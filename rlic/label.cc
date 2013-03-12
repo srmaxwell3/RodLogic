@@ -96,11 +96,25 @@ CombinedLabel const *CombinedLabel::UpdateCombinedLabelFor(Label const &label) {
 
 map<string, CombinedLabel> CombinedLabel::allCombinedLabels;
 
+// Label::Label(string const &_name, int _bitNumber) :
+//   string(_name),
+//   isDefined(true),
+//   bitNumber(_bitNumber)
+// {
+// }
+
 Label::Label(string const &_name, int _bitNumber) :
   string(_name),
-  isDefined(true),
+  isDefined(false),
   bitNumber(_bitNumber)
 {
+  if (0 <= bitNumber) {
+    static char buffer[128];
+    sprintf(buffer, "%s.%x", c_str(), bitNumber);
+    SetFrom(buffer);
+  } else {
+    SetFrom(*this);
+  }
 }
 
 Label::Label(string const &label) :

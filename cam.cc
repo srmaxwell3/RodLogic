@@ -10,8 +10,16 @@
 // the state of every Cell is updated with every clock tick, or
 // generation.  In CAM, however, a state can limit updates to
 // particular clock ticks, especially particular multiples of ticks.
-// E.g. why bother updating Cells making up a Stage A latching rod at
+// E.g. why bother updating Cells making up a Phase A latching rod at
 // any time other than when the current clock 'time' says we're
 // latching or unlatching Stage A logic rods?
 
 // b) stage of operation.
+
+
+class CellProperties {
+};
+
+class Cell {
+  Cell(size_t initialState = 0): state(initialState) {}
+};

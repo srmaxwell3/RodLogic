@@ -9,8 +9,8 @@ using std::map;
 using std::set;
 #include <string>
 using std::string;
-#include <vector>
-using std::vector;
+#include <deque>
+using std::deque;
 #include <initializer_list>
 using std::initializer_list;
 
@@ -518,7 +518,7 @@ enum DataState {
 
   DSRset,
   DSSet0,
-  DSXXXX,
+  DSSetX,
   DSSet1,
 
   eoDataState
@@ -529,7 +529,7 @@ char const *toConstCharPointer(DataState s) {
     case DSUnkn: return "DSUnkn";
     case DSRset: return "DSRset";
     case DSSet0: return "DSSet0";
-    case DSXXXX: return "DSXXXX";
+    case DSSetX: return "DSSetX";
     case DSSet1: return "DSSet1";
     case eoDataState:
       return "eoDataState";
@@ -1031,147 +1031,147 @@ struct VoxelProperties {
   Props(3,'v',Lock,LN,Lock,Unlk,Unkn,Unkn,F,FRL,N,____,S,LKNL), // LKNU
   Props(4,'-',Data,DE,Unkn,Unkn,Body,Rset,T,___,E,DBE0,W,____), // DBER
   Props(4,'-',Data,DE,Unkn,Unkn,Body,Set0,T,___,E,DBEX,W,DBER), // DBE0
-  Props(4,'-',Data,DE,Unkn,Unkn,Body,XXXX,T,___,E,DBE1,W,DBE0), // DBEX
+  Props(4,'-',Data,DE,Unkn,Unkn,Body,SetX,T,___,E,DBE1,W,DBE0), // DBEX
   Props(4,'-',Data,DE,Unkn,Unkn,Body,Set1,T,___,E,____,W,DBEX), // DBE1
   Props(4,'|',Data,DS,Unkn,Unkn,Body,Rset,T,___,S,DBS0,N,____), // DBSR
   Props(4,'|',Data,DS,Unkn,Unkn,Body,Set0,T,___,S,DBSX,N,DBSR), // DBS0
-  Props(4,'|',Data,DS,Unkn,Unkn,Body,XXXX,T,___,S,DBS1,N,DBS0), // DBSX
+  Props(4,'|',Data,DS,Unkn,Unkn,Body,SetX,T,___,S,DBS1,N,DBS0), // DBSX
   Props(4,'|',Data,DS,Unkn,Unkn,Body,Set1,T,___,S,____,N,DBSX), // DBS1
   Props(4,'-',Data,DW,Unkn,Unkn,Body,Rset,T,___,W,DBW0,E,____), // DBWR
   Props(4,'-',Data,DW,Unkn,Unkn,Body,Set0,T,___,W,DBWX,E,DBWR), // DBW0
-  Props(4,'-',Data,DW,Unkn,Unkn,Body,XXXX,T,___,W,DBW1,E,DBW0), // DBWX
+  Props(4,'-',Data,DW,Unkn,Unkn,Body,SetX,T,___,W,DBW1,E,DBW0), // DBWX
   Props(4,'-',Data,DW,Unkn,Unkn,Body,Set1,T,___,W,____,E,DBWX), // DBW1
   Props(4,'|',Data,DN,Unkn,Unkn,Body,Rset,T,___,N,DBN0,S,____), // DBNR
   Props(4,'|',Data,DN,Unkn,Unkn,Body,Set0,T,___,N,DBNX,S,DBNR), // DBN0
-  Props(4,'|',Data,DN,Unkn,Unkn,Body,XXXX,T,___,N,DBN1,S,DBN0), // DBNX
+  Props(4,'|',Data,DN,Unkn,Unkn,Body,SetX,T,___,N,DBN1,S,DBN0), // DBNX
   Props(4,'|',Data,DN,Unkn,Unkn,Body,Set1,T,___,N,____,S,DBNX), // DBN1
   Props(5,'>',Data,DE,Unkn,Unkn,Head,Rset,T,F__,E,DHE0,W,____), // DHER
   Props(5,'0',Data,DE,Unkn,Unkn,Head,Set0,T,F__,E,DHEX,W,DHER), // DHE0
-  Props(5,'X',Data,DE,Unkn,Unkn,Head,XXXX,T,F__,E,DHE1,W,DHE0), // DHEX
+  Props(5,'X',Data,DE,Unkn,Unkn,Head,SetX,T,F__,E,DHE1,W,DHE0), // DHEX
   Props(5,'1',Data,DE,Unkn,Unkn,Head,Set1,T,F__,E,____,W,DHEX), // DHE1
   Props(5,'v',Data,DS,Unkn,Unkn,Head,Rset,T,F__,S,DHS0,N,____), // DHSR
   Props(5,'0',Data,DS,Unkn,Unkn,Head,Set0,T,F__,S,DHSX,N,DHSR), // DHS0
-  Props(5,'X',Data,DS,Unkn,Unkn,Head,XXXX,T,F__,S,DHS1,N,DHS0), // DHSX
+  Props(5,'X',Data,DS,Unkn,Unkn,Head,SetX,T,F__,S,DHS1,N,DHS0), // DHSX
   Props(5,'1',Data,DS,Unkn,Unkn,Head,Set1,T,F__,S,____,N,DHSX), // DHS1
   Props(5,'<',Data,DW,Unkn,Unkn,Head,Rset,T,F__,W,DHW0,E,____), // DHWR
   Props(5,'0',Data,DW,Unkn,Unkn,Head,Set0,T,F__,W,DHWX,E,DHWR), // DHW0
-  Props(5,'X',Data,DW,Unkn,Unkn,Head,XXXX,T,F__,W,DHW1,E,DHW0), // DHWX
+  Props(5,'X',Data,DW,Unkn,Unkn,Head,SetX,T,F__,W,DHW1,E,DHW0), // DHWX
   Props(5,'1',Data,DW,Unkn,Unkn,Head,Set1,T,F__,W,____,E,DHWX), // DHW1
   Props(5,'^',Data,DN,Unkn,Unkn,Head,Rset,T,F__,N,DHN0,S,____), // DHNR
   Props(5,'0',Data,DN,Unkn,Unkn,Head,Set0,T,F__,N,DHNX,S,DHNR), // DHN0
-  Props(5,'X',Data,DN,Unkn,Unkn,Head,XXXX,T,F__,N,DHN1,S,DHN0), // DHNX
+  Props(5,'X',Data,DN,Unkn,Unkn,Head,SetX,T,F__,N,DHN1,S,DHN0), // DHNX
   Props(5,'1',Data,DN,Unkn,Unkn,Head,Set1,T,F__,N,____,S,DHNX), // DHN1
   Props(5,'>',Data,DE,Unkn,Unkn,Tail,Rset,T,_R_,E,DTE0,W,____), // DTER
   Props(5,'>',Data,DE,Unkn,Unkn,Tail,Set0,T,_R_,E,DTEX,W,DTER), // DTE0
-  Props(5,'>',Data,DE,Unkn,Unkn,Tail,XXXX,T,_R_,E,DTE1,W,DTE0), // DTEX
+  Props(5,'>',Data,DE,Unkn,Unkn,Tail,SetX,T,_R_,E,DTE1,W,DTE0), // DTEX
   Props(5,'>',Data,DE,Unkn,Unkn,Tail,Set1,T,_R_,E,____,W,DTEX), // DTE1
   Props(5,'v',Data,DS,Unkn,Unkn,Tail,Rset,T,_R_,S,DTS0,N,____), // DTSR
   Props(5,'v',Data,DS,Unkn,Unkn,Tail,Set0,T,_R_,S,DTSX,N,DTSR), // DTS0
-  Props(5,'v',Data,DS,Unkn,Unkn,Tail,XXXX,T,_R_,S,DTS1,N,DTS0), // DTSX
+  Props(5,'v',Data,DS,Unkn,Unkn,Tail,SetX,T,_R_,S,DTS1,N,DTS0), // DTSX
   Props(5,'v',Data,DS,Unkn,Unkn,Tail,Set1,T,_R_,S,____,N,DTSX), // DTS1
   Props(5,'<',Data,DW,Unkn,Unkn,Tail,Rset,T,_R_,W,DTW0,E,____), // DTWR
   Props(5,'<',Data,DW,Unkn,Unkn,Tail,Set0,T,_R_,W,DTWX,E,DTWR), // DTW0
-  Props(5,'<',Data,DW,Unkn,Unkn,Tail,XXXX,T,_R_,W,DTW1,E,DTW0), // DTWX
+  Props(5,'<',Data,DW,Unkn,Unkn,Tail,SetX,T,_R_,W,DTW1,E,DTW0), // DTWX
   Props(5,'<',Data,DW,Unkn,Unkn,Tail,Set1,T,_R_,W,____,E,DTWX), // DTW1
   Props(5,'^',Data,DN,Unkn,Unkn,Tail,Rset,T,_R_,N,DTN0,S,____), // DTNR
   Props(5,'^',Data,DN,Unkn,Unkn,Tail,Set0,T,_R_,N,DTNX,S,DTNR), // DTN0
-  Props(5,'^',Data,DN,Unkn,Unkn,Tail,XXXX,T,_R_,N,DTN1,S,DTN0), // DTNX
+  Props(5,'^',Data,DN,Unkn,Unkn,Tail,SetX,T,_R_,N,DTN1,S,DTN0), // DTNX
   Props(5,'^',Data,DN,Unkn,Unkn,Tail,Set1,T,_R_,N,____,S,DTNX), // DTN1
   Props(4,'+',Data,DE,Unkn,Unkn,Post,Rset,T,FR_,E,DPE0,W,____), // DPER
   Props(4,'+',Data,DE,Unkn,Unkn,Post,Set0,T,FR_,E,DPEX,W,DPER), // DPE0
-  Props(4,'+',Data,DE,Unkn,Unkn,Post,XXXX,T,FR_,E,DPE1,W,DPE0), // DPEX
+  Props(4,'+',Data,DE,Unkn,Unkn,Post,SetX,T,FR_,E,DPE1,W,DPE0), // DPEX
   Props(4,'+',Data,DE,Unkn,Unkn,Post,Set1,T,FR_,E,____,W,DPEX), // DPE1
   Props(4,'+',Data,DS,Unkn,Unkn,Post,Rset,T,FR_,S,DPS0,N,____), // DPSR
   Props(4,'+',Data,DS,Unkn,Unkn,Post,Set0,T,FR_,S,DPSX,N,DPSR), // DPS0
-  Props(4,'+',Data,DS,Unkn,Unkn,Post,XXXX,T,FR_,S,DPS1,N,DPS0), // DPSX
+  Props(4,'+',Data,DS,Unkn,Unkn,Post,SetX,T,FR_,S,DPS1,N,DPS0), // DPSX
   Props(4,'+',Data,DS,Unkn,Unkn,Post,Set1,T,FR_,S,____,N,DPSX), // DPS1
   Props(4,'+',Data,DW,Unkn,Unkn,Post,Rset,T,FR_,W,DPW0,E,____), // DPWR
   Props(4,'+',Data,DW,Unkn,Unkn,Post,Set0,T,FR_,W,DPWX,E,DPWR), // DPW0
-  Props(4,'+',Data,DW,Unkn,Unkn,Post,XXXX,T,FR_,W,DPW1,E,DPW0), // DPWX
+  Props(4,'+',Data,DW,Unkn,Unkn,Post,SetX,T,FR_,W,DPW1,E,DPW0), // DPWX
   Props(4,'+',Data,DW,Unkn,Unkn,Post,Set1,T,FR_,W,____,E,DPWX), // DPW1
   Props(4,'+',Data,DN,Unkn,Unkn,Post,Rset,T,FR_,N,DPN0,S,____), // DPNR
   Props(4,'+',Data,DN,Unkn,Unkn,Post,Set0,T,FR_,N,DPNX,S,DPNR), // DPN0
-  Props(4,'+',Data,DN,Unkn,Unkn,Post,XXXX,T,FR_,N,DPN1,S,DPN0), // DPNX
+  Props(4,'+',Data,DN,Unkn,Unkn,Post,SetX,T,FR_,N,DPN1,S,DPN0), // DPNX
   Props(4,'+',Data,DN,Unkn,Unkn,Post,Set1,T,FR_,N,____,S,DPNX), // DPN1
   Props(5,'^',Data,DE,Unkn,Unkn,Lock,Rset,F,FRL,E,DKE0,W,____), // DKER
   Props(5,'^',Data,DE,Unkn,Unkn,Lock,Set0,F,FRL,E,DKEX,W,DKER), // DKE0
-  Props(5,'^',Data,DE,Unkn,Unkn,Lock,XXXX,F,FRL,E,DKE1,W,DKE0), // DKEX
+  Props(5,'^',Data,DE,Unkn,Unkn,Lock,SetX,F,FRL,E,DKE1,W,DKE0), // DKEX
   Props(5,'^',Data,DE,Unkn,Unkn,Lock,Set1,F,FRL,E,____,W,DKEX), // DKE1
   Props(5,'>',Data,DS,Unkn,Unkn,Lock,Rset,F,FRL,S,DKS0,N,____), // DKSR
   Props(5,'>',Data,DS,Unkn,Unkn,Lock,Set0,F,FRL,S,DKSX,N,DKSR), // DKS0
-  Props(5,'>',Data,DS,Unkn,Unkn,Lock,XXXX,F,FRL,S,DKS1,N,DKS0), // DKSX
+  Props(5,'>',Data,DS,Unkn,Unkn,Lock,SetX,F,FRL,S,DKS1,N,DKS0), // DKSX
   Props(5,'>',Data,DS,Unkn,Unkn,Lock,Set1,F,FRL,S,____,N,DKSX), // DKS1
   Props(5,'v',Data,DW,Unkn,Unkn,Lock,Rset,F,FRL,W,DKW0,E,____), // DKWR
   Props(5,'v',Data,DW,Unkn,Unkn,Lock,Set0,F,FRL,W,DKWX,E,DKWR), // DKW0
-  Props(5,'v',Data,DW,Unkn,Unkn,Lock,XXXX,F,FRL,W,DKW1,E,DKW0), // DKWX
+  Props(5,'v',Data,DW,Unkn,Unkn,Lock,SetX,F,FRL,W,DKW1,E,DKW0), // DKWX
   Props(5,'v',Data,DW,Unkn,Unkn,Lock,Set1,F,FRL,W,____,E,DKWX), // DKW1
   Props(5,'<',Data,DN,Unkn,Unkn,Lock,Rset,F,FRL,N,DKN0,S,____), // DKNR
   Props(5,'<',Data,DN,Unkn,Unkn,Lock,Set0,F,FRL,N,DKNX,S,DKNR), // DKN0
-  Props(5,'<',Data,DN,Unkn,Unkn,Lock,XXXX,F,FRL,N,DKN1,S,DKN0), // DKNX
+  Props(5,'<',Data,DN,Unkn,Unkn,Lock,SetX,F,FRL,N,DKN1,S,DKN0), // DKNX
   Props(5,'<',Data,DN,Unkn,Unkn,Lock,Set1,F,FRL,N,____,S,DKNX), // DKN1
   Props(5,'>',Data,DE,Unkn,Unkn,Test,Rset,F,FR_,E,DQE0,W,____), // DQER
   Props(5,'>',Data,DE,Unkn,Unkn,Test,Set0,F,FR_,E,DQEX,W,DQER), // DQE0
-  Props(5,'>',Data,DE,Unkn,Unkn,Test,XXXX,F,FR_,E,DQE1,W,DQE0), // DQEX
+  Props(5,'>',Data,DE,Unkn,Unkn,Test,SetX,F,FR_,E,DQE1,W,DQE0), // DQEX
   Props(5,'>',Data,DE,Unkn,Unkn,Test,Set1,F,FR_,E,____,W,DQEX), // DQE1
   Props(5,'v',Data,DS,Unkn,Unkn,Test,Rset,F,FR_,S,DQS0,N,____), // DQSR
   Props(5,'v',Data,DS,Unkn,Unkn,Test,Set0,F,FR_,S,DQSX,N,DQSR), // DQS0
-  Props(5,'v',Data,DS,Unkn,Unkn,Test,XXXX,F,FR_,S,DQS1,N,DQS0), // DQSX
+  Props(5,'v',Data,DS,Unkn,Unkn,Test,SetX,F,FR_,S,DQS1,N,DQS0), // DQSX
   Props(5,'v',Data,DS,Unkn,Unkn,Test,Set1,F,FR_,S,____,N,DQSX), // DQS1
   Props(5,'<',Data,DW,Unkn,Unkn,Test,Rset,F,FR_,W,DQW0,E,____), // DQWR
   Props(5,'<',Data,DW,Unkn,Unkn,Test,Set0,F,FR_,W,DQWX,E,DQWR), // DQW0
-  Props(5,'<',Data,DW,Unkn,Unkn,Test,XXXX,F,FR_,W,DQW1,E,DQW0), // DQWX
+  Props(5,'<',Data,DW,Unkn,Unkn,Test,SetX,F,FR_,W,DQW1,E,DQW0), // DQWX
   Props(5,'<',Data,DW,Unkn,Unkn,Test,Set1,F,FR_,W,____,E,DQWX), // DQW1
   Props(5,'^',Data,DN,Unkn,Unkn,Test,Rset,F,FR_,N,DQN0,S,____), // DQNR
   Props(5,'^',Data,DN,Unkn,Unkn,Test,Set0,F,FR_,N,DQNX,S,DQNR), // DQN0
-  Props(5,'^',Data,DN,Unkn,Unkn,Test,XXXX,F,FR_,N,DQN1,S,DQN0), // DQNX
+  Props(5,'^',Data,DN,Unkn,Unkn,Test,SetX,F,FR_,N,DQN1,S,DQN0), // DQNX
   Props(5,'^',Data,DN,Unkn,Unkn,Test,Set1,F,FR_,N,____,S,DQNX), // DQN1
   Props(5,'@',Data,DE,Unkn,Unkn,Gate,Rset,F,FR_,E,DGE0,W,____), // DGER
   Props(5,'@',Data,DE,Unkn,Unkn,Gate,Set0,F,FR_,E,DGEX,W,DGER), // DGE0
-  Props(5,'@',Data,DE,Unkn,Unkn,Gate,XXXX,F,FR_,E,DGE1,W,DGE0), // DGEX
+  Props(5,'@',Data,DE,Unkn,Unkn,Gate,SetX,F,FR_,E,DGE1,W,DGE0), // DGEX
   Props(5,'@',Data,DE,Unkn,Unkn,Gate,Set1,F,FR_,E,____,W,DGEX), // DGE1
   Props(5,'@',Data,DS,Unkn,Unkn,Gate,Rset,F,FR_,S,DGS0,N,____), // DGSR
   Props(5,'@',Data,DS,Unkn,Unkn,Gate,Set0,F,FR_,S,DGSX,N,DGSR), // DGS0
-  Props(5,'@',Data,DS,Unkn,Unkn,Gate,XXXX,F,FR_,S,DGS1,N,DGS0), // DGSX
+  Props(5,'@',Data,DS,Unkn,Unkn,Gate,SetX,F,FR_,S,DGS1,N,DGS0), // DGSX
   Props(5,'@',Data,DS,Unkn,Unkn,Gate,Set1,F,FR_,S,____,N,DGSX), // DGS1
   Props(5,'@',Data,DW,Unkn,Unkn,Gate,Rset,F,FR_,W,DGW0,E,____), // DGWR
   Props(5,'@',Data,DW,Unkn,Unkn,Gate,Set0,F,FR_,W,DGWX,E,DGWR), // DGW0
-  Props(5,'@',Data,DW,Unkn,Unkn,Gate,XXXX,F,FR_,W,DGW1,E,DGW0), // DGWX
+  Props(5,'@',Data,DW,Unkn,Unkn,Gate,SetX,F,FR_,W,DGW1,E,DGW0), // DGWX
   Props(5,'@',Data,DW,Unkn,Unkn,Gate,Set1,F,FR_,W,____,E,DGWX), // DGW1
   Props(5,'@',Data,DN,Unkn,Unkn,Gate,Rset,F,FR_,N,DGN0,S,____), // DGNR
   Props(5,'@',Data,DN,Unkn,Unkn,Gate,Set0,F,FR_,N,DGNX,S,DGNR), // DGN0
-  Props(5,'@',Data,DN,Unkn,Unkn,Gate,XXXX,F,FR_,N,DGN1,S,DGN0), // DGNX
+  Props(5,'@',Data,DN,Unkn,Unkn,Gate,SetX,F,FR_,N,DGN1,S,DGN0), // DGNX
   Props(5,'@',Data,DN,Unkn,Unkn,Gate,Set1,F,FR_,N,____,S,DGNX), // DGN1
-  Props(6,'I',Data,DE,Unkn,Unkn,Inpt,Rset,T,___,E,DIE0,W,____), // DIER
-  Props(6,'0',Data,DE,Unkn,Unkn,Inpt,Set0,T,___,E,DIEX,W,DIER), // DIE0
-  Props(6,'X',Data,DE,Unkn,Unkn,Inpt,XXXX,T,___,E,DIE1,W,DIE0), // DIEX
-  Props(6,'1',Data,DE,Unkn,Unkn,Inpt,Set1,T,___,E,____,W,DIEX), // DIE1
-  Props(6,'I',Data,DS,Unkn,Unkn,Inpt,Rset,T,___,S,DIS0,N,____), // DISR
-  Props(6,'0',Data,DS,Unkn,Unkn,Inpt,Set0,T,___,S,DISX,N,DISR), // DIS0
-  Props(6,'X',Data,DS,Unkn,Unkn,Inpt,XXXX,T,___,S,DIS1,N,DIS0), // DISX
-  Props(6,'1',Data,DS,Unkn,Unkn,Inpt,Set1,T,___,S,____,N,DISX), // DIS1
-  Props(6,'I',Data,DW,Unkn,Unkn,Inpt,Rset,T,___,W,DIW0,E,____), // DIWR
-  Props(6,'0',Data,DW,Unkn,Unkn,Inpt,Set0,T,___,W,DIWX,E,DIWR), // DIW0
-  Props(6,'X',Data,DW,Unkn,Unkn,Inpt,XXXX,T,___,W,DIW1,E,DIW0), // DIWX
-  Props(6,'1',Data,DW,Unkn,Unkn,Inpt,Set1,T,___,W,____,E,DIWX), // DIW1
-  Props(6,'I',Data,DN,Unkn,Unkn,Inpt,Rset,T,___,N,DIN0,S,____), // DINR
-  Props(6,'0',Data,DN,Unkn,Unkn,Inpt,Set0,T,___,N,DINX,S,DINR), // DIN0
-  Props(6,'X',Data,DN,Unkn,Unkn,Inpt,XXXX,T,___,N,DIN1,S,DIN0), // DINX
-  Props(6,'1',Data,DN,Unkn,Unkn,Inpt,Set1,T,___,N,____,S,DINX), // DIN1
+  Props(6,'I',Data,DE,Unkn,Unkn,Inpt,Rset,T,F__,E,DIE0,W,____), // DIER
+  Props(6,'0',Data,DE,Unkn,Unkn,Inpt,Set0,T,F__,E,DIEX,W,DIER), // DIE0
+  Props(6,'X',Data,DE,Unkn,Unkn,Inpt,SetX,T,F__,E,DIE1,W,DIE0), // DIEX
+  Props(6,'1',Data,DE,Unkn,Unkn,Inpt,Set1,T,F__,E,____,W,DIEX), // DIE1
+  Props(6,'I',Data,DS,Unkn,Unkn,Inpt,Rset,T,F__,S,DIS0,N,____), // DISR
+  Props(6,'0',Data,DS,Unkn,Unkn,Inpt,Set0,T,F__,S,DISX,N,DISR), // DIS0
+  Props(6,'X',Data,DS,Unkn,Unkn,Inpt,SetX,T,F__,S,DIS1,N,DIS0), // DISX
+  Props(6,'1',Data,DS,Unkn,Unkn,Inpt,Set1,T,F__,S,____,N,DISX), // DIS1
+  Props(6,'I',Data,DW,Unkn,Unkn,Inpt,Rset,T,F__,W,DIW0,E,____), // DIWR
+  Props(6,'0',Data,DW,Unkn,Unkn,Inpt,Set0,T,F__,W,DIWX,E,DIWR), // DIW0
+  Props(6,'X',Data,DW,Unkn,Unkn,Inpt,SetX,T,F__,W,DIW1,E,DIW0), // DIWX
+  Props(6,'1',Data,DW,Unkn,Unkn,Inpt,Set1,T,F__,W,____,E,DIWX), // DIW1
+  Props(6,'I',Data,DN,Unkn,Unkn,Inpt,Rset,T,F__,N,DIN0,S,____), // DINR
+  Props(6,'0',Data,DN,Unkn,Unkn,Inpt,Set0,T,F__,N,DINX,S,DINR), // DIN0
+  Props(6,'X',Data,DN,Unkn,Unkn,Inpt,SetX,T,F__,N,DIN1,S,DIN0), // DINX
+  Props(6,'1',Data,DN,Unkn,Unkn,Inpt,Set1,T,F__,N,____,S,DINX), // DIN1
   Props(6,'O',Data,DE,Unkn,Unkn,Outp,Rset,T,___,E,DOE0,W,____), // DOER
   Props(6,'0',Data,DE,Unkn,Unkn,Outp,Set0,T,___,E,DOEX,W,DOER), // DOE0
-  Props(6,'X',Data,DE,Unkn,Unkn,Outp,XXXX,T,___,E,DOE1,W,DOE0), // DOEX
+  Props(6,'X',Data,DE,Unkn,Unkn,Outp,SetX,T,___,E,DOE1,W,DOE0), // DOEX
   Props(6,'1',Data,DE,Unkn,Unkn,Outp,Set1,T,___,E,____,W,DOEX), // DOE1
   Props(6,'O',Data,DS,Unkn,Unkn,Outp,Rset,T,___,S,DOS0,N,____), // DOSR
   Props(6,'0',Data,DS,Unkn,Unkn,Outp,Set0,T,___,S,DOSX,N,DOSR), // DOS0
-  Props(6,'X',Data,DS,Unkn,Unkn,Outp,XXXX,T,___,S,DOS1,N,DOS0), // DOSX
+  Props(6,'X',Data,DS,Unkn,Unkn,Outp,SetX,T,___,S,DOS1,N,DOS0), // DOSX
   Props(6,'1',Data,DS,Unkn,Unkn,Outp,Set1,T,___,S,____,N,DOSX), // DOS1
   Props(6,'O',Data,DW,Unkn,Unkn,Outp,Rset,T,___,W,DOW0,E,____), // DOWR
   Props(6,'0',Data,DW,Unkn,Unkn,Outp,Set0,T,___,W,DOWX,E,DOWR), // DOW0
-  Props(6,'X',Data,DW,Unkn,Unkn,Outp,XXXX,T,___,W,DOW1,E,DOW0), // DOWX
+  Props(6,'X',Data,DW,Unkn,Unkn,Outp,SetX,T,___,W,DOW1,E,DOW0), // DOWX
   Props(6,'1',Data,DW,Unkn,Unkn,Outp,Set1,T,___,W,____,E,DOWX), // DOW1
   Props(6,'O',Data,DN,Unkn,Unkn,Outp,Rset,T,___,N,DON0,S,____), // DONR
   Props(6,'0',Data,DN,Unkn,Unkn,Outp,Set0,T,___,N,DONX,S,DONR), // DON0
-  Props(6,'X',Data,DN,Unkn,Unkn,Outp,XXXX,T,___,N,DON1,S,DON0), // DONX
+  Props(6,'X',Data,DN,Unkn,Unkn,Outp,SetX,T,___,N,DON1,S,DON0), // DONX
   Props(6,'1',Data,DN,Unkn,Unkn,Outp,Set1,T,___,N,____,S,DONX)  // DON1
 #undef _
 #undef T
@@ -1299,12 +1299,13 @@ class Volume: public VolArray
   void AddRule(Rule const &rule) { rules[rule.scenario] = rule.newVoxel; }
   void AddRule(Scenario const &scenario, Voxel newVoxel) { rules[scenario] = newVoxel; }
   Rules &GetRules() { return rules; }
-  void AddInput(VoxelCoordinant v, vector<DataState> const &values) {
+  void AddInput(VoxelCoordinant v, deque<DataState> const &values) {
     inputs[v] = values;
   }
-  vector<DataState> &GetInputsFor(VoxelCoordinant v) const { return inputs[v]; }
-  void Phase();
-  void Tick();
+  deque<DataState> &GetInputsFor(VoxelCoordinant v) { return inputs[v]; }
+  void ProceedOneCycle();
+  void ProceedOnePhase();
+  void ProceedOneTick();
   void PrintViewFlat() const;
   bool isVoxelCoordinantInBounds(VoxelCoordinant v) const {
     return 0 <= v.L() && v.L() < NLvls &&
@@ -1313,22 +1314,29 @@ class Volume: public VolArray
   }
   bool isPartOf(RodType r, VoxelCoordinant v, bool &reachedEnd) const;
   bool isPartOf(RodType r, VoxelCoordinant v) const;
-  Voxel const &voxelAt(VoxelCoordinant v) const {
-    return (*this)[v.L()][v.R()][v.C()];
-  }
-  Voxel &voxelAt(VoxelCoordinant v) {
+  Voxel voxelAt(VoxelCoordinant v) const {
     if (isVoxelCoordinantInBounds(v)) {
       return (*this)[v.L()][v.R()][v.C()];
     }
-    static Voxel outOfBounds = Unkn;
-    return outOfBounds;
+    return Unkn;
   }
   int CurrentClock() const { return clock; }
-  TickPerCycle CurrentTick() const {
+  int CurrentCycle() const { return clock / NTicksPerCycle; }
+  PhasePerCycle CurrentPhasePerCycle() const {
+    return PhasePerCycle((CurrentClock() % NTicksPerCycle) / NTicksPerPhase);
+  }
+  TickPerCycle CurrentTickPerCycle() const {
     return TickPerCycle(CurrentClock() % NTicksPerCycle);
+  }
+  TickPerPhase CurrentTickPerPhase() const {
+    return TickPerPhase(CurrentClock() % NTicksPerPhase);
   }
 
  private:
+  // Voxel &voxelAt(VoxelCoordinant v) {
+  //   assert(isVoxelCoordinantInBounds(v));
+  //   return (*this)[v.L()][v.R()][v.C()];
+  // }
   void ViewFlat(ViewLvlArray &view) const;
   void AddToRod(RodType rodType, Direction fwd, Direction bwd, Item *item, VoxelCoordinant v);
   Item *FormRodContaining(set<VoxelCoordinant> &seenSofar, VoxelCoordinant v);
@@ -1337,7 +1345,7 @@ class Volume: public VolArray
   Rules rules;
   int clock;
   array<SetOfItems, eoRodType> itemsByRodType;
-  map<VoxelCoordinant, vector<DataState>> inputs;
+  map<VoxelCoordinant, deque<DataState>> inputs;
 };
 
 class Item: public set<VoxelCoordinant> {
@@ -1355,8 +1363,8 @@ class Item: public set<VoxelCoordinant> {
   virtual bool IsRBlked() const { return rBlkState == RBBlkd; }
   virtual bool IsBlocked() const { return IsFBlked() || IsRBlked(); };
   virtual bool CheckForFreedomOfMovement(
-      Volume const *volume, FwdOrBwd fwdOrBwd) = 0;
-  virtual bool CheckForFreedomOfMovement(Volume const *volume) = 0;
+      Volume *volume, FwdOrBwd fwdOrBwd) = 0;
+  virtual bool CheckForFreedomOfMovement(Volume *volume) = 0;
   virtual bool AttemptToMove(
       Volume *volume, FwdOrBwd fwdOrBwd, Changes &changes);
   virtual bool IsValid(Volume const *volume);
@@ -1377,8 +1385,8 @@ class LockRod: public Item {
 
   bool IsLocked() const { return lockState == LSLckd; }
 
-  bool CheckForFreedomOfMovement(Volume const *volume, FwdOrBwd fwdOrBwd);
-  bool CheckForFreedomOfMovement(Volume const *volume);
+  bool CheckForFreedomOfMovement(Volume *volume, FwdOrBwd fwdOrBwd);
+  bool CheckForFreedomOfMovement(Volume *volume);
   bool IsValid(Volume const *volume);
   void Dump(Volume const *volume = 0) const;
   char const *TypeName() const { return "LockRod"; }
@@ -1397,8 +1405,8 @@ class DataRod: public Item {
   bool IsRBlked() const { return Item::IsRBlked() || IsLocked(); }
   bool IsBlocked() const { return Item::IsBlocked() || IsLocked(); };
 
-  bool CheckForFreedomOfMovement(Volume const *volume, FwdOrBwd fwdOrBwd);
-  bool CheckForFreedomOfMovement(Volume const *volume);
+  bool CheckForFreedomOfMovement(Volume *volume, FwdOrBwd fwdOrBwd);
+  bool CheckForFreedomOfMovement(Volume *volume);
   bool IsValid(Volume const *volume);
   void Dump(Volume const *volume = 0) const;
   char const *TypeName() const { return "DataRod"; }
@@ -1461,19 +1469,26 @@ Volume::Volume(Voxel initialVoxel) : clock(0) {
   FindItems();
 }
 
-void Volume::Phase() {
-  size_t eoTick = clock + NTicksPerPhase;
+void Volume::ProceedOneCycle() {
+  size_t eoTick = clock + NTicksPerCycle;
   while (clock < eoTick) {
-    Tick();
+    ProceedOneTick();
   }
 }
 
-void Volume::Tick() {
+void Volume::ProceedOnePhase() {
+  size_t eoTick = clock + NTicksPerPhase;
+  while (clock < eoTick) {
+    ProceedOneTick();
+  }
+}
+
+void Volume::ProceedOneTick() {
   size_t tick = clock % NTicksPerCycle;
   TickPerCycleProperties const &tProperties = tickPerCycleProperties[tick];
   if (optVerbose) {
     fprintf(stdout,
-            "(Volume *)(%p)->Tick(): "
+            "(Volume *)(%p)->ProceedOneTick(): "
             "tick=%s, tProperties.rodType=%s, tProperties.fwdOrBwd=%s\n",
             this,
             toConstCharPointer(TickPerCycle(tick)),
@@ -1487,7 +1502,9 @@ void Volume::Tick() {
     i->AttemptToMove(this, tProperties.fwdOrBwd, changes);
   }
   for (auto const &c : changes) {
-    voxelAt(c.first) = c.second;
+    VoxelCoordinant v = c.first;
+    assert(isVoxelCoordinantInBounds(v));
+    (*this)[v.L()][v.R()][v.C()] = c.second;
   }
   clock += 1;
 }
@@ -1505,11 +1522,7 @@ void Volume::PrintViewFlat() const {
       fprintf(stdout, " ");
     }
   }
-  fprintf(stdout,
-          " %s %d\n   ",
-          toConstCharPointer(CurrentTick()),
-          CurrentClock()
-         );
+  fprintf(stdout, "\n   ");
   for (int c = 0; c < NCols; c += 1) {
     fprintf(stdout, "%1d", c % 10);
   }
@@ -1519,8 +1532,29 @@ void Volume::PrintViewFlat() const {
     for (int c = 0; c < NCols; c += 1) {
       fprintf(stdout, "%c", view[r][c]);
     }
-    fprintf(stdout, "\n");
+    fprintf(stdout, " %2d\n", r % 100);
   }
+  fprintf(stdout, "   ");
+  for (int c = 0; c < NCols; c += 1) {
+    if (int cc = (c / 10) % 10) {
+      fprintf(stdout, "%1d", cc);
+    } else {
+      fprintf(stdout, " ");
+    }
+  }
+  fprintf(stdout, "\n   ");
+  for (int c = 0; c < NCols; c += 1) {
+    fprintf(stdout, "%1d", c % 10);
+  }
+  fprintf(stdout, "\n");
+  fprintf(stdout,
+          "Clock: %d, tick %s (cycle: %d, phase: %s, minor tick: %s)\n\n",
+          CurrentClock(),
+          toConstCharPointer(CurrentTickPerCycle()),
+          CurrentCycle(),
+          toConstCharPointer(CurrentPhasePerCycle()),
+          toConstCharPointer(CurrentTickPerPhase())
+         );
 }
 
 void Volume::ViewFlat(ViewLvlArray &view) const {
@@ -1676,7 +1710,7 @@ bool Item::AttemptToMove(Volume *volume, FwdOrBwd fwdOrBwd, Changes &changes) {
   }
 
   if (isMovable) {
-    TickPerCycle tick = volume->CurrentTick();
+    TickPerCycle tick = volume->CurrentTickPerCycle();
     TickPerCycleProperties const &tProperties =
         tickPerCycleProperties[tick];
     assert(rodType == tProperties.rodType);
@@ -1908,12 +1942,12 @@ void Item::Dump(Volume const *volume) const {
   fprintf(stdout, " }");
 }
 
-bool LockRod::CheckForFreedomOfMovement(Volume const *volume, FwdOrBwd fwdOrBwd) {
+bool LockRod::CheckForFreedomOfMovement(Volume *volume, FwdOrBwd fwdOrBwd) {
   return CheckForFreedomOfMovement(volume) ||
       fwdOrBwd == Fwd ? !IsFBlked() : !IsRBlked();
 }
 
-bool LockRod::CheckForFreedomOfMovement(Volume const *volume) {
+bool LockRod::CheckForFreedomOfMovement(Volume *volume) {
   size_t lockStateCounts[eoLockState] = { 0 };
   bool foundMoreThan1LockState = false;
   lockState = LSUnkn;
@@ -2060,12 +2094,12 @@ void LockRod::Dump(Volume const *volume) const {
   fprintf(stdout, " }");
 }
 
-bool DataRod::CheckForFreedomOfMovement(Volume const *volume, FwdOrBwd fwdOrBwd) {
+bool DataRod::CheckForFreedomOfMovement(Volume *volume, FwdOrBwd fwdOrBwd) {
   return CheckForFreedomOfMovement(volume) ||
       fwdOrBwd == Fwd ? !IsFBlked() : !IsRBlked();
 }
 
-bool DataRod::CheckForFreedomOfMovement(Volume const *volume) {
+bool DataRod::CheckForFreedomOfMovement(Volume *volume) {
   size_t dataStateCounts[eoDataState] = { 0 };
   bool foundMoreThan1DataState = false;
   dataState = DSUnkn;
@@ -2091,44 +2125,89 @@ bool DataRod::CheckForFreedomOfMovement(Volume const *volume) {
       dataState = vProperties.dataState;
     }
 
-    if (vProperties.dataType == DTInpt) {
-      vector<DataState> &values = volume->GetInputsFor(v);
-    }
-
     if (blockStateProperties[vProperties.blockableStates].isFBlkable) {
-      VoxelCoordinant f = v.To(rodTypeProperties[rodType].fwd);
-      if (volume->isVoxelCoordinantInBounds(f)) {
-        VoxelProperties const &fvProperties =
-            voxelProperties[volume->voxelAt(f)];
-        if (rodType != fvProperties.rodType && volume->voxelAt(f) != Slot) {
+      if (vProperties.dataType == DTInpt) {
+        TickPerPhase tickPerPhase = volume->CurrentTickPerPhase();
+        deque<DataState> &values = volume->GetInputsFor(v);
+        DataState inputState = values.empty() ? DSSet0 : values.front();
+        bool fBlockedByInput = false;
+        switch (tickPerPhase) {
+          case SetDataRodsTo0:
+            fBlockedByInput = inputState < DSSet0;
+            break;
+          case SetDataRodsToX:
+            fBlockedByInput = inputState < DSSetX;
+            break;
+          case SetDataRodsTo1:
+            fBlockedByInput = inputState < DSSet1;
+            if (!values.empty()) {
+              values.pop_front();
+            }
+          default:
+            break;
+        }
+        // fprintf(stdout,
+        //         "(DataRod *)(%p)->CheckForFreedomOfMovement(...)"
+        //         ": tickPerPhase=%s"
+        //         ", values.size()=%ld"
+        //         ", inputState=%s"
+        //         ", fBlockedByInput=%s"
+        //         "\n",
+        //         this,
+        //         toConstCharPointer(tickPerPhase),
+        //         values.size(),
+        //         toConstCharPointer(inputState),
+        //         fBlockedByInput ? "true" : "false"
+        //         );
+        if (fBlockedByInput) {
+          fBlkCounts += 1;
           if (optVerbose) {
             fprintf(stdout,
-                    "(DataRod *)(%p) fBlked at %s(%d,%d,%d) by %s(%d,%d,%d)\n",
+                    "(DataRod *)(%p) fBlked at %s(%d,%d,%d) by input (%s)\n",
                     this,
                     toConstCharPointer(volume->voxelAt(v)),
                     v.L(),
                     v.R(),
                     v.C(),
-                    toConstCharPointer(volume->voxelAt(f)),
-                    f.L(),
-                    f.R(),
-                    f.C()
+                    toConstCharPointer(inputState)
+                    );
+          }
+        }
+      } else {
+        VoxelCoordinant f = v.To(rodTypeProperties[rodType].fwd);
+        if (volume->isVoxelCoordinantInBounds(f)) {
+          VoxelProperties const &fvProperties =
+              voxelProperties[volume->voxelAt(f)];
+          if (rodType != fvProperties.rodType && volume->voxelAt(f) != Slot) {
+            if (optVerbose) {
+              fprintf(stdout,
+                      "(DataRod *)(%p) fBlked at %s(%d,%d,%d) by %s(%d,%d,%d)\n",
+                      this,
+                      toConstCharPointer(volume->voxelAt(v)),
+                      v.L(),
+                      v.R(),
+                      v.C(),
+                      toConstCharPointer(volume->voxelAt(f)),
+                      f.L(),
+                      f.R(),
+                      f.C()
+                      );
+            }
+            fBlkCounts += 1;
+          }
+        } else {
+          if (optVerbose) {
+            fprintf(stdout,
+                    "(DataRod *)(%p) fBlked at %s(%d,%d,%d) by edge\n",
+                    this,
+                    toConstCharPointer(volume->voxelAt(v)),
+                    v.L(),
+                    v.R(),
+                    v.C()
                     );
           }
           fBlkCounts += 1;
         }
-      } else {
-        if (optVerbose) {
-          fprintf(stdout,
-                  "(DataRod *)(%p) fBlked at %s(%d,%d,%d) by edge\n",
-                  this,
-                  toConstCharPointer(volume->voxelAt(v)),
-                  v.L(),
-                  v.R(),
-                  v.C()
-                  );
-        }
-        fBlkCounts += 1;
       }
     }
     if (blockStateProperties[vProperties.blockableStates].isRBlkable) {
@@ -2775,10 +2854,18 @@ int main(int argc, char const *argv[]) {
   }
 
   Volume volume(initialVolume);
+  volume.AddInput
+      (VoxelCoordinant(2,  8, 0),
+       { DSSet1, DSSet0, DSSet0, DSSet1, DSSet0, DSSet0 }
+      );
+  volume.AddInput
+      (VoxelCoordinant(2, 12, 0),
+       { DSSet0, DSSet0, DSSet1, DSSet1, DSSet0, DSSet1 }
+      );
 
   volume.PrintViewFlat();
-  for (size_t t = 0; t < 4 * NTicksPerCycle; t += 1) {
-    volume.Tick();
+  for (size_t t = 0; t < (6 * NTicksPerCycle); t += 1) {
+    volume.ProceedOneTick();
     volume.PrintViewFlat();
     // for (auto const &r : volume.GetRules()) {
     //   if (r.second == Unkn) {

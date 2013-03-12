@@ -2,6 +2,8 @@
 #include <cstdio>
 #include <array>
 using std::array;
+#include <map>
+using std::map;
 #include <set>
 using std::set;
 #include <initializer_list>
@@ -17,7 +19,8 @@ enum Direction {
   DirN,
   DirU,
 
-  eoDirection
+  eoDirection,
+  DirX = eoDirection
 };
 
 char const *toConstCharPointer(Direction d) {
@@ -28,6 +31,8 @@ char const *toConstCharPointer(Direction d) {
     case DirW: return "DirW";
     case DirN: return "DirN";
     case DirU: return "DirU";
+    case eoDirection:
+      return "eoDirection";
   }
   return "Direction(?)";
 }
@@ -48,7 +53,8 @@ char const *toConstCharPointer(MajorTickPerCycle t) {
     case S: return "S";
     case W: return "W";
     case N: return "N";
-    case Unknown: return "Unknown";
+    case eoMajorTickPerCycle:
+      return "eoMajorTickPerCycle";
   }
   return "MajorTickPerCycle(?)";
 }
@@ -93,6 +99,8 @@ char const *toConstCharPointer(MinorTickPerMajorTick t) {
     case SetLogicRodsToX: return "SetLogicRodsToX";
     case SetLogicRodsTo1: return "SetLogicRodsTo1";
     case RelockLogicRods: return "RelockLogicRods";
+    case eoMinorTickPerMajorTick:
+      return "eoMinorTickPerMajorTick";
   }
   return "MinorTickPerMajorTick(?)";
 }
@@ -186,6 +194,8 @@ char const *toConstCharPointer(MinorTickPerCycle t) {
     case NSCX: return "NSCX";
     case NSC1: return "NSC1";
     case NLCL: return "NLCL";
+    case eoMinorTickPerCycle:
+      return "eoMinorTickPerCycle";
   }
   return "MinorTickPerCycle(?)";
 }
@@ -216,7 +226,34 @@ class VoxelCoordinant {
   bool operator<(VoxelCoordinant const &that) const {
     return l < that.l || (l == that.l && (r < that.r || (r == that.r && c < that.c)));
   }
-  VoxelCoordinant &To(MajorTickPerCycle c) {
+  VoxelCoordinant &Move(MajorTickPerCycle c) {
+    switch (c) {
+      case E: return MoveE();
+      case S: return MoveS();
+      case W: return MoveW();
+      case N: return MoveN();
+    }
+    return *this;
+  }
+  VoxelCoordinant &Move(Direction d) {
+    switch (d) {
+      case DirE: return MoveE();
+      case DirS: return MoveS();
+      case DirD: return MoveD();
+      case DirW: return MoveW();
+      case DirN: return MoveN();
+      case DirU: return MoveU();
+    }
+    return *this;
+  }
+  VoxelCoordinant &MoveE() { c += 1; return *this; }
+  VoxelCoordinant &MoveS() { r += 1; return *this; }
+  VoxelCoordinant &MoveD() { l -= 1; return *this; }
+  VoxelCoordinant &MoveW() { c -= 1; return *this; }
+  VoxelCoordinant &MoveN() { r -= 1; return *this; }
+  VoxelCoordinant &MoveU() { l += 1; return *this; }
+
+  VoxelCoordinant To(MajorTickPerCycle c) const {
     switch (c) {
       case E: return ToE();
       case S: return ToS();
@@ -225,7 +262,7 @@ class VoxelCoordinant {
     }
     return *this;
   }
-  VoxelCoordinant &To(Direction d) {
+  VoxelCoordinant To(Direction d) const {
     switch (d) {
       case DirE: return ToE();
       case DirS: return ToS();
@@ -236,12 +273,49 @@ class VoxelCoordinant {
     }
     return *this;
   }
-  VoxelCoordinant &ToE() { c += 1; return *this; }
-  VoxelCoordinant &ToS() { r += 1; return *this; }
-  VoxelCoordinant &ToD() { l -= 1; return *this; }
-  VoxelCoordinant &ToW() { c -= 1; return *this; }
-  VoxelCoordinant &ToN() { r -= 1; return *this; }
-  VoxelCoordinant &ToU() { l += 1; return *this; }
+  VoxelCoordinant ToE() const { return VoxelCoordinant(l, r, c + 1); }
+  VoxelCoordinant ToS() const { return VoxelCoordinant(l, r + 1, c); }
+  VoxelCoordinant ToD() const { return VoxelCoordinant(l - 1, r, c); }
+  VoxelCoordinant ToW() const { return VoxelCoordinant(l, r, c - 1); }
+  VoxelCoordinant ToN() const { return VoxelCoordinant(l, r - 1, c); }
+  VoxelCoordinant ToU() const { return VoxelCoordinant(l + 1, r, c); }
+
+  VoxelCoordinant &EFrom(VoxelCoordinant const &v) {
+    l = v.l;
+    r = v.r;
+    c = v.c + 1;
+    return *this;
+  }
+  VoxelCoordinant &SFrom(VoxelCoordinant const &v) {
+    l = v.l;
+    r = v.r + 1;
+    c = v.c;
+    return *this;
+  }
+  VoxelCoordinant &DFrom(VoxelCoordinant const &v) {
+    l = v.l - 1;
+    r = v.r;
+    c = v.c;
+    return *this;
+  }
+  VoxelCoordinant &WFrom(VoxelCoordinant const &v) {
+    l = v.l;
+    r = v.r;
+    c = v.c - 1;
+    return *this;
+  }
+  VoxelCoordinant &NFrom(VoxelCoordinant const &v) {
+    l = v.l;
+    r = v.r - 1;
+    c = v.c;
+    return *this;
+  }
+  VoxelCoordinant &UFrom(VoxelCoordinant const &v) {
+    l = v.l + 1;
+    r = v.r;
+    c = v.c;
+    return *this;
+  }
 
   int L() const { return l; }
   int R() const { return r; }
@@ -277,6 +351,8 @@ char const *toConstCharPointer(FBlockState s) {
     case FBUnkn: return "FBUnkn";
     case FBBlkd: return "FBBlkd";
     case FBUnbk: return "FBUnbk";
+    case eoFBlockState:
+      return "eoFBlockState";
   }
   return "FBlockState(?)";
 }
@@ -295,6 +371,8 @@ char const *toConstCharPointer(RBlockState s) {
     case RBUnkn: return "RBUnkn";
     case RBBlkd: return "RBBlkd";
     case RBUnbk: return "RBUnbk";
+    case eoRBlockState:
+      return "eoRBlockState";
   }
   return "FBlockState(?)";
 }
@@ -317,6 +395,8 @@ char const *toConstCharPointer(VoxelType t) {
     case VTSlot: return "VTSlot";
     case VTLatch: return "VTLatch";
     case VTLogic: return "VTLogic";
+    case eoVoxelType:
+      return "eoVoxelType";
   }
   return "VoxelType(?)";
 }
@@ -341,6 +421,8 @@ char const *toConstCharPointer(LatchType t) {
     case KTTail: return "KTTail";
     case KTPost: return "KTPost";
     case KTLock: return "KTLock";
+    case eoLatchType:
+      return "eoLatchType";
   }
   return "LatchType(?)";
 }
@@ -359,6 +441,8 @@ char const *toConstCharPointer(LatchState t) {
     case KSUnkn: return "KSUnkn";
     case KSLckd: return "KSLckd";
     case KSUnlk: return "KSUnlk";
+    case eoLatchState:
+      return "eoLatchState";
   }
   return "LatchState(?)";
 }
@@ -391,6 +475,8 @@ char const *toConstCharPointer(LogicType t) {
     case LTGate: return "LTGate";
     case LTInpt: return "LTInpt";
     case LTOutp: return "LTOutp";
+    case eoLogicType:
+      return "eoLogicType";
   }
   return "LogicType(?)";
 }
@@ -413,6 +499,8 @@ char const *toConstCharPointer(LogicState s) {
     case LSSet0: return "LSSet0";
     case LSXXXX: return "LSXXXX";
     case LSSet1: return "LSSet1";
+    case eoLogicState:
+      return "eoLogicState";
   }
   return "LogicState(?)";
 }
@@ -440,9 +528,26 @@ char const *toConstCharPointer(BlockState s) {
     case F_L: return "F_L";
     case _RL: return "_RL";
     case FRL: return "FRL";
+    case eoBlockState:
+      return "eoBlockState";
   }
   return "BlockState(?)";
 }
+
+struct BlockStateProperties {
+  bool isFBlockable;
+  bool isRBlockable;
+  bool isLatchable;
+} blockStateProperties[eoBlockState] = {
+  { false, false, false }, // ___
+  { true,  false, false }, // F__
+  { false, true,  false }, // _R_
+  { true,  true,  false }, // FR_
+  { false, false, true  }, // __L
+  { true,  false, true  }, // F_L
+  { false, true,  true  }, // _RL
+  { true,  true,  true  }  // FRL
+};
 
 // [latc]K{E,S,W,N}
 // L[ogic]{E,S,W,N}
@@ -473,18 +578,22 @@ char const *toConstCharPointer(RodType t) {
 
 struct RodTypeProperties {
   MinorTickPerCycle activeDuring[6];
+  Direction fwd;
+  Direction bwd;
+  Direction lwd;
+  Direction rwd;
 } rodTypeProperties[eoRodType] = {
 #undef ____
 #define ____ eoMinorTickPerCycle
-  { { ____, ____, ____, ____, ____, ____ } }, // RTUn
-  { { WUNL, WLNL, NUCL, NLCL, ____, ____ } }, // RTKE
-  { { SUNL, SLNL, EUCL, ELCL, ____, ____ } }, // RTKS
-  { { EUNL, ELNL, SUCL, SLCL, ____, ____ } }, // RTKW
-  { { NUNL, NLNL, WUCL, WLCL, ____, ____ } }, // RTKN
-  { { NRN1, NRNX, NRN0, ESC0, ESCX, ESC1 } }, // RTLE
-  { { ERN1, ERNX, ERN0, SSC0, SSCX, SSC1 } }, // RTLS
-  { { SRN1, SRNX, SRN0, WSC0, WSCX, WSC1 } }, // RTLW
-  { { WRN1, WRNX, WRN0, NSC0, NSCX, NSC1 } }, // RTLN
+  { { ____, ____, ____, ____, ____, ____ }, DirX, DirX, DirX, DirX }, // RTUn
+  { { WUNL, WLNL, NUCL, NLCL, ____, ____ }, DirE, DirW, DirN, DirS }, // RTKE
+  { { SUNL, SLNL, EUCL, ELCL, ____, ____ }, DirS, DirN, DirW, DirE }, // RTKS
+  { { EUNL, ELNL, SUCL, SLCL, ____, ____ }, DirW, DirE, DirS, DirN }, // RTKW
+  { { NUNL, NLNL, WUCL, WLCL, ____, ____ }, DirN, DirS, DirE, DirW }, // RTKN
+  { { NRN1, NRNX, NRN0, ESC0, ESCX, ESC1 }, DirE, DirW, DirN, DirS }, // RTLE
+  { { ERN1, ERNX, ERN0, SSC0, SSCX, SSC1 }, DirS, DirN, DirW, DirE }, // RTLS
+  { { SRN1, SRNX, SRN0, WSC0, WSCX, WSC1 }, DirW, DirE, DirS, DirN }, // RTLW
+  { { WRN1, WRNX, WRN0, NSC0, NSCX, NSC1 }, DirN, DirS, DirE, DirW }, // RTLN
 #undef ____
 };
 
@@ -780,14 +889,14 @@ struct VoxelProperties {
   { 2,'+',VTLatch,W,RTKW,KTPost,KSUnlk,LTUnkn,LSUnkn,T,___ }, // KPWU
   { 2,'+',VTLatch,N,RTKN,KTPost,KSLckd,LTUnkn,LSUnkn,T,___ }, // KPNL
   { 2,'+',VTLatch,N,RTKN,KTPost,KSUnlk,LTUnkn,LSUnkn,T,___ }, // KPNU
-  { 3,'<',VTLatch,E,RTKE,KTLock,KSLckd,LTUnkn,LSUnkn,F,___ }, // KKEL
-  { 3,'<',VTLatch,E,RTKE,KTLock,KSUnlk,LTUnkn,LSUnkn,F,___ }, // KKEU
-  { 3,'^',VTLatch,S,RTKS,KTLock,KSLckd,LTUnkn,LSUnkn,F,___ }, // KKSL
-  { 3,'^',VTLatch,S,RTKS,KTLock,KSUnlk,LTUnkn,LSUnkn,F,___ }, // KKSU
-  { 3,'>',VTLatch,W,RTKW,KTLock,KSLckd,LTUnkn,LSUnkn,F,___ }, // KKWL
-  { 3,'>',VTLatch,W,RTKW,KTLock,KSUnlk,LTUnkn,LSUnkn,F,___ }, // KKWU
-  { 3,'v',VTLatch,N,RTKN,KTLock,KSLckd,LTUnkn,LSUnkn,F,___ }, // KKNL
-  { 3,'v',VTLatch,N,RTKN,KTLock,KSUnlk,LTUnkn,LSUnkn,F,___ }, // KKNU
+  { 3,'<',VTLatch,E,RTKE,KTLock,KSLckd,LTUnkn,LSUnkn,F,FRL }, // KKEL
+  { 3,'<',VTLatch,E,RTKE,KTLock,KSUnlk,LTUnkn,LSUnkn,F,FRL }, // KKEU
+  { 3,'^',VTLatch,S,RTKS,KTLock,KSLckd,LTUnkn,LSUnkn,F,FRL }, // KKSL
+  { 3,'^',VTLatch,S,RTKS,KTLock,KSUnlk,LTUnkn,LSUnkn,F,FRL }, // KKSU
+  { 3,'>',VTLatch,W,RTKW,KTLock,KSLckd,LTUnkn,LSUnkn,F,FRL }, // KKWL
+  { 3,'>',VTLatch,W,RTKW,KTLock,KSUnlk,LTUnkn,LSUnkn,F,FRL }, // KKWU
+  { 3,'v',VTLatch,N,RTKN,KTLock,KSLckd,LTUnkn,LSUnkn,F,FRL }, // KKNL
+  { 3,'v',VTLatch,N,RTKN,KTLock,KSUnlk,LTUnkn,LSUnkn,F,FRL }, // KKNU
   { 4,'-',VTLogic,E,RTLE,KTUnkn,KSUnkn,LTBody,LSRset,T,___ }, // LBER
   { 4,'-',VTLogic,E,RTLE,KTUnkn,KSUnkn,LTBody,LSSet0,T,___ }, // LBE0
   { 4,'-',VTLogic,E,RTLE,KTUnkn,KSUnkn,LTBody,LSXXXX,T,___ }, // LBEI
@@ -956,7 +1065,7 @@ class Volume: public VolArray
   Volume(Voxel initialVoxel = Unkn);
   void MajorTick();
   void MinorTick();
-  void ViewFlat(ViewLvlArray &view) const;
+  void PrintViewFlat() const;
   bool isVoxelCoordinantInBounds(VoxelCoordinant v) const {
     return 0 <= v.L() && v.L() < NLvls &&
         0 <= v.R() && v.R() < NRows &&
@@ -969,6 +1078,7 @@ class Volume: public VolArray
   }
 
  private:
+  void ViewFlat(ViewLvlArray &view) const;
   Item *FormRodContaining(set<VoxelCoordinant> &seenSofar, VoxelCoordinant v);
   void FindItems();
 
@@ -982,43 +1092,120 @@ class Item: public set<VoxelCoordinant> {
       set<VoxelCoordinant>(),
       rodType(t),
       fBlockState(FBUnkn),
-      rBlockState(RBUnkn),
-      lockState(KSUnkn)
+      rBlockState(RBUnkn)
   {}
+
 
   bool IsFBlocked() const { return fBlockState == FBBlkd; }
   bool IsRBlocked() const { return rBlockState == RBBlkd; }
-  bool IsLocked() const { return lockState == KSLckd; }
 
+  virtual bool IsBlocked() const { return IsFBlocked() || IsRBlocked(); };
+  virtual bool CheckForBlockages(Volume const *volume);
   virtual bool IsFreeToMoveAt(Volume *volume, MinorTickPerCycle tick) const = 0;
   virtual bool AttemptToMoveAt(Volume *volume, MinorTickPerCycle tick) = 0;
+  virtual bool IsValid(Volume const *volume);
+  virtual RodType GetRodType() const { return rodType; }
   virtual void Dump() const;
 
- private:
+ protected:
   RodType rodType;
   FBlockState fBlockState;
   RBlockState rBlockState;
-  LatchState lockState;
 };
 
 class LatchRod: public Item {
  public:
-  LatchRod(RodType t): Item(t) {}
+  LatchRod(RodType t): Item(t), latchState(KSUnkn) {}
+
+  bool IsLocked() const { return latchState == KSLckd; }
+
   bool IsFreeToMoveAt(Volume *volume, MinorTickPerCycle tick) const;
   bool AttemptToMoveAt(Volume *volume, MinorTickPerCycle tick);
+  bool IsValid(Volume const *volume);
   void Dump() const;
+
+ private:
+  LatchState latchState;
 };
 
 class LogicRod: public Item {
  public:
-  LogicRod(RodType t): Item(t), logicState(LSUnkn) {}
+  LogicRod(RodType t): Item(t), latchState(KSUnkn), logicState(LSUnkn) {}
+
+  bool IsLocked() const { return latchState == KSLckd; }
+
+  bool IsBlocked() const { return Item::IsBlocked() && IsLocked(); };
+  bool CheckForBlockages(Volume const *volume);
   bool IsFreeToMoveAt(Volume *volume, MinorTickPerCycle tick) const;
   bool AttemptToMoveAt(Volume *volume, MinorTickPerCycle tick);
+  bool IsValid(Volume const *volume);
   void Dump() const;
 
  private:
+  LatchState latchState;
   LogicState logicState;
 };
+
+class Scenario {
+ public:
+  Scenario(Volume const *volume,
+           MinorTickPerCycle t,
+           VoxelCoordinant const &v
+          ) :
+      tick(t),
+      self(volume->voxelAt(v))
+  {
+    area[0] = volume->voxelAt(v.To(N));
+    area[1] = volume->voxelAt(v.To(W));
+    area[2] = volume->voxelAt(v.To(E));
+    area[3] = volume->voxelAt(v.To(S));
+  }
+  Scenario(Scenario const &that) :
+      tick(that.tick),
+      self(that.self),
+      area(that.area)
+  {
+  }
+  Scenario &operator=(Scenario const &that) {
+    if (this != &that) {
+      tick = that.tick;
+      self = that.self;
+      area = that.area;
+    }
+    return *this;
+  }
+
+  bool operator==(Scenario const &that) const {
+    return tick == that.tick && self == that.self && area == that.area;
+  }
+  bool operator<(Scenario const &that) const {
+    return tick < that.tick ||
+        (tick == that.tick && (self < that.self ||
+                               (self == that.self && (area < that.area))
+                              )
+        );
+  }
+  void Dump() const {
+    fprintf(stderr,
+            "(Scenario *)(%p)={ tick=%d, self=%s, area={ %s, %s, %s, %s }}\n",
+            this,
+            tick,
+            toConstCharPointer(self),
+            toConstCharPointer(area[0]),
+            toConstCharPointer(area[1]),
+            toConstCharPointer(area[2]),
+            toConstCharPointer(area[3])
+           );
+  }
+
+ private:
+  MinorTickPerCycle tick;
+  Voxel self;
+  array<Voxel, 4> area;
+};
+
+typedef map<Scenario, Voxel> Rules;
+Rules rules;
 
 Volume::Volume(VolArray const &initial) :
     VolArray(initial),
@@ -1047,12 +1234,38 @@ void Volume::MajorTick() {
 
 void Volume::MinorTick() {
   size_t tick = clock % NMinorTicksPerCycle;
-  ItemsActiveForMinorTick &itemsActiveThisMinorTick = itemsActiveByTick[tick];
 
-  for (Item *i : itemsActiveThisMinorTick) {
+  for (Item *i : itemsActiveByTick[tick]) {
     i->AttemptToMoveAt(this, MinorTickPerCycle(tick));
   }
   clock += 1;
+}
+
+void Volume::PrintViewFlat() const {
+  ViewLvlArray view;
+
+  ViewFlat(view);
+
+  fprintf(stdout, "   ");
+  for (int c = 0; c < NCols; c += 1) {
+    if (int cc = (c / 10) % 10) {
+      fprintf(stdout, "%1d", cc);
+    } else {
+      fprintf(stdout, " ");
+    }
+  }
+  fprintf(stdout, "\n   ");
+  for (int c = 0; c < NCols; c += 1) {
+    fprintf(stdout, "%1d", c % 10);
+  }
+  fprintf(stdout, "\n");
+  for (int r = 0; r < NRows; r += 1) {
+    fprintf(stdout, "%2d ", r % 100);
+    for (int c = 0; c < NCols; c += 1) {
+      fprintf(stdout, "%c", view[r][c]);
+    }
+    fprintf(stdout, "\n");
+  }
 }
 
 void Volume::ViewFlat(ViewLvlArray &view) const {
@@ -1112,7 +1325,7 @@ Item *Volume::FormRodContaining
   bool reachedFwdEnd = false;
   for (VoxelCoordinant f = v.To(cProperties.fwd);
        isPartOf(vProperties.rodType, f, reachedFwdEnd);
-       f.To(cProperties.fwd)
+       f.Move(cProperties.fwd)
       )
   {
     item->insert(f);
@@ -1128,7 +1341,7 @@ Item *Volume::FormRodContaining
   bool reachedBwdEnd = false;
   for (VoxelCoordinant b = v.To(cProperties.bwd);
        isPartOf(vProperties.rodType, b, reachedBwdEnd);
-       b.To(cProperties.bwd)
+       b.Move(cProperties.bwd)
       )
   {
     item->insert(b);
@@ -1142,7 +1355,18 @@ Item *Volume::FormRodContaining
     }
   }
   seenSofar.insert(item->begin(), item->end());
-  itemsActiveByTick[0].insert(item);
+  if (item->IsValid(this)) {
+    RodTypeProperties const &properties =
+        rodTypeProperties[item->GetRodType()];
+    for (auto const &t : properties.activeDuring) {
+      if (t == eoMinorTickPerCycle) {
+        break;
+      }
+      itemsActiveByTick[t].insert(item);
+    }
+    item->CheckForBlockages(this);
+  }
+
   return item;
 }
 
@@ -1174,12 +1398,126 @@ void Volume::FindItems() {
   }
 }
 
+bool Item::CheckForBlockages(Volume const *volume) {
+  fBlockState = FBUnkn;
+  rBlockState = RBUnkn;
+
+  size_t fBlockCounts = 0;
+  size_t rBlockCounts = 0;
+  for (auto const &v : *this) {
+    VoxelProperties const &vProperties = voxelProperties[volume->voxelAt(v)];
+    if (blockStateProperties[vProperties.blockableStates].isFBlockable) {
+      VoxelCoordinant f = v.To(rodTypeProperties[rodType].fwd);
+      if (volume->isVoxelCoordinantInBounds(f)) {
+        if (find(f) == end() && volume->voxelAt(f) != Slot) {
+          fprintf(stderr,
+                  "(Item *)(%p) fBlocked at %s(%d,%d,%d) by %s(%d,%d,%d)\n",
+                  this,
+                  toConstCharPointer(volume->voxelAt(v)),
+                  v.L(),
+                  v.R(),
+                  v.C(),
+                  toConstCharPointer(volume->voxelAt(f)),
+                  f.L(),
+                  f.R(),
+                  f.C()
+                 );
+          fBlockCounts += 1;
+        }
+      } else {
+        fprintf(stderr,
+                "(Item *)(%p) fBlocked at %s(%d,%d,%d) by edge\n",
+                this,
+                toConstCharPointer(volume->voxelAt(v)),
+                v.L(),
+                v.R(),
+                v.C()
+                );
+        fBlockCounts += 1;
+      }
+    }
+    if (blockStateProperties[vProperties.blockableStates].isRBlockable) {
+      VoxelCoordinant b = v.To(rodTypeProperties[rodType].bwd);
+      if (volume->isVoxelCoordinantInBounds(b)) {
+        if (find(b) == end() && volume->voxelAt(b) != Slot) {
+          fprintf(stderr,
+                  "(Item *)(%p) rBlocked at %s(%d,%d,%d) by %s(%d,%d,%d)\n",
+                  this,
+                  toConstCharPointer(volume->voxelAt(v)),
+                  v.L(),
+                  v.R(),
+                  v.C(),
+                  toConstCharPointer(volume->voxelAt(b)),
+                  b.L(),
+                  b.R(),
+                  b.C()
+                 );
+          rBlockCounts += 1;
+        }
+      } else {
+        fprintf(stderr,
+                "(Item *)(%p) rBlocked at %s(%d,%d,%d) by edge\n",
+                this,
+                toConstCharPointer(volume->voxelAt(v)),
+                v.L(),
+                v.R(),
+                v.C()
+                );
+        rBlockCounts += 1;
+      }
+    }
+  }
+
+  fBlockState = fBlockCounts != 0 ? FBBlkd : FBUnbk;
+  rBlockState = rBlockCounts != 0 ? RBBlkd : RBUnbk;
+
+  return !IsBlocked();
+}
+
+bool Item::IsValid(Volume const *volume) {
+  array<size_t, eoRodType> rodTypeCounts;
+
+  rodTypeCounts.fill(0);
+  rodType = eoRodType;
+  bool foundMoreThan1RodType = false;
+  for (auto const &v : *this) {
+    VoxelProperties const &properties = voxelProperties[volume->voxelAt(v)];
+    if (properties.type != VTSlot) {
+      rodTypeCounts[properties.rodType] += 1;
+      foundMoreThan1RodType |=
+          rodType != eoRodType &&
+          rodType != properties.rodType;
+      rodType = properties.rodType;
+    }
+  }
+  if (foundMoreThan1RodType) {
+    fprintf(stderr,
+            "(Item *)(%p)->IsValid(volume=%p): foundMoreThan1RodType!",
+            this,
+            volume
+           );
+    fprintf(stderr,
+            "  rodTypeCounts={ [%s]%lu",
+            toConstCharPointer(RodType(0)),
+            rodTypeCounts[0]
+           );
+    for (size_t t = 1; t < eoRodType; t += 1) {
+      fprintf(stderr,
+              ", [%s]%lu",
+              toConstCharPointer(RodType(t)),
+              rodTypeCounts[t]
+              );
+    }
+    fprintf(stderr, " }\n");
+  }
+  return !foundMoreThan1RodType;
+}
+
 void Item::Dump() const {
   fprintf(stderr, "(Item *)(%p)->{", this);
   fprintf(stderr, " rodType=%s, ", toConstCharPointer(rodType));
   fprintf(stderr, " fBlockState=%s, ", toConstCharPointer(fBlockState));
-  fprintf(stderr, " rBlockState=%s, ", toConstCharPointer(rBlockState));
-  fprintf(stderr, " lockState=%s, { ", toConstCharPointer(lockState));
+  fprintf(stderr, " rBlockState=%s, {", toConstCharPointer(rBlockState));
   char const *comma = "";
   for (auto const &c : *this) {
     fprintf(stderr, "%c (%2d,%2d,%2d)", *comma, c.L(), c.R(), c.C());
@@ -1193,18 +1531,175 @@ bool LatchRod::IsFreeToMoveAt(Volume *volume, MinorTickPerCycle tick) const {
 }
 
 bool LatchRod::AttemptToMoveAt(Volume *volume, MinorTickPerCycle tick) {
-  if (!IsFreeToMoveAt(volume, tick)) {
+  if (CheckForBlockages(volume)) {
+    for (auto const &v : *this) {
+      Scenario scenario(volume, tick, v);
+      if (rules.find(scenario) == rules.end()) {
+        scenario.Dump();
+      }
+    }
+    return true;
+  }
+  return false;
+}
+
+bool LatchRod::IsValid(Volume const *volume) {
+  if (!Item::IsValid(volume)) {
     return false;
   }
-  for (auto const &vc : *this) {
-    // MoveAt(volume, minorTick, vc);
+
+  array<size_t, eoRodType> latchStateCounts;
+
+  latchStateCounts.fill(0);
+
+  bool foundMoreThan1LatchState = false;
+  latchState = eoLatchState;
+  for (auto const &v : *this) {
+    VoxelProperties const &properties = voxelProperties[volume->voxelAt(v)];
+    if (properties.type != VTSlot) {
+      latchStateCounts[properties.latchState] += 1;
+      foundMoreThan1LatchState |=
+          latchState != eoLatchState &&
+          latchState != properties.latchState;
+      latchState = properties.latchState;
+    }
   }
+  if (foundMoreThan1LatchState) {
+    fprintf(stderr,
+            "(LatchRod *)(%p)->IsValid(volume=%p): foundMoreThan1LatchState!",
+            this,
+            volume
+           );
+    fprintf(stderr,
+            "  latchStateCounts={ [%s]%lu",
+            toConstCharPointer(LatchState(0)),
+            latchStateCounts[0]
+           );
+    for (size_t t = 1; t < eoLatchState; t += 1) {
+      fprintf(stderr,
+              ", [%s]%lu",
+              toConstCharPointer(LatchState(t)),
+              latchStateCounts[t]
+              );
+    }
+    fprintf(stderr, " }\n");
+  }
+  return !foundMoreThan1LatchState;
 }
 
 void LatchRod::Dump() const {
   fprintf(stderr, "(LatchRod *)(%p)->{ ", this);
+  fprintf(stderr, " latchState=%s, ", toConstCharPointer(latchState));
   Item::Dump();
   fprintf(stderr, " }");
+}
+
+bool LogicRod::CheckForBlockages(Volume const *volume) {
+  fBlockState = FBUnkn;
+  rBlockState = RBUnkn;
+  latchState = KSUnkn;
+
+  size_t fBlockCounts = 0;
+  size_t rBlockCounts = 0;
+  size_t latchCounts = 0;
+  for (auto const &v : *this) {
+    VoxelProperties const &properties = voxelProperties[volume->voxelAt(v)];
+    if (blockStateProperties[properties.blockableStates].isFBlockable) {
+      VoxelCoordinant f = v.To(rodTypeProperties[rodType].fwd);
+      if (volume->isVoxelCoordinantInBounds(f)) {
+        if (find(f) == end() && volume->voxelAt(f) != Slot) {
+          fprintf(stderr,
+                  "(LogicRod *)(%p) fBlocked at %s(%d,%d,%d) by %s(%d,%d,%d)\n",
+                  this,
+                  toConstCharPointer(volume->voxelAt(v)),
+                  v.L(),
+                  v.R(),
+                  v.C(),
+                  toConstCharPointer(volume->voxelAt(f)),
+                  f.L(),
+                  f.R(),
+                  f.C()
+                 );
+          fBlockCounts += 1;
+        }
+      } else {
+        fprintf(stderr,
+                "(LogicRod *)(%p) fBlocked at %s(%d,%d,%d) by edge\n",
+                this,
+                toConstCharPointer(volume->voxelAt(v)),
+                v.L(),
+                v.R(),
+                v.C()
+                );
+        fBlockCounts += 1;
+      }
+    }
+    if (blockStateProperties[properties.blockableStates].isRBlockable) {
+      VoxelCoordinant b = v.To(rodTypeProperties[rodType].bwd);
+      if (volume->isVoxelCoordinantInBounds(b)) {
+        if (find(b) == end() && volume->voxelAt(b) != Slot) {
+          fprintf(stderr,
+                  "(Item *)(%p) rBlocked at %s(%d,%d,%d) by %s(%d,%d,%d)\n",
+                  this,
+                  toConstCharPointer(volume->voxelAt(v)),
+                  v.L(),
+                  v.R(),
+                  v.C(),
+                  toConstCharPointer(volume->voxelAt(b)),
+                  b.L(),
+                  b.R(),
+                  b.C()
+                 );
+          rBlockCounts += 1;
+        }
+      } else {
+        fprintf(stderr,
+                "(LogicRod *)(%p) rBlocked at %s(%d,%d,%d) by edge\n",
+                this,
+                toConstCharPointer(volume->voxelAt(v)),
+                v.L(),
+                v.R(),
+                v.C()
+                );
+        rBlockCounts += 1;
+      }
+    }
+    if (blockStateProperties[properties.blockableStates].isLatchable) {
+      VoxelCoordinant r = v.To(rodTypeProperties[rodType].fwd);
+      if (volume->isVoxelCoordinantInBounds(r)) {
+        if (volume->voxelAt(r) != Slot) {
+          fprintf(stderr,
+                  "(Item *)(%p) latched at %s(%d,%d,%d) by %s(%d,%d,%d)\n",
+                  this,
+                  toConstCharPointer(volume->voxelAt(v)),
+                  v.L(),
+                  v.R(),
+                  v.C(),
+                  toConstCharPointer(volume->voxelAt(r)),
+                  r.L(),
+                  r.R(),
+                  r.C()
+                 );
+          latchCounts += 1;
+        }
+      } else {
+        fprintf(stderr,
+                "(LogicRod *)(%p) latched at %s(%d,%d,%d) by edge\n",
+                this,
+                toConstCharPointer(volume->voxelAt(v)),
+                v.L(),
+                v.R(),
+                v.C()
+                );
+        latchCounts += 1;
+      }
+    }
+  }
+
+  fBlockState = fBlockCounts != 0 ? FBBlkd : FBUnbk;
+  rBlockState = rBlockCounts != 0 ? RBBlkd : RBUnbk;
+  latchState = latchCounts != 0 ? KSLckd : KSUnlk;
+  return !IsBlocked();
 }
 
 bool LogicRod::IsFreeToMoveAt(Volume *volume, MinorTickPerCycle tick) const {
@@ -1219,8 +1714,84 @@ bool LogicRod::AttemptToMoveAt(Volume *volume, MinorTickPerCycle tick) {
   }
 }
 
+bool LogicRod::IsValid(Volume const *volume) {
+  if (!Item::IsValid(volume)) {
+    return false;
+  }
+
+  array<size_t, eoRodType> latchStateCounts;
+  array<size_t, eoRodType> logicStateCounts;
+
+  latchStateCounts.fill(0);
+  logicStateCounts.fill(0);
+
+  bool foundMoreThan1LatchState = false;
+  latchState = eoLatchState;
+  bool foundMoreThan1LogicState = false;
+  logicState = eoLogicState;
+  for (auto const &v : *this) {
+    VoxelProperties const &properties = voxelProperties[volume->voxelAt(v)];
+    LatchState latchState = properties.latchState;
+    LogicState logicState = properties.logicState;
+    if (properties.type != VTSlot) {
+      latchStateCounts[properties.latchState] += 1;
+      foundMoreThan1LatchState |=
+          latchState != eoLatchState &&
+          latchState != properties.latchState;
+      latchState = properties.latchState;
+      logicStateCounts[properties.logicState] += 1;
+      foundMoreThan1LogicState |=
+          logicState != eoLogicState &&
+          logicState != properties.logicState;
+      logicState = properties.logicState;
+    }
+  }
+  if (foundMoreThan1LatchState) {
+    fprintf(stderr,
+            "(LogicRod *)(%p)->IsValid(volume=%p): foundMoreThan1LatchState!",
+            this,
+            volume
+           );
+    fprintf(stderr,
+            "  latchStateCounts={ [%s]%lu",
+            toConstCharPointer(LatchState(0)),
+            latchStateCounts[0]
+           );
+    for (size_t t = 1; t < eoLatchState; t += 1) {
+      fprintf(stderr,
+              ", [%s]%lu",
+              toConstCharPointer(LatchState(t)),
+              latchStateCounts[t]
+              );
+    }
+    fprintf(stderr, " }\n");
+  }
+  if (foundMoreThan1LogicState) {
+    fprintf(stderr,
+            "(LogicRod *)(%p)->IsValid(volume=%p): foundMoreThan1LogicState!",
+            this,
+            volume
+           );
+    fprintf(stderr,
+            "  logicStateCounts={ [%s]%lu",
+            toConstCharPointer(LogicState(0)),
+            logicStateCounts[0]
+           );
+    for (size_t t = 1; t < eoLogicState; t += 1) {
+      fprintf(stderr,
+              ", [%s]%lu",
+              toConstCharPointer(LogicState(t)),
+              logicStateCounts[t]
+              );
+    }
+    fprintf(stderr, " }\n");
+  }
+  return !foundMoreThan1LatchState && !foundMoreThan1LogicState;
+}
+
 void LogicRod::Dump() const {
   fprintf(stderr, "(LogicRod *)(%p)->{", this);
+  fprintf(stderr, " latchState=%s, ", toConstCharPointer(latchState));
   fprintf(stderr, " logicState=%s, ", toConstCharPointer(logicState));
   Item::Dump();
   fprintf(stderr, " }");
@@ -1570,30 +2141,9 @@ VolArray initialVolume = {
 };
 
 int main(int argc, char const *argv[]) {
-  ViewLvlArray view;
   Volume volume(initialVolume);
 
-  volume.ViewFlat(view);
-
-  fprintf(stdout, "   ");
-  for (int c = 0; c < NCols; c += 1) {
-    if (int cc = (c / 10) % 10) {
-      fprintf(stdout, "%1d", cc);
-    } else {
-      fprintf(stdout, " ");
-    }
-  }
-  fprintf(stdout, "\n   ");
-  for (int c = 0; c < NCols; c += 1) {
-    fprintf(stdout, "%1d", c % 10);
-  }
-  fprintf(stdout, "\n");
-  for (int r = 0; r < NRows; r += 1) {
-    fprintf(stdout, "%2d ", r % 100);
-    for (int c = 0; c < NCols; c += 1) {
-      fprintf(stdout, "%c", view[r][c]);
-    }
-    fprintf(stdout, "\n");
-  }
+  volume.PrintViewFlat();
+  volume.MinorTick();
   return 0;
 }

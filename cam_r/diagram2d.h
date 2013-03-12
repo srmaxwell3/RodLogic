@@ -88,10 +88,11 @@ struct Diagram2D : public vector<string> {
   bool getOutputFor(string const &name, int bitNumber);
   int CurrentTick() const { return lastEvaluatedTick; }
 
-  void dumpInputLabelState(Label const &label, char const *comma, CombinedLabel const *&lastCLabel);
-  void dumpOutputLabelState(Label const &label, char const *comma, CombinedLabel const *&lastCLabel);
-  void dumpLabelState(bool isInput, Label const &label, char const *comma, CombinedLabel const *&lastCLabel);
+  bool dumpInputLabelState(Label const &label, char const *comma, CombinedLabel const *&lastCLabel);
+  bool dumpOutputLabelState(Label const &label, char const *comma, CombinedLabel const *&lastCLabel);
+  bool dumpLabelState(bool isInput, Label const &label, char const *comma, CombinedLabel const *&lastCLabel);
   void dumpState();
+  void dumpPerformance() const;
   void dump() const;
 
   static bool isLegalEWChar(char c);
@@ -108,6 +109,10 @@ struct Diagram2D : public vector<string> {
   Directions earliestOutput;
   map<Label, bool> currentOutputs;
   map<string, CombinedLabel> currentCombinedOutputs;
+  array<long, eoDirections> totalEvaluatedUSecsPerDirection;
+  long totalEvaluatedUSecs;
+  long totalEvaluatedTicks;
+
   int lastEvaluatedTick;
   int lastEvaluatedTickNChangedRods;
   int lastEvaluatedTickNInputsRead;

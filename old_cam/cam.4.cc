@@ -1,3 +1,4 @@
+#include <cassert>
 #include <cstddef>
 #include <cstdio>
 #include <array>
@@ -12,6 +13,8 @@ using std::string;
 using std::vector;
 #include <initializer_list>
 using std::initializer_list;
+
+bool optVerbose = false;
 
 // Directions of motion, in order (clockwise).
 
@@ -925,10 +928,10 @@ struct VoxelProperties {
   DataState dataState;
   bool isRodBody;
   BlockState blockableStates;
-  Direction fwd;
-  Voxel fwdVoxel;
-  Direction bwd;
-  Voxel bwdVoxel;
+  struct Changes {
+    Direction direction;
+    Voxel nextVoxel;
+  } motion[eoFwdOrBwd];
 } voxelProperties[eoVoxel] = {
 #undef Props
 #define Props(displayPriority, \
@@ -948,18 +951,17 @@ struct VoxelProperties {
              ) { \
   displayPriority, \
   text, \
-  VT#voxelType, \
-  RT#rodType, \
-  LT#lockType, \
-  LS#locState, \
-  DT#dataType, \
-  DS#dataState, \
+  VT##voxelType, \
+  RT##rodType, \
+  LT##lockType, \
+  LS##lockState, \
+  DT##dataType, \
+  DS##dataState, \
   isRodBody, \
   blockableStates, \
-  Dir#fwd, \
-  fwdVoxel, \
-  Dir#bwd, \
-  bwdVoxel \
+  { { Dir##fwd, fwdVoxel }, \
+    { Dir##bwd, bwdVoxel } \
+  } \
 }
 
 #undef T
@@ -969,21 +971,21 @@ struct VoxelProperties {
 #undef ____
 #define ____ Unkn
 
-                       displayPriority
-                      /  text
-                     /  /    voxelType
-                    /  /    /   rodType
-                   /  /    /   /    lockType
-                  /  /    /   /    /    lockState
-                 /  /    /   /    /    /    dataType
-                /  /    /   /    /    /    /    dataState
-               /  /    /   /    /    /    /    / isRodBody
-              /  /    /   /    /    /    /    / /   blockableStates
-             /  /    /   /    /    /    /    / /   / fwd
-            /  /    /   /    /    /    /    / /   / /    fwdVoxel
-           /  /    /   /    /    /    /    / /   / /    / bwd
-          /  /    /   /    /    /    /    / /   / /    / /    bwdVoxel
-         /  /    /   /    /    /    /    / /   / /    / /    /
+  //                   displayPriority
+  //                  /  text
+  //                 /  /    voxelType
+  //                /  /    /   rodType
+  //               /  /    /   /    lockType
+  //              /  /    /   /    /    lockState
+  //             /  /    /   /    /    /    dataType
+  //            /  /    /   /    /    /    /    dataState
+  //           /  /    /   /    /    /    /    / isRodBody
+  //          /  /    /   /    /    /    /    / /   blockableStates
+  //         /  /    /   /    /    /    /    / /   / fwd
+  //        /  /    /   /    /    /    /    / /   / /    fwdVoxel
+  //       /  /    /   /    /    /    /    / /   / /    / bwd
+  //      /  /    /   /    /    /    /    / /   / /    / /    bwdVoxel
+  //     /  /    /   /    /    /    /    / /   / /    / /    /
   Props(9,'?',Unkn,Un,Unkn,Unkn,Unkn,Unkn,F,___,X,____,X,____), // Unkn
   Props(0,'#',Wall,Un,Unkn,Unkn,Unkn,Unkn,F,___,X,____,X,____), // Wall
   Props(1,' ',Slot,Un,Unkn,Unkn,Unkn,Unkn,F,___,X,____,X,____), // Slot
@@ -1044,21 +1046,21 @@ struct VoxelProperties {
   Props(4,'|',Data,DN,Unkn,Unkn,Body,XXXX,T,___,N,DBN1,S,DBN0), // DBNX
   Props(4,'|',Data,DN,Unkn,Unkn,Body,Set1,T,___,N,____,S,DBNX), // DBN1
   Props(5,'>',Data,DE,Unkn,Unkn,Head,Rset,T,F__,E,DHE0,W,____), // DHER
-  Props(5,'>',Data,DE,Unkn,Unkn,Head,Set0,T,F__,E,DHEX,W,DHER), // DHE0
-  Props(5,'>',Data,DE,Unkn,Unkn,Head,XXXX,T,F__,E,DHE1,W,DHE0), // DHEX
-  Props(5,'>',Data,DE,Unkn,Unkn,Head,Set1,T,F__,E,____,W,DHEX), // DHE1
+  Props(5,'0',Data,DE,Unkn,Unkn,Head,Set0,T,F__,E,DHEX,W,DHER), // DHE0
+  Props(5,'X',Data,DE,Unkn,Unkn,Head,XXXX,T,F__,E,DHE1,W,DHE0), // DHEX
+  Props(5,'1',Data,DE,Unkn,Unkn,Head,Set1,T,F__,E,____,W,DHEX), // DHE1
   Props(5,'v',Data,DS,Unkn,Unkn,Head,Rset,T,F__,S,DHS0,N,____), // DHSR
-  Props(5,'v',Data,DS,Unkn,Unkn,Head,Set0,T,F__,S,DHSX,N,DHSR), // DHS0
-  Props(5,'v',Data,DS,Unkn,Unkn,Head,XXXX,T,F__,S,DHS1,N,DHS0), // DHSX
-  Props(5,'v',Data,DS,Unkn,Unkn,Head,Set1,T,F__,S,____,N,DHSX), // DHS1
+  Props(5,'0',Data,DS,Unkn,Unkn,Head,Set0,T,F__,S,DHSX,N,DHSR), // DHS0
+  Props(5,'X',Data,DS,Unkn,Unkn,Head,XXXX,T,F__,S,DHS1,N,DHS0), // DHSX
+  Props(5,'1',Data,DS,Unkn,Unkn,Head,Set1,T,F__,S,____,N,DHSX), // DHS1
   Props(5,'<',Data,DW,Unkn,Unkn,Head,Rset,T,F__,W,DHW0,E,____), // DHWR
-  Props(5,'<',Data,DW,Unkn,Unkn,Head,Set0,T,F__,W,DHWX,E,DHWR), // DHW0
-  Props(5,'<',Data,DW,Unkn,Unkn,Head,XXXX,T,F__,W,DHW1,E,DHW0), // DHWX
-  Props(5,'<',Data,DW,Unkn,Unkn,Head,Set1,T,F__,W,____,E,DHWX), // DHW1
+  Props(5,'0',Data,DW,Unkn,Unkn,Head,Set0,T,F__,W,DHWX,E,DHWR), // DHW0
+  Props(5,'X',Data,DW,Unkn,Unkn,Head,XXXX,T,F__,W,DHW1,E,DHW0), // DHWX
+  Props(5,'1',Data,DW,Unkn,Unkn,Head,Set1,T,F__,W,____,E,DHWX), // DHW1
   Props(5,'^',Data,DN,Unkn,Unkn,Head,Rset,T,F__,N,DHN0,S,____), // DHNR
-  Props(5,'^',Data,DN,Unkn,Unkn,Head,Set0,T,F__,N,DHNX,S,DHNR), // DHN0
-  Props(5,'^',Data,DN,Unkn,Unkn,Head,XXXX,T,F__,N,DHN1,S,DHN0), // DHNX
-  Props(5,'^',Data,DN,Unkn,Unkn,Head,Set1,T,F__,N,____,S,DHNX), // DHN1
+  Props(5,'0',Data,DN,Unkn,Unkn,Head,Set0,T,F__,N,DHNX,S,DHNR), // DHN0
+  Props(5,'X',Data,DN,Unkn,Unkn,Head,XXXX,T,F__,N,DHN1,S,DHN0), // DHNX
+  Props(5,'1',Data,DN,Unkn,Unkn,Head,Set1,T,F__,N,____,S,DHNX), // DHN1
   Props(5,'>',Data,DE,Unkn,Unkn,Tail,Rset,T,_R_,E,DTE0,W,____), // DTER
   Props(5,'>',Data,DE,Unkn,Unkn,Tail,Set0,T,_R_,E,DTEX,W,DTER), // DTE0
   Props(5,'>',Data,DE,Unkn,Unkn,Tail,XXXX,T,_R_,E,DTE1,W,DTE0), // DTEX
@@ -1226,15 +1228,15 @@ class Scenario {
         );
   }
   Voxel From(Direction d) const { return area[d]; }
-  Voxel E() const { return area[DirE]; }
-  Voxel S() const { return area[DirS]; }
-  Voxel D() const { return area[DirD]; }
-  Voxel W() const { return area[DirW]; }
-  Voxel N() const { return area[DirN]; }
-  Voxel U() const { return area[DirU]; }
-  Voxel O() const { return self; }
+  Voxel FromE() const { return area[DirE]; }
+  Voxel FromS() const { return area[DirS]; }
+  Voxel FromD() const { return area[DirD]; }
+  Voxel FromW() const { return area[DirW]; }
+  Voxel FromN() const { return area[DirN]; }
+  Voxel FromU() const { return area[DirU]; }
+  Voxel Self() const { return self; }
   void Dump() const {
-    fprintf(stderr,
+    fprintf(stdout,
             "(Scenario *)(%p)->{ %s, %s, { %s, %s, %s, %s } }\n",
             this,
             toConstCharPointer(tick),
@@ -1260,7 +1262,7 @@ struct Rule {
   }
   Rule(Scenario const &s, Voxel v) : scenario(s), newVoxel(v) { }
   void Dump() const {
-    fprintf(stderr,
+    fprintf(stdout,
             "Rule(Scenario(%s, /* { */ %s, %s, %s, %s, %s /* } */), %s)",
             toConstCharPointer(scenario.tick),
             toConstCharPointer(scenario.area[DirN]),
@@ -1311,7 +1313,11 @@ class Volume: public VolArray
     return (*this)[v.L()][v.R()][v.C()];
   }
   Voxel &voxelAt(VoxelCoordinant v) {
-    return (*this)[v.L()][v.R()][v.C()];
+    if (isVoxelCoordinantInBounds(v)) {
+      return (*this)[v.L()][v.R()][v.C()];
+    }
+    static Voxel outOfBounds = Unkn;
+    return outOfBounds;
   }
   int CurrentClock() const { return clock; }
   TickPerCycle CurrentTick() const {
@@ -1343,9 +1349,11 @@ class Item: public set<VoxelCoordinant> {
   virtual bool IsFBlked() const { return fBlkState == FBBlkd; }
   virtual bool IsRBlked() const { return rBlkState == RBBlkd; }
   virtual bool IsBlocked() const { return IsFBlked() || IsRBlked(); };
-  virtual bool CheckForFreedomOfMovement(Volume const *volume, FwdOrBwd fwdOrBwd) = 0;
+  virtual bool CheckForFreedomOfMovement(
+      Volume const *volume, FwdOrBwd fwdOrBwd) = 0;
   virtual bool CheckForFreedomOfMovement(Volume const *volume) = 0;
-  virtual bool AttemptToMove(Volume *volume, FwdOrBwd fwdOrBwd, Changes &changes);
+  virtual bool AttemptToMove(
+      Volume *volume, FwdOrBwd fwdOrBwd, Changes &changes);
   virtual bool IsValid(Volume const *volume);
   virtual RodType GetRodType() const { return rodType; }
   virtual void Dump(Volume const *volume = 0) const;
@@ -1397,7 +1405,7 @@ class DataRod: public Item {
 
 void VoxelCoordinant::Dump(Volume const *volume) const {
   if (volume) {
-    fprintf(stderr,
+    fprintf(stdout,
             "%s(%d,%d,%d)",
             toConstCharPointer(volume->voxelAt(*this)),
             l,
@@ -1405,7 +1413,7 @@ void VoxelCoordinant::Dump(Volume const *volume) const {
             c
            );
   } else {
-    fprintf(stderr,
+    fprintf(stdout,
             "(VoxelCoordinant *)(%p)->{ l=%d, r=%d, c=%d }",
             this,
             l,
@@ -1422,10 +1430,12 @@ Scenario::Scenario(Volume const *volume,
     tick(t),
     self(volume->voxelAt(v))
 {
-  area[0] = volume->voxelAt(v.To(DirN));
-  area[1] = volume->voxelAt(v.To(DirW));
-  area[2] = volume->voxelAt(v.To(DirE));
-  area[3] = volume->voxelAt(v.To(DirS));
+  area[DirE] = volume->voxelAt(v.To(DirE));
+  area[DirS] = volume->voxelAt(v.To(DirS));
+  area[DirD] = volume->voxelAt(v.To(DirD));
+  area[DirW] = volume->voxelAt(v.To(DirW));
+  area[DirN] = volume->voxelAt(v.To(DirN));
+  area[DirU] = volume->voxelAt(v.To(DirU));
 }
 
 Volume::Volume(VolArray const &initial) :
@@ -1456,13 +1466,16 @@ void Volume::Phase() {
 void Volume::Tick() {
   size_t tick = clock % NTicksPerCycle;
   TickPerCycleProperties const &tProperties = tickPerCycleProperties[tick];
-  fprintf(stderr,
-	  "(Volume *)(%p)->Tick(): tick=%s, tProperties.rodType=%s, tProperties.fwdOrBwd=%s\n",
-	  this,
-	  toConstCharPointer(TickPerCycle(tick)),
-	  toConstCharPointer(tProperties.rodType),
-	  toConstCharPointer(tProperties.fwdOrBwd)
-	 );
+  if (optVerbose) {
+    fprintf(stdout,
+            "(Volume *)(%p)->Tick(): "
+            "tick=%s, tProperties.rodType=%s, tProperties.fwdOrBwd=%s\n",
+            this,
+            toConstCharPointer(TickPerCycle(tick)),
+            toConstCharPointer(tProperties.rodType),
+            toConstCharPointer(tProperties.fwdOrBwd)
+            );
+  }
 
   Changes changes;
   for (Item *i : itemsByRodType[tProperties.rodType]) {
@@ -1487,7 +1500,11 @@ void Volume::PrintViewFlat() const {
       fprintf(stdout, " ");
     }
   }
-  fprintf(stdout, "\n   ");
+  fprintf(stdout,
+          " %s %d\n   ",
+          toConstCharPointer(CurrentTick()),
+          CurrentClock()
+         );
   for (int c = 0; c < NCols; c += 1) {
     fprintf(stdout, "%1d", c % 10);
   }
@@ -1627,8 +1644,10 @@ void Volume::FindItems() {
 	if (voxelProperties[voxelAt(v)].isRodBody) {
 	  if (seenSofar.find(v) == seenSofar.end()) {
             Item *item = FormRodContaining(seenSofar, v);
-            item->Dump(this);
-            fprintf(stderr, "\n");
+            if (optVerbose) {
+              item->Dump(this);
+              fprintf(stdout, "\n");
+            }
             break;
           }
         }
@@ -1638,107 +1657,189 @@ void Volume::FindItems() {
 }
 
 bool Item::AttemptToMove(Volume *volume, FwdOrBwd fwdOrBwd, Changes &changes) {
-  fprintf(stderr, "(%s *)(%p)->AttemptToMove(): fwdOrBwd=%s\n", TypeName(), this, toConstCharPointer(fwdOrBwd));
   bool isMovable = CheckForFreedomOfMovement(volume, fwdOrBwd);
-  Dump(volume);
-  fprintf(stderr, "\n");
+
+  if (optVerbose) {
+    fprintf(stdout,
+            "(%s *)(%p)->AttemptToMove(): fwdOrBwd=%s\n",
+            TypeName(),
+            this,
+            toConstCharPointer(fwdOrBwd)
+            );
+    Dump(volume);
+    fprintf(stdout, "\n");
+  }
 
   if (isMovable) {
     TickPerCycle tick = volume->CurrentTick();
-    Rules &rules = volume->GetRules();
+    TickPerCycleProperties const &tProperties =
+        tickPerCycleProperties[tick];
+    assert(rodType == tProperties.rodType);
+    RodTypeProperties const &rProperties = rodTypeProperties[rodType];
+    Direction directionOfMotion =
+        fwdOrBwd == Fwd ? rProperties.fwd : rProperties.bwd;
+    Direction antiDirectionOfMotion =
+        fwdOrBwd == Fwd ? rProperties.bwd : rProperties.fwd;
     bool madeChanges = false;
-    for (auto const &v : *this) {
-      Scenario scenario(volume, tick, v);
-      if (rules.find(scenario) == rules.end()) {
-	TickPerCycleProperties const &tProperties = tickPerCycleProperties[tick];
-	RodTypeProperties const &rProperties = rodTypeProperties[tProperties.rodType];
-	Direction fwdOrBwd = tProperties.fwdOrBwd == Fwd ? rProperties.fwd : rProperties.bwd;
-	Direction fwd = rProperties.fwd;
-	char const *directionOfMotion[eoDirection][eoFwdOrBwd] = {
-	  { ">", "<" }, // DirE, DirW
-	  { "v", "^" }, // DirS, DirN
-	  { "d", "u" }, // DirD, DirU
-	  { "<", ">" }, // DirW, DirE
-	  { "^", "v" }, // DirN, DirS
-	  { "u", "d" }  // DirU, DirD
-	};
 
-	switch (fwd) {
-	case DirE:
-	case DirW:
-	  fprintf(stdout, "\
-     +------+------+------|\n\
-%s | ???? | %s | ???? |\n\
-     +------+------+------|\n\
-     %s %s %s %s %s %s %s\n\
-     +------+------+------|\n\
-     | ???? | %s | ???? |\n\
-     +------+------+------|\n\
-",
-		  toConstCharPointer(tick),
-		  toConstCharPointer(scenario.N()),
-		  directionOfMotion[fwd][Fwd],
-		  toConstCharPointer(scenario.W()),
-		  directionOfMotion[fwd][tProperties.fwdOrBwd],
-		  toConstCharPointer(scenario.O()),
-		  directionOfMotion[fwd][tProperties.fwdOrBwd],
-		  toConstCharPointer(scenario.E()),
-		  directionOfMotion[fwd][Fwd],
-		  toConstCharPointer(scenario.S())
-		 );
-	  break;
-	case DirN:
-	case DirS:
-	  fprintf(stdout, "\
-     +------+--%s---+------|\n\
-%s | ???? | %s | ???? |\n\
-     +------+--%s---+------|\n\
-     | %s | %s | %s |\n\
-     +------+--%s---+------|\n\
-     | ???? | %s | ???? |\n\
-     +------+--%s---+------|\n\
-",
-		  directionOfMotion[fwd][Fwd],
-		  toConstCharPointer(tick),
-		  toConstCharPointer(scenario.N()),
-		  directionOfMotion[fwd][tProperties.fwdOrBwd],
-		  toConstCharPointer(scenario.W()),
-		  toConstCharPointer(scenario.O()),
-		  toConstCharPointer(scenario.E()),
-		  directionOfMotion[fwd][tProperties.fwdOrBwd],
-		  toConstCharPointer(scenario.S()),
-		  directionOfMotion[fwd][Fwd]
-		 );
-	  break;
-	default:
-	  break;
-	}
+    for (auto const &c : *this) {
+      Scenario scenario(volume, tick, c);
+      Voxel thisVoxel = scenario.Self();
+      Voxel prevVoxel = Unkn;
+      Voxel nextVoxel = Unkn;
+      VoxelProperties const &tvProperties = voxelProperties[thisVoxel];
 
-	char newVoxelChars[128];
-	do {
-	  fprintf(stdout, "New voxel value? ");
-	  fscanf(stdin, " %s", newVoxelChars);
-	} while (stringToVoxel.find(newVoxelChars) == stringToVoxel.end());
-
-	Voxel newVoxel = stringToVoxel[newVoxelChars];
-        rules[scenario] = newVoxel;
-
-	Rule newRule(scenario, newVoxel);
-	newRule.Dump();
-	fprintf(stderr, "\n");
+      if (thisVoxel == Slot || rodType == tvProperties.rodType) {
+        if (tvProperties.voxelType == VTData &&
+            (tvProperties.dataType == DTInpt ||
+             tvProperties.dataType == DTOutp
+            )
+           )
+        {
+          nextVoxel = tvProperties.motion[fwdOrBwd].nextVoxel;
+        } else {
+          prevVoxel = scenario.From(antiDirectionOfMotion);
+          VoxelProperties const &pvProperties = voxelProperties[prevVoxel];
+          if (pvProperties.rodType == rodType) {
+            if (pvProperties.voxelType == VTData &&
+                (pvProperties.dataType == DTInpt ||
+                 pvProperties.dataType == DTOutp
+                )
+               )
+            {
+              nextVoxel = tvProperties.motion[fwdOrBwd].nextVoxel;
+            } else {
+              nextVoxel = pvProperties.motion[fwdOrBwd].nextVoxel;
+            }
+          } else {
+            nextVoxel = Slot;
+          }
+        }
+        if (nextVoxel != Unkn) {
+          changes[c] = nextVoxel;
+          madeChanges = true;
+        } else {
+          scenario.Dump();
+          fprintf(stdout, "thisVoxel=%s\n", toConstCharPointer(thisVoxel));
+          fprintf(stdout, "prevVoxel=%s\n", toConstCharPointer(prevVoxel));
+          fprintf(stdout,
+                  "nextVoxel(%s) %s Unkn\n",
+                  toConstCharPointer(nextVoxel),
+                  nextVoxel == Unkn ? "==" : "!="
+                 );
+          assert(nextVoxel != Unkn);
+        }
+      // } else {
+      //   scenario.Dump();
+      //   fprintf(stdout,
+      //           "thisVoxel(%s) %s Slot\n",
+      //           toConstCharPointer(thisVoxel),
+      //           thisVoxel == Slot ? "==" : "!="
+      //          );
+      //   fprintf(stdout,
+      //           "rodType(%s) %s tvProperties[%s](%s)\n",
+      //           toConstCharPointer(rodType),
+      //           rodType == tvProperties.rodType ? "==" : "!=",
+      //           toConstCharPointer(thisVoxel),
+      //           toConstCharPointer(tvProperties.rodType)
+      //          );
+      //   assert(thisVoxel == Slot || rodType == tvProperties.rodType);
       }
-      Voxel newVoxel = rules[scenario];
-
-      fprintf(stderr, "(%s *)(%p)->AttemptToMove(): At ", TypeName(), this);
-      v.Dump(volume);
-      fprintf(stderr, ", applying rule ");
-      Rule rule(scenario, newVoxel);
-      rule.Dump();
-      fprintf(stderr, "\n");
-
-      changes[v] = newVoxel;
-      madeChanges = true;
     }
+    // Rules &rules = volume->GetRules();
+    // for (auto const &v : *this) {
+    //   Scenario scenario(volume, tick, v);
+    //   if (rules.find(scenario) == rules.end()) {
+    //     TickPerCycleProperties const &tProperties =
+    //         tickPerCycleProperties[tick];
+    //     RodTypeProperties const &rProperties =
+    //         rodTypeProperties[tProperties.rodType];
+    //     Direction fwdOrBwd =
+    //         tProperties.fwdOrBwd == Fwd ? rProperties.fwd : rProperties.bwd;
+    //     Direction fwd = rProperties.fwd;
+    //     char const *directionOfMotion[eoDirection][eoFwdOrBwd] = {
+    //       { ">", "<" }, // DirE, DirW
+    //       { "v", "^" }, // DirS, DirN
+    //       { "d", "u" }, // DirD, DirU
+    //       { "<", ">" }, // DirW, DirE
+    //       { "^", "v" }, // DirN, DirS
+    //       { "u", "d" }  // DirU, DirD
+    //     };
+    // 
+    //     switch (fwd) {
+    //     case DirE:
+    //     case DirW:
+    //       fprintf(stdout,
+    //               "     +------+------+------|\n"
+    //               "%s | ???? | %s | ???? |\n"
+    //               "     +------+------+------|\n"
+    //               "     %s %s %s %s %s %s %s\n"
+    //               "     +------+------+------|\n"
+    //               "     | ???? | %s | ???? |\n"
+    //               "     +------+------+------|\n",
+    //     	  toConstCharPointer(tick),
+    //     	  toConstCharPointer(scenario.N()),
+    //     	  directionOfMotion[fwd][Fwd],
+    //     	  toConstCharPointer(scenario.W()),
+    //     	  directionOfMotion[fwd][tProperties.fwdOrBwd],
+    //     	  toConstCharPointer(scenario.O()),
+    //     	  directionOfMotion[fwd][tProperties.fwdOrBwd],
+    //     	  toConstCharPointer(scenario.E()),
+    //     	  directionOfMotion[fwd][Fwd],
+    //     	  toConstCharPointer(scenario.S())
+    //     	 );
+    //       break;
+    //     case DirN:
+    //     case DirS:
+    //       fprintf(stdout,
+    //               "     +------+--%s---+------|\n"
+    //               "%s | ???? | %s | ???? |\n"
+    //               "     +------+--%s---+------|\n"
+    //               "     | %s | %s | %s |\n"
+    //               "     +------+--%s---+------|\n"
+    //               "     | ???? | %s | ???? |\n"
+    //               "     +------+--%s---+------|\n",
+    //     	  directionOfMotion[fwd][Fwd],
+    //     	  toConstCharPointer(tick),
+    //     	  toConstCharPointer(scenario.N()),
+    //     	  directionOfMotion[fwd][tProperties.fwdOrBwd],
+    //     	  toConstCharPointer(scenario.W()),
+    //     	  toConstCharPointer(scenario.O()),
+    //     	  toConstCharPointer(scenario.E()),
+    //     	  directionOfMotion[fwd][tProperties.fwdOrBwd],
+    //     	  toConstCharPointer(scenario.S()),
+    //     	  directionOfMotion[fwd][Fwd]
+    //     	 );
+    //       break;
+    //     default:
+    //       break;
+    //     }
+    // 
+    //     char newVoxelChars[128];
+    //     do {
+    //       fprintf(stdout, "New voxel value? ");
+    //       fscanf(stdin, " %s", newVoxelChars);
+    //     } while (stringToVoxel.find(newVoxelChars) == stringToVoxel.end());
+    // 
+    //     Voxel newVoxel = stringToVoxel[newVoxelChars];
+    //     rules[scenario] = newVoxel;
+    // 
+    //     Rule newRule(scenario, newVoxel);
+    //     newRule.Dump();
+    //     fprintf(stdout, "\n");
+    //   }
+    //   Voxel newVoxel = rules[scenario];
+    // 
+    //   fprintf(stdout, "(%s *)(%p)->AttemptToMove(): At ", TypeName(), this);
+    //   v.Dump(volume);
+    //   fprintf(stdout, ", applying rule ");
+    //   Rule rule(scenario, newVoxel);
+    //   rule.Dump();
+    //   fprintf(stdout, "\n");
+    // 
+    //   changes[v] = newVoxel;
+    //   madeChanges = true;
+    // }
     if (madeChanges) {
       lastMovedAt = volume->CurrentClock();
     }
@@ -1764,42 +1865,42 @@ bool Item::IsValid(Volume const *volume) {
     }
   }
   if (foundMoreThan1RodType) {
-    fprintf(stderr,
+    fprintf(stdout,
             "(%s *)(%p)->IsValid(volume=%p): foundMoreThan1RodType!",
             TypeName(),
 	    this,
             volume
            );
-    fprintf(stderr,
+    fprintf(stdout,
             "  rodTypeCounts={ [%s]%lu",
             toConstCharPointer(RodType(0)),
             rodTypeCounts[0]
            );
     for (size_t t = 1; t < eoRodType; t += 1) {
-      fprintf(stderr,
+      fprintf(stdout,
               ", [%s]%lu",
               toConstCharPointer(RodType(t)),
               rodTypeCounts[t]
               );
     }
-    fprintf(stderr, " }\n");
+    fprintf(stdout, " }\n");
   }
   return !foundMoreThan1RodType;
 }
 
 void Item::Dump(Volume const *volume) const {
-  fprintf(stderr, "(Item *)(%p)->{", this);
-  fprintf(stderr, " rodType=%s, ", toConstCharPointer(rodType));
-  fprintf(stderr, " fBlkState=%s, ", toConstCharPointer(fBlkState));
-  fprintf(stderr, " rBlkState=%s, {", toConstCharPointer(rBlkState));
+  fprintf(stdout, "(Item *)(%p)->{", this);
+  fprintf(stdout, " rodType=%s, ", toConstCharPointer(rodType));
+  fprintf(stdout, " fBlkState=%s, ", toConstCharPointer(fBlkState));
+  fprintf(stdout, " rBlkState=%s, {", toConstCharPointer(rBlkState));
   char const *comma = "";
   for (auto const &c : *this) {
-    fprintf(stderr, "%s ", comma);
+    fprintf(stdout, "%s ", comma);
     c.Dump(volume);
     comma = ",";
   }
-  fprintf(stderr, " }");
-  fprintf(stderr, " }");
+  fprintf(stdout, " }");
+  fprintf(stdout, " }");
 }
 
 bool LockRod::CheckForFreedomOfMovement(Volume const *volume, FwdOrBwd fwdOrBwd) {
@@ -1831,29 +1932,33 @@ bool LockRod::CheckForFreedomOfMovement(Volume const *volume) {
       VoxelCoordinant f = v.To(rodTypeProperties[rodType].fwd);
       if (volume->isVoxelCoordinantInBounds(f)) {
         if (find(f) == end() && volume->voxelAt(f) != Slot) {
-          fprintf(stderr,
-                  "(LockRod *)(%p) fBlked at %s(%d,%d,%d) by %s(%d,%d,%d)\n",
+          if (optVerbose) {
+            fprintf(stdout,
+                    "(LockRod *)(%p) fBlked at %s(%d,%d,%d) by %s(%d,%d,%d)\n",
+                    this,
+                    toConstCharPointer(volume->voxelAt(v)),
+                    v.L(),
+                    v.R(),
+                    v.C(),
+                    toConstCharPointer(volume->voxelAt(f)),
+                    f.L(),
+                    f.R(),
+                    f.C()
+                    );
+          }
+          fBlkCounts += 1;
+        }
+      } else {
+        if (optVerbose) {
+          fprintf(stdout,
+                  "(LockRod *)(%p) fBlked at %s(%d,%d,%d) by edge\n",
                   this,
                   toConstCharPointer(volume->voxelAt(v)),
                   v.L(),
                   v.R(),
-                  v.C(),
-                  toConstCharPointer(volume->voxelAt(f)),
-                  f.L(),
-                  f.R(),
-                  f.C()
-                 );
-          fBlkCounts += 1;
+                  v.C()
+                  );
         }
-      } else {
-        fprintf(stderr,
-                "(LockRod *)(%p) fBlked at %s(%d,%d,%d) by edge\n",
-                this,
-                toConstCharPointer(volume->voxelAt(v)),
-                v.L(),
-                v.R(),
-                v.C()
-                );
         fBlkCounts += 1;
       }
     }
@@ -1861,29 +1966,33 @@ bool LockRod::CheckForFreedomOfMovement(Volume const *volume) {
       VoxelCoordinant b = v.To(rodTypeProperties[rodType].bwd);
       if (volume->isVoxelCoordinantInBounds(b)) {
         if (find(b) == end() && volume->voxelAt(b) != Slot) {
-          fprintf(stderr,
-                  "(LockRod *)(%p) rBlked at %s(%d,%d,%d) by %s(%d,%d,%d)\n",
+          if (optVerbose) {
+            fprintf(stdout,
+                    "(LockRod *)(%p) rBlked at %s(%d,%d,%d) by %s(%d,%d,%d)\n",
+                    this,
+                    toConstCharPointer(volume->voxelAt(v)),
+                    v.L(),
+                    v.R(),
+                    v.C(),
+                    toConstCharPointer(volume->voxelAt(b)),
+                    b.L(),
+                    b.R(),
+                    b.C()
+                    );
+          }
+          rBlkCounts += 1;
+        }
+      } else {
+        if (optVerbose) {
+          fprintf(stdout,
+                  "(LockRod *)(%p) rBlked at %s(%d,%d,%d) by edge\n",
                   this,
                   toConstCharPointer(volume->voxelAt(v)),
                   v.L(),
                   v.R(),
-                  v.C(),
-                  toConstCharPointer(volume->voxelAt(b)),
-                  b.L(),
-                  b.R(),
-                  b.C()
-                 );
-          rBlkCounts += 1;
+                  v.C()
+                  );
         }
-      } else {
-        fprintf(stderr,
-                "(LockRod *)(%p) rBlked at %s(%d,%d,%d) by edge\n",
-                this,
-                toConstCharPointer(volume->voxelAt(v)),
-                v.L(),
-                v.R(),
-                v.C()
-                );
         rBlkCounts += 1;
       }
     }
@@ -1917,33 +2026,33 @@ bool LockRod::IsValid(Volume const *volume) {
     }
   }
   if (foundMoreThan1LockState) {
-    fprintf(stderr,
+    fprintf(stdout,
             "(LockRod *)(%p)->IsValid(volume=%p): foundMoreThan1LockState!",
             this,
             volume
            );
-    fprintf(stderr,
+    fprintf(stdout,
             "  lockStateCounts={ [%s]%lu",
             toConstCharPointer(LockState(0)),
             lockStateCounts[0]
            );
     for (size_t t = 1; t < eoLockState; t += 1) {
-      fprintf(stderr,
+      fprintf(stdout,
               ", [%s]%lu",
               toConstCharPointer(LockState(t)),
               lockStateCounts[t]
               );
     }
-    fprintf(stderr, " }\n");
+    fprintf(stdout, " }\n");
   }
   return !foundMoreThan1LockState;
 }
 
 void LockRod::Dump(Volume const *volume) const {
-  fprintf(stderr, "(LockRod *)(%p)->{ ", this);
-  fprintf(stderr, " lockState=%s, ", toConstCharPointer(lockState));
+  fprintf(stdout, "(LockRod *)(%p)->{ ", this);
+  fprintf(stdout, " lockState=%s, ", toConstCharPointer(lockState));
   Item::Dump(volume);
-  fprintf(stderr, " }");
+  fprintf(stdout, " }");
 }
 
 bool DataRod::CheckForFreedomOfMovement(Volume const *volume, FwdOrBwd fwdOrBwd) {
@@ -1965,6 +2074,10 @@ bool DataRod::CheckForFreedomOfMovement(Volume const *volume) {
   size_t lockCounts = 0;
   for (auto const &v : *this) {
     VoxelProperties const &vProperties = voxelProperties[volume->voxelAt(v)];
+    if (rodType != vProperties.rodType) {
+      continue;
+    }
+
     if (vProperties.dataState != DSUnkn) {
       dataStateCounts[vProperties.dataState] += 1;
       foundMoreThan1DataState |=
@@ -1976,60 +2089,72 @@ bool DataRod::CheckForFreedomOfMovement(Volume const *volume) {
     if (blockStateProperties[vProperties.blockableStates].isFBlkable) {
       VoxelCoordinant f = v.To(rodTypeProperties[rodType].fwd);
       if (volume->isVoxelCoordinantInBounds(f)) {
-        if (find(f) == end() && volume->voxelAt(f) != Slot) {
-          fprintf(stderr,
-                  "(DataRod *)(%p) fBlked at %s(%d,%d,%d) by %s(%d,%d,%d)\n",
+        VoxelProperties const &fvProperties =
+            voxelProperties[volume->voxelAt(f)];
+        if (rodType != fvProperties.rodType && volume->voxelAt(f) != Slot) {
+          if (optVerbose) {
+            fprintf(stdout,
+                    "(DataRod *)(%p) fBlked at %s(%d,%d,%d) by %s(%d,%d,%d)\n",
+                    this,
+                    toConstCharPointer(volume->voxelAt(v)),
+                    v.L(),
+                    v.R(),
+                    v.C(),
+                    toConstCharPointer(volume->voxelAt(f)),
+                    f.L(),
+                    f.R(),
+                    f.C()
+                    );
+          }
+          fBlkCounts += 1;
+        }
+      } else {
+        if (optVerbose) {
+          fprintf(stdout,
+                  "(DataRod *)(%p) fBlked at %s(%d,%d,%d) by edge\n",
                   this,
                   toConstCharPointer(volume->voxelAt(v)),
                   v.L(),
                   v.R(),
-                  v.C(),
-                  toConstCharPointer(volume->voxelAt(f)),
-                  f.L(),
-                  f.R(),
-                  f.C()
-                 );
-          fBlkCounts += 1;
+                  v.C()
+                  );
         }
-      } else {
-        fprintf(stderr,
-                "(DataRod *)(%p) fBlked at %s(%d,%d,%d) by edge\n",
-                this,
-                toConstCharPointer(volume->voxelAt(v)),
-                v.L(),
-                v.R(),
-                v.C()
-                );
         fBlkCounts += 1;
       }
     }
     if (blockStateProperties[vProperties.blockableStates].isRBlkable) {
       VoxelCoordinant b = v.To(rodTypeProperties[rodType].bwd);
       if (volume->isVoxelCoordinantInBounds(b)) {
-        if (find(b) == end() && volume->voxelAt(b) != Slot) {
-          fprintf(stderr,
-                  "(DataRod *)(%p) rBlked at %s(%d,%d,%d) by %s(%d,%d,%d)\n",
+        VoxelProperties const &bvProperties =
+            voxelProperties[volume->voxelAt(b)];
+        if (rodType != bvProperties.rodType && volume->voxelAt(b) != Slot) {
+          if (optVerbose) {
+            fprintf(stdout,
+                    "(DataRod *)(%p) rBlked at %s(%d,%d,%d) by %s(%d,%d,%d)\n",
+                    this,
+                    toConstCharPointer(volume->voxelAt(v)),
+                    v.L(),
+                    v.R(),
+                    v.C(),
+                    toConstCharPointer(volume->voxelAt(b)),
+                    b.L(),
+                    b.R(),
+                    b.C()
+                    );
+          }
+          rBlkCounts += 1;
+        }
+      } else {
+        if (optVerbose) {
+          fprintf(stdout,
+                  "(DataRod *)(%p) rBlked at %s(%d,%d,%d) by edge\n",
                   this,
                   toConstCharPointer(volume->voxelAt(v)),
                   v.L(),
                   v.R(),
-                  v.C(),
-                  toConstCharPointer(volume->voxelAt(b)),
-                  b.L(),
-                  b.R(),
-                  b.C()
-                 );
-          rBlkCounts += 1;
+                  v.C()
+                  );
         }
-      } else {
-        fprintf(stderr,
-                "(DataRod *)(%p) rBlked at %s(%d,%d,%d) by edge\n",
-                this,
-                toConstCharPointer(volume->voxelAt(v)),
-                v.L(),
-                v.R(),
-                v.C()
-                );
         rBlkCounts += 1;
       }
     }
@@ -2038,19 +2163,24 @@ bool DataRod::CheckForFreedomOfMovement(Volume const *volume) {
       if (volume->isVoxelCoordinantInBounds(r)) {
 	Voxel rv = volume->voxelAt(r);
 	VoxelProperties const rvProperties = voxelProperties[rv];
-        if (rvProperties.voxelType == VTLock && rvProperties.lockType == LTLock) {
-          fprintf(stderr,
-                  "(DataRod *)(%p) locked at %s(%d,%d,%d) by %s(%d,%d,%d)\n",
-                  this,
-                  toConstCharPointer(volume->voxelAt(v)),
-                  v.L(),
-                  v.R(),
-                  v.C(),
-                  toConstCharPointer(volume->voxelAt(r)),
-                  r.L(),
-                  r.R(),
-                  r.C()
-                 );
+        if (rvProperties.voxelType == VTLock &&
+            rvProperties.lockType == LTLock
+           )
+        {
+          if (optVerbose) {
+            fprintf(stdout,
+                    "(DataRod *)(%p) locked at %s(%d,%d,%d) by %s(%d,%d,%d)\n",
+                    this,
+                    toConstCharPointer(volume->voxelAt(v)),
+                    v.L(),
+                    v.R(),
+                    v.C(),
+                    toConstCharPointer(volume->voxelAt(r)),
+                    r.L(),
+                    r.R(),
+                    r.C()
+                    );
+          }
           lockCounts += 1;
         }
       }
@@ -2096,54 +2226,54 @@ bool DataRod::IsValid(Volume const *volume) {
     }
   }
   if (foundMoreThan1LockState) {
-    fprintf(stderr,
+    fprintf(stdout,
             "(DataRod *)(%p)->IsValid(volume=%p): foundMoreThan1LockState!",
             this,
             volume
            );
-    fprintf(stderr,
+    fprintf(stdout,
             "  lockStateCounts={ [%s]%lu",
             toConstCharPointer(LockState(0)),
             lockStateCounts[0]
            );
     for (size_t t = 1; t < eoLockState; t += 1) {
-      fprintf(stderr,
+      fprintf(stdout,
               ", [%s]%lu",
               toConstCharPointer(LockState(t)),
               lockStateCounts[t]
               );
     }
-    fprintf(stderr, " }\n");
+    fprintf(stdout, " }\n");
   }
   if (foundMoreThan1DataState) {
-    fprintf(stderr,
+    fprintf(stdout,
             "(DataRod *)(%p)->IsValid(volume=%p): foundMoreThan1DataState!",
             this,
             volume
            );
-    fprintf(stderr,
+    fprintf(stdout,
             "  dataStateCounts={ [%s]%lu",
             toConstCharPointer(DataState(0)),
             dataStateCounts[0]
            );
     for (size_t t = 1; t < eoDataState; t += 1) {
-      fprintf(stderr,
+      fprintf(stdout,
               ", [%s]%lu",
               toConstCharPointer(DataState(t)),
               dataStateCounts[t]
               );
     }
-    fprintf(stderr, " }\n");
+    fprintf(stdout, " }\n");
   }
   return !foundMoreThan1LockState && !foundMoreThan1DataState;
 }
 
 void DataRod::Dump(Volume const *volume) const {
-  fprintf(stderr, "(DataRod *)(%p)->{", this);
-  fprintf(stderr, " lockState=%s, ", toConstCharPointer(lockState));
-  fprintf(stderr, " dataState=%s, ", toConstCharPointer(dataState));
+  fprintf(stdout, "(DataRod *)(%p)->{", this);
+  fprintf(stdout, " lockState=%s, ", toConstCharPointer(lockState));
+  fprintf(stdout, " dataState=%s, ", toConstCharPointer(dataState));
   Item::Dump(volume);
-  fprintf(stderr, " }");
+  fprintf(stdout, " }");
 }
 
 // {
@@ -2773,17 +2903,17 @@ int main(int argc, char const *argv[]) {
   // volume.AddRule(Scenario(SSSX, DKS0, Wall, Slot, Wall, Slot), DKSX);
 
   volume.PrintViewFlat();
-  for (size_t t = 0; t < NTicksPerCycle; t += 1) {
+  for (size_t t = 0; t < 4 * NTicksPerCycle; t += 1) {
     volume.Tick();
     volume.PrintViewFlat();
-    for (auto const &r : volume.GetRules()) {
-      if (r.second == Unkn) {
-	fprintf(stderr, "  volume.Add");
-	Rule rule(r.first, r.second);
-	rule.Dump();
-	fprintf(stderr, ";\n");
-      }
-    }
+    // for (auto const &r : volume.GetRules()) {
+    //   if (r.second == Unkn) {
+    //     fprintf(stdout, "  volume.Add");
+    //     Rule rule(r.first, r.second);
+    //     rule.Dump();
+    //     fprintf(stdout, ";\n");
+    //   }
+    // }
   }
   return 0;
 }

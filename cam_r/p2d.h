@@ -1,6 +1,12 @@
 #ifndef P2D_H
 #define P2D_H
 
+#include <cassert>
+#include <set>
+using std::set;
+
+#include "directions.h"
+
 struct P2D {
   P2D() : y(0), x(0) {}
   P2D(int _y, int _x) : y(_y), x(_x) { }

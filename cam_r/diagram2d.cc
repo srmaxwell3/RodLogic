@@ -11,6 +11,9 @@ using std::chrono::microseconds;
 #define CHRONO_CLOCK steady_clock
 #endif
 using std::chrono::CHRONO_CLOCK;
+#include <tuple>
+using std::tuple;
+using std::make_tuple;
 
 extern bool optEchoInput;
 extern bool optShowChangedStateEveryTick;
@@ -790,7 +793,8 @@ void Diagram2D::dump() const {
     { 0, 0 }  // eoDirections
   };
 
-  map<int, int> rodLengthHistogram;
+  typedef tuple<int, size_t, size_t> LenInsOuts;
+  map<LenInsOuts, int> rodLengthHistogram;
 
   for (Directions d : directions) {
     auto const &dRods = rods[d];
@@ -803,7 +807,7 @@ void Diagram2D::dump() const {
         rodCounts[eoDirections].nIncompleteRods += 1;
         rodCounts[d].nIncompleteRods += 1;
       }
-      rodLengthHistogram[r->rodsLength()] += 1;
+      rodLengthHistogram[make_tuple(r->rodsLength(), r->countOfInputs(), r->countOfOutputs())] += 1;
 
       if (optShowRods) {
         r->dump(*this);
@@ -814,9 +818,15 @@ void Diagram2D::dump() const {
     fprintf(stdout, "\n");
   }
 
-  fprintf(stdout, "Rod Count by Length:\n");
+  fprintf(stdout, "Rod Count by (Length, Fan-In, Fan-Out):\n");
   for (auto const &lengthAndCount : rodLengthHistogram) {
-    fprintf(stdout, "%5d: %5d\n", lengthAndCount.first, lengthAndCount.second);
+    fprintf(stdout,
+	    "(%5d, %2lu, %2lu): %5d\n",
+	    std::get<0>(lengthAndCount.first),
+	    std::get<1>(lengthAndCount.first),
+	    std::get<2>(lengthAndCount.first),
+	    lengthAndCount.second
+	   );
   }
   fprintf(stdout, "\n");
 

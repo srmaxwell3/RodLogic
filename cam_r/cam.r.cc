@@ -79,7 +79,7 @@ void processInputFrom(istream &in, map<string, vector<int>> &inputs) {
     string name;
     if (sscanf(sPtr, " \"%[^\",]\" , %n", sBuf, &sCnt) == 1 ||
         sscanf(sPtr, " \'%[^\',]\' , %n", sBuf, &sCnt) == 1 ||
-        sscanf(sPtr, " %[^,] , %n", sBuf, &sCnt) == 1
+        sscanf(sPtr, " %[^, ] , %n", sBuf, &sCnt) == 1
         )
     {
       name = sBuf;
@@ -214,7 +214,7 @@ void processTableInputFrom(istream &in, map<string, vector<int>> &inputs) {
     string name;
     if (sscanf(sPtr, " \"%[^\",]\"%n", sBuf, &sCnt) == 1 ||
         sscanf(sPtr, " \'%[^\',]\'%n", sBuf, &sCnt) == 1 ||
-        sscanf(sPtr, " %[^,]%n", sBuf, &sCnt) == 1
+        sscanf(sPtr, " %[^,} ]%n", sBuf, &sCnt) == 1
         )
     {
       name = sBuf;
@@ -232,9 +232,9 @@ void processTableInputFrom(istream &in, map<string, vector<int>> &inputs) {
              );
       continue;
     }
-    while (sscanf(sPtr, " , \"%[^\",]\"%n", sBuf, &sCnt) == 1 ||
-           sscanf(sPtr, " , \'%[^\',]\'%n", sBuf, &sCnt) == 1 ||
-           sscanf(sPtr, " , %[^,]%n", sBuf, &sCnt) == 1
+    while (sscanf(sPtr, " , \"%[^\"]\"%n", sBuf, &sCnt) == 1 ||
+           sscanf(sPtr, " , \'%[^\']\'%n", sBuf, &sCnt) == 1 ||
+           sscanf(sPtr, " , %[^,} ]%n", sBuf, &sCnt) == 1
           )
     {
       name = sBuf;

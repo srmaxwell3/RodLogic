@@ -1303,7 +1303,7 @@ class Item: public set<VoxelCoordinant> {
   virtual bool CheckForFreedomOfMovement(Volume *volume, FwdOrBwd fwdOrBwd) = 0;
   virtual bool CheckForFreedomOfMovement(Volume *volume) = 0;
   virtual bool AttemptToMove
-      (Volume *volume, FwdOrBwd fwdOrBwd, Changes &changes) = 0;
+      (Volume *volume, FwdOrBwd fwdOrBwd, Changes &changes);
   virtual bool IsValid(Volume const *volume);
   virtual RodType GetRodType() const { return rodType; }
   virtual void Dump(Volume const *volume = 0) const;
@@ -1324,7 +1324,7 @@ class LockRod: public Item {
 
   bool CheckForFreedomOfMovement(Volume *volume, FwdOrBwd fwdOrBwd);
   bool CheckForFreedomOfMovement(Volume *volume);
-  bool AttemptToMove(Volume *volume, FwdOrBwd fwdOrBwd, Changes &changes);
+  // bool AttemptToMove(Volume *volume, FwdOrBwd fwdOrBwd, Changes &changes);
   bool IsValid(Volume const *volume);
   void Dump(Volume const *volume = 0) const;
   char const *TypeName() const { return "LockRod"; }
@@ -1345,7 +1345,7 @@ class DataRod: public Item {
 
   bool CheckForFreedomOfMovement(Volume *volume, FwdOrBwd fwdOrBwd);
   bool CheckForFreedomOfMovement(Volume *volume);
-  bool AttemptToMove(Volume *volume, FwdOrBwd fwdOrBwd, Changes &changes);
+  // bool AttemptToMove(Volume *volume, FwdOrBwd fwdOrBwd, Changes &changes);
   bool IsValid(Volume const *volume);
   void Dump(Volume const *volume = 0) const;
   char const *TypeName() const { return "DataRod"; }
@@ -1642,6 +1642,202 @@ void Volume::FindItems() {
   }
 }
 
+bool Item::AttemptToMove(Volume *volume, FwdOrBwd fwdOrBwd, Changes &changes) {
+  bool isMovable = CheckForFreedomOfMovement(volume, fwdOrBwd);
+
+  if (optVerbose) {
+    fprintf(stdout,
+            "(%s *)(%p)->AttemptToMove(): fwdOrBwd=%s\n",
+            TypeName(),
+            this,
+            toConstCharPointer(fwdOrBwd)
+            );
+    Dump(volume);
+    fprintf(stdout, "\n");
+  }
+
+  if (isMovable) {
+    TickPerCycle tick = volume->CurrentTickPerCycle();
+    TickPerCycleProperties const &tProperties =
+        tickPerCycleProperties[tick];
+    assert(rodType == tProperties.rodType);
+    RodTypeProperties const &rProperties = rodTypeProperties[rodType];
+    Direction directionOfMotion =
+        fwdOrBwd == Fwd ? rProperties.fwd : rProperties.bwd;
+    Direction antiDirectionOfMotion =
+        fwdOrBwd == Fwd ? rProperties.bwd : rProperties.fwd;
+    bool madeChanges = false;
+
+    // for (auto const &c : *this) {
+    //   Scenario scenario(volume, tick, c);
+    //   Voxel thisVoxel = scenario.Self();
+    //   Voxel prevVoxel = Unkn;
+    //   Voxel nextVoxel = Unkn;
+    //   VoxelProperties const &tvProperties = voxelProperties[thisVoxel];
+    //
+    //   if (thisVoxel == Slot || rodType == tvProperties.rodType) {
+    //     if (tvProperties.voxelType == VTData &&
+    //         (tvProperties.dataType == DTInpt ||
+    //          tvProperties.dataType == DTOutp
+    //         )
+    //        )
+    //     {
+    //       nextVoxel = tvProperties.motion[fwdOrBwd].nextVoxel;
+    //     } else {
+    //       prevVoxel = scenario.From(antiDirectionOfMotion);
+    //       VoxelProperties const &pvProperties = voxelProperties[prevVoxel];
+    //       if (pvProperties.rodType == rodType) {
+    //         if (pvProperties.voxelType == VTData &&
+    //             (pvProperties.dataType == DTInpt ||
+    //              pvProperties.dataType == DTOutp
+    //             )
+    //            )
+    //         {
+    //           nextVoxel = tvProperties.motion[fwdOrBwd].nextVoxel;
+    //         } else {
+    //           nextVoxel = pvProperties.motion[fwdOrBwd].nextVoxel;
+    //         }
+    //       } else {
+    //         nextVoxel = Slot;
+    //       }
+    //     }
+    //     if (nextVoxel != Unkn) {
+    //       changes[c] = nextVoxel;
+    //       madeChanges = true;
+    //     } else {
+    //       scenario.Dump();
+    //       fprintf(stdout, "thisVoxel=%s\n", toConstCharPointer(thisVoxel));
+    //       fprintf(stdout, "prevVoxel=%s\n", toConstCharPointer(prevVoxel));
+    //       fprintf(stdout,
+    //               "nextVoxel(%s) %s Unkn\n",
+    //               toConstCharPointer(nextVoxel),
+    //               nextVoxel == Unkn ? "==" : "!="
+    //              );
+    //       assert(nextVoxel != Unkn);
+    //     }
+    //   // } else {
+    //   //   scenario.Dump();
+    //   //   fprintf(stdout,
+    //   //           "thisVoxel(%s) %s Slot\n",
+    //   //           toConstCharPointer(thisVoxel),
+    //   //           thisVoxel == Slot ? "==" : "!="
+    //   //          );
+    //   //   fprintf(stdout,
+    //   //           "rodType(%s) %s tvProperties[%s](%s)\n",
+    //   //           toConstCharPointer(rodType),
+    //   //           rodType == tvProperties.rodType ? "==" : "!=",
+    //   //           toConstCharPointer(thisVoxel),
+    //   //           toConstCharPointer(tvProperties.rodType)
+    //   //          );
+    //   //   assert(thisVoxel == Slot || rodType == tvProperties.rodType);
+    //   }
+    // }
+    Rules &rules = volume->GetRules();
+    for (auto const &v : *this) {
+      Scenario scenario(volume, tick, v);
+      if (rules.find(scenario) == rules.end()) {
+#if 0
+        TickPerCycleProperties const &tProperties =
+            tickPerCycleProperties[tick];
+        RodTypeProperties const &rProperties =
+            rodTypeProperties[tProperties.rodType];
+        Direction fwdOrBwd =
+            tProperties.fwdOrBwd == Fwd ? rProperties.fwd : rProperties.bwd;
+        Direction fwd = rProperties.fwd;
+        char const *directionOfMotion[eoDirection][eoFwdOrBwd] = {
+          { ">", "<" }, // DirE, DirW
+          { "v", "^" }, // DirS, DirN
+          { "d", "u" }, // DirD, DirU
+          { "<", ">" }, // DirW, DirE
+          { "^", "v" }, // DirN, DirS
+          { "u", "d" }  // DirU, DirD
+        };
+
+        switch (fwd) {
+        case DirE:
+        case DirW:
+          fprintf(stdout,
+                  "     +------+------+------|\n"
+                  "%s | ???? | %s | ???? |\n"
+                  "     +------+------+------|\n"
+                  "     %s %s %s %s %s %s %s\n"
+                  "     +------+------+------|\n"
+                  "     | ???? | %s | ???? |\n"
+                  "     +------+------+------|\n",
+        	  toConstCharPointer(tick),
+        	  toConstCharPointer(scenario.N()),
+        	  directionOfMotion[fwd][Fwd],
+        	  toConstCharPointer(scenario.W()),
+        	  directionOfMotion[fwd][tProperties.fwdOrBwd],
+        	  toConstCharPointer(scenario.O()),
+        	  directionOfMotion[fwd][tProperties.fwdOrBwd],
+        	  toConstCharPointer(scenario.E()),
+        	  directionOfMotion[fwd][Fwd],
+        	  toConstCharPointer(scenario.S())
+        	 );
+          break;
+        case DirN:
+        case DirS:
+          fprintf(stdout,
+                  "     +------+--%s---+------|\n"
+                  "%s | ???? | %s | ???? |\n"
+                  "     +------+--%s---+------|\n"
+                  "     | %s | %s | %s |\n"
+                  "     +------+--%s---+------|\n"
+                  "     | ???? | %s | ???? |\n"
+                  "     +------+--%s---+------|\n",
+        	  directionOfMotion[fwd][Fwd],
+        	  toConstCharPointer(tick),
+        	  toConstCharPointer(scenario.N()),
+        	  directionOfMotion[fwd][tProperties.fwdOrBwd],
+        	  toConstCharPointer(scenario.W()),
+        	  toConstCharPointer(scenario.O()),
+        	  toConstCharPointer(scenario.E()),
+        	  directionOfMotion[fwd][tProperties.fwdOrBwd],
+        	  toConstCharPointer(scenario.S()),
+        	  directionOfMotion[fwd][Fwd]
+        	 );
+          break;
+        default:
+          break;
+        }
+
+        char newVoxelChars[128];
+        do {
+          fprintf(stdout, "New voxel value? ");
+          fscanf(stdin, " %s", newVoxelChars);
+        } while (stringToVoxel.find(newVoxelChars) == stringToVoxel.end());
+
+        Voxel newVoxel = stringToVoxel[newVoxelChars];
+        rules[scenario] = newVoxel;
+#else
+        Voxel newVoxel = Unkn;
+        rules[scenario] = newVoxel;
+#endif
+        Rule newRule(scenario, newVoxel);
+        newRule.Dump();
+        fprintf(stdout, "\n");
+      }
+      Voxel newVoxel = rules[scenario];
+
+      fprintf(stdout, "(%s *)(%p)->AttemptToMove(): At ", TypeName(), this);
+      v.Dump(volume);
+      fprintf(stdout, ", applying rule ");
+      Rule rule(scenario, newVoxel);
+      rule.Dump();
+      fprintf(stdout, "\n");
+
+      changes[v] = newVoxel;
+      madeChanges = true;
+    }
+    if (madeChanges) {
+      lastMovedAt = volume->CurrentClock();
+    }
+    return true;
+  }
+  return false;
+}
+
 bool Item::IsValid(Volume const *volume) {
   array<size_t, eoRodType> rodTypeCounts;
 
@@ -1798,80 +1994,80 @@ bool LockRod::CheckForFreedomOfMovement(Volume *volume) {
   return !IsBlocked();
 }
 
-bool LockRod::AttemptToMove
-    (Volume *volume,
-     FwdOrBwd fwdOrBwd,
-     Changes &changes
-    )
-{
-  bool isMovable = CheckForFreedomOfMovement(volume, fwdOrBwd);
-
-  if (optVerbose) {
-    fprintf(stdout,
-            "(LockRod *)(%p)->AttemptToMove(): fwdOrBwd=%s\n",
-            this,
-            toConstCharPointer(fwdOrBwd)
-            );
-    Dump(volume);
-    fprintf(stdout, "\n");
-  }
-
-  if (isMovable) {
-    TickPerCycle tick = volume->CurrentTickPerCycle();
-    TickPerCycleProperties const &tProperties = tickPerCycleProperties[tick];
-    assert(rodType == tProperties.rodType);
-    RodTypeProperties const &rProperties = rodTypeProperties[rodType];
-    VoxelType rodVoxelType = VTLock;
-    Direction directionOfMotion =
-        fwdOrBwd == Fwd ? rProperties.fwd : rProperties.bwd;
-    Direction antiDirectionOfMotion =
-        fwdOrBwd == Fwd ? rProperties.bwd : rProperties.fwd;
-    bool madeChanges = false;
-
-    for (auto const &c : *this) {
-      Scenario scenario(volume, tick, c);
-      Voxel thisVoxel = scenario.Self();
-      Voxel prevVoxel = Unkn;
-      Voxel nextVoxel = Unkn;
-      VoxelProperties const &tvProperties = voxelProperties[thisVoxel];
-
-      if (thisVoxel == Slot || rodType == tvProperties.rodType[0]) {
-        prevVoxel = scenario.From(antiDirectionOfMotion);
-        VoxelProperties const &pvProperties = voxelProperties[prevVoxel];
-        if (pvProperties.IsOneOf(rodType)) {
-          nextVoxel = pvProperties.motion[fwdOrBwd].nextVoxel;
-        } else {
-          nextVoxel = Slot;
-        }
-      } else {
-        assert(tvProperties.voxelType == VTData);
-        assert(tvProperties.dataType == DTSlot ||
-               tvProperties.dataType == DTJoin
-              );
-      }
-
-      if (nextVoxel != Unkn) {
-        changes[c] = nextVoxel;
-        madeChanges = true;
-      } else {
-        scenario.Dump();
-        fprintf(stdout, "thisVoxel=%s\n", toConstCharPointer(thisVoxel));
-        fprintf(stdout, "prevVoxel=%s\n", toConstCharPointer(prevVoxel));
-        fprintf(stdout,
-                "nextVoxel(%s) %s Unkn\n",
-                toConstCharPointer(nextVoxel),
-                nextVoxel == Unkn ? "==" : "!="
-               );
-        assert(nextVoxel != Unkn);
-      }
-    }
-    if (madeChanges) {
-      lastMovedAt = volume->CurrentClock();
-    }
-    return true;
-  }
-  return false;
-}
+// bool LockRod::AttemptToMove
+//     (Volume *volume,
+//      FwdOrBwd fwdOrBwd,
+//      Changes &changes
+//     )
+// {
+//   bool isMovable = CheckForFreedomOfMovement(volume, fwdOrBwd);
+//
+//   if (optVerbose) {
+//     fprintf(stdout,
+//             "(LockRod *)(%p)->AttemptToMove(): fwdOrBwd=%s\n",
+//             this,
+//             toConstCharPointer(fwdOrBwd)
+//             );
+//     Dump(volume);
+//     fprintf(stdout, "\n");
+//   }
+//
+//   if (isMovable) {
+//     TickPerCycle tick = volume->CurrentTickPerCycle();
+//     TickPerCycleProperties const &tProperties = tickPerCycleProperties[tick];
+//     assert(rodType == tProperties.rodType);
+//     RodTypeProperties const &rProperties = rodTypeProperties[rodType];
+//     VoxelType rodVoxelType = VTLock;
+//     Direction directionOfMotion =
+//         fwdOrBwd == Fwd ? rProperties.fwd : rProperties.bwd;
+//     Direction antiDirectionOfMotion =
+//         fwdOrBwd == Fwd ? rProperties.bwd : rProperties.fwd;
+//     bool madeChanges = false;
+//
+//     for (auto const &c : *this) {
+//       Scenario scenario(volume, tick, c);
+//       Voxel thisVoxel = scenario.Self();
+//       Voxel prevVoxel = Unkn;
+//       Voxel nextVoxel = Unkn;
+//       VoxelProperties const &tvProperties = voxelProperties[thisVoxel];
+//
+//       if (thisVoxel == Slot || rodType == tvProperties.rodType[0]) {
+//         prevVoxel = scenario.From(antiDirectionOfMotion);
+//         VoxelProperties const &pvProperties = voxelProperties[prevVoxel];
+//         if (pvProperties.IsOneOf(rodType)) {
+//           nextVoxel = pvProperties.motion[fwdOrBwd].nextVoxel;
+//         } else {
+//           nextVoxel = Slot;
+//         }
+//       } else {
+//         assert(tvProperties.voxelType == VTData);
+//         assert(tvProperties.dataType == DTSlot ||
+//                tvProperties.dataType == DTJoin
+//               );
+//       }
+//
+//       if (nextVoxel != Unkn) {
+//         changes[c] = nextVoxel;
+//         madeChanges = true;
+//       } else {
+//         scenario.Dump();
+//         fprintf(stdout, "thisVoxel=%s\n", toConstCharPointer(thisVoxel));
+//         fprintf(stdout, "prevVoxel=%s\n", toConstCharPointer(prevVoxel));
+//         fprintf(stdout,
+//                 "nextVoxel(%s) %s Unkn\n",
+//                 toConstCharPointer(nextVoxel),
+//                 nextVoxel == Unkn ? "==" : "!="
+//                );
+//         assert(nextVoxel != Unkn);
+//       }
+//     }
+//     if (madeChanges) {
+//       lastMovedAt = volume->CurrentClock();
+//     }
+//     return true;
+//   }
+//   return false;
+// }
 
 bool LockRod::IsValid(Volume const *volume) {
   if (!Item::IsValid(volume)) {
@@ -2085,83 +2281,83 @@ bool DataRod::CheckForFreedomOfMovement(Volume *volume) {
   return !IsBlocked();
 }
 
-bool DataRod::AttemptToMove
-    (Volume *volume,
-     FwdOrBwd fwdOrBwd,
-     Changes &changes
-    )
-{
-  bool isMovable = CheckForFreedomOfMovement(volume, fwdOrBwd);
-
-  if (optVerbose) {
-    fprintf(stdout,
-            "(DataRod *)(%p)->AttemptToMove(): fwdOrBwd=%s\n",
-            this,
-            toConstCharPointer(fwdOrBwd)
-            );
-    Dump(volume);
-    fprintf(stdout, "\n");
-  }
-
-  if (isMovable) {
-    TickPerCycle tick = volume->CurrentTickPerCycle();
-    TickPerCycleProperties const &tProperties = tickPerCycleProperties[tick];
-    assert(rodType == tProperties.rodType);
-    RodTypeProperties const &rProperties = rodTypeProperties[rodType];
-    VoxelType rodVoxelType = rProperties.voxelType;
-    Direction directionOfMotion =
-        fwdOrBwd == Fwd ? rProperties.fwd : rProperties.bwd;
-    Direction antiDirectionOfMotion =
-        fwdOrBwd == Fwd ? rProperties.bwd : rProperties.fwd;
-    bool madeChanges = false;
-
-    for (auto const &c : *this) {
-      Scenario scenario(volume, tick, c);
-      Voxel thisVoxel = scenario.Self();
-      Voxel prevVoxel = Unkn;
-      Voxel nextVoxel = Unkn;
-      VoxelProperties const &tvProperties = voxelProperties[thisVoxel];
-
-      if (thisVoxel == Slot || rodType == tvProperties.rodType[0]) {
-        prevVoxel = scenario.From(antiDirectionOfMotion);
-        VoxelProperties const &pvProperties = voxelProperties[prevVoxel];
-        if (pvProperties.IsOneOf(rodType)) {
-          if (pvProperties.voxelType == VTData &&
-              (pvProperties.dataType == DTInpt ||
-               pvProperties.dataType == DTOutp
-               )
-              )
-          {
-            nextVoxel = tvProperties.motion[fwdOrBwd].nextVoxel;
-          } else {
-            nextVoxel = pvProperties.motion[fwdOrBwd].nextVoxel;
-          }
-        } else {
-          nextVoxel = Slot;
-        }
-        if (nextVoxel != Unkn) {
-          changes[c] = nextVoxel;
-          madeChanges = true;
-        } else {
-          scenario.Dump();
-          fprintf(stdout, "thisVoxel=%s\n", toConstCharPointer(thisVoxel));
-          fprintf(stdout, "prevVoxel=%s\n", toConstCharPointer(prevVoxel));
-          fprintf(stdout,
-                  "nextVoxel(%s) %s Unkn\n",
-                  toConstCharPointer(nextVoxel),
-                  nextVoxel == Unkn ? "==" : "!="
-                 );
-          assert(nextVoxel != Unkn);
-        }
-      }
-    }
-    if (madeChanges) {
-      lastMovedAt = volume->CurrentClock();
-    }
-    return true;
-  }
-  return false;
-}
+// bool DataRod::AttemptToMove
+//     (Volume *volume,
+//      FwdOrBwd fwdOrBwd,
+//      Changes &changes
+//     )
+// {
+//   bool isMovable = CheckForFreedomOfMovement(volume, fwdOrBwd);
+//
+//   if (optVerbose) {
+//     fprintf(stdout,
+//             "(DataRod *)(%p)->AttemptToMove(): fwdOrBwd=%s\n",
+//             this,
+//             toConstCharPointer(fwdOrBwd)
+//             );
+//     Dump(volume);
+//     fprintf(stdout, "\n");
+//   }
+//
+//   if (isMovable) {
+//     TickPerCycle tick = volume->CurrentTickPerCycle();
+//     TickPerCycleProperties const &tProperties = tickPerCycleProperties[tick];
+//     assert(rodType == tProperties.rodType);
+//     RodTypeProperties const &rProperties = rodTypeProperties[rodType];
+//     VoxelType rodVoxelType = rProperties.voxelType;
+//     Direction directionOfMotion =
+//         fwdOrBwd == Fwd ? rProperties.fwd : rProperties.bwd;
+//     Direction antiDirectionOfMotion =
+//         fwdOrBwd == Fwd ? rProperties.bwd : rProperties.fwd;
+//     bool madeChanges = false;
+//
+//     for (auto const &c : *this) {
+//       Scenario scenario(volume, tick, c);
+//       Voxel thisVoxel = scenario.Self();
+//       Voxel prevVoxel = Unkn;
+//       Voxel nextVoxel = Unkn;
+//       VoxelProperties const &tvProperties = voxelProperties[thisVoxel];
+//
+//       if (thisVoxel == Slot || rodType == tvProperties.rodType[0]) {
+//         prevVoxel = scenario.From(antiDirectionOfMotion);
+//         VoxelProperties const &pvProperties = voxelProperties[prevVoxel];
+//         if (pvProperties.IsOneOf(rodType)) {
+//           if (pvProperties.voxelType == VTData &&
+//               (pvProperties.dataType == DTInpt ||
+//                pvProperties.dataType == DTOutp
+//                )
+//               )
+//           {
+//             nextVoxel = tvProperties.motion[fwdOrBwd].nextVoxel;
+//           } else {
+//             nextVoxel = pvProperties.motion[fwdOrBwd].nextVoxel;
+//           }
+//         } else {
+//           nextVoxel = Slot;
+//         }
+//         if (nextVoxel != Unkn) {
+//           changes[c] = nextVoxel;
+//           madeChanges = true;
+//         } else {
+//           scenario.Dump();
+//           fprintf(stdout, "thisVoxel=%s\n", toConstCharPointer(thisVoxel));
+//           fprintf(stdout, "prevVoxel=%s\n", toConstCharPointer(prevVoxel));
+//           fprintf(stdout,
+//                   "nextVoxel(%s) %s Unkn\n",
+//                   toConstCharPointer(nextVoxel),
+//                   nextVoxel == Unkn ? "==" : "!="
+//                  );
+//           assert(nextVoxel != Unkn);
+//         }
+//       }
+//     }
+//     if (madeChanges) {
+//       lastMovedAt = volume->CurrentClock();
+//     }
+//     return true;
+//   }
+//   return false;
+// }
 
 bool DataRod::IsValid(Volume const *volume) {
   if (!Item::IsValid(volume)) {

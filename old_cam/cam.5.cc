@@ -2276,18 +2276,6 @@ void DataRod::Dump(Volume const *volume) const {
   fprintf(stdout, " }");
 }
 
-// {
-//   Volume<7, 20, 20> block;
-//
-//   for (int l = 0; l < block.size(); l += 1) {
-//     for (int r = 0; r < block[l].size(); r += 1) {
-//       for (int c = 0; c < block[l][r].size(); c += 1) {
-//         ???
-//       }
-//     }
-//   }
-// }
-
   //   abcdefghijklmnopqrstuvwxyzABCDEFGHILKLMN
   // a ...........v............... ............ a
   // b ...........|.......>...>...^............ b
@@ -2331,17 +2319,17 @@ VolArray initialVolume = {
   // g ...........|...............|............ g
   // h ...........|...............|............ h
   // i ...........|...............|............ i
-  // j ...........^...............|............ j
+  // j ...........+...............|............ j
   // k ...........|...............|............ k
   // l ...........|...............|............ l
   // m ...........|...............|............ m
-  // n ...........^...............|............ n
+  // n ...........+...............|............ n
   // o ...........|...............|............ o
   // p ...........|...............|............ p
   // q ...........|...............|............ q
-  // r ...........^...............|............ r
+  // r ...........+...............|............ r
   // s ...........|...............|............ s
-  // t ...........|...............v............ t
+  // t ...........|...............+............ t
   // u ...........|...............|............ u
   // v ...........|...............|............ v
   // w ...........|...............|............ w
@@ -2394,19 +2382,19 @@ VolArray initialVolume = {
   // f ........................................ f
   // g ........................................ g
   // h ........................................ h
-  // i I-------^-^^----0-----1->   ............ i
+  // i I-------+-++----+-----+->   ............ i
   // j ........................................ j
   // k ........................................ k
   // l ........................................ l
-  // m I-------^-^^----------1->   ............ m
+  // m I-------+-++----------+->   ............ m
   // n ........................................ n
   // o ........................................ o
   // p ........................................ p
-  // q ........^-^^->----1--------------------O q
+  // q ........+-++-+----+--------------------O q
   // r ........................................ r
   // s ........................................ s
   // t ........................................ t
-  // u ...........   <---0--<---<-vv-v......... u
+  // u ...........   <---+--+---+-++-+......... u
   // v ........................................ v
   // w ........................................ w
   // x ........................................ x
@@ -2418,35 +2406,131 @@ VolArray initialVolume = {
   //   abcdefghijklmnopqrstuvwxyzABCDEFGHILKLMN
 
   //   abcdefghijklmnopqrstuvwxyzABCDEFGHILKLMN
-  // a ...........v............... ............ a
-  // b ...........|.......>...>...^............ b
-  // c ...........|.......|...|...|............ c
-  // d ...........|.......>...>...|............ d
-  // e  <---------------->>-->>---------------< e
-  // f ...........|.......|...|...|............ f
-  // g ...........|.......|...v...|............ g
-  // h ...........|.......|...|...|............ h
-  // i I-------^-^^----0--|--1|>..|...........C i
-  // j ...........^.......|...|...|............ j
-  // k ...........|.......v...|...|............ k
-  // l ...........|.......|...|...|............ l
-  // m I-------^-^^-------|--1|>..|...........D m
-  // n ...........^.......|...|...|............ n
-  // o ...........|.......v...|...|............ o
-  // p ...........|...^...|...|...|............ p
-  // q ........^-^^->-|--1|---|---------------O q
-  // r ...........^...1...0...0...|............ r
-  // s ...........|...|...|...|...|............ s
-  // t ...........|...|...|...|...v............ t
-  // u ...........|..<|--0|-<-|-<-vv-v......... u
-  // v ...........|...|...v...v...|............ v
-  // w ...........|...^...........|............ w
-  // x ...........|...|...........|............ x
-  // y >--------------<<--------------------->  y
-  // z ...........|...<...........|............ z
-  // A ...........|...|...........|............ A
-  // B ...........v...<...........|............ B
-  // C ........... ...............^............ C
+  // a ........................................ a
+  // b ........................................ b
+  // c ........................................ c
+  // d ........................................ d
+  // e ........................................ e
+  // f ........................................ f
+  // g .......................v................ g
+  // h ....................... ................ h
+  // i ................0   ..1   .............. i
+  // j ....................... ................ j
+  // k ...................v.................... k
+  // l ................... .................... l
+  // m ................... ..1   .............. m
+  // n ................... .................... n
+  // o ............... ...v.................... o
+  // p ............... ... .................... p
+  // q .............>   .1   .................. q
+  // r ...............1...0...0................ r
+  // s ................... ... ................ s
+  // t ............... ... ... ...v............ t
+  // u ...............   0 .<. .<.............. u
+  // v ............... ........................ v
+  // w ...............^........................ w
+  // x ........................................ x
+  // y ........................................ y
+  // z ........................................ z
+  // A ........................................ A
+  // B ........................................ B
+  // C ........................................ C
+  //   abcdefghijklmnopqrstuvwxyzABCDEFGHILKLMN
+
+  //   abcdefghijklmnopqrstuvwxyzABCDEFGHILKLMN
+  // a ........................................ a
+  // b ...................+...+................ b
+  // c ...................|...|................ c
+  // d ...................+...+................ d
+  // e ...................+...+................ e
+  // f ...................|...|................ f
+  // g ...................|...+................ g
+  // h ...................|...|................ h
+  // i ...................|...|................ i
+  // j ...................|...|................ j
+  // k ...................+...|................ k
+  // l ...................|...|................ l
+  // m ...................|...|................ m
+  // n ...................|...|................ n
+  // o ...................+...|................ o
+  // p ...............^...|...|................ p
+  // q ...............|...|...|................ q
+  // r ...............+...+...+................ r
+  // s ...............|...|...|................ s
+  // t ...............|...|...|................ t
+  // u ...............|...|...|................ u
+  // v ...............|...v...v................ v
+  // w ...............+........................ w
+  // x ...............|........................ x
+  // y ...............+........................ y
+  // z ...............+........................ z
+  // A ...............|........................ A
+  // B ...............+........................ B
+  // C ........................................ C
+  //   abcdefghijklmnopqrstuvwxyzABCDEFGHILKLMN
+
+  //   abcdefghijklmnopqrstuvwxyzABCDEFGHILKLMN
+  // a ........................................ a
+  // b ...................>...>................ b
+  // c ................... ... ................ c
+  // d ...................>...>................ d
+  // e ................. >>. >>................ e
+  // f ................... ... ................ f
+  // g ................... ... ................ g
+  // h ................... ... ................ h
+  // i ........................................ i
+  // j ........................................ j
+  // k ........................................ k
+  // l ........................................ l
+  // m ........................................ m
+  // n ........................................ n
+  // o ........................................ o
+  // p ........................................ p
+  // q ........................................ q
+  // r ........................................ r
+  // s ........................................ s
+  // t ........................................ t
+  // u ........................................ u
+  // v ............... ........................ v
+  // w ............... ........................ w
+  // x ............... ........................ x
+  // y ...............<< ...................... y
+  // z ...............<........................ z
+  // A ............... ........................ A
+  // B ...............<........................ B
+  // C ........................................ C
+  //   abcdefghijklmnopqrstuvwxyzABCDEFGHILKLMN
+
+  //   abcdefghijklmnopqrstuvwxyzABCDEFGHILKLMN
+  // a ........................................ a
+  // b ........................................ b
+  // c ........................................ c
+  // d ........................................ d
+  // e  <----------------+---+----------------< e
+  // f ........................................ f
+  // g ........................................ g
+  // h ........................................ h
+  // i ........................................ i
+  // j ........................................ j
+  // k ........................................ k
+  // l ........................................ l
+  // m ........................................ m
+  // n ........................................ n
+  // o ........................................ o
+  // p ........................................ p
+  // q ........................................ q
+  // r ........................................ r
+  // s ........................................ s
+  // t ........................................ t
+  // u ........................................ u
+  // v ........................................ v
+  // w ........................................ w
+  // x ........................................ x
+  // y >---------------+--------------------->  y
+  // z ........................................ z
+  // A ........................................ A
+  // B ........................................ B
+  // C ........................................ C
   //   abcdefghijklmnopqrstuvwxyzABCDEFGHILKLMN
 
 };
@@ -2459,280 +2543,6 @@ int main(int argc, char const *argv[]) {
   }
 
   Volume volume(initialVolume);
-
-  // volume.AddRule(Scenario(EUSL, Wall, Wall, Slot, LKWL, Wall), LKWU);
-  // volume.AddRule(Scenario(EUSL, Wall, Slot, LKWL, DKSR, Wall), Slot);
-  // volume.AddRule(Scenario(EUSL, Wall, Wall, Slot, LHWL, Wall), LHWU);
-  // volume.AddRule(Scenario(EUSL, Wall, Slot, LHWL, LBWL, Wall), LBWU);
-  // volume.AddRule(Scenario(EUSL, Wall, LHWL, LBWL, LBWL, Wall), LBWU);
-  // volume.AddRule(Scenario(EUSL, Wall, LBWL, LBWL, LBWL, Wall), LBWU);
-  // volume.AddRule(Scenario(EUSL, Wall, LBWL, LBWL, LPWL, Wall), LPWU);
-  // volume.AddRule(Scenario(EUSL, Wall, LBWL, LPWL, LBWL, Wall), LBWU);
-  // volume.AddRule(Scenario(EUSL, Wall, LPWL, LBWL, LBWL, Wall), LBWU);
-  // volume.AddRule(Scenario(EUSL, Wall, LBWL, LBWL, LTWL, Wall), LTWU);
-  // volume.AddRule(Scenario(EUSL, Wall, LBWL, LTWL, Wall, Wall), Slot);
-  // volume.AddRule(Scenario(ERS1, Wall, Wall, DPSR, Wall, DBSR), DPSR);
-  // volume.AddRule(Scenario(ERS1, DPSR, Wall, DBSR, Wall, DPSR), DBSR);
-  // volume.AddRule(Scenario(ERS1, DBSR, Wall, DPSR, Wall, DPSR), DPSR);
-  // volume.AddRule(Scenario(ERS1, DPSR, Wall, DPSR, Wall, DBSR), DPSR);
-  // volume.AddRule(Scenario(ERS1, DPSR, Wall, DBSR, Wall, DBSR), DBSR);
-  // volume.AddRule(Scenario(ERS1, DBSR, Wall, DBSR, Wall, DPSR), DBSR);
-  // volume.AddRule(Scenario(ERS1, DBSR, Wall, DPSR, Wall, DBSR), DPSR);
-  // volume.AddRule(Scenario(ERS1, DBSR, Wall, DBSR, Wall, DBSR), DBSR);
-  // volume.AddRule(Scenario(ERS1, DPSR, Wall, DBSR, Wall, DHSR), DBSR);
-  // volume.AddRule(Scenario(ERS1, DBSR, Wall, DHSR, Wall, Slot), DHSR);
-  // volume.AddRule(Scenario(ERS1, DHSR, Wall, Slot, Wall, Slot), Slot);
-  // volume.AddRule(Scenario(ERS1, Slot, Wall, Slot, Wall, Slot), Slot);
-  // volume.AddRule(Scenario(ERS1, Slot, Wall, Slot, Wall, Wall), Slot);
-  // volume.AddRule(Scenario(ERS1, Wall, Wall, DKSR, Wall, Slot), DKSR);
-  // volume.AddRule(Scenario(ERS1, DKSR, Wall, Slot, Wall, DKSR), Slot);
-  // volume.AddRule(Scenario(ERS1, Slot, Wall, DKSR, Wall, DKSR), DKSR);
-  // volume.AddRule(Scenario(ERS1, DKSR, Slot, DKSR, Wall, Slot), DKSR);
-  // volume.AddRule(Scenario(ERS1, DKSR, Wall, Slot, Wall, Slot), Slot);
-  // volume.AddRule(Scenario(ERSX, Wall, Wall, DPSR, Wall, DBSR), DPSR);
-  // volume.AddRule(Scenario(ERSX, DPSR, Wall, DBSR, Wall, DPSR), DBSR);
-  // volume.AddRule(Scenario(ERSX, DBSR, Wall, DPSR, Wall, DPSR), DPSR);
-  // volume.AddRule(Scenario(ERSX, DPSR, Wall, DPSR, Wall, DBSR), DPSR);
-  // volume.AddRule(Scenario(ERSX, DPSR, Wall, DBSR, Wall, DBSR), DBSR);
-  // volume.AddRule(Scenario(ERSX, DBSR, Wall, DBSR, Wall, DPSR), DBSR);
-  // volume.AddRule(Scenario(ERSX, DBSR, Wall, DPSR, Wall, DBSR), DPSR);
-  // volume.AddRule(Scenario(ERSX, DBSR, Wall, DBSR, Wall, DBSR), DBSR);
-  // volume.AddRule(Scenario(ERSX, DPSR, Wall, DBSR, Wall, DHSR), DBSR);
-  // volume.AddRule(Scenario(ERSX, DBSR, Wall, DHSR, Wall, Slot), DHSR);
-  // volume.AddRule(Scenario(ERSX, DHSR, Wall, Slot, Wall, Slot), Slot);
-  // volume.AddRule(Scenario(ERSX, Slot, Wall, Slot, Wall, Slot), Slot);
-  // volume.AddRule(Scenario(ERSX, Slot, Wall, Slot, Wall, Wall), Slot);
-  // volume.AddRule(Scenario(ERSX, Wall, Wall, DKSR, Wall, Slot), DKSR);
-  // volume.AddRule(Scenario(ERSX, DKSR, Wall, Slot, Wall, DKSR), Slot);
-  // volume.AddRule(Scenario(ERSX, Slot, Wall, DKSR, Wall, DKSR), DKSR);
-  // volume.AddRule(Scenario(ERSX, DKSR, Slot, DKSR, Wall, Slot), DKSR);
-  // volume.AddRule(Scenario(ERSX, DKSR, Wall, Slot, Wall, Slot), Slot);
-  // volume.AddRule(Scenario(ERS0, Wall, Wall, DPSR, Wall, DBSR), DPSR);
-  // volume.AddRule(Scenario(ERS0, DPSR, Wall, DBSR, Wall, DPSR), DBSR);
-  // volume.AddRule(Scenario(ERS0, DBSR, Wall, DPSR, Wall, DPSR), DPSR);
-  // volume.AddRule(Scenario(ERS0, DPSR, Wall, DPSR, Wall, DBSR), DPSR);
-  // volume.AddRule(Scenario(ERS0, DPSR, Wall, DBSR, Wall, DBSR), DBSR);
-  // volume.AddRule(Scenario(ERS0, DBSR, Wall, DBSR, Wall, DPSR), DBSR);
-  // volume.AddRule(Scenario(ERS0, DBSR, Wall, DPSR, Wall, DBSR), DPSR);
-  // volume.AddRule(Scenario(ERS0, DBSR, Wall, DBSR, Wall, DBSR), DBSR);
-  // volume.AddRule(Scenario(ERS0, DPSR, Wall, DBSR, Wall, DHSR), DBSR);
-  // volume.AddRule(Scenario(ERS0, DBSR, Wall, DHSR, Wall, Slot), DHSR);
-  // volume.AddRule(Scenario(ERS0, DHSR, Wall, Slot, Wall, Slot), Slot);
-  // volume.AddRule(Scenario(ERS0, Slot, Wall, Slot, Wall, Slot), Slot);
-  // volume.AddRule(Scenario(ERS0, Slot, Wall, Slot, Wall, Wall), Slot);
-  // volume.AddRule(Scenario(ERS0, Wall, Wall, DKSR, Wall, Slot), DKSR);
-  // volume.AddRule(Scenario(ERS0, DKSR, Wall, Slot, Wall, DKSR), Slot);
-  // volume.AddRule(Scenario(ERS0, Slot, Wall, DKSR, Wall, DKSR), DKSR);
-  // volume.AddRule(Scenario(ERS0, DKSR, Slot, DKSR, Wall, Slot), DKSR);
-  // volume.AddRule(Scenario(ERS0, DKSR, Wall, Slot, Wall, Slot), Slot);
-  // volume.AddRule(Scenario(ELSL, Wall, Wall, LKWU, Slot, Wall), Slot);
-  // volume.AddRule(Scenario(ELSL, Wall, LKWU, Slot, DKSR, Wall), LKWL);
-  // volume.AddRule(Scenario(ELSL, Wall, Wall, LHWU, LBWU, Wall), Slot);
-  // volume.AddRule(Scenario(ELSL, Wall, LHWU, LBWU, LBWU, Wall), LHWL);
-  // volume.AddRule(Scenario(ELSL, Wall, LBWU, LBWU, LBWU, Wall), LBWL);
-  // volume.AddRule(Scenario(ELSL, Wall, LBWU, LBWU, LPWU, Wall), LBWL);
-  // volume.AddRule(Scenario(ELSL, Wall, LBWU, LPWU, LBWU, Wall), LBWL);
-  // volume.AddRule(Scenario(ELSL, Wall, LPWU, LBWU, LBWU, Wall), LPWL);
-  // volume.AddRule(Scenario(ELSL, Wall, LBWU, LBWU, LTWU, Wall), LBWL);
-  // volume.AddRule(Scenario(ELSL, Wall, LBWU, LTWU, Slot, Wall), LBWL);
-  // volume.AddRule(Scenario(ELSL, Wall, LTWU, Slot, Wall, Wall), LTWL);
-  // volume.AddRule(Scenario(EUEL, Wall, Wall, LTSL, Wall, LBSL), Slot);
-  // volume.AddRule(Scenario(EUEL, LTSL, Wall, LBSL, Wall, LBSL), LTSU);
-  // volume.AddRule(Scenario(EUEL, LBSL, Wall, LBSL, Wall, LBSL), LBSU);
-  // volume.AddRule(Scenario(EUEL, LBSL, Wall, LBSL, Wall, LPSL), LBSU);
-  // volume.AddRule(Scenario(EUEL, LBSL, Wall, LPSL, Wall, LBSL), LBSU);
-  // volume.AddRule(Scenario(EUEL, LPSL, Wall, LBSL, Wall, LBSL), LPSU);
-  // volume.AddRule(Scenario(EUEL, LBSL, Wall, LBSL, Wall, LHSL), LBSU);
-  // volume.AddRule(Scenario(EUEL, LBSL, Wall, LHSL, Wall, Slot), LBSU);
-  // volume.AddRule(Scenario(EUEL, LHSL, Wall, Slot, Wall, Wall), LHSU);
-  // volume.AddRule(Scenario(EUEL, DKER, Wall, LKSL, Wall, Slot), Slot);
-  // volume.AddRule(Scenario(EUEL, LKSL, Wall, Slot, Wall, Wall), LKSU);
-  // volume.AddRule(Scenario(ESE0, Wall, Wall, DKER, Slot, Wall), Slot);
-  // volume.AddRule(Scenario(ESE0, Wall, DKER, Slot, DKER, Wall), DKE0);
-  // volume.AddRule(Scenario(ESE0, Wall, Slot, DKER, DKER, Wall), Slot);
-  // volume.AddRule(Scenario(ESE0, Wall, DKER, DKER, Slot, Slot), DKE0);
-  // volume.AddRule(Scenario(ESE0, Wall, DKER, Slot, Slot, Wall), DKE0);
-  // volume.AddRule(Scenario(ESE0, Wall, Slot, Slot, Slot, Wall), Slot);
-  // volume.AddRule(Scenario(ESE0, Wall, Slot, Slot, Wall, Wall), Slot);
-  // volume.AddRule(Scenario(ESE0, Wall, Wall, DPER, DBER, Wall), Slot);
-  // volume.AddRule(Scenario(ESE0, Wall, DPER, DBER, DPER, Wall), DPE0);
-  // volume.AddRule(Scenario(ESE0, Wall, DBER, DPER, DPER, Wall), DBE0);
-  // volume.AddRule(Scenario(ESE0, Wall, DPER, DPER, DBER, Wall), DPE0);
-  // volume.AddRule(Scenario(ESE0, Wall, DPER, DBER, DBER, Wall), DPE0);
-  // volume.AddRule(Scenario(ESE0, Wall, DBER, DBER, DPER, Wall), DBE0);
-  // volume.AddRule(Scenario(ESE0, Wall, DBER, DPER, DBER, Wall), DBE0);
-  // volume.AddRule(Scenario(ESE0, Wall, DBER, DBER, DBER, Wall), DBE0);
-  // volume.AddRule(Scenario(ESE0, Wall, DBER, DBER, DOER, Wall), DBE0);
-  // volume.AddRule(Scenario(ESE0, Wall, DBER, DOER, Wall, Wall), DOE0);
-  // volume.AddRule(Scenario(ESE0, Wall, Wall, DQER, Slot, Wall), Slot);
-  // volume.AddRule(Scenario(ESE0, Wall, DQER, Slot, DGER, DGNR), DQE0);
-  // volume.AddRule(Scenario(ESE0, Wall, Slot, DGER, Slot, Wall), Slot);
-  // volume.AddRule(Scenario(ESE0, DQSR, DGER, Slot, Slot, Slot), DGE0);
-  // volume.AddRule(Scenario(ESE0, Slot, DQER, Slot, DGER, DGNR), DQE0);
-  // volume.AddRule(Scenario(ESE0, Wall, DGER, Slot, Slot, Wall), DGE0);
-  // volume.AddRule(Scenario(ESE0, DQSR, Slot, Slot, Slot, Slot), Slot);
-  // volume.AddRule(Scenario(ESEX, Wall, Wall, Slot, DKE0, Wall), Slot);
-  // volume.AddRule(Scenario(ESEX, Wall, Slot, DKE0, Slot, Wall), Slot);
-  // volume.AddRule(Scenario(ESEX, Wall, DKE0, Slot, DKE0, Wall), DKEX);
-  // volume.AddRule(Scenario(ESEX, Wall, Slot, DKE0, DKE0, Slot), Slot);
-  // volume.AddRule(Scenario(ESEX, Wall, DKE0, DKE0, Slot, Wall), DKEX);
-  // volume.AddRule(Scenario(ESEX, Wall, DKE0, Slot, Slot, Wall), DKEX);
-  // volume.AddRule(Scenario(ESEX, Wall, Slot, Slot, Wall, Wall), Slot);
-  // volume.AddRule(Scenario(ESEX, Wall, Wall, Slot, DPE0, Wall), Slot);
-  // volume.AddRule(Scenario(ESEX, Wall, Slot, DPE0, DBE0, Wall), Slot);
-  // volume.AddRule(Scenario(ESEX, Wall, DPE0, DBE0, DPE0, Wall), DPEX);
-  // volume.AddRule(Scenario(ESEX, Wall, DBE0, DPE0, DPE0, Wall), DBEX);
-  // volume.AddRule(Scenario(ESEX, Wall, DPE0, DPE0, DBE0, Wall), DPEX);
-  // volume.AddRule(Scenario(ESEX, Wall, DPE0, DBE0, DBE0, Wall), DPEX);
-  // volume.AddRule(Scenario(ESEX, Wall, DBE0, DBE0, DPE0, Wall), DBEX);
-  // volume.AddRule(Scenario(ESEX, Wall, DBE0, DPE0, DBE0, Wall), DBEX);
-  // volume.AddRule(Scenario(ESEX, Wall, DBE0, DBE0, DBE0, Wall), DBEX);
-  // volume.AddRule(Scenario(ESEX, Wall, DBE0, DBE0, DOE0, Wall), DBEX);
-  // volume.AddRule(Scenario(ESEX, Wall, DBE0, DOE0, Wall, Wall), DOEX);
-  // volume.AddRule(Scenario(ESEX, Wall, Wall, Slot, DQE0, Wall), Slot);
-  // volume.AddRule(Scenario(ESEX, Wall, Slot, DQE0, Slot, DGNR), Slot);
-  // volume.AddRule(Scenario(ESEX, Wall, DQE0, Slot, DGE0, Wall), DQEX);
-  // volume.AddRule(Scenario(ESEX, DQSR, Slot, DGE0, Slot, Slot), Slot);
-  // volume.AddRule(Scenario(ESEX, Wall, DGE0, Slot, Slot, Wall), DGEX);
-  // volume.AddRule(Scenario(ESEX, Wall, Slot, Slot, Slot, Wall), Slot);
-  // volume.AddRule(Scenario(ESEX, Slot, Slot, DQE0, Slot, DGNR), Slot);
-  // volume.AddRule(Scenario(ESEX, Wall, Slot, DGE0, Slot, Wall), Slot);
-  // volume.AddRule(Scenario(ESEX, DQSR, Slot, Slot, Slot, Slot), Slot);
-  // volume.AddRule(Scenario(ESE1, Wall, Wall, Slot, Slot, Wall), Slot);
-  // volume.AddRule(Scenario(ESE1, Wall, Slot, Slot, DKEX, Wall), Slot);
-  // volume.AddRule(Scenario(ESE1, Wall, Slot, DKEX, Slot, Wall), Slot);
-  // volume.AddRule(Scenario(ESE1, Wall, DKEX, Slot, DKEX, Slot), DKE1);
-  // volume.AddRule(Scenario(ESE1, Wall, Slot, DKEX, DKEX, Wall), Slot);
-  // volume.AddRule(Scenario(ESE1, Wall, DKEX, DKEX, Slot, Wall), DKE1);
-  // volume.AddRule(Scenario(ESE1, Wall, DKEX, Slot, Wall, Wall), DKE1);
-  // volume.AddRule(Scenario(ESE1, Wall, Slot, Slot, DPEX, Wall), Slot);
-  // volume.AddRule(Scenario(ESE1, Wall, Slot, DPEX, DBEX, Wall), Slot);
-  // volume.AddRule(Scenario(ESE1, Wall, DPEX, DBEX, DPEX, Wall), DPE1);
-  // volume.AddRule(Scenario(ESE1, Wall, DBEX, DPEX, DPEX, Wall), DBE1);
-  // volume.AddRule(Scenario(ESE1, Wall, DPEX, DPEX, DBEX, Wall), DPE1);
-  // volume.AddRule(Scenario(ESE1, Wall, DPEX, DBEX, DBEX, Wall), DPE1);
-  // volume.AddRule(Scenario(ESE1, Wall, DBEX, DBEX, DPEX, Wall), DBE1);
-  // volume.AddRule(Scenario(ESE1, Wall, DBEX, DPEX, DBEX, Wall), DBE1);
-  // volume.AddRule(Scenario(ESE1, Wall, DBEX, DBEX, DBEX, Wall), DBE1);
-  // volume.AddRule(Scenario(ESE1, Wall, DBEX, DBEX, DOEX, Wall), DBE1);
-  // volume.AddRule(Scenario(ESE1, Wall, DBEX, DOEX, Wall, Wall), DOE1);
-  // volume.AddRule(Scenario(ESE1, Wall, Slot, Slot, DQEX, DGNR), Slot);
-  // volume.AddRule(Scenario(ESE1, Wall, Slot, DQEX, Slot, Wall), Slot);
-  // volume.AddRule(Scenario(ESE1, DQSR, DQEX, Slot, DGEX, Slot), DQE1);
-  // volume.AddRule(Scenario(ESE1, Wall, Slot, DGEX, Slot, Wall), Slot);
-  // volume.AddRule(Scenario(ESE1, Wall, DGEX, Slot, Slot, Wall), DGE1);
-  // volume.AddRule(Scenario(ESE1, Wall, Slot, Slot, Slot, Wall), Slot);
-  // volume.AddRule(Scenario(ESE1, Wall, Slot, Slot, Wall, Wall), Slot);
-  // volume.AddRule(Scenario(ESE1, Slot, Slot, Slot, DQEX, DGNR), Slot);
-  // volume.AddRule(Scenario(ESE1, Wall, DQEX, Slot, DGEX, Wall), DQE1);
-  // volume.AddRule(Scenario(ESE1, DQSR, DGEX, Slot, Slot, Slot), DGE1);
-  // volume.AddRule(Scenario(ELEL, Wall, Wall, Slot, Wall, LTSU), LTSL);
-  // volume.AddRule(Scenario(ELEL, Slot, Wall, LTSU, Wall, LBSU), LBSL);
-  // volume.AddRule(Scenario(ELEL, LTSU, Wall, LBSU, Wall, LBSU), LBSL);
-  // volume.AddRule(Scenario(ELEL, LBSU, Wall, LBSU, Wall, LBSU), LBSL);
-  // volume.AddRule(Scenario(ELEL, LBSU, Wall, LBSU, Wall, LPSU), LPSL);
-  // volume.AddRule(Scenario(ELEL, LBSU, Wall, LPSU, Wall, LBSU), LBSL);
-  // volume.AddRule(Scenario(ELEL, LPSU, Wall, LBSU, Wall, LBSU), LBSL);
-  // volume.AddRule(Scenario(ELEL, LBSU, Wall, LBSU, Wall, LHSU), LHSL);
-  // volume.AddRule(Scenario(ELEL, LBSU, Wall, LHSU, Wall, Wall), Slot);
-  // volume.AddRule(Scenario(ELEL, DKE1, Wall, Slot, Wall, LKSU), LKSL);
-  // volume.AddRule(Scenario(ELEL, Slot, Wall, LKSU, Wall, Wall), Slot);
-  // volume.AddRule(Scenario(SUWL, Slot, Wall, Slot, Wall, LHNL), LHNU);
-  // volume.AddRule(Scenario(SUWL, Slot, Wall, LHNL, Wall, LBNL), LBNU);
-  // volume.AddRule(Scenario(SUWL, LHNL, Wall, LBNL, Wall, LBNL), LBNU);
-  // volume.AddRule(Scenario(SUWL, LBNL, Wall, LBNL, Wall, LBNL), LBNU);
-  // volume.AddRule(Scenario(SUWL, LBNL, Wall, LBNL, Wall, LPNL), LPNU);
-  // volume.AddRule(Scenario(SUWL, LBNL, Wall, LPNL, Wall, LBNL), LBNU);
-  // volume.AddRule(Scenario(SUWL, LPNL, Wall, LBNL, Wall, LBNL), LBNU);
-  // volume.AddRule(Scenario(SUWL, LBNL, Wall, LBNL, Wall, LTNL), LTNU);
-  // volume.AddRule(Scenario(SUWL, LBNL, Wall, LTNL, Wall, Wall), Slot);
-  // volume.AddRule(Scenario(SUWL, Wall, Wall, Slot, Wall, LKNL), LKNU);
-  // volume.AddRule(Scenario(SUWL, Slot, Wall, LKNL, Wall, DKWR), Slot);
-  // volume.AddRule(Scenario(SLWL, Slot, Wall, LHNU, Wall, LBNU), Slot);
-  // volume.AddRule(Scenario(SLWL, LHNU, Wall, LBNU, Wall, LBNU), LHNL);
-  // volume.AddRule(Scenario(SLWL, LBNU, Wall, LBNU, Wall, LBNU), LBNL);
-  // volume.AddRule(Scenario(SLWL, LBNU, Wall, LBNU, Wall, LPNU), LBNL);
-  // volume.AddRule(Scenario(SLWL, LBNU, Wall, LPNU, Wall, LBNU), LBNL);
-  // volume.AddRule(Scenario(SLWL, LPNU, Wall, LBNU, Wall, LBNU), LPNL);
-  // volume.AddRule(Scenario(SLWL, LBNU, Wall, LBNU, Wall, LTNU), LBNU);
-  // volume.AddRule(Scenario(SLWL, LBNU, Wall, LTNU, Wall, Slot), LBNL);
-  // volume.AddRule(Scenario(SLWL, LTNU, Wall, Slot, Wall, Wall), LTNL);
-  // volume.AddRule(Scenario(SLWL, Wall, Wall, LKNU, Wall, Slot), Slot);
-  // volume.AddRule(Scenario(SLWL, LKNU, Wall, Slot, Wall, DKWR), LKNL);
-  // volume.AddRule(Scenario(SUSL, Wall, Wall, Slot, LKWL, Wall), LKWU);
-  // volume.AddRule(Scenario(SUSL, Wall, Slot, LKWL, DKSR, Wall), Slot);
-  // volume.AddRule(Scenario(SUSL, Wall, Wall, Slot, LHWL, Wall), LHWU);
-  // volume.AddRule(Scenario(SUSL, Wall, Slot, LHWL, LBWL, Wall), LBWU);
-  // volume.AddRule(Scenario(SUSL, Wall, LHWL, LBWL, LBWL, Wall), LBWU);
-  // volume.AddRule(Scenario(SUSL, Wall, LBWL, LBWL, LBWL, Wall), LBWU);
-  // volume.AddRule(Scenario(SUSL, Wall, LBWL, LBWL, LPWL, Wall), LPWU);
-  // volume.AddRule(Scenario(SUSL, Wall, LBWL, LPWL, LBWL, Wall), LBWU);
-  // volume.AddRule(Scenario(SUSL, Wall, LPWL, LBWL, LBWL, Wall), LBWU);
-  // volume.AddRule(Scenario(SUSL, Wall, LBWL, LBWL, LTWL, Wall), LTWU);
-  // volume.AddRule(Scenario(SUSL, Wall, LBWL, LTWL, Wall, Wall), Slot);
-  // volume.AddRule(Scenario(ESE0, Wall, DQER, Slot, Slot, Wall), DQE0);
-  // volume.AddRule(Scenario(ESE0, Slot, Slot, Slot, DGER, DGNR), Slot);
-  // volume.AddRule(Scenario(ESE0, Slot, Slot, Slot, Slot, Slot), Slot);
-  // volume.AddRule(Scenario(ESEX, Wall, Slot, DQE0, Slot, Wall), Slot);
-  // volume.AddRule(Scenario(ESEX, Slot, DQE0, Slot, Slot, DGNR), DQEX);
-  // volume.AddRule(Scenario(ESEX, Wall, Slot, Slot, DGE0, Wall), Slot);
-  // volume.AddRule(Scenario(ESEX, Slot, Slot, Slot, Slot, Slot), Slot);
-  // volume.AddRule(Scenario(ESE1, Wall, Slot, Slot, DQEX, Wall), Slot);
-  // volume.AddRule(Scenario(ESE1, Slot, Slot, DQEX, Slot, DGNR), Slot);
-  // volume.AddRule(Scenario(ESE1, Wall, DQEX, Slot, Slot, Wall), DQE1);
-  // volume.AddRule(Scenario(ESE1, Wall, Slot, Slot, DGEX, Wall), Slot);
-  // volume.AddRule(Scenario(ESE1, Slot, DGEX, Slot, Slot, Slot), DGE1);
-  // volume.AddRule(Scenario(SSS0, Wall, Wall, DQSR, Wall, Slot), Slot);
-  // volume.AddRule(Scenario(SSS0, DQSR, Wall, Slot, Wall, DGE1), DQS0);
-  // volume.AddRule(Scenario(SSS0, Slot, Slot, DGE1, Slot, Slot), DGE1);
-  // volume.AddRule(Scenario(SSS0, DGE1, Wall, Slot, Wall, Slot), Slot);
-  // volume.AddRule(Scenario(SSS0, Slot, Wall, Slot, Wall, DGSR), Slot);
-  // volume.AddRule(Scenario(SSS0, Slot, Wall, DGSR, Wall, Slot), Slot);
-  // volume.AddRule(Scenario(SSS0, DGSR, Slot, Slot, Slot, Slot), DGS0);
-  // volume.AddRule(Scenario(SSS0, Slot, Wall, Slot, Wall, Slot), Slot);
-  // volume.AddRule(Scenario(SSS0, Slot, Wall, Slot, Wall, Wall), Slot);
-  // volume.AddRule(Scenario(SSS0, Wall, Wall, DPSR, Wall, DBSR), Slot);
-  // volume.AddRule(Scenario(SSS0, DPSR, Wall, DBSR, Wall, DPSR), DPS0);
-  // volume.AddRule(Scenario(SSS0, DBSR, Wall, DPSR, Wall, DPSR), DBS0);
-  // volume.AddRule(Scenario(SSS0, DPSR, Wall, DPSR, Wall, DBSR), DPS0);
-  // volume.AddRule(Scenario(SSS0, DBSR, Wall, DPSR, Wall, DBSR), DBS0);
-  // volume.AddRule(Scenario(SSS0, DPSR, Wall, DBSR, Wall, DBSR), DPS0);
-  // volume.AddRule(Scenario(SSS0, DBSR, Wall, DBSR, Wall, DBSR), DBS0);
-  // volume.AddRule(Scenario(SSS0, DBSR, Wall, DBSR, Wall, DPSR), DBS0);
-  // volume.AddRule(Scenario(SSS0, DPSR, Wall, DBSR, Wall, DHSR), DPS0);
-  // volume.AddRule(Scenario(SSS0, DBSR, Wall, DHSR, Wall, Slot), DBS0);
-  // volume.AddRule(Scenario(SSS0, DHSR, Wall, Slot, Wall, Slot), DHS0);
-  // volume.AddRule(Scenario(SSS0, Wall, Wall, DKSR, Wall, Slot), DKS0);
-  // volume.AddRule(Scenario(SSS0, DKSR, Wall, Slot, Wall, DKSR), DKS0);
-  // volume.AddRule(Scenario(SSS0, Slot, Wall, DKSR, Wall, DKSR), Slot);
-  // volume.AddRule(Scenario(SSS0, DKSR, Slot, DKSR, Wall, Slot), DKS0);
-  // volume.AddRule(Scenario(SSS0, DKSR, Wall, Slot, Wall, Slot), DKS0);
-  // volume.AddRule(Scenario(SSSX, Wall, Wall, Slot, Wall, DQS0), Slot);
-  // volume.AddRule(Scenario(SSSX, Slot, Wall, DQS0, Wall, DGE1), Slot);
-  // volume.AddRule(Scenario(SSSX, DQS0, Slot, DGE1, Slot, Slot), DQSX);
-  // volume.AddRule(Scenario(SSSX, DGE1, Wall, Slot, Wall, Slot), Slot);
-  // volume.AddRule(Scenario(SSSX, Slot, Wall, Slot, Wall, Slot), Slot);
-  // volume.AddRule(Scenario(SSSX, Slot, Wall, Slot, Wall, DGS0), Slot);
-  // volume.AddRule(Scenario(SSSX, Slot, Slot, DGS0, Slot, Slot), Slot);
-  // volume.AddRule(Scenario(SSSX, DGS0, Wall, Slot, Wall, Slot), DGSX);
-  // volume.AddRule(Scenario(SSSX, Slot, Wall, Slot, Wall, Wall), Slot);
-  // volume.AddRule(Scenario(SSSX, Wall, Wall, Slot, Wall, DPS0), Slot);
-  // volume.AddRule(Scenario(SSSX, Slot, Wall, DPS0, Wall, DBS0), Slot);
-  // volume.AddRule(Scenario(SSSX, DPS0, Wall, DBS0, Wall, DPS0), DPSX);
-  // volume.AddRule(Scenario(SSSX, DBS0, Wall, DPS0, Wall, DPS0), DBSX);
-  // volume.AddRule(Scenario(SSSX, DPS0, Wall, DPS0, Wall, DBS0), DPSX);
-  // volume.AddRule(Scenario(SSSX, DBS0, Wall, DPS0, Wall, DBS0), DBSX);
-  // volume.AddRule(Scenario(SSSX, DPS0, Wall, DBS0, Wall, DBS0), DPSX);
-  // volume.AddRule(Scenario(SSSX, DBS0, Wall, DBS0, Wall, DBS0), DBSX);
-  // volume.AddRule(Scenario(SSSX, DBS0, Wall, DBS0, Wall, DPS0), DBSX);
-  // volume.AddRule(Scenario(SSSX, DPS0, Wall, DBS0, Wall, DHS0), DPSX);
-  // volume.AddRule(Scenario(SSSX, DBS0, Wall, DHS0, Wall, Slot), DBSX);
-  // volume.AddRule(Scenario(SSSX, DHS0, Wall, Slot, Wall, Slot), DHSX);
-  // volume.AddRule(Scenario(SSSX, Wall, Wall, DKS0, Wall, DKS0), DKSX);
-  // volume.AddRule(Scenario(SSSX, DKS0, Wall, DKS0, Wall, Slot), DKSX);
-  // volume.AddRule(Scenario(SSSX, DKS0, Wall, Slot, Wall, DKS0), DKSX);
-  // volume.AddRule(Scenario(SSSX, Slot, Slot, DKS0, Wall, DKS0), Slot);
-  // volume.AddRule(Scenario(SSSX, DKS0, Wall, Slot, Wall, Slot), DKSX);
 
   volume.PrintViewFlat();
   for (size_t t = 0; t < 4 * NTicksPerCycle; t += 1) {

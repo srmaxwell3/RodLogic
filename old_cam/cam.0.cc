@@ -21,10 +21,12 @@
 // Area of 1 face: 0.25^2 in = 0.0625 in^2
 // Force on 1 face, at 1 lbf/in^2 = 0.0625 lbf
 // Acceleration on shortest logic rod (no friction):
-//     F = ma -> a = F/m ->
+//     F = ma ->
+//     a = F/m ->
 //     a = 0.0625 lbf / 0.012607213 lb = 160.8 ft/s^2 = 1929.6 in/s^2
 // Time to change (no friction) (0.25", 0.50", 0.75"):
-//     s = 0.5 * a * t^2 -> t = sqrt(2 * s / a) ->
+//     s = 0.5 * a * t^2 ->
+//     t = sqrt(2 * s / a) ->
 //     t = sqrt(2 * 0.25 in / 1929.6 in/s^2) = 0.016097238 s
 //     t = sqrt(2 * 0.50 in / 1929.6 in/s^2) = 0.022764932 s
 //     t = sqrt(2 * 0.75 in / 1929.6 in/s^2) = 0.027881234 s
@@ -35,9 +37,12 @@
 //     v @ 0.75 in = 160.8 ft/s^2 * 0.027881234 s = 4.4833024 ft/s
 // Kenetic energy at change (no friction) (0.25", 0.50", 0.75"):
 //     E = 0.5 * m * v^2
-//     E @ 0.25 in = 0.5 * 0.012607213 lb * (2.5884358 ft/s)^2 = 0.042234163 ft*lbf
-//     E @ 0.50 in = 0.5 * 0.012607213 lb * (3.6606010 ft/s)^2 = 0.084468325 ft*lbf
-//     E @ 0.25 in = 0.5 * 0.012607213 lb * (4.4833024 ft/s)^2 = 0.126702493 ft*lbf
+//     E @ 0.25 in =
+//         0.5 * 0.012607213 lb * (2.5884358 ft/s)^2 = 0.042234163 ft*lbf
+//     E @ 0.50 in =
+//         0.5 * 0.012607213 lb * (3.6606010 ft/s)^2 = 0.084468325 ft*lbf
+//     E @ 0.25 in =
+//         0.5 * 0.012607213 lb * (4.4833024 ft/s)^2 = 0.126702493 ft*lbf
 class Entity;
 
 class EntityProperties {

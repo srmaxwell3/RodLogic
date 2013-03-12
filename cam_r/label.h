@@ -23,6 +23,7 @@ class CombinedLabel : string {
   int MaxBitNumber() const { return maxBitNumber; }
   int IsBigEndian() const { return isBigEndian; }
   int IsLittleEndian() const { return !isBigEndian; }
+  string ToString() const;
   void Dump() const;
 
   static void SetEndianness(string const &name, bool isBigEndian);
@@ -45,7 +46,7 @@ class Label: string {
   Label();
   Label &operator=(string const &label);
   bool operator<(Label const &that) const {
-    return 0 < compare(that) ||
+    return compare(that) < 0 ||
       (compare(that) == 0 && bitNumber < that.bitNumber);
   }
   bool IsDefined() const { return isDefined; }

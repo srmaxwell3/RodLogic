@@ -270,6 +270,36 @@ bool Rod2D::findLabel(Diagram2D const &diagram, P2D pStart, Directions oWard) {
         label = l;
       }
     }
+  } else {
+    Directions const tWard = oWard;
+    int nBlanks = 0;
+    string l;
+    P2D t;
+    for (t = pStart.offsetBy(oWard); nBlanks < 2 && diagram.isInBounds(t) && diagram.at(t) == ' '; t.move(tWard)) {
+      nBlanks += 1;
+    }
+    if (diagram.isInBounds(t)) {
+      char c = diagram.at(t);
+      if (nBlanks < 2 && (c == '0' || c == '1' || c == 'O' || c == 'I' || !Diagram2D::isLegalEWChar(c))) {
+        for (; diagram.isInBounds(t); t.move(tWard)) {
+          c = diagram.at(t);
+          if (c != ' ') {
+            if (nBlanks) {
+              l += ' ';
+              nBlanks = 0;
+            }
+            l += c;
+          } else if (nBlanks++) {
+            break;
+          }
+        }
+        l = trim(l);
+        if (tWard == N) {
+          std::reverse(l.begin(), l.end());
+        }
+        label = l;
+      }
+    }
   }
 
   if (!label.IsDefined()) {
@@ -383,7 +413,7 @@ int Rod2D::tickFirstSetAt () const {
 
 void Rod2D::verifyInputDelays() {
   SetOfRod2Ds seenAlready;
-  verifyInputDelays(seenAlready);
+  // verifyInputDelays(seenAlready);
 }
 
 void Rod2D::verifyInputDelays(SetOfRod2Ds &seenAlready) {
@@ -477,6 +507,8 @@ bool Rod2D::isShared(P2D const &p) const {
 
 bool Rod2D::hasInputs() const { return 0 < inputs.size(); }
 bool Rod2D::hasOutputs() const { return 0 < outputs.size(); }
+size_t Rod2D::countOfInputs() const { return connectedTo[Get1].size() + connectedTo[Get2].size(); }
+size_t Rod2D::countOfOutputs() const { return connectedTo[Put1].size() + connectedTo[Put2].size(); }
 
 void Rod2D::reset() {
   lastEvaluatedTick = -1;

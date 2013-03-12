@@ -166,7 +166,20 @@ char const *initialLayers[4][29] = {
   }
 };
 
+enum State {
+  StateUndefined,
+
+  StateT,  // 'tri-state'
+  State0,  // 0
+  StateX,  // 'inter-state'
+  State1,  // 1
+
+  eoState
+};
+
 enum Stage {
+  StageUndefined,
+
   StageA,  // W->E
   StageB,  // N->S
   StageC,  // E->W
@@ -176,6 +189,8 @@ enum Stage {
 };
 
 enum Phase {
+  PhaseUndefined,
+
   Phase1,  // Unlatch StageB logic
   Phase2,  // Set StageB logic to T
   Phase3,  // Latch StageB logic
@@ -201,6 +216,8 @@ class Clock {
 };
 
 enum Parts {
+  PartUndefined,
+
   Wall,
   Slot,
 

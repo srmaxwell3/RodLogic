@@ -1,6 +1,9 @@
 #ifndef STRING_TRIMS_H
 #define STRING_TRIMS_H
 
+#include <algorithm>
+#include <cctype>
+
 // trim from start
 static inline std::string &ltrim(std::string &s) {
   s.erase(s.begin(),
@@ -9,6 +12,12 @@ static inline std::string &ltrim(std::string &s) {
                        std::not1(std::ptr_fun<int, int>(std::isspace))
                       )
          );
+  // for (auto &i = s.begin(); i != s.end(); ++i) {
+  //   if (!std::isspace(*i)) {
+  //     s.erase(s.begin(), i);
+  //     break;
+  //   }
+  // }
   return s;
 }
 
@@ -20,6 +29,12 @@ static inline std::string &rtrim(std::string &s) {
                       ).base(),
           s.end()
          );
+  // for (auto &i = s.rbegin(); i != s.rend(); ++i) {
+  //   if (!std::isspace(*i)) {
+  //     s.erase(s.rbegin(), i);
+  //     break;
+  //   }
+  // }
   return s;
 }
 

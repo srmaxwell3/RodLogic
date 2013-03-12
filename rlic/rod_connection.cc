@@ -1,4 +1,4 @@
-#include "rod_connection_type.h"
+#include "rod_connection.h"
 
 RodConnectionType const rodConnectionType[eoRodConnectionType] = {
   Get2, Get1, Put1, Put2, None

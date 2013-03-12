@@ -1,5 +1,9 @@
-# CXX = clang++ -std=c++11 -stdlib=libc++ $(DEBUG) $(OPT)
+HOSTNAME = $(shell hostname)
+ifeq ($(HOSTNAME),Sidneys-MacBook-Pro.local)
+CXX = clang++ -std=c++11 -stdlib=libc++ $(DEBUG) $(OPT)
+else
 CXX = g++ -std=c++0x $(DEBUG) $(OPT)
+endif
 DEBUG = -g
 OPT = -O0
 

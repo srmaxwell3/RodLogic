@@ -37,6 +37,8 @@ struct Rod2D : public SetOfP2Ds {
   bool isShared(P2D const &p) const;
   bool hasInputs() const;
   bool hasOutputs() const;
+  size_t countOfInputs() const;
+  size_t countOfOutputs() const;
 
   void reset();
   bool getValue() const;

@@ -12,7 +12,7 @@ enum Directions {
   eoDirections
 };
 
-Directions directions[eoDirections];
+extern Directions const directions[eoDirections];
 
 char const *c_str(Directions d);
 Directions Next(Directions d);

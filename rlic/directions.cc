@@ -1,6 +1,6 @@
 #include "directions.h"
 
-Directions directions[eoDirections] = { E, S, D, W, N, U };
+Directions const directions[eoDirections] = { E, S, D, W, N, U };
 
 char const *c_str(Directions d) {
   switch (d) {

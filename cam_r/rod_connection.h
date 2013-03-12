@@ -18,7 +18,7 @@ extern RodConnectionType const rodConnectionThisToThat[eoDirections][eoDirection
 
 char const *c_str(RodConnectionType t);
 
-struct Rod2d;
+struct Rod2D;
 
 struct RodConnection {
   RodConnection(Rod2D *_rod, bool _isAnIdentityConnection) :
