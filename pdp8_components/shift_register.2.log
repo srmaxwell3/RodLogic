@@ -1,0 +1,2713 @@
+./cam.r -c 0 -F -t shift_register_generate_input.txt shift_register.2.txt
+Rod Count by (Length, Fan-In, Fan-Out):
+(    6,  1,  3):    24
+(    6,  3,  1):    12
+(    7,  3,  1):    12
+(    7,  4,  1):    24
+(   11,  1,  2):    12
+(   11,  1,  3):    12
+(   13,  1,  1):    12
+(   22,  1,  3):    12
+(   67,  4,  1):    12
+(  104,  1,  1):    12
+(  104,  1,  2):     3
+(  104,  1,  3):    10
+(  104,  1, 48):     2
+(  104,  2,  1):     1
+(  220,  0,  1):    15
+(  220,  0,  2):     1
+(  220,  1,  1):    12
+(  220,  1, 12):     1
+(  220,  3,  1):    48
+
+Rod Count (and # incomplete) by Direction:
+    E:    76 (    0)
+    S:    64 (    0)
+    D:     0 (    0)
+    W:    61 (    0)
+    N:    36 (    0)
+    U:     0 (    0)
+Total:   237 (    0)
+
+Earliest input: E
+Earliest output: N
+
+Executing up to 256 cycles....
+0: inputs={
+     ACIn.>0..b (000000000000 [000]) -> 011001001111 [64f],
+     Clk (0) -> 1,
+     S.1..0< (00 [0]) -> 11 [3]
+  }, outputs={ }
+1: inputs={ }, outputs={ }
+2: inputs={ }, outputs={ }
+3: inputs={ }, outputs={ }
+4: inputs={ }, outputs={,
+     ac'!.>0..b (000000000000 [000]) -> 011001001111 [64f]
+  }
+5: inputs={ }, outputs={ }
+6: inputs={
+     ACIn.>0..b (011001001111 [64f]) -> 110011000110 [cc6]
+  }, outputs={ }
+7: inputs={ }, outputs={ }
+8: inputs={ }, outputs={ }
+9: inputs={ }, outputs={ }
+10: inputs={ }, outputs={,
+     ac'!.>0..b (011001001111 [64f]) -> 110011000110 [cc6]
+  }
+11: inputs={ }, outputs={ }
+12: inputs={
+     ACIn.>0..b (110011000110 [cc6]) -> 001100101001 [329]
+  }, outputs={
+     AC.>0..b (000000000000 [000]) -> 100110110000 [9b0]
+  }
+13: inputs={ }, outputs={ }
+14: inputs={ }, outputs={ }
+15: inputs={ }, outputs={ }
+16: inputs={ }, outputs={,
+     ac'!.>0..b (110011000110 [cc6]) -> 001100101001 [329]
+  }
+17: inputs={ }, outputs={ }
+18: inputs={
+     ACIn.>0..b (001100101001 [329]) -> 000000000000 [000],
+     Link (0) -> 1,
+     S.1..0< (11 [3]) -> 01 [1]
+  }, outputs={
+     AC.>0..b (100110110000 [9b0]) -> 001100111001 [339]
+  }
+19: inputs={ }, outputs={ }
+20: inputs={ }, outputs={ }
+21: inputs={ }, outputs={ }
+22: inputs={ }, outputs={,
+     ac'!.>0..b (001100101001 [329]) -> 100110011100 [99c]
+  }
+23: inputs={ }, outputs={ }
+24: inputs={ }, outputs={ }
+25: inputs={ }, outputs={ }
+26: inputs={ }, outputs={ }
+27: inputs={ }, outputs={ }
+28: inputs={ }, outputs={ }
+29: inputs={ }, outputs={ }
+30: inputs={ }, outputs={ }
+31: inputs={ }, outputs={ }
+32: inputs={ }, outputs={ }
+33: inputs={ }, outputs={ }
+34: inputs={ }, outputs={ }
+35: inputs={ }, outputs={ }
+36: inputs={ }, outputs={ }
+37: inputs={ }, outputs={ }
+38: inputs={ }, outputs={ }
+39: inputs={ }, outputs={ }
+40: inputs={ }, outputs={ }
+41: inputs={ }, outputs={ }
+42: inputs={
+     ACIn.>0..b (000000000000 [000]) -> 111010101000 [ea8],
+     Link (1) -> 0,
+     S.1..0< (01 [1]) -> 11 [3]
+  }, outputs={ }
+43: inputs={ }, outputs={ }
+44: inputs={ }, outputs={ }
+45: inputs={ }, outputs={ }
+46: inputs={ }, outputs={,
+     ac'!.>0..b (100110011100 [99c]) -> 111010101000 [ea8]
+  }
+47: inputs={ }, outputs={ }
+48: inputs={
+     ACIn.>0..b (111010101000 [ea8]) -> 000000000000 [000],
+     Link (0) -> 1,
+     S.1..0< (11 [3]) -> 10 [2]
+  }, outputs={ }
+49: inputs={ }, outputs={ }
+50: inputs={ }, outputs={ }
+51: inputs={ }, outputs={ }
+52: inputs={ }, outputs={,
+     ac'!.>0..b (111010101000 [ea8]) -> 011001110011 [673]
+  }
+53: inputs={ }, outputs={ }
+54: inputs={,
+     Link (1) -> 0,
+     S.1..0< (10 [2]) -> 00 [0]
+  }, outputs={
+     AC.>0..b (001100111001 [339]) -> 000101010111 [157]
+  }
+55: inputs={ }, outputs={ }
+56: inputs={ }, outputs={ }
+57: inputs={ }, outputs={ }
+58: inputs={ }, outputs={,
+     ac'!.>0..b (011001110011 [673]) -> 000101010111 [157]
+  }
+59: inputs={ }, outputs={ }
+60: inputs={,
+     S.1..0< (00 [0]) -> 10 [2]
+  }, outputs={ }
+61: inputs={ }, outputs={ }
+62: inputs={ }, outputs={ }
+63: inputs={ }, outputs={ }
+64: inputs={ }, outputs={,
+     ac'!.>0..b (000101010111 [157]) -> 001010101110 [2ae]
+  }
+65: inputs={ }, outputs={ }
+66: inputs={,
+     S.1..0< (10 [2]) -> 00 [0]
+  }, outputs={ }
+67: inputs={ }, outputs={ }
+68: inputs={ }, outputs={ }
+69: inputs={ }, outputs={ }
+70: inputs={ }, outputs={,
+     ac'!.>0..b (001010101110 [2ae]) -> 000101010111 [157]
+  }
+71: inputs={ }, outputs={ }
+72: inputs={ }, outputs={ }
+73: inputs={ }, outputs={ }
+74: inputs={ }, outputs={ }
+75: inputs={ }, outputs={ }
+76: inputs={ }, outputs={ }
+77: inputs={ }, outputs={ }
+78: inputs={
+     ACIn.>0..b (000000000000 [000]) -> 001010000001 [281],
+     S.1..0< (00 [0]) -> 11 [3]
+  }, outputs={ }
+79: inputs={ }, outputs={ }
+80: inputs={ }, outputs={ }
+81: inputs={ }, outputs={ }
+82: inputs={ }, outputs={,
+     ac'!.>0..b (000101010111 [157]) -> 001010000001 [281]
+  }
+83: inputs={ }, outputs={ }
+84: inputs={
+     ACIn.>0..b (001010000001 [281]) -> 000000000000 [000],
+     S.1..0< (11 [3]) -> 01 [1]
+  }, outputs={ }
+85: inputs={ }, outputs={ }
+86: inputs={ }, outputs={ }
+87: inputs={ }, outputs={ }
+88: inputs={ }, outputs={,
+     ac'!.>0..b (001010000001 [281]) -> 000010101011 [0ab]
+  }
+89: inputs={ }, outputs={ }
+90: inputs={,
+     S.1..0< (01 [1]) -> 00 [0]
+  }, outputs={ }
+91: inputs={ }, outputs={ }
+92: inputs={ }, outputs={ }
+93: inputs={ }, outputs={ }
+94: inputs={ }, outputs={,
+     ac'!.>0..b (000010101011 [0ab]) -> 000101010111 [157]
+  }
+95: inputs={ }, outputs={ }
+96: inputs={
+     ACIn.>0..b (000000000000 [000]) -> 001101111101 [37d],
+     S.1..0< (00 [0]) -> 11 [3]
+  }, outputs={ }
+97: inputs={ }, outputs={ }
+98: inputs={ }, outputs={ }
+99: inputs={ }, outputs={ }
+100: inputs={ }, outputs={,
+     ac'!.>0..b (000101010111 [157]) -> 001101111101 [37d]
+  }
+101: inputs={ }, outputs={ }
+102: inputs={
+     ACIn.>0..b (001101111101 [37d]) -> 000000000000 [000],
+     Link (0) -> 1,
+     S.1..0< (11 [3]) -> 10 [2]
+  }, outputs={ }
+103: inputs={ }, outputs={ }
+104: inputs={ }, outputs={ }
+105: inputs={ }, outputs={ }
+106: inputs={ }, outputs={,
+     ac'!.>0..b (001101111101 [37d]) -> 001010101111 [2af]
+  }
+107: inputs={ }, outputs={ }
+108: inputs={,
+     Link (1) -> 0
+  }, outputs={ }
+109: inputs={ }, outputs={ }
+110: inputs={ }, outputs={ }
+111: inputs={ }, outputs={ }
+112: inputs={ }, outputs={,
+     ac'!.>0..b (001010101111 [2af]) -> 001010101110 [2ae]
+  }
+113: inputs={ }, outputs={ }
+114: inputs={,
+     Link (0) -> 1
+  }, outputs={ }
+115: inputs={ }, outputs={ }
+116: inputs={ }, outputs={ }
+117: inputs={ }, outputs={ }
+118: inputs={ }, outputs={,
+     ac'!.>0..b (001010101110 [2ae]) -> 001010101111 [2af]
+  }
+119: inputs={ }, outputs={ }
+120: inputs={,
+     S.1..0< (10 [2]) -> 01 [1]
+  }, outputs={ }
+121: inputs={ }, outputs={ }
+122: inputs={ }, outputs={ }
+123: inputs={ }, outputs={ }
+124: inputs={ }, outputs={,
+     ac'!.>0..b (001010101111 [2af]) -> 100010101011 [8ab]
+  }
+125: inputs={ }, outputs={ }
+126: inputs={ }, outputs={ }
+127: inputs={ }, outputs={ }
+128: inputs={ }, outputs={ }
+129: inputs={ }, outputs={ }
+130: inputs={ }, outputs={ }
+131: inputs={ }, outputs={ }
+132: inputs={,
+     S.1..0< (01 [1]) -> 10 [2]
+  }, outputs={ }
+133: inputs={ }, outputs={ }
+134: inputs={ }, outputs={ }
+135: inputs={ }, outputs={ }
+136: inputs={ }, outputs={,
+     ac'!.>0..b (100010101011 [8ab]) -> 001010101111 [2af]
+  }
+137: inputs={ }, outputs={ }
+138: inputs={,
+     S.1..0< (10 [2]) -> 01 [1]
+  }, outputs={ }
+139: inputs={ }, outputs={ }
+140: inputs={ }, outputs={ }
+141: inputs={ }, outputs={ }
+142: inputs={ }, outputs={,
+     ac'!.>0..b (001010101111 [2af]) -> 100010101011 [8ab]
+  }
+143: inputs={ }, outputs={ }
+144: inputs={,
+     Link (1) -> 0
+  }, outputs={ }
+145: inputs={ }, outputs={ }
+146: inputs={ }, outputs={ }
+147: inputs={ }, outputs={ }
+148: inputs={ }, outputs={,
+     ac'!.>0..b (100010101011 [8ab]) -> 000010101011 [0ab]
+  }
+149: inputs={ }, outputs={ }
+150: inputs={
+     ACIn.>0..b (000000000000 [000]) -> 111010110100 [eb4],
+     S.1..0< (01 [1]) -> 11 [3]
+  }, outputs={ }
+151: inputs={ }, outputs={ }
+152: inputs={ }, outputs={ }
+153: inputs={ }, outputs={ }
+154: inputs={ }, outputs={,
+     ac'!.>0..b (000010101011 [0ab]) -> 111010110100 [eb4]
+  }
+155: inputs={ }, outputs={ }
+156: inputs={
+     ACIn.>0..b (111010110100 [eb4]) -> 000000000000 [000],
+     S.1..0< (11 [3]) -> 00 [0]
+  }, outputs={ }
+157: inputs={ }, outputs={ }
+158: inputs={ }, outputs={ }
+159: inputs={ }, outputs={ }
+160: inputs={ }, outputs={,
+     ac'!.>0..b (111010110100 [eb4]) -> 000101010111 [157]
+  }
+161: inputs={ }, outputs={ }
+162: inputs={
+     ACIn.>0..b (000000000000 [000]) -> 100001101010 [86a],
+     S.1..0< (00 [0]) -> 11 [3]
+  }, outputs={
+     AC.>0..b (000101010111 [157]) -> 000101001011 [14b]
+  }
+163: inputs={ }, outputs={ }
+164: inputs={ }, outputs={ }
+165: inputs={ }, outputs={ }
+166: inputs={ }, outputs={,
+     ac'!.>0..b (000101010111 [157]) -> 100001101010 [86a]
+  }
+167: inputs={ }, outputs={ }
+168: inputs={
+     ACIn.>0..b (100001101010 [86a]) -> 000000000000 [000],
+     S.1..0< (11 [3]) -> 00 [0]
+  }, outputs={ }
+169: inputs={ }, outputs={ }
+170: inputs={ }, outputs={ }
+171: inputs={ }, outputs={ }
+172: inputs={ }, outputs={,
+     ac'!.>0..b (100001101010 [86a]) -> 000101001011 [14b]
+  }
+173: inputs={ }, outputs={ }
+174: inputs={ }, outputs={ }
+175: inputs={ }, outputs={ }
+176: inputs={ }, outputs={ }
+177: inputs={ }, outputs={ }
+178: inputs={ }, outputs={ }
+179: inputs={ }, outputs={ }
+180: inputs={,
+     Link (0) -> 1,
+     S.1..0< (00 [0]) -> 10 [2]
+  }, outputs={ }
+181: inputs={ }, outputs={ }
+182: inputs={ }, outputs={ }
+183: inputs={ }, outputs={ }
+184: inputs={ }, outputs={,
+     ac'!.>0..b (000101001011 [14b]) -> 001010010111 [297]
+  }
+185: inputs={ }, outputs={ }
+186: inputs={,
+     Link (1) -> 0,
+     S.1..0< (10 [2]) -> 01 [1]
+  }, outputs={ }
+187: inputs={ }, outputs={ }
+188: inputs={ }, outputs={ }
+189: inputs={ }, outputs={ }
+190: inputs={ }, outputs={,
+     ac'!.>0..b (001010010111 [297]) -> 000010100101 [0a5]
+  }
+191: inputs={ }, outputs={ }
+192: inputs={,
+     S.1..0< (01 [1]) -> 00 [0]
+  }, outputs={ }
+193: inputs={ }, outputs={ }
+194: inputs={ }, outputs={ }
+195: inputs={ }, outputs={ }
+196: inputs={ }, outputs={,
+     ac'!.>0..b (000010100101 [0a5]) -> 000101001011 [14b]
+  }
+197: inputs={ }, outputs={ }
+198: inputs={,
+     S.1..0< (00 [0]) -> 01 [1]
+  }, outputs={ }
+199: inputs={ }, outputs={ }
+200: inputs={ }, outputs={ }
+201: inputs={ }, outputs={ }
+202: inputs={ }, outputs={,
+     ac'!.>0..b (000101001011 [14b]) -> 000010100101 [0a5]
+  }
+203: inputs={ }, outputs={ }
+204: inputs={,
+     S.1..0< (01 [1]) -> 00 [0]
+  }, outputs={ }
+205: inputs={ }, outputs={ }
+206: inputs={ }, outputs={ }
+207: inputs={ }, outputs={ }
+208: inputs={ }, outputs={,
+     ac'!.>0..b (000010100101 [0a5]) -> 000101001011 [14b]
+  }
+209: inputs={ }, outputs={ }
+210: inputs={
+     ACIn.>0..b (000000000000 [000]) -> 111001101111 [e6f],
+     S.1..0< (00 [0]) -> 11 [3]
+  }, outputs={ }
+211: inputs={ }, outputs={ }
+212: inputs={ }, outputs={ }
+213: inputs={ }, outputs={ }
+214: inputs={ }, outputs={,
+     ac'!.>0..b (000101001011 [14b]) -> 111001101111 [e6f]
+  }
+215: inputs={ }, outputs={ }
+216: inputs={
+     ACIn.>0..b (111001101111 [e6f]) -> 010001000100 [444]
+  }, outputs={ }
+217: inputs={ }, outputs={ }
+218: inputs={ }, outputs={ }
+219: inputs={ }, outputs={ }
+220: inputs={ }, outputs={,
+     ac'!.>0..b (111001101111 [e6f]) -> 010001000100 [444]
+  }
+221: inputs={ }, outputs={ }
+222: inputs={
+     ACIn.>0..b (010001000100 [444]) -> 000000000000 [000],
+     S.1..0< (11 [3]) -> 10 [2]
+  }, outputs={
+     AC.>0..b (000101001011 [14b]) -> 000110010000 [190]
+  }
+223: inputs={ }, outputs={ }
+224: inputs={ }, outputs={ }
+225: inputs={ }, outputs={ }
+226: inputs={ }, outputs={,
+     ac'!.>0..b (010001000100 [444]) -> 001100100000 [320]
+  }
+227: inputs={ }, outputs={ }
+228: inputs={
+     ACIn.>0..b (000000000000 [000]) -> 100000110011 [833],
+     S.1..0< (10 [2]) -> 11 [3]
+  }, outputs={
+     AC.>0..b (000110010000 [190]) -> 101110111011 [bbb]
+  }
+229: inputs={ }, outputs={ }
+230: inputs={ }, outputs={ }
+231: inputs={ }, outputs={ }
+232: inputs={ }, outputs={,
+     ac'!.>0..b (001100100000 [320]) -> 100000110011 [833]
+  }
+233: inputs={ }, outputs={ }
+234: inputs={
+     ACIn.>0..b (100000110011 [833]) -> 000000000000 [000],
+     Link (0) -> 1,
+     S.1..0< (11 [3]) -> 10 [2]
+  }, outputs={ }
+235: inputs={ }, outputs={ }
+236: inputs={ }, outputs={ }
+237: inputs={ }, outputs={ }
+238: inputs={ }, outputs={,
+     ac'!.>0..b (100000110011 [833]) -> 011101110111 [777]
+  }
+239: inputs={ }, outputs={ }
+240: inputs={,
+     Link (1) -> 0,
+     S.1..0< (10 [2]) -> 00 [0]
+  }, outputs={ }
+241: inputs={ }, outputs={ }
+242: inputs={ }, outputs={ }
+243: inputs={ }, outputs={ }
+244: inputs={ }, outputs={,
+     ac'!.>0..b (011101110111 [777]) -> 101110111011 [bbb]
+  }
+245: inputs={ }, outputs={ }
+246: inputs={,
+     Link (0) -> 1,
+     S.1..0< (00 [0]) -> 01 [1]
+  }, outputs={ }
+247: inputs={ }, outputs={ }
+248: inputs={ }, outputs={ }
+249: inputs={ }, outputs={ }
+250: inputs={ }, outputs={,
+     ac'!.>0..b (101110111011 [bbb]) -> 110111011101 [ddd]
+  }
+251: inputs={ }, outputs={ }
+252: inputs={
+     ACIn.>0..b (000000000000 [000]) -> 101110001001 [b89],
+     Link (1) -> 0,
+     S.1..0< (01 [1]) -> 11 [3]
+  }, outputs={ }
+253: inputs={ }, outputs={ }
+254: inputs={ }, outputs={ }
+255: inputs={ }, outputs={ }
+256: inputs={ }, outputs={,
+     ac'!.>0..b (110111011101 [ddd]) -> 101110001001 [b89]
+  }
+257: inputs={ }, outputs={ }
+258: inputs={
+     ACIn.>0..b (101110001001 [b89]) -> 000000000000 [000],
+     Link (0) -> 1,
+     S.1..0< (11 [3]) -> 01 [1]
+  }, outputs={ }
+259: inputs={ }, outputs={ }
+260: inputs={ }, outputs={ }
+261: inputs={ }, outputs={ }
+262: inputs={ }, outputs={,
+     ac'!.>0..b (101110001001 [b89]) -> 110111011101 [ddd]
+  }
+263: inputs={ }, outputs={ }
+264: inputs={,
+     Link (1) -> 0,
+     S.1..0< (01 [1]) -> 10 [2]
+  }, outputs={ }
+265: inputs={ }, outputs={ }
+266: inputs={ }, outputs={ }
+267: inputs={ }, outputs={ }
+268: inputs={ }, outputs={,
+     ac'!.>0..b (110111011101 [ddd]) -> 011101110110 [776]
+  }
+269: inputs={ }, outputs={ }
+270: inputs={ }, outputs={ }
+271: inputs={ }, outputs={ }
+272: inputs={ }, outputs={ }
+273: inputs={ }, outputs={ }
+274: inputs={ }, outputs={ }
+275: inputs={ }, outputs={ }
+276: inputs={,
+     Link (0) -> 1,
+     S.1..0< (10 [2]) -> 01 [1]
+  }, outputs={ }
+277: inputs={ }, outputs={ }
+278: inputs={ }, outputs={ }
+279: inputs={ }, outputs={ }
+280: inputs={ }, outputs={,
+     ac'!.>0..b (011101110110 [776]) -> 110111011101 [ddd]
+  }
+281: inputs={ }, outputs={ }
+282: inputs={
+     ACIn.>0..b (000000000000 [000]) -> 010101001001 [549],
+     Link (1) -> 0,
+     S.1..0< (01 [1]) -> 11 [3]
+  }, outputs={ }
+283: inputs={ }, outputs={ }
+284: inputs={ }, outputs={ }
+285: inputs={ }, outputs={ }
+286: inputs={ }, outputs={,
+     ac'!.>0..b (110111011101 [ddd]) -> 010101001001 [549]
+  }
+287: inputs={ }, outputs={ }
+288: inputs={
+     ACIn.>0..b (010101001001 [549]) -> 000000000000 [000],
+     S.1..0< (11 [3]) -> 00 [0]
+  }, outputs={ }
+289: inputs={ }, outputs={ }
+290: inputs={ }, outputs={ }
+291: inputs={ }, outputs={ }
+292: inputs={ }, outputs={,
+     ac'!.>0..b (010101001001 [549]) -> 101110111011 [bbb]
+  }
+293: inputs={ }, outputs={ }
+294: inputs={
+     ACIn.>0..b (000000000000 [000]) -> 010110011011 [59b],
+     S.1..0< (00 [0]) -> 11 [3]
+  }, outputs={
+     AC.>0..b (101110111011 [bbb]) -> 101010110110 [ab6]
+  }
+295: inputs={ }, outputs={ }
+296: inputs={ }, outputs={ }
+297: inputs={ }, outputs={ }
+298: inputs={ }, outputs={,
+     ac'!.>0..b (101110111011 [bbb]) -> 010110011011 [59b]
+  }
+299: inputs={ }, outputs={ }
+300: inputs={
+     ACIn.>0..b (010110011011 [59b]) -> 000000000000 [000],
+     Link (0) -> 1,
+     S.1..0< (11 [3]) -> 10 [2]
+  }, outputs={ }
+301: inputs={ }, outputs={ }
+302: inputs={ }, outputs={ }
+303: inputs={ }, outputs={ }
+304: inputs={ }, outputs={,
+     ac'!.>0..b (010110011011 [59b]) -> 010101101101 [56d]
+  }
+305: inputs={ }, outputs={ }
+306: inputs={ }, outputs={
+     AC.>0..b (101010110110 [ab6]) -> 101001100100 [a64]
+  }
+307: inputs={ }, outputs={ }
+308: inputs={ }, outputs={ }
+309: inputs={ }, outputs={ }
+310: inputs={ }, outputs={,
+     ac'!.>0..b (010101101101 [56d]) -> 010011001001 [4c9]
+  }
+311: inputs={ }, outputs={ }
+312: inputs={
+     ACIn.>0..b (000000000000 [000]) -> 011100001000 [708],
+     Link (1) -> 0,
+     S.1..0< (10 [2]) -> 11 [3]
+  }, outputs={ }
+313: inputs={ }, outputs={ }
+314: inputs={ }, outputs={ }
+315: inputs={ }, outputs={ }
+316: inputs={ }, outputs={,
+     ac'!.>0..b (010011001001 [4c9]) -> 011100001000 [708]
+  }
+317: inputs={ }, outputs={ }
+318: inputs={
+     ACIn.>0..b (011100001000 [708]) -> 011001011111 [65f]
+  }, outputs={ }
+319: inputs={ }, outputs={ }
+320: inputs={ }, outputs={ }
+321: inputs={ }, outputs={ }
+322: inputs={ }, outputs={,
+     ac'!.>0..b (011100001000 [708]) -> 011001011111 [65f]
+  }
+323: inputs={ }, outputs={ }
+324: inputs={
+     ACIn.>0..b (011001011111 [65f]) -> 101011110010 [af2]
+  }, outputs={
+     AC.>0..b (101001100100 [a64]) -> 100011110111 [8f7]
+  }
+325: inputs={ }, outputs={ }
+326: inputs={ }, outputs={ }
+327: inputs={ }, outputs={ }
+328: inputs={ }, outputs={,
+     ac'!.>0..b (011001011111 [65f]) -> 101011110010 [af2]
+  }
+329: inputs={ }, outputs={ }
+330: inputs={
+     ACIn.>0..b (101011110010 [af2]) -> 011110111000 [7b8]
+  }, outputs={
+     AC.>0..b (100011110111 [8f7]) -> 100110100000 [9a0]
+  }
+331: inputs={ }, outputs={ }
+332: inputs={ }, outputs={ }
+333: inputs={ }, outputs={ }
+334: inputs={ }, outputs={,
+     ac'!.>0..b (101011110010 [af2]) -> 011110111000 [7b8]
+  }
+335: inputs={ }, outputs={ }
+336: inputs={
+     ACIn.>0..b (011110111000 [7b8]) -> 000000000000 [000],
+     S.1..0< (11 [3]) -> 00 [0]
+  }, outputs={ }
+337: inputs={ }, outputs={ }
+338: inputs={ }, outputs={ }
+339: inputs={ }, outputs={ }
+340: inputs={ }, outputs={,
+     ac'!.>0..b (011110111000 [7b8]) -> 100110100000 [9a0]
+  }
+341: inputs={ }, outputs={ }
+342: inputs={
+     ACIn.>0..b (000000000000 [000]) -> 111010111000 [eb8],
+     S.1..0< (00 [0]) -> 11 [3]
+  }, outputs={
+     AC.>0..b (100110100000 [9a0]) -> 100001000111 [847]
+  }
+343: inputs={ }, outputs={ }
+344: inputs={ }, outputs={ }
+345: inputs={ }, outputs={ }
+346: inputs={ }, outputs={,
+     ac'!.>0..b (100110100000 [9a0]) -> 111010111000 [eb8]
+  }
+347: inputs={ }, outputs={ }
+348: inputs={
+     ACIn.>0..b (111010111000 [eb8]) -> 000000000000 [000],
+     S.1..0< (11 [3]) -> 00 [0]
+  }, outputs={ }
+349: inputs={ }, outputs={ }
+350: inputs={ }, outputs={ }
+351: inputs={ }, outputs={ }
+352: inputs={ }, outputs={,
+     ac'!.>0..b (111010111000 [eb8]) -> 100001000111 [847]
+  }
+353: inputs={ }, outputs={ }
+354: inputs={
+     ACIn.>0..b (000000000000 [000]) -> 101001000001 [a41],
+     S.1..0< (00 [0]) -> 11 [3]
+  }, outputs={
+     AC.>0..b (100001000111 [847]) -> 000101000111 [147]
+  }
+355: inputs={ }, outputs={ }
+356: inputs={ }, outputs={ }
+357: inputs={ }, outputs={ }
+358: inputs={ }, outputs={,
+     ac'!.>0..b (100001000111 [847]) -> 101001000001 [a41]
+  }
+359: inputs={ }, outputs={ }
+360: inputs={
+     ACIn.>0..b (101001000001 [a41]) -> 000000000000 [000],
+     Link (0) -> 1,
+     S.1..0< (11 [3]) -> 01 [1]
+  }, outputs={ }
+361: inputs={ }, outputs={ }
+362: inputs={ }, outputs={ }
+363: inputs={ }, outputs={ }
+364: inputs={ }, outputs={,
+     ac'!.>0..b (101001000001 [a41]) -> 100010100011 [8a3]
+  }
+365: inputs={ }, outputs={ }
+366: inputs={ }, outputs={ }
+367: inputs={ }, outputs={ }
+368: inputs={ }, outputs={ }
+369: inputs={ }, outputs={ }
+370: inputs={ }, outputs={ }
+371: inputs={ }, outputs={ }
+372: inputs={,
+     Link (1) -> 0
+  }, outputs={ }
+373: inputs={ }, outputs={ }
+374: inputs={ }, outputs={ }
+375: inputs={ }, outputs={ }
+376: inputs={ }, outputs={,
+     ac'!.>0..b (100010100011 [8a3]) -> 000010100011 [0a3]
+  }
+377: inputs={ }, outputs={ }
+378: inputs={,
+     S.1..0< (01 [1]) -> 00 [0]
+  }, outputs={ }
+379: inputs={ }, outputs={ }
+380: inputs={ }, outputs={ }
+381: inputs={ }, outputs={ }
+382: inputs={ }, outputs={,
+     ac'!.>0..b (000010100011 [0a3]) -> 000101000111 [147]
+  }
+383: inputs={ }, outputs={ }
+384: inputs={ }, outputs={ }
+385: inputs={ }, outputs={ }
+386: inputs={ }, outputs={ }
+387: inputs={ }, outputs={ }
+388: inputs={ }, outputs={ }
+389: inputs={ }, outputs={ }
+390: inputs={,
+     Link (0) -> 1,
+     S.1..0< (00 [0]) -> 01 [1]
+  }, outputs={ }
+391: inputs={ }, outputs={ }
+392: inputs={ }, outputs={ }
+393: inputs={ }, outputs={ }
+394: inputs={ }, outputs={,
+     ac'!.>0..b (000101000111 [147]) -> 100010100011 [8a3]
+  }
+395: inputs={ }, outputs={ }
+396: inputs={,
+     Link (1) -> 0
+  }, outputs={ }
+397: inputs={ }, outputs={ }
+398: inputs={ }, outputs={ }
+399: inputs={ }, outputs={ }
+400: inputs={ }, outputs={,
+     ac'!.>0..b (100010100011 [8a3]) -> 000010100011 [0a3]
+  }
+401: inputs={ }, outputs={ }
+402: inputs={
+     ACIn.>0..b (000000000000 [000]) -> 000110100110 [1a6],
+     S.1..0< (01 [1]) -> 11 [3]
+  }, outputs={ }
+403: inputs={ }, outputs={ }
+404: inputs={ }, outputs={ }
+405: inputs={ }, outputs={ }
+406: inputs={ }, outputs={,
+     ac'!.>0..b (000010100011 [0a3]) -> 000110100110 [1a6]
+  }
+407: inputs={ }, outputs={ }
+408: inputs={
+     ACIn.>0..b (000110100110 [1a6]) -> 000000000000 [000],
+     S.1..0< (11 [3]) -> 00 [0]
+  }, outputs={ }
+409: inputs={ }, outputs={ }
+410: inputs={ }, outputs={ }
+411: inputs={ }, outputs={ }
+412: inputs={ }, outputs={,
+     ac'!.>0..b (000110100110 [1a6]) -> 000101000111 [147]
+  }
+413: inputs={ }, outputs={ }
+414: inputs={,
+     Link (0) -> 1,
+     S.1..0< (00 [0]) -> 01 [1]
+  }, outputs={ }
+415: inputs={ }, outputs={ }
+416: inputs={ }, outputs={ }
+417: inputs={ }, outputs={ }
+418: inputs={ }, outputs={,
+     ac'!.>0..b (000101000111 [147]) -> 100010100011 [8a3]
+  }
+419: inputs={ }, outputs={ }
+420: inputs={
+     ACIn.>0..b (000000000000 [000]) -> 111011110101 [ef5],
+     Link (1) -> 0,
+     S.1..0< (01 [1]) -> 11 [3]
+  }, outputs={ }
+421: inputs={ }, outputs={ }
+422: inputs={ }, outputs={ }
+423: inputs={ }, outputs={ }
+424: inputs={ }, outputs={,
+     ac'!.>0..b (100010100011 [8a3]) -> 111011110101 [ef5]
+  }
+425: inputs={ }, outputs={ }
+426: inputs={
+     ACIn.>0..b (111011110101 [ef5]) -> 000000000000 [000],
+     S.1..0< (11 [3]) -> 10 [2]
+  }, outputs={ }
+427: inputs={ }, outputs={ }
+428: inputs={ }, outputs={ }
+429: inputs={ }, outputs={ }
+430: inputs={ }, outputs={,
+     ac'!.>0..b (111011110101 [ef5]) -> 001010001110 [28e]
+  }
+431: inputs={ }, outputs={ }
+432: inputs={ }, outputs={
+     AC.>0..b (000101000111 [147]) -> 000100001010 [10a]
+  }
+433: inputs={ }, outputs={ }
+434: inputs={ }, outputs={ }
+435: inputs={ }, outputs={ }
+436: inputs={ }, outputs={,
+     ac'!.>0..b (001010001110 [28e]) -> 001000010100 [214]
+  }
+437: inputs={ }, outputs={ }
+438: inputs={,
+     S.1..0< (10 [2]) -> 01 [1]
+  }, outputs={ }
+439: inputs={ }, outputs={ }
+440: inputs={ }, outputs={ }
+441: inputs={ }, outputs={ }
+442: inputs={ }, outputs={,
+     ac'!.>0..b (001000010100 [214]) -> 000010000101 [085]
+  }
+443: inputs={ }, outputs={ }
+444: inputs={,
+     S.1..0< (01 [1]) -> 10 [2]
+  }, outputs={ }
+445: inputs={ }, outputs={ }
+446: inputs={ }, outputs={ }
+447: inputs={ }, outputs={ }
+448: inputs={ }, outputs={,
+     ac'!.>0..b (000010000101 [085]) -> 001000010100 [214]
+  }
+449: inputs={ }, outputs={ }
+450: inputs={,
+     S.1..0< (10 [2]) -> 00 [0]
+  }, outputs={ }
+451: inputs={ }, outputs={ }
+452: inputs={ }, outputs={ }
+453: inputs={ }, outputs={ }
+454: inputs={ }, outputs={,
+     ac'!.>0..b (001000010100 [214]) -> 000100001010 [10a]
+  }
+455: inputs={ }, outputs={ }
+456: inputs={,
+     S.1..0< (00 [0]) -> 10 [2]
+  }, outputs={ }
+457: inputs={ }, outputs={ }
+458: inputs={ }, outputs={ }
+459: inputs={ }, outputs={ }
+460: inputs={ }, outputs={,
+     ac'!.>0..b (000100001010 [10a]) -> 001000010100 [214]
+  }
+461: inputs={ }, outputs={ }
+462: inputs={
+     ACIn.>0..b (000000000000 [000]) -> 001010100000 [2a0],
+     S.1..0< (10 [2]) -> 11 [3]
+  }, outputs={ }
+463: inputs={ }, outputs={ }
+464: inputs={ }, outputs={ }
+465: inputs={ }, outputs={ }
+466: inputs={ }, outputs={,
+     ac'!.>0..b (001000010100 [214]) -> 001010100000 [2a0]
+  }
+467: inputs={ }, outputs={ }
+468: inputs={
+     ACIn.>0..b (001010100000 [2a0]) -> 000000000000 [000],
+     S.1..0< (11 [3]) -> 10 [2]
+  }, outputs={ }
+469: inputs={ }, outputs={ }
+470: inputs={ }, outputs={ }
+471: inputs={ }, outputs={ }
+472: inputs={ }, outputs={,
+     ac'!.>0..b (001010100000 [2a0]) -> 001000010100 [214]
+  }
+473: inputs={ }, outputs={ }
+474: inputs={
+     ACIn.>0..b (000000000000 [000]) -> 000011010111 [0d7],
+     S.1..0< (10 [2]) -> 11 [3]
+  }, outputs={ }
+475: inputs={ }, outputs={ }
+476: inputs={ }, outputs={ }
+477: inputs={ }, outputs={ }
+478: inputs={ }, outputs={,
+     ac'!.>0..b (001000010100 [214]) -> 000011010111 [0d7]
+  }
+479: inputs={ }, outputs={ }
+480: inputs={
+     ACIn.>0..b (000011010111 [0d7]) -> 000000000000 [000],
+     S.1..0< (11 [3]) -> 10 [2]
+  }, outputs={ }
+481: inputs={ }, outputs={ }
+482: inputs={ }, outputs={ }
+483: inputs={ }, outputs={ }
+484: inputs={ }, outputs={,
+     ac'!.>0..b (000011010111 [0d7]) -> 001000010100 [214]
+  }
+485: inputs={ }, outputs={ }
+486: inputs={,
+     S.1..0< (10 [2]) -> 00 [0]
+  }, outputs={ }
+487: inputs={ }, outputs={ }
+488: inputs={ }, outputs={ }
+489: inputs={ }, outputs={ }
+490: inputs={ }, outputs={,
+     ac'!.>0..b (001000010100 [214]) -> 000100001010 [10a]
+  }
+491: inputs={ }, outputs={ }
+492: inputs={
+     ACIn.>0..b (000000000000 [000]) -> 101110111000 [bb8],
+     S.1..0< (00 [0]) -> 11 [3]
+  }, outputs={ }
+493: inputs={ }, outputs={ }
+494: inputs={ }, outputs={ }
+495: inputs={ }, outputs={ }
+496: inputs={ }, outputs={,
+     ac'!.>0..b (000100001010 [10a]) -> 101110111000 [bb8]
+  }
+497: inputs={ }, outputs={ }
+498: inputs={
+     ACIn.>0..b (101110111000 [bb8]) -> 000000000000 [000],
+     Link (0) -> 1,
+     S.1..0< (11 [3]) -> 10 [2]
+  }, outputs={ }
+499: inputs={ }, outputs={ }
+500: inputs={ }, outputs={ }
+501: inputs={ }, outputs={ }
+502: inputs={ }, outputs={,
+     ac'!.>0..b (101110111000 [bb8]) -> 001000010101 [215]
+  }
+503: inputs={ }, outputs={ }
+504: inputs={ }, outputs={ }
+505: inputs={ }, outputs={ }
+506: inputs={ }, outputs={ }
+507: inputs={ }, outputs={ }
+508: inputs={ }, outputs={ }
+509: inputs={ }, outputs={ }
+510: inputs={,
+     Link (1) -> 0,
+     S.1..0< (10 [2]) -> 00 [0]
+  }, outputs={ }
+511: inputs={ }, outputs={ }
+512: inputs={ }, outputs={ }
+513: inputs={ }, outputs={ }
+514: inputs={ }, outputs={,
+     ac'!.>0..b (001000010101 [215]) -> 000100001010 [10a]
+  }
+515: inputs={ }, outputs={ }
+516: inputs={ }, outputs={ }
+517: inputs={ }, outputs={ }
+518: inputs={ }, outputs={ }
+519: inputs={ }, outputs={ }
+520: inputs={ }, outputs={ }
+521: inputs={ }, outputs={ }
+522: inputs={,
+     S.1..0< (00 [0]) -> 10 [2]
+  }, outputs={ }
+523: inputs={ }, outputs={ }
+524: inputs={ }, outputs={ }
+525: inputs={ }, outputs={ }
+526: inputs={ }, outputs={,
+     ac'!.>0..b (000100001010 [10a]) -> 001000010100 [214]
+  }
+527: inputs={ }, outputs={ }
+528: inputs={,
+     S.1..0< (10 [2]) -> 00 [0]
+  }, outputs={ }
+529: inputs={ }, outputs={ }
+530: inputs={ }, outputs={ }
+531: inputs={ }, outputs={ }
+532: inputs={ }, outputs={,
+     ac'!.>0..b (001000010100 [214]) -> 000100001010 [10a]
+  }
+533: inputs={ }, outputs={ }
+534: inputs={ }, outputs={ }
+535: inputs={ }, outputs={ }
+536: inputs={ }, outputs={ }
+537: inputs={ }, outputs={ }
+538: inputs={ }, outputs={ }
+539: inputs={ }, outputs={ }
+540: inputs={,
+     Link (0) -> 1,
+     S.1..0< (00 [0]) -> 01 [1]
+  }, outputs={ }
+541: inputs={ }, outputs={ }
+542: inputs={ }, outputs={ }
+543: inputs={ }, outputs={ }
+544: inputs={ }, outputs={,
+     ac'!.>0..b (000100001010 [10a]) -> 100010000101 [885]
+  }
+545: inputs={ }, outputs={ }
+546: inputs={,
+     S.1..0< (01 [1]) -> 10 [2]
+  }, outputs={ }
+547: inputs={ }, outputs={ }
+548: inputs={ }, outputs={ }
+549: inputs={ }, outputs={ }
+550: inputs={ }, outputs={,
+     ac'!.>0..b (100010000101 [885]) -> 001000010101 [215]
+  }
+551: inputs={ }, outputs={ }
+552: inputs={,
+     Link (1) -> 0,
+     S.1..0< (10 [2]) -> 00 [0]
+  }, outputs={ }
+553: inputs={ }, outputs={ }
+554: inputs={ }, outputs={ }
+555: inputs={ }, outputs={ }
+556: inputs={ }, outputs={,
+     ac'!.>0..b (001000010101 [215]) -> 000100001010 [10a]
+  }
+557: inputs={ }, outputs={ }
+558: inputs={ }, outputs={ }
+559: inputs={ }, outputs={ }
+560: inputs={ }, outputs={ }
+561: inputs={ }, outputs={ }
+562: inputs={ }, outputs={ }
+563: inputs={ }, outputs={ }
+564: inputs={
+     ACIn.>0..b (000000000000 [000]) -> 001101000100 [344],
+     S.1..0< (00 [0]) -> 11 [3]
+  }, outputs={ }
+565: inputs={ }, outputs={ }
+566: inputs={ }, outputs={ }
+567: inputs={ }, outputs={ }
+568: inputs={ }, outputs={,
+     ac'!.>0..b (000100001010 [10a]) -> 001101000100 [344]
+  }
+569: inputs={ }, outputs={ }
+570: inputs={
+     ACIn.>0..b (001101000100 [344]) -> 001000000001 [201]
+  }, outputs={ }
+571: inputs={ }, outputs={ }
+572: inputs={ }, outputs={ }
+573: inputs={ }, outputs={ }
+574: inputs={ }, outputs={,
+     ac'!.>0..b (001101000100 [344]) -> 001000000001 [201]
+  }
+575: inputs={ }, outputs={ }
+576: inputs={
+     ACIn.>0..b (001000000001 [201]) -> 000011011101 [0dd]
+  }, outputs={ }
+577: inputs={ }, outputs={ }
+578: inputs={ }, outputs={ }
+579: inputs={ }, outputs={ }
+580: inputs={ }, outputs={,
+     ac'!.>0..b (001000000001 [201]) -> 000011011101 [0dd]
+  }
+581: inputs={ }, outputs={ }
+582: inputs={
+     ACIn.>0..b (000011011101 [0dd]) -> 000100101000 [128]
+  }, outputs={ }
+583: inputs={ }, outputs={ }
+584: inputs={ }, outputs={ }
+585: inputs={ }, outputs={ }
+586: inputs={ }, outputs={,
+     ac'!.>0..b (000011011101 [0dd]) -> 000100101000 [128]
+  }
+587: inputs={ }, outputs={ }
+588: inputs={
+     ACIn.>0..b (000100101000 [128]) -> 000000000000 [000],
+     S.1..0< (11 [3]) -> 00 [0]
+  }, outputs={ }
+589: inputs={ }, outputs={ }
+590: inputs={ }, outputs={ }
+591: inputs={ }, outputs={ }
+592: inputs={ }, outputs={,
+     ac'!.>0..b (000100101000 [128]) -> 000100001010 [10a]
+  }
+593: inputs={ }, outputs={ }
+594: inputs={
+     ACIn.>0..b (000000000000 [000]) -> 100110000000 [980],
+     S.1..0< (00 [0]) -> 11 [3]
+  }, outputs={ }
+595: inputs={ }, outputs={ }
+596: inputs={ }, outputs={ }
+597: inputs={ }, outputs={ }
+598: inputs={ }, outputs={,
+     ac'!.>0..b (000100001010 [10a]) -> 100110000000 [980]
+  }
+599: inputs={ }, outputs={ }
+600: inputs={
+     ACIn.>0..b (100110000000 [980]) -> 000000000000 [000],
+     S.1..0< (11 [3]) -> 00 [0]
+  }, outputs={ }
+601: inputs={ }, outputs={ }
+602: inputs={ }, outputs={ }
+603: inputs={ }, outputs={ }
+604: inputs={ }, outputs={,
+     ac'!.>0..b (100110000000 [980]) -> 000100001010 [10a]
+  }
+605: inputs={ }, outputs={ }
+606: inputs={ }, outputs={ }
+607: inputs={ }, outputs={ }
+608: inputs={ }, outputs={ }
+609: inputs={ }, outputs={ }
+610: inputs={ }, outputs={ }
+611: inputs={ }, outputs={ }
+612: inputs={,
+     Link (0) -> 1,
+     S.1..0< (00 [0]) -> 01 [1]
+  }, outputs={ }
+613: inputs={ }, outputs={ }
+614: inputs={ }, outputs={ }
+615: inputs={ }, outputs={ }
+616: inputs={ }, outputs={,
+     ac'!.>0..b (000100001010 [10a]) -> 100010000101 [885]
+  }
+617: inputs={ }, outputs={ }
+618: inputs={
+     ACIn.>0..b (000000000000 [000]) -> 010110111110 [5be],
+     Link (1) -> 0,
+     S.1..0< (01 [1]) -> 11 [3]
+  }, outputs={ }
+619: inputs={ }, outputs={ }
+620: inputs={ }, outputs={ }
+621: inputs={ }, outputs={ }
+622: inputs={ }, outputs={,
+     ac'!.>0..b (100010000101 [885]) -> 010110111110 [5be]
+  }
+623: inputs={ }, outputs={ }
+624: inputs={
+     ACIn.>0..b (010110111110 [5be]) -> 000000000000 [000],
+     Link (0) -> 1,
+     S.1..0< (11 [3]) -> 10 [2]
+  }, outputs={ }
+625: inputs={ }, outputs={ }
+626: inputs={ }, outputs={ }
+627: inputs={ }, outputs={ }
+628: inputs={ }, outputs={,
+     ac'!.>0..b (010110111110 [5be]) -> 001000010101 [215]
+  }
+629: inputs={ }, outputs={ }
+630: inputs={,
+     S.1..0< (10 [2]) -> 01 [1]
+  }, outputs={
+     AC.>0..b (000100001010 [10a]) -> 101001000001 [a41]
+  }
+631: inputs={ }, outputs={ }
+632: inputs={ }, outputs={ }
+633: inputs={ }, outputs={ }
+634: inputs={ }, outputs={,
+     ac'!.>0..b (001000010101 [215]) -> 110100100000 [d20]
+  }
+635: inputs={ }, outputs={ }
+636: inputs={,
+     Link (1) -> 0,
+     S.1..0< (01 [1]) -> 00 [0]
+  }, outputs={ }
+637: inputs={ }, outputs={ }
+638: inputs={ }, outputs={ }
+639: inputs={ }, outputs={ }
+640: inputs={ }, outputs={,
+     ac'!.>0..b (110100100000 [d20]) -> 101001000001 [a41]
+  }
+641: inputs={ }, outputs={ }
+642: inputs={,
+     Link (0) -> 1,
+     S.1..0< (00 [0]) -> 10 [2]
+  }, outputs={ }
+643: inputs={ }, outputs={ }
+644: inputs={ }, outputs={ }
+645: inputs={ }, outputs={ }
+646: inputs={ }, outputs={,
+     ac'!.>0..b (101001000001 [a41]) -> 010010000011 [483]
+  }
+647: inputs={ }, outputs={ }
+648: inputs={,
+     S.1..0< (10 [2]) -> 01 [1]
+  }, outputs={ }
+649: inputs={ }, outputs={ }
+650: inputs={ }, outputs={ }
+651: inputs={ }, outputs={ }
+652: inputs={ }, outputs={,
+     ac'!.>0..b (010010000011 [483]) -> 110100100000 [d20]
+  }
+653: inputs={ }, outputs={ }
+654: inputs={,
+     S.1..0< (01 [1]) -> 10 [2]
+  }, outputs={ }
+655: inputs={ }, outputs={ }
+656: inputs={ }, outputs={ }
+657: inputs={ }, outputs={ }
+658: inputs={ }, outputs={,
+     ac'!.>0..b (110100100000 [d20]) -> 010010000011 [483]
+  }
+659: inputs={ }, outputs={ }
+660: inputs={ }, outputs={ }
+661: inputs={ }, outputs={ }
+662: inputs={ }, outputs={ }
+663: inputs={ }, outputs={ }
+664: inputs={ }, outputs={ }
+665: inputs={ }, outputs={ }
+666: inputs={,
+     Link (1) -> 0,
+     S.1..0< (10 [2]) -> 00 [0]
+  }, outputs={ }
+667: inputs={ }, outputs={ }
+668: inputs={ }, outputs={ }
+669: inputs={ }, outputs={ }
+670: inputs={ }, outputs={,
+     ac'!.>0..b (010010000011 [483]) -> 101001000001 [a41]
+  }
+671: inputs={ }, outputs={ }
+672: inputs={,
+     Link (0) -> 1,
+     S.1..0< (00 [0]) -> 10 [2]
+  }, outputs={ }
+673: inputs={ }, outputs={ }
+674: inputs={ }, outputs={ }
+675: inputs={ }, outputs={ }
+676: inputs={ }, outputs={,
+     ac'!.>0..b (101001000001 [a41]) -> 010010000011 [483]
+  }
+677: inputs={ }, outputs={ }
+678: inputs={
+     ACIn.>0..b (000000000000 [000]) -> 110111111000 [df8],
+     Link (1) -> 0,
+     S.1..0< (10 [2]) -> 11 [3]
+  }, outputs={ }
+679: inputs={ }, outputs={ }
+680: inputs={ }, outputs={ }
+681: inputs={ }, outputs={ }
+682: inputs={ }, outputs={,
+     ac'!.>0..b (010010000011 [483]) -> 110111111000 [df8]
+  }
+683: inputs={ }, outputs={ }
+684: inputs={
+     ACIn.>0..b (110111111000 [df8]) -> 111110101011 [fab]
+  }, outputs={ }
+685: inputs={ }, outputs={ }
+686: inputs={ }, outputs={ }
+687: inputs={ }, outputs={ }
+688: inputs={ }, outputs={,
+     ac'!.>0..b (110111111000 [df8]) -> 111110101011 [fab]
+  }
+689: inputs={ }, outputs={ }
+690: inputs={
+     ACIn.>0..b (111110101011 [fab]) -> 000000000000 [000],
+     Link (0) -> 1,
+     S.1..0< (11 [3]) -> 10 [2]
+  }, outputs={
+     AC.>0..b (101001000001 [a41]) -> 001000000111 [207]
+  }
+691: inputs={ }, outputs={ }
+692: inputs={ }, outputs={ }
+693: inputs={ }, outputs={ }
+694: inputs={ }, outputs={,
+     ac'!.>0..b (111110101011 [fab]) -> 010000001111 [40f]
+  }
+695: inputs={ }, outputs={ }
+696: inputs={
+     ACIn.>0..b (000000000000 [000]) -> 101010101011 [aab],
+     Link (1) -> 0,
+     S.1..0< (10 [2]) -> 11 [3]
+  }, outputs={
+     AC.>0..b (001000000111 [207]) -> 000001010100 [054]
+  }
+697: inputs={ }, outputs={ }
+698: inputs={ }, outputs={ }
+699: inputs={ }, outputs={ }
+700: inputs={ }, outputs={,
+     ac'!.>0..b (010000001111 [40f]) -> 101010101011 [aab]
+  }
+701: inputs={ }, outputs={ }
+702: inputs={
+     ACIn.>0..b (101010101011 [aab]) -> 000000000000 [000],
+     S.1..0< (11 [3]) -> 01 [1]
+  }, outputs={ }
+703: inputs={ }, outputs={ }
+704: inputs={ }, outputs={ }
+705: inputs={ }, outputs={ }
+706: inputs={ }, outputs={,
+     ac'!.>0..b (101010101011 [aab]) -> 000000101010 [02a]
+  }
+707: inputs={ }, outputs={ }
+708: inputs={
+     ACIn.>0..b (000000000000 [000]) -> 111000111001 [e39],
+     S.1..0< (01 [1]) -> 11 [3]
+  }, outputs={ }
+709: inputs={ }, outputs={ }
+710: inputs={ }, outputs={ }
+711: inputs={ }, outputs={ }
+712: inputs={ }, outputs={,
+     ac'!.>0..b (000000101010 [02a]) -> 111000111001 [e39]
+  }
+713: inputs={ }, outputs={ }
+714: inputs={
+     ACIn.>0..b (111000111001 [e39]) -> 000000000000 [000],
+     S.1..0< (11 [3]) -> 00 [0]
+  }, outputs={ }
+715: inputs={ }, outputs={ }
+716: inputs={ }, outputs={ }
+717: inputs={ }, outputs={ }
+718: inputs={ }, outputs={,
+     ac'!.>0..b (111000111001 [e39]) -> 000001010100 [054]
+  }
+719: inputs={ }, outputs={ }
+720: inputs={,
+     S.1..0< (00 [0]) -> 10 [2]
+  }, outputs={
+     AC.>0..b (000001010100 [054]) -> 000111000110 [1c6]
+  }
+721: inputs={ }, outputs={ }
+722: inputs={ }, outputs={ }
+723: inputs={ }, outputs={ }
+724: inputs={ }, outputs={,
+     ac'!.>0..b (000001010100 [054]) -> 001110001100 [38c]
+  }
+725: inputs={ }, outputs={ }
+726: inputs={ }, outputs={ }
+727: inputs={ }, outputs={ }
+728: inputs={ }, outputs={ }
+729: inputs={ }, outputs={ }
+730: inputs={ }, outputs={ }
+731: inputs={ }, outputs={ }
+732: inputs={ }, outputs={ }
+733: inputs={ }, outputs={ }
+734: inputs={ }, outputs={ }
+735: inputs={ }, outputs={ }
+736: inputs={ }, outputs={ }
+737: inputs={ }, outputs={ }
+738: inputs={,
+     S.1..0< (10 [2]) -> 01 [1]
+  }, outputs={ }
+739: inputs={ }, outputs={ }
+740: inputs={ }, outputs={ }
+741: inputs={ }, outputs={ }
+742: inputs={ }, outputs={,
+     ac'!.>0..b (001110001100 [38c]) -> 000011100011 [0e3]
+  }
+743: inputs={ }, outputs={ }
+744: inputs={,
+     S.1..0< (01 [1]) -> 00 [0]
+  }, outputs={ }
+745: inputs={ }, outputs={ }
+746: inputs={ }, outputs={ }
+747: inputs={ }, outputs={ }
+748: inputs={ }, outputs={,
+     ac'!.>0..b (000011100011 [0e3]) -> 000111000110 [1c6]
+  }
+749: inputs={ }, outputs={ }
+750: inputs={,
+     S.1..0< (00 [0]) -> 10 [2]
+  }, outputs={ }
+751: inputs={ }, outputs={ }
+752: inputs={ }, outputs={ }
+753: inputs={ }, outputs={ }
+754: inputs={ }, outputs={,
+     ac'!.>0..b (000111000110 [1c6]) -> 001110001100 [38c]
+  }
+755: inputs={ }, outputs={ }
+756: inputs={,
+     Link (0) -> 1
+  }, outputs={ }
+757: inputs={ }, outputs={ }
+758: inputs={ }, outputs={ }
+759: inputs={ }, outputs={ }
+760: inputs={ }, outputs={,
+     ac'!.>0..b (001110001100 [38c]) -> 001110001101 [38d]
+  }
+761: inputs={ }, outputs={ }
+762: inputs={
+     ACIn.>0..b (000000000000 [000]) -> 010001111011 [47b],
+     Link (1) -> 0,
+     S.1..0< (10 [2]) -> 11 [3]
+  }, outputs={ }
+763: inputs={ }, outputs={ }
+764: inputs={ }, outputs={ }
+765: inputs={ }, outputs={ }
+766: inputs={ }, outputs={,
+     ac'!.>0..b (001110001101 [38d]) -> 010001111011 [47b]
+  }
+767: inputs={ }, outputs={ }
+768: inputs={
+     ACIn.>0..b (010001111011 [47b]) -> 000000000000 [000],
+     Link (0) -> 1,
+     S.1..0< (11 [3]) -> 10 [2]
+  }, outputs={ }
+769: inputs={ }, outputs={ }
+770: inputs={ }, outputs={ }
+771: inputs={ }, outputs={ }
+772: inputs={ }, outputs={,
+     ac'!.>0..b (010001111011 [47b]) -> 001110001101 [38d]
+  }
+773: inputs={ }, outputs={ }
+774: inputs={,
+     Link (1) -> 0,
+     S.1..0< (10 [2]) -> 00 [0]
+  }, outputs={
+     AC.>0..b (000111000110 [1c6]) -> 101110000100 [b84]
+  }
+775: inputs={ }, outputs={ }
+776: inputs={ }, outputs={ }
+777: inputs={ }, outputs={ }
+778: inputs={ }, outputs={,
+     ac'!.>0..b (001110001101 [38d]) -> 101110000100 [b84]
+  }
+779: inputs={ }, outputs={ }
+780: inputs={,
+     Link (0) -> 1,
+     S.1..0< (00 [0]) -> 01 [1]
+  }, outputs={ }
+781: inputs={ }, outputs={ }
+782: inputs={ }, outputs={ }
+783: inputs={ }, outputs={ }
+784: inputs={ }, outputs={,
+     ac'!.>0..b (101110000100 [b84]) -> 110111000010 [dc2]
+  }
+785: inputs={ }, outputs={ }
+786: inputs={
+     ACIn.>0..b (000000000000 [000]) -> 011100110110 [736],
+     Link (1) -> 0,
+     S.1..0< (01 [1]) -> 11 [3]
+  }, outputs={ }
+787: inputs={ }, outputs={ }
+788: inputs={ }, outputs={ }
+789: inputs={ }, outputs={ }
+790: inputs={ }, outputs={,
+     ac'!.>0..b (110111000010 [dc2]) -> 011100110110 [736]
+  }
+791: inputs={ }, outputs={ }
+792: inputs={
+     ACIn.>0..b (011100110110 [736]) -> 000000000000 [000],
+     Link (0) -> 1,
+     S.1..0< (11 [3]) -> 01 [1]
+  }, outputs={ }
+793: inputs={ }, outputs={ }
+794: inputs={ }, outputs={ }
+795: inputs={ }, outputs={ }
+796: inputs={ }, outputs={,
+     ac'!.>0..b (011100110110 [736]) -> 110111000010 [dc2]
+  }
+797: inputs={ }, outputs={ }
+798: inputs={,
+     Link (1) -> 0
+  }, outputs={
+     AC.>0..b (101110000100 [b84]) -> 100011001001 [8c9]
+  }
+799: inputs={ }, outputs={ }
+800: inputs={ }, outputs={ }
+801: inputs={ }, outputs={ }
+802: inputs={ }, outputs={,
+     ac'!.>0..b (110111000010 [dc2]) -> 010001100100 [464]
+  }
+803: inputs={ }, outputs={ }
+804: inputs={,
+     Link (0) -> 1
+  }, outputs={ }
+805: inputs={ }, outputs={ }
+806: inputs={ }, outputs={ }
+807: inputs={ }, outputs={ }
+808: inputs={ }, outputs={,
+     ac'!.>0..b (010001100100 [464]) -> 110001100100 [c64]
+  }
+809: inputs={ }, outputs={ }
+810: inputs={
+     ACIn.>0..b (000000000000 [000]) -> 001110111110 [3be],
+     Link (1) -> 0,
+     S.1..0< (01 [1]) -> 11 [3]
+  }, outputs={ }
+811: inputs={ }, outputs={ }
+812: inputs={ }, outputs={ }
+813: inputs={ }, outputs={ }
+814: inputs={ }, outputs={,
+     ac'!.>0..b (110001100100 [c64]) -> 001110111110 [3be]
+  }
+815: inputs={ }, outputs={ }
+816: inputs={
+     ACIn.>0..b (001110111110 [3be]) -> 000000000000 [000],
+     S.1..0< (11 [3]) -> 10 [2]
+  }, outputs={ }
+817: inputs={ }, outputs={ }
+818: inputs={ }, outputs={ }
+819: inputs={ }, outputs={ }
+820: inputs={ }, outputs={,
+     ac'!.>0..b (001110111110 [3be]) -> 000110010010 [192]
+  }
+821: inputs={ }, outputs={ }
+822: inputs={,
+     S.1..0< (10 [2]) -> 01 [1]
+  }, outputs={ }
+823: inputs={ }, outputs={ }
+824: inputs={ }, outputs={ }
+825: inputs={ }, outputs={ }
+826: inputs={ }, outputs={,
+     ac'!.>0..b (000110010010 [192]) -> 010001100100 [464]
+  }
+827: inputs={ }, outputs={ }
+828: inputs={,
+     S.1..0< (01 [1]) -> 10 [2]
+  }, outputs={ }
+829: inputs={ }, outputs={ }
+830: inputs={ }, outputs={ }
+831: inputs={ }, outputs={ }
+832: inputs={ }, outputs={,
+     ac'!.>0..b (010001100100 [464]) -> 000110010010 [192]
+  }
+833: inputs={ }, outputs={ }
+834: inputs={ }, outputs={ }
+835: inputs={ }, outputs={ }
+836: inputs={ }, outputs={ }
+837: inputs={ }, outputs={ }
+838: inputs={ }, outputs={ }
+839: inputs={ }, outputs={ }
+840: inputs={,
+     Link (0) -> 1,
+     S.1..0< (10 [2]) -> 01 [1]
+  }, outputs={ }
+841: inputs={ }, outputs={ }
+842: inputs={ }, outputs={ }
+843: inputs={ }, outputs={ }
+844: inputs={ }, outputs={,
+     ac'!.>0..b (000110010010 [192]) -> 110001100100 [c64]
+  }
+845: inputs={ }, outputs={ }
+846: inputs={,
+     S.1..0< (01 [1]) -> 10 [2]
+  }, outputs={ }
+847: inputs={ }, outputs={ }
+848: inputs={ }, outputs={ }
+849: inputs={ }, outputs={ }
+850: inputs={ }, outputs={,
+     ac'!.>0..b (110001100100 [c64]) -> 000110010011 [193]
+  }
+851: inputs={ }, outputs={ }
+852: inputs={,
+     Link (1) -> 0,
+     S.1..0< (10 [2]) -> 01 [1]
+  }, outputs={ }
+853: inputs={ }, outputs={ }
+854: inputs={ }, outputs={ }
+855: inputs={ }, outputs={ }
+856: inputs={ }, outputs={,
+     ac'!.>0..b (000110010011 [193]) -> 010001100100 [464]
+  }
+857: inputs={ }, outputs={ }
+858: inputs={,
+     Link (0) -> 1,
+     S.1..0< (01 [1]) -> 10 [2]
+  }, outputs={ }
+859: inputs={ }, outputs={ }
+860: inputs={ }, outputs={ }
+861: inputs={ }, outputs={ }
+862: inputs={ }, outputs={,
+     ac'!.>0..b (010001100100 [464]) -> 000110010011 [193]
+  }
+863: inputs={ }, outputs={ }
+864: inputs={,
+     Link (1) -> 0
+  }, outputs={ }
+865: inputs={ }, outputs={ }
+866: inputs={ }, outputs={ }
+867: inputs={ }, outputs={ }
+868: inputs={ }, outputs={,
+     ac'!.>0..b (000110010011 [193]) -> 000110010010 [192]
+  }
+869: inputs={ }, outputs={ }
+870: inputs={ }, outputs={ }
+871: inputs={ }, outputs={ }
+872: inputs={ }, outputs={ }
+873: inputs={ }, outputs={ }
+874: inputs={ }, outputs={ }
+875: inputs={ }, outputs={ }
+876: inputs={
+     ACIn.>0..b (000000000000 [000]) -> 101011110100 [af4],
+     S.1..0< (10 [2]) -> 11 [3]
+  }, outputs={ }
+877: inputs={ }, outputs={ }
+878: inputs={ }, outputs={ }
+879: inputs={ }, outputs={ }
+880: inputs={ }, outputs={,
+     ac'!.>0..b (000110010010 [192]) -> 101011110100 [af4]
+  }
+881: inputs={ }, outputs={ }
+882: inputs={
+     ACIn.>0..b (101011110100 [af4]) -> 000000000000 [000],
+     S.1..0< (11 [3]) -> 10 [2]
+  }, outputs={ }
+883: inputs={ }, outputs={ }
+884: inputs={ }, outputs={ }
+885: inputs={ }, outputs={ }
+886: inputs={ }, outputs={,
+     ac'!.>0..b (101011110100 [af4]) -> 000110010010 [192]
+  }
+887: inputs={ }, outputs={ }
+888: inputs={ }, outputs={ }
+889: inputs={ }, outputs={ }
+890: inputs={ }, outputs={ }
+891: inputs={ }, outputs={ }
+892: inputs={ }, outputs={ }
+893: inputs={ }, outputs={ }
+894: inputs={,
+     Link (0) -> 1,
+     S.1..0< (10 [2]) -> 01 [1]
+  }, outputs={ }
+895: inputs={ }, outputs={ }
+896: inputs={ }, outputs={ }
+897: inputs={ }, outputs={ }
+898: inputs={ }, outputs={,
+     ac'!.>0..b (000110010010 [192]) -> 110001100100 [c64]
+  }
+899: inputs={ }, outputs={ }
+900: inputs={,
+     Link (1) -> 0,
+     S.1..0< (01 [1]) -> 10 [2]
+  }, outputs={ }
+901: inputs={ }, outputs={ }
+902: inputs={ }, outputs={ }
+903: inputs={ }, outputs={ }
+904: inputs={ }, outputs={,
+     ac'!.>0..b (110001100100 [c64]) -> 000110010010 [192]
+  }
+905: inputs={ }, outputs={ }
+906: inputs={,
+     S.1..0< (10 [2]) -> 00 [0]
+  }, outputs={ }
+907: inputs={ }, outputs={ }
+908: inputs={ }, outputs={ }
+909: inputs={ }, outputs={ }
+910: inputs={ }, outputs={,
+     ac'!.>0..b (000110010010 [192]) -> 100011001001 [8c9]
+  }
+911: inputs={ }, outputs={ }
+912: inputs={,
+     Link (0) -> 1,
+     S.1..0< (00 [0]) -> 01 [1]
+  }, outputs={ }
+913: inputs={ }, outputs={ }
+914: inputs={ }, outputs={ }
+915: inputs={ }, outputs={ }
+916: inputs={ }, outputs={,
+     ac'!.>0..b (100011001001 [8c9]) -> 110001100100 [c64]
+  }
+917: inputs={ }, outputs={ }
+918: inputs={,
+     S.1..0< (01 [1]) -> 10 [2]
+  }, outputs={ }
+919: inputs={ }, outputs={ }
+920: inputs={ }, outputs={ }
+921: inputs={ }, outputs={ }
+922: inputs={ }, outputs={,
+     ac'!.>0..b (110001100100 [c64]) -> 000110010011 [193]
+  }
+923: inputs={ }, outputs={ }
+924: inputs={,
+     S.1..0< (10 [2]) -> 01 [1]
+  }, outputs={ }
+925: inputs={ }, outputs={ }
+926: inputs={ }, outputs={ }
+927: inputs={ }, outputs={ }
+928: inputs={ }, outputs={,
+     ac'!.>0..b (000110010011 [193]) -> 110001100100 [c64]
+  }
+929: inputs={ }, outputs={ }
+930: inputs={,
+     Link (1) -> 0
+  }, outputs={ }
+931: inputs={ }, outputs={ }
+932: inputs={ }, outputs={ }
+933: inputs={ }, outputs={ }
+934: inputs={ }, outputs={,
+     ac'!.>0..b (110001100100 [c64]) -> 010001100100 [464]
+  }
+935: inputs={ }, outputs={ }
+936: inputs={,
+     S.1..0< (01 [1]) -> 00 [0]
+  }, outputs={ }
+937: inputs={ }, outputs={ }
+938: inputs={ }, outputs={ }
+939: inputs={ }, outputs={ }
+940: inputs={ }, outputs={,
+     ac'!.>0..b (010001100100 [464]) -> 100011001001 [8c9]
+  }
+941: inputs={ }, outputs={ }
+942: inputs={
+     ACIn.>0..b (000000000000 [000]) -> 000000001110 [00e],
+     S.1..0< (00 [0]) -> 11 [3]
+  }, outputs={ }
+943: inputs={ }, outputs={ }
+944: inputs={ }, outputs={ }
+945: inputs={ }, outputs={ }
+946: inputs={ }, outputs={,
+     ac'!.>0..b (100011001001 [8c9]) -> 000000001110 [00e]
+  }
+947: inputs={ }, outputs={ }
+948: inputs={
+     ACIn.>0..b (000000001110 [00e]) -> 010101001101 [54d]
+  }, outputs={ }
+949: inputs={ }, outputs={ }
+950: inputs={ }, outputs={ }
+951: inputs={ }, outputs={ }
+952: inputs={ }, outputs={,
+     ac'!.>0..b (000000001110 [00e]) -> 010101001101 [54d]
+  }
+953: inputs={ }, outputs={ }
+954: inputs={
+     ACIn.>0..b (010101001101 [54d]) -> 000000000000 [000],
+     S.1..0< (11 [3]) -> 00 [0]
+  }, outputs={ }
+955: inputs={ }, outputs={ }
+956: inputs={ }, outputs={ }
+957: inputs={ }, outputs={ }
+958: inputs={ }, outputs={,
+     ac'!.>0..b (010101001101 [54d]) -> 100011001001 [8c9]
+  }
+959: inputs={ }, outputs={ }
+960: inputs={,
+     Link (0) -> 1,
+     S.1..0< (00 [0]) -> 01 [1]
+  }, outputs={
+     AC.>0..b (100011001001 [8c9]) -> 101010110010 [ab2]
+  }
+961: inputs={ }, outputs={ }
+962: inputs={ }, outputs={ }
+963: inputs={ }, outputs={ }
+964: inputs={ }, outputs={,
+     ac'!.>0..b (100011001001 [8c9]) -> 110101011001 [d59]
+  }
+965: inputs={ }, outputs={ }
+966: inputs={
+     ACIn.>0..b (000000000000 [000]) -> 110000111100 [c3c],
+     Link (1) -> 0,
+     S.1..0< (01 [1]) -> 11 [3]
+  }, outputs={ }
+967: inputs={ }, outputs={ }
+968: inputs={ }, outputs={ }
+969: inputs={ }, outputs={ }
+970: inputs={ }, outputs={,
+     ac'!.>0..b (110101011001 [d59]) -> 110000111100 [c3c]
+  }
+971: inputs={ }, outputs={ }
+972: inputs={
+     ACIn.>0..b (110000111100 [c3c]) -> 000000000000 [000],
+     S.1..0< (11 [3]) -> 10 [2]
+  }, outputs={ }
+973: inputs={ }, outputs={ }
+974: inputs={ }, outputs={ }
+975: inputs={ }, outputs={ }
+976: inputs={ }, outputs={,
+     ac'!.>0..b (110000111100 [c3c]) -> 010101100100 [564]
+  }
+977: inputs={ }, outputs={ }
+978: inputs={ }, outputs={
+     AC.>0..b (101010110010 [ab2]) -> 001111000011 [3c3]
+  }
+979: inputs={ }, outputs={ }
+980: inputs={ }, outputs={ }
+981: inputs={ }, outputs={ }
+982: inputs={ }, outputs={,
+     ac'!.>0..b (010101100100 [564]) -> 011110000110 [786]
+  }
+983: inputs={ }, outputs={ }
+984: inputs={
+     ACIn.>0..b (000000000000 [000]) -> 111100010110 [f16],
+     S.1..0< (10 [2]) -> 11 [3]
+  }, outputs={ }
+985: inputs={ }, outputs={ }
+986: inputs={ }, outputs={ }
+987: inputs={ }, outputs={ }
+988: inputs={ }, outputs={,
+     ac'!.>0..b (011110000110 [786]) -> 111100010110 [f16]
+  }
+989: inputs={ }, outputs={ }
+990: inputs={
+     ACIn.>0..b (111100010110 [f16]) -> 110111001010 [dca]
+  }, outputs={ }
+991: inputs={ }, outputs={ }
+992: inputs={ }, outputs={ }
+993: inputs={ }, outputs={ }
+994: inputs={ }, outputs={,
+     ac'!.>0..b (111100010110 [f16]) -> 110111001010 [dca]
+  }
+995: inputs={ }, outputs={ }
+996: inputs={
+     ACIn.>0..b (110111001010 [dca]) -> 000000000000 [000],
+     S.1..0< (11 [3]) -> 00 [0]
+  }, outputs={
+     AC.>0..b (001111000011 [3c3]) -> 000011101001 [0e9]
+  }
+997: inputs={ }, outputs={ }
+998: inputs={ }, outputs={ }
+999: inputs={ }, outputs={ }
+1000: inputs={ }, outputs={,
+     ac'!.>0..b (110111001010 [dca]) -> 000011101001 [0e9]
+  }
+1001: inputs={ }, outputs={ }
+1002: inputs={
+     ACIn.>0..b (000000000000 [000]) -> 100011000100 [8c4],
+     S.1..0< (00 [0]) -> 11 [3]
+  }, outputs={
+     AC.>0..b (000011101001 [0e9]) -> 001000110101 [235]
+  }
+1003: inputs={ }, outputs={ }
+1004: inputs={ }, outputs={ }
+1005: inputs={ }, outputs={ }
+1006: inputs={ }, outputs={,
+     ac'!.>0..b (000011101001 [0e9]) -> 100011000100 [8c4]
+  }
+1007: inputs={ }, outputs={ }
+1008: inputs={
+     ACIn.>0..b (100011000100 [8c4]) -> 000000000000 [000],
+     Link (0) -> 1,
+     S.1..0< (11 [3]) -> 01 [1]
+  }, outputs={ }
+1009: inputs={ }, outputs={ }
+1010: inputs={ }, outputs={ }
+1011: inputs={ }, outputs={ }
+1012: inputs={ }, outputs={,
+     ac'!.>0..b (100011000100 [8c4]) -> 100100011010 [91a]
+  }
+1013: inputs={ }, outputs={ }
+1014: inputs={
+     ACIn.>0..b (000000000000 [000]) -> 110111111011 [dfb],
+     Link (1) -> 0,
+     S.1..0< (01 [1]) -> 11 [3]
+  }, outputs={ }
+1015: inputs={ }, outputs={ }
+1016: inputs={ }, outputs={ }
+1017: inputs={ }, outputs={ }
+1018: inputs={ }, outputs={,
+     ac'!.>0..b (100100011010 [91a]) -> 110111111011 [dfb]
+  }
+1019: inputs={ }, outputs={ }
+1020: inputs={
+     ACIn.>0..b (110111111011 [dfb]) -> 000000000000 [000],
+     Link (0) -> 1,
+     S.1..0< (11 [3]) -> 01 [1]
+  }, outputs={ }
+1021: inputs={ }, outputs={ }
+1022: inputs={ }, outputs={ }
+1023: inputs={ }, outputs={ }
+1024: inputs={ }, outputs={,
+     ac'!.>0..b (110111111011 [dfb]) -> 100100011010 [91a]
+  }
+1025: inputs={ }, outputs={ }
+1026: inputs={,
+     Link (1) -> 0,
+     S.1..0< (01 [1]) -> 00 [0]
+  }, outputs={
+     AC.>0..b (001000110101 [235]) -> 001000000100 [204]
+  }
+1027: inputs={ }, outputs={ }
+1028: inputs={ }, outputs={ }
+1029: inputs={ }, outputs={ }
+1030: inputs={ }, outputs={,
+     ac'!.>0..b (100100011010 [91a]) -> 001000000100 [204]
+  }
+1031: inputs={ }, outputs={ }
+1032: inputs={,
+     Link (0) -> 1,
+     S.1..0< (00 [0]) -> 01 [1]
+  }, outputs={ }
+1033: inputs={ }, outputs={ }
+1034: inputs={ }, outputs={ }
+1035: inputs={ }, outputs={ }
+1036: inputs={ }, outputs={,
+     ac'!.>0..b (001000000100 [204]) -> 100100000010 [902]
+  }
+1037: inputs={ }, outputs={ }
+1038: inputs={,
+     Link (1) -> 0
+  }, outputs={ }
+1039: inputs={ }, outputs={ }
+1040: inputs={ }, outputs={ }
+1041: inputs={ }, outputs={ }
+1042: inputs={ }, outputs={,
+     ac'!.>0..b (100100000010 [902]) -> 000100000010 [102]
+  }
+1043: inputs={ }, outputs={ }
+1044: inputs={
+     ACIn.>0..b (000000000000 [000]) -> 011111101111 [7ef],
+     S.1..0< (01 [1]) -> 11 [3]
+  }, outputs={ }
+1045: inputs={ }, outputs={ }
+1046: inputs={ }, outputs={ }
+1047: inputs={ }, outputs={ }
+1048: inputs={ }, outputs={,
+     ac'!.>0..b (000100000010 [102]) -> 011111101111 [7ef]
+  }
+1049: inputs={ }, outputs={ }
+1050: inputs={
+     ACIn.>0..b (011111101111 [7ef]) -> 000000000000 [000],
+     S.1..0< (11 [3]) -> 01 [1]
+  }, outputs={ }
+1051: inputs={ }, outputs={ }
+1052: inputs={ }, outputs={ }
+1053: inputs={ }, outputs={ }
+1054: inputs={ }, outputs={,
+     ac'!.>0..b (011111101111 [7ef]) -> 000100000010 [102]
+  }
+1055: inputs={ }, outputs={ }
+1056: inputs={,
+     Link (0) -> 1,
+     S.1..0< (01 [1]) -> 10 [2]
+  }, outputs={
+     AC.>0..b (001000000100 [204]) -> 100000010000 [810]
+  }
+1057: inputs={ }, outputs={ }
+1058: inputs={ }, outputs={ }
+1059: inputs={ }, outputs={ }
+1060: inputs={ }, outputs={,
+     ac'!.>0..b (000100000010 [102]) -> 000000100001 [021]
+  }
+1061: inputs={ }, outputs={ }
+1062: inputs={,
+     Link (1) -> 0,
+     S.1..0< (10 [2]) -> 00 [0]
+  }, outputs={ }
+1063: inputs={ }, outputs={ }
+1064: inputs={ }, outputs={ }
+1065: inputs={ }, outputs={ }
+1066: inputs={ }, outputs={,
+     ac'!.>0..b (000000100001 [021]) -> 100000010000 [810]
+  }
+1067: inputs={ }, outputs={ }
+1068: inputs={,
+     S.1..0< (00 [0]) -> 10 [2]
+  }, outputs={ }
+1069: inputs={ }, outputs={ }
+1070: inputs={ }, outputs={ }
+1071: inputs={ }, outputs={ }
+1072: inputs={ }, outputs={,
+     ac'!.>0..b (100000010000 [810]) -> 000000100000 [020]
+  }
+1073: inputs={ }, outputs={ }
+1074: inputs={
+     ACIn.>0..b (000000000000 [000]) -> 101110010110 [b96],
+     S.1..0< (10 [2]) -> 11 [3]
+  }, outputs={ }
+1075: inputs={ }, outputs={ }
+1076: inputs={ }, outputs={ }
+1077: inputs={ }, outputs={ }
+1078: inputs={ }, outputs={,
+     ac'!.>0..b (000000100000 [020]) -> 101110010110 [b96]
+  }
+1079: inputs={ }, outputs={ }
+1080: inputs={
+     ACIn.>0..b (101110010110 [b96]) -> 000000000000 [000],
+     S.1..0< (11 [3]) -> 00 [0]
+  }, outputs={ }
+1081: inputs={ }, outputs={ }
+1082: inputs={ }, outputs={ }
+1083: inputs={ }, outputs={ }
+1084: inputs={ }, outputs={,
+     ac'!.>0..b (101110010110 [b96]) -> 100000010000 [810]
+  }
+1085: inputs={ }, outputs={ }
+1086: inputs={ }, outputs={ }
+1087: inputs={ }, outputs={ }
+1088: inputs={ }, outputs={ }
+1089: inputs={ }, outputs={ }
+1090: inputs={ }, outputs={ }
+1091: inputs={ }, outputs={ }
+1092: inputs={,
+     S.1..0< (00 [0]) -> 01 [1]
+  }, outputs={ }
+1093: inputs={ }, outputs={ }
+1094: inputs={ }, outputs={ }
+1095: inputs={ }, outputs={ }
+1096: inputs={ }, outputs={,
+     ac'!.>0..b (100000010000 [810]) -> 010000001000 [408]
+  }
+1097: inputs={ }, outputs={ }
+1098: inputs={,
+     S.1..0< (01 [1]) -> 00 [0]
+  }, outputs={ }
+1099: inputs={ }, outputs={ }
+1100: inputs={ }, outputs={ }
+1101: inputs={ }, outputs={ }
+1102: inputs={ }, outputs={,
+     ac'!.>0..b (010000001000 [408]) -> 100000010000 [810]
+  }
+1103: inputs={ }, outputs={ }
+1104: inputs={,
+     S.1..0< (00 [0]) -> 01 [1]
+  }, outputs={ }
+1105: inputs={ }, outputs={ }
+1106: inputs={ }, outputs={ }
+1107: inputs={ }, outputs={ }
+1108: inputs={ }, outputs={,
+     ac'!.>0..b (100000010000 [810]) -> 010000001000 [408]
+  }
+1109: inputs={ }, outputs={ }
+1110: inputs={
+     ACIn.>0..b (000000000000 [000]) -> 111010001001 [e89],
+     S.1..0< (01 [1]) -> 11 [3]
+  }, outputs={ }
+1111: inputs={ }, outputs={ }
+1112: inputs={ }, outputs={ }
+1113: inputs={ }, outputs={ }
+1114: inputs={ }, outputs={,
+     ac'!.>0..b (010000001000 [408]) -> 111010001001 [e89]
+  }
+1115: inputs={ }, outputs={ }
+1116: inputs={
+     ACIn.>0..b (111010001001 [e89]) -> 000000000000 [000],
+     Link (0) -> 1,
+     S.1..0< (11 [3]) -> 10 [2]
+  }, outputs={ }
+1117: inputs={ }, outputs={ }
+1118: inputs={ }, outputs={ }
+1119: inputs={ }, outputs={ }
+1120: inputs={ }, outputs={,
+     ac'!.>0..b (111010001001 [e89]) -> 000000100001 [021]
+  }
+1121: inputs={ }, outputs={ }
+1122: inputs={
+     ACIn.>0..b (000000000000 [000]) -> 011111101111 [7ef],
+     Link (1) -> 0,
+     S.1..0< (10 [2]) -> 11 [3]
+  }, outputs={
+     AC.>0..b (100000010000 [810]) -> 000101110110 [176]
+  }
+1123: inputs={ }, outputs={ }
+1124: inputs={ }, outputs={ }
+1125: inputs={ }, outputs={ }
+1126: inputs={ }, outputs={,
+     ac'!.>0..b (000000100001 [021]) -> 011111101111 [7ef]
+  }
+1127: inputs={ }, outputs={ }
+1128: inputs={
+     ACIn.>0..b (011111101111 [7ef]) -> 000000000000 [000],
+     S.1..0< (11 [3]) -> 01 [1]
+  }, outputs={ }
+1129: inputs={ }, outputs={ }
+1130: inputs={ }, outputs={ }
+1131: inputs={ }, outputs={ }
+1132: inputs={ }, outputs={,
+     ac'!.>0..b (011111101111 [7ef]) -> 000010111011 [0bb]
+  }
+1133: inputs={ }, outputs={ }
+1134: inputs={,
+     Link (0) -> 1,
+     S.1..0< (01 [1]) -> 10 [2]
+  }, outputs={
+     AC.>0..b (000101110110 [176]) -> 100000010000 [810]
+  }
+1135: inputs={ }, outputs={ }
+1136: inputs={ }, outputs={ }
+1137: inputs={ }, outputs={ }
+1138: inputs={ }, outputs={,
+     ac'!.>0..b (000010111011 [0bb]) -> 000000100001 [021]
+  }
+1139: inputs={ }, outputs={ }
+1140: inputs={,
+     Link (1) -> 0,
+     S.1..0< (10 [2]) -> 01 [1]
+  }, outputs={ }
+1141: inputs={ }, outputs={ }
+1142: inputs={ }, outputs={ }
+1143: inputs={ }, outputs={ }
+1144: inputs={ }, outputs={,
+     ac'!.>0..b (000000100001 [021]) -> 010000001000 [408]
+  }
+1145: inputs={ }, outputs={ }
+1146: inputs={,
+     S.1..0< (01 [1]) -> 00 [0]
+  }, outputs={ }
+1147: inputs={ }, outputs={ }
+1148: inputs={ }, outputs={ }
+1149: inputs={ }, outputs={ }
+1150: inputs={ }, outputs={,
+     ac'!.>0..b (010000001000 [408]) -> 100000010000 [810]
+  }
+1151: inputs={ }, outputs={ }
+1152: inputs={ }, outputs={ }
+1153: inputs={ }, outputs={ }
+1154: inputs={ }, outputs={ }
+1155: inputs={ }, outputs={ }
+1156: inputs={ }, outputs={ }
+1157: inputs={ }, outputs={ }
+1158: inputs={,
+     S.1..0< (00 [0]) -> 10 [2]
+  }, outputs={ }
+1159: inputs={ }, outputs={ }
+1160: inputs={ }, outputs={ }
+1161: inputs={ }, outputs={ }
+1162: inputs={ }, outputs={,
+     ac'!.>0..b (100000010000 [810]) -> 000000100000 [020]
+  }
+1163: inputs={ }, outputs={ }
+1164: inputs={,
+     S.1..0< (10 [2]) -> 01 [1]
+  }, outputs={ }
+1165: inputs={ }, outputs={ }
+1166: inputs={ }, outputs={ }
+1167: inputs={ }, outputs={ }
+1168: inputs={ }, outputs={,
+     ac'!.>0..b (000000100000 [020]) -> 010000001000 [408]
+  }
+1169: inputs={ }, outputs={ }
+1170: inputs={,
+     S.1..0< (01 [1]) -> 00 [0]
+  }, outputs={ }
+1171: inputs={ }, outputs={ }
+1172: inputs={ }, outputs={ }
+1173: inputs={ }, outputs={ }
+1174: inputs={ }, outputs={,
+     ac'!.>0..b (010000001000 [408]) -> 100000010000 [810]
+  }
+1175: inputs={ }, outputs={ }
+1176: inputs={,
+     Link (0) -> 1,
+     S.1..0< (00 [0]) -> 01 [1]
+  }, outputs={ }
+1177: inputs={ }, outputs={ }
+1178: inputs={ }, outputs={ }
+1179: inputs={ }, outputs={ }
+1180: inputs={ }, outputs={,
+     ac'!.>0..b (100000010000 [810]) -> 110000001000 [c08]
+  }
+1181: inputs={ }, outputs={ }
+1182: inputs={,
+     Link (1) -> 0,
+     S.1..0< (01 [1]) -> 10 [2]
+  }, outputs={ }
+1183: inputs={ }, outputs={ }
+1184: inputs={ }, outputs={ }
+1185: inputs={ }, outputs={ }
+1186: inputs={ }, outputs={,
+     ac'!.>0..b (110000001000 [c08]) -> 000000100000 [020]
+  }
+1187: inputs={ }, outputs={ }
+1188: inputs={,
+     Link (0) -> 1
+  }, outputs={ }
+1189: inputs={ }, outputs={ }
+1190: inputs={ }, outputs={ }
+1191: inputs={ }, outputs={ }
+1192: inputs={ }, outputs={,
+     ac'!.>0..b (000000100000 [020]) -> 000000100001 [021]
+  }
+1193: inputs={ }, outputs={ }
+1194: inputs={,
+     Link (1) -> 0,
+     S.1..0< (10 [2]) -> 01 [1]
+  }, outputs={ }
+1195: inputs={ }, outputs={ }
+1196: inputs={ }, outputs={ }
+1197: inputs={ }, outputs={ }
+1198: inputs={ }, outputs={,
+     ac'!.>0..b (000000100001 [021]) -> 010000001000 [408]
+  }
+1199: inputs={ }, outputs={ }
+1200: inputs={
+     ACIn.>0..b (000000000000 [000]) -> 101000000010 [a02],
+     S.1..0< (01 [1]) -> 11 [3]
+  }, outputs={ }
+1201: inputs={ }, outputs={ }
+1202: inputs={ }, outputs={ }
+1203: inputs={ }, outputs={ }
+1204: inputs={ }, outputs={,
+     ac'!.>0..b (010000001000 [408]) -> 101000000010 [a02]
+  }
+1205: inputs={ }, outputs={ }
+1206: inputs={
+     ACIn.>0..b (101000000010 [a02]) -> 000000000000 [000],
+     S.1..0< (11 [3]) -> 10 [2]
+  }, outputs={ }
+1207: inputs={ }, outputs={ }
+1208: inputs={ }, outputs={ }
+1209: inputs={ }, outputs={ }
+1210: inputs={ }, outputs={,
+     ac'!.>0..b (101000000010 [a02]) -> 000000100000 [020]
+  }
+1211: inputs={ }, outputs={ }
+1212: inputs={ }, outputs={ }
+1213: inputs={ }, outputs={ }
+1214: inputs={ }, outputs={ }
+1215: inputs={ }, outputs={ }
+1216: inputs={ }, outputs={ }
+1217: inputs={ }, outputs={ }
+1218: inputs={
+     ACIn.>0..b (000000000000 [000]) -> 011001001111 [64f],
+     S.1..0< (10 [2]) -> 11 [3]
+  }, outputs={ }
+1219: inputs={ }, outputs={ }
+1220: inputs={ }, outputs={ }
+1221: inputs={ }, outputs={ }
+1222: inputs={ }, outputs={,
+     ac'!.>0..b (000000100000 [020]) -> 011001001111 [64f]
+  }
+1223: inputs={ }, outputs={ }
+1224: inputs={
+     ACIn.>0..b (011001001111 [64f]) -> 000000000000 [000],
+     S.1..0< (11 [3]) -> 00 [0]
+  }, outputs={ }
+1225: inputs={ }, outputs={ }
+1226: inputs={ }, outputs={ }
+1227: inputs={ }, outputs={ }
+1228: inputs={ }, outputs={,
+     ac'!.>0..b (011001001111 [64f]) -> 100000010000 [810]
+  }
+1229: inputs={ }, outputs={ }
+1230: inputs={,
+     Link (0) -> 1,
+     S.1..0< (00 [0]) -> 01 [1]
+  }, outputs={
+     AC.>0..b (100000010000 [810]) -> 100110110000 [9b0]
+  }
+1231: inputs={ }, outputs={ }
+1232: inputs={ }, outputs={ }
+1233: inputs={ }, outputs={ }
+1234: inputs={ }, outputs={,
+     ac'!.>0..b (100000010000 [810]) -> 110011011000 [cd8]
+  }
+1235: inputs={ }, outputs={ }
+1236: inputs={,
+     S.1..0< (01 [1]) -> 10 [2]
+  }, outputs={ }
+1237: inputs={ }, outputs={ }
+1238: inputs={ }, outputs={ }
+1239: inputs={ }, outputs={ }
+1240: inputs={ }, outputs={,
+     ac'!.>0..b (110011011000 [cd8]) -> 001101100001 [361]
+  }
+1241: inputs={ }, outputs={ }
+1242: inputs={,
+     S.1..0< (10 [2]) -> 01 [1]
+  }, outputs={ }
+1243: inputs={ }, outputs={ }
+1244: inputs={ }, outputs={ }
+1245: inputs={ }, outputs={ }
+1246: inputs={ }, outputs={,
+     ac'!.>0..b (001101100001 [361]) -> 110011011000 [cd8]
+  }
+1247: inputs={ }, outputs={ }
+1248: inputs={,
+     Link (1) -> 0,
+     S.1..0< (01 [1]) -> 00 [0]
+  }, outputs={ }
+1249: inputs={ }, outputs={ }
+1250: inputs={ }, outputs={ }
+1251: inputs={ }, outputs={ }
+1252: inputs={ }, outputs={,
+     ac'!.>0..b (110011011000 [cd8]) -> 100110110000 [9b0]
+  }
+1253: inputs={ }, outputs={ }
+1254: inputs={,
+     S.1..0< (00 [0]) -> 01 [1]
+  }, outputs={ }
+1255: inputs={ }, outputs={ }
+1256: inputs={ }, outputs={ }
+1257: inputs={ }, outputs={ }
+1258: inputs={ }, outputs={,
+     ac'!.>0..b (100110110000 [9b0]) -> 010011011000 [4d8]
+  }
+1259: inputs={ }, outputs={ }
+1260: inputs={
+     ACIn.>0..b (000000000000 [000]) -> 110001100011 [c63],
+     S.1..0< (01 [1]) -> 11 [3]
+  }, outputs={ }
+1261: inputs={ }, outputs={ }
+1262: inputs={ }, outputs={ }
+1263: inputs={ }, outputs={ }
+1264: inputs={ }, outputs={,
+     ac'!.>0..b (010011011000 [4d8]) -> 110001100011 [c63]
+  }
+1265: inputs={ }, outputs={ }
+1266: inputs={
+     ACIn.>0..b (110001100011 [c63]) -> 000000000000 [000],
+     S.1..0< (11 [3]) -> 01 [1]
+  }, outputs={ }
+1267: inputs={ }, outputs={ }
+1268: inputs={ }, outputs={ }
+1269: inputs={ }, outputs={ }
+1270: inputs={ }, outputs={,
+     ac'!.>0..b (110001100011 [c63]) -> 010011011000 [4d8]
+  }
+1271: inputs={ }, outputs={ }
+1272: inputs={
+     ACIn.>0..b (000000000000 [000]) -> 101110001001 [b89],
+     S.1..0< (01 [1]) -> 11 [3]
+  }, outputs={
+     AC.>0..b (100110110000 [9b0]) -> 001110011100 [39c]
+  }
+1273: inputs={ }, outputs={ }
+1274: inputs={ }, outputs={ }
+1275: inputs={ }, outputs={ }
+1276: inputs={ }, outputs={,
+     ac'!.>0..b (010011011000 [4d8]) -> 101110001001 [b89]
+  }
+1277: inputs={ }, outputs={ }
+1278: inputs={
+     ACIn.>0..b (101110001001 [b89]) -> 000000000000 [000],
+     S.1..0< (11 [3]) -> 00 [0]
+  }, outputs={ }
+1279: inputs={ }, outputs={ }
+1280: inputs={ }, outputs={ }
+1281: inputs={ }, outputs={ }
+1282: inputs={ }, outputs={,
+     ac'!.>0..b (101110001001 [b89]) -> 001110011100 [39c]
+  }
+1283: inputs={ }, outputs={ }
+1284: inputs={,
+     Link (0) -> 1,
+     S.1..0< (00 [0]) -> 01 [1]
+  }, outputs={ }
+1285: inputs={ }, outputs={ }
+1286: inputs={ }, outputs={ }
+1287: inputs={ }, outputs={ }
+1288: inputs={ }, outputs={,
+     ac'!.>0..b (001110011100 [39c]) -> 100111001110 [9ce]
+  }
+1289: inputs={ }, outputs={ }
+1290: inputs={,
+     Link (1) -> 0,
+     S.1..0< (01 [1]) -> 10 [2]
+  }, outputs={ }
+1291: inputs={ }, outputs={ }
+1292: inputs={ }, outputs={ }
+1293: inputs={ }, outputs={ }
+1294: inputs={ }, outputs={,
+     ac'!.>0..b (100111001110 [9ce]) -> 011100111000 [738]
+  }
+1295: inputs={ }, outputs={ }
+1296: inputs={,
+     Link (0) -> 1,
+     S.1..0< (10 [2]) -> 01 [1]
+  }, outputs={ }
+1297: inputs={ }, outputs={ }
+1298: inputs={ }, outputs={ }
+1299: inputs={ }, outputs={ }
+1300: inputs={ }, outputs={,
+     ac'!.>0..b (011100111000 [738]) -> 100111001110 [9ce]
+  }
+1301: inputs={ }, outputs={ }
+1302: inputs={,
+     Link (1) -> 0,
+     S.1..0< (01 [1]) -> 00 [0]
+  }, outputs={ }
+1303: inputs={ }, outputs={ }
+1304: inputs={ }, outputs={ }
+1305: inputs={ }, outputs={ }
+1306: inputs={ }, outputs={,
+     ac'!.>0..b (100111001110 [9ce]) -> 001110011100 [39c]
+  }
+1307: inputs={ }, outputs={ }
+1308: inputs={ }, outputs={ }
+1309: inputs={ }, outputs={ }
+1310: inputs={ }, outputs={ }
+1311: inputs={ }, outputs={ }
+1312: inputs={ }, outputs={ }
+1313: inputs={ }, outputs={ }
+1314: inputs={,
+     S.1..0< (00 [0]) -> 01 [1]
+  }, outputs={ }
+1315: inputs={ }, outputs={ }
+1316: inputs={ }, outputs={ }
+1317: inputs={ }, outputs={ }
+1318: inputs={ }, outputs={,
+     ac'!.>0..b (001110011100 [39c]) -> 000111001110 [1ce]
+  }
+1319: inputs={ }, outputs={ }
+1320: inputs={,
+     Link (0) -> 1,
+     S.1..0< (01 [1]) -> 10 [2]
+  }, outputs={ }
+1321: inputs={ }, outputs={ }
+1322: inputs={ }, outputs={ }
+1323: inputs={ }, outputs={ }
+1324: inputs={ }, outputs={,
+     ac'!.>0..b (000111001110 [1ce]) -> 011100111001 [739]
+  }
+1325: inputs={ }, outputs={ }
+1326: inputs={,
+     Link (1) -> 0,
+     S.1..0< (10 [2]) -> 00 [0]
+  }, outputs={ }
+1327: inputs={ }, outputs={ }
+1328: inputs={ }, outputs={ }
+1329: inputs={ }, outputs={ }
+1330: inputs={ }, outputs={,
+     ac'!.>0..b (011100111001 [739]) -> 001110011100 [39c]
+  }
+1331: inputs={ }, outputs={ }
+1332: inputs={ }, outputs={ }
+1333: inputs={ }, outputs={ }
+1334: inputs={ }, outputs={ }
+1335: inputs={ }, outputs={ }
+1336: inputs={ }, outputs={ }
+1337: inputs={ }, outputs={ }
+1338: inputs={ }, outputs={ }
+1339: inputs={ }, outputs={ }
+1340: inputs={ }, outputs={ }
+1341: inputs={ }, outputs={ }
+1342: inputs={ }, outputs={ }
+1343: inputs={ }, outputs={ }
+1344: inputs={,
+     Link (0) -> 1,
+     S.1..0< (00 [0]) -> 01 [1]
+  }, outputs={ }
+1345: inputs={ }, outputs={ }
+1346: inputs={ }, outputs={ }
+1347: inputs={ }, outputs={ }
+1348: inputs={ }, outputs={,
+     ac'!.>0..b (001110011100 [39c]) -> 100111001110 [9ce]
+  }
+1349: inputs={ }, outputs={ }
+1350: inputs={,
+     Link (1) -> 0,
+     S.1..0< (01 [1]) -> 10 [2]
+  }, outputs={ }
+1351: inputs={ }, outputs={ }
+1352: inputs={ }, outputs={ }
+1353: inputs={ }, outputs={ }
+1354: inputs={ }, outputs={,
+     ac'!.>0..b (100111001110 [9ce]) -> 011100111000 [738]
+  }
+1355: inputs={ }, outputs={ }
+1356: inputs={,
+     S.1..0< (10 [2]) -> 00 [0]
+  }, outputs={ }
+1357: inputs={ }, outputs={ }
+1358: inputs={ }, outputs={ }
+1359: inputs={ }, outputs={ }
+1360: inputs={ }, outputs={,
+     ac'!.>0..b (011100111000 [738]) -> 001110011100 [39c]
+  }
+1361: inputs={ }, outputs={ }
+1362: inputs={,
+     Link (0) -> 1,
+     S.1..0< (00 [0]) -> 10 [2]
+  }, outputs={ }
+1363: inputs={ }, outputs={ }
+1364: inputs={ }, outputs={ }
+1365: inputs={ }, outputs={ }
+1366: inputs={ }, outputs={,
+     ac'!.>0..b (001110011100 [39c]) -> 011100111001 [739]
+  }
+1367: inputs={ }, outputs={ }
+1368: inputs={ }, outputs={ }
+1369: inputs={ }, outputs={ }
+1370: inputs={ }, outputs={ }
+1371: inputs={ }, outputs={ }
+1372: inputs={ }, outputs={ }
+1373: inputs={ }, outputs={ }
+1374: inputs={,
+     Link (1) -> 0,
+     S.1..0< (10 [2]) -> 01 [1]
+  }, outputs={ }
+1375: inputs={ }, outputs={ }
+1376: inputs={ }, outputs={ }
+1377: inputs={ }, outputs={ }
+1378: inputs={ }, outputs={,
+     ac'!.>0..b (011100111001 [739]) -> 000111001110 [1ce]
+  }
+1379: inputs={ }, outputs={ }
+1380: inputs={
+     ACIn.>0..b (000000000000 [000]) -> 011110100000 [7a0],
+     S.1..0< (01 [1]) -> 11 [3]
+  }, outputs={ }
+1381: inputs={ }, outputs={ }
+1382: inputs={ }, outputs={ }
+1383: inputs={ }, outputs={ }
+1384: inputs={ }, outputs={,
+     ac'!.>0..b (000111001110 [1ce]) -> 011110100000 [7a0]
+  }
+1385: inputs={ }, outputs={ }
+1386: inputs={
+     ACIn.>0..b (011110100000 [7a0]) -> 000000000000 [000],
+     S.1..0< (11 [3]) -> 00 [0]
+  }, outputs={ }
+1387: inputs={ }, outputs={ }
+1388: inputs={ }, outputs={ }
+1389: inputs={ }, outputs={ }
+1390: inputs={ }, outputs={,
+     ac'!.>0..b (011110100000 [7a0]) -> 001110011100 [39c]
+  }
+1391: inputs={ }, outputs={ }
+1392: inputs={,
+     Link (0) -> 1,
+     S.1..0< (00 [0]) -> 10 [2]
+  }, outputs={
+     AC.>0..b (001110011100 [39c]) -> 100001011111 [85f]
+  }
+1393: inputs={ }, outputs={ }
+1394: inputs={ }, outputs={ }
+1395: inputs={ }, outputs={ }
+1396: inputs={ }, outputs={,
+     ac'!.>0..b (001110011100 [39c]) -> 000010111111 [0bf]
+  }
+1397: inputs={ }, outputs={ }
+1398: inputs={ }, outputs={ }
+1399: inputs={ }, outputs={ }
+1400: inputs={ }, outputs={ }
+1401: inputs={ }, outputs={ }
+1402: inputs={ }, outputs={ }
+1403: inputs={ }, outputs={ }
+1404: inputs={,
+     Link (1) -> 0,
+     S.1..0< (10 [2]) -> 00 [0]
+  }, outputs={ }
+1405: inputs={ }, outputs={ }
+1406: inputs={ }, outputs={ }
+1407: inputs={ }, outputs={ }
+1408: inputs={ }, outputs={,
+     ac'!.>0..b (000010111111 [0bf]) -> 100001011111 [85f]
+  }
+1409: inputs={ }, outputs={ }
+1410: inputs={
+     ACIn.>0..b (000000000000 [000]) -> 000100011111 [11f],
+     S.1..0< (00 [0]) -> 11 [3]
+  }, outputs={ }
+1411: inputs={ }, outputs={ }
+1412: inputs={ }, outputs={ }
+1413: inputs={ }, outputs={ }
+1414: inputs={ }, outputs={,
+     ac'!.>0..b (100001011111 [85f]) -> 000100011111 [11f]
+  }
+1415: inputs={ }, outputs={ }
+1416: inputs={
+     ACIn.>0..b (000100011111 [11f]) -> 000000000000 [000],
+     S.1..0< (11 [3]) -> 00 [0]
+  }, outputs={ }
+1417: inputs={ }, outputs={ }
+1418: inputs={ }, outputs={ }
+1419: inputs={ }, outputs={ }
+1420: inputs={ }, outputs={,
+     ac'!.>0..b (000100011111 [11f]) -> 100001011111 [85f]
+  }
+1421: inputs={ }, outputs={ }
+1422: inputs={
+     ACIn.>0..b (000000000000 [000]) -> 001010110110 [2b6],
+     S.1..0< (00 [0]) -> 11 [3]
+  }, outputs={ }
+1423: inputs={ }, outputs={ }
+1424: inputs={ }, outputs={ }
+1425: inputs={ }, outputs={ }
+1426: inputs={ }, outputs={,
+     ac'!.>0..b (100001011111 [85f]) -> 001010110110 [2b6]
+  }
+1427: inputs={ }, outputs={ }
+1428: inputs={
+     ACIn.>0..b (001010110110 [2b6]) -> 000000000000 [000],
+     S.1..0< (11 [3]) -> 01 [1]
+  }, outputs={ }
+1429: inputs={ }, outputs={ }
+1430: inputs={ }, outputs={ }
+1431: inputs={ }, outputs={ }
+1432: inputs={ }, outputs={,
+     ac'!.>0..b (001010110110 [2b6]) -> 010000101111 [42f]
+  }
+1433: inputs={ }, outputs={ }
+1434: inputs={
+     ACIn.>0..b (000000000000 [000]) -> 010010100111 [4a7],
+     S.1..0< (01 [1]) -> 11 [3]
+  }, outputs={ }
+1435: inputs={ }, outputs={ }
+1436: inputs={ }, outputs={ }
+1437: inputs={ }, outputs={ }
+1438: inputs={ }, outputs={,
+     ac'!.>0..b (010000101111 [42f]) -> 010010100111 [4a7]
+  }
+1439: inputs={ }, outputs={ }
+1440: inputs={
+     ACIn.>0..b (010010100111 [4a7]) -> 000000000000 [000],
+     Link (0) -> 1,
+     S.1..0< (11 [3]) -> 01 [1]
+  }, outputs={ }
+1441: inputs={ }, outputs={ }
+1442: inputs={ }, outputs={ }
+1443: inputs={ }, outputs={ }
+1444: inputs={ }, outputs={,
+     ac'!.>0..b (010010100111 [4a7]) -> 110000101111 [c2f]
+  }
+1445: inputs={ }, outputs={ }
+1446: inputs={ }, outputs={
+     AC.>0..b (100001011111 [85f]) -> 101101011000 [b58]
+  }
+1447: inputs={ }, outputs={ }
+1448: inputs={ }, outputs={ }
+1449: inputs={ }, outputs={ }
+1450: inputs={ }, outputs={,
+     ac'!.>0..b (110000101111 [c2f]) -> 110110101100 [dac]
+  }
+1451: inputs={ }, outputs={ }
+1452: inputs={,
+     Link (1) -> 0,
+     S.1..0< (01 [1]) -> 10 [2]
+  }, outputs={ }
+1453: inputs={ }, outputs={ }
+1454: inputs={ }, outputs={ }
+1455: inputs={ }, outputs={ }
+1456: inputs={ }, outputs={,
+     ac'!.>0..b (110110101100 [dac]) -> 011010110000 [6b0]
+  }
+1457: inputs={ }, outputs={ }
+1458: inputs={,
+     Link (0) -> 1,
+     S.1..0< (10 [2]) -> 01 [1]
+  }, outputs={ }
+1459: inputs={ }, outputs={ }
+1460: inputs={ }, outputs={ }
+1461: inputs={ }, outputs={ }
+1462: inputs={ }, outputs={,
+     ac'!.>0..b (011010110000 [6b0]) -> 110110101100 [dac]
+  }
+1463: inputs={ }, outputs={ }
+1464: inputs={,
+     S.1..0< (01 [1]) -> 10 [2]
+  }, outputs={ }
+1465: inputs={ }, outputs={ }
+1466: inputs={ }, outputs={ }
+1467: inputs={ }, outputs={ }
+1468: inputs={ }, outputs={,
+     ac'!.>0..b (110110101100 [dac]) -> 011010110001 [6b1]
+  }
+1469: inputs={ }, outputs={ }
+1470: inputs={,
+     Link (1) -> 0,
+     S.1..0< (10 [2]) -> 01 [1]
+  }, outputs={ }
+1471: inputs={ }, outputs={ }
+1472: inputs={ }, outputs={ }
+1473: inputs={ }, outputs={ }
+1474: inputs={ }, outputs={,
+     ac'!.>0..b (011010110001 [6b1]) -> 010110101100 [5ac]
+  }
+1475: inputs={ }, outputs={ }
+1476: inputs={,
+     S.1..0< (01 [1]) -> 00 [0]
+  }, outputs={ }
+1477: inputs={ }, outputs={ }
+1478: inputs={ }, outputs={ }
+1479: inputs={ }, outputs={ }
+1480: inputs={ }, outputs={,
+     ac'!.>0..b (010110101100 [5ac]) -> 101101011000 [b58]
+  }
+1481: inputs={ }, outputs={ }
+1482: inputs={,
+     S.1..0< (00 [0]) -> 10 [2]
+  }, outputs={ }
+1483: inputs={ }, outputs={ }
+1484: inputs={ }, outputs={ }
+1485: inputs={ }, outputs={ }
+1486: inputs={ }, outputs={,
+     ac'!.>0..b (101101011000 [b58]) -> 011010110000 [6b0]
+  }
+1487: inputs={ }, outputs={ }
+1488: inputs={,
+     Link (0) -> 1
+  }, outputs={ }
+1489: inputs={ }, outputs={ }
+1490: inputs={ }, outputs={ }
+1491: inputs={ }, outputs={ }
+1492: inputs={ }, outputs={,
+     ac'!.>0..b (011010110000 [6b0]) -> 011010110001 [6b1]
+  }
+1493: inputs={ }, outputs={ }
+1494: inputs={,
+     Link (1) -> 0
+  }, outputs={ }
+1495: inputs={ }, outputs={ }
+1496: inputs={ }, outputs={ }
+1497: inputs={ }, outputs={ }
+1498: inputs={ }, outputs={,
+     ac'!.>0..b (011010110001 [6b1]) -> 011010110000 [6b0]
+  }
+1499: inputs={ }, outputs={ }
+1500: inputs={,
+     S.1..0< (10 [2]) -> 01 [1]
+  }, outputs={ }
+1501: inputs={ }, outputs={ }
+1502: inputs={ }, outputs={ }
+1503: inputs={ }, outputs={ }
+1504: inputs={ }, outputs={,
+     ac'!.>0..b (011010110000 [6b0]) -> 010110101100 [5ac]
+  }
+1505: inputs={ }, outputs={ }
+1506: inputs={ }, outputs={ }
+1507: inputs={ }, outputs={ }
+1508: inputs={ }, outputs={ }
+1509: inputs={ }, outputs={ }
+1510: inputs={ }, outputs={ }
+1511: inputs={ }, outputs={ }
+1512: inputs={,
+     Link (0) -> 1
+  }, outputs={ }
+1513: inputs={ }, outputs={ }
+1514: inputs={ }, outputs={ }
+1515: inputs={ }, outputs={ }
+1516: inputs={ }, outputs={,
+     ac'!.>0..b (010110101100 [5ac]) -> 110110101100 [dac]
+  }
+1517: inputs={ }, outputs={ }
+1518: inputs={,
+     Link (1) -> 0,
+     S.1..0< (01 [1]) -> 00 [0]
+  }, outputs={ }
+1519: inputs={ }, outputs={ }
+1520: inputs={ }, outputs={ }
+1521: inputs={ }, outputs={ }
+1522: inputs={ }, outputs={,
+     ac'!.>0..b (110110101100 [dac]) -> 101101011000 [b58]
+  }
+1523: inputs={ }, outputs={ }
+1524: inputs={,
+     S.1..0< (00 [0]) -> 10 [2]
+  }, outputs={ }
+1525: inputs={ }, outputs={ }
+1526: inputs={ }, outputs={ }
+1527: inputs={ }, outputs={ }
+1528: inputs={ }, outputs={,
+     ac'!.>0..b (101101011000 [b58]) -> 011010110000 [6b0]
+  }
+1529: inputs={ }, outputs={ }
+1530: inputs={,
+     S.1..0< (10 [2]) -> 01 [1]
+  }, outputs={ }
+1531: inputs={ }, outputs={ }
+1532: inputs={ }, outputs={ }
+1533: inputs={ }, outputs={ }
+1534: inputs={ }, outputs={,
+     ac'!.>0..b (011010110000 [6b0]) -> 010110101100 [5ac]
+  }
+1535: inputs={ }, outputs={ }
+1536: inputs={,
+     Clk (1) -> 0,
+     S.1..0< (01 [1]) -> 00 [0]
+  }, outputs={ }

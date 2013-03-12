@@ -1,0 +1,25 @@
+./cam.r -c 0 -F 16x16bytes.txt
+Rod Count by Length:
+    5:  4096
+    7:  6144
+   10:  2048
+   20:  2048
+   89:   512
+  361:   128
+  384:    44
+  396:     8
+ 1542:   178
+
+Rod Count (and # incomplete) by Direction:
+    E:  4242 (    0)
+    S:  2100 (    0)
+    D:     0 (    0)
+    W:  2592 (    0)
+    N:  6272 (    0)
+    U:     0 (    0)
+Total: 15206 (    0)
+
+Earliest input: E
+Earliest output: W
+
+Not executing (optCycleCount == 0).

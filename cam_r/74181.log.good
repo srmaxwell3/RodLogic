@@ -1,0 +1,30 @@
+./cam.r -c 0 -F 74181.txt
+Rod Count by Length:
+    1:    22
+   11:     4
+   12:     2
+   16:     1
+   17:     1
+   18:     1
+   48:    11
+   49:     1
+   74:    20
+  103:    10
+  120:    14
+  129:    22
+  133:    11
+  151:     7
+
+Rod Count (and # incomplete) by Direction:
+    E:    27 (    0)
+    S:    58 (    0)
+    D:     0 (    0)
+    W:    20 (    0)
+    N:    22 (    0)
+    U:     0 (    0)
+Total:   127 (    0)
+
+Earliest input: E
+Earliest output: W
+
+Not executing (optCycleCount == 0).

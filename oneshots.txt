@@ -1,0 +1,53 @@
+One Shot, Leading-Edge Triggered, 1 Cycle Delay, Followed by 1 Cycle (6 Tick) Duration
+
+                     Set
+                    /
+                   v
+                   |
+Trigger >----------1---->
+                   |
+          Reset    |
+             Q \   |
+              \ \  |
+               v v |    
+            ^  | | |  
+          >-0--1-1-|----> Output
+            |  | | |
+            |  | | |
+           <0--|-0-1-<
+            |  | | |
+           <0--1-0-0-<
+            |  | | |
+           <0--0-1-1-<
+            |  v v v
+            ^
+
+One Shot, Leading-Edge Triggered, 1 Cycle Delay, Followed by 2 Cycle (12 Tick) Duration
+
+                     Set
+                    /
+                   v
+                   |
+Trigger >----------1-------->
+                   |
+          Reset    |
+             Q \   |
+              \ \  |
+               v v |       
+       ^    ^  | | |  
+     >-1----|--|-1-1>   v
+       |    |  | | |    |
+       |  >-0--1-|-|----1---> Output
+       |    |  | | |    |
+       |    |  | | |    |
+       |   <0--|-0-1-<  |
+       |    |  | | |    |
+       |   <0--1-0-0-<  |
+       |    |  | | |    |
+       |   <0--0-1-1-<  |
+       |    |  v v v    |
+       |    ^           |
+       |                |
+      <1----------------1-<
+       |                v
+       ^

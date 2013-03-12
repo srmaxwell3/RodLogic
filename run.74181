@@ -1,0 +1,8 @@
+#
+
+./cam.r < 74181.txt > 74181.log
+grep ": inputs=" 74181.log | sed -e 's/"\(.\)0"=\(.\), "\11"=\(.\), "\12"=\(.\), "\13"=\(.\)/\"\1"=\5\4\3\2/g' > 74181.ticks.log
+sed -e 's/^-?[0-9][0-9]*: inputs={ "A"=\(....\), "B"=\(....\), "C0"=\(.\), "M"=\(.\), "S"=\(....\), "Start"=. }, outputs={ "Busy"=., "C4"=\(.\), "F"=\(....\), "G!"=., "P!"=., "Ready"=. }/\1,\2,\3,\4,\5,\6,\7/' 74181.ticks.log > 74181.ticks.bits.log
+./74181.tests > ./74181.tests.log
+diff -y 74181.ticks.bits.log 74181.tests.log > 74181.ticks.bits.vs.tests.diff
+

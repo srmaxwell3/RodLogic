@@ -1,0 +1,512 @@
+./cam.r -c 15 -e -i oneshots.input.txt oneshots.txt
+Rod Count by Length:
+   10:     6
+   11:     3
+   13:     3
+   14:     2
+   15:     1
+   16:     2
+   18:     2
+   20:     3
+
+Rod Count (and # incomplete) by Direction:
+    E:     5 (    0)
+    S:     7 (    0)
+    D:     0 (    0)
+    W:     7 (    0)
+    N:     3 (    0)
+    U:     0 (    0)
+Total:    22 (    0)
+
+Earliest input: E
+Earliest output: N
+
+Executing up to 15 cycles....
+Rod2D({"1Trigger",E,{6,25-9}})->evaluateAt(diagram, tick=0): { Input[1Trigger] -> false} -> false
+Rod2D({"1Output",E,{14,25-11}})->evaluateAt(diagram, tick=0): { Get2:{"1Busy",N,{12-23,13}} -> !false} -> true
+Rod2D({"1Output",E,{14,25-11}})->evaluateAt(diagram, tick=0) wrote output for "1Output" -> true
+Rod2D({"2Trigger",E,{31,29-9}})->evaluateAt(diagram, tick=0): { Input[2Trigger] -> false} -> false
+Rod2D({"???",E,{39,21-6}})->evaluateAt(diagram, tick=0): { Get2:{"???",N,{38-54,8}} -> false} -> false
+Rod2D({"2Output",E,{41,29-11}})->evaluateAt(diagram, tick=0): { Get2:{"2Busy",N,{37-50,13}} -> !false} -> true
+Rod2D({"2Output",E,{41,29-11}})->evaluateAt(diagram, tick=0) wrote output for "2Output" -> true
+0: inputs={ "1Trigger"=0, "2Trigger"=0 }, outputs={ "1Busy"=0, "1Output"=1, "2Busy"=0, "2Output"=1 }
+Rod2D({"Set",S,{22-4,20}})->evaluateAt(diagram, tick=1): { Get1:{"1Trigger",E,{6,25-9}} -> !false} -> false
+Rod2D({"1Q",S,{22-11,16}})->evaluateAt(diagram, tick=1): { Get1:{"1Output",E,{14,25-11}} -> !true} -> true
+Rod2D({"1Reset",S,{22-11,18}})->evaluateAt(diagram, tick=1): { Get1:{"1Output",E,{14,25-11}} -> !true} -> true
+Rod2D({"Set",S,{49-29,20}})->evaluateAt(diagram, tick=1): { Get1:{"2Trigger",E,{31,29-9}} -> !false, Get1:{"???",E,{39,21-6}} -> !false} -> false
+Rod2D({"2Q",S,{49-36,16}})->evaluateAt(diagram, tick=1): { Get1:{"2Output",E,{41,29-11}} -> !true} -> true
+Rod2D({"2Reset",S,{49-36,18}})->evaluateAt(diagram, tick=1): { Get1:{"???",E,{39,21-6}} -> !false} -> false
+Rod2D({"???",S,{53-39,25}})->evaluateAt(diagram, tick=1): { Get1:{"2Output",E,{41,29-11}} -> !true} -> true
+1: inputs={ "1Trigger"=0, "2Trigger"=0 }, outputs={ "1Busy"=0, "1Output"=1, "2Busy"=0, "2Output"=1 }
+2: inputs={ "1Trigger"=0, "2Trigger"=0 }, outputs={ "1Busy"=0, "1Output"=1, "2Busy"=0, "2Output"=1 }
+Rod2D({"???",W,{17,12-22}})->evaluateAt(diagram, tick=3): { Get2:{"Set",S,{22-4,20}} -> false, Get2:{"1Reset",S,{22-11,18}} -> !true} -> false
+Rod2D({"???",W,{19,12-22}})->evaluateAt(diagram, tick=3): { Get2:{"Set",S,{22-4,20}} -> !false, Get2:{"1Q",S,{22-11,16}} -> true, Get2:{"1Reset",S,{22-11,18}} -> !true} -> false
+Rod2D({"???",W,{21,12-22}})->evaluateAt(diagram, tick=3): { Get2:{"Set",S,{22-4,20}} -> false, Get2:{"1Reset",S,{22-11,18}} -> true} -> false
+Rod2D({"???",W,{44,12-22}})->evaluateAt(diagram, tick=3): { Get2:{"Set",S,{49-29,20}} -> false, Get2:{"2Reset",S,{49-36,18}} -> !false} -> false
+Rod2D({"???",W,{46,12-22}})->evaluateAt(diagram, tick=3): { Get2:{"Set",S,{49-29,20}} -> !false, Get2:{"2Q",S,{49-36,16}} -> true, Get2:{"2Reset",S,{49-36,18}} -> !false} -> true
+Rod2D({"???",W,{48,12-22}})->evaluateAt(diagram, tick=3): { Get2:{"Set",S,{49-29,20}} -> false, Get2:{"2Reset",S,{49-36,18}} -> false} -> false
+Rod2D({"???",W,{52,7-27}})->evaluateAt(diagram, tick=3): { Get2:{"???",S,{53-39,25}} -> true} -> true
+3: inputs={ "1Trigger"=0, "2Trigger"=0 }, outputs={ "1Busy"=0, "1Output"=1, "2Busy"=0, "2Output"=1 }
+Rod2D({"1Busy",N,{12-23,13}})->evaluateAt(diagram, tick=4): { Get1:{"???",W,{17,12-22}} -> !false, Get1:{"???",W,{19,12-22}} -> !false, Get1:{"???",W,{21,12-22}} -> !false} -> true
+Rod2D({"1Busy",N,{12-23,13}})->evaluateAt(diagram, tick=4) wrote output for "1Busy" -> true
+Rod2D({"2Busy",N,{37-50,13}})->evaluateAt(diagram, tick=4): { Get1:{"???",W,{44,12-22}} -> !false, Get1:{"???",W,{46,12-22}} -> !true, Get1:{"???",W,{48,12-22}} -> !false} -> false
+Rod2D({"2Busy",N,{37-50,13}})->evaluateAt(diagram, tick=4) wrote output for "2Busy" -> false
+Rod2D({"???",N,{38-54,8}})->evaluateAt(diagram, tick=4): { Get1:{"???",W,{52,7-27}} -> !true} -> true
+4: inputs={ "1Trigger"=0, "2Trigger"=0 }, outputs={ "1Busy"=1, "1Output"=1, "2Busy"=0, "2Output"=1 }
+5: inputs={ "1Trigger"=0, "2Trigger"=0 }, outputs={ "1Busy"=1, "1Output"=1, "2Busy"=0, "2Output"=1 }
+Rod2D({"1Trigger",E,{6,25-9}})->evaluateAt(diagram, tick=6): { Input[1Trigger] -> false} -> false
+Rod2D({"1Output",E,{14,25-11}})->evaluateAt(diagram, tick=6): { Get2:{"1Busy",N,{12-23,13}} -> !true} -> false
+Rod2D({"1Output",E,{14,25-11}})->evaluateAt(diagram, tick=6) wrote output for "1Output" -> false
+Rod2D({"2Trigger",E,{31,29-9}})->evaluateAt(diagram, tick=6): { Input[2Trigger] -> false} -> false
+Rod2D({"???",E,{39,21-6}})->evaluateAt(diagram, tick=6): { Get2:{"???",N,{38-54,8}} -> true} -> true
+Rod2D({"2Output",E,{41,29-11}})->evaluateAt(diagram, tick=6): { Get2:{"2Busy",N,{37-50,13}} -> !false} -> true
+Rod2D({"2Output",E,{41,29-11}})->evaluateAt(diagram, tick=6) wrote output for "2Output" -> true
+6: inputs={ "1Trigger"=0, "2Trigger"=0 }, outputs={ "1Busy"=1, "1Output"=0, "2Busy"=0, "2Output"=1 }
+Rod2D({"Set",S,{22-4,20}})->evaluateAt(diagram, tick=7): { Get1:{"1Trigger",E,{6,25-9}} -> !false} -> false
+Rod2D({"1Q",S,{22-11,16}})->evaluateAt(diagram, tick=7): { Get1:{"1Output",E,{14,25-11}} -> !false} -> false
+Rod2D({"1Reset",S,{22-11,18}})->evaluateAt(diagram, tick=7): { Get1:{"1Output",E,{14,25-11}} -> !false} -> false
+Rod2D({"Set",S,{49-29,20}})->evaluateAt(diagram, tick=7): { Get1:{"2Trigger",E,{31,29-9}} -> !false, Get1:{"???",E,{39,21-6}} -> !true} -> false
+Rod2D({"2Q",S,{49-36,16}})->evaluateAt(diagram, tick=7): { Get1:{"2Output",E,{41,29-11}} -> !true} -> true
+Rod2D({"2Reset",S,{49-36,18}})->evaluateAt(diagram, tick=7): { Get1:{"???",E,{39,21-6}} -> !true} -> true
+Rod2D({"???",S,{53-39,25}})->evaluateAt(diagram, tick=7): { Get1:{"2Output",E,{41,29-11}} -> !true} -> true
+7: inputs={ "1Trigger"=0, "2Trigger"=0 }, outputs={ "1Busy"=1, "1Output"=0, "2Busy"=0, "2Output"=1 }
+8: inputs={ "1Trigger"=0, "2Trigger"=0 }, outputs={ "1Busy"=1, "1Output"=0, "2Busy"=0, "2Output"=1 }
+Rod2D({"???",W,{17,12-22}})->evaluateAt(diagram, tick=9): { Get2:{"Set",S,{22-4,20}} -> false, Get2:{"1Reset",S,{22-11,18}} -> !false} -> false
+Rod2D({"???",W,{19,12-22}})->evaluateAt(diagram, tick=9): { Get2:{"Set",S,{22-4,20}} -> !false, Get2:{"1Q",S,{22-11,16}} -> false, Get2:{"1Reset",S,{22-11,18}} -> !false} -> false
+Rod2D({"???",W,{21,12-22}})->evaluateAt(diagram, tick=9): { Get2:{"Set",S,{22-4,20}} -> false, Get2:{"1Reset",S,{22-11,18}} -> false} -> false
+Rod2D({"???",W,{44,12-22}})->evaluateAt(diagram, tick=9): { Get2:{"Set",S,{49-29,20}} -> false, Get2:{"2Reset",S,{49-36,18}} -> !true} -> false
+Rod2D({"???",W,{46,12-22}})->evaluateAt(diagram, tick=9): { Get2:{"Set",S,{49-29,20}} -> !false, Get2:{"2Q",S,{49-36,16}} -> true, Get2:{"2Reset",S,{49-36,18}} -> !true} -> false
+Rod2D({"???",W,{48,12-22}})->evaluateAt(diagram, tick=9): { Get2:{"Set",S,{49-29,20}} -> false, Get2:{"2Reset",S,{49-36,18}} -> true} -> false
+Rod2D({"???",W,{52,7-27}})->evaluateAt(diagram, tick=9): { Get2:{"???",S,{53-39,25}} -> true} -> true
+9: inputs={ "1Trigger"=0, "2Trigger"=0 }, outputs={ "1Busy"=1, "1Output"=0, "2Busy"=0, "2Output"=1 }
+Rod2D({"1Busy",N,{12-23,13}})->evaluateAt(diagram, tick=10): { Get1:{"???",W,{17,12-22}} -> !false, Get1:{"???",W,{19,12-22}} -> !false, Get1:{"???",W,{21,12-22}} -> !false} -> true
+Rod2D({"1Busy",N,{12-23,13}})->evaluateAt(diagram, tick=10) wrote output for "1Busy" -> true
+Rod2D({"2Busy",N,{37-50,13}})->evaluateAt(diagram, tick=10): { Get1:{"???",W,{44,12-22}} -> !false, Get1:{"???",W,{46,12-22}} -> !false, Get1:{"???",W,{48,12-22}} -> !false} -> true
+Rod2D({"2Busy",N,{37-50,13}})->evaluateAt(diagram, tick=10) wrote output for "2Busy" -> true
+Rod2D({"???",N,{38-54,8}})->evaluateAt(diagram, tick=10): { Get1:{"???",W,{52,7-27}} -> !true} -> true
+10: inputs={ "1Trigger"=0, "2Trigger"=0 }, outputs={ "1Busy"=1, "1Output"=0, "2Busy"=1, "2Output"=1 }
+11: inputs={ "1Trigger"=0, "2Trigger"=0 }, outputs={ "1Busy"=1, "1Output"=0, "2Busy"=1, "2Output"=1 }
+Rod2D({"1Trigger",E,{6,25-9}})->evaluateAt(diagram, tick=12): { Input[1Trigger] -> true} -> true
+Rod2D({"1Output",E,{14,25-11}})->evaluateAt(diagram, tick=12): { Get2:{"1Busy",N,{12-23,13}} -> !true} -> false
+Rod2D({"1Output",E,{14,25-11}})->evaluateAt(diagram, tick=12) wrote output for "1Output" -> false
+Rod2D({"2Trigger",E,{31,29-9}})->evaluateAt(diagram, tick=12): { Input[2Trigger] -> true} -> true
+Rod2D({"???",E,{39,21-6}})->evaluateAt(diagram, tick=12): { Get2:{"???",N,{38-54,8}} -> true} -> true
+Rod2D({"2Output",E,{41,29-11}})->evaluateAt(diagram, tick=12): { Get2:{"2Busy",N,{37-50,13}} -> !true} -> false
+Rod2D({"2Output",E,{41,29-11}})->evaluateAt(diagram, tick=12) wrote output for "2Output" -> false
+12: inputs={ "1Trigger"=1, "2Trigger"=1 }, outputs={ "1Busy"=1, "1Output"=0, "2Busy"=1, "2Output"=0 }
+Rod2D({"Set",S,{22-4,20}})->evaluateAt(diagram, tick=13): { Get1:{"1Trigger",E,{6,25-9}} -> !true} -> true
+Rod2D({"1Q",S,{22-11,16}})->evaluateAt(diagram, tick=13): { Get1:{"1Output",E,{14,25-11}} -> !false} -> false
+Rod2D({"1Reset",S,{22-11,18}})->evaluateAt(diagram, tick=13): { Get1:{"1Output",E,{14,25-11}} -> !false} -> false
+Rod2D({"Set",S,{49-29,20}})->evaluateAt(diagram, tick=13): { Get1:{"2Trigger",E,{31,29-9}} -> !true, Get1:{"???",E,{39,21-6}} -> !true} -> true
+Rod2D({"2Q",S,{49-36,16}})->evaluateAt(diagram, tick=13): { Get1:{"2Output",E,{41,29-11}} -> !false} -> false
+Rod2D({"2Reset",S,{49-36,18}})->evaluateAt(diagram, tick=13): { Get1:{"???",E,{39,21-6}} -> !true} -> true
+Rod2D({"???",S,{53-39,25}})->evaluateAt(diagram, tick=13): { Get1:{"2Output",E,{41,29-11}} -> !false} -> false
+13: inputs={ "1Trigger"=1, "2Trigger"=1 }, outputs={ "1Busy"=1, "1Output"=0, "2Busy"=1, "2Output"=0 }
+14: inputs={ "1Trigger"=1, "2Trigger"=1 }, outputs={ "1Busy"=1, "1Output"=0, "2Busy"=1, "2Output"=0 }
+Rod2D({"???",W,{17,12-22}})->evaluateAt(diagram, tick=15): { Get2:{"Set",S,{22-4,20}} -> true, Get2:{"1Reset",S,{22-11,18}} -> !false} -> true
+Rod2D({"???",W,{19,12-22}})->evaluateAt(diagram, tick=15): { Get2:{"Set",S,{22-4,20}} -> !true, Get2:{"1Q",S,{22-11,16}} -> false, Get2:{"1Reset",S,{22-11,18}} -> !false} -> false
+Rod2D({"???",W,{21,12-22}})->evaluateAt(diagram, tick=15): { Get2:{"Set",S,{22-4,20}} -> true, Get2:{"1Reset",S,{22-11,18}} -> false} -> false
+Rod2D({"???",W,{44,12-22}})->evaluateAt(diagram, tick=15): { Get2:{"Set",S,{49-29,20}} -> true, Get2:{"2Reset",S,{49-36,18}} -> !true} -> false
+Rod2D({"???",W,{46,12-22}})->evaluateAt(diagram, tick=15): { Get2:{"Set",S,{49-29,20}} -> !true, Get2:{"2Q",S,{49-36,16}} -> false, Get2:{"2Reset",S,{49-36,18}} -> !true} -> false
+Rod2D({"???",W,{48,12-22}})->evaluateAt(diagram, tick=15): { Get2:{"Set",S,{49-29,20}} -> true, Get2:{"2Reset",S,{49-36,18}} -> true} -> true
+Rod2D({"???",W,{52,7-27}})->evaluateAt(diagram, tick=15): { Get2:{"???",S,{53-39,25}} -> false} -> false
+15: inputs={ "1Trigger"=1, "2Trigger"=1 }, outputs={ "1Busy"=1, "1Output"=0, "2Busy"=1, "2Output"=0 }
+Rod2D({"1Busy",N,{12-23,13}})->evaluateAt(diagram, tick=16): { Get1:{"???",W,{17,12-22}} -> !true, Get1:{"???",W,{19,12-22}} -> !false, Get1:{"???",W,{21,12-22}} -> !false} -> false
+Rod2D({"1Busy",N,{12-23,13}})->evaluateAt(diagram, tick=16) wrote output for "1Busy" -> false
+Rod2D({"2Busy",N,{37-50,13}})->evaluateAt(diagram, tick=16): { Get1:{"???",W,{44,12-22}} -> !false, Get1:{"???",W,{46,12-22}} -> !false, Get1:{"???",W,{48,12-22}} -> !true} -> false
+Rod2D({"2Busy",N,{37-50,13}})->evaluateAt(diagram, tick=16) wrote output for "2Busy" -> false
+Rod2D({"???",N,{38-54,8}})->evaluateAt(diagram, tick=16): { Get1:{"???",W,{52,7-27}} -> !false} -> false
+16: inputs={ "1Trigger"=1, "2Trigger"=1 }, outputs={ "1Busy"=0, "1Output"=0, "2Busy"=0, "2Output"=0 }
+17: inputs={ "1Trigger"=1, "2Trigger"=1 }, outputs={ "1Busy"=0, "1Output"=0, "2Busy"=0, "2Output"=0 }
+Rod2D({"1Trigger",E,{6,25-9}})->evaluateAt(diagram, tick=18): { Input[1Trigger] -> false} -> false
+Rod2D({"1Output",E,{14,25-11}})->evaluateAt(diagram, tick=18): { Get2:{"1Busy",N,{12-23,13}} -> !false} -> true
+Rod2D({"1Output",E,{14,25-11}})->evaluateAt(diagram, tick=18) wrote output for "1Output" -> true
+Rod2D({"2Trigger",E,{31,29-9}})->evaluateAt(diagram, tick=18): { Input[2Trigger] -> false} -> false
+Rod2D({"???",E,{39,21-6}})->evaluateAt(diagram, tick=18): { Get2:{"???",N,{38-54,8}} -> false} -> false
+Rod2D({"2Output",E,{41,29-11}})->evaluateAt(diagram, tick=18): { Get2:{"2Busy",N,{37-50,13}} -> !false} -> true
+Rod2D({"2Output",E,{41,29-11}})->evaluateAt(diagram, tick=18) wrote output for "2Output" -> true
+18: inputs={ "1Trigger"=0, "2Trigger"=0 }, outputs={ "1Busy"=0, "1Output"=1, "2Busy"=0, "2Output"=1 }
+Rod2D({"Set",S,{22-4,20}})->evaluateAt(diagram, tick=19): { Get1:{"1Trigger",E,{6,25-9}} -> !false} -> false
+Rod2D({"1Q",S,{22-11,16}})->evaluateAt(diagram, tick=19): { Get1:{"1Output",E,{14,25-11}} -> !true} -> true
+Rod2D({"1Reset",S,{22-11,18}})->evaluateAt(diagram, tick=19): { Get1:{"1Output",E,{14,25-11}} -> !true} -> true
+Rod2D({"Set",S,{49-29,20}})->evaluateAt(diagram, tick=19): { Get1:{"2Trigger",E,{31,29-9}} -> !false, Get1:{"???",E,{39,21-6}} -> !false} -> false
+Rod2D({"2Q",S,{49-36,16}})->evaluateAt(diagram, tick=19): { Get1:{"2Output",E,{41,29-11}} -> !true} -> true
+Rod2D({"2Reset",S,{49-36,18}})->evaluateAt(diagram, tick=19): { Get1:{"???",E,{39,21-6}} -> !false} -> false
+Rod2D({"???",S,{53-39,25}})->evaluateAt(diagram, tick=19): { Get1:{"2Output",E,{41,29-11}} -> !true} -> true
+19: inputs={ "1Trigger"=0, "2Trigger"=0 }, outputs={ "1Busy"=0, "1Output"=1, "2Busy"=0, "2Output"=1 }
+20: inputs={ "1Trigger"=0, "2Trigger"=0 }, outputs={ "1Busy"=0, "1Output"=1, "2Busy"=0, "2Output"=1 }
+Rod2D({"???",W,{17,12-22}})->evaluateAt(diagram, tick=21): { Get2:{"Set",S,{22-4,20}} -> false, Get2:{"1Reset",S,{22-11,18}} -> !true} -> false
+Rod2D({"???",W,{19,12-22}})->evaluateAt(diagram, tick=21): { Get2:{"Set",S,{22-4,20}} -> !false, Get2:{"1Q",S,{22-11,16}} -> true, Get2:{"1Reset",S,{22-11,18}} -> !true} -> false
+Rod2D({"???",W,{21,12-22}})->evaluateAt(diagram, tick=21): { Get2:{"Set",S,{22-4,20}} -> false, Get2:{"1Reset",S,{22-11,18}} -> true} -> false
+Rod2D({"???",W,{44,12-22}})->evaluateAt(diagram, tick=21): { Get2:{"Set",S,{49-29,20}} -> false, Get2:{"2Reset",S,{49-36,18}} -> !false} -> false
+Rod2D({"???",W,{46,12-22}})->evaluateAt(diagram, tick=21): { Get2:{"Set",S,{49-29,20}} -> !false, Get2:{"2Q",S,{49-36,16}} -> true, Get2:{"2Reset",S,{49-36,18}} -> !false} -> true
+Rod2D({"???",W,{48,12-22}})->evaluateAt(diagram, tick=21): { Get2:{"Set",S,{49-29,20}} -> false, Get2:{"2Reset",S,{49-36,18}} -> false} -> false
+Rod2D({"???",W,{52,7-27}})->evaluateAt(diagram, tick=21): { Get2:{"???",S,{53-39,25}} -> true} -> true
+21: inputs={ "1Trigger"=0, "2Trigger"=0 }, outputs={ "1Busy"=0, "1Output"=1, "2Busy"=0, "2Output"=1 }
+Rod2D({"1Busy",N,{12-23,13}})->evaluateAt(diagram, tick=22): { Get1:{"???",W,{17,12-22}} -> !false, Get1:{"???",W,{19,12-22}} -> !false, Get1:{"???",W,{21,12-22}} -> !false} -> true
+Rod2D({"1Busy",N,{12-23,13}})->evaluateAt(diagram, tick=22) wrote output for "1Busy" -> true
+Rod2D({"2Busy",N,{37-50,13}})->evaluateAt(diagram, tick=22): { Get1:{"???",W,{44,12-22}} -> !false, Get1:{"???",W,{46,12-22}} -> !true, Get1:{"???",W,{48,12-22}} -> !false} -> false
+Rod2D({"2Busy",N,{37-50,13}})->evaluateAt(diagram, tick=22) wrote output for "2Busy" -> false
+Rod2D({"???",N,{38-54,8}})->evaluateAt(diagram, tick=22): { Get1:{"???",W,{52,7-27}} -> !true} -> true
+22: inputs={ "1Trigger"=0, "2Trigger"=0 }, outputs={ "1Busy"=1, "1Output"=1, "2Busy"=0, "2Output"=1 }
+23: inputs={ "1Trigger"=0, "2Trigger"=0 }, outputs={ "1Busy"=1, "1Output"=1, "2Busy"=0, "2Output"=1 }
+Rod2D({"1Trigger",E,{6,25-9}})->evaluateAt(diagram, tick=24): { Input[1Trigger] -> false} -> false
+Rod2D({"1Output",E,{14,25-11}})->evaluateAt(diagram, tick=24): { Get2:{"1Busy",N,{12-23,13}} -> !true} -> false
+Rod2D({"1Output",E,{14,25-11}})->evaluateAt(diagram, tick=24) wrote output for "1Output" -> false
+Rod2D({"2Trigger",E,{31,29-9}})->evaluateAt(diagram, tick=24): { Input[2Trigger] -> false} -> false
+Rod2D({"???",E,{39,21-6}})->evaluateAt(diagram, tick=24): { Get2:{"???",N,{38-54,8}} -> true} -> true
+Rod2D({"2Output",E,{41,29-11}})->evaluateAt(diagram, tick=24): { Get2:{"2Busy",N,{37-50,13}} -> !false} -> true
+Rod2D({"2Output",E,{41,29-11}})->evaluateAt(diagram, tick=24) wrote output for "2Output" -> true
+24: inputs={ "1Trigger"=0, "2Trigger"=0 }, outputs={ "1Busy"=1, "1Output"=0, "2Busy"=0, "2Output"=1 }
+Rod2D({"Set",S,{22-4,20}})->evaluateAt(diagram, tick=25): { Get1:{"1Trigger",E,{6,25-9}} -> !false} -> false
+Rod2D({"1Q",S,{22-11,16}})->evaluateAt(diagram, tick=25): { Get1:{"1Output",E,{14,25-11}} -> !false} -> false
+Rod2D({"1Reset",S,{22-11,18}})->evaluateAt(diagram, tick=25): { Get1:{"1Output",E,{14,25-11}} -> !false} -> false
+Rod2D({"Set",S,{49-29,20}})->evaluateAt(diagram, tick=25): { Get1:{"2Trigger",E,{31,29-9}} -> !false, Get1:{"???",E,{39,21-6}} -> !true} -> false
+Rod2D({"2Q",S,{49-36,16}})->evaluateAt(diagram, tick=25): { Get1:{"2Output",E,{41,29-11}} -> !true} -> true
+Rod2D({"2Reset",S,{49-36,18}})->evaluateAt(diagram, tick=25): { Get1:{"???",E,{39,21-6}} -> !true} -> true
+Rod2D({"???",S,{53-39,25}})->evaluateAt(diagram, tick=25): { Get1:{"2Output",E,{41,29-11}} -> !true} -> true
+25: inputs={ "1Trigger"=0, "2Trigger"=0 }, outputs={ "1Busy"=1, "1Output"=0, "2Busy"=0, "2Output"=1 }
+26: inputs={ "1Trigger"=0, "2Trigger"=0 }, outputs={ "1Busy"=1, "1Output"=0, "2Busy"=0, "2Output"=1 }
+Rod2D({"???",W,{17,12-22}})->evaluateAt(diagram, tick=27): { Get2:{"Set",S,{22-4,20}} -> false, Get2:{"1Reset",S,{22-11,18}} -> !false} -> false
+Rod2D({"???",W,{19,12-22}})->evaluateAt(diagram, tick=27): { Get2:{"Set",S,{22-4,20}} -> !false, Get2:{"1Q",S,{22-11,16}} -> false, Get2:{"1Reset",S,{22-11,18}} -> !false} -> false
+Rod2D({"???",W,{21,12-22}})->evaluateAt(diagram, tick=27): { Get2:{"Set",S,{22-4,20}} -> false, Get2:{"1Reset",S,{22-11,18}} -> false} -> false
+Rod2D({"???",W,{44,12-22}})->evaluateAt(diagram, tick=27): { Get2:{"Set",S,{49-29,20}} -> false, Get2:{"2Reset",S,{49-36,18}} -> !true} -> false
+Rod2D({"???",W,{46,12-22}})->evaluateAt(diagram, tick=27): { Get2:{"Set",S,{49-29,20}} -> !false, Get2:{"2Q",S,{49-36,16}} -> true, Get2:{"2Reset",S,{49-36,18}} -> !true} -> false
+Rod2D({"???",W,{48,12-22}})->evaluateAt(diagram, tick=27): { Get2:{"Set",S,{49-29,20}} -> false, Get2:{"2Reset",S,{49-36,18}} -> true} -> false
+Rod2D({"???",W,{52,7-27}})->evaluateAt(diagram, tick=27): { Get2:{"???",S,{53-39,25}} -> true} -> true
+27: inputs={ "1Trigger"=0, "2Trigger"=0 }, outputs={ "1Busy"=1, "1Output"=0, "2Busy"=0, "2Output"=1 }
+Rod2D({"1Busy",N,{12-23,13}})->evaluateAt(diagram, tick=28): { Get1:{"???",W,{17,12-22}} -> !false, Get1:{"???",W,{19,12-22}} -> !false, Get1:{"???",W,{21,12-22}} -> !false} -> true
+Rod2D({"1Busy",N,{12-23,13}})->evaluateAt(diagram, tick=28) wrote output for "1Busy" -> true
+Rod2D({"2Busy",N,{37-50,13}})->evaluateAt(diagram, tick=28): { Get1:{"???",W,{44,12-22}} -> !false, Get1:{"???",W,{46,12-22}} -> !false, Get1:{"???",W,{48,12-22}} -> !false} -> true
+Rod2D({"2Busy",N,{37-50,13}})->evaluateAt(diagram, tick=28) wrote output for "2Busy" -> true
+Rod2D({"???",N,{38-54,8}})->evaluateAt(diagram, tick=28): { Get1:{"???",W,{52,7-27}} -> !true} -> true
+28: inputs={ "1Trigger"=0, "2Trigger"=0 }, outputs={ "1Busy"=1, "1Output"=0, "2Busy"=1, "2Output"=1 }
+29: inputs={ "1Trigger"=0, "2Trigger"=0 }, outputs={ "1Busy"=1, "1Output"=0, "2Busy"=1, "2Output"=1 }
+Rod2D({"1Trigger",E,{6,25-9}})->evaluateAt(diagram, tick=30): { Input[1Trigger] -> false} -> false
+Rod2D({"1Output",E,{14,25-11}})->evaluateAt(diagram, tick=30): { Get2:{"1Busy",N,{12-23,13}} -> !true} -> false
+Rod2D({"1Output",E,{14,25-11}})->evaluateAt(diagram, tick=30) wrote output for "1Output" -> false
+Rod2D({"2Trigger",E,{31,29-9}})->evaluateAt(diagram, tick=30): { Input[2Trigger] -> false} -> false
+Rod2D({"???",E,{39,21-6}})->evaluateAt(diagram, tick=30): { Get2:{"???",N,{38-54,8}} -> true} -> true
+Rod2D({"2Output",E,{41,29-11}})->evaluateAt(diagram, tick=30): { Get2:{"2Busy",N,{37-50,13}} -> !true} -> false
+Rod2D({"2Output",E,{41,29-11}})->evaluateAt(diagram, tick=30) wrote output for "2Output" -> false
+30: inputs={ "1Trigger"=0, "2Trigger"=0 }, outputs={ "1Busy"=1, "1Output"=0, "2Busy"=1, "2Output"=0 }
+Rod2D({"Set",S,{22-4,20}})->evaluateAt(diagram, tick=31): { Get1:{"1Trigger",E,{6,25-9}} -> !false} -> false
+Rod2D({"1Q",S,{22-11,16}})->evaluateAt(diagram, tick=31): { Get1:{"1Output",E,{14,25-11}} -> !false} -> false
+Rod2D({"1Reset",S,{22-11,18}})->evaluateAt(diagram, tick=31): { Get1:{"1Output",E,{14,25-11}} -> !false} -> false
+Rod2D({"Set",S,{49-29,20}})->evaluateAt(diagram, tick=31): { Get1:{"2Trigger",E,{31,29-9}} -> !false, Get1:{"???",E,{39,21-6}} -> !true} -> false
+Rod2D({"2Q",S,{49-36,16}})->evaluateAt(diagram, tick=31): { Get1:{"2Output",E,{41,29-11}} -> !false} -> false
+Rod2D({"2Reset",S,{49-36,18}})->evaluateAt(diagram, tick=31): { Get1:{"???",E,{39,21-6}} -> !true} -> true
+Rod2D({"???",S,{53-39,25}})->evaluateAt(diagram, tick=31): { Get1:{"2Output",E,{41,29-11}} -> !false} -> false
+31: inputs={ "1Trigger"=0, "2Trigger"=0 }, outputs={ "1Busy"=1, "1Output"=0, "2Busy"=1, "2Output"=0 }
+32: inputs={ "1Trigger"=0, "2Trigger"=0 }, outputs={ "1Busy"=1, "1Output"=0, "2Busy"=1, "2Output"=0 }
+Rod2D({"???",W,{17,12-22}})->evaluateAt(diagram, tick=33): { Get2:{"Set",S,{22-4,20}} -> false, Get2:{"1Reset",S,{22-11,18}} -> !false} -> false
+Rod2D({"???",W,{19,12-22}})->evaluateAt(diagram, tick=33): { Get2:{"Set",S,{22-4,20}} -> !false, Get2:{"1Q",S,{22-11,16}} -> false, Get2:{"1Reset",S,{22-11,18}} -> !false} -> false
+Rod2D({"???",W,{21,12-22}})->evaluateAt(diagram, tick=33): { Get2:{"Set",S,{22-4,20}} -> false, Get2:{"1Reset",S,{22-11,18}} -> false} -> false
+Rod2D({"???",W,{44,12-22}})->evaluateAt(diagram, tick=33): { Get2:{"Set",S,{49-29,20}} -> false, Get2:{"2Reset",S,{49-36,18}} -> !true} -> false
+Rod2D({"???",W,{46,12-22}})->evaluateAt(diagram, tick=33): { Get2:{"Set",S,{49-29,20}} -> !false, Get2:{"2Q",S,{49-36,16}} -> false, Get2:{"2Reset",S,{49-36,18}} -> !true} -> false
+Rod2D({"???",W,{48,12-22}})->evaluateAt(diagram, tick=33): { Get2:{"Set",S,{49-29,20}} -> false, Get2:{"2Reset",S,{49-36,18}} -> true} -> false
+Rod2D({"???",W,{52,7-27}})->evaluateAt(diagram, tick=33): { Get2:{"???",S,{53-39,25}} -> false} -> false
+33: inputs={ "1Trigger"=0, "2Trigger"=0 }, outputs={ "1Busy"=1, "1Output"=0, "2Busy"=1, "2Output"=0 }
+Rod2D({"1Busy",N,{12-23,13}})->evaluateAt(diagram, tick=34): { Get1:{"???",W,{17,12-22}} -> !false, Get1:{"???",W,{19,12-22}} -> !false, Get1:{"???",W,{21,12-22}} -> !false} -> true
+Rod2D({"1Busy",N,{12-23,13}})->evaluateAt(diagram, tick=34) wrote output for "1Busy" -> true
+Rod2D({"2Busy",N,{37-50,13}})->evaluateAt(diagram, tick=34): { Get1:{"???",W,{44,12-22}} -> !false, Get1:{"???",W,{46,12-22}} -> !false, Get1:{"???",W,{48,12-22}} -> !false} -> true
+Rod2D({"2Busy",N,{37-50,13}})->evaluateAt(diagram, tick=34) wrote output for "2Busy" -> true
+Rod2D({"???",N,{38-54,8}})->evaluateAt(diagram, tick=34): { Get1:{"???",W,{52,7-27}} -> !false} -> false
+34: inputs={ "1Trigger"=0, "2Trigger"=0 }, outputs={ "1Busy"=1, "1Output"=0, "2Busy"=1, "2Output"=0 }
+35: inputs={ "1Trigger"=0, "2Trigger"=0 }, outputs={ "1Busy"=1, "1Output"=0, "2Busy"=1, "2Output"=0 }
+Rod2D({"1Trigger",E,{6,25-9}})->evaluateAt(diagram, tick=36): { Input[1Trigger] -> false} -> false
+Rod2D({"1Output",E,{14,25-11}})->evaluateAt(diagram, tick=36): { Get2:{"1Busy",N,{12-23,13}} -> !true} -> false
+Rod2D({"1Output",E,{14,25-11}})->evaluateAt(diagram, tick=36) wrote output for "1Output" -> false
+Rod2D({"2Trigger",E,{31,29-9}})->evaluateAt(diagram, tick=36): { Input[2Trigger] -> false} -> false
+Rod2D({"???",E,{39,21-6}})->evaluateAt(diagram, tick=36): { Get2:{"???",N,{38-54,8}} -> false} -> false
+Rod2D({"2Output",E,{41,29-11}})->evaluateAt(diagram, tick=36): { Get2:{"2Busy",N,{37-50,13}} -> !true} -> false
+Rod2D({"2Output",E,{41,29-11}})->evaluateAt(diagram, tick=36) wrote output for "2Output" -> false
+36: inputs={ "1Trigger"=0, "2Trigger"=0 }, outputs={ "1Busy"=1, "1Output"=0, "2Busy"=1, "2Output"=0 }
+Rod2D({"Set",S,{22-4,20}})->evaluateAt(diagram, tick=37): { Get1:{"1Trigger",E,{6,25-9}} -> !false} -> false
+Rod2D({"1Q",S,{22-11,16}})->evaluateAt(diagram, tick=37): { Get1:{"1Output",E,{14,25-11}} -> !false} -> false
+Rod2D({"1Reset",S,{22-11,18}})->evaluateAt(diagram, tick=37): { Get1:{"1Output",E,{14,25-11}} -> !false} -> false
+Rod2D({"Set",S,{49-29,20}})->evaluateAt(diagram, tick=37): { Get1:{"2Trigger",E,{31,29-9}} -> !false, Get1:{"???",E,{39,21-6}} -> !false} -> false
+Rod2D({"2Q",S,{49-36,16}})->evaluateAt(diagram, tick=37): { Get1:{"2Output",E,{41,29-11}} -> !false} -> false
+Rod2D({"2Reset",S,{49-36,18}})->evaluateAt(diagram, tick=37): { Get1:{"???",E,{39,21-6}} -> !false} -> false
+Rod2D({"???",S,{53-39,25}})->evaluateAt(diagram, tick=37): { Get1:{"2Output",E,{41,29-11}} -> !false} -> false
+37: inputs={ "1Trigger"=0, "2Trigger"=0 }, outputs={ "1Busy"=1, "1Output"=0, "2Busy"=1, "2Output"=0 }
+38: inputs={ "1Trigger"=0, "2Trigger"=0 }, outputs={ "1Busy"=1, "1Output"=0, "2Busy"=1, "2Output"=0 }
+Rod2D({"???",W,{17,12-22}})->evaluateAt(diagram, tick=39): { Get2:{"Set",S,{22-4,20}} -> false, Get2:{"1Reset",S,{22-11,18}} -> !false} -> false
+Rod2D({"???",W,{19,12-22}})->evaluateAt(diagram, tick=39): { Get2:{"Set",S,{22-4,20}} -> !false, Get2:{"1Q",S,{22-11,16}} -> false, Get2:{"1Reset",S,{22-11,18}} -> !false} -> false
+Rod2D({"???",W,{21,12-22}})->evaluateAt(diagram, tick=39): { Get2:{"Set",S,{22-4,20}} -> false, Get2:{"1Reset",S,{22-11,18}} -> false} -> false
+Rod2D({"???",W,{44,12-22}})->evaluateAt(diagram, tick=39): { Get2:{"Set",S,{49-29,20}} -> false, Get2:{"2Reset",S,{49-36,18}} -> !false} -> false
+Rod2D({"???",W,{46,12-22}})->evaluateAt(diagram, tick=39): { Get2:{"Set",S,{49-29,20}} -> !false, Get2:{"2Q",S,{49-36,16}} -> false, Get2:{"2Reset",S,{49-36,18}} -> !false} -> false
+Rod2D({"???",W,{48,12-22}})->evaluateAt(diagram, tick=39): { Get2:{"Set",S,{49-29,20}} -> false, Get2:{"2Reset",S,{49-36,18}} -> false} -> false
+Rod2D({"???",W,{52,7-27}})->evaluateAt(diagram, tick=39): { Get2:{"???",S,{53-39,25}} -> false} -> false
+39: inputs={ "1Trigger"=0, "2Trigger"=0 }, outputs={ "1Busy"=1, "1Output"=0, "2Busy"=1, "2Output"=0 }
+Rod2D({"1Busy",N,{12-23,13}})->evaluateAt(diagram, tick=40): { Get1:{"???",W,{17,12-22}} -> !false, Get1:{"???",W,{19,12-22}} -> !false, Get1:{"???",W,{21,12-22}} -> !false} -> true
+Rod2D({"1Busy",N,{12-23,13}})->evaluateAt(diagram, tick=40) wrote output for "1Busy" -> true
+Rod2D({"2Busy",N,{37-50,13}})->evaluateAt(diagram, tick=40): { Get1:{"???",W,{44,12-22}} -> !false, Get1:{"???",W,{46,12-22}} -> !false, Get1:{"???",W,{48,12-22}} -> !false} -> true
+Rod2D({"2Busy",N,{37-50,13}})->evaluateAt(diagram, tick=40) wrote output for "2Busy" -> true
+Rod2D({"???",N,{38-54,8}})->evaluateAt(diagram, tick=40): { Get1:{"???",W,{52,7-27}} -> !false} -> false
+40: inputs={ "1Trigger"=0, "2Trigger"=0 }, outputs={ "1Busy"=1, "1Output"=0, "2Busy"=1, "2Output"=0 }
+41: inputs={ "1Trigger"=0, "2Trigger"=0 }, outputs={ "1Busy"=1, "1Output"=0, "2Busy"=1, "2Output"=0 }
+Rod2D({"1Trigger",E,{6,25-9}})->evaluateAt(diagram, tick=42): { Input[1Trigger] -> true} -> true
+Rod2D({"1Output",E,{14,25-11}})->evaluateAt(diagram, tick=42): { Get2:{"1Busy",N,{12-23,13}} -> !true} -> false
+Rod2D({"1Output",E,{14,25-11}})->evaluateAt(diagram, tick=42) wrote output for "1Output" -> false
+Rod2D({"2Trigger",E,{31,29-9}})->evaluateAt(diagram, tick=42): { Input[2Trigger] -> true} -> true
+Rod2D({"???",E,{39,21-6}})->evaluateAt(diagram, tick=42): { Get2:{"???",N,{38-54,8}} -> false} -> false
+Rod2D({"2Output",E,{41,29-11}})->evaluateAt(diagram, tick=42): { Get2:{"2Busy",N,{37-50,13}} -> !true} -> false
+Rod2D({"2Output",E,{41,29-11}})->evaluateAt(diagram, tick=42) wrote output for "2Output" -> false
+42: inputs={ "1Trigger"=1, "2Trigger"=1 }, outputs={ "1Busy"=1, "1Output"=0, "2Busy"=1, "2Output"=0 }
+Rod2D({"Set",S,{22-4,20}})->evaluateAt(diagram, tick=43): { Get1:{"1Trigger",E,{6,25-9}} -> !true} -> true
+Rod2D({"1Q",S,{22-11,16}})->evaluateAt(diagram, tick=43): { Get1:{"1Output",E,{14,25-11}} -> !false} -> false
+Rod2D({"1Reset",S,{22-11,18}})->evaluateAt(diagram, tick=43): { Get1:{"1Output",E,{14,25-11}} -> !false} -> false
+Rod2D({"Set",S,{49-29,20}})->evaluateAt(diagram, tick=43): { Get1:{"2Trigger",E,{31,29-9}} -> !true, Get1:{"???",E,{39,21-6}} -> !false} -> false
+Rod2D({"2Q",S,{49-36,16}})->evaluateAt(diagram, tick=43): { Get1:{"2Output",E,{41,29-11}} -> !false} -> false
+Rod2D({"2Reset",S,{49-36,18}})->evaluateAt(diagram, tick=43): { Get1:{"???",E,{39,21-6}} -> !false} -> false
+Rod2D({"???",S,{53-39,25}})->evaluateAt(diagram, tick=43): { Get1:{"2Output",E,{41,29-11}} -> !false} -> false
+43: inputs={ "1Trigger"=1, "2Trigger"=1 }, outputs={ "1Busy"=1, "1Output"=0, "2Busy"=1, "2Output"=0 }
+44: inputs={ "1Trigger"=1, "2Trigger"=1 }, outputs={ "1Busy"=1, "1Output"=0, "2Busy"=1, "2Output"=0 }
+Rod2D({"???",W,{17,12-22}})->evaluateAt(diagram, tick=45): { Get2:{"Set",S,{22-4,20}} -> true, Get2:{"1Reset",S,{22-11,18}} -> !false} -> true
+Rod2D({"???",W,{19,12-22}})->evaluateAt(diagram, tick=45): { Get2:{"Set",S,{22-4,20}} -> !true, Get2:{"1Q",S,{22-11,16}} -> false, Get2:{"1Reset",S,{22-11,18}} -> !false} -> false
+Rod2D({"???",W,{21,12-22}})->evaluateAt(diagram, tick=45): { Get2:{"Set",S,{22-4,20}} -> true, Get2:{"1Reset",S,{22-11,18}} -> false} -> false
+Rod2D({"???",W,{44,12-22}})->evaluateAt(diagram, tick=45): { Get2:{"Set",S,{49-29,20}} -> false, Get2:{"2Reset",S,{49-36,18}} -> !false} -> false
+Rod2D({"???",W,{46,12-22}})->evaluateAt(diagram, tick=45): { Get2:{"Set",S,{49-29,20}} -> !false, Get2:{"2Q",S,{49-36,16}} -> false, Get2:{"2Reset",S,{49-36,18}} -> !false} -> false
+Rod2D({"???",W,{48,12-22}})->evaluateAt(diagram, tick=45): { Get2:{"Set",S,{49-29,20}} -> false, Get2:{"2Reset",S,{49-36,18}} -> false} -> false
+Rod2D({"???",W,{52,7-27}})->evaluateAt(diagram, tick=45): { Get2:{"???",S,{53-39,25}} -> false} -> false
+45: inputs={ "1Trigger"=1, "2Trigger"=1 }, outputs={ "1Busy"=1, "1Output"=0, "2Busy"=1, "2Output"=0 }
+Rod2D({"1Busy",N,{12-23,13}})->evaluateAt(diagram, tick=46): { Get1:{"???",W,{17,12-22}} -> !true, Get1:{"???",W,{19,12-22}} -> !false, Get1:{"???",W,{21,12-22}} -> !false} -> false
+Rod2D({"1Busy",N,{12-23,13}})->evaluateAt(diagram, tick=46) wrote output for "1Busy" -> false
+Rod2D({"2Busy",N,{37-50,13}})->evaluateAt(diagram, tick=46): { Get1:{"???",W,{44,12-22}} -> !false, Get1:{"???",W,{46,12-22}} -> !false, Get1:{"???",W,{48,12-22}} -> !false} -> true
+Rod2D({"2Busy",N,{37-50,13}})->evaluateAt(diagram, tick=46) wrote output for "2Busy" -> true
+Rod2D({"???",N,{38-54,8}})->evaluateAt(diagram, tick=46): { Get1:{"???",W,{52,7-27}} -> !false} -> false
+46: inputs={ "1Trigger"=1, "2Trigger"=1 }, outputs={ "1Busy"=0, "1Output"=0, "2Busy"=1, "2Output"=0 }
+47: inputs={ "1Trigger"=1, "2Trigger"=1 }, outputs={ "1Busy"=0, "1Output"=0, "2Busy"=1, "2Output"=0 }
+Rod2D({"1Trigger",E,{6,25-9}})->evaluateAt(diagram, tick=48): { Input[1Trigger] -> true} -> true
+Rod2D({"1Output",E,{14,25-11}})->evaluateAt(diagram, tick=48): { Get2:{"1Busy",N,{12-23,13}} -> !false} -> true
+Rod2D({"1Output",E,{14,25-11}})->evaluateAt(diagram, tick=48) wrote output for "1Output" -> true
+Rod2D({"2Trigger",E,{31,29-9}})->evaluateAt(diagram, tick=48): { Input[2Trigger] -> true} -> true
+Rod2D({"???",E,{39,21-6}})->evaluateAt(diagram, tick=48): { Get2:{"???",N,{38-54,8}} -> false} -> false
+Rod2D({"2Output",E,{41,29-11}})->evaluateAt(diagram, tick=48): { Get2:{"2Busy",N,{37-50,13}} -> !true} -> false
+Rod2D({"2Output",E,{41,29-11}})->evaluateAt(diagram, tick=48) wrote output for "2Output" -> false
+48: inputs={ "1Trigger"=1, "2Trigger"=1 }, outputs={ "1Busy"=0, "1Output"=1, "2Busy"=1, "2Output"=0 }
+Rod2D({"Set",S,{22-4,20}})->evaluateAt(diagram, tick=49): { Get1:{"1Trigger",E,{6,25-9}} -> !true} -> true
+Rod2D({"1Q",S,{22-11,16}})->evaluateAt(diagram, tick=49): { Get1:{"1Output",E,{14,25-11}} -> !true} -> true
+Rod2D({"1Reset",S,{22-11,18}})->evaluateAt(diagram, tick=49): { Get1:{"1Output",E,{14,25-11}} -> !true} -> true
+Rod2D({"Set",S,{49-29,20}})->evaluateAt(diagram, tick=49): { Get1:{"2Trigger",E,{31,29-9}} -> !true, Get1:{"???",E,{39,21-6}} -> !false} -> false
+Rod2D({"2Q",S,{49-36,16}})->evaluateAt(diagram, tick=49): { Get1:{"2Output",E,{41,29-11}} -> !false} -> false
+Rod2D({"2Reset",S,{49-36,18}})->evaluateAt(diagram, tick=49): { Get1:{"???",E,{39,21-6}} -> !false} -> false
+Rod2D({"???",S,{53-39,25}})->evaluateAt(diagram, tick=49): { Get1:{"2Output",E,{41,29-11}} -> !false} -> false
+49: inputs={ "1Trigger"=1, "2Trigger"=1 }, outputs={ "1Busy"=0, "1Output"=1, "2Busy"=1, "2Output"=0 }
+50: inputs={ "1Trigger"=1, "2Trigger"=1 }, outputs={ "1Busy"=0, "1Output"=1, "2Busy"=1, "2Output"=0 }
+Rod2D({"???",W,{17,12-22}})->evaluateAt(diagram, tick=51): { Get2:{"Set",S,{22-4,20}} -> true, Get2:{"1Reset",S,{22-11,18}} -> !true} -> false
+Rod2D({"???",W,{19,12-22}})->evaluateAt(diagram, tick=51): { Get2:{"Set",S,{22-4,20}} -> !true, Get2:{"1Q",S,{22-11,16}} -> true, Get2:{"1Reset",S,{22-11,18}} -> !true} -> false
+Rod2D({"???",W,{21,12-22}})->evaluateAt(diagram, tick=51): { Get2:{"Set",S,{22-4,20}} -> true, Get2:{"1Reset",S,{22-11,18}} -> true} -> true
+Rod2D({"???",W,{44,12-22}})->evaluateAt(diagram, tick=51): { Get2:{"Set",S,{49-29,20}} -> false, Get2:{"2Reset",S,{49-36,18}} -> !false} -> false
+Rod2D({"???",W,{46,12-22}})->evaluateAt(diagram, tick=51): { Get2:{"Set",S,{49-29,20}} -> !false, Get2:{"2Q",S,{49-36,16}} -> false, Get2:{"2Reset",S,{49-36,18}} -> !false} -> false
+Rod2D({"???",W,{48,12-22}})->evaluateAt(diagram, tick=51): { Get2:{"Set",S,{49-29,20}} -> false, Get2:{"2Reset",S,{49-36,18}} -> false} -> false
+Rod2D({"???",W,{52,7-27}})->evaluateAt(diagram, tick=51): { Get2:{"???",S,{53-39,25}} -> false} -> false
+51: inputs={ "1Trigger"=1, "2Trigger"=1 }, outputs={ "1Busy"=0, "1Output"=1, "2Busy"=1, "2Output"=0 }
+Rod2D({"1Busy",N,{12-23,13}})->evaluateAt(diagram, tick=52): { Get1:{"???",W,{17,12-22}} -> !false, Get1:{"???",W,{19,12-22}} -> !false, Get1:{"???",W,{21,12-22}} -> !true} -> false
+Rod2D({"1Busy",N,{12-23,13}})->evaluateAt(diagram, tick=52) wrote output for "1Busy" -> false
+Rod2D({"2Busy",N,{37-50,13}})->evaluateAt(diagram, tick=52): { Get1:{"???",W,{44,12-22}} -> !false, Get1:{"???",W,{46,12-22}} -> !false, Get1:{"???",W,{48,12-22}} -> !false} -> true
+Rod2D({"2Busy",N,{37-50,13}})->evaluateAt(diagram, tick=52) wrote output for "2Busy" -> true
+Rod2D({"???",N,{38-54,8}})->evaluateAt(diagram, tick=52): { Get1:{"???",W,{52,7-27}} -> !false} -> false
+52: inputs={ "1Trigger"=1, "2Trigger"=1 }, outputs={ "1Busy"=0, "1Output"=1, "2Busy"=1, "2Output"=0 }
+53: inputs={ "1Trigger"=1, "2Trigger"=1 }, outputs={ "1Busy"=0, "1Output"=1, "2Busy"=1, "2Output"=0 }
+Rod2D({"1Trigger",E,{6,25-9}})->evaluateAt(diagram, tick=54): { Input[1Trigger] -> false} -> false
+Rod2D({"1Output",E,{14,25-11}})->evaluateAt(diagram, tick=54): { Get2:{"1Busy",N,{12-23,13}} -> !false} -> true
+Rod2D({"1Output",E,{14,25-11}})->evaluateAt(diagram, tick=54) wrote output for "1Output" -> true
+Rod2D({"2Trigger",E,{31,29-9}})->evaluateAt(diagram, tick=54): { Input[2Trigger] -> false} -> false
+Rod2D({"???",E,{39,21-6}})->evaluateAt(diagram, tick=54): { Get2:{"???",N,{38-54,8}} -> false} -> false
+Rod2D({"2Output",E,{41,29-11}})->evaluateAt(diagram, tick=54): { Get2:{"2Busy",N,{37-50,13}} -> !true} -> false
+Rod2D({"2Output",E,{41,29-11}})->evaluateAt(diagram, tick=54) wrote output for "2Output" -> false
+54: inputs={ "1Trigger"=0, "2Trigger"=0 }, outputs={ "1Busy"=0, "1Output"=1, "2Busy"=1, "2Output"=0 }
+Rod2D({"Set",S,{22-4,20}})->evaluateAt(diagram, tick=55): { Get1:{"1Trigger",E,{6,25-9}} -> !false} -> false
+Rod2D({"1Q",S,{22-11,16}})->evaluateAt(diagram, tick=55): { Get1:{"1Output",E,{14,25-11}} -> !true} -> true
+Rod2D({"1Reset",S,{22-11,18}})->evaluateAt(diagram, tick=55): { Get1:{"1Output",E,{14,25-11}} -> !true} -> true
+Rod2D({"Set",S,{49-29,20}})->evaluateAt(diagram, tick=55): { Get1:{"2Trigger",E,{31,29-9}} -> !false, Get1:{"???",E,{39,21-6}} -> !false} -> false
+Rod2D({"2Q",S,{49-36,16}})->evaluateAt(diagram, tick=55): { Get1:{"2Output",E,{41,29-11}} -> !false} -> false
+Rod2D({"2Reset",S,{49-36,18}})->evaluateAt(diagram, tick=55): { Get1:{"???",E,{39,21-6}} -> !false} -> false
+Rod2D({"???",S,{53-39,25}})->evaluateAt(diagram, tick=55): { Get1:{"2Output",E,{41,29-11}} -> !false} -> false
+55: inputs={ "1Trigger"=0, "2Trigger"=0 }, outputs={ "1Busy"=0, "1Output"=1, "2Busy"=1, "2Output"=0 }
+56: inputs={ "1Trigger"=0, "2Trigger"=0 }, outputs={ "1Busy"=0, "1Output"=1, "2Busy"=1, "2Output"=0 }
+Rod2D({"???",W,{17,12-22}})->evaluateAt(diagram, tick=57): { Get2:{"Set",S,{22-4,20}} -> false, Get2:{"1Reset",S,{22-11,18}} -> !true} -> false
+Rod2D({"???",W,{19,12-22}})->evaluateAt(diagram, tick=57): { Get2:{"Set",S,{22-4,20}} -> !false, Get2:{"1Q",S,{22-11,16}} -> true, Get2:{"1Reset",S,{22-11,18}} -> !true} -> false
+Rod2D({"???",W,{21,12-22}})->evaluateAt(diagram, tick=57): { Get2:{"Set",S,{22-4,20}} -> false, Get2:{"1Reset",S,{22-11,18}} -> true} -> false
+Rod2D({"???",W,{44,12-22}})->evaluateAt(diagram, tick=57): { Get2:{"Set",S,{49-29,20}} -> false, Get2:{"2Reset",S,{49-36,18}} -> !false} -> false
+Rod2D({"???",W,{46,12-22}})->evaluateAt(diagram, tick=57): { Get2:{"Set",S,{49-29,20}} -> !false, Get2:{"2Q",S,{49-36,16}} -> false, Get2:{"2Reset",S,{49-36,18}} -> !false} -> false
+Rod2D({"???",W,{48,12-22}})->evaluateAt(diagram, tick=57): { Get2:{"Set",S,{49-29,20}} -> false, Get2:{"2Reset",S,{49-36,18}} -> false} -> false
+Rod2D({"???",W,{52,7-27}})->evaluateAt(diagram, tick=57): { Get2:{"???",S,{53-39,25}} -> false} -> false
+57: inputs={ "1Trigger"=0, "2Trigger"=0 }, outputs={ "1Busy"=0, "1Output"=1, "2Busy"=1, "2Output"=0 }
+Rod2D({"1Busy",N,{12-23,13}})->evaluateAt(diagram, tick=58): { Get1:{"???",W,{17,12-22}} -> !false, Get1:{"???",W,{19,12-22}} -> !false, Get1:{"???",W,{21,12-22}} -> !false} -> true
+Rod2D({"1Busy",N,{12-23,13}})->evaluateAt(diagram, tick=58) wrote output for "1Busy" -> true
+Rod2D({"2Busy",N,{37-50,13}})->evaluateAt(diagram, tick=58): { Get1:{"???",W,{44,12-22}} -> !false, Get1:{"???",W,{46,12-22}} -> !false, Get1:{"???",W,{48,12-22}} -> !false} -> true
+Rod2D({"2Busy",N,{37-50,13}})->evaluateAt(diagram, tick=58) wrote output for "2Busy" -> true
+Rod2D({"???",N,{38-54,8}})->evaluateAt(diagram, tick=58): { Get1:{"???",W,{52,7-27}} -> !false} -> false
+58: inputs={ "1Trigger"=0, "2Trigger"=0 }, outputs={ "1Busy"=1, "1Output"=1, "2Busy"=1, "2Output"=0 }
+59: inputs={ "1Trigger"=0, "2Trigger"=0 }, outputs={ "1Busy"=1, "1Output"=1, "2Busy"=1, "2Output"=0 }
+Rod2D({"1Trigger",E,{6,25-9}})->evaluateAt(diagram, tick=60): { Input[1Trigger] -> false} -> false
+Rod2D({"1Output",E,{14,25-11}})->evaluateAt(diagram, tick=60): { Get2:{"1Busy",N,{12-23,13}} -> !true} -> false
+Rod2D({"1Output",E,{14,25-11}})->evaluateAt(diagram, tick=60) wrote output for "1Output" -> false
+Rod2D({"2Trigger",E,{31,29-9}})->evaluateAt(diagram, tick=60): { Input[2Trigger] -> false} -> false
+Rod2D({"???",E,{39,21-6}})->evaluateAt(diagram, tick=60): { Get2:{"???",N,{38-54,8}} -> false} -> false
+Rod2D({"2Output",E,{41,29-11}})->evaluateAt(diagram, tick=60): { Get2:{"2Busy",N,{37-50,13}} -> !true} -> false
+Rod2D({"2Output",E,{41,29-11}})->evaluateAt(diagram, tick=60) wrote output for "2Output" -> false
+60: inputs={ "1Trigger"=0, "2Trigger"=0 }, outputs={ "1Busy"=1, "1Output"=0, "2Busy"=1, "2Output"=0 }
+Rod2D({"Set",S,{22-4,20}})->evaluateAt(diagram, tick=61): { Get1:{"1Trigger",E,{6,25-9}} -> !false} -> false
+Rod2D({"1Q",S,{22-11,16}})->evaluateAt(diagram, tick=61): { Get1:{"1Output",E,{14,25-11}} -> !false} -> false
+Rod2D({"1Reset",S,{22-11,18}})->evaluateAt(diagram, tick=61): { Get1:{"1Output",E,{14,25-11}} -> !false} -> false
+Rod2D({"Set",S,{49-29,20}})->evaluateAt(diagram, tick=61): { Get1:{"2Trigger",E,{31,29-9}} -> !false, Get1:{"???",E,{39,21-6}} -> !false} -> false
+Rod2D({"2Q",S,{49-36,16}})->evaluateAt(diagram, tick=61): { Get1:{"2Output",E,{41,29-11}} -> !false} -> false
+Rod2D({"2Reset",S,{49-36,18}})->evaluateAt(diagram, tick=61): { Get1:{"???",E,{39,21-6}} -> !false} -> false
+Rod2D({"???",S,{53-39,25}})->evaluateAt(diagram, tick=61): { Get1:{"2Output",E,{41,29-11}} -> !false} -> false
+61: inputs={ "1Trigger"=0, "2Trigger"=0 }, outputs={ "1Busy"=1, "1Output"=0, "2Busy"=1, "2Output"=0 }
+62: inputs={ "1Trigger"=0, "2Trigger"=0 }, outputs={ "1Busy"=1, "1Output"=0, "2Busy"=1, "2Output"=0 }
+Rod2D({"???",W,{17,12-22}})->evaluateAt(diagram, tick=63): { Get2:{"Set",S,{22-4,20}} -> false, Get2:{"1Reset",S,{22-11,18}} -> !false} -> false
+Rod2D({"???",W,{19,12-22}})->evaluateAt(diagram, tick=63): { Get2:{"Set",S,{22-4,20}} -> !false, Get2:{"1Q",S,{22-11,16}} -> false, Get2:{"1Reset",S,{22-11,18}} -> !false} -> false
+Rod2D({"???",W,{21,12-22}})->evaluateAt(diagram, tick=63): { Get2:{"Set",S,{22-4,20}} -> false, Get2:{"1Reset",S,{22-11,18}} -> false} -> false
+Rod2D({"???",W,{44,12-22}})->evaluateAt(diagram, tick=63): { Get2:{"Set",S,{49-29,20}} -> false, Get2:{"2Reset",S,{49-36,18}} -> !false} -> false
+Rod2D({"???",W,{46,12-22}})->evaluateAt(diagram, tick=63): { Get2:{"Set",S,{49-29,20}} -> !false, Get2:{"2Q",S,{49-36,16}} -> false, Get2:{"2Reset",S,{49-36,18}} -> !false} -> false
+Rod2D({"???",W,{48,12-22}})->evaluateAt(diagram, tick=63): { Get2:{"Set",S,{49-29,20}} -> false, Get2:{"2Reset",S,{49-36,18}} -> false} -> false
+Rod2D({"???",W,{52,7-27}})->evaluateAt(diagram, tick=63): { Get2:{"???",S,{53-39,25}} -> false} -> false
+63: inputs={ "1Trigger"=0, "2Trigger"=0 }, outputs={ "1Busy"=1, "1Output"=0, "2Busy"=1, "2Output"=0 }
+Rod2D({"1Busy",N,{12-23,13}})->evaluateAt(diagram, tick=64): { Get1:{"???",W,{17,12-22}} -> !false, Get1:{"???",W,{19,12-22}} -> !false, Get1:{"???",W,{21,12-22}} -> !false} -> true
+Rod2D({"1Busy",N,{12-23,13}})->evaluateAt(diagram, tick=64) wrote output for "1Busy" -> true
+Rod2D({"2Busy",N,{37-50,13}})->evaluateAt(diagram, tick=64): { Get1:{"???",W,{44,12-22}} -> !false, Get1:{"???",W,{46,12-22}} -> !false, Get1:{"???",W,{48,12-22}} -> !false} -> true
+Rod2D({"2Busy",N,{37-50,13}})->evaluateAt(diagram, tick=64) wrote output for "2Busy" -> true
+Rod2D({"???",N,{38-54,8}})->evaluateAt(diagram, tick=64): { Get1:{"???",W,{52,7-27}} -> !false} -> false
+64: inputs={ "1Trigger"=0, "2Trigger"=0 }, outputs={ "1Busy"=1, "1Output"=0, "2Busy"=1, "2Output"=0 }
+65: inputs={ "1Trigger"=0, "2Trigger"=0 }, outputs={ "1Busy"=1, "1Output"=0, "2Busy"=1, "2Output"=0 }
+Rod2D({"1Trigger",E,{6,25-9}})->evaluateAt(diagram, tick=66): { Input[1Trigger] -> false} -> false
+Rod2D({"1Output",E,{14,25-11}})->evaluateAt(diagram, tick=66): { Get2:{"1Busy",N,{12-23,13}} -> !true} -> false
+Rod2D({"1Output",E,{14,25-11}})->evaluateAt(diagram, tick=66) wrote output for "1Output" -> false
+Rod2D({"2Trigger",E,{31,29-9}})->evaluateAt(diagram, tick=66): { Input[2Trigger] -> false} -> false
+Rod2D({"???",E,{39,21-6}})->evaluateAt(diagram, tick=66): { Get2:{"???",N,{38-54,8}} -> false} -> false
+Rod2D({"2Output",E,{41,29-11}})->evaluateAt(diagram, tick=66): { Get2:{"2Busy",N,{37-50,13}} -> !true} -> false
+Rod2D({"2Output",E,{41,29-11}})->evaluateAt(diagram, tick=66) wrote output for "2Output" -> false
+66: inputs={ "1Trigger"=0, "2Trigger"=0 }, outputs={ "1Busy"=1, "1Output"=0, "2Busy"=1, "2Output"=0 }
+Rod2D({"Set",S,{22-4,20}})->evaluateAt(diagram, tick=67): { Get1:{"1Trigger",E,{6,25-9}} -> !false} -> false
+Rod2D({"1Q",S,{22-11,16}})->evaluateAt(diagram, tick=67): { Get1:{"1Output",E,{14,25-11}} -> !false} -> false
+Rod2D({"1Reset",S,{22-11,18}})->evaluateAt(diagram, tick=67): { Get1:{"1Output",E,{14,25-11}} -> !false} -> false
+Rod2D({"Set",S,{49-29,20}})->evaluateAt(diagram, tick=67): { Get1:{"2Trigger",E,{31,29-9}} -> !false, Get1:{"???",E,{39,21-6}} -> !false} -> false
+Rod2D({"2Q",S,{49-36,16}})->evaluateAt(diagram, tick=67): { Get1:{"2Output",E,{41,29-11}} -> !false} -> false
+Rod2D({"2Reset",S,{49-36,18}})->evaluateAt(diagram, tick=67): { Get1:{"???",E,{39,21-6}} -> !false} -> false
+Rod2D({"???",S,{53-39,25}})->evaluateAt(diagram, tick=67): { Get1:{"2Output",E,{41,29-11}} -> !false} -> false
+67: inputs={ "1Trigger"=0, "2Trigger"=0 }, outputs={ "1Busy"=1, "1Output"=0, "2Busy"=1, "2Output"=0 }
+68: inputs={ "1Trigger"=0, "2Trigger"=0 }, outputs={ "1Busy"=1, "1Output"=0, "2Busy"=1, "2Output"=0 }
+Rod2D({"???",W,{17,12-22}})->evaluateAt(diagram, tick=69): { Get2:{"Set",S,{22-4,20}} -> false, Get2:{"1Reset",S,{22-11,18}} -> !false} -> false
+Rod2D({"???",W,{19,12-22}})->evaluateAt(diagram, tick=69): { Get2:{"Set",S,{22-4,20}} -> !false, Get2:{"1Q",S,{22-11,16}} -> false, Get2:{"1Reset",S,{22-11,18}} -> !false} -> false
+Rod2D({"???",W,{21,12-22}})->evaluateAt(diagram, tick=69): { Get2:{"Set",S,{22-4,20}} -> false, Get2:{"1Reset",S,{22-11,18}} -> false} -> false
+Rod2D({"???",W,{44,12-22}})->evaluateAt(diagram, tick=69): { Get2:{"Set",S,{49-29,20}} -> false, Get2:{"2Reset",S,{49-36,18}} -> !false} -> false
+Rod2D({"???",W,{46,12-22}})->evaluateAt(diagram, tick=69): { Get2:{"Set",S,{49-29,20}} -> !false, Get2:{"2Q",S,{49-36,16}} -> false, Get2:{"2Reset",S,{49-36,18}} -> !false} -> false
+Rod2D({"???",W,{48,12-22}})->evaluateAt(diagram, tick=69): { Get2:{"Set",S,{49-29,20}} -> false, Get2:{"2Reset",S,{49-36,18}} -> false} -> false
+Rod2D({"???",W,{52,7-27}})->evaluateAt(diagram, tick=69): { Get2:{"???",S,{53-39,25}} -> false} -> false
+69: inputs={ "1Trigger"=0, "2Trigger"=0 }, outputs={ "1Busy"=1, "1Output"=0, "2Busy"=1, "2Output"=0 }
+Rod2D({"1Busy",N,{12-23,13}})->evaluateAt(diagram, tick=70): { Get1:{"???",W,{17,12-22}} -> !false, Get1:{"???",W,{19,12-22}} -> !false, Get1:{"???",W,{21,12-22}} -> !false} -> true
+Rod2D({"1Busy",N,{12-23,13}})->evaluateAt(diagram, tick=70) wrote output for "1Busy" -> true
+Rod2D({"2Busy",N,{37-50,13}})->evaluateAt(diagram, tick=70): { Get1:{"???",W,{44,12-22}} -> !false, Get1:{"???",W,{46,12-22}} -> !false, Get1:{"???",W,{48,12-22}} -> !false} -> true
+Rod2D({"2Busy",N,{37-50,13}})->evaluateAt(diagram, tick=70) wrote output for "2Busy" -> true
+Rod2D({"???",N,{38-54,8}})->evaluateAt(diagram, tick=70): { Get1:{"???",W,{52,7-27}} -> !false} -> false
+70: inputs={ "1Trigger"=0, "2Trigger"=0 }, outputs={ "1Busy"=1, "1Output"=0, "2Busy"=1, "2Output"=0 }
+71: inputs={ "1Trigger"=0, "2Trigger"=0 }, outputs={ "1Busy"=1, "1Output"=0, "2Busy"=1, "2Output"=0 }
+Rod2D({"1Trigger",E,{6,25-9}})->evaluateAt(diagram, tick=72): { Input[1Trigger] -> false} -> false
+Rod2D({"1Output",E,{14,25-11}})->evaluateAt(diagram, tick=72): { Get2:{"1Busy",N,{12-23,13}} -> !true} -> false
+Rod2D({"1Output",E,{14,25-11}})->evaluateAt(diagram, tick=72) wrote output for "1Output" -> false
+Rod2D({"2Trigger",E,{31,29-9}})->evaluateAt(diagram, tick=72): { Input[2Trigger] -> false} -> false
+Rod2D({"???",E,{39,21-6}})->evaluateAt(diagram, tick=72): { Get2:{"???",N,{38-54,8}} -> false} -> false
+Rod2D({"2Output",E,{41,29-11}})->evaluateAt(diagram, tick=72): { Get2:{"2Busy",N,{37-50,13}} -> !true} -> false
+Rod2D({"2Output",E,{41,29-11}})->evaluateAt(diagram, tick=72) wrote output for "2Output" -> false
+72: inputs={ "1Trigger"=0, "2Trigger"=0 }, outputs={ "1Busy"=1, "1Output"=0, "2Busy"=1, "2Output"=0 }
+Rod2D({"Set",S,{22-4,20}})->evaluateAt(diagram, tick=73): { Get1:{"1Trigger",E,{6,25-9}} -> !false} -> false
+Rod2D({"1Q",S,{22-11,16}})->evaluateAt(diagram, tick=73): { Get1:{"1Output",E,{14,25-11}} -> !false} -> false
+Rod2D({"1Reset",S,{22-11,18}})->evaluateAt(diagram, tick=73): { Get1:{"1Output",E,{14,25-11}} -> !false} -> false
+Rod2D({"Set",S,{49-29,20}})->evaluateAt(diagram, tick=73): { Get1:{"2Trigger",E,{31,29-9}} -> !false, Get1:{"???",E,{39,21-6}} -> !false} -> false
+Rod2D({"2Q",S,{49-36,16}})->evaluateAt(diagram, tick=73): { Get1:{"2Output",E,{41,29-11}} -> !false} -> false
+Rod2D({"2Reset",S,{49-36,18}})->evaluateAt(diagram, tick=73): { Get1:{"???",E,{39,21-6}} -> !false} -> false
+Rod2D({"???",S,{53-39,25}})->evaluateAt(diagram, tick=73): { Get1:{"2Output",E,{41,29-11}} -> !false} -> false
+73: inputs={ "1Trigger"=0, "2Trigger"=0 }, outputs={ "1Busy"=1, "1Output"=0, "2Busy"=1, "2Output"=0 }
+74: inputs={ "1Trigger"=0, "2Trigger"=0 }, outputs={ "1Busy"=1, "1Output"=0, "2Busy"=1, "2Output"=0 }
+Rod2D({"???",W,{17,12-22}})->evaluateAt(diagram, tick=75): { Get2:{"Set",S,{22-4,20}} -> false, Get2:{"1Reset",S,{22-11,18}} -> !false} -> false
+Rod2D({"???",W,{19,12-22}})->evaluateAt(diagram, tick=75): { Get2:{"Set",S,{22-4,20}} -> !false, Get2:{"1Q",S,{22-11,16}} -> false, Get2:{"1Reset",S,{22-11,18}} -> !false} -> false
+Rod2D({"???",W,{21,12-22}})->evaluateAt(diagram, tick=75): { Get2:{"Set",S,{22-4,20}} -> false, Get2:{"1Reset",S,{22-11,18}} -> false} -> false
+Rod2D({"???",W,{44,12-22}})->evaluateAt(diagram, tick=75): { Get2:{"Set",S,{49-29,20}} -> false, Get2:{"2Reset",S,{49-36,18}} -> !false} -> false
+Rod2D({"???",W,{46,12-22}})->evaluateAt(diagram, tick=75): { Get2:{"Set",S,{49-29,20}} -> !false, Get2:{"2Q",S,{49-36,16}} -> false, Get2:{"2Reset",S,{49-36,18}} -> !false} -> false
+Rod2D({"???",W,{48,12-22}})->evaluateAt(diagram, tick=75): { Get2:{"Set",S,{49-29,20}} -> false, Get2:{"2Reset",S,{49-36,18}} -> false} -> false
+Rod2D({"???",W,{52,7-27}})->evaluateAt(diagram, tick=75): { Get2:{"???",S,{53-39,25}} -> false} -> false
+75: inputs={ "1Trigger"=0, "2Trigger"=0 }, outputs={ "1Busy"=1, "1Output"=0, "2Busy"=1, "2Output"=0 }
+Rod2D({"1Busy",N,{12-23,13}})->evaluateAt(diagram, tick=76): { Get1:{"???",W,{17,12-22}} -> !false, Get1:{"???",W,{19,12-22}} -> !false, Get1:{"???",W,{21,12-22}} -> !false} -> true
+Rod2D({"1Busy",N,{12-23,13}})->evaluateAt(diagram, tick=76) wrote output for "1Busy" -> true
+Rod2D({"2Busy",N,{37-50,13}})->evaluateAt(diagram, tick=76): { Get1:{"???",W,{44,12-22}} -> !false, Get1:{"???",W,{46,12-22}} -> !false, Get1:{"???",W,{48,12-22}} -> !false} -> true
+Rod2D({"2Busy",N,{37-50,13}})->evaluateAt(diagram, tick=76) wrote output for "2Busy" -> true
+Rod2D({"???",N,{38-54,8}})->evaluateAt(diagram, tick=76): { Get1:{"???",W,{52,7-27}} -> !false} -> false
+76: inputs={ "1Trigger"=0, "2Trigger"=0 }, outputs={ "1Busy"=1, "1Output"=0, "2Busy"=1, "2Output"=0 }
+77: inputs={ "1Trigger"=0, "2Trigger"=0 }, outputs={ "1Busy"=1, "1Output"=0, "2Busy"=1, "2Output"=0 }
+Rod2D({"1Trigger",E,{6,25-9}})->evaluateAt(diagram, tick=78): { Input[1Trigger] -> false} -> false
+Rod2D({"1Output",E,{14,25-11}})->evaluateAt(diagram, tick=78): { Get2:{"1Busy",N,{12-23,13}} -> !true} -> false
+Rod2D({"1Output",E,{14,25-11}})->evaluateAt(diagram, tick=78) wrote output for "1Output" -> false
+Rod2D({"2Trigger",E,{31,29-9}})->evaluateAt(diagram, tick=78): { Input[2Trigger] -> false} -> false
+Rod2D({"???",E,{39,21-6}})->evaluateAt(diagram, tick=78): { Get2:{"???",N,{38-54,8}} -> false} -> false
+Rod2D({"2Output",E,{41,29-11}})->evaluateAt(diagram, tick=78): { Get2:{"2Busy",N,{37-50,13}} -> !true} -> false
+Rod2D({"2Output",E,{41,29-11}})->evaluateAt(diagram, tick=78) wrote output for "2Output" -> false
+78: inputs={ "1Trigger"=0, "2Trigger"=0 }, outputs={ "1Busy"=1, "1Output"=0, "2Busy"=1, "2Output"=0 }
+Rod2D({"Set",S,{22-4,20}})->evaluateAt(diagram, tick=79): { Get1:{"1Trigger",E,{6,25-9}} -> !false} -> false
+Rod2D({"1Q",S,{22-11,16}})->evaluateAt(diagram, tick=79): { Get1:{"1Output",E,{14,25-11}} -> !false} -> false
+Rod2D({"1Reset",S,{22-11,18}})->evaluateAt(diagram, tick=79): { Get1:{"1Output",E,{14,25-11}} -> !false} -> false
+Rod2D({"Set",S,{49-29,20}})->evaluateAt(diagram, tick=79): { Get1:{"2Trigger",E,{31,29-9}} -> !false, Get1:{"???",E,{39,21-6}} -> !false} -> false
+Rod2D({"2Q",S,{49-36,16}})->evaluateAt(diagram, tick=79): { Get1:{"2Output",E,{41,29-11}} -> !false} -> false
+Rod2D({"2Reset",S,{49-36,18}})->evaluateAt(diagram, tick=79): { Get1:{"???",E,{39,21-6}} -> !false} -> false
+Rod2D({"???",S,{53-39,25}})->evaluateAt(diagram, tick=79): { Get1:{"2Output",E,{41,29-11}} -> !false} -> false
+79: inputs={ "1Trigger"=0, "2Trigger"=0 }, outputs={ "1Busy"=1, "1Output"=0, "2Busy"=1, "2Output"=0 }
+80: inputs={ "1Trigger"=0, "2Trigger"=0 }, outputs={ "1Busy"=1, "1Output"=0, "2Busy"=1, "2Output"=0 }
+Rod2D({"???",W,{17,12-22}})->evaluateAt(diagram, tick=81): { Get2:{"Set",S,{22-4,20}} -> false, Get2:{"1Reset",S,{22-11,18}} -> !false} -> false
+Rod2D({"???",W,{19,12-22}})->evaluateAt(diagram, tick=81): { Get2:{"Set",S,{22-4,20}} -> !false, Get2:{"1Q",S,{22-11,16}} -> false, Get2:{"1Reset",S,{22-11,18}} -> !false} -> false
+Rod2D({"???",W,{21,12-22}})->evaluateAt(diagram, tick=81): { Get2:{"Set",S,{22-4,20}} -> false, Get2:{"1Reset",S,{22-11,18}} -> false} -> false
+Rod2D({"???",W,{44,12-22}})->evaluateAt(diagram, tick=81): { Get2:{"Set",S,{49-29,20}} -> false, Get2:{"2Reset",S,{49-36,18}} -> !false} -> false
+Rod2D({"???",W,{46,12-22}})->evaluateAt(diagram, tick=81): { Get2:{"Set",S,{49-29,20}} -> !false, Get2:{"2Q",S,{49-36,16}} -> false, Get2:{"2Reset",S,{49-36,18}} -> !false} -> false
+Rod2D({"???",W,{48,12-22}})->evaluateAt(diagram, tick=81): { Get2:{"Set",S,{49-29,20}} -> false, Get2:{"2Reset",S,{49-36,18}} -> false} -> false
+Rod2D({"???",W,{52,7-27}})->evaluateAt(diagram, tick=81): { Get2:{"???",S,{53-39,25}} -> false} -> false
+81: inputs={ "1Trigger"=0, "2Trigger"=0 }, outputs={ "1Busy"=1, "1Output"=0, "2Busy"=1, "2Output"=0 }
+Rod2D({"1Busy",N,{12-23,13}})->evaluateAt(diagram, tick=82): { Get1:{"???",W,{17,12-22}} -> !false, Get1:{"???",W,{19,12-22}} -> !false, Get1:{"???",W,{21,12-22}} -> !false} -> true
+Rod2D({"1Busy",N,{12-23,13}})->evaluateAt(diagram, tick=82) wrote output for "1Busy" -> true
+Rod2D({"2Busy",N,{37-50,13}})->evaluateAt(diagram, tick=82): { Get1:{"???",W,{44,12-22}} -> !false, Get1:{"???",W,{46,12-22}} -> !false, Get1:{"???",W,{48,12-22}} -> !false} -> true
+Rod2D({"2Busy",N,{37-50,13}})->evaluateAt(diagram, tick=82) wrote output for "2Busy" -> true
+Rod2D({"???",N,{38-54,8}})->evaluateAt(diagram, tick=82): { Get1:{"???",W,{52,7-27}} -> !false} -> false
+82: inputs={ "1Trigger"=0, "2Trigger"=0 }, outputs={ "1Busy"=1, "1Output"=0, "2Busy"=1, "2Output"=0 }
+83: inputs={ "1Trigger"=0, "2Trigger"=0 }, outputs={ "1Busy"=1, "1Output"=0, "2Busy"=1, "2Output"=0 }
+Rod2D({"1Trigger",E,{6,25-9}})->evaluateAt(diagram, tick=84): { Input[1Trigger] -> false} -> false
+Rod2D({"1Output",E,{14,25-11}})->evaluateAt(diagram, tick=84): { Get2:{"1Busy",N,{12-23,13}} -> !true} -> false
+Rod2D({"1Output",E,{14,25-11}})->evaluateAt(diagram, tick=84) wrote output for "1Output" -> false
+Rod2D({"2Trigger",E,{31,29-9}})->evaluateAt(diagram, tick=84): { Input[2Trigger] -> false} -> false
+Rod2D({"???",E,{39,21-6}})->evaluateAt(diagram, tick=84): { Get2:{"???",N,{38-54,8}} -> false} -> false
+Rod2D({"2Output",E,{41,29-11}})->evaluateAt(diagram, tick=84): { Get2:{"2Busy",N,{37-50,13}} -> !true} -> false
+Rod2D({"2Output",E,{41,29-11}})->evaluateAt(diagram, tick=84) wrote output for "2Output" -> false
+84: inputs={ "1Trigger"=0, "2Trigger"=0 }, outputs={ "1Busy"=1, "1Output"=0, "2Busy"=1, "2Output"=0 }
+Rod2D({"Set",S,{22-4,20}})->evaluateAt(diagram, tick=85): { Get1:{"1Trigger",E,{6,25-9}} -> !false} -> false
+Rod2D({"1Q",S,{22-11,16}})->evaluateAt(diagram, tick=85): { Get1:{"1Output",E,{14,25-11}} -> !false} -> false
+Rod2D({"1Reset",S,{22-11,18}})->evaluateAt(diagram, tick=85): { Get1:{"1Output",E,{14,25-11}} -> !false} -> false
+Rod2D({"Set",S,{49-29,20}})->evaluateAt(diagram, tick=85): { Get1:{"2Trigger",E,{31,29-9}} -> !false, Get1:{"???",E,{39,21-6}} -> !false} -> false
+Rod2D({"2Q",S,{49-36,16}})->evaluateAt(diagram, tick=85): { Get1:{"2Output",E,{41,29-11}} -> !false} -> false
+Rod2D({"2Reset",S,{49-36,18}})->evaluateAt(diagram, tick=85): { Get1:{"???",E,{39,21-6}} -> !false} -> false
+Rod2D({"???",S,{53-39,25}})->evaluateAt(diagram, tick=85): { Get1:{"2Output",E,{41,29-11}} -> !false} -> false
+85: inputs={ "1Trigger"=0, "2Trigger"=0 }, outputs={ "1Busy"=1, "1Output"=0, "2Busy"=1, "2Output"=0 }
+86: inputs={ "1Trigger"=0, "2Trigger"=0 }, outputs={ "1Busy"=1, "1Output"=0, "2Busy"=1, "2Output"=0 }
+Rod2D({"???",W,{17,12-22}})->evaluateAt(diagram, tick=87): { Get2:{"Set",S,{22-4,20}} -> false, Get2:{"1Reset",S,{22-11,18}} -> !false} -> false
+Rod2D({"???",W,{19,12-22}})->evaluateAt(diagram, tick=87): { Get2:{"Set",S,{22-4,20}} -> !false, Get2:{"1Q",S,{22-11,16}} -> false, Get2:{"1Reset",S,{22-11,18}} -> !false} -> false
+Rod2D({"???",W,{21,12-22}})->evaluateAt(diagram, tick=87): { Get2:{"Set",S,{22-4,20}} -> false, Get2:{"1Reset",S,{22-11,18}} -> false} -> false
+Rod2D({"???",W,{44,12-22}})->evaluateAt(diagram, tick=87): { Get2:{"Set",S,{49-29,20}} -> false, Get2:{"2Reset",S,{49-36,18}} -> !false} -> false
+Rod2D({"???",W,{46,12-22}})->evaluateAt(diagram, tick=87): { Get2:{"Set",S,{49-29,20}} -> !false, Get2:{"2Q",S,{49-36,16}} -> false, Get2:{"2Reset",S,{49-36,18}} -> !false} -> false
+Rod2D({"???",W,{48,12-22}})->evaluateAt(diagram, tick=87): { Get2:{"Set",S,{49-29,20}} -> false, Get2:{"2Reset",S,{49-36,18}} -> false} -> false
+Rod2D({"???",W,{52,7-27}})->evaluateAt(diagram, tick=87): { Get2:{"???",S,{53-39,25}} -> false} -> false
+87: inputs={ "1Trigger"=0, "2Trigger"=0 }, outputs={ "1Busy"=1, "1Output"=0, "2Busy"=1, "2Output"=0 }
+Rod2D({"1Busy",N,{12-23,13}})->evaluateAt(diagram, tick=88): { Get1:{"???",W,{17,12-22}} -> !false, Get1:{"???",W,{19,12-22}} -> !false, Get1:{"???",W,{21,12-22}} -> !false} -> true
+Rod2D({"1Busy",N,{12-23,13}})->evaluateAt(diagram, tick=88) wrote output for "1Busy" -> true
+Rod2D({"2Busy",N,{37-50,13}})->evaluateAt(diagram, tick=88): { Get1:{"???",W,{44,12-22}} -> !false, Get1:{"???",W,{46,12-22}} -> !false, Get1:{"???",W,{48,12-22}} -> !false} -> true
+Rod2D({"2Busy",N,{37-50,13}})->evaluateAt(diagram, tick=88) wrote output for "2Busy" -> true
+Rod2D({"???",N,{38-54,8}})->evaluateAt(diagram, tick=88): { Get1:{"???",W,{52,7-27}} -> !false} -> false
+88: inputs={ "1Trigger"=0, "2Trigger"=0 }, outputs={ "1Busy"=1, "1Output"=0, "2Busy"=1, "2Output"=0 }
+89: inputs={ "1Trigger"=0, "2Trigger"=0 }, outputs={ "1Busy"=1, "1Output"=0, "2Busy"=1, "2Output"=0 }
+Rod2D({"1Trigger",E,{6,25-9}})->evaluateAt(diagram, tick=90): { Input[1Trigger] -> false} -> false
+Rod2D({"1Output",E,{14,25-11}})->evaluateAt(diagram, tick=90): { Get2:{"1Busy",N,{12-23,13}} -> !true} -> false
+Rod2D({"1Output",E,{14,25-11}})->evaluateAt(diagram, tick=90) wrote output for "1Output" -> false
+Rod2D({"2Trigger",E,{31,29-9}})->evaluateAt(diagram, tick=90): { Input[2Trigger] -> false} -> false
+Rod2D({"???",E,{39,21-6}})->evaluateAt(diagram, tick=90): { Get2:{"???",N,{38-54,8}} -> false} -> false
+Rod2D({"2Output",E,{41,29-11}})->evaluateAt(diagram, tick=90): { Get2:{"2Busy",N,{37-50,13}} -> !true} -> false
+Rod2D({"2Output",E,{41,29-11}})->evaluateAt(diagram, tick=90) wrote output for "2Output" -> false
+90: inputs={ "1Trigger"=0, "2Trigger"=0 }, outputs={ "1Busy"=1, "1Output"=0, "2Busy"=1, "2Output"=0 }

@@ -1,0 +1,189 @@
+./cam.r -c 15 -e -f -i dcff.input.txt dcff.txt
+(Label *)(0x7fb910c06d88)->{ string()="CD&", isDefined=true, bitNumber=-1, ToString()="CD&" }
+(Label *)(0x7fb910c07528)->{ string()="C!Q&", isDefined=true, bitNumber=-1, ToString()="C!Q&" }
+(Label *)(0x7fb910c094d8)->{ string()="C", isDefined=true, bitNumber=-1, ToString()="C" }
+(Label *)(0x7fb910c0ad78)->{ string()="D", isDefined=true, bitNumber=-1, ToString()="D" }
+(Label *)(0x7fb910c0c5b8)->{ string()="Q", isDefined=true, bitNumber=-1, ToString()="Q" }
+Rod Count by Length:
+    8:     1
+   10:     3
+   12:     2
+   18:     1
+
+Rod Count (and # incomplete) by Direction:
+    E:     3 (    0)
+    S:     2 (    0)
+    D:     0 (    0)
+    W:     1 (    0)
+    N:     1 (    0)
+    U:     0 (    0)
+Total:     7 (    0)
+
+Earliest input: E
+Earliest output: E
+
+(Label *)(0x7fff51f24650)->{ string()="C", isDefined=true, bitNumber=-1, ToString()="C" }
+C <- 0
+C <- 0
+C <- 1
+C <- 0
+C <- 0
+C <- 1
+C <- 0
+C <- 0
+C <- 0
+C <- 0
+C <- 0
+(Label *)(0x7fff51f24650)->{ string()="D", isDefined=true, bitNumber=-1, ToString()="D" }
+D <- 0
+D <- 0
+D <- 1
+D <- 0
+D <- 0
+D <- 0
+D <- 0
+D <- 0
+D <- 1
+D <- 0
+D <- 0
+Executing up to 15 cycles....
+Rod2D(<E:6:14-2>)->evaluateAt(diagram, tick=0): { Input[C] -> false} -> false
+Rod2D(<E:8:14-2>)->evaluateAt(diagram, tick=0): { Input[D] -> false} -> false
+Rod2D(<E:10:20-2>)->evaluateAt(diagram, tick=0): { Get2:<N:5-15:8> -> false} -> false
+Rod2D(<E:10:20-2>)->evaluateAt(diagram, tick=0) wrote output for "Q" -> false
+0: inputs={ "D"=0, "C"=0 }, outputs={ "Q"=0 }
+Rod2D(<S:14-4:11>)->evaluateAt(diagram, tick=1): { Get1:<E:6:14-2> -> !false, Get1:<E:8:14-2> -> !false} -> false
+Rod2D(<S:14-4:13>)->evaluateAt(diagram, tick=1): { Get1:<E:6:14-2> -> !false, Get1:<E:10:20-2> -> !false} -> false
+Rod2D(<W:13:7-15>)->evaluateAt(diagram, tick=3): { Get2:<S:14-4:11> -> !false, Get2:<S:14-4:13> -> !false} -> true
+Rod2D(<N:5-15:8>)->evaluateAt(diagram, tick=4): { Get1:<W:13:7-15> -> !true} -> false
+Rod2D(<E:6:14-2>)->evaluateAt(diagram, tick=6): { Input[C] -> false} -> false
+Rod2D(<E:8:14-2>)->evaluateAt(diagram, tick=6): { Input[D] -> false} -> false
+Rod2D(<E:10:20-2>)->evaluateAt(diagram, tick=6): { Get2:<N:5-15:8> -> false} -> false
+Rod2D(<E:10:20-2>)->evaluateAt(diagram, tick=6) wrote output for "Q" -> false
+6: inputs={ "D"=0, "C"=0 }, outputs={ "Q"=0 }
+Rod2D(<S:14-4:11>)->evaluateAt(diagram, tick=7): { Get1:<E:6:14-2> -> !false, Get1:<E:8:14-2> -> !false} -> false
+Rod2D(<S:14-4:13>)->evaluateAt(diagram, tick=7): { Get1:<E:6:14-2> -> !false, Get1:<E:10:20-2> -> !false} -> false
+Rod2D(<W:13:7-15>)->evaluateAt(diagram, tick=9): { Get2:<S:14-4:11> -> !false, Get2:<S:14-4:13> -> !false} -> true
+Rod2D(<N:5-15:8>)->evaluateAt(diagram, tick=10): { Get1:<W:13:7-15> -> !true} -> false
+Rod2D(<E:6:14-2>)->evaluateAt(diagram, tick=12): { Input[C] -> true} -> true
+Rod2D(<E:8:14-2>)->evaluateAt(diagram, tick=12): { Input[D] -> true} -> true
+Rod2D(<E:10:20-2>)->evaluateAt(diagram, tick=12): { Get2:<N:5-15:8> -> false} -> false
+Rod2D(<E:10:20-2>)->evaluateAt(diagram, tick=12) wrote output for "Q" -> false
+12: inputs={ "D"=1, "C"=1 }, outputs={ "Q"=0 }
+Rod2D(<S:14-4:11>)->evaluateAt(diagram, tick=13): { Get1:<E:6:14-2> -> !true, Get1:<E:8:14-2> -> !true} -> true
+Rod2D(<S:14-4:13>)->evaluateAt(diagram, tick=13): { Get1:<E:6:14-2> -> !true, Get1:<E:10:20-2> -> !false} -> false
+Rod2D(<W:13:7-15>)->evaluateAt(diagram, tick=15): { Get2:<S:14-4:11> -> !true, Get2:<S:14-4:13> -> !false} -> false
+Rod2D(<N:5-15:8>)->evaluateAt(diagram, tick=16): { Get1:<W:13:7-15> -> !false} -> true
+Rod2D(<E:6:14-2>)->evaluateAt(diagram, tick=18): { Input[C] -> false} -> false
+Rod2D(<E:8:14-2>)->evaluateAt(diagram, tick=18): { Input[D] -> false} -> false
+Rod2D(<E:10:20-2>)->evaluateAt(diagram, tick=18): { Get2:<N:5-15:8> -> true} -> true
+Rod2D(<E:10:20-2>)->evaluateAt(diagram, tick=18) wrote output for "Q" -> true
+18: inputs={ "D"=0, "C"=0 }, outputs={ "Q"=1 }
+Rod2D(<S:14-4:11>)->evaluateAt(diagram, tick=19): { Get1:<E:6:14-2> -> !false, Get1:<E:8:14-2> -> !false} -> false
+Rod2D(<S:14-4:13>)->evaluateAt(diagram, tick=19): { Get1:<E:6:14-2> -> !false, Get1:<E:10:20-2> -> !true} -> true
+Rod2D(<W:13:7-15>)->evaluateAt(diagram, tick=21): { Get2:<S:14-4:11> -> !false, Get2:<S:14-4:13> -> !true} -> false
+Rod2D(<N:5-15:8>)->evaluateAt(diagram, tick=22): { Get1:<W:13:7-15> -> !false} -> true
+Rod2D(<E:6:14-2>)->evaluateAt(diagram, tick=24): { Input[C] -> false} -> false
+Rod2D(<E:8:14-2>)->evaluateAt(diagram, tick=24): { Input[D] -> false} -> false
+Rod2D(<E:10:20-2>)->evaluateAt(diagram, tick=24): { Get2:<N:5-15:8> -> true} -> true
+Rod2D(<E:10:20-2>)->evaluateAt(diagram, tick=24) wrote output for "Q" -> true
+24: inputs={ "D"=0, "C"=0 }, outputs={ "Q"=1 }
+Rod2D(<S:14-4:11>)->evaluateAt(diagram, tick=25): { Get1:<E:6:14-2> -> !false, Get1:<E:8:14-2> -> !false} -> false
+Rod2D(<S:14-4:13>)->evaluateAt(diagram, tick=25): { Get1:<E:6:14-2> -> !false, Get1:<E:10:20-2> -> !true} -> true
+Rod2D(<W:13:7-15>)->evaluateAt(diagram, tick=27): { Get2:<S:14-4:11> -> !false, Get2:<S:14-4:13> -> !true} -> false
+Rod2D(<N:5-15:8>)->evaluateAt(diagram, tick=28): { Get1:<W:13:7-15> -> !false} -> true
+Rod2D(<E:6:14-2>)->evaluateAt(diagram, tick=30): { Input[C] -> true} -> true
+Rod2D(<E:8:14-2>)->evaluateAt(diagram, tick=30): { Input[D] -> false} -> false
+Rod2D(<E:10:20-2>)->evaluateAt(diagram, tick=30): { Get2:<N:5-15:8> -> true} -> true
+Rod2D(<E:10:20-2>)->evaluateAt(diagram, tick=30) wrote output for "Q" -> true
+30: inputs={ "D"=0, "C"=1 }, outputs={ "Q"=1 }
+Rod2D(<S:14-4:11>)->evaluateAt(diagram, tick=31): { Get1:<E:6:14-2> -> !true, Get1:<E:8:14-2> -> !false} -> false
+Rod2D(<S:14-4:13>)->evaluateAt(diagram, tick=31): { Get1:<E:6:14-2> -> !true, Get1:<E:10:20-2> -> !true} -> false
+Rod2D(<W:13:7-15>)->evaluateAt(diagram, tick=33): { Get2:<S:14-4:11> -> !false, Get2:<S:14-4:13> -> !false} -> true
+Rod2D(<N:5-15:8>)->evaluateAt(diagram, tick=34): { Get1:<W:13:7-15> -> !true} -> false
+Rod2D(<E:6:14-2>)->evaluateAt(diagram, tick=36): { Input[C] -> false} -> false
+Rod2D(<E:8:14-2>)->evaluateAt(diagram, tick=36): { Input[D] -> false} -> false
+Rod2D(<E:10:20-2>)->evaluateAt(diagram, tick=36): { Get2:<N:5-15:8> -> false} -> false
+Rod2D(<E:10:20-2>)->evaluateAt(diagram, tick=36) wrote output for "Q" -> false
+36: inputs={ "D"=0, "C"=0 }, outputs={ "Q"=0 }
+Rod2D(<S:14-4:11>)->evaluateAt(diagram, tick=37): { Get1:<E:6:14-2> -> !false, Get1:<E:8:14-2> -> !false} -> false
+Rod2D(<S:14-4:13>)->evaluateAt(diagram, tick=37): { Get1:<E:6:14-2> -> !false, Get1:<E:10:20-2> -> !false} -> false
+Rod2D(<W:13:7-15>)->evaluateAt(diagram, tick=39): { Get2:<S:14-4:11> -> !false, Get2:<S:14-4:13> -> !false} -> true
+Rod2D(<N:5-15:8>)->evaluateAt(diagram, tick=40): { Get1:<W:13:7-15> -> !true} -> false
+Rod2D(<E:6:14-2>)->evaluateAt(diagram, tick=42): { Input[C] -> false} -> false
+Rod2D(<E:8:14-2>)->evaluateAt(diagram, tick=42): { Input[D] -> false} -> false
+Rod2D(<E:10:20-2>)->evaluateAt(diagram, tick=42): { Get2:<N:5-15:8> -> false} -> false
+Rod2D(<E:10:20-2>)->evaluateAt(diagram, tick=42) wrote output for "Q" -> false
+42: inputs={ "D"=0, "C"=0 }, outputs={ "Q"=0 }
+Rod2D(<S:14-4:11>)->evaluateAt(diagram, tick=43): { Get1:<E:6:14-2> -> !false, Get1:<E:8:14-2> -> !false} -> false
+Rod2D(<S:14-4:13>)->evaluateAt(diagram, tick=43): { Get1:<E:6:14-2> -> !false, Get1:<E:10:20-2> -> !false} -> false
+Rod2D(<W:13:7-15>)->evaluateAt(diagram, tick=45): { Get2:<S:14-4:11> -> !false, Get2:<S:14-4:13> -> !false} -> true
+Rod2D(<N:5-15:8>)->evaluateAt(diagram, tick=46): { Get1:<W:13:7-15> -> !true} -> false
+Rod2D(<E:6:14-2>)->evaluateAt(diagram, tick=48): { Input[C] -> false} -> false
+Rod2D(<E:8:14-2>)->evaluateAt(diagram, tick=48): { Input[D] -> true} -> true
+Rod2D(<E:10:20-2>)->evaluateAt(diagram, tick=48): { Get2:<N:5-15:8> -> false} -> false
+Rod2D(<E:10:20-2>)->evaluateAt(diagram, tick=48) wrote output for "Q" -> false
+48: inputs={ "D"=1, "C"=0 }, outputs={ "Q"=0 }
+Rod2D(<S:14-4:11>)->evaluateAt(diagram, tick=49): { Get1:<E:6:14-2> -> !false, Get1:<E:8:14-2> -> !true} -> false
+Rod2D(<S:14-4:13>)->evaluateAt(diagram, tick=49): { Get1:<E:6:14-2> -> !false, Get1:<E:10:20-2> -> !false} -> false
+Rod2D(<W:13:7-15>)->evaluateAt(diagram, tick=51): { Get2:<S:14-4:11> -> !false, Get2:<S:14-4:13> -> !false} -> true
+Rod2D(<N:5-15:8>)->evaluateAt(diagram, tick=52): { Get1:<W:13:7-15> -> !true} -> false
+Rod2D(<E:6:14-2>)->evaluateAt(diagram, tick=54): { Input[C] -> false} -> false
+Rod2D(<E:8:14-2>)->evaluateAt(diagram, tick=54): { Input[D] -> false} -> false
+Rod2D(<E:10:20-2>)->evaluateAt(diagram, tick=54): { Get2:<N:5-15:8> -> false} -> false
+Rod2D(<E:10:20-2>)->evaluateAt(diagram, tick=54) wrote output for "Q" -> false
+54: inputs={ "D"=0, "C"=0 }, outputs={ "Q"=0 }
+Rod2D(<S:14-4:11>)->evaluateAt(diagram, tick=55): { Get1:<E:6:14-2> -> !false, Get1:<E:8:14-2> -> !false} -> false
+Rod2D(<S:14-4:13>)->evaluateAt(diagram, tick=55): { Get1:<E:6:14-2> -> !false, Get1:<E:10:20-2> -> !false} -> false
+Rod2D(<W:13:7-15>)->evaluateAt(diagram, tick=57): { Get2:<S:14-4:11> -> !false, Get2:<S:14-4:13> -> !false} -> true
+Rod2D(<N:5-15:8>)->evaluateAt(diagram, tick=58): { Get1:<W:13:7-15> -> !true} -> false
+Rod2D(<E:6:14-2>)->evaluateAt(diagram, tick=60): { Input[C] -> false} -> false
+Rod2D(<E:8:14-2>)->evaluateAt(diagram, tick=60): { Input[D] -> false} -> false
+Rod2D(<E:10:20-2>)->evaluateAt(diagram, tick=60): { Get2:<N:5-15:8> -> false} -> false
+Rod2D(<E:10:20-2>)->evaluateAt(diagram, tick=60) wrote output for "Q" -> false
+60: inputs={ "D"=0, "C"=0 }, outputs={ "Q"=0 }
+Rod2D(<S:14-4:11>)->evaluateAt(diagram, tick=61): { Get1:<E:6:14-2> -> !false, Get1:<E:8:14-2> -> !false} -> false
+Rod2D(<S:14-4:13>)->evaluateAt(diagram, tick=61): { Get1:<E:6:14-2> -> !false, Get1:<E:10:20-2> -> !false} -> false
+Rod2D(<W:13:7-15>)->evaluateAt(diagram, tick=63): { Get2:<S:14-4:11> -> !false, Get2:<S:14-4:13> -> !false} -> true
+Rod2D(<N:5-15:8>)->evaluateAt(diagram, tick=64): { Get1:<W:13:7-15> -> !true} -> false
+Rod2D(<E:6:14-2>)->evaluateAt(diagram, tick=66): { Input[C] -> false} -> false
+Rod2D(<E:8:14-2>)->evaluateAt(diagram, tick=66): { Input[D] -> false} -> false
+Rod2D(<E:10:20-2>)->evaluateAt(diagram, tick=66): { Get2:<N:5-15:8> -> false} -> false
+Rod2D(<E:10:20-2>)->evaluateAt(diagram, tick=66) wrote output for "Q" -> false
+66: inputs={ "D"=0, "C"=0 }, outputs={ "Q"=0 }
+Rod2D(<S:14-4:11>)->evaluateAt(diagram, tick=67): { Get1:<E:6:14-2> -> !false, Get1:<E:8:14-2> -> !false} -> false
+Rod2D(<S:14-4:13>)->evaluateAt(diagram, tick=67): { Get1:<E:6:14-2> -> !false, Get1:<E:10:20-2> -> !false} -> false
+Rod2D(<W:13:7-15>)->evaluateAt(diagram, tick=69): { Get2:<S:14-4:11> -> !false, Get2:<S:14-4:13> -> !false} -> true
+Rod2D(<N:5-15:8>)->evaluateAt(diagram, tick=70): { Get1:<W:13:7-15> -> !true} -> false
+Rod2D(<E:6:14-2>)->evaluateAt(diagram, tick=72): { Input[C] -> false} -> false
+Rod2D(<E:8:14-2>)->evaluateAt(diagram, tick=72): { Input[D] -> false} -> false
+Rod2D(<E:10:20-2>)->evaluateAt(diagram, tick=72): { Get2:<N:5-15:8> -> false} -> false
+Rod2D(<E:10:20-2>)->evaluateAt(diagram, tick=72) wrote output for "Q" -> false
+72: inputs={ "D"=0, "C"=0 }, outputs={ "Q"=0 }
+Rod2D(<S:14-4:11>)->evaluateAt(diagram, tick=73): { Get1:<E:6:14-2> -> !false, Get1:<E:8:14-2> -> !false} -> false
+Rod2D(<S:14-4:13>)->evaluateAt(diagram, tick=73): { Get1:<E:6:14-2> -> !false, Get1:<E:10:20-2> -> !false} -> false
+Rod2D(<W:13:7-15>)->evaluateAt(diagram, tick=75): { Get2:<S:14-4:11> -> !false, Get2:<S:14-4:13> -> !false} -> true
+Rod2D(<N:5-15:8>)->evaluateAt(diagram, tick=76): { Get1:<W:13:7-15> -> !true} -> false
+Rod2D(<E:6:14-2>)->evaluateAt(diagram, tick=78): { Input[C] -> false} -> false
+Rod2D(<E:8:14-2>)->evaluateAt(diagram, tick=78): { Input[D] -> false} -> false
+Rod2D(<E:10:20-2>)->evaluateAt(diagram, tick=78): { Get2:<N:5-15:8> -> false} -> false
+Rod2D(<E:10:20-2>)->evaluateAt(diagram, tick=78) wrote output for "Q" -> false
+78: inputs={ "D"=0, "C"=0 }, outputs={ "Q"=0 }
+Rod2D(<S:14-4:11>)->evaluateAt(diagram, tick=79): { Get1:<E:6:14-2> -> !false, Get1:<E:8:14-2> -> !false} -> false
+Rod2D(<S:14-4:13>)->evaluateAt(diagram, tick=79): { Get1:<E:6:14-2> -> !false, Get1:<E:10:20-2> -> !false} -> false
+Rod2D(<W:13:7-15>)->evaluateAt(diagram, tick=81): { Get2:<S:14-4:11> -> !false, Get2:<S:14-4:13> -> !false} -> true
+Rod2D(<N:5-15:8>)->evaluateAt(diagram, tick=82): { Get1:<W:13:7-15> -> !true} -> false
+Rod2D(<E:6:14-2>)->evaluateAt(diagram, tick=84): { Input[C] -> false} -> false
+Rod2D(<E:8:14-2>)->evaluateAt(diagram, tick=84): { Input[D] -> false} -> false
+Rod2D(<E:10:20-2>)->evaluateAt(diagram, tick=84): { Get2:<N:5-15:8> -> false} -> false
+Rod2D(<E:10:20-2>)->evaluateAt(diagram, tick=84) wrote output for "Q" -> false
+84: inputs={ "D"=0, "C"=0 }, outputs={ "Q"=0 }
+Rod2D(<S:14-4:11>)->evaluateAt(diagram, tick=85): { Get1:<E:6:14-2> -> !false, Get1:<E:8:14-2> -> !false} -> false
+Rod2D(<S:14-4:13>)->evaluateAt(diagram, tick=85): { Get1:<E:6:14-2> -> !false, Get1:<E:10:20-2> -> !false} -> false
+Rod2D(<W:13:7-15>)->evaluateAt(diagram, tick=87): { Get2:<S:14-4:11> -> !false, Get2:<S:14-4:13> -> !false} -> true
+Rod2D(<N:5-15:8>)->evaluateAt(diagram, tick=88): { Get1:<W:13:7-15> -> !true} -> false
+Rod2D(<E:6:14-2>)->evaluateAt(diagram, tick=90): { Input[C] -> false} -> false
+Rod2D(<E:8:14-2>)->evaluateAt(diagram, tick=90): { Input[D] -> false} -> false
+Rod2D(<E:10:20-2>)->evaluateAt(diagram, tick=90): { Get2:<N:5-15:8> -> false} -> false
+Rod2D(<E:10:20-2>)->evaluateAt(diagram, tick=90) wrote output for "Q" -> false
+90: inputs={ "D"=0, "C"=0 }, outputs={ "Q"=0 }
