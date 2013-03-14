@@ -26,6 +26,8 @@ struct RodTypeProperties {
   Direction bwd;
   Direction lwd;
   Direction rwd;
-} rodTypeProperties[eoRodType];
+};
+
+extern RodTypeProperties rodTypeProperties[eoRodType];
 
 #endif // RODTYPE_H

@@ -1,6 +1,13 @@
 #ifndef RULE_H
 #define RULE_H
 
+#include <map>
+using std::map;
+
+#include "scenario.h"
+#include "tickpercycle.h"
+#include "voxel.h"
+
 struct Rule {
   Rule(TickPerCycle tick, Voxel self, Voxel n, Voxel w, Voxel e, Voxel s, Voxel v) :
       scenario(tick, self, n, w, e, s),
@@ -23,5 +30,7 @@ struct Rule {
   Scenario scenario;
   Voxel newVoxel;
 };
+
+typedef map<Scenario, Voxel> Rules;
 
 #endif // RULE_H

@@ -2,14 +2,19 @@
 #define VOXEL_H
 
 #include <array>
-#include "voxeltype.h"
-#include "rodtype.h"
-#include "locktype.h"
-#include "lockstate.h"
-#include "datatype.h"
-#include "datastate.h"
+using std::array;
+#include <map>
+using std::map;
+
 #include "blockstate.h"
+#include "datastate.h"
+#include "datatype.h"
 #include "direction.h"
+#include "lockstate.h"
+#include "locktype.h"
+#include "rodtype.h"
+#include "voxelcoordinant.h"
+#include "voxeltype.h"
 
 // U[nknown]
 // W[all]
@@ -62,6 +67,8 @@ enum Voxel {
 
 char const *toConstCharPointer(Voxel v);
 
+typedef map<VoxelCoordinant, Voxel> Changes;
+
 struct VoxelProperties {
   int displayPriority;
   char const text;
@@ -86,6 +93,8 @@ struct VoxelProperties {
     }
     return false;
   }
-} voxelProperties[eoVoxel];
+};
+
+extern VoxelProperties voxelProperties[eoVoxel];
 
 #endif // VOXEL_H

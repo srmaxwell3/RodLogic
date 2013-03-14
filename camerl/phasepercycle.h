@@ -19,6 +19,8 @@ struct PhaseProperties {
   PhasePerCycle bwd;  // this major cycle direction backward
   PhasePerCycle nxt;  // the next major cycle's forward direction
   PhasePerCycle lst;  // the last major cycle's forward direction
-} phaseProperties[eoPhasePerCycle];
+};
+
+extern PhaseProperties phaseProperties[eoPhasePerCycle];
 
 #endif // PHASEPERCYCLE_H

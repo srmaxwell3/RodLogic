@@ -183,31 +183,7 @@ char const *toConstCharPointer(Voxel v) {
   return "Voxel(?)";
 }
 
-struct VoxelProperties {
-  int displayPriority;
-  char const text;
-  VoxelType voxelType;
-  array<RodType, 3> rodType;
-  LockType lockType;
-  LockState lockState;
-  DataType dataType;
-  DataState dataState;
-  bool isRodBody;
-  BlockState blockableStates;
-  struct Changes {
-    Direction direction;
-    Voxel nextVoxel;
-  } motion[eoFwdOrBwd];
-
-  bool IsOneOf(RodType r) const {
-    for (auto const &rt : rodType) {
-      if (r == rt) {
-        return true;
-      }
-    }
-    return false;
-  }
-} voxelProperties[eoVoxel] = {
+VoxelProperties voxelProperties[eoVoxel] = {
 #undef Props
 #define Props(displayPriority, \
               text, \

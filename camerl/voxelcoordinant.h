@@ -1,6 +1,9 @@
 #ifndef VOXELCOORDINANT_H
 #define VOXELCOORDINANT_H
 
+#include "direction.h"
+#include "phasepercycle.h"
+
 class Volume;
 
 class VoxelCoordinant {

@@ -2,7 +2,6 @@
 #define TICKPERCYCLE_H
 
 #include <cstddef>
-#include "rodtype.h"
 #include "fwdorbwd.h"
 
 // {E,S,W,N}
@@ -22,10 +21,5 @@ enum TickPerCycle {
 size_t const NTicksPerCycle = size_t(eoTickPerCycle);
 
 char const *toConstCharPointer(TickPerCycle t);
-
-struct TickPerCycleProperties {
-  RodType rodType;
-  FwdOrBwd fwdOrBwd;
-} tickPerCycleProperties[eoTickPerCycle];
 
 #endif // TICKPERCYCLE_H

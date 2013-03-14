@@ -20,6 +20,8 @@ struct BlockStateProperties {
   bool isFBlkable;
   bool isRBlkable;
   bool isLockable;
-} blockStateProperties[eoBlockState];
+};
+
+extern BlockStateProperties blockStateProperties[eoBlockState];
 
 #endif // BLOCKSTATE_H
