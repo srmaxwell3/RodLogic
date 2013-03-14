@@ -11,14 +11,15 @@ class Volume;
 
 class LockRod: public Item {
  public:
-  LockRod(RodType t): Item(t), lockState(LSUnkn) {}
+  LockRod(RodType t): Item(t), lockState(lsUnkn) {}
 
-  bool IsLocked() const { return lockState == LSLckd; }
+  bool IsLocked() const { return lockState == lsLckd; }
 
   bool CheckForFreedomOfMovement(Volume *volume, FwdOrBwd fwdOrBwd);
   bool CheckForFreedomOfMovement(Volume *volume);
-  bool AttemptToMove(Volume *volume, FwdOrBwd fwdOrBwd, Changes &changes);
+  // bool AttemptToMove(Volume *volume, FwdOrBwd fwdOrBwd, Changes &changes);
   bool IsValid(Volume const *volume);
+  virtual LockState GetCurrentLockState() const { return lockState; }
   void Dump(Volume const *volume = 0) const;
   char const *TypeName() const { return "LockRod"; }
 

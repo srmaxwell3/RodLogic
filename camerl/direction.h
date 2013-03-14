@@ -4,10 +4,10 @@
 // Directions of motion, in order (clockwise).
 
 enum Direction {
-  DirE, DirS, DirD, DirW, DirN, DirU,
+  E, S, D, W, N, U,
 
   eoDirection,
-  DirX = eoDirection
+  X = eoDirection
 };
 
 char const *toConstCharPointer(Direction d);

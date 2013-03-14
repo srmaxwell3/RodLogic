@@ -2,7 +2,6 @@
 #define VOXELCOORDINANT_H
 
 #include "direction.h"
-#include "phasepercycle.h"
 
 class Volume;
 
@@ -28,25 +27,14 @@ class VoxelCoordinant {
   bool operator<(VoxelCoordinant const &that) const {
     return l < that.l || (l == that.l && (r < that.r || (r == that.r && c < that.c)));
   }
-  VoxelCoordinant &Move(PhasePerCycle c) {
-    switch (c) {
-      case E: return MoveE();
-      case S: return MoveS();
-      case W: return MoveW();
-      case N: return MoveN();
-    default:
-      return *this;
-    }
-    return *this;
-  }
   VoxelCoordinant &Move(Direction d) {
     switch (d) {
-      case DirE: return MoveE();
-      case DirS: return MoveS();
-      case DirD: return MoveD();
-      case DirW: return MoveW();
-      case DirN: return MoveN();
-      case DirU: return MoveU();
+      case E: return MoveE();
+      case S: return MoveS();
+      case D: return MoveD();
+      case W: return MoveW();
+      case N: return MoveN();
+      case U: return MoveU();
     default:
       return *this;
     }
@@ -59,25 +47,14 @@ class VoxelCoordinant {
   VoxelCoordinant &MoveN() { r -= 1; return *this; }
   VoxelCoordinant &MoveU() { l += 1; return *this; }
 
-  VoxelCoordinant To(PhasePerCycle c) const {
-    switch (c) {
-      case E: return ToE();
-      case S: return ToS();
-      case W: return ToW();
-      case N: return ToN();
-    default:
-      return *this;
-    }
-    return *this;
-  }
   VoxelCoordinant To(Direction d) const {
     switch (d) {
-      case DirE: return ToE();
-      case DirS: return ToS();
-      case DirD: return ToD();
-      case DirW: return ToW();
-      case DirN: return ToN();
-      case DirU: return ToU();
+      case E: return ToE();
+      case S: return ToS();
+      case D: return ToD();
+      case W: return ToW();
+      case N: return ToN();
+      case U: return ToU();
     default:
       return *this;
     }

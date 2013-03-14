@@ -2,11 +2,12 @@
 #define DATASTATE_H
 
 enum DataState {
-  DSUnkn,
+  dsUnkn,
 
-  DSRset,
-  DSSet0,
-  DSSet1,
+  dsRset,
+  dsSet0,
+  dsSetX,
+  dsSet1,
 
   eoDataState
 };

@@ -2,6 +2,7 @@
 #define TICKPERCYCLE_H
 
 #include <cstddef>
+#include "direction.h"
 #include "fwdorbwd.h"
 
 // {E,S,W,N}
@@ -10,14 +11,17 @@
 // }
 
 enum TickPerCycle {
-  EUSL, ERS1, ERS0, ELSL, EUEL, ESE0, ESE1, ELEL,
-  SUWL, SRW1, SRW0, SLWL, SUSL, SSS0, SSS1, SLSL,
-  WUNL, WRN1, WRN0, WLNL, WUWL, WSW0, WSW1, WLWL,
-  NUEL, NRE1, NRE0, NLEL, NUNL, NSN0, NSN1, NLNL,
+  tcEUSL,tcERS1,tcERSX,tcERS0,tcELSL,tcEUEL,tcESE0,tcESEX,tcESE1,tcELEL,
+  tcSUWL,tcSRW1,tcSRWX,tcSRW0,tcSLWL,tcSUSL,tcSSS0,tcSSSX,tcSSS1,tcSLSL,
+  tcDUWL,tcDRW1,tcDRWX,tcDRW0,tcDLWL,tcDUSL,tcDSS0,tcDSSX,tcDSS1,tcDLSL,
+  tcWUNL,tcWRN1,tcWRNX,tcWRN0,tcWLNL,tcWUWL,tcWSW0,tcWSWX,tcWSW1,tcWLWL,
+  tcNUEL,tcNRE1,tcNREX,tcNRE0,tcNLEL,tcNUNL,tcNSN0,tcNSNX,tcNSN1,tcNLNL,
+  tcUUEL,tcURE1,tcUREX,tcURE0,tcULEL,tcUUNL,tcUSN0,tcUSNX,tcUSN1,tcULNL,
 
   eoTickPerCycle
 };
 
+size_t const NPhasesPerCycle = size_t(eoDirection);
 size_t const NTicksPerCycle = size_t(eoTickPerCycle);
 
 char const *toConstCharPointer(TickPerCycle t);

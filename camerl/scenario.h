@@ -11,16 +11,18 @@
 class Scenario {
   friend class Rule;
  public:
-  Scenario(TickPerCycle _tick, Voxel _n, Voxel _w, Voxel _self, Voxel _e, Voxel _s) :
-      tick(_tick),
-      self(_self)
+  Scenario(TickPerCycle t,
+           Voxel n, Voxel u, Voxel w, Voxel o, Voxel e, Voxel d, Voxel s
+          ) :
+      tick(t),
+      self(o)
   {
-    area[DirE] = _e;
-    area[DirS] = _s;
-    area[DirD] = Unkn;
-    area[DirW] = _w;
-    area[DirN] = _n;
-    area[DirU] = Unkn;
+    area[E] = e;
+    area[S] = s;
+    area[D] = d;
+    area[W] = w;
+    area[N] = n;
+    area[U] = u;
   }
   Scenario(TickPerCycle _tick, Voxel _self, array<Voxel, eoDirection> _area) :
       tick(_tick),
@@ -55,23 +57,38 @@ class Scenario {
         );
   }
   Voxel From(Direction d) const { return area[d]; }
-  Voxel FromE() const { return area[DirE]; }
-  Voxel FromS() const { return area[DirS]; }
-  Voxel FromD() const { return area[DirD]; }
-  Voxel FromW() const { return area[DirW]; }
-  Voxel FromN() const { return area[DirN]; }
-  Voxel FromU() const { return area[DirU]; }
+  Voxel FromE() const { return area[E]; }
+  Voxel FromS() const { return area[S]; }
+  Voxel FromD() const { return area[D]; }
+  Voxel FromW() const { return area[W]; }
+  Voxel FromN() const { return area[N]; }
+  Voxel FromU() const { return area[U]; }
   Voxel Self() const { return self; }
   void Dump() const {
     fprintf(stdout,
-            "(Scenario *)(%p)->{ %s, %s, { %s, %s, %s, %s } }\n",
+            "(Scenario *)(%p)->{ tick=%s, self=%s, area={ %s, %s, %s, %s, %s, %s } }",
             this,
             toConstCharPointer(tick),
             toConstCharPointer(self),
-            toConstCharPointer(area[DirE]),
-            toConstCharPointer(area[DirS]),
-            toConstCharPointer(area[DirW]),
-            toConstCharPointer(area[DirN])
+            toConstCharPointer(area[E]),
+            toConstCharPointer(area[S]),
+            toConstCharPointer(area[D]),
+            toConstCharPointer(area[W]),
+            toConstCharPointer(area[N]),
+            toConstCharPointer(area[U])
+           );
+  }
+  void Show() const {
+    fprintf(stdout,
+            "{ %s, %s, %s, %s, %s, %s, %s, %s }",
+            toConstCharPointer(tick),
+            toConstCharPointer(area[N]),
+            toConstCharPointer(area[U]),
+            toConstCharPointer(area[W]),
+            toConstCharPointer(self),
+            toConstCharPointer(area[E]),
+            toConstCharPointer(area[D]),
+            toConstCharPointer(area[S])
            );
   }
 

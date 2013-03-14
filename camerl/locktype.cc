@@ -2,12 +2,12 @@
 
 char const *toConstCharPointer(LockType t) {
   switch (t) {
-    case LTUnkn: return "LTUnkn";
-    case LTBody: return "LTBody";
-    case LTHead: return "LTHead";
-    case LTTail: return "LTTail";
-    case LTPost: return "LTPost";
-    case LTLock: return "LTLock";
+    case ltUnkn: return "ltUnkn";
+    case ltBody: return "ltBody";
+    case ltHead: return "ltHead";
+    case ltTail: return "ltTail";
+    case ltPost: return "ltPost";
+    case ltLock: return "ltLock";
     case eoLockType:
       return "eoLockType";
   }

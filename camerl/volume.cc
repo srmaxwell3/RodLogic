@@ -41,6 +41,15 @@ void Volume::ProceedOnePhase() {
 }
 
 void Volume::ProceedOneTick() {
+  if (clock % NTicksPerPhase == 0) {
+    Direction d = Direction((clock / NTicksPerPhase) % NPhasesPerCycle);
+    for (auto &vci : inputs[d]) {
+      if (!vci.second.empty()) {
+        vci.second.pop_front();
+      }
+    }
+  }
+
   size_t tick = clock % NTicksPerCycle;
   TickPerCycleProperties const &tProperties = tickPerCycleProperties[tick];
   if (optVerbose) {
@@ -173,11 +182,11 @@ void Volume::AddToRod(RodType rodType, Direction fwd, Direction bwd, Item *item,
     if (!reachedFwdEnd) {
       VoxelCoordinant uc = fc.ToU();
       if (isPartOf(rodType, uc) && item->find(uc) == item->end()) {
-	AddToRod(rodType, fwd, bwd, item, uc);
+        AddToRod(rodType, fwd, bwd, item, uc);
       }
       VoxelCoordinant dc = fc.ToD();
       if (isPartOf(rodType, dc) && item->find(dc) == item->end()) {
-	AddToRod(rodType, fwd, bwd, item, dc);
+        AddToRod(rodType, fwd, bwd, item, dc);
       }
     }
   }
@@ -191,11 +200,11 @@ void Volume::AddToRod(RodType rodType, Direction fwd, Direction bwd, Item *item,
     if (!reachedBwdEnd) {
       VoxelCoordinant uc = bc.ToU();
       if (isPartOf(rodType, uc) && item->find(uc) == item->end()) {
-	AddToRod(rodType, fwd, bwd, item, uc);
+        AddToRod(rodType, fwd, bwd, item, uc);
       }
       VoxelCoordinant dc = bc.ToD();
       if (isPartOf(rodType, dc) && item->find(dc) == item->end()) {
-	AddToRod(rodType, fwd, bwd, item, dc);
+        AddToRod(rodType, fwd, bwd, item, dc);
       }
     }
   }
@@ -210,10 +219,10 @@ Item *Volume::FormRodContaining
   RodTypeProperties const &rProperties = rodTypeProperties[rodType];
   Item *item = 0;
   switch (rodType) {
-    case RTLE: case RTLS: case RTLW: case RTLN:
+    case rtLE: case rtLS: case rtLW: case rtLN:
       item = new LockRod(rodType);
       break;
-    case RTDE: case RTDS: case RTDW: case RTDN:
+    case rtDE: case rtDS: case rtDW: case rtDN:
       item = new DataRod(rodType);
       break;
     default:
@@ -244,8 +253,8 @@ void Volume::FindItems() {
       for (int c = 0; c < NCols; c += 1) {
         VoxelCoordinant vc(l, r, c);
         Voxel v = voxelAt(vc);
-	if (voxelProperties[v].isRodBody) {
-	  if (seenSofar.find(vc) == seenSofar.end()) {
+        if (voxelProperties[v].isRodBody) {
+          if (seenSofar.find(vc) == seenSofar.end()) {
             Item *item = FormRodContaining(seenSofar, vc);
             if (optVerbose) {
               item->Dump(this);
@@ -258,4 +267,3 @@ void Volume::FindItems() {
     }
   }
 }
-

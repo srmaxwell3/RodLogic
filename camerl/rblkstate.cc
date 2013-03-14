@@ -2,9 +2,9 @@
 
 char const *toConstCharPointer(RBlkState s) {
   switch (s) {
-    case RBUnkn: return "RBUnkn";
-    case RBBlkd: return "RBBlkd";
-    case RBUnbk: return "RBUnbk";
+    case rbUnkn: return "rbUnkn";
+    case rbBlkd: return "rbBlkd";
+    case rbUnbk: return "rbUnbk";
     case eoRBlkState:
       return "eoRBlkState";
   }

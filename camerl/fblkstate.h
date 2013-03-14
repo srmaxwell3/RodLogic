@@ -2,10 +2,10 @@
 #define FBLKSTATE_H
 
 enum FBlkState {
-  FBUnkn,
+  fbUnkn,
 
-  FBBlkd,
-  FBUnbk,
+  fbBlkd,
+  fbUnbk,
 
   eoFBlkState
 };

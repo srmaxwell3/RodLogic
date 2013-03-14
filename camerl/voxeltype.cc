@@ -2,11 +2,11 @@
 
 char const *toConstCharPointer(VoxelType t) {
   switch (t) {
-    case VTUnkn: return "VTUnkn";
-    case VTWall: return "VTWall";
-    case VTSlot: return "VTSlot";
-    case VTLock: return "VTLock";
-    case VTData: return "VTData";
+    case vtUnkn: return "vtUnkn";
+    case vtWall: return "vtWall";
+    case vtSlot: return "vtSlot";
+    case vtLock: return "vtLock";
+    case vtData: return "vtData";
     case eoVoxelType:
       return "eoVoxelType";
   }

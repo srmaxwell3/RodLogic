@@ -2,13 +2,13 @@
 #define LOCKTYPE_H
 
 enum LockType {
-  LTUnkn,
+  ltUnkn,
 
-  LTBody,
-  LTHead,
-  LTTail,
-  LTPost,
-  LTLock,
+  ltBody,
+  ltHead,
+  ltTail,
+  ltPost,
+  ltLock,
 
   eoLockType
 };

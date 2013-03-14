@@ -2,10 +2,10 @@
 #define RBLKSTATE_H
 
 enum RBlkState {
-  RBUnkn,
+  rbUnkn,
 
-  RBBlkd,
-  RBUnbk,
+  rbBlkd,
+  rbUnbk,
 
   eoRBlkState
 };

@@ -2,9 +2,9 @@
 
 char const *toConstCharPointer(FBlkState s) {
   switch (s) {
-    case FBUnkn: return "FBUnkn";
-    case FBBlkd: return "FBBlkd";
-    case FBUnbk: return "FBUnbk";
+    case fbUnkn: return "fbUnkn";
+    case fbBlkd: return "fbBlkd";
+    case fbUnbk: return "fbUnbk";
     case eoFBlkState:
       return "eoFBlkState";
   }

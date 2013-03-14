@@ -2,14 +2,14 @@
 #define BLOCKSTATE_H
 
 enum BlockState {
-  ___,  // FBUnbk, RBUnbk, LSUnlk
-  F__,  // FBBlkd, RBUnbk, LSUnlk
-  _R_,  // FBUnbk, RBBlkd, LSUnlk
-  FR_,  // FBBlkd, RBBlkd, LSUnlk
-  __L,  // FBUnbk, RBUnbk, LSLckd
-  F_L,  // FBBlkd, RBUnbk, LSLckd
-  _RL,  // FBUnbk, RBBlkd, LSLckd
-  FRL,  // FBBlkd, RBBlkd, LSLckd
+  ___,  // fbUnbk, rbUnbk, lsUnlk
+  F__,  // fbBlkd, rbUnbk, lsUnlk
+  _R_,  // fbUnbk, rbBlkd, lsUnlk
+  FR_,  // fbBlkd, rbBlkd, lsUnlk
+  __L,  // fbUnbk, rbUnbk, lsLckd
+  F_L,  // fbBlkd, rbUnbk, lsLckd
+  _RL,  // fbUnbk, rbBlkd, lsLckd
+  FRL,  // fbBlkd, rbBlkd, lsLckd
 
   eoBlockState
 };

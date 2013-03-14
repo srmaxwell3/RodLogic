@@ -1,6 +1,7 @@
 #ifndef VOLUME_H
 #define VOLUME_H
 
+#include <cassert>
 #include <cstddef>
 using std::size_t;
 #include <array>
@@ -18,14 +19,16 @@ using std::set;
 #include "tickperphase.h"
 #include "voxel.h"
 
+extern bool optVerbose;
+
 class Item;
 typedef set<Item *> SetOfItems;
 class LockRod;
 class DataRod;
 
 size_t const NLvls = 7;
-size_t const NRows = 28;
-size_t const NCols = 25;
+size_t const NRows = 29;
+size_t const NCols = 32;
 
 typedef array<array<array<Voxel, NCols>, NRows>, NLvls> VolArray;
 typedef array<array<char, NCols>, NRows> ViewLvlArray;
@@ -35,15 +38,68 @@ class Volume: public VolArray
  public:
   Volume(VolArray const &initial);
   Volume(Voxel initialVoxel = Unkn);
-  void AddRule(Rule const &rule) { rules[rule.scenario] = rule.newVoxel; }
   void AddRule(Scenario const &scenario, Voxel newVoxel) {
     rules[scenario] = newVoxel;
   }
-  Rules &GetRules() { return rules; }
-  void AddInput(VoxelCoordinant const &vc, deque<DataState> const &values) {
-    inputs[vc] = values;
+  void AddRule(TickPerCycle t,
+       Voxel n, Voxel u, Voxel w, Voxel o, Voxel e, Voxel d, Voxel s,
+       Voxel v
+      )
+  {
+    Scenario scenario(t, n, u, w, o, e, d, s);
+    rules[scenario] = v;
+    if (optVerbose) {
+      fprintf(stdout,
+              "(Volume *)(%p)->AddRule(%s, %s, %s, %s, %s, %s, %s, %s, %s): rules[",
+              this,
+              toConstCharPointer(t),
+              toConstCharPointer(n),
+              toConstCharPointer(u),
+              toConstCharPointer(w),
+              toConstCharPointer(o),
+              toConstCharPointer(e),
+              toConstCharPointer(d),
+              toConstCharPointer(s),
+              toConstCharPointer(v)
+             );
+      scenario.Show();
+      fprintf(stdout, "] = %s\n", toConstCharPointer(v));
+    }
   }
-  deque<DataState> &GetInputsFor(VoxelCoordinant const &vc) { return inputs[vc]; }
+  Rules &GetRules() { return rules; }
+  RuleCounts &GetRuleCounts() { return ruleCounts; }
+  bool FoundNewRules() const {
+    bool foundNewRules = false;
+    for (auto const &r : rules) {
+      if (r.second == Unkn) {
+        fprintf(stdout, "  volume.Add");
+        Rule rule(r.first, r.second);
+        rule.Show();
+        foundNewRules = true;
+      }
+    }
+    return foundNewRules;
+  }
+  void DumpUnusedRules() const {
+    for (auto const &r : ruleCounts) {
+      if (r.second == 0) {
+        fprintf(stdout, "Unused rule; scenario ");
+        r.first.Show();
+      }
+    }
+  }
+
+  void AddInput(VoxelCoordinant const &vc, deque<DataState> const &values) {
+    GetInputsFor(vc) = values;
+  }
+  deque<DataState> &GetInputsFor(VoxelCoordinant const &vc) {
+    Voxel v = voxelAt(vc);
+    VoxelProperties const &vProperties = voxelProperties[v];
+    assert(vProperties.voxelType == vtData);
+    assert(vProperties.dataType == dtInpt);
+    Direction d = rodTypeProperties[vProperties.rodType[0]].fwd;
+    return inputs[d][vc];
+  }
   void ProceedOneCycle();
   void ProceedOnePhase();
   void ProceedOneTick();
@@ -59,12 +115,12 @@ class Volume: public VolArray
     if (isVoxelCoordinantInBounds(vc)) {
       return (*this)[vc.L()][vc.R()][vc.C()];
     }
-    return Unkn;
+    return Wall;
   }
   int CurrentClock() const { return clock; }
   int CurrentCycle() const { return clock / NTicksPerCycle; }
-  PhasePerCycle CurrentPhasePerCycle() const {
-    return PhasePerCycle((CurrentClock() % NTicksPerCycle) / NTicksPerPhase);
+  Direction CurrentPhasePerCycle() const {
+    return Direction((CurrentClock() % NTicksPerCycle) / NTicksPerPhase);
   }
   TickPerCycle CurrentTickPerCycle() const {
     return TickPerCycle(CurrentClock() % NTicksPerCycle);
@@ -89,9 +145,10 @@ class Volume: public VolArray
   void FindItems();
 
   Rules rules;
+  RuleCounts ruleCounts;
   int clock;
   array<SetOfItems, eoRodType> itemsByRodType;
-  map<VoxelCoordinant, deque<DataState>> inputs;
+  array<map<VoxelCoordinant, deque<DataState>>, eoDirection> inputs;
 };
 
 #endif // VOLUME_H

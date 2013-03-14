@@ -8,10 +8,10 @@ Scenario::Scenario(Volume const *volume,
     tick(t),
     self(volume->voxelAt(vc))
 {
-  area[DirE] = volume->voxelAt(vc.To(DirE));
-  area[DirS] = volume->voxelAt(vc.To(DirS));
-  area[DirD] = volume->voxelAt(vc.To(DirD));
-  area[DirW] = volume->voxelAt(vc.To(DirW));
-  area[DirN] = volume->voxelAt(vc.To(DirN));
-  area[DirU] = volume->voxelAt(vc.To(DirU));
+  area[E] = volume->voxelAt(vc.To(E));
+  area[S] = volume->voxelAt(vc.To(S));
+  area[D] = volume->voxelAt(vc.To(D));
+  area[W] = volume->voxelAt(vc.To(W));
+  area[N] = volume->voxelAt(vc.To(N));
+  area[U] = volume->voxelAt(vc.To(U));
 }

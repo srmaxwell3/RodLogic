@@ -2,10 +2,10 @@
 #define LOCKSTATE_H
 
 enum LockState {
-  LSUnkn,
+  lsUnkn,
 
-  LSLckd,
-  LSUnlk,
+  lsLckd,
+  lsUnlk,
 
   eoLockState
 };

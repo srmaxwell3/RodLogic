@@ -2,12 +2,12 @@
 
 char const *toConstCharPointer(Direction d) {
   switch (d) {
-    case DirE: return "DirE";
-    case DirS: return "DirS";
-    case DirD: return "DirD";
-    case DirW: return "DirW";
-    case DirN: return "DirN";
-    case DirU: return "DirU";
+    case E: return "E";
+    case S: return "S";
+    case D: return "D";
+    case W: return "W";
+    case N: return "N";
+    case U: return "U";
     case eoDirection:
       return "eoDirection";
   }

@@ -2,10 +2,11 @@
 
 char const *toConstCharPointer(DataState s) {
   switch (s) {
-    case DSUnkn: return "DSUnkn";
-    case DSRset: return "DSRset";
-    case DSSet0: return "DSSet0";
-    case DSSet1: return "DSSet1";
+    case dsUnkn: return "dsUnkn";
+    case dsRset: return "dsRset";
+    case dsSet0: return "dsSet0";
+    case dsSetX: return "dsSetX";
+    case dsSet1: return "dsSet1";
     case eoDataState:
       return "eoDataState";
   }

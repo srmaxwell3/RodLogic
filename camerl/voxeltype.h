@@ -2,12 +2,12 @@
 #define VOXELTYPE_H
 
 enum VoxelType {
-  VTUnkn,
+  vtUnkn,
 
-  VTWall,
-  VTSlot,
-  VTLock,
-  VTData,
+  vtWall,
+  vtSlot,
+  vtLock,
+  vtData,
 
   eoVoxelType
 };

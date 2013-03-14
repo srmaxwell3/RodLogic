@@ -15,10 +15,10 @@ size_t const NPhasesPerCycle = size_t(eoPhasePerCycle);
 char const *toConstCharPointer(PhasePerCycle t);
 
 struct PhaseProperties {
-  PhasePerCycle fwd;  // this major cycle direction forward (identity)
-  PhasePerCycle bwd;  // this major cycle direction backward
-  PhasePerCycle nxt;  // the next major cycle's forward direction
-  PhasePerCycle lst;  // the last major cycle's forward direction
+  Direction fwd;  // this major cycle direction forward (identity)
+  Direction bwd;  // this major cycle direction backward
+  Direction nxt;  // the next major cycle's forward direction
+  Direction lst;  // the last major cycle's forward direction
 };
 
 extern PhaseProperties phaseProperties[eoPhasePerCycle];

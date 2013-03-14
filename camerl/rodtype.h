@@ -9,10 +9,10 @@
 // D[ata]{E,S,W,N}
 
 enum RodType {
-  RTUn,
+  rtUn,
 
-  RTLE, RTLS, RTLW, RTLN,
-  RTDE, RTDS, RTDW, RTDN,
+  rtLE, rtLS, rtLD, rtLW, rtLN, rtLU,
+  rtDE, rtDS, rtDD, rtDW, rtDN, rtDU,
 
   eoRodType
 };

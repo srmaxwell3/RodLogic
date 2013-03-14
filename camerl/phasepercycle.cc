@@ -14,7 +14,9 @@ char const *toConstCharPointer(PhasePerCycle t) {
 
 PhaseProperties phaseProperties[eoPhasePerCycle] = {
   { E, W, S, N },  // E
-  { S, N, W, E },  // S
-  { W, E, N, S },  // W
-  { N, S, E, W }   // N
+  { S, N, D, E },  // S
+  { D, U, W, S },  // D
+  { W, E, N, D },  // W
+  { N, S, U, W },  // N
+  { U, D, E, N }   // U
 };

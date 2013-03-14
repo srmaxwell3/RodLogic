@@ -12,7 +12,6 @@ ALL_OBJS = \
 	camerl.o \
 	direction.o \
 	fwdorbwd.o \
-	phasepercycle.o \
 	tickperphase.o \
 	tickpercycle.o \
 	tickpercycleproperties.o \
@@ -50,8 +49,6 @@ camerl.o:	camerl.cc
 direction.o:	direction.cc direction.h
 
 fwdorbwd.o:	fwdorbwd.cc fwdorbwd.h
-
-phasepercycle.o:	phasepercycle.cc phasepercycle.h
 
 tickperphase.o:	tickperphase.cc tickperphase.h
 
