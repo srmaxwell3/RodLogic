@@ -363,6 +363,7 @@ void processDiagramFrom(istream &in, map<string, vector<int>> const &inputs) {
   Diagram2D diagram(in);
   diagram.scan();
   diagram.dump();
+  diagram.refactor();
 
   // for (unsigned s = 0; s < 16; s += 1) {
   //   for (unsigned m = 0; m < 2; m += 1) {

@@ -49,4 +49,25 @@ Total:   127 (    0)
 Earliest input: E
 Earliest output: W
 
+Refactoring....
+limitTowards[E] =   12
+limitTowards[S] =  154
+limitTowards[D] =    0
+limitTowards[W] =   67
+limitTowards[N] =   74
+limitTowards[U] =    0
+
+Row separations:
+separations[ 2] =   25
+separations[ 3] =   17
+separations[ 4] =    2
+separations[ 8] =    1
+separations[ 9] =    1
+
+Column separations:
+separations[ 1] =    1
+separations[ 2] =   31
+separations[ 3] =   23
+separations[ 4] =    2
+
 Not executing (optCycleCount == 0).

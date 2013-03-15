@@ -63,6 +63,8 @@ struct Diagram2D : public vector<string> {
 
   void scan();
 
+  void refactor();
+
   void setInputFor(Label const &label, vector<int> const &values);
   void setInputFor(string const &label, vector<int> const &values);
   void addInputFor(Label const &label, bool value);

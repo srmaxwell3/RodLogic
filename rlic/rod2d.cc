@@ -245,12 +245,20 @@ bool Rod2D::findLabel(Diagram2D const &diagram, P2D pStart, Directions oWard) {
     int nBlanks = 0;
     string l;
     P2D t;
-    for (t = pStart.offsetBy(oWard); nBlanks < 2 && diagram.isInBounds(t) && diagram.at(t) == ' '; t.move(tWard)) {
+    for (t = pStart.offsetBy(oWard);
+         nBlanks < 2 && diagram.isInBounds(t) && diagram.at(t) == ' ';
+         t.move(tWard)
+        )
+    {
       nBlanks += 1;
     }
     if (diagram.isInBounds(t)) {
       char c = diagram.at(t);
-      if (nBlanks < 2 && (c == '0' || c == '1' || c == 'O' || c == 'I' || !Diagram2D::isLegalEWChar(c))) {
+      if (nBlanks < 2 &&
+          (c != '/' && c != '\\') &&
+          (c == '0' || c == '1' || c == 'O' || c == 'I' || !Diagram2D::isLegalEWChar(c))
+         )
+      {
         for (; diagram.isInBounds(t); t.move(tWard)) {
           c = diagram.at(t);
           if (c != ' ') {
@@ -275,12 +283,20 @@ bool Rod2D::findLabel(Diagram2D const &diagram, P2D pStart, Directions oWard) {
     int nBlanks = 0;
     string l;
     P2D t;
-    for (t = pStart.offsetBy(oWard); nBlanks < 2 && diagram.isInBounds(t) && diagram.at(t) == ' '; t.move(tWard)) {
+    for (t = pStart.offsetBy(oWard);
+         nBlanks < 2 && diagram.isInBounds(t) && diagram.at(t) == ' ';
+         t.move(tWard)
+        )
+    {
       nBlanks += 1;
     }
     if (diagram.isInBounds(t)) {
       char c = diagram.at(t);
-      if (nBlanks < 2 && (c == '0' || c == '1' || c == 'O' || c == 'I' || !Diagram2D::isLegalEWChar(c))) {
+      if (nBlanks < 2 &&
+          (c != '/' && c != '\\') &&
+          (c == '0' || c == '1' || c == 'O' || c == 'I' || !Diagram2D::isLegalEWChar(c))
+         )
+      {
         for (; diagram.isInBounds(t); t.move(tWard)) {
           c = diagram.at(t);
           if (c != ' ') {
@@ -306,9 +322,16 @@ bool Rod2D::findLabel(Diagram2D const &diagram, P2D pStart, Directions oWard) {
     Directions const &tWard = oWardToTWard[oWard][0];
     char const &slash = oWardToSlash[oWard][0];
     int nLSlashes = 0;
-    for (P2D pOl = pStart.offsetBy(oWard, lWard); diagram.isInBounds(pOl); pOl.move(oWard, lWard)) {
+    for (P2D pOl = pStart.offsetBy(oWard, lWard);
+         diagram.isInBounds(pOl);
+         pOl.move(oWard, lWard)
+        )
+    {
       char c = diagram.at(pOl);
-      if (0 < nLSlashes && c != slash) {
+      if (0 < nLSlashes && c != slash &&
+          (c != '/' && c != '\\')
+         )
+      {
 	int nBlanks = 0;
 	string l;
 	for (P2D t = pOl; diagram.isInBounds(t); t.move(tWard)) {
@@ -341,9 +364,16 @@ bool Rod2D::findLabel(Diagram2D const &diagram, P2D pStart, Directions oWard) {
     Directions const &tWard = oWardToTWard[oWard][1];
     char const &slash = oWardToSlash[oWard][1];
     int nRSlashes = 0;
-    for (P2D pOr = pStart.offsetBy(oWard, rWard); diagram.isInBounds(pOr); pOr.move(oWard, rWard)) {
+    for (P2D pOr = pStart.offsetBy(oWard, rWard);
+         diagram.isInBounds(pOr);
+         pOr.move(oWard, rWard)
+        )
+    {
       char c = diagram.at(pOr);
-      if (0 < nRSlashes && c != slash) {
+      if (0 < nRSlashes && c != slash &&
+          (c != '/' && c != '\\')
+         )
+      {
 	int nBlanks = 0;
 	string l;
 	for (P2D t = pOr; diagram.isInBounds(t); t.move(tWard)) {
@@ -596,12 +626,16 @@ void Rod2D::dump(Diagram2D const &diagram) const {
   fprintf(stdout, "(Rod2D *)(%p)->", this);
   fprintf(stdout, "{ label=\"%s\"", label.ToString().c_str());
   fprintf(stdout, ", %sisComplete", isComplete ? "" : "!");
-  fprintf(stdout, ", headAt=P2D(%d,%d)", headAt.y, headAt.x);
-  fprintf(stdout, ", tailAt=P2D(%d,%d)", tailAt.y, tailAt.x);
+  fprintf(stdout, ", headAt=%s", headAt.ToString().c_str());
+  fprintf(stdout, ", tailAt=%s", tailAt.ToString().c_str());
   fprintf(stdout, ", direction=%s", c_str(direction));
   fprintf(stdout, ", tickFirstSet=%d", tickFirstSet);
   fprintf(stdout, ", countOfValidInputs=%d", countOfValidInputs);
-  if (int countOfInvalidInputs = (connectedTo[Get1].size() + connectedTo[Get2].size()) - countOfValidInputs) {
+  if (int countOfInvalidInputs =
+          (connectedTo[Get1].size() + connectedTo[Get2].size()) -
+          countOfValidInputs
+     )
+  {
     fprintf(stdout, ", countOfInvalidInputs=%d", countOfInvalidInputs);
   }
 

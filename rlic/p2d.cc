@@ -5,7 +5,7 @@ void SetOfP2Ds::dump(Diagram2D const &diagram) const {
   char const *comma = "{";
   fprintf(stdout, "(%lu)", size());
   for (auto const &p : *this) {
-    fprintf(stdout, "%sP2D(%d,%d)", comma, p.y, p.x);
+    fprintf(stdout, "%s%s", comma, p.ToString().c_str());
     fprintf(stdout, "(%c)", diagram.at(p));
     comma = ",";
   }

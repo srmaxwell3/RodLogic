@@ -4,6 +4,8 @@
 #include <cassert>
 #include <set>
 using std::set;
+#include <string>
+using std::string;
 
 #include "directions.h"
 
@@ -53,6 +55,20 @@ struct P2D {
     return *this;
   }
 
+  int limitTowards(Directions d) const {
+    switch (d) {
+      case E:
+      case W:
+        return x;
+      case S:
+      case N:
+        return y;
+      default:
+        assert(d == E || d == S || d == W || d == N);
+    }
+    return eoDirections;
+  }
+
   P2D &move(Directions d1, Directions d2) {
     return move(d1).move(d2);
   }
@@ -61,6 +77,12 @@ struct P2D {
   void incY() { y += 1; }
   void decX() { x -= 1; }
   void incX() { x += 1; }
+
+  string ToString() const {
+    char buffer[32];
+    sprintf(buffer, "P2D(%d,%d)", y + 1, x + 1);
+    return buffer;
+  }
 
   int y;
   int x;

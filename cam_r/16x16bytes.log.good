@@ -31,4 +31,28 @@ Total: 15206 (    0)
 Earliest input: E
 Earliest output: W
 
+Refactoring....
+limitTowards[E] =   15
+limitTowards[S] =  398
+limitTowards[D] =    0
+limitTowards[W] = 1506
+limitTowards[N] =   52
+limitTowards[U] =    0
+
+Row separations:
+separations[ 1] =  205
+separations[ 2] =    2
+separations[ 3] =   33
+separations[ 4] =    1
+separations[ 5] =   15
+separations[ 6] =    1
+
+Column separations:
+separations[ 1] =  545
+separations[ 2] =    2
+separations[ 4] =   16
+separations[ 7] =  112
+separations[ 8] =   15
+separations[16] =    1
+
 Not executing (optCycleCount == 0).

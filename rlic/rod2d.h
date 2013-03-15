@@ -17,7 +17,8 @@ struct Diagram2D;
 struct Rod2D;
 typedef set<Rod2D *> SetOfRod2Ds;
 
-struct Rod2D : public SetOfP2Ds {
+class Rod2D : public SetOfP2Ds {
+ public:
   Rod2D(Diagram2D &diagram, P2D const &pStart, Directions d);
   Rod2D();
 
@@ -27,6 +28,8 @@ struct Rod2D : public SetOfP2Ds {
   bool rodIsIncomplete() const;
   bool rodsDirection() const;
   int rodsLength() const;
+  P2D const &getHeadAt() const { return headAt; }
+  P2D const &getTailAt() const { return tailAt; }
 
   void setFirstTick (int t);
   int tickFirstSetAt () const;
