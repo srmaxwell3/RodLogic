@@ -12,4 +12,6 @@ enum Direction {
 
 char const *toConstCharPointer(Direction d);
 
+extern Direction const direction[eoDirection];
+
 #endif // DIRECTION_H

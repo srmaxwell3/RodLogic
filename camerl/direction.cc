@@ -13,3 +13,7 @@ char const *toConstCharPointer(Direction d) {
   }
   return "Direction(?)";
 }
+
+Direction const direction[eoDirection] = {
+  E, S, D, W, N, U
+};

@@ -26,4 +26,6 @@ size_t const NTicksPerCycle = size_t(eoTickPerCycle);
 
 char const *toConstCharPointer(TickPerCycle t);
 
+extern TickPerCycle const tickPerCycle[eoTickPerCycle];
+
 #endif // TICKPERCYCLE_H

@@ -1,4 +1,13 @@
 #include <cassert>
+#include <chrono>
+using std::chrono::duration_cast;
+using std::chrono::microseconds;
+#if 1
+#define CHRONO_CLOCK high_resolution_clock
+#else
+#define CHRONO_CLOCK steady_clock
+#endif
+using std::chrono::CHRONO_CLOCK;
 
 #include "datarod.h"
 #include "item.h"
@@ -6,23 +15,32 @@
 #include "tickpercycleproperties.h"
 #include "volume.h"
 
+extern bool optShowPerformance;
 extern bool optVerbose;
 
 Volume::Volume(VolArray const &initial) :
     VolArray(initial),
-    clock(0)
+    NLvls(initial.size()),
+    NRows(0),
+    NCols(0),
+    clock(0),
+    totalEvaluatedUSecs(0),
+    totalEvaluatedTicks(0)
 {
-  FindItems();
-}
-
-Volume::Volume(Voxel initialVoxel) : clock(0) {
-  for (int l = 0; l < NLvls; l += 1) {
-    for (int r = 0; r < NRows; r += 1) {
-      for (int c = 0; c < NCols; c += 1) {
-        (*this)[l][r][c] = initialVoxel;
+  for (auto const &lvl : initial) {
+    if (NRows < lvl.size()) {
+      NRows = lvl.size();
+    }
+    for (auto const &row : lvl) {
+      if (NCols < row.size()) {
+        NCols = row.size();
       }
     }
   }
+
+  totalEvaluatedUSecsPerDirection.fill(0);
+  totalEvaluatedUSecsPerTick.fill(0);
+
   FindItems();
 }
 
@@ -63,6 +81,8 @@ void Volume::ProceedOneTick() {
             );
   }
 
+  auto boEvaluation = CHRONO_CLOCK::now();
+
   Changes changes;
   for (Item *i : itemsByRodType[tProperties.rodType]) {
     i->AttemptToMove(this, tProperties.fwdOrBwd, changes);
@@ -73,6 +93,23 @@ void Volume::ProceedOneTick() {
     (*this)[vc.L()][vc.R()][vc.C()] = c.second;
   }
   clock += 1;
+
+  auto eoEvaluation = CHRONO_CLOCK::now();
+  auto dTEvaluation = duration_cast<microseconds>(eoEvaluation - boEvaluation).count();
+  totalEvaluatedUSecsPerDirection[totalEvaluatedTicks % eoDirection] += dTEvaluation;
+  totalEvaluatedUSecsPerTick[totalEvaluatedTicks % eoTickPerCycle] += dTEvaluation;
+  totalEvaluatedUSecs += dTEvaluation;
+
+  if (optShowPerformance) {
+    fprintf(stdout,
+            "%ld [%ld.%s]: dT = %lld us\n",
+            totalEvaluatedTicks,
+            totalEvaluatedTicks / eoTickPerCycle,
+            toConstCharPointer(TickPerCycle(totalEvaluatedTicks % eoTickPerCycle)),
+            (long long) dTEvaluation
+            );
+  }
+  totalEvaluatedTicks += 1;
 }
 
 void Volume::PrintViewFlat() const {
@@ -80,6 +117,14 @@ void Volume::PrintViewFlat() const {
 
   ViewFlat(view);
 
+  fprintf(stdout,
+          "Clock: %d, tick %s (cycle: %d, phase: %s, minor tick: %s)\n",
+          CurrentClock(),
+          toConstCharPointer(CurrentTickPerCycle()),
+          CurrentCycle(),
+          toConstCharPointer(CurrentPhasePerCycle()),
+          toConstCharPointer(CurrentTickPerPhase())
+         );
   fprintf(stdout, "   ");
   for (int c = 0; c < NCols; c += 1) {
     if (int cc = (c / 10) % 10) {
@@ -112,18 +157,15 @@ void Volume::PrintViewFlat() const {
   for (int c = 0; c < NCols; c += 1) {
     fprintf(stdout, "%1d", c % 10);
   }
-  fprintf(stdout, "\n");
-  fprintf(stdout,
-          "Clock: %d, tick %s (cycle: %d, phase: %s, minor tick: %s)\n\n",
-          CurrentClock(),
-          toConstCharPointer(CurrentTickPerCycle()),
-          CurrentCycle(),
-          toConstCharPointer(CurrentPhasePerCycle()),
-          toConstCharPointer(CurrentTickPerPhase())
-         );
+  fprintf(stdout, "\n\n");
 }
 
 void Volume::ViewFlat(ViewLvlArray &view) const {
+  view.resize(NRows);
+  for (auto &col : view) {
+    col.resize(NCols);
+  }
+
   for (int r = 0; r < NRows; r += 1) {
     for (int c = 0; c < NCols; c += 1) {
       int lOfMaxDisplayPriority = NLvls;
@@ -171,6 +213,56 @@ void Volume::ViewFlat(ViewLvlArray &view) const {
       // }
       view[r][c] = text;
     }
+  }
+}
+
+void Volume::DumpPerformance() const {
+  if (int totalEvaluatedCycles = totalEvaluatedTicks / eoDirection) {
+    double averageEvaluatedUSecsPerCycle = 0.0;
+    fprintf(stdout, "Performance:\n");
+    for (auto d : direction) {
+      double averageEvaluatedUSecsForDirection =
+          totalEvaluatedUSecsPerDirection[d] / totalEvaluatedTicks;
+      // fprintf(stdout,
+      //         "%s: %9.2f (%9.2f) uS mean total time (per rod time)/tick\n",
+      //         toConstCharPointer(d),
+      //         averageEvaluatedUSecsForDirection,
+      //         averageEvaluatedUSecsForDirection / rods[d].size()
+      //        );
+      fprintf(stdout,
+              "%s: %9.2f uS mean total time/direction\n",
+              toConstCharPointer(d),
+              averageEvaluatedUSecsForDirection
+             );
+      averageEvaluatedUSecsPerCycle += averageEvaluatedUSecsForDirection;
+    }
+    fprintf(stdout,
+            "   %9.2f uS mean time/cycle\n",
+            averageEvaluatedUSecsPerCycle
+           );
+
+    for (auto t : tickPerCycle) {
+      double averageEvaluatedUSecsForTick =
+          totalEvaluatedUSecsPerTick[t] / totalEvaluatedTicks;
+      // fprintf(stdout,
+      //         "%s: %9.2f (%9.2f) uS mean total time (per rod time)/tick\n",
+      //         toConstCharPointer(d),
+      //         averageEvaluatedUSecsForTick,
+      //         averageEvaluatedUSecsForTick / rods[d].size()
+      //        );
+      fprintf(stdout,
+              "%s: %9.2f uS mean total time/tick\n",
+              toConstCharPointer(t),
+              averageEvaluatedUSecsForTick
+             );
+    }
+
+    fprintf(stdout,
+            "Total %ld ticks (%d cycles), %ld uS\n",
+            totalEvaluatedTicks,
+            totalEvaluatedCycles,
+            totalEvaluatedUSecs
+           );
   }
 }
 

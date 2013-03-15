@@ -12,6 +12,8 @@ using std::deque;
 using std::map;
 #include <set>
 using std::set;
+#include <vector>
+using std::vector;
 
 #include "rule.h"
 #include "scenario.h"
@@ -26,18 +28,19 @@ typedef set<Item *> SetOfItems;
 class LockRod;
 class DataRod;
 
-size_t const NLvls = 7;
-size_t const NRows = 29;
-size_t const NCols = 32;
-
-typedef array<array<array<Voxel, NCols>, NRows>, NLvls> VolArray;
-typedef array<array<wchar_t, NCols>, NRows> ViewLvlArray;
+// size_t const NLvls = 7;
+// size_t const NRows = 29;
+// size_t const NCols = 32;
+//
+// typedef array<array<array<Voxel, NCols>, NRows>, NLvls> VolArray;
+// typedef array<array<wchar_t, NCols>, NRows> ViewLvlArray;
+typedef vector<vector<vector<Voxel>>> VolArray;
+typedef vector<vector<wchar_t>> ViewLvlArray;
 
 class Volume: public VolArray
 {
  public:
   Volume(VolArray const &initial);
-  Volume(Voxel initialVoxel = Unkn);
   void AddRule(Scenario const &scenario, Voxel newVoxel) {
     rules[scenario] = newVoxel;
   }
@@ -104,6 +107,7 @@ class Volume: public VolArray
   void ProceedOnePhase();
   void ProceedOneTick();
   void PrintViewFlat() const;
+  void DumpPerformance() const;
   bool isVoxelCoordinantInBounds(VoxelCoordinant const &vc) const {
     return 0 <= vc.L() && vc.L() < NLvls &&
         0 <= vc.R() && vc.R() < NRows &&
@@ -144,11 +148,19 @@ class Volume: public VolArray
   Item *FormRodContaining(set<VoxelCoordinant> &seenSofar, VoxelCoordinant const &vc);
   void FindItems();
 
+  size_t NLvls;
+  size_t NRows;
+  size_t NCols;
+
   Rules rules;
   RuleCounts ruleCounts;
   int clock;
   array<SetOfItems, eoRodType> itemsByRodType;
   array<map<VoxelCoordinant, deque<DataState>>, eoDirection> inputs;
+  array<long, eoDirection> totalEvaluatedUSecsPerDirection;
+  array<long, eoTickPerCycle> totalEvaluatedUSecsPerTick;
+  long totalEvaluatedUSecs;
+  long totalEvaluatedTicks;
 };
 
 #endif // VOLUME_H
