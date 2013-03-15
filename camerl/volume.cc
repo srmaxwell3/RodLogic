@@ -136,7 +136,40 @@ void Volume::ViewFlat(ViewLvlArray &view) const {
           lOfMaxDisplayPriority = l;
         }
       }
-      view[r][c] = voxelProperties[(*this)[lOfMaxDisplayPriority][r][c]].text;
+
+      VoxelProperties const &vProperties =
+          voxelProperties[(*this)[lOfMaxDisplayPriority][r][c]];
+
+      wchar_t text = vProperties.text;
+      // ┃┇━┅▲△▶▷▼▽◀◁⬛
+      // switch (vProperties.voxelType) {
+      //   case vtLock:
+      //     switch (text) {
+      //       case '|': text = L'┇'; break;
+      //       case '-': text = L'┅'; break;
+      //       case '>': text = L'▷'; break;
+      //       case 'v': text = L'▽'; break;
+      //       case '<': text = L'◁'; break;
+      //       case '^': text = L'△'; break;
+      //       default:
+      //         break;
+      //     }
+      //     break;
+      //   case vtData:
+      //     switch (text) {
+      //       case '|': text = L'┃'; break;
+      //       case '-': text = L'━'; break;
+      //       case '>': text = vProperties.dataType == dtSlot ? L'▷' : L'▶'; break;
+      //       case 'v': text = vProperties.dataType == dtSlot ? L'▽' : L'▼'; break;
+      //       case '<': text = vProperties.dataType == dtSlot ? L'◁' : L'◀'; break;
+      //       case '^': text = vProperties.dataType == dtSlot ? L'△' : L'▲'; break;
+      //       case '#': text = L'⬛'; break;
+      //       default:
+      //         break;
+      //     }
+      //     break;
+      // }
+      view[r][c] = text;
     }
   }
 }

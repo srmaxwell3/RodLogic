@@ -31,7 +31,7 @@ size_t const NRows = 29;
 size_t const NCols = 32;
 
 typedef array<array<array<Voxel, NCols>, NRows>, NLvls> VolArray;
-typedef array<array<char, NCols>, NRows> ViewLvlArray;
+typedef array<array<wchar_t, NCols>, NRows> ViewLvlArray;
 
 class Volume: public VolArray
 {
