@@ -14,6 +14,7 @@ using std::string;
 using std::deque;
 #include <initializer_list>
 using std::initializer_list;
+#include <unistd.h>
 
 bool optVerbose = false;
 
@@ -531,6 +532,7 @@ int main(int argc, char const *argv[]) {
     if (volume.FoundNewRules()) {
       break;
     }
+    usleep(250000);
   }
   volume.DumpUnusedRules();
   return 0;
