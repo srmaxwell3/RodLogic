@@ -69,6 +69,14 @@ Rod2D::Rod2D(Diagram2D &diagram, P2D const &pStart, Directions d) :
 	break;
 
       case '|':
+	if (scanDirection == E) {
+          diagram.rodSharedAt(this, p);
+          shared.insert(p);
+        }
+	diagram.saw(p);
+	insert(p);
+	break;
+
       case '.':
 	diagram.saw(p);
 	insert(p);
@@ -425,12 +433,12 @@ void Rod2D::setFirstTick (int t) {
   }
 
   tickFirstSet = t;
-  for (auto const &c : connectedTo[Put1]) {
+  for (auto const &c : connectedTo[rcPut1]) {
     if (Rod2D *r = c.rod) {
       r->setFirstTick(t + 1);
     }
   }
-  for (auto const &c : connectedTo[Put2]) {
+  for (auto const &c : connectedTo[rcPut2]) {
     if (Rod2D *r = c.rod) {
       r->setFirstTick(t + 2);
     }
@@ -465,7 +473,7 @@ void Rod2D::verifyInputDelays(SetOfRod2Ds &seenAlready) {
            );
   }
 
-  for (auto const &c : connectedTo[Get2]) {
+  for (auto const &c : connectedTo[rcGet2]) {
     if (Rod2D *r = c.rod) {
       if (r->tickFirstSetAt() != (tickFirstSet - 2)) {
 	if (optWarnings) {
@@ -492,7 +500,7 @@ void Rod2D::verifyInputDelays(SetOfRod2Ds &seenAlready) {
       r->verifyInputDelays();
     }
   }
-  for (auto const &c : connectedTo[Get1]) {
+  for (auto const &c : connectedTo[rcGet1]) {
     if (Rod2D *r = c.rod) {
       if (r->tickFirstSetAt() != (tickFirstSet - 1)) {
 	if (optWarnings) {
@@ -521,14 +529,16 @@ void Rod2D::verifyInputDelays(SetOfRod2Ds &seenAlready) {
   }
 }
 
-void Rod2D::connectWith(Rod2D *that, bool isAnIdentityConnection) {
+void Rod2D::connectWith(Rod2D *that, RodIntersectionType intersectionType) {
+  assert(intersectionType != riNone);
+
   RodConnectionType toThat = rodConnectionThisToThat[direction][that->direction];
-  assert(toThat != None);
-  connectedTo[toThat].insert(RodConnection(that, isAnIdentityConnection));
+  assert(toThat != rcNone || intersectionType == riCrossing);
+  connectedTo[toThat].insert(RodConnection(that, intersectionType));
 
   RodConnectionType toThis = rodConnectionThisToThat[that->direction][direction];
-  assert(toThis != None);
-  that->connectedTo[toThis].insert(RodConnection(this, isAnIdentityConnection));
+  assert(toThis != rcNone || intersectionType == riCrossing);
+  that->connectedTo[toThis].insert(RodConnection(this, intersectionType));
 }
 
 bool Rod2D::isShared(P2D const &p) const {
@@ -537,8 +547,12 @@ bool Rod2D::isShared(P2D const &p) const {
 
 bool Rod2D::hasInputs() const { return 0 < inputs.size(); }
 bool Rod2D::hasOutputs() const { return 0 < outputs.size(); }
-size_t Rod2D::countOfInputs() const { return connectedTo[Get1].size() + connectedTo[Get2].size(); }
-size_t Rod2D::countOfOutputs() const { return connectedTo[Put1].size() + connectedTo[Put2].size(); }
+size_t Rod2D::countOfInputs() const {
+  return connectedTo[rcGet1].size() + connectedTo[rcGet2].size();
+}
+size_t Rod2D::countOfOutputs() const {
+  return connectedTo[rcPut1].size() + connectedTo[rcPut2].size();
+}
 
 void Rod2D::reset() {
   lastEvaluatedTick = -1;
@@ -558,13 +572,22 @@ bool Rod2D::evaluateAt(Diagram2D &diagram, int tick) {
     fprintf(stdout, "Rod2D(%s)->evaluateAt(diagram, tick=%d): { [Get2]{", rodsId().c_str(), tick);
   }
   char const *comma = "";
-  for (auto const &rc : connectedTo[Get2]) {
-    bool rValue = rc.rod->getValue();;
+  for (auto const &rc : connectedTo[rcGet2]) {
+    if (!rc.isALogicalConnection()) {
+      continue;
+    }
+
+    bool rValue = rc.rod->getValue();
     if (optShowEvaluatingRods) {
-      fprintf(stdout, "%s %s -> %s%1d", comma, rc.rod->rodsId().c_str(), rc.isAnIdentityConnection ? "" : "!", rValue);
+      fprintf(stdout,
+              "%s %s -> %s%1d",
+              comma,
+              rc.rod->rodsId().c_str(),
+              rc.isAnIdentityConnection() ? "" : "!", rValue
+             );
       comma = ",";
     }
-    if (!rc.isAnIdentityConnection) {
+    if (!rc.isAnIdentityConnection()) {
       result &= !rValue;
     } else {
       result &= rValue;
@@ -574,13 +597,22 @@ bool Rod2D::evaluateAt(Diagram2D &diagram, int tick) {
     fprintf(stdout, "}, [Get1]{");
   }
   comma = "";
-  for (auto const &rc : connectedTo[Get1]) {
-    bool rValue = rc.rod->getValue();;
+  for (auto const &rc : connectedTo[rcGet1]) {
+    if (!rc.isALogicalConnection()) {
+      continue;
+    }
+
+    bool rValue = rc.rod->getValue();
     if (optShowEvaluatingRods) {
-      fprintf(stdout, "%s %s -> %s%1d", comma, rc.rod->rodsId().c_str(), rc.isAnIdentityConnection ? "" : "!", rValue);
+      fprintf(stdout,
+              "%s %s -> %s%1d",
+              comma,
+              rc.rod->rodsId().c_str(),
+              rc.isAnIdentityConnection() ? "" : "!", rValue
+             );
       comma = ",";
     }
-    if (!rc.isAnIdentityConnection) {
+    if (!rc.isAnIdentityConnection()) {
       result &= !rValue;
     } else {
       result &= rValue;
@@ -632,7 +664,7 @@ void Rod2D::dump(Diagram2D const &diagram) const {
   fprintf(stdout, ", tickFirstSet=%d", tickFirstSet);
   fprintf(stdout, ", countOfValidInputs=%d", countOfValidInputs);
   if (int countOfInvalidInputs =
-          (connectedTo[Get1].size() + connectedTo[Get2].size()) -
+          (connectedTo[rcGet1].size() + connectedTo[rcGet2].size()) -
           countOfValidInputs
      )
   {
@@ -660,7 +692,12 @@ void Rod2D::dump(Diagram2D const &diagram) const {
       fprintf(stdout, " [%s](%lu){", c_str(t), nConnections);
       char const *comma = "";
       for (auto const &c : connections) {
-	fprintf(stdout, "%s{%p,%s}", comma, c.rod, c.isAnIdentityConnection ? "1" : "0");
+	fprintf(stdout,
+                "%s{%p,%s}",
+                comma,
+                c.rod,
+                c.isACrossingConnection() ? "+" : c.isAnIdentityConnection() ? "1" : "0"
+               );
 	comma = ",";
       }
       fprintf(stdout, "}");

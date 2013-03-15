@@ -3,12 +3,25 @@
 
 #include "directions.h"
 
+enum RodIntersectionType {
+  riNone,
+  riCrossing,
+  riComplement,
+  riIdentity,
+
+  eoRodIntersectionType
+};
+
+extern RodIntersectionType const rodIntersectionType[eoRodIntersectionType];
+
+char const *c_str(RodIntersectionType t);
+
 enum RodConnectionType {
-  Get2,
-  Get1,
-  Put1,
-  Put2,
-  None,
+  rcGet2,
+  rcGet1,
+  rcPut1,
+  rcPut2,
+  rcNone,
 
   eoRodConnectionType
 };
@@ -21,23 +34,35 @@ char const *c_str(RodConnectionType t);
 struct Rod2D;
 
 struct RodConnection {
-  RodConnection(Rod2D *_rod, bool _isAnIdentityConnection) :
+  RodConnection(Rod2D *_rod, RodIntersectionType _intersectionType) :
       rod(_rod),
-      isAnIdentityConnection(_isAnIdentityConnection)
+      intersectionType(_intersectionType)
   {
   }
   RodConnection() :
       rod(0),
-      isAnIdentityConnection(false)
+      intersectionType(riNone)
   {
   }
   bool operator<(RodConnection const &that) const {
     return rod < that.rod ||
-        (rod == that.rod && isAnIdentityConnection < that.isAnIdentityConnection);
+        (rod == that.rod && intersectionType < that.intersectionType);
   }
+  bool isACrossingConnection() const {
+    return intersectionType == riCrossing;
+  };
+  bool isALogicalConnection() const {
+    return intersectionType == riComplement || intersectionType == riIdentity;
+  };
+  bool isAnIdentityConnection() const {
+    return intersectionType == riIdentity;
+  };
+  bool isAComplementConnection() const {
+    return intersectionType == riComplement;
+  };
 
   Rod2D *rod;
-  bool isAnIdentityConnection;
+  RodIntersectionType intersectionType;
 };
 
 #endif // ROD_CONNECTION_TYPE_H

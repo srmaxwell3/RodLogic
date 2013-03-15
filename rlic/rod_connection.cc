@@ -1,27 +1,43 @@
 #include "rod_connection.h"
 
+RodIntersectionType const rodIntersectionType[eoRodIntersectionType] = {
+  riNone, riCrossing, riComplement, riIdentity
+};
+
+char const *c_str(RodIntersectionType t) {
+  switch (t) {
+    case riNone: return "riNone";
+    case riCrossing: return "riCrossing";
+    case riComplement: return "riComplement";
+    case riIdentity: return "riIdentity";
+    case eoRodIntersectionType:
+      return "eoRodIntersectionType";
+  }
+  return "RodIntersectionType(?)";
+}
+
 RodConnectionType const rodConnectionType[eoRodConnectionType] = {
-  Get2, Get1, Put1, Put2, None
+  rcGet2, rcGet1, rcPut1, rcPut2, rcNone
 };
 
 RodConnectionType const rodConnectionThisToThat[eoDirections][eoDirections] = {
   //  that->direction ==
-  //  E     S     D     W     N     U
-  { None, Put1, Put2, None, Get2, Get1 }, // this->direction == E
-  { Get1, None, Put1, Put2, None, Get2 }, // this->direction == S
-  { Get2, Get1, None, Put1, Put2, None }, // this->direction == D
-  { None, Get2, Get1, None, Put1, Put2 }, // this->direction == W
-  { Put2, None, Get2, Get1, None, Put1 }, // this->direction == N
-  { Put1, Put2, None, Get2, Get1, None }, // this->direction == U
+  //   E       S       D       W       N       U
+  { rcNone, rcPut1, rcPut2, rcNone, rcGet2, rcGet1 }, // this->direction == E
+  { rcGet1, rcNone, rcPut1, rcPut2, rcNone, rcGet2 }, // this->direction == S
+  { rcGet2, rcGet1, rcNone, rcPut1, rcPut2, rcNone }, // this->direction == D
+  { rcNone, rcGet2, rcGet1, rcNone, rcPut1, rcPut2 }, // this->direction == W
+  { rcPut2, rcNone, rcGet2, rcGet1, rcNone, rcPut1 }, // this->direction == N
+  { rcPut1, rcPut2, rcNone, rcGet2, rcGet1, rcNone }, // this->direction == U
 };
 
 char const *c_str(RodConnectionType t) {
   switch (t) {
-    case Get2: return "Get2";
-    case Get1: return "Get1";
-    case Put1: return "Put1";
-    case Put2: return "Put2";
-    case None: return "None";
+    case rcGet2: return "rcGet2";
+    case rcGet1: return "rcGet1";
+    case rcPut1: return "rcPut1";
+    case rcPut2: return "rcPut2";
+    case rcNone: return "rcNone";
     case eoRodConnectionType:
       return "eoRodConnectionType";
   }

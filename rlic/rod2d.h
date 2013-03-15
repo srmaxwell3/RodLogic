@@ -36,7 +36,7 @@ class Rod2D : public SetOfP2Ds {
   void verifyInputDelays();
   void verifyInputDelays(SetOfRod2Ds &seenAlready);
 
-  void connectWith(Rod2D *that, bool isAnIdentityConnection);
+  void connectWith(Rod2D *that, RodIntersectionType intersectionType);
   bool isShared(P2D const &p) const;
   bool hasInputs() const;
   bool hasOutputs() const;
