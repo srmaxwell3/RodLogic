@@ -142,14 +142,12 @@ void Diagram2D::newIncompleteEWRodAt(P2D const &p) {
   if (d == eoDirections) {
     if (nEHeads || nWHeads) {
       fprintf(stderr,
-              "cam.r: Warning: Unable to determine the direction of an EW rod, at P2D(%d,%d)!\n",
-              p.y,
-              p.x
+              "cam.r: Warning: Unable to determine the direction of an EW rod, at %s!\n",
+              p.ToString().c_str()
              );
       fprintf(stdout,
-              "cam.r: Warning: Unable to determine the direction of an EW rod, at P2D(%d,%d)!\n",
-              p.y,
-              p.x
+              "cam.r: Warning: Unable to determine the direction of an EW rod, at %s!\n",
+              p.ToString().c_str()
              );
     }
     return;
@@ -200,14 +198,12 @@ void Diagram2D::newIncompleteSNRodAt(P2D const &p) {
   if (d == eoDirections) {
     if (nSHeads || nNHeads) {
       fprintf(stderr,
-              "cam.r: Warning: Unable to determine the direction of an SN rod, at P2D(%d,%d)!\n",
-              p.y,
-              p.x
+              "cam.r: Warning: Unable to determine the direction of an SN rod, at %s!\n",
+              p.ToString().c_str()
              );
       fprintf(stdout,
-              "cam.r: Warning: Unable to determine the direction of an SN rod, at P2D(%d,%d)!\n",
-              p.y,
-              p.x
+              "cam.r: Warning: Unable to determine the direction of an SN rod, at %s!\n",
+              p.ToString().c_str()
              );
     }
     return;
@@ -290,25 +286,34 @@ void Diagram2D::scan() {
   for (auto &pAndRs : pointsShared) {
     auto &rods = pAndRs.second;
     auto &p = pAndRs.first;
-    bool isAnIdentityConnection = false;
+    RodIntersectionType intersectionType = riNone;
 
     switch (char const &c = at(p)) {
+      case '|':
+      case '-':
+      case '>':
+      case 'v':
+      case '<':
+      case '^':
+        intersectionType = riCrossing;
+        break;
+
       case '0':
-        isAnIdentityConnection = false;
+        intersectionType = riComplement;
         break;
 
       case '1':
-        isAnIdentityConnection = true;
+        intersectionType = riIdentity;
         break;
 
       default:
-        assert(c == '0' || c == '1');
+        assert(intersectionType != riNone);
     }
 
     if (1 < rods.size()) {
       for (auto r1 = rods.begin(); r1 != rods.end(); ++r1) {
         for (auto r2 = std::next(r1); r2 != rods.end(); ++r2) {
-          (*r1)->connectWith(*r2, isAnIdentityConnection);
+          (*r1)->connectWith(*r2, intersectionType);
         }
       }
     }
@@ -344,6 +349,93 @@ void Diagram2D::scan() {
         r->verifyInputDelays();
       }
     }
+  }
+}
+
+void Diagram2D::refactor() {
+  fprintf(stdout, "Refactoring....\n");
+
+  // Find the extents of the current rods.
+  int limitTowards[eoDirections];
+  for (auto const d : directions) {
+    for (auto const r : rods[d]) {
+      P2D const &headAt = r->getHeadAt();
+      P2D const &tailAt = r->getTailAt();
+      Directions b = BWard(d);
+      Directions f = FWard(d);
+      Directions l = LWard(d);
+      Directions r = RWard(d);
+
+      switch (d) {
+        case E:
+          limitTowards[b] = std::min(limitTowards[b], tailAt.limitTowards(b));
+          limitTowards[f] = std::max(limitTowards[f], tailAt.limitTowards(f));
+          limitTowards[l] = std::min(limitTowards[l], tailAt.limitTowards(l));
+          limitTowards[r] = std::max(limitTowards[r], tailAt.limitTowards(r));
+          break;
+        case W:
+          limitTowards[b] = std::max(limitTowards[b], tailAt.limitTowards(b));
+          limitTowards[f] = std::min(limitTowards[f], tailAt.limitTowards(f));
+          limitTowards[l] = std::min(limitTowards[l], tailAt.limitTowards(l));
+          limitTowards[r] = std::max(limitTowards[r], tailAt.limitTowards(r));
+          break;
+        case S:
+          limitTowards[b] = std::min(limitTowards[b], tailAt.limitTowards(b));
+          limitTowards[f] = std::max(limitTowards[f], tailAt.limitTowards(f));
+          limitTowards[l] = std::max(limitTowards[l], tailAt.limitTowards(l));
+          limitTowards[r] = std::min(limitTowards[r], tailAt.limitTowards(r));
+          break;
+        case N:
+          limitTowards[b] = std::max(limitTowards[b], tailAt.limitTowards(b));
+          limitTowards[f] = std::min(limitTowards[f], tailAt.limitTowards(f));
+          limitTowards[l] = std::max(limitTowards[l], tailAt.limitTowards(l));
+          limitTowards[r] = std::min(limitTowards[r], tailAt.limitTowards(r));
+          break;
+      }
+    }
+  }
+  for (auto const d : directions) {
+    fprintf(stdout, "limitTowards[%s] = %4d\n", c_str(d), limitTowards[d]);
+  }
+  fprintf(stdout, "\n");
+
+  // Find the separations between the rods.
+  array<map<int, int>, 2> rowAndColumnCounts;
+  for (auto const d : directions) {
+    for (auto const r : rods[d]) {
+      P2D const &headAt = r->getHeadAt();
+
+      switch (d) {
+        // E/W rods are on a row.
+        case E:
+        case W:
+          rowAndColumnCounts[0][headAt.y] += 1;
+          break;
+        // S/N rods are in a column.
+        case S:
+        case N:
+          rowAndColumnCounts[1][headAt.x] += 1;
+          break;
+      }
+    }
+  }
+  array<map<int, int>, 2> rowAndColumnSeparations;
+  for (size_t rc = 0; rc < 2; rc += 1) {
+    auto const &rcCounts = rowAndColumnCounts[rc];
+    auto rcCount = rcCounts.begin();
+    int rcLast = rcCount->first;
+    for (++rcCount; rcCount != rcCounts.end(); ++rcCount) {
+      rowAndColumnSeparations[rc][rcCount->first - rcLast] += 1;
+      rcLast = rcCount->first;
+    }
+  }
+  for (size_t rc = 0; rc < 2; rc += 1) {
+    auto const &rcSeparations = rowAndColumnSeparations[rc];
+    fprintf(stdout, "%s separations:\n", rc == 0 ? "Row" : "Column");
+    for (auto const &rcSeparation : rcSeparations) {
+      fprintf(stdout, "separations[%2d] = %4d\n", rcSeparation.first, rcSeparation.second);
+    }
+    fprintf(stdout, "\n");
   }
 }
 
@@ -399,11 +491,15 @@ void Diagram2D::evaluate() {
   evaluateAt(lastEvaluatedTick + 1);
 }
 
-bool Diagram2D::dumpInputLabelState(Label const &label, char const *comma, CombinedLabel const *&lastCLabel) {
+bool Diagram2D::dumpInputLabelState
+    (Label const &label, char const *comma, CombinedLabel const *&lastCLabel)
+{
   return dumpLabelState(true, label, comma, lastCLabel);
 }
 
-bool Diagram2D::dumpOutputLabelState(Label const &label, char const *comma, CombinedLabel const *&lastCLabel) {
+bool Diagram2D::dumpOutputLabelState
+    (Label const &label, char const *comma, CombinedLabel const *&lastCLabel)
+{
   return dumpLabelState(false, label, comma, lastCLabel);
 }
 
@@ -581,8 +677,9 @@ void Diagram2D::dumpState() {
   if (!currentInputs.empty()) {
     CombinedLabel const *lastCLabel = nullptr;
     for (auto const &lv : currentInputs) {
-      dumpedALabel |= dumpInputLabelState(lv.first, comma, lastCLabel);
-      comma = ",\n    ";
+      if (dumpedALabel |= dumpInputLabelState(lv.first, comma, lastCLabel)) {
+        comma = ",\n    ";
+      }
     }
   }
   if (dumpedALabel) {
@@ -593,12 +690,13 @@ void Diagram2D::dumpState() {
 
   fprintf(stdout, ", outputs={");
   dumpedALabel = false;
-  comma = "\n    ";
   if (!currentOutputs.empty()) {
     CombinedLabel const *lastCLabel = nullptr;
+    comma = "\n    ";
     for (auto const &lv : currentOutputs) {
-      dumpedALabel |= dumpOutputLabelState(lv.first, comma, lastCLabel);
-      comma = ",\n    ";
+      if (dumpedALabel |= dumpOutputLabelState(lv.first, comma, lastCLabel)) {
+        comma = ",\n    ";
+      }
     }
   }
   if (dumpedALabel) {
@@ -613,7 +711,8 @@ void Diagram2D::dumpPerformance() const {
     double averageEvaluatedUSecsPerCycle = 0.0;
     fprintf(stdout, "Performance:\n");
     for (auto d : directions) {
-      double averageEvaluatedUSecsForTick = totalEvaluatedUSecsPerDirection[d] / totalEvaluatedTicks;
+      double averageEvaluatedUSecsForTick =
+          totalEvaluatedUSecsPerDirection[d] / totalEvaluatedTicks;
       fprintf(stdout,
               "%s: %9.2f (%9.2f) uS mean total time (per rod time)/tick\n",
               c_str(d),
@@ -622,23 +721,43 @@ void Diagram2D::dumpPerformance() const {
              );
       averageEvaluatedUSecsPerCycle += averageEvaluatedUSecsForTick;
     }
-    fprintf(stdout, "   %9.2f uS mean time/cycle\n", averageEvaluatedUSecsPerCycle);
-    fprintf(stdout, "Total %ld ticks (%d cycles), %ld uS\n", totalEvaluatedTicks, totalEvaluatedCycles, totalEvaluatedUSecs);
+    fprintf(stdout,
+            "   %9.2f uS mean time/cycle\n",
+            averageEvaluatedUSecsPerCycle
+           );
+    fprintf(stdout,
+            "Total %ld ticks (%d cycles), %ld uS\n",
+            totalEvaluatedTicks,
+            totalEvaluatedCycles,
+            totalEvaluatedUSecs
+           );
   }
 }
 
 void Diagram2D::setInputFor(string const &text, vector<int> const &values) {
-  for (size_t dotAt = text.find_first_of('.'); dotAt != string::npos; dotAt = text.find_first_of('.', dotAt + 1)) {
+  for (size_t dotAt = text.find_first_of('.');
+       dotAt != string::npos;
+       dotAt = text.find_first_of('.', dotAt + 1)
+      )
+  {
     string name = text.substr(0, dotAt);
     string tail = text.substr(dotAt + 1);
     int hiBitNumber;
     int loBitNumber;
     int nChars;
-    if (sscanf(tail.c_str(), "%x..%x%n", &hiBitNumber, &loBitNumber, &nChars) == 2 && nChars == tail.size()) {
+    if (sscanf(tail.c_str(), "%x..%x%n", &hiBitNumber, &loBitNumber, &nChars) == 2 &&
+        nChars == tail.size()
+       )
+    {
       vector<Label> labels;
       bool isBigEndian = false;
       if (optEchoInput) {
-	fprintf(stdout, "name=%s, hiBitNumber=%d, loBitNumber=%d\n", name.c_str(), hiBitNumber, loBitNumber);
+	fprintf(stdout,
+                "name=%s, hiBitNumber=%d, loBitNumber=%d\n",
+                name.c_str(),
+                hiBitNumber,
+                loBitNumber
+               );
       }
       if (loBitNumber < hiBitNumber) {
         for (int bitNumber = loBitNumber; bitNumber <= hiBitNumber; bitNumber += 1) {
@@ -663,7 +782,13 @@ void Diagram2D::setInputFor(string const &text, vector<int> const &values) {
       size_t nthValue = 0;
       for (auto value : values) {
 	if (optEchoInput) {
-	  fprintf(stdout, "[%lu] %s<-0x%0*x", nthValue++, labelToString.c_str(), nHexDigits, value);
+	  fprintf(stdout,
+                  "[%lu] %s<-0x%0*x",
+                  nthValue++,
+                  labelToString.c_str(),
+                  nHexDigits,
+                  value
+                 );
 	}
         char const *comma = "; ";
         for (auto const &label : labels) {
@@ -707,17 +832,39 @@ void Diagram2D::setInputFor(Label const &label, vector<int> const &values) {
 }
 
 void Diagram2D::addInputFor(Label const &label, bool value) {
-  assert(currentInputs.find(label) != currentInputs.end());
+  if (currentInputs.find(label) == currentInputs.end()) {
+    fprintf(stderr,
+            "cam.r: Error: Diagram2D::addInputFor(label=\"%s\", value=%d): "
+            "Unable to find input for label!\n",
+            label.ToString().c_str(),
+            value
+           );
+    assert(currentInputs.find(label) != currentInputs.end());
+  }
   currentInputs[label].push_back(value);
 }
 
 bool Diagram2D::hasInputFor(Label const &label) {
-  assert(currentInputs.find(label) != currentInputs.end());
+  if (currentInputs.find(label) == currentInputs.end()) {
+    fprintf(stderr,
+            "cam.r: Error: Diagram2D::hasInputFor(label=\"%s\"): "
+            "Unable to find input for label!\n",
+            label.ToString().c_str()
+           );
+    assert(currentInputs.find(label) != currentInputs.end());
+  }
   return !currentInputs[label].empty();
 }
 
 bool Diagram2D::getInputFor(Label const &label) {
-  assert(currentInputs.find(label) != currentInputs.end());
+  if (currentInputs.find(label) == currentInputs.end()) {
+    fprintf(stderr,
+            "cam.r: Error: Diagram2D::getInputFor(label=\"%s\"): "
+            "Unable to find input for label!\n",
+            label.ToString().c_str()
+           );
+    assert(currentInputs.find(label) != currentInputs.end());
+  }
   auto &values = currentInputs[label];
   if (!values.empty()) {
     return values.front();
@@ -727,33 +874,32 @@ bool Diagram2D::getInputFor(Label const &label) {
 
 bool Diagram2D::getInputFor(string const &name, int bitNumber) {
   Label label(name, bitNumber);
-  // assert(currentInputs.find(label) != currentInputs.end());
-  if (currentInputs.find(label) != currentInputs.end()) {
-    auto &values = currentInputs[label];
-    if (!values.empty()) {
-      return values.front();
-    }
-  } else {
+  if (currentInputs.find(label) == currentInputs.end()) {
     fprintf(stderr,
-            "cam.r: Warning: Diagram2D::getInputFor(name=\"%s\", bitNumber=%d): "
-            "Unable to find input for Label().ToString()=%s\n",
+            "cam.r: Error: Diagram2D::getInputFor(name=\"%s\", bitNumber=%d): "
+            "Unable to find input for Label().ToString()=%s!\n",
             name.c_str(),
             bitNumber,
             label.ToString().c_str()
            );
-    fprintf(stdout,
-            "cam.r: Warning: Diagram2D::getInputFor(name=\"%s\", bitNumber=%d): "
-            "Unable to find input for Label().ToString()=%s\n",
-            name.c_str(),
-            bitNumber,
-            label.ToString().c_str()
-           );
+    assert(currentInputs.find(label) != currentInputs.end());
+  }
+  auto &values = currentInputs[label];
+  if (!values.empty()) {
+    return values.front();
   }
   return false;
 }
 
 bool Diagram2D::readInputFor(Label const &label) {
-  assert(currentInputs.find(label) != currentInputs.end());
+  if (currentInputs.find(label) == currentInputs.end()) {
+    fprintf(stderr,
+            "cam.r: Error: Diagram2D::readInputFor(label=\"%s\"): "
+            "Unable to find input for label!\n",
+            label.ToString().c_str()
+           );
+    assert(currentInputs.find(label) != currentInputs.end());
+  }
   lastEvaluatedTickNInputsRead += 1;
   auto &values = currentInputs[label];
   if (!values.empty()) {
@@ -763,19 +909,46 @@ bool Diagram2D::readInputFor(Label const &label) {
 }
 
 void Diagram2D::writeOutputFor(Label const &label, bool value) {
-  assert(currentOutputs.find(label) != currentOutputs.end());
+  if (currentOutputs.find(label) == currentOutputs.end()) {
+    fprintf(stderr,
+            "cam.r: Error: "
+            "Diagram2D::getOutputFor(label=\"%s\", value=%d): "
+            "Unable to find input for label!\n",
+            label.ToString().c_str(),
+            value
+           );
+    assert(currentOutputs.find(label) != currentOutputs.end());
+  }
   lastEvaluatedTickNOutputsWritten += 1;
   currentOutputs[label] = value;
 }
 
 bool Diagram2D::getOutputFor(Label const &label) {
-  assert(currentOutputs.find(label) != currentOutputs.end());
+  if (currentOutputs.find(label) == currentOutputs.end()) {
+    fprintf(stderr,
+            "cam.r: Error: "
+            "Diagram2D::getOutputFor(label=\"%s\"): "
+            "Unable to find input for label!\n",
+            label.ToString().c_str()
+           );
+    assert(currentOutputs.find(label) != currentOutputs.end());
+  }
   return currentOutputs[label];
 }
 
 bool Diagram2D::getOutputFor(string const &name, int bitNumber) {
   Label label(name, bitNumber);
-  assert(currentOutputs.find(label) != currentOutputs.end());
+  if (currentOutputs.find(label) == currentOutputs.end()) {
+    fprintf(stderr,
+            "cam.r: Error: "
+            "Diagram2D::getOutputFor(name=\"%s\", bitNumber=%d): "
+            "Unable to find input for Label().ToString()=%s\n",
+            name.c_str(),
+            bitNumber,
+            label.ToString().c_str()
+           );
+    assert(currentOutputs.find(label) != currentOutputs.end());
+  }
   return currentOutputs[label];
 }
 
@@ -821,7 +994,7 @@ void Diagram2D::dump() const {
   fprintf(stdout, "Rod Count by (Length, Fan-In, Fan-Out):\n");
   for (auto const &lengthAndCount : rodLengthHistogram) {
     fprintf(stdout,
-	    "(%5d, %2lu, %2lu): %5d\n",
+	    "(%5d, %3lu, %3lu): %5d\n",
 	    std::get<0>(lengthAndCount.first),
 	    std::get<1>(lengthAndCount.first),
 	    std::get<2>(lengthAndCount.first),
