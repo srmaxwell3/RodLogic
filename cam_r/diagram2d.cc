@@ -356,41 +356,45 @@ void Diagram2D::refactor() {
   fprintf(stdout, "Refactoring....\n");
 
   // Find the extents of the current rods.
-  int limitTowards[eoDirections];
+  array<int, eoDirections>  limitTowards;
+  limitTowards.fill(0);
+
   for (auto const d : directions) {
     for (auto const r : rods[d]) {
       P2D const &headAt = r->getHeadAt();
       P2D const &tailAt = r->getTailAt();
-      Directions b = BWard(d);
-      Directions f = FWard(d);
-      Directions l = LWard(d);
-      Directions r = RWard(d);
+      Directions bwd = BWard(d);
+      Directions fwd = FWard(d);
+      Directions lwd = LWard(d);
+      Directions rwd = RWard(d);
 
       switch (d) {
-        case E:
-          limitTowards[b] = std::min(limitTowards[b], tailAt.limitTowards(b));
-          limitTowards[f] = std::max(limitTowards[f], tailAt.limitTowards(f));
-          limitTowards[l] = std::min(limitTowards[l], tailAt.limitTowards(l));
-          limitTowards[r] = std::max(limitTowards[r], tailAt.limitTowards(r));
-          break;
-        case W:
-          limitTowards[b] = std::max(limitTowards[b], tailAt.limitTowards(b));
-          limitTowards[f] = std::min(limitTowards[f], tailAt.limitTowards(f));
-          limitTowards[l] = std::min(limitTowards[l], tailAt.limitTowards(l));
-          limitTowards[r] = std::max(limitTowards[r], tailAt.limitTowards(r));
-          break;
-        case S:
-          limitTowards[b] = std::min(limitTowards[b], tailAt.limitTowards(b));
-          limitTowards[f] = std::max(limitTowards[f], tailAt.limitTowards(f));
-          limitTowards[l] = std::max(limitTowards[l], tailAt.limitTowards(l));
-          limitTowards[r] = std::min(limitTowards[r], tailAt.limitTowards(r));
-          break;
-        case N:
-          limitTowards[b] = std::max(limitTowards[b], tailAt.limitTowards(b));
-          limitTowards[f] = std::min(limitTowards[f], tailAt.limitTowards(f));
-          limitTowards[l] = std::max(limitTowards[l], tailAt.limitTowards(l));
-          limitTowards[r] = std::min(limitTowards[r], tailAt.limitTowards(r));
-          break;
+      case E:
+	limitTowards[bwd] = std::min(limitTowards[bwd], tailAt.limitTowards(bwd));
+	limitTowards[fwd] = std::max(limitTowards[fwd], tailAt.limitTowards(fwd));
+	limitTowards[lwd] = std::min(limitTowards[lwd], tailAt.limitTowards(lwd));
+	limitTowards[rwd] = std::max(limitTowards[rwd], tailAt.limitTowards(rwd));
+	break;
+      case W:
+	limitTowards[bwd] = std::max(limitTowards[bwd], tailAt.limitTowards(bwd));
+	limitTowards[fwd] = std::min(limitTowards[fwd], tailAt.limitTowards(fwd));
+	limitTowards[lwd] = std::min(limitTowards[lwd], tailAt.limitTowards(lwd));
+	limitTowards[rwd] = std::max(limitTowards[rwd], tailAt.limitTowards(rwd));
+	break;
+      case S:
+	limitTowards[bwd] = std::min(limitTowards[bwd], tailAt.limitTowards(bwd));
+	limitTowards[fwd] = std::max(limitTowards[fwd], tailAt.limitTowards(fwd));
+	limitTowards[lwd] = std::max(limitTowards[lwd], tailAt.limitTowards(lwd));
+	limitTowards[rwd] = std::min(limitTowards[rwd], tailAt.limitTowards(rwd));
+	break;
+      case N:
+	limitTowards[bwd] = std::max(limitTowards[bwd], tailAt.limitTowards(bwd));
+	limitTowards[fwd] = std::min(limitTowards[fwd], tailAt.limitTowards(fwd));
+	limitTowards[lwd] = std::max(limitTowards[lwd], tailAt.limitTowards(lwd));
+	limitTowards[rwd] = std::min(limitTowards[rwd], tailAt.limitTowards(rwd));
+	break;
+      default:
+	break;
       }
     }
   }
@@ -407,15 +411,17 @@ void Diagram2D::refactor() {
 
       switch (d) {
         // E/W rods are on a row.
-        case E:
-        case W:
-          rowAndColumnCounts[0][headAt.y] += 1;
-          break;
+      case E:
+      case W:
+	rowAndColumnCounts[0][headAt.y] += 1;
+	break;
         // S/N rods are in a column.
-        case S:
-        case N:
-          rowAndColumnCounts[1][headAt.x] += 1;
-          break;
+      case S:
+      case N:
+	rowAndColumnCounts[1][headAt.x] += 1;
+	break;
+      default:
+	break;
       }
     }
   }
@@ -677,7 +683,7 @@ void Diagram2D::dumpState() {
   if (!currentInputs.empty()) {
     CombinedLabel const *lastCLabel = nullptr;
     for (auto const &lv : currentInputs) {
-      if (dumpedALabel |= dumpInputLabelState(lv.first, comma, lastCLabel)) {
+      if ((dumpedALabel |= dumpInputLabelState(lv.first, comma, lastCLabel))) {
         comma = ",\n    ";
       }
     }
@@ -694,7 +700,7 @@ void Diagram2D::dumpState() {
     CombinedLabel const *lastCLabel = nullptr;
     comma = "\n    ";
     for (auto const &lv : currentOutputs) {
-      if (dumpedALabel |= dumpOutputLabelState(lv.first, comma, lastCLabel)) {
+      if ((dumpedALabel |= dumpOutputLabelState(lv.first, comma, lastCLabel))) {
         comma = ",\n    ";
       }
     }
