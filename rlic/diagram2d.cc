@@ -17,7 +17,7 @@ using std::make_tuple;
 
 extern bool optEchoInput;
 extern bool optShowChangedStateEveryTick;
-extern bool optShowPerfrmance;
+extern bool optShowPerformance;
 extern bool optShowRods;
 
 Diagram2D::Diagram2D(istream &in) :
@@ -525,7 +525,7 @@ void Diagram2D::evaluateAt(int tick) {
   totalEvaluatedUSecsPerDirection[totalEvaluatedTicks % eoDirections] += dTEvaluation;
   totalEvaluatedUSecs += dTEvaluation;
 
-  if (optShowPerfrmance) {
+  if (optShowPerformance) {
     fprintf(stdout,
 	    "%ld [%ld.%s]: dT = %lld us\n",
 	    totalEvaluatedTicks,

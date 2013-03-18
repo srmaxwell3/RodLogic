@@ -25,13 +25,14 @@ using std::string;
 
 bool optLittleEndian = false;
 bool optCycleCountSet = false;
+bool optShowDebugOutput = false;
 int optCycleCount = 0;
 string optInputPath = "";
 bool optEchoInput = false;
 string optTableInputPath = "";
 bool optRodsInitialValue = false;
 bool optShowEvaluatingRods = false;
-bool optShowPerfrmance = false;
+bool optShowPerformance = false;
 bool optShowRods = false;
 bool optShowChangedStateEveryTick = false;
 bool optShowStateEveryTick = false;
@@ -439,7 +440,10 @@ void processDiagramFrom(istream &in, map<string, vector<int>> const &inputs) {
 
     // fprintf(stdout, "Executing up to %d cycles....\n", maxInputLength);
     // while (diagram.CurrentTick() < (maxInputLength * int(eoDirections))) {
-    while (diagram.hasUnreadInput()) {
+    while ((0 < optCycleCount && ((diagram.CurrentTick() % int(eoDirections)) < optCycleCount)) ||
+           diagram.hasUnreadInput()
+          )
+    {
       if (!diagram.rodsWereChangedDuringLastEvaluation()) {
         nPhasesWithoutChanges += 1;
         if (allowedPhasesWithoutChanges * int(eoDirections) <= nPhasesWithoutChanges) {
@@ -479,7 +483,7 @@ void processDiagramFrom(istream &in, map<string, vector<int>> const &inputs) {
       }
     };
 
-    if (optShowPerfrmance) {
+    if (optShowPerformance) {
       diagram.dumpPerformance();
     }
   } else {
@@ -487,9 +491,59 @@ void processDiagramFrom(istream &in, map<string, vector<int>> const &inputs) {
   }
 }
 
+char const *ARGV0 = "cam.r";
+
+void Usage(bool terminate) {
+  fprintf(stderr,
+          "\
+%s [ <option>... ] [ <diagram>... ]\n\
+where <option> is:\n\
+-0		Set the default initial value of a rod to 0 (default: false) [%s].\n\
+-1		Set the default initial value of a rod to 1 (default: true) [%s].\n\
+-b		Assume Big Endian for multi-rod variables (default: on) [%s].\n\
+-c <n>		Execute up to <n> cycles (default: 0; execute until input is exhausted) [%d].\n\
+-d		Log debug output (in addition to input and output) variables (default: no) [%s].\n\
+-e		Log rod evaluation (default: no) [%s].\n\
+-i <path>	Read (variable-per-row) input from <path>, without echo (default: no) [%s].\n\
+-I <path>	Read (variable-per-row) input from <path>, with echo (default: no) [%s].\n\
+-l		Assume Little Endian for multi-rod variables (default: off) [%s].\n\
+-p		Log performance metrics (default: off) [%s].\n\
+-r		Log rods (default: off) [%s].\n\
+-s		Log whole state after each tick (default: off) [%s].\n\
+-S		Log changed state after each tick (default: off) [%s].\n\
+-t <path>	Read (tabular, variable-per-column) input from <path>, without echo (default: no) [%s].\n\
+-T <path>	Read (tabular, variable-per-column) input from <path>, with echo (default: no) [%s].\n\
+-w		Log verification warnings (default: no) [%s].\n\
+",
+          ARGV0,
+          optRodsInitialValue ? "" : "-0",
+          optRodsInitialValue ? "-1" : "",
+          optLittleEndian ? "" : "-b",
+          optCycleCount,
+          optShowDebugOutput ? "-d" : "",
+          optShowEvaluatingRods ? "-e" : "",
+          !optInputPath.empty() && !optEchoInput ? optInputPath.c_str() : "",
+          !optInputPath.empty() &&  optEchoInput ? optInputPath.c_str() : "",
+          optLittleEndian ? "-l" : "",
+          optShowPerformance ? "-p" : "",
+          optShowRods ? "-s" : "",
+          optShowStateEveryTick && !optShowChangedStateEveryTick ? "-s" : "",
+          optShowStateEveryTick &&  optShowChangedStateEveryTick ? "-S" : "",
+          !optTableInputPath.empty() && !optEchoInput ? optTableInputPath.c_str() : "",
+          !optTableInputPath.empty() &&  optEchoInput ? optTableInputPath.c_str() : "",
+          optWarnings ? "-w" : ""
+         );
+  if (terminate) {
+    exit(1);
+  }
+}
+
 int main(int argc, char *const argv[]) {
+  ARGV0 = argv[0];
+
+  bool optShowHelp = false;
   int c;
-  while ((c = getopt(argc, argv, "01bc:ei:I:lprsSt:T:w")) != -1) {
+  while ((c = getopt(argc, argv, "01bc:dehi:I:lprsSt:T:w")) != -1) {
     switch (c) {
       case '0':
         optRodsInitialValue = false;
@@ -507,8 +561,14 @@ int main(int argc, char *const argv[]) {
         }
         optCycleCountSet = true;
         break;
+      case 'd':
+        optShowDebugOutput = true;
+        break;
       case 'e':
         optShowEvaluatingRods = true;
+        break;
+      case 'h':
+        optShowHelp = true;
         break;
       case 'i':
         optInputPath = optarg;
@@ -522,7 +582,7 @@ int main(int argc, char *const argv[]) {
         optLittleEndian = true;
         break;
       case 'p':
-	optShowPerfrmance = true;
+	optShowPerformance = true;
 	break;
       case 'r':
         optShowRods = true;
@@ -560,24 +620,43 @@ int main(int argc, char *const argv[]) {
     }
   }
 
-  fprintf(stdout, "%s -c %d", argv[0], optCycleCount);
+  if (optShowHelp) {
+    Usage(false);
+  }
+
+  fprintf(stdout, "%s", argv[0]);
+  fprintf(stdout, " -%s", optRodsInitialValue ? "1" : "0");
+  fprintf(stdout, " -%s", optLittleEndian ? "l" : "b");
+  fprintf(stdout, " -c %d", optCycleCount);
+  if (optShowDebugOutput) {
+    fprintf(stdout, " -d");
+  }
   if (optShowEvaluatingRods) {
     fprintf(stdout, " -e");
   }
-  if (!optRodsInitialValue) {
-    fprintf(stdout, " -F");
-  }
   if (!optInputPath.empty()) {
-    fprintf(stdout, " -i %s", optInputPath.c_str());
+    fprintf(stdout, " -%s %s",
+            optEchoInput ? "I" : "i",
+            optInputPath.c_str()
+           );
+  }
+  if (optShowPerformance) {
+    fprintf(stdout, " -p");
   }
   if (optShowRods) {
-    fprintf(stdout, " -s");
+    fprintf(stdout, " -r");
+  }
+  if (optShowStateEveryTick) {
+    fprintf(stdout, " -%s", optShowChangedStateEveryTick ? "S" : "s");
   }
   if (!optTableInputPath.empty()) {
-    fprintf(stdout, " -t %s", optTableInputPath.c_str());
+    fprintf(stdout, " -%s %s",
+            optEchoInput ? "T" : "t",
+            optTableInputPath.c_str()
+           );
   }
-  if (optRodsInitialValue) {
-    fprintf(stdout, " -T");
+  if (optWarnings) {
+    fprintf(stdout, " -w");
   }
   if (optind < argc) {
     for (int a = optind; a < argc; a += 1) {

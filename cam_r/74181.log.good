@@ -1,4 +1,4 @@
-./cam.r -c 0 -F 74181.txt
+./cam.r -0 -b -c 0 74181.txt
 Rod Count by (Length, Fan-In, Fan-Out):
 (    1,   0,   0):    22
 (   11,   0,   0):     1
