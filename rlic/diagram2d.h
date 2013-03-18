@@ -66,8 +66,8 @@ struct Diagram2D : public vector<string> {
   void setInputFor(Label const &label, vector<int> const &values);
   void setInputFor(string const &label, vector<int> const &values);
   void addInputFor(Label const &label, bool value);
-  bool getInputFor(Label const &label);
-  bool getInputFor(string const &name, int bitNumber);
+  EdgedBool const &getInputFor(Label const &label);
+  EdgedBool const &getInputFor(string const &name, int bitNumber);
 
   void reset();
   void evaluateAt(int tick);
@@ -93,12 +93,12 @@ struct Diagram2D : public vector<string> {
   bool readInputFor(Label const &label);
 
   void writeOutputFor(Label const &label, bool value);
-  bool getOutputFor(Label const &label);
-  bool getOutputFor(string const &name, int bitNumber);
+  EdgedBool const &getOutputFor(Label const &label);
+  EdgedBool const &getOutputFor(string const &name, int bitNumber);
 
   void writeDebugOutputFor(Label const &label, bool value);
-  bool getDebugOutputFor(Label const &label);
-  bool getDebugOutputFor(string const &name, int bitNumber);
+  EdgedBool const &getDebugOutputFor(Label const &label);
+  EdgedBool const &getDebugOutputFor(string const &name, int bitNumber);
 
   int CurrentTick() const { return lastEvaluatedTick; }
 
@@ -126,12 +126,12 @@ struct Diagram2D : public vector<string> {
 
   array<SetOfRod2Ds, eoDirections> rodsWithOutputs;
   Directions earliestOutput;
-  map<Label, bool> currentOutputs;
+  map<Label, EdgedBool> currentOutputs;
   map<string, CombinedLabel> currentCombinedOutputs;
 
   array<SetOfRod2Ds, eoDirections> rodsWithDebugOutputs;
   Directions earliestDebugOutput;
-  map<Label, bool> currentDebugOutputs;
+  map<Label, EdgedBool> currentDebugOutputs;
   map<string, CombinedLabel> currentCombinedDebugOutputs;
 
   array<long, eoDirections> totalEvaluatedUSecsPerDirection;
