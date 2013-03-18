@@ -12,8 +12,8 @@ class BitStreamInput : public deque<bool> {
       edgedBool(initalValue)
   {
   }
-  bool get() const { return bool(edgedBool); }
-  bool read() {
+  EdgedBool const &get() const { return edgedBool; }
+  EdgedBool const &read() {
     if (!empty()) {
       edgedBool = front();
       pop_front();
