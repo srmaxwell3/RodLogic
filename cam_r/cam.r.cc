@@ -422,6 +422,7 @@ void processDiagramFrom(istream &in, map<string, vector<int>> const &inputs) {
   // while (diagram.CurrentTick() < 100 && diagram.hasInputFor("Read")) {
   //   diagram.evaluate();
   // }
+
   int maxInputLength = optCycleCount;
   for (auto const &nameAndValues : inputs) {
     string const &name = nameAndValues.first;
@@ -431,23 +432,41 @@ void processDiagramFrom(istream &in, map<string, vector<int>> const &inputs) {
     maxInputLength = std::max(maxInputLength, int(values.size()));
   }
 
-  if (maxInputLength) {
+  if (!inputs.empty()) {
+    int const allowedPhasesWithoutChanges = 16;
     int nPhasesWithoutChanges = 0;
+    int nPhasesWithoutInputs = 0;
 
-    fprintf(stdout, "Executing up to %d cycles....\n", maxInputLength);
-    while (diagram.CurrentTick() < (maxInputLength * int(eoDirections))) {
+    // fprintf(stdout, "Executing up to %d cycles....\n", maxInputLength);
+    // while (diagram.CurrentTick() < (maxInputLength * int(eoDirections))) {
+    while (diagram.hasUnreadInput()) {
       if (!diagram.rodsWereChangedDuringLastEvaluation()) {
         nPhasesWithoutChanges += 1;
-        if (int(eoDirections) <= nPhasesWithoutChanges) {
+        if (allowedPhasesWithoutChanges * int(eoDirections) <= nPhasesWithoutChanges) {
           fprintf(stdout,
-                  "Bailing early (cycle %d): the last cycle had no rod changes....\n",
+                  "Bailing early (cycle %d): the last %d cycle(s) had no rod changes....\n",
+		  allowedPhasesWithoutChanges,
                   diagram.CurrentTick()
                   );
           break;
-        } else {
-          nPhasesWithoutChanges = 0;
-        }
+	}
+      } else {
+	nPhasesWithoutChanges = 0;
       }
+
+      // if (!diagram.unreadInputsWereReadDuringLastEvaluation()) {
+      //   nPhasesWithoutInputs += 1;
+      //   if (allowedPhasesWithoutChanges * int(eoDirections) <= nPhasesWithoutInputs) {
+      //     fprintf(stdout,
+      //             "Bailing early (cycle %d): the last %d cycle(s) had no rod inputs....\n",
+      // 		  allowedPhasesWithoutChanges,
+      //             diagram.CurrentTick()
+      //             );
+      //     break;
+      // 	}
+      // } else {
+      // 	nPhasesWithoutInputs = 0;
+      // }
 
       diagram.evaluate();
 
@@ -458,7 +477,7 @@ void processDiagramFrom(istream &in, map<string, vector<int>> const &inputs) {
       {
 	diagram.dumpState();
       }
-    }
+    };
 
     if (optShowPerfrmance) {
       diagram.dumpPerformance();
