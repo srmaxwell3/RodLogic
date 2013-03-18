@@ -48,7 +48,7 @@ class Rod2D : public SetOfP2Ds {
   string const &getExpression() const { return expression; }
 
   void reset();
-  bool getValue() const;
+  EdgedBool const &getValue() const;
   bool evaluateAt(Diagram2D &diagram, int tick);
   bool hasChanged() const;
 
@@ -77,7 +77,6 @@ class Rod2D : public SetOfP2Ds {
   set<RodConnection> connectedTo[eoRodConnectionType];
   string expression;
   EdgedBool lastEvaluatedValue;
-  int lastEvaluatedTick;
 };
 
 #endif // ROD2D

@@ -13,12 +13,22 @@ class BitStreamInput : public deque<bool> {
   {
   }
   EdgedBool const &get() const { return edgedBool; }
+  EdgedBool const &getAt(int atTick) { return edgedBool.getAt(atTick); }
   EdgedBool const &read() {
     if (!empty()) {
       edgedBool = front();
       pop_front();
     } else {
       edgedBool = false;
+    }
+    return get();
+  }
+  EdgedBool const &readAt(int atTick) {
+    if (!empty()) {
+      edgedBool.updateAt(atTick, front());
+      pop_front();
+    } else {
+      edgedBool.updateAt(atTick, false);
     }
     return get();
   }

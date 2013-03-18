@@ -90,7 +90,7 @@ struct Diagram2D : public vector<string> {
   size_t maxUnreadInput() const;
   bool hasUnreadInput() const;
   bool hasInputFor(Label const &label);
-  bool readInputFor(Label const &label);
+  EdgedBool const &readInputFor(Label const &label);
 
   void writeOutputFor(Label const &label, bool value);
   EdgedBool const &getOutputFor(Label const &label);

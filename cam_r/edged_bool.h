@@ -3,24 +3,61 @@
 
 class EdgedBool {
  public:
-  EdgedBool(bool initalValue = false) {
-    values[0] = initalValue;
-    values[1] = initalValue;
+  EdgedBool(bool initalValue = false, int atTick = -1) {
+    reset(initalValue, atTick);
   }
-  operator bool() const { return values[0]; }
-  EdgedBool &operator=(bool newValue) {
-    values[1] = values[0];
-    values[0] = newValue;
+
+  operator bool() const { return history[0].value; }
+  // EdgedBool &operator=(bool newValue) {
+  //   history[1] = history[0];
+  //   history[0] = { history[1].atTick + 1, newValue };
+  //   return *this;
+  // }
+
+  void reset(bool initalValue = false, int atTick = -1) {
+    history[0] = { atTick, initalValue };
+    history[1] = { atTick, initalValue };
+  }
+
+  EdgedBool &updateAt(int atTick, bool newValue) {
+    history[1] = history[0];
+    history[0] = { atTick, newValue };
     return *this;
   }
-  bool isALeadingEdge() const { return values[0] && !values[1]; }
-  bool isATrailingEdge() const { return !values[0] && values[1]; }
-  bool isAnEdge() const { return values[0] != values[1]; }
-  bool hasChanged() const { return isAnEdge(); }
-  bool isSteady() const { return !hasChanged(); }
+
+  EdgedBool &getAt(int atTick) {
+    if (history[0].atTick != atTick) {
+      history[1] = history[0];
+      history[0] = { atTick, history[1].value };
+    }
+    return *this;
+  }
+
+  int dTicks() const {
+    return history[0].atTick - history[1].atTick;
+  }
+
+  bool isALeadingEdge() const {
+    return history[0].value && isAnEdge();
+  }
+  bool isATrailingEdge() const {
+    return !history[0].value && isAnEdge();
+  }
+  bool isAnEdge() const {
+    return history[0].value != history[1].value;
+  }
+  bool hasChanged() const {
+    return isAnEdge();
+  }
+  bool isSteady() const {
+    return !hasChanged();
+  }
 
  private:
-  bool values[2];
+  struct {
+    int atTick;
+    bool value;
+  } history[2];
 };
 
 #endif // EDGED_BOOL_H

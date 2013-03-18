@@ -23,7 +23,6 @@ Rod2D::Rod2D(Diagram2D &diagram, P2D const &pStart, Directions d) :
     direction(d),
     expression(),
     tickFirstSet(-1),
-    lastEvaluatedTick(-1),
     lastEvaluatedValue(optRodsInitialValue)
 {
   char pStartChar = diagram.at(pStart);
@@ -132,7 +131,7 @@ Rod2D::Rod2D(Diagram2D &diagram, P2D const &pStart, Directions d) :
   char buffer[1024];
   char *bPtr = buffer;
   int bCnt = 0;
-  if (findTailLabel(diagram) || findHeadLabel(diagram)) {
+  if (findHeadLabel(diagram) || findTailLabel(diagram)) {
     sprintf(bPtr, "<\"%s\":%s:%n", label.ToString().c_str(), c_str(direction), &bCnt);
   } else {
     sprintf(bPtr, "<%s:%n", c_str(direction), &bCnt);
@@ -210,7 +209,6 @@ Rod2D::Rod2D() :
     shared(),
     direction(eoDirections),
     tickFirstSet(-1),
-    lastEvaluatedTick(-1),
     lastEvaluatedValue(optRodsInitialValue)
 {
 }
@@ -270,84 +268,6 @@ bool Rod2D::findLabel(Diagram2D const &diagram, P2D pStart, Directions oWard) {
     { '\\', '/' }, // N
     { '?',  '?' }, // U
   };
-
-  if (direction == E || direction == W) {
-    Directions const tWard = oWard;
-    int nBlanks = 0;
-    string l;
-    P2D t;
-    for (t = pStart.offsetBy(oWard);
-         nBlanks < 2 && diagram.isInBounds(t) && diagram.at(t) == ' ';
-         t.move(tWard)
-        )
-    {
-      nBlanks += 1;
-    }
-    if (diagram.isInBounds(t)) {
-      char c = diagram.at(t);
-      if (nBlanks < 2 &&
-          (c != '/' && c != '\\') &&
-          (c == '0' || c == '1' || c == 'O' || c == 'I' || !Diagram2D::isLegalEWChar(c))
-         )
-      {
-        for (; diagram.isInBounds(t); t.move(tWard)) {
-          c = diagram.at(t);
-          if (c != ' ') {
-            if (nBlanks) {
-              l += ' ';
-              nBlanks = 0;
-            }
-            l += c;
-          } else if (nBlanks++) {
-            break;
-          }
-        }
-        l = trim(l);
-        if (tWard == W) {
-          std::reverse(l.begin(), l.end());
-        }
-        label = l;
-      }
-    }
-  } else {
-    Directions const tWard = oWard;
-    int nBlanks = 0;
-    string l;
-    P2D t;
-    for (t = pStart.offsetBy(oWard);
-         nBlanks < 2 && diagram.isInBounds(t) && diagram.at(t) == ' ';
-         t.move(tWard)
-        )
-    {
-      nBlanks += 1;
-    }
-    if (diagram.isInBounds(t)) {
-      char c = diagram.at(t);
-      if (nBlanks < 2 &&
-          (c != '/' && c != '\\') &&
-          (c == '0' || c == '1' || c == 'O' || c == 'I' || !Diagram2D::isLegalEWChar(c))
-         )
-      {
-        for (; diagram.isInBounds(t); t.move(tWard)) {
-          c = diagram.at(t);
-          if (c != ' ') {
-            if (nBlanks) {
-              l += ' ';
-              nBlanks = 0;
-            }
-            l += c;
-          } else if (nBlanks++) {
-            break;
-          }
-        }
-        l = trim(l);
-        if (tWard == N) {
-          std::reverse(l.begin(), l.end());
-        }
-        label = l;
-      }
-    }
-  }
 
   if (!label.IsDefined()) {
     Directions const &tWard = oWardToTWard[oWard][0];
@@ -433,6 +353,85 @@ bool Rod2D::findLabel(Diagram2D const &diagram, P2D pStart, Directions oWard) {
     }
   }
 
+  if (!label.IsDefined()) {
+    if (direction == E || direction == W) {
+      Directions const tWard = oWard;
+      int nBlanks = 0;
+      string l;
+      P2D t;
+      for (t = pStart.offsetBy(oWard);
+           nBlanks < 2 && diagram.isInBounds(t) && diagram.at(t) == ' ';
+           t.move(tWard)
+           )
+      {
+        nBlanks += 1;
+      }
+      if (diagram.isInBounds(t)) {
+        char c = diagram.at(t);
+        if (nBlanks < 2 &&
+            (c != '/' && c != '\\') &&
+            (c == '0' || c == '1' || c == 'O' || c == 'I' || !Diagram2D::isLegalEWChar(c))
+            )
+        {
+          for (; diagram.isInBounds(t); t.move(tWard)) {
+            c = diagram.at(t);
+            if (c != ' ') {
+              if (nBlanks) {
+                l += ' ';
+                nBlanks = 0;
+              }
+              l += c;
+            } else if (nBlanks++) {
+              break;
+            }
+          }
+          l = trim(l);
+          if (tWard == W) {
+            std::reverse(l.begin(), l.end());
+          }
+          label = l;
+        }
+      }
+    } else {
+      Directions const tWard = oWard;
+      int nBlanks = 0;
+      string l;
+      P2D t;
+      for (t = pStart.offsetBy(oWard);
+           nBlanks < 2 && diagram.isInBounds(t) && diagram.at(t) == ' ';
+           t.move(tWard)
+           )
+      {
+        nBlanks += 1;
+      }
+      if (diagram.isInBounds(t)) {
+        char c = diagram.at(t);
+        if (nBlanks < 2 &&
+            (c != '/' && c != '\\') &&
+            (c == '0' || c == '1' || c == 'O' || c == 'I' || !Diagram2D::isLegalEWChar(c))
+            )
+        {
+          for (; diagram.isInBounds(t); t.move(tWard)) {
+            c = diagram.at(t);
+            if (c != ' ') {
+              if (nBlanks) {
+                l += ' ';
+                nBlanks = 0;
+              }
+              l += c;
+            } else if (nBlanks++) {
+              break;
+            }
+          }
+          l = trim(l);
+          if (tWard == N) {
+            std::reverse(l.begin(), l.end());
+          }
+          label = l;
+        }
+      }
+    }
+  }
   return label.IsDefined();
 }
 
@@ -701,13 +700,10 @@ string const &Rod2D::formExpression() {
 }
 
 void Rod2D::reset() {
-  lastEvaluatedTick = -1;
+  lastEvaluatedValue.reset(optRodsInitialValue);
 }
 
-bool Rod2D::getValue() const {
-  // if (lastEvaluatedTick < 0) {
-  //   return false;
-  // }
+EdgedBool const &Rod2D::getValue() const {
   return lastEvaluatedValue;
 }
 
@@ -799,12 +795,15 @@ bool Rod2D::evaluateAt(Diagram2D &diagram, int tick) {
     }
   }
 
-  if (optShowEvaluatingRods) {
-    fprintf(stdout, " } -> %1d\n", result);
-  }
+  lastEvaluatedValue.updateAt(tick, result);
 
-  lastEvaluatedValue = result;
-  lastEvaluatedTick = tick;
+  if (optShowEvaluatingRods) {
+    fprintf(stdout,
+            " } -> %1d%s\n",
+            result,
+            lastEvaluatedValue.hasChanged() ? "*" : ""
+           );
+  }
   return lastEvaluatedValue;
 }
 
