@@ -30,6 +30,7 @@ Total: 15206 (    0)
 
 Earliest input: E
 Earliest output: W
+Earliest debugOutput: None
 
 Refactoring....
 limitTowards[E] =   15
