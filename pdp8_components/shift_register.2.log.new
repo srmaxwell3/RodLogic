@@ -1,0 +1,4019 @@
+cam_r/cam.r -c 0 -F -t shift_register_generate_input.txt shift_register.2.txt
+Rod Count by (Length, Fan-In, Fan-Out):
+(    6,  1,  3):    24
+(    6,  3,  1):    12
+(    7,  3,  1):    12
+(    7,  4,  1):    24
+(    9,  1,  1):     1
+(    9,  1,  2):     1
+(   10,  1,  1):     2
+(   11,  1,  2):    12
+(   11,  1,  3):    12
+(   13,  1,  1):    12
+(   17,  1,  1):     2
+(   22,  1,  3):    12
+(   33,  1,  1):     1
+(   33,  2, 16):     1
+(   67,  4,  1):    12
+(  122,  1,  1):    12
+(  122,  1,  2):     3
+(  122,  1,  3):    10
+(  122,  1, 48):     2
+(  122,  2,  1):     1
+(  220,  1,  1):    26
+(  220,  1,  2):     2
+(  220,  1, 12):     1
+(  220,  3,  1):    48
+
+Rod Count (and # incomplete) by Direction:
+    E:    77 (    0)
+    S:    66 (    0)
+    D:     0 (    0)
+    W:    64 (    0)
+    N:    38 (    0)
+    U:     0 (    0)
+Total:   245 (    0)
+
+Earliest input: E
+Earliest output: N
+
+Refactoring....
+limitTowards[E] =   15
+limitTowards[S] =  123
+limitTowards[D] =    0
+limitTowards[W] =  185
+limitTowards[N] =   34
+limitTowards[U] =    0
+
+Row separations:
+separations[ 1] =   71
+separations[ 2] =    9
+separations[ 4] =    2
+separations[ 6] =    2
+separations[10] =    1
+
+Column separations:
+separations[ 1] =   71
+separations[ 2] =    7
+separations[ 4] =   11
+separations[ 5] =    1
+separations[ 7] =   10
+separations[ 9] =    1
+
+Executing up to 256 cycles....
+0: inputs={
+     ACIn.>0..b (000000000000 [000]) -> 011001001111 [64f],
+     Clk (0) -> 1,
+     S.1..0< (00 [0]) -> 11 [3]
+  }, outputs={ }
+1: inputs={ }, outputs={,
+     Start (0) -> 1
+  }
+2: inputs={ }, outputs={ }
+3: inputs={ }, outputs={,
+     Busy (0) -> 1
+  }
+4: inputs={ }, outputs={,
+     Wait (0) -> 1,
+     ac'!.>0..b (000000000000 [000]) -> 011001001111 [64f]
+  }
+5: inputs={ }, outputs={ }
+6: inputs={ }, outputs={ }
+7: inputs={ }, outputs={,
+     Start (1) -> 0
+  }
+8: inputs={ }, outputs={ }
+9: inputs={ }, outputs={,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+10: inputs={ }, outputs={,
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     ac'!.>0..b (011001001111 [64f]) -> 000000000000 [000]
+  }
+11: inputs={ }, outputs={ }
+12: inputs={ }, outputs={
+     AC.>0..b (000000000000 [000]) -> 100110110000 [9b0],
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+13: inputs={ }, outputs={,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+14: inputs={ }, outputs={ }
+15: inputs={ }, outputs={,
+     Busy (1) -> 0,
+     Ready (0) -> 1
+  }
+16: inputs={ }, outputs={,
+     Wait (1) -> 0,
+     ac'!.>0..b (000000000000 [000]) -> 100110110000 [9b0]
+  }
+17: inputs={ }, outputs={ }
+18: inputs={
+     ACIn.>0..b (011001001111 [64f]) -> 110011000110 [cc6]
+  }, outputs={ }
+19: inputs={ }, outputs={,
+     Start (0) -> 1
+  }
+20: inputs={ }, outputs={ }
+21: inputs={ }, outputs={,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+22: inputs={ }, outputs={,
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     ac'!.>0..b (100110110000 [9b0]) -> 110011000110 [cc6]
+  }
+23: inputs={ }, outputs={ }
+24: inputs={
+     ACIn.>0..b (110011000110 [cc6]) -> 001100101001 [329]
+  }, outputs={,
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+25: inputs={ }, outputs={,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+26: inputs={ }, outputs={ }
+27: inputs={ }, outputs={,
+     Busy (0) -> 1,
+     Ready (1) -> 0
+  }
+28: inputs={ }, outputs={,
+     Wait (0) -> 1,
+     ac'!.>0..b (110011000110 [cc6]) -> 001100101001 [329]
+  }
+29: inputs={ }, outputs={ }
+30: inputs={ }, outputs={
+     AC.>0..b (100110110000 [9b0]) -> 001100111001 [339]
+  }
+31: inputs={ }, outputs={,
+     Start (1) -> 0
+  }
+32: inputs={ }, outputs={ }
+33: inputs={ }, outputs={,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+34: inputs={ }, outputs={,
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     ac'!.>0..b (001100101001 [329]) -> 001100111001 [339]
+  }
+35: inputs={ }, outputs={ }
+36: inputs={ }, outputs={,
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+37: inputs={ }, outputs={,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+38: inputs={ }, outputs={ }
+39: inputs={ }, outputs={,
+     Busy (1) -> 0,
+     Ready (0) -> 1
+  }
+40: inputs={ }, outputs={,
+     Wait (1) -> 0
+  }
+41: inputs={ }, outputs={ }
+42: inputs={
+     ACIn.>0..b (001100101001 [329]) -> 000000000000 [000],
+     Link (0) -> 1,
+     S.1..0< (11 [3]) -> 01 [1]
+  }, outputs={ }
+43: inputs={ }, outputs={,
+     Start (0) -> 1
+  }
+44: inputs={ }, outputs={ }
+45: inputs={ }, outputs={,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+46: inputs={ }, outputs={,
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     ac'!.>0..b (001100111001 [339]) -> 100110011100 [99c]
+  }
+47: inputs={ }, outputs={ }
+48: inputs={ }, outputs={,
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+49: inputs={ }, outputs={,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+50: inputs={ }, outputs={ }
+51: inputs={ }, outputs={,
+     Busy (0) -> 1,
+     Ready (1) -> 0
+  }
+52: inputs={ }, outputs={,
+     Wait (0) -> 1
+  }
+53: inputs={ }, outputs={ }
+54: inputs={ }, outputs={ }
+55: inputs={ }, outputs={,
+     Start (1) -> 0
+  }
+56: inputs={ }, outputs={ }
+57: inputs={ }, outputs={,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+58: inputs={ }, outputs={,
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     ac'!.>0..b (100110011100 [99c]) -> 001100111001 [339]
+  }
+59: inputs={ }, outputs={ }
+60: inputs={ }, outputs={,
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+61: inputs={ }, outputs={,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+62: inputs={ }, outputs={ }
+63: inputs={ }, outputs={,
+     Busy (1) -> 0,
+     Ready (0) -> 1
+  }
+64: inputs={ }, outputs={,
+     Wait (1) -> 0
+  }
+65: inputs={ }, outputs={ }
+66: inputs={ }, outputs={ }
+67: inputs={ }, outputs={,
+     Start (0) -> 1
+  }
+68: inputs={ }, outputs={ }
+69: inputs={ }, outputs={,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+70: inputs={ }, outputs={,
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     ac'!.>0..b (001100111001 [339]) -> 100110011100 [99c]
+  }
+71: inputs={ }, outputs={ }
+72: inputs={ }, outputs={,
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+73: inputs={ }, outputs={,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+74: inputs={ }, outputs={ }
+75: inputs={ }, outputs={,
+     Busy (0) -> 1,
+     Ready (1) -> 0
+  }
+76: inputs={ }, outputs={,
+     Wait (0) -> 1
+  }
+77: inputs={ }, outputs={ }
+78: inputs={ }, outputs={ }
+79: inputs={ }, outputs={,
+     Start (1) -> 0
+  }
+80: inputs={ }, outputs={ }
+81: inputs={ }, outputs={,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+82: inputs={ }, outputs={,
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     ac'!.>0..b (100110011100 [99c]) -> 001100111001 [339]
+  }
+83: inputs={ }, outputs={ }
+84: inputs={ }, outputs={,
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+85: inputs={ }, outputs={,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+86: inputs={ }, outputs={ }
+87: inputs={ }, outputs={,
+     Busy (1) -> 0,
+     Ready (0) -> 1
+  }
+88: inputs={ }, outputs={,
+     Wait (1) -> 0
+  }
+89: inputs={ }, outputs={ }
+90: inputs={
+     ACIn.>0..b (000000000000 [000]) -> 111010101000 [ea8],
+     Link (1) -> 0,
+     S.1..0< (01 [1]) -> 11 [3]
+  }, outputs={ }
+91: inputs={ }, outputs={,
+     Start (0) -> 1
+  }
+92: inputs={ }, outputs={ }
+93: inputs={ }, outputs={,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+94: inputs={ }, outputs={,
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     ac'!.>0..b (001100111001 [339]) -> 111010101000 [ea8]
+  }
+95: inputs={ }, outputs={ }
+96: inputs={
+     ACIn.>0..b (111010101000 [ea8]) -> 000000000000 [000],
+     Link (0) -> 1,
+     S.1..0< (11 [3]) -> 10 [2]
+  }, outputs={,
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+97: inputs={ }, outputs={,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+98: inputs={ }, outputs={ }
+99: inputs={ }, outputs={,
+     Busy (0) -> 1,
+     Ready (1) -> 0
+  }
+100: inputs={ }, outputs={,
+     Wait (0) -> 1,
+     ac'!.>0..b (111010101000 [ea8]) -> 011001110011 [673]
+  }
+101: inputs={ }, outputs={ }
+102: inputs={ }, outputs={
+     AC.>0..b (001100111001 [339]) -> 000101010111 [157]
+  }
+103: inputs={ }, outputs={,
+     Start (1) -> 0
+  }
+104: inputs={ }, outputs={ }
+105: inputs={ }, outputs={,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+106: inputs={ }, outputs={,
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     ac'!.>0..b (011001110011 [673]) -> 000101010111 [157]
+  }
+107: inputs={ }, outputs={ }
+108: inputs={ }, outputs={,
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+109: inputs={ }, outputs={,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+110: inputs={ }, outputs={ }
+111: inputs={ }, outputs={,
+     Busy (1) -> 0,
+     Ready (0) -> 1
+  }
+112: inputs={ }, outputs={,
+     Wait (1) -> 0
+  }
+113: inputs={ }, outputs={ }
+114: inputs={,
+     Link (1) -> 0,
+     S.1..0< (10 [2]) -> 00 [0]
+  }, outputs={ }
+115: inputs={ }, outputs={,
+     Start (0) -> 1
+  }
+116: inputs={ }, outputs={ }
+117: inputs={ }, outputs={,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+118: inputs={ }, outputs={,
+     Strt.>1..4 (0111 [7]) -> 0011 [3]
+  }
+119: inputs={ }, outputs={ }
+120: inputs={,
+     S.1..0< (00 [0]) -> 10 [2]
+  }, outputs={,
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+121: inputs={ }, outputs={,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+122: inputs={ }, outputs={ }
+123: inputs={ }, outputs={,
+     Busy (0) -> 1,
+     Ready (1) -> 0
+  }
+124: inputs={ }, outputs={,
+     Wait (0) -> 1,
+     ac'!.>0..b (000101010111 [157]) -> 001010101110 [2ae]
+  }
+125: inputs={ }, outputs={ }
+126: inputs={ }, outputs={ }
+127: inputs={ }, outputs={,
+     Start (1) -> 0
+  }
+128: inputs={ }, outputs={ }
+129: inputs={ }, outputs={,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+130: inputs={ }, outputs={,
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     ac'!.>0..b (001010101110 [2ae]) -> 000101010111 [157]
+  }
+131: inputs={ }, outputs={ }
+132: inputs={ }, outputs={,
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+133: inputs={ }, outputs={,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+134: inputs={ }, outputs={ }
+135: inputs={ }, outputs={,
+     Busy (1) -> 0,
+     Ready (0) -> 1
+  }
+136: inputs={ }, outputs={,
+     Wait (1) -> 0
+  }
+137: inputs={ }, outputs={ }
+138: inputs={,
+     S.1..0< (10 [2]) -> 00 [0]
+  }, outputs={ }
+139: inputs={ }, outputs={,
+     Start (0) -> 1
+  }
+140: inputs={ }, outputs={ }
+141: inputs={ }, outputs={,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+142: inputs={ }, outputs={,
+     Strt.>1..4 (0111 [7]) -> 0011 [3]
+  }
+143: inputs={ }, outputs={ }
+144: inputs={ }, outputs={,
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+145: inputs={ }, outputs={,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+146: inputs={ }, outputs={ }
+147: inputs={ }, outputs={,
+     Busy (0) -> 1,
+     Ready (1) -> 0
+  }
+148: inputs={ }, outputs={,
+     Wait (0) -> 1
+  }
+149: inputs={ }, outputs={ }
+150: inputs={ }, outputs={ }
+151: inputs={ }, outputs={,
+     Start (1) -> 0
+  }
+152: inputs={ }, outputs={ }
+153: inputs={ }, outputs={,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+154: inputs={ }, outputs={,
+     Strt.>1..4 (1000 [8]) -> 1100 [c]
+  }
+155: inputs={ }, outputs={ }
+156: inputs={ }, outputs={,
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+157: inputs={ }, outputs={,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+158: inputs={ }, outputs={ }
+159: inputs={ }, outputs={,
+     Busy (1) -> 0,
+     Ready (0) -> 1
+  }
+160: inputs={ }, outputs={,
+     Wait (1) -> 0
+  }
+161: inputs={ }, outputs={ }
+162: inputs={
+     ACIn.>0..b (000000000000 [000]) -> 001010000001 [281],
+     S.1..0< (00 [0]) -> 11 [3]
+  }, outputs={ }
+163: inputs={ }, outputs={,
+     Start (0) -> 1
+  }
+164: inputs={ }, outputs={ }
+165: inputs={ }, outputs={,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+166: inputs={ }, outputs={,
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     ac'!.>0..b (000101010111 [157]) -> 001010000001 [281]
+  }
+167: inputs={ }, outputs={ }
+168: inputs={
+     ACIn.>0..b (001010000001 [281]) -> 000000000000 [000],
+     S.1..0< (11 [3]) -> 01 [1]
+  }, outputs={,
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+169: inputs={ }, outputs={,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+170: inputs={ }, outputs={ }
+171: inputs={ }, outputs={,
+     Busy (0) -> 1,
+     Ready (1) -> 0
+  }
+172: inputs={ }, outputs={,
+     Wait (0) -> 1,
+     ac'!.>0..b (001010000001 [281]) -> 000010101011 [0ab]
+  }
+173: inputs={ }, outputs={ }
+174: inputs={ }, outputs={ }
+175: inputs={ }, outputs={,
+     Start (1) -> 0
+  }
+176: inputs={ }, outputs={ }
+177: inputs={ }, outputs={,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+178: inputs={ }, outputs={,
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     ac'!.>0..b (000010101011 [0ab]) -> 000101010111 [157]
+  }
+179: inputs={ }, outputs={ }
+180: inputs={ }, outputs={,
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+181: inputs={ }, outputs={,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+182: inputs={ }, outputs={ }
+183: inputs={ }, outputs={,
+     Busy (1) -> 0,
+     Ready (0) -> 1
+  }
+184: inputs={ }, outputs={,
+     Wait (1) -> 0
+  }
+185: inputs={ }, outputs={ }
+186: inputs={,
+     S.1..0< (01 [1]) -> 00 [0]
+  }, outputs={ }
+187: inputs={ }, outputs={,
+     Start (0) -> 1
+  }
+188: inputs={ }, outputs={ }
+189: inputs={ }, outputs={,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+190: inputs={ }, outputs={,
+     Strt.>1..4 (0111 [7]) -> 0011 [3]
+  }
+191: inputs={ }, outputs={ }
+192: inputs={
+     ACIn.>0..b (000000000000 [000]) -> 001101111101 [37d],
+     S.1..0< (00 [0]) -> 11 [3]
+  }, outputs={,
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+193: inputs={ }, outputs={,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+194: inputs={ }, outputs={ }
+195: inputs={ }, outputs={,
+     Busy (0) -> 1,
+     Ready (1) -> 0
+  }
+196: inputs={ }, outputs={,
+     Wait (0) -> 1,
+     ac'!.>0..b (000101010111 [157]) -> 001101111101 [37d]
+  }
+197: inputs={ }, outputs={ }
+198: inputs={ }, outputs={ }
+199: inputs={ }, outputs={,
+     Start (1) -> 0
+  }
+200: inputs={ }, outputs={ }
+201: inputs={ }, outputs={,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+202: inputs={ }, outputs={,
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     ac'!.>0..b (001101111101 [37d]) -> 000101010111 [157]
+  }
+203: inputs={ }, outputs={ }
+204: inputs={ }, outputs={,
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+205: inputs={ }, outputs={,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+206: inputs={ }, outputs={ }
+207: inputs={ }, outputs={,
+     Busy (1) -> 0,
+     Ready (0) -> 1
+  }
+208: inputs={ }, outputs={,
+     Wait (1) -> 0
+  }
+209: inputs={ }, outputs={ }
+210: inputs={
+     ACIn.>0..b (001101111101 [37d]) -> 000000000000 [000],
+     Link (0) -> 1,
+     S.1..0< (11 [3]) -> 10 [2]
+  }, outputs={ }
+211: inputs={ }, outputs={,
+     Start (0) -> 1
+  }
+212: inputs={ }, outputs={ }
+213: inputs={ }, outputs={,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+214: inputs={ }, outputs={,
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     ac'!.>0..b (000101010111 [157]) -> 001010101111 [2af]
+  }
+215: inputs={ }, outputs={ }
+216: inputs={,
+     Link (1) -> 0
+  }, outputs={,
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+217: inputs={ }, outputs={,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+218: inputs={ }, outputs={ }
+219: inputs={ }, outputs={,
+     Busy (0) -> 1,
+     Ready (1) -> 0
+  }
+220: inputs={ }, outputs={,
+     Wait (0) -> 1,
+     ac'!.>0..b (001010101111 [2af]) -> 001010101110 [2ae]
+  }
+221: inputs={ }, outputs={ }
+222: inputs={ }, outputs={ }
+223: inputs={ }, outputs={,
+     Start (1) -> 0
+  }
+224: inputs={ }, outputs={ }
+225: inputs={ }, outputs={,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+226: inputs={ }, outputs={,
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     ac'!.>0..b (001010101110 [2ae]) -> 000101010111 [157]
+  }
+227: inputs={ }, outputs={ }
+228: inputs={ }, outputs={,
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+229: inputs={ }, outputs={,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+230: inputs={ }, outputs={ }
+231: inputs={ }, outputs={,
+     Busy (1) -> 0,
+     Ready (0) -> 1
+  }
+232: inputs={ }, outputs={,
+     Wait (1) -> 0
+  }
+233: inputs={ }, outputs={ }
+234: inputs={,
+     Link (0) -> 1
+  }, outputs={ }
+235: inputs={ }, outputs={,
+     Start (0) -> 1
+  }
+236: inputs={ }, outputs={ }
+237: inputs={ }, outputs={,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+238: inputs={ }, outputs={,
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     ac'!.>0..b (000101010111 [157]) -> 001010101111 [2af]
+  }
+239: inputs={ }, outputs={ }
+240: inputs={,
+     S.1..0< (10 [2]) -> 01 [1]
+  }, outputs={,
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+241: inputs={ }, outputs={,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+242: inputs={ }, outputs={ }
+243: inputs={ }, outputs={,
+     Busy (0) -> 1,
+     Ready (1) -> 0
+  }
+244: inputs={ }, outputs={,
+     Wait (0) -> 1,
+     ac'!.>0..b (001010101111 [2af]) -> 100010101011 [8ab]
+  }
+245: inputs={ }, outputs={ }
+246: inputs={ }, outputs={ }
+247: inputs={ }, outputs={,
+     Start (1) -> 0
+  }
+248: inputs={ }, outputs={ }
+249: inputs={ }, outputs={,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+250: inputs={ }, outputs={,
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     ac'!.>0..b (100010101011 [8ab]) -> 000101010111 [157]
+  }
+251: inputs={ }, outputs={ }
+252: inputs={ }, outputs={,
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+253: inputs={ }, outputs={,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+254: inputs={ }, outputs={ }
+255: inputs={ }, outputs={,
+     Busy (1) -> 0,
+     Ready (0) -> 1
+  }
+256: inputs={ }, outputs={,
+     Wait (1) -> 0
+  }
+257: inputs={ }, outputs={ }
+258: inputs={ }, outputs={ }
+259: inputs={ }, outputs={,
+     Start (0) -> 1
+  }
+260: inputs={ }, outputs={ }
+261: inputs={ }, outputs={,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+262: inputs={ }, outputs={,
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     ac'!.>0..b (000101010111 [157]) -> 100010101011 [8ab]
+  }
+263: inputs={ }, outputs={ }
+264: inputs={,
+     S.1..0< (01 [1]) -> 10 [2]
+  }, outputs={,
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+265: inputs={ }, outputs={,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+266: inputs={ }, outputs={ }
+267: inputs={ }, outputs={,
+     Busy (0) -> 1,
+     Ready (1) -> 0
+  }
+268: inputs={ }, outputs={,
+     Wait (0) -> 1,
+     ac'!.>0..b (100010101011 [8ab]) -> 001010101111 [2af]
+  }
+269: inputs={ }, outputs={ }
+270: inputs={ }, outputs={ }
+271: inputs={ }, outputs={,
+     Start (1) -> 0
+  }
+272: inputs={ }, outputs={ }
+273: inputs={ }, outputs={,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+274: inputs={ }, outputs={,
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     ac'!.>0..b (001010101111 [2af]) -> 000101010111 [157]
+  }
+275: inputs={ }, outputs={ }
+276: inputs={ }, outputs={,
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+277: inputs={ }, outputs={,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+278: inputs={ }, outputs={ }
+279: inputs={ }, outputs={,
+     Busy (1) -> 0,
+     Ready (0) -> 1
+  }
+280: inputs={ }, outputs={,
+     Wait (1) -> 0
+  }
+281: inputs={ }, outputs={ }
+282: inputs={,
+     S.1..0< (10 [2]) -> 01 [1]
+  }, outputs={ }
+283: inputs={ }, outputs={,
+     Start (0) -> 1
+  }
+284: inputs={ }, outputs={ }
+285: inputs={ }, outputs={,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+286: inputs={ }, outputs={,
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     ac'!.>0..b (000101010111 [157]) -> 100010101011 [8ab]
+  }
+287: inputs={ }, outputs={ }
+288: inputs={,
+     Link (1) -> 0
+  }, outputs={,
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+289: inputs={ }, outputs={,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+290: inputs={ }, outputs={ }
+291: inputs={ }, outputs={,
+     Busy (0) -> 1,
+     Ready (1) -> 0
+  }
+292: inputs={ }, outputs={,
+     Wait (0) -> 1,
+     ac'!.>0..b (100010101011 [8ab]) -> 000010101011 [0ab]
+  }
+293: inputs={ }, outputs={ }
+294: inputs={ }, outputs={ }
+295: inputs={ }, outputs={,
+     Start (1) -> 0
+  }
+296: inputs={ }, outputs={ }
+297: inputs={ }, outputs={,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+298: inputs={ }, outputs={,
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     ac'!.>0..b (000010101011 [0ab]) -> 000101010111 [157]
+  }
+299: inputs={ }, outputs={ }
+300: inputs={ }, outputs={,
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+301: inputs={ }, outputs={,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+302: inputs={ }, outputs={ }
+303: inputs={ }, outputs={,
+     Busy (1) -> 0,
+     Ready (0) -> 1
+  }
+304: inputs={ }, outputs={,
+     Wait (1) -> 0
+  }
+305: inputs={ }, outputs={ }
+306: inputs={
+     ACIn.>0..b (000000000000 [000]) -> 111010110100 [eb4],
+     S.1..0< (01 [1]) -> 11 [3]
+  }, outputs={ }
+307: inputs={ }, outputs={,
+     Start (0) -> 1
+  }
+308: inputs={ }, outputs={ }
+309: inputs={ }, outputs={,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+310: inputs={ }, outputs={,
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     ac'!.>0..b (000101010111 [157]) -> 111010110100 [eb4]
+  }
+311: inputs={ }, outputs={ }
+312: inputs={
+     ACIn.>0..b (111010110100 [eb4]) -> 000000000000 [000],
+     S.1..0< (11 [3]) -> 00 [0]
+  }, outputs={,
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+313: inputs={ }, outputs={,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+314: inputs={ }, outputs={ }
+315: inputs={ }, outputs={,
+     Busy (0) -> 1,
+     Ready (1) -> 0
+  }
+316: inputs={ }, outputs={,
+     Wait (0) -> 1,
+     ac'!.>0..b (111010110100 [eb4]) -> 000101010111 [157]
+  }
+317: inputs={ }, outputs={ }
+318: inputs={ }, outputs={
+     AC.>0..b (000101010111 [157]) -> 000101001011 [14b]
+  }
+319: inputs={ }, outputs={,
+     Start (1) -> 0
+  }
+320: inputs={ }, outputs={ }
+321: inputs={ }, outputs={,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+322: inputs={ }, outputs={,
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     ac'!.>0..b (000101010111 [157]) -> 000101001011 [14b]
+  }
+323: inputs={ }, outputs={ }
+324: inputs={ }, outputs={,
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+325: inputs={ }, outputs={,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+326: inputs={ }, outputs={ }
+327: inputs={ }, outputs={,
+     Busy (1) -> 0,
+     Ready (0) -> 1
+  }
+328: inputs={ }, outputs={,
+     Wait (1) -> 0
+  }
+329: inputs={ }, outputs={ }
+330: inputs={
+     ACIn.>0..b (000000000000 [000]) -> 100001101010 [86a],
+     S.1..0< (00 [0]) -> 11 [3]
+  }, outputs={ }
+331: inputs={ }, outputs={,
+     Start (0) -> 1
+  }
+332: inputs={ }, outputs={ }
+333: inputs={ }, outputs={,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+334: inputs={ }, outputs={,
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     ac'!.>0..b (000101001011 [14b]) -> 100001101010 [86a]
+  }
+335: inputs={ }, outputs={ }
+336: inputs={
+     ACIn.>0..b (100001101010 [86a]) -> 000000000000 [000],
+     S.1..0< (11 [3]) -> 00 [0]
+  }, outputs={,
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+337: inputs={ }, outputs={,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+338: inputs={ }, outputs={ }
+339: inputs={ }, outputs={,
+     Busy (0) -> 1,
+     Ready (1) -> 0
+  }
+340: inputs={ }, outputs={,
+     Wait (0) -> 1,
+     ac'!.>0..b (100001101010 [86a]) -> 000101001011 [14b]
+  }
+341: inputs={ }, outputs={ }
+342: inputs={ }, outputs={ }
+343: inputs={ }, outputs={,
+     Start (1) -> 0
+  }
+344: inputs={ }, outputs={ }
+345: inputs={ }, outputs={,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+346: inputs={ }, outputs={,
+     Strt.>1..4 (1000 [8]) -> 1100 [c]
+  }
+347: inputs={ }, outputs={ }
+348: inputs={ }, outputs={,
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+349: inputs={ }, outputs={,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+350: inputs={ }, outputs={ }
+351: inputs={ }, outputs={,
+     Busy (1) -> 0,
+     Ready (0) -> 1
+  }
+352: inputs={ }, outputs={,
+     Wait (1) -> 0
+  }
+353: inputs={ }, outputs={ }
+354: inputs={ }, outputs={ }
+355: inputs={ }, outputs={,
+     Start (0) -> 1
+  }
+356: inputs={ }, outputs={ }
+357: inputs={ }, outputs={,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+358: inputs={ }, outputs={,
+     Strt.>1..4 (0111 [7]) -> 0011 [3]
+  }
+359: inputs={ }, outputs={ }
+360: inputs={,
+     Link (0) -> 1,
+     S.1..0< (00 [0]) -> 10 [2]
+  }, outputs={,
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+361: inputs={ }, outputs={,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+362: inputs={ }, outputs={ }
+363: inputs={ }, outputs={,
+     Busy (0) -> 1,
+     Ready (1) -> 0
+  }
+364: inputs={ }, outputs={,
+     Wait (0) -> 1,
+     ac'!.>0..b (000101001011 [14b]) -> 001010010111 [297]
+  }
+365: inputs={ }, outputs={ }
+366: inputs={ }, outputs={ }
+367: inputs={ }, outputs={,
+     Start (1) -> 0
+  }
+368: inputs={ }, outputs={ }
+369: inputs={ }, outputs={,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+370: inputs={ }, outputs={,
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     ac'!.>0..b (001010010111 [297]) -> 000101001011 [14b]
+  }
+371: inputs={ }, outputs={ }
+372: inputs={ }, outputs={,
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+373: inputs={ }, outputs={,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+374: inputs={ }, outputs={ }
+375: inputs={ }, outputs={,
+     Busy (1) -> 0,
+     Ready (0) -> 1
+  }
+376: inputs={ }, outputs={,
+     Wait (1) -> 0
+  }
+377: inputs={ }, outputs={ }
+378: inputs={,
+     Link (1) -> 0,
+     S.1..0< (10 [2]) -> 01 [1]
+  }, outputs={ }
+379: inputs={ }, outputs={,
+     Start (0) -> 1
+  }
+380: inputs={ }, outputs={ }
+381: inputs={ }, outputs={,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+382: inputs={ }, outputs={,
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     ac'!.>0..b (000101001011 [14b]) -> 000010100101 [0a5]
+  }
+383: inputs={ }, outputs={ }
+384: inputs={,
+     S.1..0< (01 [1]) -> 00 [0]
+  }, outputs={,
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+385: inputs={ }, outputs={,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+386: inputs={ }, outputs={ }
+387: inputs={ }, outputs={,
+     Busy (0) -> 1,
+     Ready (1) -> 0
+  }
+388: inputs={ }, outputs={,
+     Wait (0) -> 1,
+     ac'!.>0..b (000010100101 [0a5]) -> 000101001011 [14b]
+  }
+389: inputs={ }, outputs={ }
+390: inputs={ }, outputs={ }
+391: inputs={ }, outputs={,
+     Start (1) -> 0
+  }
+392: inputs={ }, outputs={ }
+393: inputs={ }, outputs={,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+394: inputs={ }, outputs={,
+     Strt.>1..4 (1000 [8]) -> 1100 [c]
+  }
+395: inputs={ }, outputs={ }
+396: inputs={ }, outputs={,
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+397: inputs={ }, outputs={,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+398: inputs={ }, outputs={ }
+399: inputs={ }, outputs={,
+     Busy (1) -> 0,
+     Ready (0) -> 1
+  }
+400: inputs={ }, outputs={,
+     Wait (1) -> 0
+  }
+401: inputs={ }, outputs={ }
+402: inputs={,
+     S.1..0< (00 [0]) -> 01 [1]
+  }, outputs={ }
+403: inputs={ }, outputs={,
+     Start (0) -> 1
+  }
+404: inputs={ }, outputs={ }
+405: inputs={ }, outputs={,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+406: inputs={ }, outputs={,
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     ac'!.>0..b (000101001011 [14b]) -> 000010100101 [0a5]
+  }
+407: inputs={ }, outputs={ }
+408: inputs={,
+     S.1..0< (01 [1]) -> 00 [0]
+  }, outputs={,
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+409: inputs={ }, outputs={,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+410: inputs={ }, outputs={ }
+411: inputs={ }, outputs={,
+     Busy (0) -> 1,
+     Ready (1) -> 0
+  }
+412: inputs={ }, outputs={,
+     Wait (0) -> 1,
+     ac'!.>0..b (000010100101 [0a5]) -> 000101001011 [14b]
+  }
+413: inputs={ }, outputs={ }
+414: inputs={ }, outputs={ }
+415: inputs={ }, outputs={,
+     Start (1) -> 0
+  }
+416: inputs={ }, outputs={ }
+417: inputs={ }, outputs={,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+418: inputs={ }, outputs={,
+     Strt.>1..4 (1000 [8]) -> 1100 [c]
+  }
+419: inputs={ }, outputs={ }
+420: inputs={ }, outputs={,
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+421: inputs={ }, outputs={,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+422: inputs={ }, outputs={ }
+423: inputs={ }, outputs={,
+     Busy (1) -> 0,
+     Ready (0) -> 1
+  }
+424: inputs={ }, outputs={,
+     Wait (1) -> 0
+  }
+425: inputs={ }, outputs={ }
+426: inputs={
+     ACIn.>0..b (000000000000 [000]) -> 111001101111 [e6f],
+     S.1..0< (00 [0]) -> 11 [3]
+  }, outputs={ }
+427: inputs={ }, outputs={,
+     Start (0) -> 1
+  }
+428: inputs={ }, outputs={ }
+429: inputs={ }, outputs={,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+430: inputs={ }, outputs={,
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     ac'!.>0..b (000101001011 [14b]) -> 111001101111 [e6f]
+  }
+431: inputs={ }, outputs={ }
+432: inputs={
+     ACIn.>0..b (111001101111 [e6f]) -> 010001000100 [444]
+  }, outputs={,
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+433: inputs={ }, outputs={,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+434: inputs={ }, outputs={ }
+435: inputs={ }, outputs={,
+     Busy (0) -> 1,
+     Ready (1) -> 0
+  }
+436: inputs={ }, outputs={,
+     Wait (0) -> 1,
+     ac'!.>0..b (111001101111 [e6f]) -> 010001000100 [444]
+  }
+437: inputs={ }, outputs={ }
+438: inputs={ }, outputs={
+     AC.>0..b (000101001011 [14b]) -> 000110010000 [190]
+  }
+439: inputs={ }, outputs={,
+     Start (1) -> 0
+  }
+440: inputs={ }, outputs={ }
+441: inputs={ }, outputs={,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+442: inputs={ }, outputs={,
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     ac'!.>0..b (010001000100 [444]) -> 000110010000 [190]
+  }
+443: inputs={ }, outputs={ }
+444: inputs={ }, outputs={
+     AC.>0..b (000110010000 [190]) -> 101110111011 [bbb],
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+445: inputs={ }, outputs={,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+446: inputs={ }, outputs={ }
+447: inputs={ }, outputs={,
+     Busy (1) -> 0,
+     Ready (0) -> 1
+  }
+448: inputs={ }, outputs={,
+     Wait (1) -> 0,
+     ac'!.>0..b (000110010000 [190]) -> 101110111011 [bbb]
+  }
+449: inputs={ }, outputs={ }
+450: inputs={
+     ACIn.>0..b (010001000100 [444]) -> 000000000000 [000],
+     S.1..0< (11 [3]) -> 10 [2]
+  }, outputs={ }
+451: inputs={ }, outputs={,
+     Start (0) -> 1
+  }
+452: inputs={ }, outputs={ }
+453: inputs={ }, outputs={,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+454: inputs={ }, outputs={,
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     ac'!.>0..b (101110111011 [bbb]) -> 011101110110 [776]
+  }
+455: inputs={ }, outputs={ }
+456: inputs={
+     ACIn.>0..b (000000000000 [000]) -> 100000110011 [833],
+     S.1..0< (10 [2]) -> 11 [3]
+  }, outputs={,
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+457: inputs={ }, outputs={,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+458: inputs={ }, outputs={ }
+459: inputs={ }, outputs={,
+     Busy (0) -> 1,
+     Ready (1) -> 0
+  }
+460: inputs={ }, outputs={,
+     Wait (0) -> 1,
+     ac'!.>0..b (011101110110 [776]) -> 100000110011 [833]
+  }
+461: inputs={ }, outputs={ }
+462: inputs={ }, outputs={ }
+463: inputs={ }, outputs={,
+     Start (1) -> 0
+  }
+464: inputs={ }, outputs={ }
+465: inputs={ }, outputs={,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+466: inputs={ }, outputs={,
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     ac'!.>0..b (100000110011 [833]) -> 101110111011 [bbb]
+  }
+467: inputs={ }, outputs={ }
+468: inputs={ }, outputs={,
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+469: inputs={ }, outputs={,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+470: inputs={ }, outputs={ }
+471: inputs={ }, outputs={,
+     Busy (1) -> 0,
+     Ready (0) -> 1
+  }
+472: inputs={ }, outputs={,
+     Wait (1) -> 0
+  }
+473: inputs={ }, outputs={ }
+474: inputs={
+     ACIn.>0..b (100000110011 [833]) -> 000000000000 [000],
+     Link (0) -> 1,
+     S.1..0< (11 [3]) -> 10 [2]
+  }, outputs={ }
+475: inputs={ }, outputs={,
+     Start (0) -> 1
+  }
+476: inputs={ }, outputs={ }
+477: inputs={ }, outputs={,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+478: inputs={ }, outputs={,
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     ac'!.>0..b (101110111011 [bbb]) -> 011101110111 [777]
+  }
+479: inputs={ }, outputs={ }
+480: inputs={,
+     Link (1) -> 0,
+     S.1..0< (10 [2]) -> 00 [0]
+  }, outputs={,
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+481: inputs={ }, outputs={,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+482: inputs={ }, outputs={ }
+483: inputs={ }, outputs={,
+     Busy (0) -> 1,
+     Ready (1) -> 0
+  }
+484: inputs={ }, outputs={,
+     Wait (0) -> 1,
+     ac'!.>0..b (011101110111 [777]) -> 101110111011 [bbb]
+  }
+485: inputs={ }, outputs={ }
+486: inputs={ }, outputs={ }
+487: inputs={ }, outputs={,
+     Start (1) -> 0
+  }
+488: inputs={ }, outputs={ }
+489: inputs={ }, outputs={,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+490: inputs={ }, outputs={,
+     Strt.>1..4 (1000 [8]) -> 1100 [c]
+  }
+491: inputs={ }, outputs={ }
+492: inputs={ }, outputs={,
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+493: inputs={ }, outputs={,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+494: inputs={ }, outputs={ }
+495: inputs={ }, outputs={,
+     Busy (1) -> 0,
+     Ready (0) -> 1
+  }
+496: inputs={ }, outputs={,
+     Wait (1) -> 0
+  }
+497: inputs={ }, outputs={ }
+498: inputs={,
+     Link (0) -> 1,
+     S.1..0< (00 [0]) -> 01 [1]
+  }, outputs={ }
+499: inputs={ }, outputs={,
+     Start (0) -> 1
+  }
+500: inputs={ }, outputs={ }
+501: inputs={ }, outputs={,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+502: inputs={ }, outputs={,
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     ac'!.>0..b (101110111011 [bbb]) -> 110111011101 [ddd]
+  }
+503: inputs={ }, outputs={ }
+504: inputs={
+     ACIn.>0..b (000000000000 [000]) -> 101110001001 [b89],
+     Link (1) -> 0,
+     S.1..0< (01 [1]) -> 11 [3]
+  }, outputs={,
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+505: inputs={ }, outputs={,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+506: inputs={ }, outputs={ }
+507: inputs={ }, outputs={,
+     Busy (0) -> 1,
+     Ready (1) -> 0
+  }
+508: inputs={ }, outputs={,
+     Wait (0) -> 1,
+     ac'!.>0..b (110111011101 [ddd]) -> 101110001001 [b89]
+  }
+509: inputs={ }, outputs={ }
+510: inputs={ }, outputs={ }
+511: inputs={ }, outputs={,
+     Start (1) -> 0
+  }
+512: inputs={ }, outputs={ }
+513: inputs={ }, outputs={,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+514: inputs={ }, outputs={,
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     ac'!.>0..b (101110001001 [b89]) -> 101110111011 [bbb]
+  }
+515: inputs={ }, outputs={ }
+516: inputs={ }, outputs={,
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+517: inputs={ }, outputs={,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+518: inputs={ }, outputs={ }
+519: inputs={ }, outputs={,
+     Busy (1) -> 0,
+     Ready (0) -> 1
+  }
+520: inputs={ }, outputs={,
+     Wait (1) -> 0
+  }
+521: inputs={ }, outputs={ }
+522: inputs={
+     ACIn.>0..b (101110001001 [b89]) -> 000000000000 [000],
+     Link (0) -> 1,
+     S.1..0< (11 [3]) -> 01 [1]
+  }, outputs={ }
+523: inputs={ }, outputs={,
+     Start (0) -> 1
+  }
+524: inputs={ }, outputs={ }
+525: inputs={ }, outputs={,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+526: inputs={ }, outputs={,
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     ac'!.>0..b (101110111011 [bbb]) -> 110111011101 [ddd]
+  }
+527: inputs={ }, outputs={ }
+528: inputs={,
+     Link (1) -> 0,
+     S.1..0< (01 [1]) -> 10 [2]
+  }, outputs={,
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+529: inputs={ }, outputs={,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+530: inputs={ }, outputs={ }
+531: inputs={ }, outputs={,
+     Busy (0) -> 1,
+     Ready (1) -> 0
+  }
+532: inputs={ }, outputs={,
+     Wait (0) -> 1,
+     ac'!.>0..b (110111011101 [ddd]) -> 011101110110 [776]
+  }
+533: inputs={ }, outputs={ }
+534: inputs={ }, outputs={ }
+535: inputs={ }, outputs={,
+     Start (1) -> 0
+  }
+536: inputs={ }, outputs={ }
+537: inputs={ }, outputs={,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+538: inputs={ }, outputs={,
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     ac'!.>0..b (011101110110 [776]) -> 101110111011 [bbb]
+  }
+539: inputs={ }, outputs={ }
+540: inputs={ }, outputs={,
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+541: inputs={ }, outputs={,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+542: inputs={ }, outputs={ }
+543: inputs={ }, outputs={,
+     Busy (1) -> 0,
+     Ready (0) -> 1
+  }
+544: inputs={ }, outputs={,
+     Wait (1) -> 0
+  }
+545: inputs={ }, outputs={ }
+546: inputs={ }, outputs={ }
+547: inputs={ }, outputs={,
+     Start (0) -> 1
+  }
+548: inputs={ }, outputs={ }
+549: inputs={ }, outputs={,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+550: inputs={ }, outputs={,
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     ac'!.>0..b (101110111011 [bbb]) -> 011101110110 [776]
+  }
+551: inputs={ }, outputs={ }
+552: inputs={,
+     Link (0) -> 1,
+     S.1..0< (10 [2]) -> 01 [1]
+  }, outputs={,
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+553: inputs={ }, outputs={,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+554: inputs={ }, outputs={ }
+555: inputs={ }, outputs={,
+     Busy (0) -> 1,
+     Ready (1) -> 0
+  }
+556: inputs={ }, outputs={,
+     Wait (0) -> 1,
+     ac'!.>0..b (011101110110 [776]) -> 110111011101 [ddd]
+  }
+557: inputs={ }, outputs={ }
+558: inputs={ }, outputs={ }
+559: inputs={ }, outputs={,
+     Start (1) -> 0
+  }
+560: inputs={ }, outputs={ }
+561: inputs={ }, outputs={,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+562: inputs={ }, outputs={,
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     ac'!.>0..b (110111011101 [ddd]) -> 101110111011 [bbb]
+  }
+563: inputs={ }, outputs={ }
+564: inputs={ }, outputs={,
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+565: inputs={ }, outputs={,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+566: inputs={ }, outputs={ }
+567: inputs={ }, outputs={,
+     Busy (1) -> 0,
+     Ready (0) -> 1
+  }
+568: inputs={ }, outputs={,
+     Wait (1) -> 0
+  }
+569: inputs={ }, outputs={ }
+570: inputs={
+     ACIn.>0..b (000000000000 [000]) -> 010101001001 [549],
+     Link (1) -> 0,
+     S.1..0< (01 [1]) -> 11 [3]
+  }, outputs={ }
+571: inputs={ }, outputs={,
+     Start (0) -> 1
+  }
+572: inputs={ }, outputs={ }
+573: inputs={ }, outputs={,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+574: inputs={ }, outputs={,
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     ac'!.>0..b (101110111011 [bbb]) -> 010101001001 [549]
+  }
+575: inputs={ }, outputs={ }
+576: inputs={
+     ACIn.>0..b (010101001001 [549]) -> 000000000000 [000],
+     S.1..0< (11 [3]) -> 00 [0]
+  }, outputs={,
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+577: inputs={ }, outputs={,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+578: inputs={ }, outputs={ }
+579: inputs={ }, outputs={,
+     Busy (0) -> 1,
+     Ready (1) -> 0
+  }
+580: inputs={ }, outputs={,
+     Wait (0) -> 1,
+     ac'!.>0..b (010101001001 [549]) -> 101110111011 [bbb]
+  }
+581: inputs={ }, outputs={ }
+582: inputs={ }, outputs={
+     AC.>0..b (101110111011 [bbb]) -> 101010110110 [ab6]
+  }
+583: inputs={ }, outputs={,
+     Start (1) -> 0
+  }
+584: inputs={ }, outputs={ }
+585: inputs={ }, outputs={,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+586: inputs={ }, outputs={,
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     ac'!.>0..b (101110111011 [bbb]) -> 101010110110 [ab6]
+  }
+587: inputs={ }, outputs={ }
+588: inputs={ }, outputs={,
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+589: inputs={ }, outputs={,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+590: inputs={ }, outputs={ }
+591: inputs={ }, outputs={,
+     Busy (1) -> 0,
+     Ready (0) -> 1
+  }
+592: inputs={ }, outputs={,
+     Wait (1) -> 0
+  }
+593: inputs={ }, outputs={ }
+594: inputs={
+     ACIn.>0..b (000000000000 [000]) -> 010110011011 [59b],
+     S.1..0< (00 [0]) -> 11 [3]
+  }, outputs={ }
+595: inputs={ }, outputs={,
+     Start (0) -> 1
+  }
+596: inputs={ }, outputs={ }
+597: inputs={ }, outputs={,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+598: inputs={ }, outputs={,
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     ac'!.>0..b (101010110110 [ab6]) -> 010110011011 [59b]
+  }
+599: inputs={ }, outputs={ }
+600: inputs={
+     ACIn.>0..b (010110011011 [59b]) -> 000000000000 [000],
+     Link (0) -> 1,
+     S.1..0< (11 [3]) -> 10 [2]
+  }, outputs={,
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+601: inputs={ }, outputs={,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+602: inputs={ }, outputs={ }
+603: inputs={ }, outputs={,
+     Busy (0) -> 1,
+     Ready (1) -> 0
+  }
+604: inputs={ }, outputs={,
+     Wait (0) -> 1,
+     ac'!.>0..b (010110011011 [59b]) -> 010101101101 [56d]
+  }
+605: inputs={ }, outputs={ }
+606: inputs={ }, outputs={
+     AC.>0..b (101010110110 [ab6]) -> 101001100100 [a64]
+  }
+607: inputs={ }, outputs={,
+     Start (1) -> 0
+  }
+608: inputs={ }, outputs={ }
+609: inputs={ }, outputs={,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+610: inputs={ }, outputs={,
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     ac'!.>0..b (010101101101 [56d]) -> 101001100100 [a64]
+  }
+611: inputs={ }, outputs={ }
+612: inputs={ }, outputs={,
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+613: inputs={ }, outputs={,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+614: inputs={ }, outputs={ }
+615: inputs={ }, outputs={,
+     Busy (1) -> 0,
+     Ready (0) -> 1
+  }
+616: inputs={ }, outputs={,
+     Wait (1) -> 0
+  }
+617: inputs={ }, outputs={ }
+618: inputs={ }, outputs={ }
+619: inputs={ }, outputs={,
+     Start (0) -> 1
+  }
+620: inputs={ }, outputs={ }
+621: inputs={ }, outputs={,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+622: inputs={ }, outputs={,
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     ac'!.>0..b (101001100100 [a64]) -> 010011001001 [4c9]
+  }
+623: inputs={ }, outputs={ }
+624: inputs={
+     ACIn.>0..b (000000000000 [000]) -> 011100001000 [708],
+     Link (1) -> 0,
+     S.1..0< (10 [2]) -> 11 [3]
+  }, outputs={,
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+625: inputs={ }, outputs={,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+626: inputs={ }, outputs={ }
+627: inputs={ }, outputs={,
+     Busy (0) -> 1,
+     Ready (1) -> 0
+  }
+628: inputs={ }, outputs={,
+     Wait (0) -> 1,
+     ac'!.>0..b (010011001001 [4c9]) -> 011100001000 [708]
+  }
+629: inputs={ }, outputs={ }
+630: inputs={ }, outputs={ }
+631: inputs={ }, outputs={,
+     Start (1) -> 0
+  }
+632: inputs={ }, outputs={ }
+633: inputs={ }, outputs={,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+634: inputs={ }, outputs={,
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     ac'!.>0..b (011100001000 [708]) -> 101001100100 [a64]
+  }
+635: inputs={ }, outputs={ }
+636: inputs={ }, outputs={
+     AC.>0..b (101001100100 [a64]) -> 100011110111 [8f7],
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+637: inputs={ }, outputs={,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+638: inputs={ }, outputs={ }
+639: inputs={ }, outputs={,
+     Busy (1) -> 0,
+     Ready (0) -> 1
+  }
+640: inputs={ }, outputs={,
+     Wait (1) -> 0,
+     ac'!.>0..b (101001100100 [a64]) -> 100011110111 [8f7]
+  }
+641: inputs={ }, outputs={ }
+642: inputs={
+     ACIn.>0..b (011100001000 [708]) -> 011001011111 [65f]
+  }, outputs={ }
+643: inputs={ }, outputs={,
+     Start (0) -> 1
+  }
+644: inputs={ }, outputs={ }
+645: inputs={ }, outputs={,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+646: inputs={ }, outputs={,
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     ac'!.>0..b (100011110111 [8f7]) -> 011001011111 [65f]
+  }
+647: inputs={ }, outputs={ }
+648: inputs={
+     ACIn.>0..b (011001011111 [65f]) -> 101011110010 [af2]
+  }, outputs={,
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+649: inputs={ }, outputs={,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+650: inputs={ }, outputs={ }
+651: inputs={ }, outputs={,
+     Busy (0) -> 1,
+     Ready (1) -> 0
+  }
+652: inputs={ }, outputs={,
+     Wait (0) -> 1,
+     ac'!.>0..b (011001011111 [65f]) -> 101011110010 [af2]
+  }
+653: inputs={ }, outputs={ }
+654: inputs={ }, outputs={
+     AC.>0..b (100011110111 [8f7]) -> 100110100000 [9a0]
+  }
+655: inputs={ }, outputs={,
+     Start (1) -> 0
+  }
+656: inputs={ }, outputs={ }
+657: inputs={ }, outputs={,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+658: inputs={ }, outputs={,
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     ac'!.>0..b (101011110010 [af2]) -> 100110100000 [9a0]
+  }
+659: inputs={ }, outputs={ }
+660: inputs={ }, outputs={,
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+661: inputs={ }, outputs={,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+662: inputs={ }, outputs={ }
+663: inputs={ }, outputs={,
+     Busy (1) -> 0,
+     Ready (0) -> 1
+  }
+664: inputs={ }, outputs={,
+     Wait (1) -> 0
+  }
+665: inputs={ }, outputs={ }
+666: inputs={
+     ACIn.>0..b (101011110010 [af2]) -> 011110111000 [7b8]
+  }, outputs={ }
+667: inputs={ }, outputs={,
+     Start (0) -> 1
+  }
+668: inputs={ }, outputs={ }
+669: inputs={ }, outputs={,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+670: inputs={ }, outputs={,
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     ac'!.>0..b (100110100000 [9a0]) -> 011110111000 [7b8]
+  }
+671: inputs={ }, outputs={ }
+672: inputs={
+     ACIn.>0..b (011110111000 [7b8]) -> 000000000000 [000],
+     S.1..0< (11 [3]) -> 00 [0]
+  }, outputs={,
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+673: inputs={ }, outputs={,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+674: inputs={ }, outputs={ }
+675: inputs={ }, outputs={,
+     Busy (0) -> 1,
+     Ready (1) -> 0
+  }
+676: inputs={ }, outputs={,
+     Wait (0) -> 1,
+     ac'!.>0..b (011110111000 [7b8]) -> 100110100000 [9a0]
+  }
+677: inputs={ }, outputs={ }
+678: inputs={ }, outputs={
+     AC.>0..b (100110100000 [9a0]) -> 100001000111 [847]
+  }
+679: inputs={ }, outputs={,
+     Start (1) -> 0
+  }
+680: inputs={ }, outputs={ }
+681: inputs={ }, outputs={,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+682: inputs={ }, outputs={,
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     ac'!.>0..b (100110100000 [9a0]) -> 100001000111 [847]
+  }
+683: inputs={ }, outputs={ }
+684: inputs={ }, outputs={,
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+685: inputs={ }, outputs={,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+686: inputs={ }, outputs={ }
+687: inputs={ }, outputs={,
+     Busy (1) -> 0,
+     Ready (0) -> 1
+  }
+688: inputs={ }, outputs={,
+     Wait (1) -> 0
+  }
+689: inputs={ }, outputs={ }
+690: inputs={
+     ACIn.>0..b (000000000000 [000]) -> 111010111000 [eb8],
+     S.1..0< (00 [0]) -> 11 [3]
+  }, outputs={ }
+691: inputs={ }, outputs={,
+     Start (0) -> 1
+  }
+692: inputs={ }, outputs={ }
+693: inputs={ }, outputs={,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+694: inputs={ }, outputs={,
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     ac'!.>0..b (100001000111 [847]) -> 111010111000 [eb8]
+  }
+695: inputs={ }, outputs={ }
+696: inputs={
+     ACIn.>0..b (111010111000 [eb8]) -> 000000000000 [000],
+     S.1..0< (11 [3]) -> 00 [0]
+  }, outputs={,
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+697: inputs={ }, outputs={,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+698: inputs={ }, outputs={ }
+699: inputs={ }, outputs={,
+     Busy (0) -> 1,
+     Ready (1) -> 0
+  }
+700: inputs={ }, outputs={,
+     Wait (0) -> 1,
+     ac'!.>0..b (111010111000 [eb8]) -> 100001000111 [847]
+  }
+701: inputs={ }, outputs={ }
+702: inputs={ }, outputs={
+     AC.>0..b (100001000111 [847]) -> 000101000111 [147]
+  }
+703: inputs={ }, outputs={,
+     Start (1) -> 0
+  }
+704: inputs={ }, outputs={ }
+705: inputs={ }, outputs={,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+706: inputs={ }, outputs={,
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     ac'!.>0..b (100001000111 [847]) -> 000101000111 [147]
+  }
+707: inputs={ }, outputs={ }
+708: inputs={ }, outputs={,
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+709: inputs={ }, outputs={,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+710: inputs={ }, outputs={ }
+711: inputs={ }, outputs={,
+     Busy (1) -> 0,
+     Ready (0) -> 1
+  }
+712: inputs={ }, outputs={,
+     Wait (1) -> 0
+  }
+713: inputs={ }, outputs={ }
+714: inputs={
+     ACIn.>0..b (000000000000 [000]) -> 101001000001 [a41],
+     S.1..0< (00 [0]) -> 11 [3]
+  }, outputs={ }
+715: inputs={ }, outputs={,
+     Start (0) -> 1
+  }
+716: inputs={ }, outputs={ }
+717: inputs={ }, outputs={,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+718: inputs={ }, outputs={,
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     ac'!.>0..b (000101000111 [147]) -> 101001000001 [a41]
+  }
+719: inputs={ }, outputs={ }
+720: inputs={
+     ACIn.>0..b (101001000001 [a41]) -> 000000000000 [000],
+     Link (0) -> 1,
+     S.1..0< (11 [3]) -> 01 [1]
+  }, outputs={,
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+721: inputs={ }, outputs={,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+722: inputs={ }, outputs={ }
+723: inputs={ }, outputs={,
+     Busy (0) -> 1,
+     Ready (1) -> 0
+  }
+724: inputs={ }, outputs={,
+     Wait (0) -> 1,
+     ac'!.>0..b (101001000001 [a41]) -> 100010100011 [8a3]
+  }
+725: inputs={ }, outputs={ }
+726: inputs={ }, outputs={ }
+727: inputs={ }, outputs={,
+     Start (1) -> 0
+  }
+728: inputs={ }, outputs={ }
+729: inputs={ }, outputs={,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+730: inputs={ }, outputs={,
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     ac'!.>0..b (100010100011 [8a3]) -> 000101000111 [147]
+  }
+731: inputs={ }, outputs={ }
+732: inputs={ }, outputs={,
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+733: inputs={ }, outputs={,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+734: inputs={ }, outputs={ }
+735: inputs={ }, outputs={,
+     Busy (1) -> 0,
+     Ready (0) -> 1
+  }
+736: inputs={ }, outputs={,
+     Wait (1) -> 0
+  }
+737: inputs={ }, outputs={ }
+738: inputs={ }, outputs={ }
+739: inputs={ }, outputs={,
+     Start (0) -> 1
+  }
+740: inputs={ }, outputs={ }
+741: inputs={ }, outputs={,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+742: inputs={ }, outputs={,
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     ac'!.>0..b (000101000111 [147]) -> 100010100011 [8a3]
+  }
+743: inputs={ }, outputs={ }
+744: inputs={,
+     Link (1) -> 0
+  }, outputs={,
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+745: inputs={ }, outputs={,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+746: inputs={ }, outputs={ }
+747: inputs={ }, outputs={,
+     Busy (0) -> 1,
+     Ready (1) -> 0
+  }
+748: inputs={ }, outputs={,
+     Wait (0) -> 1,
+     ac'!.>0..b (100010100011 [8a3]) -> 000010100011 [0a3]
+  }
+749: inputs={ }, outputs={ }
+750: inputs={ }, outputs={ }
+751: inputs={ }, outputs={,
+     Start (1) -> 0
+  }
+752: inputs={ }, outputs={ }
+753: inputs={ }, outputs={,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+754: inputs={ }, outputs={,
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     ac'!.>0..b (000010100011 [0a3]) -> 000101000111 [147]
+  }
+755: inputs={ }, outputs={ }
+756: inputs={ }, outputs={,
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+757: inputs={ }, outputs={,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+758: inputs={ }, outputs={ }
+759: inputs={ }, outputs={,
+     Busy (1) -> 0,
+     Ready (0) -> 1
+  }
+760: inputs={ }, outputs={,
+     Wait (1) -> 0
+  }
+761: inputs={ }, outputs={ }
+762: inputs={,
+     S.1..0< (01 [1]) -> 00 [0]
+  }, outputs={ }
+763: inputs={ }, outputs={,
+     Start (0) -> 1
+  }
+764: inputs={ }, outputs={ }
+765: inputs={ }, outputs={,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+766: inputs={ }, outputs={,
+     Strt.>1..4 (0111 [7]) -> 0011 [3]
+  }
+767: inputs={ }, outputs={ }
+768: inputs={ }, outputs={,
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+769: inputs={ }, outputs={,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+770: inputs={ }, outputs={ }
+771: inputs={ }, outputs={,
+     Busy (0) -> 1,
+     Ready (1) -> 0
+  }
+772: inputs={ }, outputs={,
+     Wait (0) -> 1
+  }
+773: inputs={ }, outputs={ }
+774: inputs={ }, outputs={ }
+775: inputs={ }, outputs={,
+     Start (1) -> 0
+  }
+776: inputs={ }, outputs={ }
+777: inputs={ }, outputs={,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+778: inputs={ }, outputs={,
+     Strt.>1..4 (1000 [8]) -> 1100 [c]
+  }
+779: inputs={ }, outputs={ }
+780: inputs={ }, outputs={,
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+781: inputs={ }, outputs={,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+782: inputs={ }, outputs={ }
+783: inputs={ }, outputs={,
+     Busy (1) -> 0,
+     Ready (0) -> 1
+  }
+784: inputs={ }, outputs={,
+     Wait (1) -> 0
+  }
+785: inputs={ }, outputs={ }
+786: inputs={,
+     Link (0) -> 1,
+     S.1..0< (00 [0]) -> 01 [1]
+  }, outputs={ }
+787: inputs={ }, outputs={,
+     Start (0) -> 1
+  }
+788: inputs={ }, outputs={ }
+789: inputs={ }, outputs={,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+790: inputs={ }, outputs={,
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     ac'!.>0..b (000101000111 [147]) -> 100010100011 [8a3]
+  }
+791: inputs={ }, outputs={ }
+792: inputs={,
+     Link (1) -> 0
+  }, outputs={,
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+793: inputs={ }, outputs={,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+794: inputs={ }, outputs={ }
+795: inputs={ }, outputs={,
+     Busy (0) -> 1,
+     Ready (1) -> 0
+  }
+796: inputs={ }, outputs={,
+     Wait (0) -> 1,
+     ac'!.>0..b (100010100011 [8a3]) -> 000010100011 [0a3]
+  }
+797: inputs={ }, outputs={ }
+798: inputs={ }, outputs={ }
+799: inputs={ }, outputs={,
+     Start (1) -> 0
+  }
+800: inputs={ }, outputs={ }
+801: inputs={ }, outputs={,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+802: inputs={ }, outputs={,
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     ac'!.>0..b (000010100011 [0a3]) -> 000101000111 [147]
+  }
+803: inputs={ }, outputs={ }
+804: inputs={ }, outputs={,
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+805: inputs={ }, outputs={,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+806: inputs={ }, outputs={ }
+807: inputs={ }, outputs={,
+     Busy (1) -> 0,
+     Ready (0) -> 1
+  }
+808: inputs={ }, outputs={,
+     Wait (1) -> 0
+  }
+809: inputs={ }, outputs={ }
+810: inputs={
+     ACIn.>0..b (000000000000 [000]) -> 000110100110 [1a6],
+     S.1..0< (01 [1]) -> 11 [3]
+  }, outputs={ }
+811: inputs={ }, outputs={,
+     Start (0) -> 1
+  }
+812: inputs={ }, outputs={ }
+813: inputs={ }, outputs={,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+814: inputs={ }, outputs={,
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     ac'!.>0..b (000101000111 [147]) -> 000110100110 [1a6]
+  }
+815: inputs={ }, outputs={ }
+816: inputs={
+     ACIn.>0..b (000110100110 [1a6]) -> 000000000000 [000],
+     S.1..0< (11 [3]) -> 00 [0]
+  }, outputs={,
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+817: inputs={ }, outputs={,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+818: inputs={ }, outputs={ }
+819: inputs={ }, outputs={,
+     Busy (0) -> 1,
+     Ready (1) -> 0
+  }
+820: inputs={ }, outputs={,
+     Wait (0) -> 1,
+     ac'!.>0..b (000110100110 [1a6]) -> 000101000111 [147]
+  }
+821: inputs={ }, outputs={ }
+822: inputs={ }, outputs={ }
+823: inputs={ }, outputs={,
+     Start (1) -> 0
+  }
+824: inputs={ }, outputs={ }
+825: inputs={ }, outputs={,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+826: inputs={ }, outputs={,
+     Strt.>1..4 (1000 [8]) -> 1100 [c]
+  }
+827: inputs={ }, outputs={ }
+828: inputs={ }, outputs={,
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+829: inputs={ }, outputs={,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+830: inputs={ }, outputs={ }
+831: inputs={ }, outputs={,
+     Busy (1) -> 0,
+     Ready (0) -> 1
+  }
+832: inputs={ }, outputs={,
+     Wait (1) -> 0
+  }
+833: inputs={ }, outputs={ }
+834: inputs={,
+     Link (0) -> 1,
+     S.1..0< (00 [0]) -> 01 [1]
+  }, outputs={ }
+835: inputs={ }, outputs={,
+     Start (0) -> 1
+  }
+836: inputs={ }, outputs={ }
+837: inputs={ }, outputs={,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+838: inputs={ }, outputs={,
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     ac'!.>0..b (000101000111 [147]) -> 100010100011 [8a3]
+  }
+839: inputs={ }, outputs={ }
+840: inputs={
+     ACIn.>0..b (000000000000 [000]) -> 111011110101 [ef5],
+     Link (1) -> 0,
+     S.1..0< (01 [1]) -> 11 [3]
+  }, outputs={,
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+841: inputs={ }, outputs={,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+842: inputs={ }, outputs={ }
+843: inputs={ }, outputs={,
+     Busy (0) -> 1,
+     Ready (1) -> 0
+  }
+844: inputs={ }, outputs={,
+     Wait (0) -> 1,
+     ac'!.>0..b (100010100011 [8a3]) -> 111011110101 [ef5]
+  }
+845: inputs={ }, outputs={ }
+846: inputs={ }, outputs={ }
+847: inputs={ }, outputs={,
+     Start (1) -> 0
+  }
+848: inputs={ }, outputs={ }
+849: inputs={ }, outputs={,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+850: inputs={ }, outputs={,
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     ac'!.>0..b (111011110101 [ef5]) -> 000101000111 [147]
+  }
+851: inputs={ }, outputs={ }
+852: inputs={ }, outputs={
+     AC.>0..b (000101000111 [147]) -> 000100001010 [10a],
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+853: inputs={ }, outputs={,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+854: inputs={ }, outputs={ }
+855: inputs={ }, outputs={,
+     Busy (1) -> 0,
+     Ready (0) -> 1
+  }
+856: inputs={ }, outputs={,
+     Wait (1) -> 0,
+     ac'!.>0..b (000101000111 [147]) -> 000100001010 [10a]
+  }
+857: inputs={ }, outputs={ }
+858: inputs={
+     ACIn.>0..b (111011110101 [ef5]) -> 000000000000 [000],
+     S.1..0< (11 [3]) -> 10 [2]
+  }, outputs={ }
+859: inputs={ }, outputs={,
+     Start (0) -> 1
+  }
+860: inputs={ }, outputs={ }
+861: inputs={ }, outputs={,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+862: inputs={ }, outputs={,
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     ac'!.>0..b (000100001010 [10a]) -> 001000010100 [214]
+  }
+863: inputs={ }, outputs={ }
+864: inputs={ }, outputs={,
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+865: inputs={ }, outputs={,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+866: inputs={ }, outputs={ }
+867: inputs={ }, outputs={,
+     Busy (0) -> 1,
+     Ready (1) -> 0
+  }
+868: inputs={ }, outputs={,
+     Wait (0) -> 1
+  }
+869: inputs={ }, outputs={ }
+870: inputs={ }, outputs={ }
+871: inputs={ }, outputs={,
+     Start (1) -> 0
+  }
+872: inputs={ }, outputs={ }
+873: inputs={ }, outputs={,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+874: inputs={ }, outputs={,
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     ac'!.>0..b (001000010100 [214]) -> 000100001010 [10a]
+  }
+875: inputs={ }, outputs={ }
+876: inputs={ }, outputs={,
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+877: inputs={ }, outputs={,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+878: inputs={ }, outputs={ }
+879: inputs={ }, outputs={,
+     Busy (1) -> 0,
+     Ready (0) -> 1
+  }
+880: inputs={ }, outputs={,
+     Wait (1) -> 0
+  }
+881: inputs={ }, outputs={ }
+882: inputs={,
+     S.1..0< (10 [2]) -> 01 [1]
+  }, outputs={ }
+883: inputs={ }, outputs={,
+     Start (0) -> 1
+  }
+884: inputs={ }, outputs={ }
+885: inputs={ }, outputs={,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+886: inputs={ }, outputs={,
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     ac'!.>0..b (000100001010 [10a]) -> 000010000101 [085]
+  }
+887: inputs={ }, outputs={ }
+888: inputs={,
+     S.1..0< (01 [1]) -> 10 [2]
+  }, outputs={,
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+889: inputs={ }, outputs={,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+890: inputs={ }, outputs={ }
+891: inputs={ }, outputs={,
+     Busy (0) -> 1,
+     Ready (1) -> 0
+  }
+892: inputs={ }, outputs={,
+     Wait (0) -> 1,
+     ac'!.>0..b (000010000101 [085]) -> 001000010100 [214]
+  }
+893: inputs={ }, outputs={ }
+894: inputs={ }, outputs={ }
+895: inputs={ }, outputs={,
+     Start (1) -> 0
+  }
+896: inputs={ }, outputs={ }
+897: inputs={ }, outputs={,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+898: inputs={ }, outputs={,
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     ac'!.>0..b (001000010100 [214]) -> 000100001010 [10a]
+  }
+899: inputs={ }, outputs={ }
+900: inputs={ }, outputs={,
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+901: inputs={ }, outputs={,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+902: inputs={ }, outputs={ }
+903: inputs={ }, outputs={,
+     Busy (1) -> 0,
+     Ready (0) -> 1
+  }
+904: inputs={ }, outputs={,
+     Wait (1) -> 0
+  }
+905: inputs={ }, outputs={ }
+906: inputs={,
+     S.1..0< (10 [2]) -> 00 [0]
+  }, outputs={ }
+907: inputs={ }, outputs={,
+     Start (0) -> 1
+  }
+908: inputs={ }, outputs={ }
+909: inputs={ }, outputs={,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+910: inputs={ }, outputs={,
+     Strt.>1..4 (0111 [7]) -> 0011 [3]
+  }
+911: inputs={ }, outputs={ }
+912: inputs={,
+     S.1..0< (00 [0]) -> 10 [2]
+  }, outputs={,
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+913: inputs={ }, outputs={,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+914: inputs={ }, outputs={ }
+915: inputs={ }, outputs={,
+     Busy (0) -> 1,
+     Ready (1) -> 0
+  }
+916: inputs={ }, outputs={,
+     Wait (0) -> 1,
+     ac'!.>0..b (000100001010 [10a]) -> 001000010100 [214]
+  }
+917: inputs={ }, outputs={ }
+918: inputs={ }, outputs={ }
+919: inputs={ }, outputs={,
+     Start (1) -> 0
+  }
+920: inputs={ }, outputs={ }
+921: inputs={ }, outputs={,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+922: inputs={ }, outputs={,
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     ac'!.>0..b (001000010100 [214]) -> 000100001010 [10a]
+  }
+923: inputs={ }, outputs={ }
+924: inputs={ }, outputs={,
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+925: inputs={ }, outputs={,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+926: inputs={ }, outputs={ }
+927: inputs={ }, outputs={,
+     Busy (1) -> 0,
+     Ready (0) -> 1
+  }
+928: inputs={ }, outputs={,
+     Wait (1) -> 0
+  }
+929: inputs={ }, outputs={ }
+930: inputs={
+     ACIn.>0..b (000000000000 [000]) -> 001010100000 [2a0],
+     S.1..0< (10 [2]) -> 11 [3]
+  }, outputs={ }
+931: inputs={ }, outputs={,
+     Start (0) -> 1
+  }
+932: inputs={ }, outputs={ }
+933: inputs={ }, outputs={,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+934: inputs={ }, outputs={,
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     ac'!.>0..b (000100001010 [10a]) -> 001010100000 [2a0]
+  }
+935: inputs={ }, outputs={ }
+936: inputs={
+     ACIn.>0..b (001010100000 [2a0]) -> 000000000000 [000],
+     S.1..0< (11 [3]) -> 10 [2]
+  }, outputs={,
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+937: inputs={ }, outputs={,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+938: inputs={ }, outputs={ }
+939: inputs={ }, outputs={,
+     Busy (0) -> 1,
+     Ready (1) -> 0
+  }
+940: inputs={ }, outputs={,
+     Wait (0) -> 1,
+     ac'!.>0..b (001010100000 [2a0]) -> 001000010100 [214]
+  }
+941: inputs={ }, outputs={ }
+942: inputs={ }, outputs={ }
+943: inputs={ }, outputs={,
+     Start (1) -> 0
+  }
+944: inputs={ }, outputs={ }
+945: inputs={ }, outputs={,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+946: inputs={ }, outputs={,
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     ac'!.>0..b (001000010100 [214]) -> 000100001010 [10a]
+  }
+947: inputs={ }, outputs={ }
+948: inputs={ }, outputs={,
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+949: inputs={ }, outputs={,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+950: inputs={ }, outputs={ }
+951: inputs={ }, outputs={,
+     Busy (1) -> 0,
+     Ready (0) -> 1
+  }
+952: inputs={ }, outputs={,
+     Wait (1) -> 0
+  }
+953: inputs={ }, outputs={ }
+954: inputs={
+     ACIn.>0..b (000000000000 [000]) -> 000011010111 [0d7],
+     S.1..0< (10 [2]) -> 11 [3]
+  }, outputs={ }
+955: inputs={ }, outputs={,
+     Start (0) -> 1
+  }
+956: inputs={ }, outputs={ }
+957: inputs={ }, outputs={,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+958: inputs={ }, outputs={,
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     ac'!.>0..b (000100001010 [10a]) -> 000011010111 [0d7]
+  }
+959: inputs={ }, outputs={ }
+960: inputs={
+     ACIn.>0..b (000011010111 [0d7]) -> 000000000000 [000],
+     S.1..0< (11 [3]) -> 10 [2]
+  }, outputs={,
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+961: inputs={ }, outputs={,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+962: inputs={ }, outputs={ }
+963: inputs={ }, outputs={,
+     Busy (0) -> 1,
+     Ready (1) -> 0
+  }
+964: inputs={ }, outputs={,
+     Wait (0) -> 1,
+     ac'!.>0..b (000011010111 [0d7]) -> 001000010100 [214]
+  }
+965: inputs={ }, outputs={ }
+966: inputs={ }, outputs={ }
+967: inputs={ }, outputs={,
+     Start (1) -> 0
+  }
+968: inputs={ }, outputs={ }
+969: inputs={ }, outputs={,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+970: inputs={ }, outputs={,
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     ac'!.>0..b (001000010100 [214]) -> 000100001010 [10a]
+  }
+971: inputs={ }, outputs={ }
+972: inputs={ }, outputs={,
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+973: inputs={ }, outputs={,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+974: inputs={ }, outputs={ }
+975: inputs={ }, outputs={,
+     Busy (1) -> 0,
+     Ready (0) -> 1
+  }
+976: inputs={ }, outputs={,
+     Wait (1) -> 0
+  }
+977: inputs={ }, outputs={ }
+978: inputs={,
+     S.1..0< (10 [2]) -> 00 [0]
+  }, outputs={ }
+979: inputs={ }, outputs={,
+     Start (0) -> 1
+  }
+980: inputs={ }, outputs={ }
+981: inputs={ }, outputs={,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+982: inputs={ }, outputs={,
+     Strt.>1..4 (0111 [7]) -> 0011 [3]
+  }
+983: inputs={ }, outputs={ }
+984: inputs={
+     ACIn.>0..b (000000000000 [000]) -> 101110111000 [bb8],
+     S.1..0< (00 [0]) -> 11 [3]
+  }, outputs={,
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+985: inputs={ }, outputs={,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+986: inputs={ }, outputs={ }
+987: inputs={ }, outputs={,
+     Busy (0) -> 1,
+     Ready (1) -> 0
+  }
+988: inputs={ }, outputs={,
+     Wait (0) -> 1,
+     ac'!.>0..b (000100001010 [10a]) -> 101110111000 [bb8]
+  }
+989: inputs={ }, outputs={ }
+990: inputs={ }, outputs={ }
+991: inputs={ }, outputs={,
+     Start (1) -> 0
+  }
+992: inputs={ }, outputs={ }
+993: inputs={ }, outputs={,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+994: inputs={ }, outputs={,
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     ac'!.>0..b (101110111000 [bb8]) -> 000100001010 [10a]
+  }
+995: inputs={ }, outputs={ }
+996: inputs={ }, outputs={,
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+997: inputs={ }, outputs={,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+998: inputs={ }, outputs={ }
+999: inputs={ }, outputs={,
+     Busy (1) -> 0,
+     Ready (0) -> 1
+  }
+1000: inputs={ }, outputs={,
+     Wait (1) -> 0
+  }
+1001: inputs={ }, outputs={ }
+1002: inputs={
+     ACIn.>0..b (101110111000 [bb8]) -> 000000000000 [000],
+     Link (0) -> 1,
+     S.1..0< (11 [3]) -> 10 [2]
+  }, outputs={ }
+1003: inputs={ }, outputs={,
+     Start (0) -> 1
+  }
+1004: inputs={ }, outputs={ }
+1005: inputs={ }, outputs={,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+1006: inputs={ }, outputs={,
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     ac'!.>0..b (000100001010 [10a]) -> 001000010101 [215]
+  }
+1007: inputs={ }, outputs={ }
+1008: inputs={ }, outputs={,
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+1009: inputs={ }, outputs={,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+1010: inputs={ }, outputs={ }
+1011: inputs={ }, outputs={,
+     Busy (0) -> 1,
+     Ready (1) -> 0
+  }
+1012: inputs={ }, outputs={,
+     Wait (0) -> 1
+  }
+1013: inputs={ }, outputs={ }
+1014: inputs={ }, outputs={ }
+1015: inputs={ }, outputs={,
+     Start (1) -> 0
+  }
+1016: inputs={ }, outputs={ }
+1017: inputs={ }, outputs={,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+1018: inputs={ }, outputs={,
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     ac'!.>0..b (001000010101 [215]) -> 000100001010 [10a]
+  }
+1019: inputs={ }, outputs={ }
+1020: inputs={ }, outputs={,
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+1021: inputs={ }, outputs={,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+1022: inputs={ }, outputs={ }
+1023: inputs={ }, outputs={,
+     Busy (1) -> 0,
+     Ready (0) -> 1
+  }
+1024: inputs={ }, outputs={,
+     Wait (1) -> 0
+  }
+1025: inputs={ }, outputs={ }
+1026: inputs={,
+     Link (1) -> 0,
+     S.1..0< (10 [2]) -> 00 [0]
+  }, outputs={ }
+1027: inputs={ }, outputs={,
+     Start (0) -> 1
+  }
+1028: inputs={ }, outputs={ }
+1029: inputs={ }, outputs={,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+1030: inputs={ }, outputs={,
+     Strt.>1..4 (0111 [7]) -> 0011 [3]
+  }
+1031: inputs={ }, outputs={ }
+1032: inputs={ }, outputs={,
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+1033: inputs={ }, outputs={,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+1034: inputs={ }, outputs={ }
+1035: inputs={ }, outputs={,
+     Busy (0) -> 1,
+     Ready (1) -> 0
+  }
+1036: inputs={ }, outputs={,
+     Wait (0) -> 1
+  }
+1037: inputs={ }, outputs={ }
+1038: inputs={ }, outputs={ }
+1039: inputs={ }, outputs={,
+     Start (1) -> 0
+  }
+1040: inputs={ }, outputs={ }
+1041: inputs={ }, outputs={,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+1042: inputs={ }, outputs={,
+     Strt.>1..4 (1000 [8]) -> 1100 [c]
+  }
+1043: inputs={ }, outputs={ }
+1044: inputs={ }, outputs={,
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+1045: inputs={ }, outputs={,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+1046: inputs={ }, outputs={ }
+1047: inputs={ }, outputs={,
+     Busy (1) -> 0,
+     Ready (0) -> 1
+  }
+1048: inputs={ }, outputs={,
+     Wait (1) -> 0
+  }
+1049: inputs={ }, outputs={ }
+1050: inputs={,
+     S.1..0< (00 [0]) -> 10 [2]
+  }, outputs={ }
+1051: inputs={ }, outputs={,
+     Start (0) -> 1
+  }
+1052: inputs={ }, outputs={ }
+1053: inputs={ }, outputs={,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+1054: inputs={ }, outputs={,
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     ac'!.>0..b (000100001010 [10a]) -> 001000010100 [214]
+  }
+1055: inputs={ }, outputs={ }
+1056: inputs={,
+     S.1..0< (10 [2]) -> 00 [0]
+  }, outputs={,
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+1057: inputs={ }, outputs={,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+1058: inputs={ }, outputs={ }
+1059: inputs={ }, outputs={,
+     Busy (0) -> 1,
+     Ready (1) -> 0
+  }
+1060: inputs={ }, outputs={,
+     Wait (0) -> 1,
+     ac'!.>0..b (001000010100 [214]) -> 000100001010 [10a]
+  }
+1061: inputs={ }, outputs={ }
+1062: inputs={ }, outputs={ }
+1063: inputs={ }, outputs={,
+     Start (1) -> 0
+  }
+1064: inputs={ }, outputs={ }
+1065: inputs={ }, outputs={,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+1066: inputs={ }, outputs={,
+     Strt.>1..4 (1000 [8]) -> 1100 [c]
+  }
+1067: inputs={ }, outputs={ }
+1068: inputs={ }, outputs={,
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+1069: inputs={ }, outputs={,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+1070: inputs={ }, outputs={ }
+1071: inputs={ }, outputs={,
+     Busy (1) -> 0,
+     Ready (0) -> 1
+  }
+1072: inputs={ }, outputs={,
+     Wait (1) -> 0
+  }
+1073: inputs={ }, outputs={ }
+1074: inputs={ }, outputs={ }
+1075: inputs={ }, outputs={,
+     Start (0) -> 1
+  }
+1076: inputs={ }, outputs={ }
+1077: inputs={ }, outputs={,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+1078: inputs={ }, outputs={,
+     Strt.>1..4 (0111 [7]) -> 0011 [3]
+  }
+1079: inputs={ }, outputs={ }
+1080: inputs={,
+     Link (0) -> 1,
+     S.1..0< (00 [0]) -> 01 [1]
+  }, outputs={,
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+1081: inputs={ }, outputs={,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+1082: inputs={ }, outputs={ }
+1083: inputs={ }, outputs={,
+     Busy (0) -> 1,
+     Ready (1) -> 0
+  }
+1084: inputs={ }, outputs={,
+     Wait (0) -> 1,
+     ac'!.>0..b (000100001010 [10a]) -> 100010000101 [885]
+  }
+1085: inputs={ }, outputs={ }
+1086: inputs={ }, outputs={ }
+1087: inputs={ }, outputs={,
+     Start (1) -> 0
+  }
+1088: inputs={ }, outputs={ }
+1089: inputs={ }, outputs={,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+1090: inputs={ }, outputs={,
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     ac'!.>0..b (100010000101 [885]) -> 000100001010 [10a]
+  }
+1091: inputs={ }, outputs={ }
+1092: inputs={ }, outputs={,
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+1093: inputs={ }, outputs={,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+1094: inputs={ }, outputs={ }
+1095: inputs={ }, outputs={,
+     Busy (1) -> 0,
+     Ready (0) -> 1
+  }
+1096: inputs={ }, outputs={,
+     Wait (1) -> 0
+  }
+1097: inputs={ }, outputs={ }
+1098: inputs={,
+     S.1..0< (01 [1]) -> 10 [2]
+  }, outputs={ }
+1099: inputs={ }, outputs={,
+     Start (0) -> 1
+  }
+1100: inputs={ }, outputs={ }
+1101: inputs={ }, outputs={,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+1102: inputs={ }, outputs={,
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     ac'!.>0..b (000100001010 [10a]) -> 001000010101 [215]
+  }
+1103: inputs={ }, outputs={ }
+1104: inputs={,
+     Link (1) -> 0,
+     S.1..0< (10 [2]) -> 00 [0]
+  }, outputs={,
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+1105: inputs={ }, outputs={,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+1106: inputs={ }, outputs={ }
+1107: inputs={ }, outputs={,
+     Busy (0) -> 1,
+     Ready (1) -> 0
+  }
+1108: inputs={ }, outputs={,
+     Wait (0) -> 1,
+     ac'!.>0..b (001000010101 [215]) -> 000100001010 [10a]
+  }
+1109: inputs={ }, outputs={ }
+1110: inputs={ }, outputs={ }
+1111: inputs={ }, outputs={,
+     Start (1) -> 0
+  }
+1112: inputs={ }, outputs={ }
+1113: inputs={ }, outputs={,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+1114: inputs={ }, outputs={,
+     Strt.>1..4 (1000 [8]) -> 1100 [c]
+  }
+1115: inputs={ }, outputs={ }
+1116: inputs={ }, outputs={,
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+1117: inputs={ }, outputs={,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+1118: inputs={ }, outputs={ }
+1119: inputs={ }, outputs={,
+     Busy (1) -> 0,
+     Ready (0) -> 1
+  }
+1120: inputs={ }, outputs={,
+     Wait (1) -> 0
+  }
+1121: inputs={ }, outputs={ }
+1122: inputs={ }, outputs={ }
+1123: inputs={ }, outputs={,
+     Start (0) -> 1
+  }
+1124: inputs={ }, outputs={ }
+1125: inputs={ }, outputs={,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+1126: inputs={ }, outputs={,
+     Strt.>1..4 (0111 [7]) -> 0011 [3]
+  }
+1127: inputs={ }, outputs={ }
+1128: inputs={
+     ACIn.>0..b (000000000000 [000]) -> 001101000100 [344],
+     S.1..0< (00 [0]) -> 11 [3]
+  }, outputs={,
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+1129: inputs={ }, outputs={,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+1130: inputs={ }, outputs={ }
+1131: inputs={ }, outputs={,
+     Busy (0) -> 1,
+     Ready (1) -> 0
+  }
+1132: inputs={ }, outputs={,
+     Wait (0) -> 1,
+     ac'!.>0..b (000100001010 [10a]) -> 001101000100 [344]
+  }
+1133: inputs={ }, outputs={ }
+1134: inputs={ }, outputs={ }
+1135: inputs={ }, outputs={,
+     Start (1) -> 0
+  }
+1136: inputs={ }, outputs={ }
+1137: inputs={ }, outputs={,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+1138: inputs={ }, outputs={,
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     ac'!.>0..b (001101000100 [344]) -> 000100001010 [10a]
+  }
+1139: inputs={ }, outputs={ }
+1140: inputs={ }, outputs={,
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+1141: inputs={ }, outputs={,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+1142: inputs={ }, outputs={ }
+1143: inputs={ }, outputs={,
+     Busy (1) -> 0,
+     Ready (0) -> 1
+  }
+1144: inputs={ }, outputs={,
+     Wait (1) -> 0
+  }
+1145: inputs={ }, outputs={ }
+1146: inputs={
+     ACIn.>0..b (001101000100 [344]) -> 001000000001 [201]
+  }, outputs={ }
+1147: inputs={ }, outputs={,
+     Start (0) -> 1
+  }
+1148: inputs={ }, outputs={ }
+1149: inputs={ }, outputs={,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+1150: inputs={ }, outputs={,
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     ac'!.>0..b (000100001010 [10a]) -> 001000000001 [201]
+  }
+1151: inputs={ }, outputs={ }
+1152: inputs={
+     ACIn.>0..b (001000000001 [201]) -> 000011011101 [0dd]
+  }, outputs={,
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+1153: inputs={ }, outputs={,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+1154: inputs={ }, outputs={ }
+1155: inputs={ }, outputs={,
+     Busy (0) -> 1,
+     Ready (1) -> 0
+  }
+1156: inputs={ }, outputs={,
+     Wait (0) -> 1,
+     ac'!.>0..b (001000000001 [201]) -> 000011011101 [0dd]
+  }
+1157: inputs={ }, outputs={ }
+1158: inputs={ }, outputs={ }
+1159: inputs={ }, outputs={,
+     Start (1) -> 0
+  }
+1160: inputs={ }, outputs={ }
+1161: inputs={ }, outputs={,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+1162: inputs={ }, outputs={,
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     ac'!.>0..b (000011011101 [0dd]) -> 000100001010 [10a]
+  }
+1163: inputs={ }, outputs={ }
+1164: inputs={ }, outputs={,
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+1165: inputs={ }, outputs={,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+1166: inputs={ }, outputs={ }
+1167: inputs={ }, outputs={,
+     Busy (1) -> 0,
+     Ready (0) -> 1
+  }
+1168: inputs={ }, outputs={,
+     Wait (1) -> 0
+  }
+1169: inputs={ }, outputs={ }
+1170: inputs={
+     ACIn.>0..b (000011011101 [0dd]) -> 000100101000 [128]
+  }, outputs={ }
+1171: inputs={ }, outputs={,
+     Start (0) -> 1
+  }
+1172: inputs={ }, outputs={ }
+1173: inputs={ }, outputs={,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+1174: inputs={ }, outputs={,
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     ac'!.>0..b (000100001010 [10a]) -> 000100101000 [128]
+  }
+1175: inputs={ }, outputs={ }
+1176: inputs={
+     ACIn.>0..b (000100101000 [128]) -> 000000000000 [000],
+     S.1..0< (11 [3]) -> 00 [0]
+  }, outputs={,
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+1177: inputs={ }, outputs={,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+1178: inputs={ }, outputs={ }
+1179: inputs={ }, outputs={,
+     Busy (0) -> 1,
+     Ready (1) -> 0
+  }
+1180: inputs={ }, outputs={,
+     Wait (0) -> 1,
+     ac'!.>0..b (000100101000 [128]) -> 000100001010 [10a]
+  }
+1181: inputs={ }, outputs={ }
+1182: inputs={ }, outputs={ }
+1183: inputs={ }, outputs={,
+     Start (1) -> 0
+  }
+1184: inputs={ }, outputs={ }
+1185: inputs={ }, outputs={,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+1186: inputs={ }, outputs={,
+     Strt.>1..4 (1000 [8]) -> 1100 [c]
+  }
+1187: inputs={ }, outputs={ }
+1188: inputs={ }, outputs={,
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+1189: inputs={ }, outputs={,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+1190: inputs={ }, outputs={ }
+1191: inputs={ }, outputs={,
+     Busy (1) -> 0,
+     Ready (0) -> 1
+  }
+1192: inputs={ }, outputs={,
+     Wait (1) -> 0
+  }
+1193: inputs={ }, outputs={ }
+1194: inputs={
+     ACIn.>0..b (000000000000 [000]) -> 100110000000 [980],
+     S.1..0< (00 [0]) -> 11 [3]
+  }, outputs={ }
+1195: inputs={ }, outputs={,
+     Start (0) -> 1
+  }
+1196: inputs={ }, outputs={ }
+1197: inputs={ }, outputs={,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+1198: inputs={ }, outputs={,
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     ac'!.>0..b (000100001010 [10a]) -> 100110000000 [980]
+  }
+1199: inputs={ }, outputs={ }
+1200: inputs={
+     ACIn.>0..b (100110000000 [980]) -> 000000000000 [000],
+     S.1..0< (11 [3]) -> 00 [0]
+  }, outputs={,
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+1201: inputs={ }, outputs={,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+1202: inputs={ }, outputs={ }
+1203: inputs={ }, outputs={,
+     Busy (0) -> 1,
+     Ready (1) -> 0
+  }
+1204: inputs={ }, outputs={,
+     Wait (0) -> 1,
+     ac'!.>0..b (100110000000 [980]) -> 000100001010 [10a]
+  }
+1205: inputs={ }, outputs={ }
+1206: inputs={ }, outputs={ }
+1207: inputs={ }, outputs={,
+     Start (1) -> 0
+  }
+1208: inputs={ }, outputs={ }
+1209: inputs={ }, outputs={,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+1210: inputs={ }, outputs={,
+     Strt.>1..4 (1000 [8]) -> 1100 [c]
+  }
+1211: inputs={ }, outputs={ }
+1212: inputs={ }, outputs={,
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+1213: inputs={ }, outputs={,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+1214: inputs={ }, outputs={ }
+1215: inputs={ }, outputs={,
+     Busy (1) -> 0,
+     Ready (0) -> 1
+  }
+1216: inputs={ }, outputs={,
+     Wait (1) -> 0
+  }
+1217: inputs={ }, outputs={ }
+1218: inputs={ }, outputs={ }
+1219: inputs={ }, outputs={,
+     Start (0) -> 1
+  }
+1220: inputs={ }, outputs={ }
+1221: inputs={ }, outputs={,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+1222: inputs={ }, outputs={,
+     Strt.>1..4 (0111 [7]) -> 0011 [3]
+  }
+1223: inputs={ }, outputs={ }
+1224: inputs={,
+     Link (0) -> 1,
+     S.1..0< (00 [0]) -> 01 [1]
+  }, outputs={,
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+1225: inputs={ }, outputs={,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+1226: inputs={ }, outputs={ }
+1227: inputs={ }, outputs={,
+     Busy (0) -> 1,
+     Ready (1) -> 0
+  }
+1228: inputs={ }, outputs={,
+     Wait (0) -> 1,
+     ac'!.>0..b (000100001010 [10a]) -> 100010000101 [885]
+  }
+1229: inputs={ }, outputs={ }
+1230: inputs={ }, outputs={ }
+1231: inputs={ }, outputs={,
+     Start (1) -> 0
+  }
+1232: inputs={ }, outputs={ }
+1233: inputs={ }, outputs={,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+1234: inputs={ }, outputs={,
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     ac'!.>0..b (100010000101 [885]) -> 000100001010 [10a]
+  }
+1235: inputs={ }, outputs={ }
+1236: inputs={ }, outputs={,
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+1237: inputs={ }, outputs={,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+1238: inputs={ }, outputs={ }
+1239: inputs={ }, outputs={,
+     Busy (1) -> 0,
+     Ready (0) -> 1
+  }
+1240: inputs={ }, outputs={,
+     Wait (1) -> 0
+  }
+1241: inputs={ }, outputs={ }
+1242: inputs={
+     ACIn.>0..b (000000000000 [000]) -> 010110111110 [5be],
+     Link (1) -> 0,
+     S.1..0< (01 [1]) -> 11 [3]
+  }, outputs={ }
+1243: inputs={ }, outputs={,
+     Start (0) -> 1
+  }
+1244: inputs={ }, outputs={ }
+1245: inputs={ }, outputs={,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+1246: inputs={ }, outputs={,
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     ac'!.>0..b (000100001010 [10a]) -> 010110111110 [5be]
+  }
+1247: inputs={ }, outputs={ }
+1248: inputs={
+     ACIn.>0..b (010110111110 [5be]) -> 000000000000 [000],
+     Link (0) -> 1,
+     S.1..0< (11 [3]) -> 10 [2]
+  }, outputs={,
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+1249: inputs={ }, outputs={,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+1250: inputs={ }, outputs={ }
+1251: inputs={ }, outputs={,
+     Busy (0) -> 1,
+     Ready (1) -> 0
+  }
+1252: inputs={ }, outputs={,
+     Wait (0) -> 1,
+     ac'!.>0..b (010110111110 [5be]) -> 001000010101 [215]
+  }
+1253: inputs={ }, outputs={ }
+1254: inputs={ }, outputs={
+     AC.>0..b (000100001010 [10a]) -> 101001000001 [a41]
+  }
+1255: inputs={ }, outputs={,
+     Start (1) -> 0
+  }
+1256: inputs={ }, outputs={ }
+1257: inputs={ }, outputs={,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+1258: inputs={ }, outputs={,
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     ac'!.>0..b (001000010101 [215]) -> 101001000001 [a41]
+  }
+1259: inputs={ }, outputs={ }
+1260: inputs={ }, outputs={,
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+1261: inputs={ }, outputs={,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+1262: inputs={ }, outputs={ }
+1263: inputs={ }, outputs={,
+     Busy (1) -> 0,
+     Ready (0) -> 1
+  }
+1264: inputs={ }, outputs={,
+     Wait (1) -> 0
+  }
+1265: inputs={ }, outputs={ }
+1266: inputs={,
+     S.1..0< (10 [2]) -> 01 [1]
+  }, outputs={ }
+1267: inputs={ }, outputs={,
+     Start (0) -> 1
+  }
+1268: inputs={ }, outputs={ }
+1269: inputs={ }, outputs={,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+1270: inputs={ }, outputs={,
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     ac'!.>0..b (101001000001 [a41]) -> 110100100000 [d20]
+  }
+1271: inputs={ }, outputs={ }
+1272: inputs={,
+     Link (1) -> 0,
+     S.1..0< (01 [1]) -> 00 [0]
+  }, outputs={,
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+1273: inputs={ }, outputs={,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+1274: inputs={ }, outputs={ }
+1275: inputs={ }, outputs={,
+     Busy (0) -> 1,
+     Ready (1) -> 0
+  }
+1276: inputs={ }, outputs={,
+     Wait (0) -> 1,
+     ac'!.>0..b (110100100000 [d20]) -> 101001000001 [a41]
+  }
+1277: inputs={ }, outputs={ }
+1278: inputs={ }, outputs={ }
+1279: inputs={ }, outputs={,
+     Start (1) -> 0
+  }
+1280: inputs={ }, outputs={ }
+1281: inputs={ }, outputs={,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+1282: inputs={ }, outputs={,
+     Strt.>1..4 (1000 [8]) -> 1100 [c]
+  }
+1283: inputs={ }, outputs={ }
+1284: inputs={ }, outputs={,
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+1285: inputs={ }, outputs={,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+1286: inputs={ }, outputs={ }
+1287: inputs={ }, outputs={,
+     Busy (1) -> 0,
+     Ready (0) -> 1
+  }
+1288: inputs={ }, outputs={,
+     Wait (1) -> 0
+  }
+1289: inputs={ }, outputs={ }
+1290: inputs={,
+     Link (0) -> 1,
+     S.1..0< (00 [0]) -> 10 [2]
+  }, outputs={ }
+1291: inputs={ }, outputs={,
+     Start (0) -> 1
+  }
+1292: inputs={ }, outputs={ }
+1293: inputs={ }, outputs={,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+1294: inputs={ }, outputs={,
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     ac'!.>0..b (101001000001 [a41]) -> 010010000011 [483]
+  }
+1295: inputs={ }, outputs={ }
+1296: inputs={,
+     S.1..0< (10 [2]) -> 01 [1]
+  }, outputs={,
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+1297: inputs={ }, outputs={,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+1298: inputs={ }, outputs={ }
+1299: inputs={ }, outputs={,
+     Busy (0) -> 1,
+     Ready (1) -> 0
+  }
+1300: inputs={ }, outputs={,
+     Wait (0) -> 1,
+     ac'!.>0..b (010010000011 [483]) -> 110100100000 [d20]
+  }
+1301: inputs={ }, outputs={ }
+1302: inputs={ }, outputs={ }
+1303: inputs={ }, outputs={,
+     Start (1) -> 0
+  }
+1304: inputs={ }, outputs={ }
+1305: inputs={ }, outputs={,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+1306: inputs={ }, outputs={,
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     ac'!.>0..b (110100100000 [d20]) -> 101001000001 [a41]
+  }
+1307: inputs={ }, outputs={ }
+1308: inputs={ }, outputs={,
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+1309: inputs={ }, outputs={,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+1310: inputs={ }, outputs={ }
+1311: inputs={ }, outputs={,
+     Busy (1) -> 0,
+     Ready (0) -> 1
+  }
+1312: inputs={ }, outputs={,
+     Wait (1) -> 0
+  }
+1313: inputs={ }, outputs={ }
+1314: inputs={,
+     S.1..0< (01 [1]) -> 10 [2]
+  }, outputs={ }
+1315: inputs={ }, outputs={,
+     Start (0) -> 1
+  }
+1316: inputs={ }, outputs={ }
+1317: inputs={ }, outputs={,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+1318: inputs={ }, outputs={,
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     ac'!.>0..b (101001000001 [a41]) -> 010010000011 [483]
+  }
+1319: inputs={ }, outputs={ }
+1320: inputs={ }, outputs={,
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+1321: inputs={ }, outputs={,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+1322: inputs={ }, outputs={ }
+1323: inputs={ }, outputs={,
+     Busy (0) -> 1,
+     Ready (1) -> 0
+  }
+1324: inputs={ }, outputs={,
+     Wait (0) -> 1
+  }
+1325: inputs={ }, outputs={ }
+1326: inputs={ }, outputs={ }
+1327: inputs={ }, outputs={,
+     Start (1) -> 0
+  }
+1328: inputs={ }, outputs={ }
+1329: inputs={ }, outputs={,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+1330: inputs={ }, outputs={,
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     ac'!.>0..b (010010000011 [483]) -> 101001000001 [a41]
+  }
+1331: inputs={ }, outputs={ }
+1332: inputs={ }, outputs={,
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+1333: inputs={ }, outputs={,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+1334: inputs={ }, outputs={ }
+1335: inputs={ }, outputs={,
+     Busy (1) -> 0,
+     Ready (0) -> 1
+  }
+1336: inputs={ }, outputs={,
+     Wait (1) -> 0
+  }
+1337: inputs={ }, outputs={ }
+1338: inputs={,
+     Link (1) -> 0,
+     S.1..0< (10 [2]) -> 00 [0]
+  }, outputs={ }
+1339: inputs={ }, outputs={,
+     Start (0) -> 1
+  }
+1340: inputs={ }, outputs={ }
+1341: inputs={ }, outputs={,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+1342: inputs={ }, outputs={,
+     Strt.>1..4 (0111 [7]) -> 0011 [3]
+  }
+1343: inputs={ }, outputs={ }
+1344: inputs={,
+     Link (0) -> 1,
+     S.1..0< (00 [0]) -> 10 [2]
+  }, outputs={,
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+1345: inputs={ }, outputs={,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+1346: inputs={ }, outputs={ }
+1347: inputs={ }, outputs={,
+     Busy (0) -> 1,
+     Ready (1) -> 0
+  }
+1348: inputs={ }, outputs={,
+     Wait (0) -> 1,
+     ac'!.>0..b (101001000001 [a41]) -> 010010000011 [483]
+  }
+1349: inputs={ }, outputs={ }
+1350: inputs={ }, outputs={ }
+1351: inputs={ }, outputs={,
+     Start (1) -> 0
+  }
+1352: inputs={ }, outputs={ }
+1353: inputs={ }, outputs={,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+1354: inputs={ }, outputs={,
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     ac'!.>0..b (010010000011 [483]) -> 101001000001 [a41]
+  }
+1355: inputs={ }, outputs={ }
+1356: inputs={ }, outputs={,
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+1357: inputs={ }, outputs={,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+1358: inputs={ }, outputs={ }
+1359: inputs={ }, outputs={,
+     Busy (1) -> 0,
+     Ready (0) -> 1
+  }
+1360: inputs={ }, outputs={,
+     Wait (1) -> 0
+  }
+1361: inputs={ }, outputs={ }
+1362: inputs={
+     ACIn.>0..b (000000000000 [000]) -> 110111111000 [df8],
+     Link (1) -> 0,
+     S.1..0< (10 [2]) -> 11 [3]
+  }, outputs={ }
+1363: inputs={ }, outputs={,
+     Start (0) -> 1
+  }
+1364: inputs={ }, outputs={ }
+1365: inputs={ }, outputs={,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+1366: inputs={ }, outputs={,
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     ac'!.>0..b (101001000001 [a41]) -> 110111111000 [df8]
+  }
+1367: inputs={ }, outputs={ }
+1368: inputs={
+     ACIn.>0..b (110111111000 [df8]) -> 111110101011 [fab]
+  }, outputs={,
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+1369: inputs={ }, outputs={,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+1370: inputs={ }, outputs={ }
+1371: inputs={ }, outputs={,
+     Busy (0) -> 1,
+     Ready (1) -> 0
+  }
+1372: inputs={ }, outputs={,
+     Wait (0) -> 1,
+     ac'!.>0..b (110111111000 [df8]) -> 111110101011 [fab]
+  }
+1373: inputs={ }, outputs={ }
+1374: inputs={ }, outputs={
+     AC.>0..b (101001000001 [a41]) -> 001000000111 [207]
+  }
+1375: inputs={ }, outputs={,
+     Start (1) -> 0
+  }
+1376: inputs={ }, outputs={ }
+1377: inputs={ }, outputs={,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+1378: inputs={ }, outputs={,
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     ac'!.>0..b (111110101011 [fab]) -> 001000000111 [207]
+  }
+1379: inputs={ }, outputs={ }
+1380: inputs={ }, outputs={
+     AC.>0..b (001000000111 [207]) -> 000001010100 [054],
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+1381: inputs={ }, outputs={,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+1382: inputs={ }, outputs={ }
+1383: inputs={ }, outputs={,
+     Busy (1) -> 0,
+     Ready (0) -> 1
+  }
+1384: inputs={ }, outputs={,
+     Wait (1) -> 0,
+     ac'!.>0..b (001000000111 [207]) -> 000001010100 [054]
+  }
+1385: inputs={ }, outputs={ }
+1386: inputs={
+     ACIn.>0..b (111110101011 [fab]) -> 000000000000 [000],
+     Link (0) -> 1,
+     S.1..0< (11 [3]) -> 10 [2]
+  }, outputs={ }
+1387: inputs={ }, outputs={,
+     Start (0) -> 1
+  }
+1388: inputs={ }, outputs={ }
+1389: inputs={ }, outputs={,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+1390: inputs={ }, outputs={,
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     ac'!.>0..b (000001010100 [054]) -> 000010101001 [0a9]
+  }
+1391: inputs={ }, outputs={ }
+1392: inputs={
+     ACIn.>0..b (000000000000 [000]) -> 101010101011 [aab],
+     Link (1) -> 0,
+     S.1..0< (10 [2]) -> 11 [3]
+  }, outputs={,
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+1393: inputs={ }, outputs={,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+1394: inputs={ }, outputs={ }
+1395: inputs={ }, outputs={,
+     Busy (0) -> 1,
+     Ready (1) -> 0
+  }
+1396: inputs={ }, outputs={,
+     Wait (0) -> 1,
+     ac'!.>0..b (000010101001 [0a9]) -> 101010101011 [aab]
+  }
+1397: inputs={ }, outputs={ }
+1398: inputs={ }, outputs={ }
+1399: inputs={ }, outputs={,
+     Start (1) -> 0
+  }
+1400: inputs={ }, outputs={ }
+1401: inputs={ }, outputs={,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+1402: inputs={ }, outputs={,
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     ac'!.>0..b (101010101011 [aab]) -> 000001010100 [054]
+  }
+1403: inputs={ }, outputs={ }
+1404: inputs={ }, outputs={,
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+1405: inputs={ }, outputs={,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+1406: inputs={ }, outputs={ }
+1407: inputs={ }, outputs={,
+     Busy (1) -> 0,
+     Ready (0) -> 1
+  }
+1408: inputs={ }, outputs={,
+     Wait (1) -> 0
+  }
+1409: inputs={ }, outputs={ }
+1410: inputs={
+     ACIn.>0..b (101010101011 [aab]) -> 000000000000 [000],
+     S.1..0< (11 [3]) -> 01 [1]
+  }, outputs={ }
+1411: inputs={ }, outputs={,
+     Start (0) -> 1
+  }
+1412: inputs={ }, outputs={ }
+1413: inputs={ }, outputs={,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+1414: inputs={ }, outputs={,
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     ac'!.>0..b (000001010100 [054]) -> 000000101010 [02a]
+  }
+1415: inputs={ }, outputs={ }
+1416: inputs={
+     ACIn.>0..b (000000000000 [000]) -> 111000111001 [e39],
+     S.1..0< (01 [1]) -> 11 [3]
+  }, outputs={,
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+1417: inputs={ }, outputs={,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+1418: inputs={ }, outputs={ }
+1419: inputs={ }, outputs={,
+     Busy (0) -> 1,
+     Ready (1) -> 0
+  }
+1420: inputs={ }, outputs={,
+     Wait (0) -> 1,
+     ac'!.>0..b (000000101010 [02a]) -> 111000111001 [e39]
+  }
+1421: inputs={ }, outputs={ }
+1422: inputs={ }, outputs={ }
+1423: inputs={ }, outputs={,
+     Start (1) -> 0
+  }
+1424: inputs={ }, outputs={ }
+1425: inputs={ }, outputs={,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+1426: inputs={ }, outputs={,
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     ac'!.>0..b (111000111001 [e39]) -> 000001010100 [054]
+  }
+1427: inputs={ }, outputs={ }
+1428: inputs={ }, outputs={
+     AC.>0..b (000001010100 [054]) -> 000111000110 [1c6],
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+1429: inputs={ }, outputs={,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+1430: inputs={ }, outputs={ }
+1431: inputs={ }, outputs={,
+     Busy (1) -> 0,
+     Ready (0) -> 1
+  }
+1432: inputs={ }, outputs={,
+     Wait (1) -> 0,
+     ac'!.>0..b (000001010100 [054]) -> 000111000110 [1c6]
+  }
+1433: inputs={ }, outputs={ }
+1434: inputs={
+     ACIn.>0..b (111000111001 [e39]) -> 000000000000 [000],
+     S.1..0< (11 [3]) -> 00 [0]
+  }, outputs={ }
+1435: inputs={ }, outputs={,
+     Start (0) -> 1
+  }
+1436: inputs={ }, outputs={ }
+1437: inputs={ }, outputs={,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+1438: inputs={ }, outputs={,
+     Strt.>1..4 (0111 [7]) -> 0011 [3]
+  }
+1439: inputs={ }, outputs={ }
+1440: inputs={,
+     S.1..0< (00 [0]) -> 10 [2]
+  }, outputs={,
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+1441: inputs={ }, outputs={,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+1442: inputs={ }, outputs={ }
+1443: inputs={ }, outputs={,
+     Busy (0) -> 1,
+     Ready (1) -> 0
+  }
+1444: inputs={ }, outputs={,
+     Wait (0) -> 1,
+     ac'!.>0..b (000111000110 [1c6]) -> 001110001100 [38c]
+  }
+1445: inputs={ }, outputs={ }
+1446: inputs={ }, outputs={ }
+1447: inputs={ }, outputs={,
+     Start (1) -> 0
+  }
+1448: inputs={ }, outputs={ }
+1449: inputs={ }, outputs={,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+1450: inputs={ }, outputs={,
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     ac'!.>0..b (001110001100 [38c]) -> 000111000110 [1c6]
+  }
+1451: inputs={ }, outputs={ }
+1452: inputs={ }, outputs={,
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+1453: inputs={ }, outputs={,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+1454: inputs={ }, outputs={ }
+1455: inputs={ }, outputs={,
+     Busy (1) -> 0,
+     Ready (0) -> 1
+  }
+1456: inputs={ }, outputs={,
+     Wait (1) -> 0
+  }
+1457: inputs={ }, outputs={ }
+1458: inputs={ }, outputs={ }
+1459: inputs={ }, outputs={,
+     Start (0) -> 1
+  }
+1460: inputs={ }, outputs={ }
+1461: inputs={ }, outputs={,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+1462: inputs={ }, outputs={,
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     ac'!.>0..b (000111000110 [1c6]) -> 001110001100 [38c]
+  }
+1463: inputs={ }, outputs={ }
+1464: inputs={ }, outputs={,
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+1465: inputs={ }, outputs={,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+1466: inputs={ }, outputs={ }
+1467: inputs={ }, outputs={,
+     Busy (0) -> 1,
+     Ready (1) -> 0
+  }
+1468: inputs={ }, outputs={,
+     Wait (0) -> 1
+  }
+1469: inputs={ }, outputs={ }
+1470: inputs={ }, outputs={ }
+1471: inputs={ }, outputs={,
+     Start (1) -> 0
+  }
+1472: inputs={ }, outputs={ }
+1473: inputs={ }, outputs={,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+1474: inputs={ }, outputs={,
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     ac'!.>0..b (001110001100 [38c]) -> 000111000110 [1c6]
+  }
+1475: inputs={ }, outputs={ }
+1476: inputs={ }, outputs={,
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+1477: inputs={ }, outputs={,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+1478: inputs={ }, outputs={ }
+1479: inputs={ }, outputs={,
+     Busy (1) -> 0,
+     Ready (0) -> 1
+  }
+1480: inputs={ }, outputs={,
+     Wait (1) -> 0
+  }
+1481: inputs={ }, outputs={ }
+1482: inputs={,
+     S.1..0< (10 [2]) -> 01 [1]
+  }, outputs={ }
+1483: inputs={ }, outputs={,
+     Start (0) -> 1
+  }
+1484: inputs={ }, outputs={ }
+1485: inputs={ }, outputs={,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+1486: inputs={ }, outputs={,
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     ac'!.>0..b (000111000110 [1c6]) -> 000011100011 [0e3]
+  }
+1487: inputs={ }, outputs={ }
+1488: inputs={,
+     S.1..0< (01 [1]) -> 00 [0]
+  }, outputs={,
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+1489: inputs={ }, outputs={,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+1490: inputs={ }, outputs={ }
+1491: inputs={ }, outputs={,
+     Busy (0) -> 1,
+     Ready (1) -> 0
+  }
+1492: inputs={ }, outputs={,
+     Wait (0) -> 1,
+     ac'!.>0..b (000011100011 [0e3]) -> 000111000110 [1c6]
+  }
+1493: inputs={ }, outputs={ }
+1494: inputs={ }, outputs={ }
+1495: inputs={ }, outputs={,
+     Start (1) -> 0
+  }
+1496: inputs={ }, outputs={ }
+1497: inputs={ }, outputs={,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+1498: inputs={ }, outputs={,
+     Strt.>1..4 (1000 [8]) -> 1100 [c]
+  }
+1499: inputs={ }, outputs={ }
+1500: inputs={ }, outputs={,
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+1501: inputs={ }, outputs={,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+1502: inputs={ }, outputs={ }
+1503: inputs={ }, outputs={,
+     Busy (1) -> 0,
+     Ready (0) -> 1
+  }
+1504: inputs={ }, outputs={,
+     Wait (1) -> 0
+  }
+1505: inputs={ }, outputs={ }
+1506: inputs={,
+     S.1..0< (00 [0]) -> 10 [2]
+  }, outputs={ }
+1507: inputs={ }, outputs={,
+     Start (0) -> 1
+  }
+1508: inputs={ }, outputs={ }
+1509: inputs={ }, outputs={,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+1510: inputs={ }, outputs={,
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     ac'!.>0..b (000111000110 [1c6]) -> 001110001100 [38c]
+  }
+1511: inputs={ }, outputs={ }
+1512: inputs={,
+     Link (0) -> 1
+  }, outputs={,
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+1513: inputs={ }, outputs={,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+1514: inputs={ }, outputs={ }
+1515: inputs={ }, outputs={,
+     Busy (0) -> 1,
+     Ready (1) -> 0
+  }
+1516: inputs={ }, outputs={,
+     Wait (0) -> 1,
+     ac'!.>0..b (001110001100 [38c]) -> 001110001101 [38d]
+  }
+1517: inputs={ }, outputs={ }
+1518: inputs={ }, outputs={ }
+1519: inputs={ }, outputs={,
+     Start (1) -> 0
+  }
+1520: inputs={ }, outputs={ }
+1521: inputs={ }, outputs={,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+1522: inputs={ }, outputs={,
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     ac'!.>0..b (001110001101 [38d]) -> 000111000110 [1c6]
+  }
+1523: inputs={ }, outputs={ }
+1524: inputs={ }, outputs={,
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+1525: inputs={ }, outputs={,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+1526: inputs={ }, outputs={ }
+1527: inputs={ }, outputs={,
+     Busy (1) -> 0,
+     Ready (0) -> 1
+  }
+1528: inputs={ }, outputs={,
+     Wait (1) -> 0
+  }
+1529: inputs={ }, outputs={ }
+1530: inputs={
+     ACIn.>0..b (000000000000 [000]) -> 010001111011 [47b],
+     Link (1) -> 0,
+     S.1..0< (10 [2]) -> 11 [3]
+  }, outputs={ }
+1531: inputs={ }, outputs={,
+     Start (0) -> 1
+  }
+1532: inputs={ }, outputs={ }
+1533: inputs={ }, outputs={,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+1534: inputs={ }, outputs={,
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     ac'!.>0..b (000111000110 [1c6]) -> 010001111011 [47b]
+  }
+1535: inputs={ }, outputs={ }
+1536: inputs={
+     ACIn.>0..b (010001111011 [47b]) -> 000000000000 [000],
+     Link (0) -> 1,
+     S.1..0< (11 [3]) -> 10 [2]
+  }, outputs={,
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }

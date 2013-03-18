@@ -2,68 +2,47 @@ function randInt(n) {
   return int(n * rand());
 }
 
-function shuffle(a, n,   i, j, t) {
-  for (i = 0; i < n; i += 1) {
-    j = randInt(n);
-    if (i != j) {
-      t = a[j];
-      a[j] = a[i];
-      a[i] = t;
+BEGIN {
+  nWords = 128;
+  nWrites = 128;
+  nReads = 128;
+
+  w = 0
+  r = 0;
+  for (i = 0; w < nWrites && r < nReads; i += 1) {
+    if (0 < randInt(2)) {
+      md[i] = 0;
+      ma[i] = randInt(4096);
+      wr[i] = 0;
+      rd[i] = 1;
+      r += 1;
+    } else {
+      md[i] = randInt(4096);
+      ma[i] = randInt(4096);
+      wr[i] = 1;
+      rd[i] = 0;
+      w += 1;
     }
   }
-}
-
-BEGIN {
-  nWords = 64;
-  nWrites = 64;
-  nReads = 64;
-
-  for (i = 0; i < nWrites; i += 1) {
-    wData[i] = randInt(4096);
-    wAdrs[i] = randInt(4096);
-  }
-  # shuffle(wAdrs, nWrites);
-  for (i = 0; i < nReads; i += 1) {
-      rAdrs[i] = randInt(4096);
-  }
-  # shuffle(rAdrs, nReads);
-
-  for (i = 0; i < nWrites; i += 1) {
-    md[i] = wData[i];
-    ma[i] = wAdrs[i];
+  for (; w < nWrites; i += 1) {
+    md[i] = randInt(4096);
+    ma[i] = randInt(4096);
     wr[i] = 1;
     rd[i] = 0;
+    w += 1;
   }
-  for (; i < nReads; i += 1) {
-    md[i] = wData[i];
-    ma[i] = rAdrs[i];
+  for (; r < nReads; i += 1) {
+    md[i] = 0;
+    ma[i] = randInt(4096);
     wr[i] = 0;
     rd[i] = 1;
+    r += 1;
   }
 
-  printf "{ MA.0..b, { 0x%03x", ma[0];
+  printf "{ MA.0..b, MD.0..b, Write, Read }\n";
   for (i = 0; i < (nWrites + nReads); i += 1) {
-    printf ", 0x%03x", ma[i];
+    printf "{ 0x%03x, 0x%03x, %1d, %1d }\n", ma[i], md[i], wr[i], rd[i];
   }
-  printf " } }\n";
-
-  printf "{ MD.0..b, { 0x%03x", md[0];
-  for (i = 0; i < (nWrites + nReads); i += 1) {
-    printf ", 0x%03x", md[i];
-  }
-  printf " } }\n";
-
-  printf "{ Write,   { %5d", wr[0];
-  for (i = 0; i < (nWrites + nReads); i += 1) {
-    printf ", %5d", wr[i];
-  }
-  printf " } }\n";
-
-  printf "{ Read,    { %5d", rd[0];
-  for (i = 0; i < (nRdites + nReads); i += 1) {
-    printf ", %5d", rd[i];
-  }
-  printf " } }\n";
   exit 0;
 }
 

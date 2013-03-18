@@ -1,0 +1,86 @@
+cam.r: Error: Diagram2D::getOutputFor(name="Strt", bitNumber=2): Unable to find input for Label().ToString()=Strt.2
+cam.r: diagram2d.cc:950: bool Diagram2D::getOutputFor(const string&, int): Assertion `currentOutputs.find(label) != currentOutputs.end()' failed.
+cam_r/cam.r -c 32768 -F -t 74181.tests.input.txt 74181.txt
+Rod Count by (Length, Fan-In, Fan-Out):
+(   10,   1,   1):     2
+(   11,   1,   1):     1
+(   11,   1,   2):     2
+(   14,   1,   1):     1
+(   15,   1,   0):     1
+(   15,   1,   1):     1
+(   48,   1,   1):     2
+(   48,   2,   1):     9
+(   49,   1,  14):     1
+(   74,   1,   1):     1
+(   74,   2,   1):     9
+(   74,   3,   1):     4
+(   74,   4,   1):     4
+(   74,   5,   1):     2
+(  103,   1,   5):     1
+(  103,   1,  10):     1
+(  103,   2,   6):     2
+(  103,   2,   9):     2
+(  103,   3,   2):     2
+(  103,   3,   3):     1
+(  103,   3,   5):     1
+(  119,   1,   1):     2
+(  119,   1,   3):     4
+(  119,   1,   4):     8
+(  128,   1,   1):     6
+(  128,   2,   1):     8
+(  128,   3,   1):     8
+(  133,   1,   1):     2
+(  133,   1,   2):     5
+(  133,   2,   2):     1
+(  133,   3,   2):     1
+(  133,   4,   2):     2
+(  150,   2,   0):     4
+(  151,   1,   0):     3
+
+Rod Count (and # incomplete) by Direction:
+    E:    27 (    0)
+    S:    35 (    0)
+    D:     0 (    0)
+    W:    20 (    0)
+    N:    22 (    0)
+    U:     0 (    0)
+Total:   104 (    0)
+
+Earliest input: E
+Earliest output: N
+
+Refactoring....
+limitTowards[E] =   12
+limitTowards[S] =  162
+limitTowards[D] =    0
+limitTowards[W] =   67
+limitTowards[N] =   83
+limitTowards[U] =    0
+
+Row separations:
+separations[ 2] =   25
+separations[ 3] =   17
+separations[ 4] =    2
+separations[ 8] =    2
+
+Column separations:
+separations[ 2] =   30
+separations[ 3] =   24
+separations[ 4] =    2
+
+Executing up to 32768 cycles....
+0: inputs={
+     A.3..0< -> 0000 [0],
+     B.3..0< -> 0000 [0],
+     C0 -> 0,
+     M -> 0,
+     S.3..0< -> 0000 [0],
+     Start -> 1
+  }, outputs={
+     Busy -> 0,
+     C4 -> 0,
+     F.>0..3 -> 0000 [0],
+     G! -> 0,
+     P! -> 0,
+     Ready -> 0,
+     Start -> 1

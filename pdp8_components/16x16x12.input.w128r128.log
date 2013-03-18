@@ -1,0 +1,5162 @@
+cam_r/cam.r -c 0 -F -t 16x16x12.input.w128r128.txt 16x16x12.txt
+Rod Count by (Length, Fan-In, Fan-Out):
+(    6,  1,  3):  6144
+(    6,  3,  1):  3072
+(    8,  3,  1):  3072
+(    8,  4,  1):  6144
+(    9,  1,  1):     1
+(    9,  1,  2):     1
+(    9,  1,  3):  3072
+(   10,  1,  1):     2
+(   17,  1,  0):     1
+(   17,  1,  1):     1
+(   27,  2,  3):  3072
+(   27,  3,  1):  3072
+(   45,  1,  2):     1
+(   45,  2,  1):     1
+(  159,  1, 24):   256
+(  540,  1, 32):   192
+(  592,  1,  1):    12
+(  592,  1, 16):     2
+(  592,  1, 32):     4
+(  592, 16,  1):    12
+(  595,  4, 16):    16
+( 2752,  0,  0):     4
+( 2752,  0,  1):    16
+( 2752,  0, 16):     4
+( 2752,  1,  0):    12
+( 2752,  1,  2):     2
+( 2752,  1, 16):    12
+( 2752, 16,  1):   192
+( 2753,  5, 192):    32
+
+Rod Count (and # incomplete) by Direction:
+    E:  9435 (    0)
+    S:  3120 (    0)
+    D:     0 (    0)
+    W:  3387 (    0)
+    N: 12482 (    0)
+    U:     0 (    0)
+Total: 28424 (    0)
+
+Earliest input: E
+Earliest output: N
+
+Refactoring....
+limitTowards[E] =   18
+limitTowards[S] =  595
+limitTowards[D] =    0
+limitTowards[W] = 2705
+limitTowards[N] =   48
+limitTowards[U] =    0
+
+Row separations:
+separations[ 1] =  301
+separations[ 2] =    6
+separations[ 4] =   32
+separations[ 5] =    1
+separations[ 8] =   15
+separations[ 9] =    1
+separations[14] =    1
+
+Column separations:
+separations[ 1] =  986
+separations[ 2] =    4
+separations[ 3] =    1
+separations[ 8] =  192
+separations[13] =   15
+separations[15] =    1
+
+Executing up to 256 cycles....
+0: inputs={
+     MA.>0..b (000000000000 [000]) -> 110110001000 [d88],
+     MD.>0..b (000000000000 [000]) -> 010010101000 [4a8],
+     Write (0) -> 1
+  }, outputs={
+     !Rd_XX0.>0..b (000000000000 [000]) -> 111111111111 [fff],
+     !Rd_XX1.>0..b (000000000000 [000]) -> 111111111111 [fff],
+     !Rd_XX2.>0..b (000000000000 [000]) -> 111111111111 [fff],
+     !Rd_XX3.>0..b (000000000000 [000]) -> 111111111111 [fff],
+     !Rd_XX4.>0..b (000000000000 [000]) -> 111111111111 [fff],
+     !Rd_XX5.>0..b (000000000000 [000]) -> 111111111111 [fff],
+     !Rd_XX6.>0..b (000000000000 [000]) -> 111111111111 [fff],
+     !Rd_XX7.>0..b (000000000000 [000]) -> 111111111111 [fff],
+     !Rd_XX8.>0..b (000000000000 [000]) -> 111111111111 [fff],
+     !Rd_XX9.>0..b (000000000000 [000]) -> 111111111111 [fff],
+     !Rd_XXa.>0..b (000000000000 [000]) -> 111111111111 [fff],
+     !Rd_XXb.>0..b (000000000000 [000]) -> 111111111111 [fff],
+     !Rd_XXc.>0..b (000000000000 [000]) -> 111111111111 [fff],
+     !Rd_XXd.>0..b (000000000000 [000]) -> 111111111111 [fff],
+     !Rd_XXe.>0..b (000000000000 [000]) -> 111111111111 [fff],
+     !Rd_XXf.>0..b (000000000000 [000]) -> 111111111111 [fff]
+  }
+1: inputs={ }, outputs={
+     En_X0X (0) -> 1
+  }
+2: inputs={ }, outputs={ }
+3: inputs={ }, outputs={
+     Busy (0) -> 1,
+     En_X00 (0) -> 1,
+     En_X01 (0) -> 1,
+     En_X02 (0) -> 1,
+     En_X03 (0) -> 1,
+     En_X04 (0) -> 1,
+     En_X05 (0) -> 1,
+     En_X06 (0) -> 1,
+     En_X07 (0) -> 1,
+     En_X08 (0) -> 1,
+     En_X09 (0) -> 1,
+     En_X0a (0) -> 1,
+     En_X0b (0) -> 1,
+     En_X0c (0) -> 1,
+     En_X0d (0) -> 1,
+     En_X0e (0) -> 1,
+     En_X0f (0) -> 1,
+     Strt.>1..4 (0000 [0]) -> 1000 [8],
+     WrXX0 (0) -> 1
+  }
+4: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+5: inputs={ }, outputs={ }
+6: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+7: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+8: inputs={ }, outputs={ }
+9: inputs={ }, outputs={
+     Busy (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7],
+     WrXX0 (1) -> 0
+  }
+10: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+11: inputs={ }, outputs={ }
+12: inputs={ }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+13: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+14: inputs={ }, outputs={ }
+15: inputs={ }, outputs={
+     Busy (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8],
+     WrXX0 (0) -> 1
+  }
+16: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+17: inputs={ }, outputs={ }
+18: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+19: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+20: inputs={ }, outputs={ }
+21: inputs={ }, outputs={
+     Busy (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7],
+     WrXX0 (1) -> 0
+  }
+22: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+23: inputs={ }, outputs={ }
+24: inputs={
+     Read (0) -> 1,
+     Write (1) -> 0
+  }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+25: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+26: inputs={ }, outputs={ }
+27: inputs={ }, outputs={
+     Busy (0) -> 1,
+     RdXX0 (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+28: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+29: inputs={ }, outputs={ }
+30: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+31: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+32: inputs={ }, outputs={ }
+33: inputs={ }, outputs={
+     Busy (1) -> 0,
+     RdXX0 (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+34: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+35: inputs={ }, outputs={ }
+36: inputs={
+     Read (1) -> 0,
+     Write (0) -> 1
+  }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+37: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+38: inputs={ }, outputs={ }
+39: inputs={ }, outputs={
+     Busy (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8],
+     WrXX0 (0) -> 1
+  }
+40: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+41: inputs={ }, outputs={ }
+42: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+43: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+44: inputs={ }, outputs={ }
+45: inputs={ }, outputs={
+     Busy (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7],
+     WrXX0 (1) -> 0
+  }
+46: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+47: inputs={ }, outputs={ }
+48: inputs={ }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+49: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+50: inputs={ }, outputs={ }
+51: inputs={ }, outputs={
+     Busy (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8],
+     WrXX0 (0) -> 1
+  }
+52: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+53: inputs={ }, outputs={ }
+54: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+55: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+56: inputs={ }, outputs={ }
+57: inputs={ }, outputs={
+     Busy (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7],
+     WrXX0 (1) -> 0
+  }
+58: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+59: inputs={ }, outputs={ }
+60: inputs={
+     Read (0) -> 1,
+     Write (1) -> 0
+  }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+61: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+62: inputs={ }, outputs={ }
+63: inputs={ }, outputs={
+     Busy (0) -> 1,
+     RdXX0 (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+64: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+65: inputs={ }, outputs={ }
+66: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+67: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+68: inputs={ }, outputs={ }
+69: inputs={ }, outputs={
+     Busy (1) -> 0,
+     RdXX0 (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+70: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+71: inputs={ }, outputs={ }
+72: inputs={ }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+73: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+74: inputs={ }, outputs={ }
+75: inputs={ }, outputs={
+     Busy (0) -> 1,
+     RdXX0 (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+76: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+77: inputs={ }, outputs={ }
+78: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+79: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+80: inputs={ }, outputs={ }
+81: inputs={ }, outputs={
+     Busy (1) -> 0,
+     RdXX0 (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+82: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+83: inputs={ }, outputs={ }
+84: inputs={
+     Read (1) -> 0,
+     Write (0) -> 1
+  }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+85: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+86: inputs={ }, outputs={ }
+87: inputs={ }, outputs={
+     Busy (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8],
+     WrXX0 (0) -> 1
+  }
+88: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+89: inputs={ }, outputs={ }
+90: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+91: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+92: inputs={ }, outputs={ }
+93: inputs={ }, outputs={
+     Busy (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7],
+     WrXX0 (1) -> 0
+  }
+94: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+95: inputs={ }, outputs={ }
+96: inputs={
+     Read (0) -> 1,
+     Write (1) -> 0
+  }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+97: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+98: inputs={ }, outputs={ }
+99: inputs={ }, outputs={
+     Busy (0) -> 1,
+     RdXX0 (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+100: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+101: inputs={ }, outputs={ }
+102: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+103: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+104: inputs={ }, outputs={ }
+105: inputs={ }, outputs={
+     Busy (1) -> 0,
+     RdXX0 (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+106: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+107: inputs={ }, outputs={ }
+108: inputs={
+     Read (1) -> 0,
+     Write (0) -> 1
+  }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+109: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+110: inputs={ }, outputs={ }
+111: inputs={ }, outputs={
+     Busy (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8],
+     WrXX0 (0) -> 1
+  }
+112: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+113: inputs={ }, outputs={ }
+114: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+115: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+116: inputs={ }, outputs={ }
+117: inputs={ }, outputs={
+     Busy (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7],
+     WrXX0 (1) -> 0
+  }
+118: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+119: inputs={ }, outputs={ }
+120: inputs={ }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+121: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+122: inputs={ }, outputs={ }
+123: inputs={ }, outputs={
+     Busy (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8],
+     WrXX0 (0) -> 1
+  }
+124: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+125: inputs={ }, outputs={ }
+126: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+127: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+128: inputs={ }, outputs={ }
+129: inputs={ }, outputs={
+     Busy (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7],
+     WrXX0 (1) -> 0
+  }
+130: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+131: inputs={ }, outputs={ }
+132: inputs={ }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+133: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+134: inputs={ }, outputs={ }
+135: inputs={ }, outputs={
+     Busy (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8],
+     WrXX0 (0) -> 1
+  }
+136: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+137: inputs={ }, outputs={ }
+138: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+139: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+140: inputs={ }, outputs={ }
+141: inputs={ }, outputs={
+     Busy (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7],
+     WrXX0 (1) -> 0
+  }
+142: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+143: inputs={ }, outputs={ }
+144: inputs={
+     Read (0) -> 1,
+     Write (1) -> 0
+  }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+145: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+146: inputs={ }, outputs={ }
+147: inputs={ }, outputs={
+     Busy (0) -> 1,
+     RdXX0 (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+148: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+149: inputs={ }, outputs={ }
+150: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+151: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+152: inputs={ }, outputs={ }
+153: inputs={ }, outputs={
+     Busy (1) -> 0,
+     RdXX0 (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+154: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+155: inputs={ }, outputs={ }
+156: inputs={ }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+157: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+158: inputs={ }, outputs={ }
+159: inputs={ }, outputs={
+     Busy (0) -> 1,
+     RdXX0 (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+160: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+161: inputs={ }, outputs={ }
+162: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+163: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+164: inputs={ }, outputs={ }
+165: inputs={ }, outputs={
+     Busy (1) -> 0,
+     RdXX0 (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+166: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+167: inputs={ }, outputs={ }
+168: inputs={ }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+169: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+170: inputs={ }, outputs={ }
+171: inputs={ }, outputs={
+     Busy (0) -> 1,
+     RdXX0 (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+172: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+173: inputs={ }, outputs={ }
+174: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+175: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+176: inputs={ }, outputs={ }
+177: inputs={ }, outputs={
+     Busy (1) -> 0,
+     RdXX0 (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+178: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+179: inputs={ }, outputs={ }
+180: inputs={ }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+181: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+182: inputs={ }, outputs={ }
+183: inputs={ }, outputs={
+     Busy (0) -> 1,
+     RdXX0 (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+184: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+185: inputs={ }, outputs={ }
+186: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+187: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+188: inputs={ }, outputs={ }
+189: inputs={ }, outputs={
+     Busy (1) -> 0,
+     RdXX0 (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+190: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+191: inputs={ }, outputs={ }
+192: inputs={
+     Read (1) -> 0,
+     Write (0) -> 1
+  }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+193: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+194: inputs={ }, outputs={ }
+195: inputs={ }, outputs={
+     Busy (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8],
+     WrXX0 (0) -> 1
+  }
+196: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+197: inputs={ }, outputs={ }
+198: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+199: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+200: inputs={ }, outputs={ }
+201: inputs={ }, outputs={
+     Busy (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7],
+     WrXX0 (1) -> 0
+  }
+202: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+203: inputs={ }, outputs={ }
+204: inputs={ }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+205: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+206: inputs={ }, outputs={ }
+207: inputs={ }, outputs={
+     Busy (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8],
+     WrXX0 (0) -> 1
+  }
+208: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+209: inputs={ }, outputs={ }
+210: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+211: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+212: inputs={ }, outputs={ }
+213: inputs={ }, outputs={
+     Busy (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7],
+     WrXX0 (1) -> 0
+  }
+214: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+215: inputs={ }, outputs={ }
+216: inputs={
+     Read (0) -> 1,
+     Write (1) -> 0
+  }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+217: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+218: inputs={ }, outputs={ }
+219: inputs={ }, outputs={
+     Busy (0) -> 1,
+     RdXX0 (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+220: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+221: inputs={ }, outputs={ }
+222: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+223: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+224: inputs={ }, outputs={ }
+225: inputs={ }, outputs={
+     Busy (1) -> 0,
+     RdXX0 (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+226: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+227: inputs={ }, outputs={ }
+228: inputs={
+     Read (1) -> 0,
+     Write (0) -> 1
+  }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+229: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+230: inputs={ }, outputs={ }
+231: inputs={ }, outputs={
+     Busy (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8],
+     WrXX0 (0) -> 1
+  }
+232: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+233: inputs={ }, outputs={ }
+234: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+235: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+236: inputs={ }, outputs={ }
+237: inputs={ }, outputs={
+     Busy (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7],
+     WrXX0 (1) -> 0
+  }
+238: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+239: inputs={ }, outputs={ }
+240: inputs={
+     Read (0) -> 1,
+     Write (1) -> 0
+  }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+241: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+242: inputs={ }, outputs={ }
+243: inputs={ }, outputs={
+     Busy (0) -> 1,
+     RdXX0 (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+244: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+245: inputs={ }, outputs={ }
+246: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+247: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+248: inputs={ }, outputs={ }
+249: inputs={ }, outputs={
+     Busy (1) -> 0,
+     RdXX0 (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+250: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+251: inputs={ }, outputs={ }
+252: inputs={ }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+253: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+254: inputs={ }, outputs={ }
+255: inputs={ }, outputs={
+     Busy (0) -> 1,
+     RdXX0 (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+256: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+257: inputs={ }, outputs={ }
+258: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+259: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+260: inputs={ }, outputs={ }
+261: inputs={ }, outputs={
+     Busy (1) -> 0,
+     RdXX0 (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+262: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+263: inputs={ }, outputs={ }
+264: inputs={
+     Read (1) -> 0,
+     Write (0) -> 1
+  }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+265: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+266: inputs={ }, outputs={ }
+267: inputs={ }, outputs={
+     Busy (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8],
+     WrXX0 (0) -> 1
+  }
+268: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+269: inputs={ }, outputs={ }
+270: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+271: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+272: inputs={ }, outputs={ }
+273: inputs={ }, outputs={
+     Busy (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7],
+     WrXX0 (1) -> 0
+  }
+274: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+275: inputs={ }, outputs={ }
+276: inputs={ }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+277: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+278: inputs={ }, outputs={ }
+279: inputs={ }, outputs={
+     Busy (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8],
+     WrXX0 (0) -> 1
+  }
+280: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+281: inputs={ }, outputs={ }
+282: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+283: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+284: inputs={ }, outputs={ }
+285: inputs={ }, outputs={
+     Busy (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7],
+     WrXX0 (1) -> 0
+  }
+286: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+287: inputs={ }, outputs={ }
+288: inputs={ }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+289: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+290: inputs={ }, outputs={ }
+291: inputs={ }, outputs={
+     Busy (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8],
+     WrXX0 (0) -> 1
+  }
+292: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+293: inputs={ }, outputs={ }
+294: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+295: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+296: inputs={ }, outputs={ }
+297: inputs={ }, outputs={
+     Busy (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7],
+     WrXX0 (1) -> 0
+  }
+298: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+299: inputs={ }, outputs={ }
+300: inputs={
+     Read (0) -> 1,
+     Write (1) -> 0
+  }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+301: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+302: inputs={ }, outputs={ }
+303: inputs={ }, outputs={
+     Busy (0) -> 1,
+     RdXX0 (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+304: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+305: inputs={ }, outputs={ }
+306: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+307: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+308: inputs={ }, outputs={ }
+309: inputs={ }, outputs={
+     Busy (1) -> 0,
+     RdXX0 (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+310: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+311: inputs={ }, outputs={ }
+312: inputs={ }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+313: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+314: inputs={ }, outputs={ }
+315: inputs={ }, outputs={
+     Busy (0) -> 1,
+     RdXX0 (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+316: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+317: inputs={ }, outputs={ }
+318: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+319: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+320: inputs={ }, outputs={ }
+321: inputs={ }, outputs={
+     Busy (1) -> 0,
+     RdXX0 (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+322: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+323: inputs={ }, outputs={ }
+324: inputs={
+     Read (1) -> 0,
+     Write (0) -> 1
+  }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+325: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+326: inputs={ }, outputs={ }
+327: inputs={ }, outputs={
+     Busy (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8],
+     WrXX0 (0) -> 1
+  }
+328: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+329: inputs={ }, outputs={ }
+330: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+331: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+332: inputs={ }, outputs={ }
+333: inputs={ }, outputs={
+     Busy (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7],
+     WrXX0 (1) -> 0
+  }
+334: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+335: inputs={ }, outputs={ }
+336: inputs={
+     Read (0) -> 1,
+     Write (1) -> 0
+  }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+337: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+338: inputs={ }, outputs={ }
+339: inputs={ }, outputs={
+     Busy (0) -> 1,
+     RdXX0 (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+340: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+341: inputs={ }, outputs={ }
+342: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+343: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+344: inputs={ }, outputs={ }
+345: inputs={ }, outputs={
+     Busy (1) -> 0,
+     RdXX0 (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+346: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+347: inputs={ }, outputs={ }
+348: inputs={
+     Read (1) -> 0,
+     Write (0) -> 1
+  }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+349: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+350: inputs={ }, outputs={ }
+351: inputs={ }, outputs={
+     Busy (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8],
+     WrXX0 (0) -> 1
+  }
+352: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+353: inputs={ }, outputs={ }
+354: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+355: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+356: inputs={ }, outputs={ }
+357: inputs={ }, outputs={
+     Busy (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7],
+     WrXX0 (1) -> 0
+  }
+358: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+359: inputs={ }, outputs={ }
+360: inputs={ }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+361: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+362: inputs={ }, outputs={ }
+363: inputs={ }, outputs={
+     Busy (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8],
+     WrXX0 (0) -> 1
+  }
+364: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+365: inputs={ }, outputs={ }
+366: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+367: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+368: inputs={ }, outputs={ }
+369: inputs={ }, outputs={
+     Busy (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7],
+     WrXX0 (1) -> 0
+  }
+370: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+371: inputs={ }, outputs={ }
+372: inputs={
+     Read (0) -> 1,
+     Write (1) -> 0
+  }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+373: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+374: inputs={ }, outputs={ }
+375: inputs={ }, outputs={
+     Busy (0) -> 1,
+     RdXX0 (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+376: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+377: inputs={ }, outputs={ }
+378: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+379: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+380: inputs={ }, outputs={ }
+381: inputs={ }, outputs={
+     Busy (1) -> 0,
+     RdXX0 (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+382: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+383: inputs={ }, outputs={ }
+384: inputs={ }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+385: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+386: inputs={ }, outputs={ }
+387: inputs={ }, outputs={
+     Busy (0) -> 1,
+     RdXX0 (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+388: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+389: inputs={ }, outputs={ }
+390: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+391: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+392: inputs={ }, outputs={ }
+393: inputs={ }, outputs={
+     Busy (1) -> 0,
+     RdXX0 (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+394: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+395: inputs={ }, outputs={ }
+396: inputs={
+     Read (1) -> 0,
+     Write (0) -> 1
+  }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+397: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+398: inputs={ }, outputs={ }
+399: inputs={ }, outputs={
+     Busy (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8],
+     WrXX0 (0) -> 1
+  }
+400: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+401: inputs={ }, outputs={ }
+402: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+403: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+404: inputs={ }, outputs={ }
+405: inputs={ }, outputs={
+     Busy (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7],
+     WrXX0 (1) -> 0
+  }
+406: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+407: inputs={ }, outputs={ }
+408: inputs={
+     Read (0) -> 1,
+     Write (1) -> 0
+  }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+409: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+410: inputs={ }, outputs={ }
+411: inputs={ }, outputs={
+     Busy (0) -> 1,
+     RdXX0 (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+412: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+413: inputs={ }, outputs={ }
+414: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+415: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+416: inputs={ }, outputs={ }
+417: inputs={ }, outputs={
+     Busy (1) -> 0,
+     RdXX0 (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+418: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+419: inputs={ }, outputs={ }
+420: inputs={ }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+421: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+422: inputs={ }, outputs={ }
+423: inputs={ }, outputs={
+     Busy (0) -> 1,
+     RdXX0 (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+424: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+425: inputs={ }, outputs={ }
+426: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+427: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+428: inputs={ }, outputs={ }
+429: inputs={ }, outputs={
+     Busy (1) -> 0,
+     RdXX0 (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+430: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+431: inputs={ }, outputs={ }
+432: inputs={
+     Read (1) -> 0,
+     Write (0) -> 1
+  }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+433: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+434: inputs={ }, outputs={ }
+435: inputs={ }, outputs={
+     Busy (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8],
+     WrXX0 (0) -> 1
+  }
+436: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+437: inputs={ }, outputs={ }
+438: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+439: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+440: inputs={ }, outputs={ }
+441: inputs={ }, outputs={
+     Busy (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7],
+     WrXX0 (1) -> 0
+  }
+442: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+443: inputs={ }, outputs={ }
+444: inputs={ }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+445: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+446: inputs={ }, outputs={ }
+447: inputs={ }, outputs={
+     Busy (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8],
+     WrXX0 (0) -> 1
+  }
+448: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+449: inputs={ }, outputs={ }
+450: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+451: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+452: inputs={ }, outputs={ }
+453: inputs={ }, outputs={
+     Busy (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7],
+     WrXX0 (1) -> 0
+  }
+454: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+455: inputs={ }, outputs={ }
+456: inputs={ }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+457: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+458: inputs={ }, outputs={ }
+459: inputs={ }, outputs={
+     Busy (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8],
+     WrXX0 (0) -> 1
+  }
+460: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+461: inputs={ }, outputs={ }
+462: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+463: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+464: inputs={ }, outputs={ }
+465: inputs={ }, outputs={
+     Busy (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7],
+     WrXX0 (1) -> 0
+  }
+466: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+467: inputs={ }, outputs={ }
+468: inputs={ }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+469: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+470: inputs={ }, outputs={ }
+471: inputs={ }, outputs={
+     Busy (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8],
+     WrXX0 (0) -> 1
+  }
+472: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+473: inputs={ }, outputs={ }
+474: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+475: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+476: inputs={ }, outputs={ }
+477: inputs={ }, outputs={
+     Busy (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7],
+     WrXX0 (1) -> 0
+  }
+478: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+479: inputs={ }, outputs={ }
+480: inputs={ }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+481: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+482: inputs={ }, outputs={ }
+483: inputs={ }, outputs={
+     Busy (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8],
+     WrXX0 (0) -> 1
+  }
+484: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+485: inputs={ }, outputs={ }
+486: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+487: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+488: inputs={ }, outputs={ }
+489: inputs={ }, outputs={
+     Busy (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7],
+     WrXX0 (1) -> 0
+  }
+490: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+491: inputs={ }, outputs={ }
+492: inputs={
+     Read (0) -> 1,
+     Write (1) -> 0
+  }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+493: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+494: inputs={ }, outputs={ }
+495: inputs={ }, outputs={
+     Busy (0) -> 1,
+     RdXX0 (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+496: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+497: inputs={ }, outputs={ }
+498: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+499: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+500: inputs={ }, outputs={ }
+501: inputs={ }, outputs={
+     Busy (1) -> 0,
+     RdXX0 (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+502: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+503: inputs={ }, outputs={ }
+504: inputs={
+     Read (1) -> 0,
+     Write (0) -> 1
+  }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+505: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+506: inputs={ }, outputs={ }
+507: inputs={ }, outputs={
+     Busy (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8],
+     WrXX0 (0) -> 1
+  }
+508: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+509: inputs={ }, outputs={ }
+510: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+511: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+512: inputs={ }, outputs={ }
+513: inputs={ }, outputs={
+     Busy (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7],
+     WrXX0 (1) -> 0
+  }
+514: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+515: inputs={ }, outputs={ }
+516: inputs={
+     Read (0) -> 1,
+     Write (1) -> 0
+  }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+517: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+518: inputs={ }, outputs={ }
+519: inputs={ }, outputs={
+     Busy (0) -> 1,
+     RdXX0 (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+520: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+521: inputs={ }, outputs={ }
+522: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+523: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+524: inputs={ }, outputs={ }
+525: inputs={ }, outputs={
+     Busy (1) -> 0,
+     RdXX0 (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+526: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+527: inputs={ }, outputs={ }
+528: inputs={ }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+529: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+530: inputs={ }, outputs={ }
+531: inputs={ }, outputs={
+     Busy (0) -> 1,
+     RdXX0 (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+532: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+533: inputs={ }, outputs={ }
+534: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+535: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+536: inputs={ }, outputs={ }
+537: inputs={ }, outputs={
+     Busy (1) -> 0,
+     RdXX0 (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+538: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+539: inputs={ }, outputs={ }
+540: inputs={
+     Read (1) -> 0,
+     Write (0) -> 1
+  }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+541: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+542: inputs={ }, outputs={ }
+543: inputs={ }, outputs={
+     Busy (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8],
+     WrXX0 (0) -> 1
+  }
+544: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+545: inputs={ }, outputs={ }
+546: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+547: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+548: inputs={ }, outputs={ }
+549: inputs={ }, outputs={
+     Busy (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7],
+     WrXX0 (1) -> 0
+  }
+550: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+551: inputs={ }, outputs={ }
+552: inputs={ }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+553: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+554: inputs={ }, outputs={ }
+555: inputs={ }, outputs={
+     Busy (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8],
+     WrXX0 (0) -> 1
+  }
+556: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+557: inputs={ }, outputs={ }
+558: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+559: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+560: inputs={ }, outputs={ }
+561: inputs={ }, outputs={
+     Busy (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7],
+     WrXX0 (1) -> 0
+  }
+562: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+563: inputs={ }, outputs={ }
+564: inputs={ }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+565: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+566: inputs={ }, outputs={ }
+567: inputs={ }, outputs={
+     Busy (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8],
+     WrXX0 (0) -> 1
+  }
+568: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+569: inputs={ }, outputs={ }
+570: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+571: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+572: inputs={ }, outputs={ }
+573: inputs={ }, outputs={
+     Busy (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7],
+     WrXX0 (1) -> 0
+  }
+574: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+575: inputs={ }, outputs={ }
+576: inputs={
+     Read (0) -> 1,
+     Write (1) -> 0
+  }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+577: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+578: inputs={ }, outputs={ }
+579: inputs={ }, outputs={
+     Busy (0) -> 1,
+     RdXX0 (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+580: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+581: inputs={ }, outputs={ }
+582: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+583: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+584: inputs={ }, outputs={ }
+585: inputs={ }, outputs={
+     Busy (1) -> 0,
+     RdXX0 (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+586: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+587: inputs={ }, outputs={ }
+588: inputs={
+     Read (1) -> 0,
+     Write (0) -> 1
+  }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+589: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+590: inputs={ }, outputs={ }
+591: inputs={ }, outputs={
+     Busy (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8],
+     WrXX0 (0) -> 1
+  }
+592: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+593: inputs={ }, outputs={ }
+594: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+595: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+596: inputs={ }, outputs={ }
+597: inputs={ }, outputs={
+     Busy (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7],
+     WrXX0 (1) -> 0
+  }
+598: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+599: inputs={ }, outputs={ }
+600: inputs={
+     Read (0) -> 1,
+     Write (1) -> 0
+  }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+601: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+602: inputs={ }, outputs={ }
+603: inputs={ }, outputs={
+     Busy (0) -> 1,
+     RdXX0 (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+604: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+605: inputs={ }, outputs={ }
+606: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+607: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+608: inputs={ }, outputs={ }
+609: inputs={ }, outputs={
+     Busy (1) -> 0,
+     RdXX0 (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+610: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+611: inputs={ }, outputs={ }
+612: inputs={ }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+613: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+614: inputs={ }, outputs={ }
+615: inputs={ }, outputs={
+     Busy (0) -> 1,
+     RdXX0 (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+616: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+617: inputs={ }, outputs={ }
+618: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+619: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+620: inputs={ }, outputs={ }
+621: inputs={ }, outputs={
+     Busy (1) -> 0,
+     RdXX0 (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+622: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+623: inputs={ }, outputs={ }
+624: inputs={
+     Read (1) -> 0,
+     Write (0) -> 1
+  }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+625: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+626: inputs={ }, outputs={ }
+627: inputs={ }, outputs={
+     Busy (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8],
+     WrXX0 (0) -> 1
+  }
+628: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+629: inputs={ }, outputs={ }
+630: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+631: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+632: inputs={ }, outputs={ }
+633: inputs={ }, outputs={
+     Busy (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7],
+     WrXX0 (1) -> 0
+  }
+634: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+635: inputs={ }, outputs={ }
+636: inputs={
+     Read (0) -> 1,
+     Write (1) -> 0
+  }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+637: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+638: inputs={ }, outputs={ }
+639: inputs={ }, outputs={
+     Busy (0) -> 1,
+     RdXX0 (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+640: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+641: inputs={ }, outputs={ }
+642: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+643: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+644: inputs={ }, outputs={ }
+645: inputs={ }, outputs={
+     Busy (1) -> 0,
+     RdXX0 (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+646: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+647: inputs={ }, outputs={ }
+648: inputs={
+     Read (1) -> 0,
+     Write (0) -> 1
+  }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+649: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+650: inputs={ }, outputs={ }
+651: inputs={ }, outputs={
+     Busy (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8],
+     WrXX0 (0) -> 1
+  }
+652: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+653: inputs={ }, outputs={ }
+654: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+655: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+656: inputs={ }, outputs={ }
+657: inputs={ }, outputs={
+     Busy (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7],
+     WrXX0 (1) -> 0
+  }
+658: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+659: inputs={ }, outputs={ }
+660: inputs={ }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+661: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+662: inputs={ }, outputs={ }
+663: inputs={ }, outputs={
+     Busy (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8],
+     WrXX0 (0) -> 1
+  }
+664: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+665: inputs={ }, outputs={ }
+666: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+667: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+668: inputs={ }, outputs={ }
+669: inputs={ }, outputs={
+     Busy (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7],
+     WrXX0 (1) -> 0
+  }
+670: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+671: inputs={ }, outputs={ }
+672: inputs={
+     Read (0) -> 1,
+     Write (1) -> 0
+  }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+673: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+674: inputs={ }, outputs={ }
+675: inputs={ }, outputs={
+     Busy (0) -> 1,
+     RdXX0 (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+676: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+677: inputs={ }, outputs={ }
+678: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+679: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+680: inputs={ }, outputs={ }
+681: inputs={ }, outputs={
+     Busy (1) -> 0,
+     RdXX0 (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+682: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+683: inputs={ }, outputs={ }
+684: inputs={ }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+685: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+686: inputs={ }, outputs={ }
+687: inputs={ }, outputs={
+     Busy (0) -> 1,
+     RdXX0 (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+688: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+689: inputs={ }, outputs={ }
+690: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+691: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+692: inputs={ }, outputs={ }
+693: inputs={ }, outputs={
+     Busy (1) -> 0,
+     RdXX0 (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+694: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+695: inputs={ }, outputs={ }
+696: inputs={ }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+697: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+698: inputs={ }, outputs={ }
+699: inputs={ }, outputs={
+     Busy (0) -> 1,
+     RdXX0 (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+700: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+701: inputs={ }, outputs={ }
+702: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+703: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+704: inputs={ }, outputs={ }
+705: inputs={ }, outputs={
+     Busy (1) -> 0,
+     RdXX0 (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+706: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+707: inputs={ }, outputs={ }
+708: inputs={
+     Read (1) -> 0,
+     Write (0) -> 1
+  }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+709: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+710: inputs={ }, outputs={ }
+711: inputs={ }, outputs={
+     Busy (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8],
+     WrXX0 (0) -> 1
+  }
+712: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+713: inputs={ }, outputs={ }
+714: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+715: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+716: inputs={ }, outputs={ }
+717: inputs={ }, outputs={
+     Busy (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7],
+     WrXX0 (1) -> 0
+  }
+718: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+719: inputs={ }, outputs={ }
+720: inputs={
+     Read (0) -> 1,
+     Write (1) -> 0
+  }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+721: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+722: inputs={ }, outputs={ }
+723: inputs={ }, outputs={
+     Busy (0) -> 1,
+     RdXX0 (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+724: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+725: inputs={ }, outputs={ }
+726: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+727: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+728: inputs={ }, outputs={ }
+729: inputs={ }, outputs={
+     Busy (1) -> 0,
+     RdXX0 (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+730: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+731: inputs={ }, outputs={ }
+732: inputs={
+     Read (1) -> 0,
+     Write (0) -> 1
+  }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+733: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+734: inputs={ }, outputs={ }
+735: inputs={ }, outputs={
+     Busy (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8],
+     WrXX0 (0) -> 1
+  }
+736: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+737: inputs={ }, outputs={ }
+738: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+739: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+740: inputs={ }, outputs={ }
+741: inputs={ }, outputs={
+     Busy (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7],
+     WrXX0 (1) -> 0
+  }
+742: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+743: inputs={ }, outputs={ }
+744: inputs={ }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+745: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+746: inputs={ }, outputs={ }
+747: inputs={ }, outputs={
+     Busy (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8],
+     WrXX0 (0) -> 1
+  }
+748: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+749: inputs={ }, outputs={ }
+750: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+751: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+752: inputs={ }, outputs={ }
+753: inputs={ }, outputs={
+     Busy (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7],
+     WrXX0 (1) -> 0
+  }
+754: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+755: inputs={ }, outputs={ }
+756: inputs={
+     Read (0) -> 1,
+     Write (1) -> 0
+  }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+757: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+758: inputs={ }, outputs={ }
+759: inputs={ }, outputs={
+     Busy (0) -> 1,
+     RdXX0 (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+760: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+761: inputs={ }, outputs={ }
+762: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+763: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+764: inputs={ }, outputs={ }
+765: inputs={ }, outputs={
+     Busy (1) -> 0,
+     RdXX0 (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+766: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+767: inputs={ }, outputs={ }
+768: inputs={ }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+769: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+770: inputs={ }, outputs={ }
+771: inputs={ }, outputs={
+     Busy (0) -> 1,
+     RdXX0 (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+772: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+773: inputs={ }, outputs={ }
+774: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+775: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+776: inputs={ }, outputs={ }
+777: inputs={ }, outputs={
+     Busy (1) -> 0,
+     RdXX0 (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+778: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+779: inputs={ }, outputs={ }
+780: inputs={ }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+781: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+782: inputs={ }, outputs={ }
+783: inputs={ }, outputs={
+     Busy (0) -> 1,
+     RdXX0 (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+784: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+785: inputs={ }, outputs={ }
+786: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+787: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+788: inputs={ }, outputs={ }
+789: inputs={ }, outputs={
+     Busy (1) -> 0,
+     RdXX0 (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+790: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+791: inputs={ }, outputs={ }
+792: inputs={
+     Read (1) -> 0,
+     Write (0) -> 1
+  }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+793: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+794: inputs={ }, outputs={ }
+795: inputs={ }, outputs={
+     Busy (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8],
+     WrXX0 (0) -> 1
+  }
+796: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+797: inputs={ }, outputs={ }
+798: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+799: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+800: inputs={ }, outputs={ }
+801: inputs={ }, outputs={
+     Busy (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7],
+     WrXX0 (1) -> 0
+  }
+802: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+803: inputs={ }, outputs={ }
+804: inputs={ }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+805: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+806: inputs={ }, outputs={ }
+807: inputs={ }, outputs={
+     Busy (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8],
+     WrXX0 (0) -> 1
+  }
+808: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+809: inputs={ }, outputs={ }
+810: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+811: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+812: inputs={ }, outputs={ }
+813: inputs={ }, outputs={
+     Busy (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7],
+     WrXX0 (1) -> 0
+  }
+814: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+815: inputs={ }, outputs={ }
+816: inputs={
+     Read (0) -> 1,
+     Write (1) -> 0
+  }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+817: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+818: inputs={ }, outputs={ }
+819: inputs={ }, outputs={
+     Busy (0) -> 1,
+     RdXX0 (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+820: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+821: inputs={ }, outputs={ }
+822: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+823: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+824: inputs={ }, outputs={ }
+825: inputs={ }, outputs={
+     Busy (1) -> 0,
+     RdXX0 (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+826: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+827: inputs={ }, outputs={ }
+828: inputs={ }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+829: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+830: inputs={ }, outputs={ }
+831: inputs={ }, outputs={
+     Busy (0) -> 1,
+     RdXX0 (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+832: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+833: inputs={ }, outputs={ }
+834: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+835: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+836: inputs={ }, outputs={ }
+837: inputs={ }, outputs={
+     Busy (1) -> 0,
+     RdXX0 (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+838: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+839: inputs={ }, outputs={ }
+840: inputs={
+     Read (1) -> 0,
+     Write (0) -> 1
+  }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+841: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+842: inputs={ }, outputs={ }
+843: inputs={ }, outputs={
+     Busy (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8],
+     WrXX0 (0) -> 1
+  }
+844: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+845: inputs={ }, outputs={ }
+846: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+847: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+848: inputs={ }, outputs={ }
+849: inputs={ }, outputs={
+     Busy (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7],
+     WrXX0 (1) -> 0
+  }
+850: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+851: inputs={ }, outputs={ }
+852: inputs={
+     Read (0) -> 1,
+     Write (1) -> 0
+  }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+853: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+854: inputs={ }, outputs={ }
+855: inputs={ }, outputs={
+     Busy (0) -> 1,
+     RdXX0 (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+856: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+857: inputs={ }, outputs={ }
+858: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+859: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+860: inputs={ }, outputs={ }
+861: inputs={ }, outputs={
+     Busy (1) -> 0,
+     RdXX0 (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+862: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+863: inputs={ }, outputs={ }
+864: inputs={
+     Read (1) -> 0,
+     Write (0) -> 1
+  }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+865: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+866: inputs={ }, outputs={ }
+867: inputs={ }, outputs={
+     Busy (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8],
+     WrXX0 (0) -> 1
+  }
+868: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+869: inputs={ }, outputs={ }
+870: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+871: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+872: inputs={ }, outputs={ }
+873: inputs={ }, outputs={
+     Busy (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7],
+     WrXX0 (1) -> 0
+  }
+874: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+875: inputs={ }, outputs={ }
+876: inputs={
+     Read (0) -> 1,
+     Write (1) -> 0
+  }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+877: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+878: inputs={ }, outputs={ }
+879: inputs={ }, outputs={
+     Busy (0) -> 1,
+     RdXX0 (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+880: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+881: inputs={ }, outputs={ }
+882: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+883: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+884: inputs={ }, outputs={ }
+885: inputs={ }, outputs={
+     Busy (1) -> 0,
+     RdXX0 (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+886: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+887: inputs={ }, outputs={ }
+888: inputs={ }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+889: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+890: inputs={ }, outputs={ }
+891: inputs={ }, outputs={
+     Busy (0) -> 1,
+     RdXX0 (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+892: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+893: inputs={ }, outputs={ }
+894: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+895: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+896: inputs={ }, outputs={ }
+897: inputs={ }, outputs={
+     Busy (1) -> 0,
+     RdXX0 (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+898: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+899: inputs={ }, outputs={ }
+900: inputs={ }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+901: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+902: inputs={ }, outputs={ }
+903: inputs={ }, outputs={
+     Busy (0) -> 1,
+     RdXX0 (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+904: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+905: inputs={ }, outputs={ }
+906: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+907: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+908: inputs={ }, outputs={ }
+909: inputs={ }, outputs={
+     Busy (1) -> 0,
+     RdXX0 (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+910: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+911: inputs={ }, outputs={ }
+912: inputs={
+     Read (1) -> 0,
+     Write (0) -> 1
+  }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+913: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+914: inputs={ }, outputs={ }
+915: inputs={ }, outputs={
+     Busy (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8],
+     WrXX0 (0) -> 1
+  }
+916: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+917: inputs={ }, outputs={ }
+918: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+919: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+920: inputs={ }, outputs={ }
+921: inputs={ }, outputs={
+     Busy (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7],
+     WrXX0 (1) -> 0
+  }
+922: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+923: inputs={ }, outputs={ }
+924: inputs={ }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+925: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+926: inputs={ }, outputs={ }
+927: inputs={ }, outputs={
+     Busy (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8],
+     WrXX0 (0) -> 1
+  }
+928: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+929: inputs={ }, outputs={ }
+930: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+931: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+932: inputs={ }, outputs={ }
+933: inputs={ }, outputs={
+     Busy (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7],
+     WrXX0 (1) -> 0
+  }
+934: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+935: inputs={ }, outputs={ }
+936: inputs={ }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+937: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+938: inputs={ }, outputs={ }
+939: inputs={ }, outputs={
+     Busy (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8],
+     WrXX0 (0) -> 1
+  }
+940: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+941: inputs={ }, outputs={ }
+942: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+943: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+944: inputs={ }, outputs={ }
+945: inputs={ }, outputs={
+     Busy (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7],
+     WrXX0 (1) -> 0
+  }
+946: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+947: inputs={ }, outputs={ }
+948: inputs={ }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+949: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+950: inputs={ }, outputs={ }
+951: inputs={ }, outputs={
+     Busy (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8],
+     WrXX0 (0) -> 1
+  }
+952: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+953: inputs={ }, outputs={ }
+954: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+955: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+956: inputs={ }, outputs={ }
+957: inputs={ }, outputs={
+     Busy (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7],
+     WrXX0 (1) -> 0
+  }
+958: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+959: inputs={ }, outputs={ }
+960: inputs={ }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+961: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+962: inputs={ }, outputs={ }
+963: inputs={ }, outputs={
+     Busy (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8],
+     WrXX0 (0) -> 1
+  }
+964: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+965: inputs={ }, outputs={ }
+966: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+967: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+968: inputs={ }, outputs={ }
+969: inputs={ }, outputs={
+     Busy (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7],
+     WrXX0 (1) -> 0
+  }
+970: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+971: inputs={ }, outputs={ }
+972: inputs={ }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+973: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+974: inputs={ }, outputs={ }
+975: inputs={ }, outputs={
+     Busy (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8],
+     WrXX0 (0) -> 1
+  }
+976: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+977: inputs={ }, outputs={ }
+978: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+979: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+980: inputs={ }, outputs={ }
+981: inputs={ }, outputs={
+     Busy (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7],
+     WrXX0 (1) -> 0
+  }
+982: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+983: inputs={ }, outputs={ }
+984: inputs={ }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+985: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+986: inputs={ }, outputs={ }
+987: inputs={ }, outputs={
+     Busy (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8],
+     WrXX0 (0) -> 1
+  }
+988: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+989: inputs={ }, outputs={ }
+990: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+991: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+992: inputs={ }, outputs={ }
+993: inputs={ }, outputs={
+     Busy (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7],
+     WrXX0 (1) -> 0
+  }
+994: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+995: inputs={ }, outputs={ }
+996: inputs={
+     Read (0) -> 1,
+     Write (1) -> 0
+  }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+997: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+998: inputs={ }, outputs={ }
+999: inputs={ }, outputs={
+     Busy (0) -> 1,
+     RdXX0 (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+1000: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+1001: inputs={ }, outputs={ }
+1002: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+1003: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+1004: inputs={ }, outputs={ }
+1005: inputs={ }, outputs={
+     Busy (1) -> 0,
+     RdXX0 (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+1006: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+1007: inputs={ }, outputs={ }
+1008: inputs={ }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+1009: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+1010: inputs={ }, outputs={ }
+1011: inputs={ }, outputs={
+     Busy (0) -> 1,
+     RdXX0 (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+1012: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+1013: inputs={ }, outputs={ }
+1014: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+1015: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+1016: inputs={ }, outputs={ }
+1017: inputs={ }, outputs={
+     Busy (1) -> 0,
+     RdXX0 (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+1018: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+1019: inputs={ }, outputs={ }
+1020: inputs={
+     Read (1) -> 0,
+     Write (0) -> 1
+  }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+1021: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+1022: inputs={ }, outputs={ }
+1023: inputs={ }, outputs={
+     Busy (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8],
+     WrXX0 (0) -> 1
+  }
+1024: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+1025: inputs={ }, outputs={ }
+1026: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+1027: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+1028: inputs={ }, outputs={ }
+1029: inputs={ }, outputs={
+     Busy (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7],
+     WrXX0 (1) -> 0
+  }
+1030: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+1031: inputs={ }, outputs={ }
+1032: inputs={
+     Read (0) -> 1,
+     Write (1) -> 0
+  }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+1033: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+1034: inputs={ }, outputs={ }
+1035: inputs={ }, outputs={
+     Busy (0) -> 1,
+     RdXX0 (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+1036: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+1037: inputs={ }, outputs={ }
+1038: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+1039: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+1040: inputs={ }, outputs={ }
+1041: inputs={ }, outputs={
+     Busy (1) -> 0,
+     RdXX0 (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+1042: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+1043: inputs={ }, outputs={ }
+1044: inputs={ }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+1045: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+1046: inputs={ }, outputs={ }
+1047: inputs={ }, outputs={
+     Busy (0) -> 1,
+     RdXX0 (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+1048: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+1049: inputs={ }, outputs={ }
+1050: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+1051: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+1052: inputs={ }, outputs={ }
+1053: inputs={ }, outputs={
+     Busy (1) -> 0,
+     RdXX0 (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+1054: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+1055: inputs={ }, outputs={ }
+1056: inputs={
+     Read (1) -> 0,
+     Write (0) -> 1
+  }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+1057: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+1058: inputs={ }, outputs={ }
+1059: inputs={ }, outputs={
+     Busy (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8],
+     WrXX0 (0) -> 1
+  }
+1060: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+1061: inputs={ }, outputs={ }
+1062: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+1063: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+1064: inputs={ }, outputs={ }
+1065: inputs={ }, outputs={
+     Busy (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7],
+     WrXX0 (1) -> 0
+  }
+1066: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+1067: inputs={ }, outputs={ }
+1068: inputs={ }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+1069: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+1070: inputs={ }, outputs={ }
+1071: inputs={ }, outputs={
+     Busy (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8],
+     WrXX0 (0) -> 1
+  }
+1072: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+1073: inputs={ }, outputs={ }
+1074: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+1075: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+1076: inputs={ }, outputs={ }
+1077: inputs={ }, outputs={
+     Busy (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7],
+     WrXX0 (1) -> 0
+  }
+1078: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+1079: inputs={ }, outputs={ }
+1080: inputs={
+     Read (0) -> 1,
+     Write (1) -> 0
+  }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+1081: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+1082: inputs={ }, outputs={ }
+1083: inputs={ }, outputs={
+     Busy (0) -> 1,
+     RdXX0 (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+1084: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+1085: inputs={ }, outputs={ }
+1086: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+1087: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+1088: inputs={ }, outputs={ }
+1089: inputs={ }, outputs={
+     Busy (1) -> 0,
+     RdXX0 (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+1090: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+1091: inputs={ }, outputs={ }
+1092: inputs={ }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+1093: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+1094: inputs={ }, outputs={ }
+1095: inputs={ }, outputs={
+     Busy (0) -> 1,
+     RdXX0 (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+1096: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+1097: inputs={ }, outputs={ }
+1098: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+1099: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+1100: inputs={ }, outputs={ }
+1101: inputs={ }, outputs={
+     Busy (1) -> 0,
+     RdXX0 (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+1102: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+1103: inputs={ }, outputs={ }
+1104: inputs={
+     Read (1) -> 0,
+     Write (0) -> 1
+  }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+1105: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+1106: inputs={ }, outputs={ }
+1107: inputs={ }, outputs={
+     Busy (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8],
+     WrXX0 (0) -> 1
+  }
+1108: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+1109: inputs={ }, outputs={ }
+1110: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+1111: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+1112: inputs={ }, outputs={ }
+1113: inputs={ }, outputs={
+     Busy (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7],
+     WrXX0 (1) -> 0
+  }
+1114: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+1115: inputs={ }, outputs={ }
+1116: inputs={ }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+1117: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+1118: inputs={ }, outputs={ }
+1119: inputs={ }, outputs={
+     Busy (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8],
+     WrXX0 (0) -> 1
+  }
+1120: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+1121: inputs={ }, outputs={ }
+1122: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+1123: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+1124: inputs={ }, outputs={ }
+1125: inputs={ }, outputs={
+     Busy (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7],
+     WrXX0 (1) -> 0
+  }
+1126: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+1127: inputs={ }, outputs={ }
+1128: inputs={ }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+1129: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+1130: inputs={ }, outputs={ }
+1131: inputs={ }, outputs={
+     Busy (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8],
+     WrXX0 (0) -> 1
+  }
+1132: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+1133: inputs={ }, outputs={ }
+1134: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+1135: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+1136: inputs={ }, outputs={ }
+1137: inputs={ }, outputs={
+     Busy (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7],
+     WrXX0 (1) -> 0
+  }
+1138: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+1139: inputs={ }, outputs={ }
+1140: inputs={ }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+1141: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+1142: inputs={ }, outputs={ }
+1143: inputs={ }, outputs={
+     Busy (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8],
+     WrXX0 (0) -> 1
+  }
+1144: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+1145: inputs={ }, outputs={ }
+1146: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+1147: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+1148: inputs={ }, outputs={ }
+1149: inputs={ }, outputs={
+     Busy (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7],
+     WrXX0 (1) -> 0
+  }
+1150: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+1151: inputs={ }, outputs={ }
+1152: inputs={
+     Read (0) -> 1,
+     Write (1) -> 0
+  }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+1153: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+1154: inputs={ }, outputs={ }
+1155: inputs={ }, outputs={
+     Busy (0) -> 1,
+     RdXX0 (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+1156: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+1157: inputs={ }, outputs={ }
+1158: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+1159: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+1160: inputs={ }, outputs={ }
+1161: inputs={ }, outputs={
+     Busy (1) -> 0,
+     RdXX0 (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+1162: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+1163: inputs={ }, outputs={ }
+1164: inputs={
+     Read (1) -> 0,
+     Write (0) -> 1
+  }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+1165: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+1166: inputs={ }, outputs={ }
+1167: inputs={ }, outputs={
+     Busy (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8],
+     WrXX0 (0) -> 1
+  }
+1168: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+1169: inputs={ }, outputs={ }
+1170: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+1171: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+1172: inputs={ }, outputs={ }
+1173: inputs={ }, outputs={
+     Busy (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7],
+     WrXX0 (1) -> 0
+  }
+1174: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+1175: inputs={ }, outputs={ }
+1176: inputs={ }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+1177: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+1178: inputs={ }, outputs={ }
+1179: inputs={ }, outputs={
+     Busy (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8],
+     WrXX0 (0) -> 1
+  }
+1180: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+1181: inputs={ }, outputs={ }
+1182: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+1183: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+1184: inputs={ }, outputs={ }
+1185: inputs={ }, outputs={
+     Busy (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7],
+     WrXX0 (1) -> 0
+  }
+1186: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+1187: inputs={ }, outputs={ }
+1188: inputs={
+     Read (0) -> 1,
+     Write (1) -> 0
+  }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+1189: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+1190: inputs={ }, outputs={ }
+1191: inputs={ }, outputs={
+     Busy (0) -> 1,
+     RdXX0 (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+1192: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+1193: inputs={ }, outputs={ }
+1194: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+1195: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+1196: inputs={ }, outputs={ }
+1197: inputs={ }, outputs={
+     Busy (1) -> 0,
+     RdXX0 (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+1198: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+1199: inputs={ }, outputs={ }
+1200: inputs={
+     Read (1) -> 0,
+     Write (0) -> 1
+  }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+1201: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+1202: inputs={ }, outputs={ }
+1203: inputs={ }, outputs={
+     Busy (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8],
+     WrXX0 (0) -> 1
+  }
+1204: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+1205: inputs={ }, outputs={ }
+1206: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+1207: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+1208: inputs={ }, outputs={ }
+1209: inputs={ }, outputs={
+     Busy (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7],
+     WrXX0 (1) -> 0
+  }
+1210: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+1211: inputs={ }, outputs={ }
+1212: inputs={ }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+1213: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+1214: inputs={ }, outputs={ }
+1215: inputs={ }, outputs={
+     Busy (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8],
+     WrXX0 (0) -> 1
+  }
+1216: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+1217: inputs={ }, outputs={ }
+1218: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+1219: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+1220: inputs={ }, outputs={ }
+1221: inputs={ }, outputs={
+     Busy (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7],
+     WrXX0 (1) -> 0
+  }
+1222: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+1223: inputs={ }, outputs={ }
+1224: inputs={ }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+1225: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+1226: inputs={ }, outputs={ }
+1227: inputs={ }, outputs={
+     Busy (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8],
+     WrXX0 (0) -> 1
+  }
+1228: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+1229: inputs={ }, outputs={ }
+1230: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+1231: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+1232: inputs={ }, outputs={ }
+1233: inputs={ }, outputs={
+     Busy (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7],
+     WrXX0 (1) -> 0
+  }
+1234: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+1235: inputs={ }, outputs={ }
+1236: inputs={
+     Read (0) -> 1,
+     Write (1) -> 0
+  }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+1237: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+1238: inputs={ }, outputs={ }
+1239: inputs={ }, outputs={
+     Busy (0) -> 1,
+     RdXX0 (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+1240: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+1241: inputs={ }, outputs={ }
+1242: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+1243: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+1244: inputs={ }, outputs={ }
+1245: inputs={ }, outputs={
+     Busy (1) -> 0,
+     RdXX0 (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+1246: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+1247: inputs={ }, outputs={ }
+1248: inputs={ }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+1249: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+1250: inputs={ }, outputs={ }
+1251: inputs={ }, outputs={
+     Busy (0) -> 1,
+     RdXX0 (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+1252: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+1253: inputs={ }, outputs={ }
+1254: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+1255: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+1256: inputs={ }, outputs={ }
+1257: inputs={ }, outputs={
+     Busy (1) -> 0,
+     RdXX0 (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+1258: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+1259: inputs={ }, outputs={ }
+1260: inputs={
+     Read (1) -> 0,
+     Write (0) -> 1
+  }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+1261: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+1262: inputs={ }, outputs={ }
+1263: inputs={ }, outputs={
+     Busy (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8],
+     WrXX0 (0) -> 1
+  }
+1264: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+1265: inputs={ }, outputs={ }
+1266: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+1267: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+1268: inputs={ }, outputs={ }
+1269: inputs={ }, outputs={
+     Busy (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7],
+     WrXX0 (1) -> 0
+  }
+1270: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+1271: inputs={ }, outputs={ }
+1272: inputs={ }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+1273: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+1274: inputs={ }, outputs={ }
+1275: inputs={ }, outputs={
+     Busy (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8],
+     WrXX0 (0) -> 1
+  }
+1276: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+1277: inputs={ }, outputs={ }
+1278: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+1279: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+1280: inputs={ }, outputs={ }
+1281: inputs={ }, outputs={
+     Busy (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7],
+     WrXX0 (1) -> 0
+  }
+1282: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+1283: inputs={ }, outputs={ }
+1284: inputs={ }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+1285: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+1286: inputs={ }, outputs={ }
+1287: inputs={ }, outputs={
+     Busy (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8],
+     WrXX0 (0) -> 1
+  }
+1288: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+1289: inputs={ }, outputs={ }
+1290: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+1291: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+1292: inputs={ }, outputs={ }
+1293: inputs={ }, outputs={
+     Busy (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7],
+     WrXX0 (1) -> 0
+  }
+1294: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+1295: inputs={ }, outputs={ }
+1296: inputs={ }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+1297: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+1298: inputs={ }, outputs={ }
+1299: inputs={ }, outputs={
+     Busy (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8],
+     WrXX0 (0) -> 1
+  }
+1300: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+1301: inputs={ }, outputs={ }
+1302: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+1303: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+1304: inputs={ }, outputs={ }
+1305: inputs={ }, outputs={
+     Busy (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7],
+     WrXX0 (1) -> 0
+  }
+1306: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+1307: inputs={ }, outputs={ }
+1308: inputs={
+     Read (0) -> 1,
+     Write (1) -> 0
+  }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+1309: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+1310: inputs={ }, outputs={ }
+1311: inputs={ }, outputs={
+     Busy (0) -> 1,
+     RdXX0 (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+1312: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+1313: inputs={ }, outputs={ }
+1314: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+1315: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+1316: inputs={ }, outputs={ }
+1317: inputs={ }, outputs={
+     Busy (1) -> 0,
+     RdXX0 (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+1318: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+1319: inputs={ }, outputs={ }
+1320: inputs={
+     Read (1) -> 0,
+     Write (0) -> 1
+  }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+1321: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+1322: inputs={ }, outputs={ }
+1323: inputs={ }, outputs={
+     Busy (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8],
+     WrXX0 (0) -> 1
+  }
+1324: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+1325: inputs={ }, outputs={ }
+1326: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+1327: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+1328: inputs={ }, outputs={ }
+1329: inputs={ }, outputs={
+     Busy (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7],
+     WrXX0 (1) -> 0
+  }
+1330: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+1331: inputs={ }, outputs={ }
+1332: inputs={
+     Read (0) -> 1,
+     Write (1) -> 0
+  }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+1333: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+1334: inputs={ }, outputs={ }
+1335: inputs={ }, outputs={
+     Busy (0) -> 1,
+     RdXX0 (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+1336: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+1337: inputs={ }, outputs={ }
+1338: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+1339: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+1340: inputs={ }, outputs={ }
+1341: inputs={ }, outputs={
+     Busy (1) -> 0,
+     RdXX0 (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+1342: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+1343: inputs={ }, outputs={ }
+1344: inputs={
+     Read (1) -> 0,
+     Write (0) -> 1
+  }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+1345: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+1346: inputs={ }, outputs={ }
+1347: inputs={ }, outputs={
+     Busy (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8],
+     WrXX0 (0) -> 1
+  }
+1348: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+1349: inputs={ }, outputs={ }
+1350: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+1351: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+1352: inputs={ }, outputs={ }
+1353: inputs={ }, outputs={
+     Busy (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7],
+     WrXX0 (1) -> 0
+  }
+1354: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+1355: inputs={ }, outputs={ }
+1356: inputs={
+     Read (0) -> 1,
+     Write (1) -> 0
+  }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+1357: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+1358: inputs={ }, outputs={ }
+1359: inputs={ }, outputs={
+     Busy (0) -> 1,
+     RdXX0 (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+1360: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+1361: inputs={ }, outputs={ }
+1362: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+1363: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+1364: inputs={ }, outputs={ }
+1365: inputs={ }, outputs={
+     Busy (1) -> 0,
+     RdXX0 (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+1366: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+1367: inputs={ }, outputs={ }
+1368: inputs={
+     Read (1) -> 0,
+     Write (0) -> 1
+  }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+1369: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+1370: inputs={ }, outputs={ }
+1371: inputs={ }, outputs={
+     Busy (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8],
+     WrXX0 (0) -> 1
+  }
+1372: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+1373: inputs={ }, outputs={ }
+1374: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+1375: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+1376: inputs={ }, outputs={ }
+1377: inputs={ }, outputs={
+     Busy (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7],
+     WrXX0 (1) -> 0
+  }
+1378: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+1379: inputs={ }, outputs={ }
+1380: inputs={ }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+1381: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+1382: inputs={ }, outputs={ }
+1383: inputs={ }, outputs={
+     Busy (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8],
+     WrXX0 (0) -> 1
+  }
+1384: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+1385: inputs={ }, outputs={ }
+1386: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+1387: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+1388: inputs={ }, outputs={ }
+1389: inputs={ }, outputs={
+     Busy (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7],
+     WrXX0 (1) -> 0
+  }
+1390: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+1391: inputs={ }, outputs={ }
+1392: inputs={ }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+1393: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+1394: inputs={ }, outputs={ }
+1395: inputs={ }, outputs={
+     Busy (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8],
+     WrXX0 (0) -> 1
+  }
+1396: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+1397: inputs={ }, outputs={ }
+1398: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+1399: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+1400: inputs={ }, outputs={ }
+1401: inputs={ }, outputs={
+     Busy (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7],
+     WrXX0 (1) -> 0
+  }
+1402: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+1403: inputs={ }, outputs={ }
+1404: inputs={ }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+1405: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+1406: inputs={ }, outputs={ }
+1407: inputs={ }, outputs={
+     Busy (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8],
+     WrXX0 (0) -> 1
+  }
+1408: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+1409: inputs={ }, outputs={ }
+1410: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+1411: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+1412: inputs={ }, outputs={ }
+1413: inputs={ }, outputs={
+     Busy (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7],
+     WrXX0 (1) -> 0
+  }
+1414: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+1415: inputs={ }, outputs={ }
+1416: inputs={
+     Read (0) -> 1,
+     Write (1) -> 0
+  }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+1417: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+1418: inputs={ }, outputs={ }
+1419: inputs={ }, outputs={
+     Busy (0) -> 1,
+     RdXX0 (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+1420: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+1421: inputs={ }, outputs={ }
+1422: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+1423: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+1424: inputs={ }, outputs={ }
+1425: inputs={ }, outputs={
+     Busy (1) -> 0,
+     RdXX0 (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+1426: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+1427: inputs={ }, outputs={ }
+1428: inputs={ }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+1429: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+1430: inputs={ }, outputs={ }
+1431: inputs={ }, outputs={
+     Busy (0) -> 1,
+     RdXX0 (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+1432: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+1433: inputs={ }, outputs={ }
+1434: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+1435: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+1436: inputs={ }, outputs={ }
+1437: inputs={ }, outputs={
+     Busy (1) -> 0,
+     RdXX0 (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+1438: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+1439: inputs={ }, outputs={ }
+1440: inputs={
+     Read (1) -> 0,
+     Write (0) -> 1
+  }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+1441: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+1442: inputs={ }, outputs={ }
+1443: inputs={ }, outputs={
+     Busy (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8],
+     WrXX0 (0) -> 1
+  }
+1444: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+1445: inputs={ }, outputs={ }
+1446: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+1447: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+1448: inputs={ }, outputs={ }
+1449: inputs={ }, outputs={
+     Busy (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7],
+     WrXX0 (1) -> 0
+  }
+1450: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+1451: inputs={ }, outputs={ }
+1452: inputs={ }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+1453: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+1454: inputs={ }, outputs={ }
+1455: inputs={ }, outputs={
+     Busy (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8],
+     WrXX0 (0) -> 1
+  }
+1456: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+1457: inputs={ }, outputs={ }
+1458: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+1459: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+1460: inputs={ }, outputs={ }
+1461: inputs={ }, outputs={
+     Busy (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7],
+     WrXX0 (1) -> 0
+  }
+1462: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+1463: inputs={ }, outputs={ }
+1464: inputs={ }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+1465: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+1466: inputs={ }, outputs={ }
+1467: inputs={ }, outputs={
+     Busy (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8],
+     WrXX0 (0) -> 1
+  }
+1468: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+1469: inputs={ }, outputs={ }
+1470: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+1471: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+1472: inputs={ }, outputs={ }
+1473: inputs={ }, outputs={
+     Busy (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7],
+     WrXX0 (1) -> 0
+  }
+1474: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+1475: inputs={ }, outputs={ }
+1476: inputs={ }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+1477: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+1478: inputs={ }, outputs={ }
+1479: inputs={ }, outputs={
+     Busy (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8],
+     WrXX0 (0) -> 1
+  }
+1480: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+1481: inputs={ }, outputs={ }
+1482: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+1483: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+1484: inputs={ }, outputs={ }
+1485: inputs={ }, outputs={
+     Busy (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7],
+     WrXX0 (1) -> 0
+  }
+1486: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+1487: inputs={ }, outputs={ }
+1488: inputs={ }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+1489: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+1490: inputs={ }, outputs={ }
+1491: inputs={ }, outputs={
+     Busy (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8],
+     WrXX0 (0) -> 1
+  }
+1492: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+1493: inputs={ }, outputs={ }
+1494: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+1495: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+1496: inputs={ }, outputs={ }
+1497: inputs={ }, outputs={
+     Busy (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7],
+     WrXX0 (1) -> 0
+  }
+1498: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+1499: inputs={ }, outputs={ }
+1500: inputs={
+     Read (0) -> 1,
+     Write (1) -> 0
+  }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+1501: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+1502: inputs={ }, outputs={ }
+1503: inputs={ }, outputs={
+     Busy (0) -> 1,
+     RdXX0 (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+1504: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+1505: inputs={ }, outputs={ }
+1506: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+1507: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+1508: inputs={ }, outputs={ }
+1509: inputs={ }, outputs={
+     Busy (1) -> 0,
+     RdXX0 (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+1510: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+1511: inputs={ }, outputs={ }
+1512: inputs={ }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+1513: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+1514: inputs={ }, outputs={ }
+1515: inputs={ }, outputs={
+     Busy (0) -> 1,
+     RdXX0 (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+1516: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+1517: inputs={ }, outputs={ }
+1518: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+1519: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+1520: inputs={ }, outputs={ }
+1521: inputs={ }, outputs={
+     Busy (1) -> 0,
+     RdXX0 (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+1522: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+1523: inputs={ }, outputs={ }
+1524: inputs={ }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
+1525: inputs={ }, outputs={
+     Start (1) -> 0,
+     Strt.>1..4 (0001 [1]) -> 0000 [0]
+  }
+1526: inputs={ }, outputs={ }
+1527: inputs={ }, outputs={
+     Busy (0) -> 1,
+     RdXX0 (0) -> 1,
+     Ready (1) -> 0,
+     Strt.>1..4 (0000 [0]) -> 1000 [8]
+  }
+1528: inputs={ }, outputs={
+     Strt.>1..4 (1000 [8]) -> 1100 [c],
+     Wait (0) -> 1
+  }
+1529: inputs={ }, outputs={ }
+1530: inputs={ }, outputs={
+     Strt.>1..4 (1100 [c]) -> 1110 [e]
+  }
+1531: inputs={ }, outputs={
+     Start (0) -> 1,
+     Strt.>1..4 (1110 [e]) -> 1111 [f]
+  }
+1532: inputs={ }, outputs={ }
+1533: inputs={ }, outputs={
+     Busy (1) -> 0,
+     RdXX0 (1) -> 0,
+     Ready (0) -> 1,
+     Strt.>1..4 (1111 [f]) -> 0111 [7]
+  }
+1534: inputs={ }, outputs={
+     Strt.>1..4 (0111 [7]) -> 0011 [3],
+     Wait (1) -> 0
+  }
+1535: inputs={ }, outputs={ }
+1536: inputs={
+     Read (1) -> 0,
+     Write (0) -> 1
+  }, outputs={
+     Strt.>1..4 (0011 [3]) -> 0001 [1]
+  }
