@@ -4,6 +4,8 @@
 
 #include <algorithm>
 #include <cassert>
+#include <sstream>
+using std::ostringstream;
 
 #include "string_trims.h"
 
@@ -19,6 +21,7 @@ Rod2D::Rod2D(Diagram2D &diagram, P2D const &pStart, Directions d) :
     headAt(),
     tailAt(),
     direction(d),
+    expression(),
     tickFirstSet(-1),
     lastEvaluatedTick(-1),
     lastEvaluatedValue(optRodsInitialValue)
@@ -102,6 +105,12 @@ Rod2D::Rod2D(Diagram2D &diagram, P2D const &pStart, Directions d) :
 	insert(p);
 	break;
 
+      case 'D':
+	debugOutputs.insert(p);
+	diagram.saw(p);
+	insert(p);
+	break;
+
       default:
 	if (sawHeadOrTailChar && c == pStartChar) {
 	  diagram.saw(p);
@@ -166,14 +175,28 @@ Rod2D::Rod2D(Diagram2D &diagram, P2D const &pStart, Directions d) :
 	     );
     }
   }
-  if (hasInputs() && hasOutputs() && !label.IsDefined()) {
+  if (0 < debugOutputs.size()) {
+    if (1 < debugOutputs.size()) {
+      fprintf(stderr,
+	      "cam.r: Warning: Rod2D(%s) has more than 1 (%lu) debugOutputs!",
+	      rodsId().c_str(),
+	      inputs.size()
+	     );
+      fprintf(stdout,
+	      "cam.r: Warning: Rod2D(%s) has more than 1 (%lu) debugOutputs!",
+	      rodsId().c_str(),
+	      inputs.size()
+	     );
+    }
+  }
+  if ((hasInputs() || hasOutputs() || hasDebugOutputs()) && !label.IsDefined()) {
     label = rodsId();
     fprintf(stderr,
-            "cam.r: Warning: %s has inputs/outputs, but no label!\n",
+            "cam.r: Warning: %s has inputs/[debug]outputs, but no label!\n",
             label.ToString().c_str()
            );
     fprintf(stdout,
-            "cam.r: Warning: %s has inputs/outputs, but no label!\n",
+            "cam.r: Warning: %s has inputs/[debug] outputs, but no label!\n",
             label.ToString().c_str()
            );
   }
@@ -451,7 +474,7 @@ int Rod2D::tickFirstSetAt () const {
 
 void Rod2D::verifyInputDelays() {
   SetOfRod2Ds seenAlready;
-  // verifyInputDelays(seenAlready);
+  verifyInputDelays(seenAlready);
 }
 
 void Rod2D::verifyInputDelays(SetOfRod2Ds &seenAlready) {
@@ -497,7 +520,7 @@ void Rod2D::verifyInputDelays(SetOfRod2Ds &seenAlready) {
 	continue;
       }
       countOfValidInputs += 1;
-      r->verifyInputDelays();
+      r->verifyInputDelays(seenAlready);
     }
   }
   for (auto const &c : connectedTo[rcGet1]) {
@@ -524,7 +547,7 @@ void Rod2D::verifyInputDelays(SetOfRod2Ds &seenAlready) {
 	continue;
       }
       countOfValidInputs += 1;
-      r->verifyInputDelays();
+      r->verifyInputDelays(seenAlready);
     }
   }
 }
@@ -547,11 +570,134 @@ bool Rod2D::isShared(P2D const &p) const {
 
 bool Rod2D::hasInputs() const { return 0 < inputs.size(); }
 bool Rod2D::hasOutputs() const { return 0 < outputs.size(); }
+bool Rod2D::hasDebugOutputs() const { return 0 < debugOutputs.size(); }
 size_t Rod2D::countOfInputs() const {
   return connectedTo[rcGet1].size() + connectedTo[rcGet2].size();
 }
 size_t Rod2D::countOfOutputs() const {
   return connectedTo[rcPut1].size() + connectedTo[rcPut2].size();
+}
+
+string Rod2D::formExpression(SetOfRod2Ds &seenAlready) {
+  fprintf(stderr,
+	  "(Rod2D *)(%p)->formExpression(): [%s] %shasExpression()\n",
+	  this,
+	  rodsId().c_str(),
+	  hasExpression() ? "!" : ""
+	 );
+  if (hasExpression()) {
+    return expression;
+  }
+
+  fprintf(stderr,
+	  "(Rod2D *)(%p)->formExpression(): [%s] %sseenAlready\n",
+	  this,
+	  rodsId().c_str(),
+	  seenAlready.find(this) == seenAlready.end() ? "!" : ""
+	 );
+  if (seenAlready.find(this) == seenAlready.end()) {
+    seenAlready.insert(this);
+
+    fprintf(stderr,
+	    "(Rod2D *)(%p)->formExpression(): [%s] countOfInputs()=%lu\n",
+	    this,
+	    rodsId().c_str(),
+	    countOfInputs()
+	    );
+    if (countOfInputs()) {
+      vector<string> argExpressions;
+      for (auto &rc : connectedTo[rcGet2]) {
+	fprintf(stderr,
+		"(Rod2D *)(%p)->formExpression(): [%s] get2 rc.intersectionType=%s\n",
+		this,
+		rodsId().c_str(),
+		c_str(rc.intersectionType)
+		);
+	if (rc.intersectionType == riComplement) {
+	  ostringstream result;
+	  result << "NOT(" << rc.rod->formExpression(seenAlready) << ")";
+	  argExpressions.push_back(result.str());
+
+	  fprintf(stderr,
+		  "(Rod2D *)(%p)->formExpression(): [%s] get2 arg=%s\n",
+		  this,
+		  rodsId().c_str(),
+		  argExpressions.back().c_str()
+		  );
+	} else if (rc.intersectionType == riIdentity) {
+	  argExpressions.push_back(rc.rod->formExpression(seenAlready));
+
+	  fprintf(stderr,
+		  "(Rod2D *)(%p)->formExpression(): [%s] get2 arg=%s\n",
+		  this,
+		  rodsId().c_str(),
+		  argExpressions.back().c_str()
+		  );
+	}
+      }
+      for (auto &rc : connectedTo[rcGet1]) {
+	fprintf(stderr,
+		"(Rod2D *)(%p)->formExpression(): [%s] get1 rc.intersectionType=%s\n",
+		this,
+		rodsId().c_str(),
+		c_str(rc.intersectionType)
+		);
+	if (rc.intersectionType == riComplement) {
+	  ostringstream result;
+	  result << "NOT(" << rc.rod->formExpression(seenAlready) << ")";
+	  argExpressions.push_back(result.str());
+
+	  fprintf(stderr,
+		  "(Rod2D *)(%p)->formExpression(): [%s] get1 arg=%s\n",
+		  this,
+		  rodsId().c_str(),
+		  argExpressions.back().c_str()
+		  );
+	} else if (rc.intersectionType == riIdentity) {
+	  argExpressions.push_back(rc.rod->formExpression(seenAlready));
+
+	  fprintf(stderr,
+		  "(Rod2D *)(%p)->formExpression(): [%s] get1 arg=%s\n",
+		  this,
+		  rodsId().c_str(),
+		  argExpressions.back().c_str()
+		  );
+	}
+      }
+      if (!argExpressions.empty()) {
+	std::sort(argExpressions.begin(), argExpressions.end());
+	ostringstream result;
+	result << "AND(" << argExpressions[0];
+	for (size_t a = 1; a < argExpressions.size(); a += 1) {
+	  result << "," << argExpressions[a];
+	}
+	result << ")";
+	expression = result.str();
+      } else {
+	expression = !label.IsDefined() ? label.ToString() : rodsId();
+      }
+    } else {
+      expression = !label.IsDefined() ? label.ToString() : rodsId();
+    }
+  } else {
+    expression = !label.IsDefined() ? label.ToString() : rodsId();
+  }
+
+  // fprintf(stderr,
+  // 	  "(Rod2D *)(%p)->formExpression(): [%s] expression=%s\n",
+  // 	  this,
+  // 	  rodsId().c_str(),
+  // 	  expression.c_str()
+  // 	  );
+  return expression;
+}
+
+string const &Rod2D::formExpression() {
+  if (!hasExpression()) {
+    SetOfRod2Ds seenAlready;
+    expression = formExpression(seenAlready);
+  }
+  return expression;
 }
 
 void Rod2D::reset() {
@@ -643,6 +789,16 @@ bool Rod2D::evaluateAt(Diagram2D &diagram, int tick) {
     }
   }
 
+  if (hasDebugOutputs()) {
+    diagram.writeDebugOutputFor(label, result);
+
+    if (optShowEvaluatingRods) {
+      if (optShowEvaluatingRods) {
+	fprintf(stdout, ", %1d -> DebugOutput[%s]", result, rodsLabel().ToString().c_str());
+      }
+    }
+  }
+
   if (optShowEvaluatingRods) {
     fprintf(stdout, " } -> %1d\n", result);
   }
@@ -685,6 +841,10 @@ void Rod2D::dump(Diagram2D const &diagram) const {
     fprintf(stdout, ", outputs=");
     outputs.dump(diagram);
   }
+  if (0 < debugOutputs.size()) {
+    fprintf(stdout, ", debugOutputs=");
+    debugOutputs.dump(diagram);
+  }
   fprintf(stdout, ", connectedTo[]={");
   for (auto const t : rodConnectionType) {
     auto const connections = connectedTo[t];
@@ -704,6 +864,7 @@ void Rod2D::dump(Diagram2D const &diagram) const {
     }
   }
   fprintf(stdout, "}");
+  fprintf(stdout, ", expression=\"%s\"", getExpression().c_str());
   fprintf(stdout, "}");
   fprintf(stdout, "\n");
 }

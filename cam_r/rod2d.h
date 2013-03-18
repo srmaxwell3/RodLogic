@@ -40,8 +40,12 @@ class Rod2D : public SetOfP2Ds {
   bool isShared(P2D const &p) const;
   bool hasInputs() const;
   bool hasOutputs() const;
+  bool hasDebugOutputs() const;
   size_t countOfInputs() const;
   size_t countOfOutputs() const;
+
+  string const &formExpression();
+  string const &getExpression() const { return expression; }
 
   void reset();
   bool getValue() const;
@@ -55,6 +59,9 @@ class Rod2D : public SetOfP2Ds {
   bool findTailLabel(Diagram2D const &diagram);
   bool findLabel(Diagram2D const &diagram, P2D pStart, Directions oWard);
 
+  string formExpression(SetOfRod2Ds &seenAlready);
+  bool hasExpression() const { return !expression.empty(); }
+
   Label label;
   string id;
   bool isComplete;
@@ -66,7 +73,9 @@ class Rod2D : public SetOfP2Ds {
   SetOfP2Ds shared;
   SetOfP2Ds inputs;
   SetOfP2Ds outputs;
+  SetOfP2Ds debugOutputs;
   set<RodConnection> connectedTo[eoRodConnectionType];
+  string expression;
   EdgedBool lastEvaluatedValue;
   int lastEvaluatedTick;
 };
