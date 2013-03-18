@@ -63,8 +63,6 @@ struct Diagram2D : public vector<string> {
 
   void scan();
 
-  void refactor();
-
   void setInputFor(Label const &label, vector<int> const &values);
   void setInputFor(string const &label, vector<int> const &values);
   void addInputFor(Label const &label, bool value);
@@ -80,19 +78,36 @@ struct Diagram2D : public vector<string> {
   bool inputsWereReadDuringLastEvaluation() const {
     return 0 < lastEvaluatedTickNInputsRead;
   }
+  bool unreadInputsWereReadDuringLastEvaluation() const {
+    return 0 < lastEvaluatedTickNUnreadInputsRead;
+  }
   bool outputsWereWrittenDuringLastEvaluation() const {
     return 0 < lastEvaluatedTickNOutputsWritten;
   }
+  bool debugOutputsWereWrittenDuringLastEvaluation() const {
+    return 0 < lastEvaluatedTickNDebugOutputsWritten;
+  }
+  size_t maxUnreadInput() const;
+  bool hasUnreadInput() const;
   bool hasInputFor(Label const &label);
   bool readInputFor(Label const &label);
+
   void writeOutputFor(Label const &label, bool value);
   bool getOutputFor(Label const &label);
   bool getOutputFor(string const &name, int bitNumber);
+
+  void writeDebugOutputFor(Label const &label, bool value);
+  bool getDebugOutputFor(Label const &label);
+  bool getDebugOutputFor(string const &name, int bitNumber);
+
   int CurrentTick() const { return lastEvaluatedTick; }
+
+  void refactor();
 
   bool dumpInputLabelState(Label const &label, char const *comma, CombinedLabel const *&lastCLabel);
   bool dumpOutputLabelState(Label const &label, char const *comma, CombinedLabel const *&lastCLabel);
-  bool dumpLabelState(bool isInput, Label const &label, char const *comma, CombinedLabel const *&lastCLabel);
+  bool dumpDebugOutputLabelState(Label const &label, char const *comma, CombinedLabel const *&lastCLabel);
+  bool dumpLabelState(int isIOD, Label const &label, char const *comma, CombinedLabel const *&lastCLabel);
   void dumpState();
   void dumpPerformance() const;
   void dump() const;
@@ -103,14 +118,22 @@ struct Diagram2D : public vector<string> {
   set<P2D> pointsAlreadySeen;
   map<P2D, SetOfRod2Ds> pointsShared;
   array<SetOfRod2Ds, eoDirections> rods;
+
   array<SetOfRod2Ds, eoDirections> rodsWithInputs;
   Directions earliestInput;
   map<Label, BitStreamInput> currentInputs;
   map<string, CombinedLabel> currentCombinedInputs;
+
   array<SetOfRod2Ds, eoDirections> rodsWithOutputs;
   Directions earliestOutput;
   map<Label, bool> currentOutputs;
   map<string, CombinedLabel> currentCombinedOutputs;
+
+  array<SetOfRod2Ds, eoDirections> rodsWithDebugOutputs;
+  Directions earliestDebugOutput;
+  map<Label, bool> currentDebugOutputs;
+  map<string, CombinedLabel> currentCombinedDebugOutputs;
+
   array<long, eoDirections> totalEvaluatedUSecsPerDirection;
   long totalEvaluatedUSecs;
   long totalEvaluatedTicks;
@@ -118,7 +141,9 @@ struct Diagram2D : public vector<string> {
   int lastEvaluatedTick;
   int lastEvaluatedTickNChangedRods;
   int lastEvaluatedTickNInputsRead;
+  int lastEvaluatedTickNUnreadInputsRead;
   int lastEvaluatedTickNOutputsWritten;
+  int lastEvaluatedTickNDebugOutputsWritten;
   int xMax;
   int yMax;
 };

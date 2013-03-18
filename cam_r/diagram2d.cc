@@ -24,12 +24,15 @@ Diagram2D::Diagram2D(istream &in) :
     vector<string>(),
     earliestInput(eoDirections),
     earliestOutput(eoDirections),
+    earliestDebugOutput(eoDirections),
     totalEvaluatedUSecs(0),
     totalEvaluatedTicks(0),
     lastEvaluatedTick(-1),
     lastEvaluatedTickNChangedRods(0),
     lastEvaluatedTickNInputsRead(0),
+    lastEvaluatedTickNUnreadInputsRead(0),
     lastEvaluatedTickNOutputsWritten(0),
+    lastEvaluatedTickNDebugOutputsWritten(0),
     xMax(0),
     yMax(0)
 {
@@ -96,6 +99,26 @@ void Diagram2D::newRodAt(P2D const &p, Directions d) {
 
     if (0 <= label.BitNumber()) {
       currentCombinedOutputs[label.Name()].Update(label);
+    }
+  }
+  if (r->hasDebugOutputs()) {
+    rodsWithDebugOutputs[d].insert(r);
+    if (currentDebugOutputs.find(label) != currentDebugOutputs.end()) {
+      fprintf(stderr,
+              "cam.r: Warning: Rod2D(%s): rod reuses an debugOutput label (\"%s\")!\n",
+              r->rodsId().c_str(),
+              r->rodsLabel().ToString().c_str()
+             );
+      fprintf(stdout,
+              "cam.r: Warning: Rod2D(%s): rod reuses an debugOutput label (\"%s\")!\n",
+              r->rodsId().c_str(),
+              r->rodsLabel().ToString().c_str()
+             );
+    }
+    currentDebugOutputs[label] = false;
+
+    if (0 <= label.BitNumber()) {
+      currentCombinedDebugOutputs[label.Name()].Update(label);
     }
   }
 }
@@ -333,6 +356,13 @@ void Diagram2D::scan() {
     }
   }
 
+  earliestDebugOutput = eoDirections;
+  for (auto const d : directions) {
+    if (!rodsWithDebugOutputs[d].empty()) {
+      earliestDebugOutput = d;
+    }
+  }
+
   if (earliestInput != eoDirections) {
     int tick = 0;
     for (auto d = earliestInput; Last(d) != earliestInput; d = Last(d)) {
@@ -350,6 +380,20 @@ void Diagram2D::scan() {
       }
     }
   }
+
+  if (earliestDebugOutput != eoDirections) {
+    for (auto d = earliestDebugOutput; Last(d) != earliestDebugOutput; d = Last(d)) {
+      for (auto &r : rodsWithDebugOutputs[d]) {
+        r->verifyInputDelays();
+      }
+    }
+  }
+
+  // for (auto const d : directions) {
+  //   for (auto r : rods[d]) {
+  //     r->formExpression();
+  //   }
+  // }  
 }
 
 void Diagram2D::refactor() {
@@ -463,7 +507,9 @@ void Diagram2D::evaluateAt(int tick) {
                 );
   lastEvaluatedTickNChangedRods = 0;
   lastEvaluatedTickNInputsRead = 0;
+  lastEvaluatedTickNUnreadInputsRead = 0;
   lastEvaluatedTickNOutputsWritten = 0;
+  lastEvaluatedTickNDebugOutputsWritten = 0;
 
   auto boEvaluation = CHRONO_CLOCK::now();
   for (auto &r : rods[d]) {
@@ -500,13 +546,19 @@ void Diagram2D::evaluate() {
 bool Diagram2D::dumpInputLabelState
     (Label const &label, char const *comma, CombinedLabel const *&lastCLabel)
 {
-  return dumpLabelState(true, label, comma, lastCLabel);
+  return dumpLabelState(0, label, comma, lastCLabel);
 }
 
 bool Diagram2D::dumpOutputLabelState
     (Label const &label, char const *comma, CombinedLabel const *&lastCLabel)
 {
-  return dumpLabelState(false, label, comma, lastCLabel);
+  return dumpLabelState(1, label, comma, lastCLabel);
+}
+
+bool Diagram2D::dumpDebugOutputLabelState
+    (Label const &label, char const *comma, CombinedLabel const *&lastCLabel)
+{
+  return dumpLabelState(2, label, comma, lastCLabel);
 }
 
 string intToBinary(int value, int span) {
@@ -523,15 +575,23 @@ string intToBinary(int value, int span) {
 
 map<string, unsigned> lastInputLabelStates;
 map<string, unsigned> lastOutputLabelStates;
+map<string, unsigned> lastDebugOutputLabelStates;
 
-bool Diagram2D::dumpLabelState(bool isInput, Label const &label, char const *comma, CombinedLabel const *&lastCLabel) {
+bool Diagram2D::dumpLabelState
+    (int isIOD, Label const &label, char const *comma, CombinedLabel const *&lastCLabel)
+{
   string labelToString = label.ToString();
   bool dumpedALabel = false;
 
   if (label.BitNumber() < 0) {
     unsigned &lastLabelState =
-        isInput ? lastInputLabelStates[labelToString] : lastOutputLabelStates[labelToString];
-    unsigned value = isInput ? getInputFor(label) : getOutputFor(label);
+        isIOD == 0 ? lastInputLabelStates[labelToString] :
+        isIOD == 1 ? lastOutputLabelStates[labelToString] :
+        lastDebugOutputLabelStates[labelToString];
+    unsigned value =
+        isIOD == 0 ? getInputFor(label) :
+        isIOD == 1 ? getOutputFor(label) :
+        getDebugOutputFor(label);
 
     if (!optShowChangedStateEveryTick || lastLabelState != value) {
       if (optShowChangedStateEveryTick) {
@@ -573,7 +633,10 @@ bool Diagram2D::dumpLabelState(bool isInput, Label const &label, char const *com
             if (bitNumber < 0) {
               continue;
             }
-            bool bit = isInput ? getInputFor(name, bitNumber) : getOutputFor(name, bitNumber);
+            bool bit =
+                isIOD == 0 ? getInputFor(name, bitNumber) :
+                isIOD == 1 ? getOutputFor(name, bitNumber) :
+                getDebugOutputFor(name, bitNumber);
             value = (value << 1) | bit;
           }
         } else {
@@ -581,13 +644,18 @@ bool Diagram2D::dumpLabelState(bool isInput, Label const &label, char const *com
             if (bitNumber < 0) {
               continue;
             }
-            bool bit = isInput ? getInputFor(name, bitNumber) : getOutputFor(name, bitNumber);
+            bool bit =
+                isIOD == 0 ? getInputFor(name, bitNumber) :
+                isIOD == 1 ? getOutputFor(name, bitNumber) :
+                getDebugOutputFor(name, bitNumber);
             value = (value << 1) | bit;
           }
         }
 
         unsigned &lastLabelState =
-            isInput ? lastInputLabelStates[labelToString] : lastOutputLabelStates[labelToString];
+            isIOD == 0 ? lastInputLabelStates[labelToString] :
+            isIOD == 1 ? lastOutputLabelStates[labelToString] :
+            lastDebugOutputLabelStates[labelToString];
 
 	if (!optShowChangedStateEveryTick || lastLabelState != value) {
           // Write the multi-bit value.
@@ -621,8 +689,13 @@ bool Diagram2D::dumpLabelState(bool isInput, Label const &label, char const *com
 	}
       } else {
         unsigned &lastLabelState =
-            isInput ? lastInputLabelStates[labelToString] : lastOutputLabelStates[labelToString];
-        unsigned value = isInput ? getInputFor(label) : getOutputFor(label);
+            isIOD == 0 ? lastInputLabelStates[labelToString] :
+            isIOD == 1 ? lastOutputLabelStates[labelToString] :
+            lastDebugOutputLabelStates[labelToString];
+        unsigned value =
+            isIOD == 0 ? getInputFor(label) :
+            isIOD == 1 ? getOutputFor(label) :
+            getDebugOutputFor(label);
 
 	if (!optShowChangedStateEveryTick || lastLabelState != value) {
 	  if (optShowChangedStateEveryTick) {
@@ -649,8 +722,13 @@ bool Diagram2D::dumpLabelState(bool isInput, Label const &label, char const *com
     lastCLabel = cLabel;
   } else {
     unsigned &lastLabelState =
-        isInput ? lastInputLabelStates[labelToString] : lastOutputLabelStates[labelToString];
-    unsigned value = isInput ? getInputFor(label) : getOutputFor(label);
+        isIOD == 0 ? lastInputLabelStates[labelToString] :
+        isIOD == 1 ? lastOutputLabelStates[labelToString] :
+        lastDebugOutputLabelStates[labelToString];
+    unsigned value =
+        isIOD == 0 ? getInputFor(label) :
+        isIOD == 1 ? getOutputFor(label) :
+        getDebugOutputFor(label);
 
     if (!optShowChangedStateEveryTick || lastLabelState != value) {
       if (optShowChangedStateEveryTick) {
@@ -701,6 +779,23 @@ void Diagram2D::dumpState() {
     comma = "\n    ";
     for (auto const &lv : currentOutputs) {
       if ((dumpedALabel |= dumpOutputLabelState(lv.first, comma, lastCLabel))) {
+        comma = ",\n    ";
+      }
+    }
+  }
+  if (dumpedALabel) {
+    fprintf(stdout, "\n  }");
+  } else {
+    fprintf(stdout, " }");
+  }
+
+  fprintf(stdout, ", debugOutputs={");
+  dumpedALabel = false;
+  if (!currentDebugOutputs.empty()) {
+    CombinedLabel const *lastCLabel = nullptr;
+    comma = "\n    ";
+    for (auto const &lv : currentDebugOutputs) {
+      if ((dumpedALabel |= dumpDebugOutputLabelState(lv.first, comma, lastCLabel))) {
         comma = ",\n    ";
       }
     }
@@ -850,6 +945,18 @@ void Diagram2D::addInputFor(Label const &label, bool value) {
   currentInputs[label].push_back(value);
 }
 
+size_t Diagram2D::maxUnreadInput()const {
+  size_t result = 0;
+  for (auto const &i : currentInputs) {
+    result = std::max(result, i.second.size());
+  }
+  return result;
+}
+
+bool Diagram2D::hasUnreadInput() const {
+  return 0 < maxUnreadInput();
+}
+
 bool Diagram2D::hasInputFor(Label const &label) {
   if (currentInputs.find(label) == currentInputs.end()) {
     fprintf(stderr,
@@ -909,6 +1016,7 @@ bool Diagram2D::readInputFor(Label const &label) {
   lastEvaluatedTickNInputsRead += 1;
   auto &values = currentInputs[label];
   if (!values.empty()) {
+    lastEvaluatedTickNUnreadInputsRead += 1;
     values.pop_front();
   }
   return getInputFor(label);
@@ -956,6 +1064,50 @@ bool Diagram2D::getOutputFor(string const &name, int bitNumber) {
     assert(currentOutputs.find(label) != currentOutputs.end());
   }
   return currentOutputs[label];
+}
+
+void Diagram2D::writeDebugOutputFor(Label const &label, bool value) {
+  if (currentDebugOutputs.find(label) == currentDebugOutputs.end()) {
+    fprintf(stderr,
+            "cam.r: Error: "
+            "Diagram2D::getDebugOutputFor(label=\"%s\", value=%d): "
+            "Unable to find input for label!\n",
+            label.ToString().c_str(),
+            value
+           );
+    assert(currentDebugOutputs.find(label) != currentDebugOutputs.end());
+  }
+  lastEvaluatedTickNDebugOutputsWritten += 1;
+  currentDebugOutputs[label] = value;
+}
+
+bool Diagram2D::getDebugOutputFor(Label const &label) {
+  if (currentDebugOutputs.find(label) == currentDebugOutputs.end()) {
+    fprintf(stderr,
+            "cam.r: Error: "
+            "Diagram2D::getDebugOutputFor(label=\"%s\"): "
+            "Unable to find input for label!\n",
+            label.ToString().c_str()
+           );
+    assert(currentDebugOutputs.find(label) != currentDebugOutputs.end());
+  }
+  return currentDebugOutputs[label];
+}
+
+bool Diagram2D::getDebugOutputFor(string const &name, int bitNumber) {
+  Label label(name, bitNumber);
+  if (currentDebugOutputs.find(label) == currentDebugOutputs.end()) {
+    fprintf(stderr,
+            "cam.r: Error: "
+            "Diagram2D::getDebugOutputFor(name=\"%s\", bitNumber=%d): "
+            "Unable to find input for Label().ToString()=%s\n",
+            name.c_str(),
+            bitNumber,
+            label.ToString().c_str()
+           );
+    assert(currentDebugOutputs.find(label) != currentDebugOutputs.end());
+  }
+  return currentDebugOutputs[label];
 }
 
 void Diagram2D::dump() const {
@@ -1028,6 +1180,10 @@ void Diagram2D::dump() const {
   fprintf(stdout,
           "Earliest output: %s\n",
           earliestOutput != eoDirections ? c_str(earliestOutput) : "None"
+         );
+  fprintf(stdout,
+          "Earliest debugOutput: %s\n",
+          earliestDebugOutput != eoDirections ? c_str(earliestDebugOutput) : "None"
          );
   fprintf(stdout, "\n");
 }
