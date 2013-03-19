@@ -9,6 +9,8 @@ using std::chrono::microseconds;
 #endif
 using std::chrono::CHRONO_CLOCK;
 
+#include "ncurses.h"
+
 #include "datarod.h"
 #include "item.h"
 #include "lockrod.h"
@@ -113,10 +115,61 @@ void Volume::ProceedOneTick() {
 }
 
 void Volume::PrintViewFlat() const {
-  ViewLvlArray view;
+  static ViewLvlArray views[2];
+  static int whichView = 0;
 
-  ViewFlat(view);
+  int v = whichView % 2;
+  ViewFlat(views[v]);
 
+#if 1
+  mvprintw(0, 0,
+          "Clock: %d, tick %s (cycle: %d, phase: %s, minor tick: %s)\n",
+          CurrentClock(),
+          toConstCharPointer(CurrentTickPerCycle()),
+          CurrentCycle(),
+          toConstCharPointer(CurrentPhasePerCycle()),
+          toConstCharPointer(CurrentTickPerPhase())
+         );
+  printw("   ");
+  for (int c = 0; c < NCols; c += 1) {
+    if (int cc = (c / 10) % 10) {
+      printw("%1d", cc);
+    } else {
+      printw(" ");
+    }
+  }
+  printw("\n   ");
+  for (int c = 0; c < NCols; c += 1) {
+    printw("%1d", c % 10);
+  }
+  printw("\n");
+  for (int r = 0; r < NRows; r += 1) {
+    printw("%2d ", r % 100);
+    for (int c = 0; c < NCols; c += 1) {
+      if (0 < whichView && views[v][r][c] != views[v ^ 1][r][c]) {
+        addch(views[v][r][c] | A_BOLD);
+      } else {
+        printw("%c", views[v][r][c]);
+      }
+    }
+    printw(" %2d\n", r % 100);
+  }
+  printw("   ");
+  for (int c = 0; c < NCols; c += 1) {
+    if (int cc = (c / 10) % 10) {
+      printw("%1d", cc);
+    } else {
+      printw(" ");
+    }
+  }
+  printw("\n   ");
+  for (int c = 0; c < NCols; c += 1) {
+    printw("%1d", c % 10);
+  }
+  printw("\n");
+  refresh();
+  whichView += 1;
+#else
   fprintf(stdout,
           "Clock: %d, tick %s (cycle: %d, phase: %s, minor tick: %s)\n",
           CurrentClock(),
@@ -158,6 +211,7 @@ void Volume::PrintViewFlat() const {
     fprintf(stdout, "%1d", c % 10);
   }
   fprintf(stdout, "\n\n");
+#endif
 }
 
 void Volume::ViewFlat(ViewLvlArray &view) const {
