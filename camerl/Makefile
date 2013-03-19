@@ -1,3 +1,4 @@
+HOSTNAME = $(shell hostname)
 ifeq ($(HOSTNAME),Sidneys-MacBook-Pro.local)
 CXX = clang++ -std=c++11 -stdlib=libc++ $(DEBUG) $(OPT)
 else
@@ -6,6 +7,7 @@ endif
 # CXX = clang++ -std=c++11 -stdlib=libc++ $(DEBUG) $(OPT)
 DEBUG = -g
 OPT = -O0
+LIBS = -lncurses
 zzzzzzzz =
 
 ALL_OBJS = \
@@ -42,7 +44,7 @@ clobber:	clean
 	$(RM) ./camerl
 
 camerl:		$(ALL_OBJS)
-	$(CXX) -o camerl $(ALL_OBJS)
+	$(CXX) -o camerl $(ALL_OBJS) $(LIBS)
 
 camerl.o:	camerl.cc
 
