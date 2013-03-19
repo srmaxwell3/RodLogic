@@ -33,6 +33,7 @@ char const *toConstCharPointer(TickPerCycle t) {
     case tcDSS1: return "tcDSS1";
     case tcDLSL: return "tcDLSL";
     case tcWUNL: return "tcWUNL";
+    case tcWRN1: return "tcWRN1";
     case tcWRNX: return "tcWRNX";
     case tcWRN0: return "tcWRN0";
     case tcWLNL: return "tcWLNL";
@@ -66,3 +67,12 @@ char const *toConstCharPointer(TickPerCycle t) {
   }
   return "TickPerCycle(?)";
 }
+
+TickPerCycle const tickPerCycle[eoTickPerCycle] = {
+  tcEUSL,tcERS1,tcERSX,tcERS0,tcELSL,tcEUEL,tcESE0,tcESEX,tcESE1,tcELEL,
+  tcSUWL,tcSRW1,tcSRWX,tcSRW0,tcSLWL,tcSUSL,tcSSS0,tcSSSX,tcSSS1,tcSLSL,
+  tcDUWL,tcDRW1,tcDRWX,tcDRW0,tcDLWL,tcDUSL,tcDSS0,tcDSSX,tcDSS1,tcDLSL,
+  tcWUNL,tcWRN1,tcWRNX,tcWRN0,tcWLNL,tcWUWL,tcWSW0,tcWSWX,tcWSW1,tcWLWL,
+  tcNUEL,tcNRE1,tcNREX,tcNRE0,tcNLEL,tcNUNL,tcNSN0,tcNSNX,tcNSN1,tcNLNL,
+  tcUUEL,tcURE1,tcUREX,tcURE0,tcULEL,tcUUNL,tcUSN0,tcUSNX,tcUSN1,tcULNL
+};
