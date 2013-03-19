@@ -3,6 +3,16 @@
 
 class EdgedBool {
  public:
+
+  enum QueryType {
+    aLeadingEdge,
+    aHi,
+    aTrailingEdge,
+    aLo,
+
+    eoQueryType
+  };
+
   EdgedBool(bool initalValue = false, int atTick = -1) {
     reset(initalValue, atTick);
   }
@@ -35,6 +45,28 @@ class EdgedBool {
 
   int dTicks() const {
     return history[0].atTick - history[1].atTick;
+  }
+
+  bool is(QueryType t) const {
+    switch (t) {
+    case aLeadingEdge:
+      return isALeadingEdge();
+    case aHi:
+      return isAHi();
+    case aTrailingEdge:
+      return isATrailingEdge();
+    case aLo:
+      return isALo();
+    }
+    return false;
+  }
+
+  bool isAHi() const {
+    return history[0].value;
+  }
+
+  bool isALo() const {
+    return !history[0].value;
   }
 
   bool isALeadingEdge() const {

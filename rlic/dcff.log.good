@@ -39,7 +39,7 @@ separations[ 3] =    1
 Rod2D(<"C":E:6:14-2>)->evaluateAt(diagram, tick=0): { [Get2]{}, [Get1]{}}, Input[C] -> 0 } -> 0
 Rod2D(<"D":E:8:14-2>)->evaluateAt(diagram, tick=0): { [Get2]{}, [Get1]{}}, Input[D] -> 0 } -> 0
 Rod2D(<"Q":E:10:20-2>)->evaluateAt(diagram, tick=0): { [Get2]{ <"=":N:5-15:8> -> 0}, [Get1]{}}, 0 -> Output[Q] } -> 0
-0: inputs={
+0 [0.E]: inputs={
      C -> 0,
      D -> 0
   }, outputs={
@@ -47,33 +47,33 @@ Rod2D(<"Q":E:10:20-2>)->evaluateAt(diagram, tick=0): { [Get2]{ <"=":N:5-15:8> ->
   }
 Rod2D(<"CD&":S:14-4:11>)->evaluateAt(diagram, tick=1): { [Get2]{}, [Get1]{ <"C":E:6:14-2> -> 0, <"D":E:8:14-2> -> 0}} } -> 0
 Rod2D(<"C!Q&":S:14-4:13>)->evaluateAt(diagram, tick=1): { [Get2]{}, [Get1]{ <"C":E:6:14-2> -> !0, <"Q":E:10:20-2> -> 0}} } -> 0
-1: inputs={
+1 [0.S]: inputs={
      C -> 0,
      D -> 0
   }, outputs={
      Q -> 0
   }
-2: inputs={
+2 [0.D]: inputs={
      C -> 0,
      D -> 0
   }, outputs={
      Q -> 0
   }
 Rod2D(<W:13:7-15>)->evaluateAt(diagram, tick=3): { [Get2]{ <"CD&":S:14-4:11> -> !0, <"C!Q&":S:14-4:13> -> !0}, [Get1]{}} } -> 1*
-3: inputs={
+3 [0.W]: inputs={
      C -> 0,
      D -> 0
   }, outputs={
      Q -> 0
   }
 Rod2D(<"=":N:5-15:8>)->evaluateAt(diagram, tick=4): { [Get2]{}, [Get1]{ <W:13:7-15> -> !1}} } -> 0
-4: inputs={
+4 [0.N]: inputs={
      C -> 0,
      D -> 0
   }, outputs={
      Q -> 0
   }
-5: inputs={
+5 [0.U]: inputs={
      C -> 0,
      D -> 0
   }, outputs={
@@ -82,7 +82,7 @@ Rod2D(<"=":N:5-15:8>)->evaluateAt(diagram, tick=4): { [Get2]{}, [Get1]{ <W:13:7-
 Rod2D(<"C":E:6:14-2>)->evaluateAt(diagram, tick=6): { [Get2]{}, [Get1]{}}, Input[C] -> 0 } -> 0
 Rod2D(<"D":E:8:14-2>)->evaluateAt(diagram, tick=6): { [Get2]{}, [Get1]{}}, Input[D] -> 0 } -> 0
 Rod2D(<"Q":E:10:20-2>)->evaluateAt(diagram, tick=6): { [Get2]{ <"=":N:5-15:8> -> 0}, [Get1]{}}, 0 -> Output[Q] } -> 0
-6: inputs={
+6 [1.E]: inputs={
      C -> 0,
      D -> 0
   }, outputs={
@@ -90,33 +90,33 @@ Rod2D(<"Q":E:10:20-2>)->evaluateAt(diagram, tick=6): { [Get2]{ <"=":N:5-15:8> ->
   }
 Rod2D(<"CD&":S:14-4:11>)->evaluateAt(diagram, tick=7): { [Get2]{}, [Get1]{ <"C":E:6:14-2> -> 0, <"D":E:8:14-2> -> 0}} } -> 0
 Rod2D(<"C!Q&":S:14-4:13>)->evaluateAt(diagram, tick=7): { [Get2]{}, [Get1]{ <"C":E:6:14-2> -> !0, <"Q":E:10:20-2> -> 0}} } -> 0
-7: inputs={
+7 [1.S]: inputs={
      C -> 0,
      D -> 0
   }, outputs={
      Q -> 0
   }
-8: inputs={
+8 [1.D]: inputs={
      C -> 0,
      D -> 0
   }, outputs={
      Q -> 0
   }
 Rod2D(<W:13:7-15>)->evaluateAt(diagram, tick=9): { [Get2]{ <"CD&":S:14-4:11> -> !0, <"C!Q&":S:14-4:13> -> !0}, [Get1]{}} } -> 1
-9: inputs={
+9 [1.W]: inputs={
      C -> 0,
      D -> 0
   }, outputs={
      Q -> 0
   }
 Rod2D(<"=":N:5-15:8>)->evaluateAt(diagram, tick=10): { [Get2]{}, [Get1]{ <W:13:7-15> -> !1}} } -> 0
-10: inputs={
+10 [1.N]: inputs={
      C -> 0,
      D -> 0
   }, outputs={
      Q -> 0
   }
-11: inputs={
+11 [1.U]: inputs={
      C -> 0,
      D -> 0
   }, outputs={
@@ -125,7 +125,7 @@ Rod2D(<"=":N:5-15:8>)->evaluateAt(diagram, tick=10): { [Get2]{}, [Get1]{ <W:13:7
 Rod2D(<"C":E:6:14-2>)->evaluateAt(diagram, tick=12): { [Get2]{}, [Get1]{}}, Input[C] -> 0 } -> 0
 Rod2D(<"D":E:8:14-2>)->evaluateAt(diagram, tick=12): { [Get2]{}, [Get1]{}}, Input[D] -> 0 } -> 0
 Rod2D(<"Q":E:10:20-2>)->evaluateAt(diagram, tick=12): { [Get2]{ <"=":N:5-15:8> -> 0}, [Get1]{}}, 0 -> Output[Q] } -> 0
-12: inputs={
+12 [2.E]: inputs={
      C -> 0,
      D -> 0
   }, outputs={
@@ -133,33 +133,33 @@ Rod2D(<"Q":E:10:20-2>)->evaluateAt(diagram, tick=12): { [Get2]{ <"=":N:5-15:8> -
   }
 Rod2D(<"CD&":S:14-4:11>)->evaluateAt(diagram, tick=13): { [Get2]{}, [Get1]{ <"C":E:6:14-2> -> 0, <"D":E:8:14-2> -> 0}} } -> 0
 Rod2D(<"C!Q&":S:14-4:13>)->evaluateAt(diagram, tick=13): { [Get2]{}, [Get1]{ <"C":E:6:14-2> -> !0, <"Q":E:10:20-2> -> 0}} } -> 0
-13: inputs={
+13 [2.S]: inputs={
      C -> 0,
      D -> 0
   }, outputs={
      Q -> 0
   }
-14: inputs={
+14 [2.D]: inputs={
      C -> 0,
      D -> 0
   }, outputs={
      Q -> 0
   }
 Rod2D(<W:13:7-15>)->evaluateAt(diagram, tick=15): { [Get2]{ <"CD&":S:14-4:11> -> !0, <"C!Q&":S:14-4:13> -> !0}, [Get1]{}} } -> 1
-15: inputs={
+15 [2.W]: inputs={
      C -> 0,
      D -> 0
   }, outputs={
      Q -> 0
   }
 Rod2D(<"=":N:5-15:8>)->evaluateAt(diagram, tick=16): { [Get2]{}, [Get1]{ <W:13:7-15> -> !1}} } -> 0
-16: inputs={
+16 [2.N]: inputs={
      C -> 0,
      D -> 0
   }, outputs={
      Q -> 0
   }
-17: inputs={
+17 [2.U]: inputs={
      C -> 0,
      D -> 0
   }, outputs={
@@ -168,7 +168,7 @@ Rod2D(<"=":N:5-15:8>)->evaluateAt(diagram, tick=16): { [Get2]{}, [Get1]{ <W:13:7
 Rod2D(<"C":E:6:14-2>)->evaluateAt(diagram, tick=18): { [Get2]{}, [Get1]{}}, Input[C] -> 1 } -> 1*
 Rod2D(<"D":E:8:14-2>)->evaluateAt(diagram, tick=18): { [Get2]{}, [Get1]{}}, Input[D] -> 1 } -> 1*
 Rod2D(<"Q":E:10:20-2>)->evaluateAt(diagram, tick=18): { [Get2]{ <"=":N:5-15:8> -> 0}, [Get1]{}}, 0 -> Output[Q] } -> 0
-18: inputs={
+18 [3.E]: inputs={
      C -> 1,
      D -> 1
   }, outputs={
@@ -176,33 +176,33 @@ Rod2D(<"Q":E:10:20-2>)->evaluateAt(diagram, tick=18): { [Get2]{ <"=":N:5-15:8> -
   }
 Rod2D(<"CD&":S:14-4:11>)->evaluateAt(diagram, tick=19): { [Get2]{}, [Get1]{ <"C":E:6:14-2> -> 1, <"D":E:8:14-2> -> 1}} } -> 1*
 Rod2D(<"C!Q&":S:14-4:13>)->evaluateAt(diagram, tick=19): { [Get2]{}, [Get1]{ <"C":E:6:14-2> -> !1, <"Q":E:10:20-2> -> 0}} } -> 0
-19: inputs={
+19 [3.S]: inputs={
      C -> 1,
      D -> 1
   }, outputs={
      Q -> 0
   }
-20: inputs={
+20 [3.D]: inputs={
      C -> 1,
      D -> 1
   }, outputs={
      Q -> 0
   }
 Rod2D(<W:13:7-15>)->evaluateAt(diagram, tick=21): { [Get2]{ <"CD&":S:14-4:11> -> !1, <"C!Q&":S:14-4:13> -> !0}, [Get1]{}} } -> 0*
-21: inputs={
+21 [3.W]: inputs={
      C -> 1,
      D -> 1
   }, outputs={
      Q -> 0
   }
 Rod2D(<"=":N:5-15:8>)->evaluateAt(diagram, tick=22): { [Get2]{}, [Get1]{ <W:13:7-15> -> !0}} } -> 1*
-22: inputs={
+22 [3.N]: inputs={
      C -> 1,
      D -> 1
   }, outputs={
      Q -> 0
   }
-23: inputs={
+23 [3.U]: inputs={
      C -> 1,
      D -> 1
   }, outputs={
@@ -211,7 +211,7 @@ Rod2D(<"=":N:5-15:8>)->evaluateAt(diagram, tick=22): { [Get2]{}, [Get1]{ <W:13:7
 Rod2D(<"C":E:6:14-2>)->evaluateAt(diagram, tick=24): { [Get2]{}, [Get1]{}}, Input[C] -> 0 } -> 0*
 Rod2D(<"D":E:8:14-2>)->evaluateAt(diagram, tick=24): { [Get2]{}, [Get1]{}}, Input[D] -> 0 } -> 0*
 Rod2D(<"Q":E:10:20-2>)->evaluateAt(diagram, tick=24): { [Get2]{ <"=":N:5-15:8> -> 1}, [Get1]{}}, 1 -> Output[Q] } -> 1*
-24: inputs={
+24 [4.E]: inputs={
      C -> 0,
      D -> 0
   }, outputs={
@@ -219,33 +219,33 @@ Rod2D(<"Q":E:10:20-2>)->evaluateAt(diagram, tick=24): { [Get2]{ <"=":N:5-15:8> -
   }
 Rod2D(<"CD&":S:14-4:11>)->evaluateAt(diagram, tick=25): { [Get2]{}, [Get1]{ <"C":E:6:14-2> -> 0, <"D":E:8:14-2> -> 0}} } -> 0*
 Rod2D(<"C!Q&":S:14-4:13>)->evaluateAt(diagram, tick=25): { [Get2]{}, [Get1]{ <"C":E:6:14-2> -> !0, <"Q":E:10:20-2> -> 1}} } -> 1*
-25: inputs={
+25 [4.S]: inputs={
      C -> 0,
      D -> 0
   }, outputs={
      Q -> 1
   }
-26: inputs={
+26 [4.D]: inputs={
      C -> 0,
      D -> 0
   }, outputs={
      Q -> 1
   }
 Rod2D(<W:13:7-15>)->evaluateAt(diagram, tick=27): { [Get2]{ <"CD&":S:14-4:11> -> !0, <"C!Q&":S:14-4:13> -> !1}, [Get1]{}} } -> 0
-27: inputs={
+27 [4.W]: inputs={
      C -> 0,
      D -> 0
   }, outputs={
      Q -> 1
   }
 Rod2D(<"=":N:5-15:8>)->evaluateAt(diagram, tick=28): { [Get2]{}, [Get1]{ <W:13:7-15> -> !0}} } -> 1
-28: inputs={
+28 [4.N]: inputs={
      C -> 0,
      D -> 0
   }, outputs={
      Q -> 1
   }
-29: inputs={
+29 [4.U]: inputs={
      C -> 0,
      D -> 0
   }, outputs={
@@ -254,7 +254,7 @@ Rod2D(<"=":N:5-15:8>)->evaluateAt(diagram, tick=28): { [Get2]{}, [Get1]{ <W:13:7
 Rod2D(<"C":E:6:14-2>)->evaluateAt(diagram, tick=30): { [Get2]{}, [Get1]{}}, Input[C] -> 0 } -> 0
 Rod2D(<"D":E:8:14-2>)->evaluateAt(diagram, tick=30): { [Get2]{}, [Get1]{}}, Input[D] -> 0 } -> 0
 Rod2D(<"Q":E:10:20-2>)->evaluateAt(diagram, tick=30): { [Get2]{ <"=":N:5-15:8> -> 1}, [Get1]{}}, 1 -> Output[Q] } -> 1
-30: inputs={
+30 [5.E]: inputs={
      C -> 0,
      D -> 0
   }, outputs={
@@ -262,33 +262,33 @@ Rod2D(<"Q":E:10:20-2>)->evaluateAt(diagram, tick=30): { [Get2]{ <"=":N:5-15:8> -
   }
 Rod2D(<"CD&":S:14-4:11>)->evaluateAt(diagram, tick=31): { [Get2]{}, [Get1]{ <"C":E:6:14-2> -> 0, <"D":E:8:14-2> -> 0}} } -> 0
 Rod2D(<"C!Q&":S:14-4:13>)->evaluateAt(diagram, tick=31): { [Get2]{}, [Get1]{ <"C":E:6:14-2> -> !0, <"Q":E:10:20-2> -> 1}} } -> 1
-31: inputs={
+31 [5.S]: inputs={
      C -> 0,
      D -> 0
   }, outputs={
      Q -> 1
   }
-32: inputs={
+32 [5.D]: inputs={
      C -> 0,
      D -> 0
   }, outputs={
      Q -> 1
   }
 Rod2D(<W:13:7-15>)->evaluateAt(diagram, tick=33): { [Get2]{ <"CD&":S:14-4:11> -> !0, <"C!Q&":S:14-4:13> -> !1}, [Get1]{}} } -> 0
-33: inputs={
+33 [5.W]: inputs={
      C -> 0,
      D -> 0
   }, outputs={
      Q -> 1
   }
 Rod2D(<"=":N:5-15:8>)->evaluateAt(diagram, tick=34): { [Get2]{}, [Get1]{ <W:13:7-15> -> !0}} } -> 1
-34: inputs={
+34 [5.N]: inputs={
      C -> 0,
      D -> 0
   }, outputs={
      Q -> 1
   }
-35: inputs={
+35 [5.U]: inputs={
      C -> 0,
      D -> 0
   }, outputs={
@@ -297,7 +297,7 @@ Rod2D(<"=":N:5-15:8>)->evaluateAt(diagram, tick=34): { [Get2]{}, [Get1]{ <W:13:7
 Rod2D(<"C":E:6:14-2>)->evaluateAt(diagram, tick=36): { [Get2]{}, [Get1]{}}, Input[C] -> 1 } -> 1*
 Rod2D(<"D":E:8:14-2>)->evaluateAt(diagram, tick=36): { [Get2]{}, [Get1]{}}, Input[D] -> 0 } -> 0
 Rod2D(<"Q":E:10:20-2>)->evaluateAt(diagram, tick=36): { [Get2]{ <"=":N:5-15:8> -> 1}, [Get1]{}}, 1 -> Output[Q] } -> 1
-36: inputs={
+36 [6.E]: inputs={
      C -> 1,
      D -> 0
   }, outputs={
@@ -305,33 +305,33 @@ Rod2D(<"Q":E:10:20-2>)->evaluateAt(diagram, tick=36): { [Get2]{ <"=":N:5-15:8> -
   }
 Rod2D(<"CD&":S:14-4:11>)->evaluateAt(diagram, tick=37): { [Get2]{}, [Get1]{ <"C":E:6:14-2> -> 1, <"D":E:8:14-2> -> 0}} } -> 0
 Rod2D(<"C!Q&":S:14-4:13>)->evaluateAt(diagram, tick=37): { [Get2]{}, [Get1]{ <"C":E:6:14-2> -> !1, <"Q":E:10:20-2> -> 1}} } -> 0*
-37: inputs={
+37 [6.S]: inputs={
      C -> 1,
      D -> 0
   }, outputs={
      Q -> 1
   }
-38: inputs={
+38 [6.D]: inputs={
      C -> 1,
      D -> 0
   }, outputs={
      Q -> 1
   }
 Rod2D(<W:13:7-15>)->evaluateAt(diagram, tick=39): { [Get2]{ <"CD&":S:14-4:11> -> !0, <"C!Q&":S:14-4:13> -> !0}, [Get1]{}} } -> 1*
-39: inputs={
+39 [6.W]: inputs={
      C -> 1,
      D -> 0
   }, outputs={
      Q -> 1
   }
 Rod2D(<"=":N:5-15:8>)->evaluateAt(diagram, tick=40): { [Get2]{}, [Get1]{ <W:13:7-15> -> !1}} } -> 0*
-40: inputs={
+40 [6.N]: inputs={
      C -> 1,
      D -> 0
   }, outputs={
      Q -> 1
   }
-41: inputs={
+41 [6.U]: inputs={
      C -> 1,
      D -> 0
   }, outputs={
@@ -340,7 +340,7 @@ Rod2D(<"=":N:5-15:8>)->evaluateAt(diagram, tick=40): { [Get2]{}, [Get1]{ <W:13:7
 Rod2D(<"C":E:6:14-2>)->evaluateAt(diagram, tick=42): { [Get2]{}, [Get1]{}}, Input[C] -> 0 } -> 0*
 Rod2D(<"D":E:8:14-2>)->evaluateAt(diagram, tick=42): { [Get2]{}, [Get1]{}}, Input[D] -> 0 } -> 0
 Rod2D(<"Q":E:10:20-2>)->evaluateAt(diagram, tick=42): { [Get2]{ <"=":N:5-15:8> -> 0}, [Get1]{}}, 0 -> Output[Q] } -> 0*
-42: inputs={
+42 [7.E]: inputs={
      C -> 0,
      D -> 0
   }, outputs={
@@ -348,33 +348,33 @@ Rod2D(<"Q":E:10:20-2>)->evaluateAt(diagram, tick=42): { [Get2]{ <"=":N:5-15:8> -
   }
 Rod2D(<"CD&":S:14-4:11>)->evaluateAt(diagram, tick=43): { [Get2]{}, [Get1]{ <"C":E:6:14-2> -> 0, <"D":E:8:14-2> -> 0}} } -> 0
 Rod2D(<"C!Q&":S:14-4:13>)->evaluateAt(diagram, tick=43): { [Get2]{}, [Get1]{ <"C":E:6:14-2> -> !0, <"Q":E:10:20-2> -> 0}} } -> 0
-43: inputs={
+43 [7.S]: inputs={
      C -> 0,
      D -> 0
   }, outputs={
      Q -> 0
   }
-44: inputs={
+44 [7.D]: inputs={
      C -> 0,
      D -> 0
   }, outputs={
      Q -> 0
   }
 Rod2D(<W:13:7-15>)->evaluateAt(diagram, tick=45): { [Get2]{ <"CD&":S:14-4:11> -> !0, <"C!Q&":S:14-4:13> -> !0}, [Get1]{}} } -> 1
-45: inputs={
+45 [7.W]: inputs={
      C -> 0,
      D -> 0
   }, outputs={
      Q -> 0
   }
 Rod2D(<"=":N:5-15:8>)->evaluateAt(diagram, tick=46): { [Get2]{}, [Get1]{ <W:13:7-15> -> !1}} } -> 0
-46: inputs={
+46 [7.N]: inputs={
      C -> 0,
      D -> 0
   }, outputs={
      Q -> 0
   }
-47: inputs={
+47 [7.U]: inputs={
      C -> 0,
      D -> 0
   }, outputs={
@@ -383,7 +383,7 @@ Rod2D(<"=":N:5-15:8>)->evaluateAt(diagram, tick=46): { [Get2]{}, [Get1]{ <W:13:7
 Rod2D(<"C":E:6:14-2>)->evaluateAt(diagram, tick=48): { [Get2]{}, [Get1]{}}, Input[C] -> 0 } -> 0
 Rod2D(<"D":E:8:14-2>)->evaluateAt(diagram, tick=48): { [Get2]{}, [Get1]{}}, Input[D] -> 0 } -> 0
 Rod2D(<"Q":E:10:20-2>)->evaluateAt(diagram, tick=48): { [Get2]{ <"=":N:5-15:8> -> 0}, [Get1]{}}, 0 -> Output[Q] } -> 0
-48: inputs={
+48 [8.E]: inputs={
      C -> 0,
      D -> 0
   }, outputs={
@@ -391,33 +391,33 @@ Rod2D(<"Q":E:10:20-2>)->evaluateAt(diagram, tick=48): { [Get2]{ <"=":N:5-15:8> -
   }
 Rod2D(<"CD&":S:14-4:11>)->evaluateAt(diagram, tick=49): { [Get2]{}, [Get1]{ <"C":E:6:14-2> -> 0, <"D":E:8:14-2> -> 0}} } -> 0
 Rod2D(<"C!Q&":S:14-4:13>)->evaluateAt(diagram, tick=49): { [Get2]{}, [Get1]{ <"C":E:6:14-2> -> !0, <"Q":E:10:20-2> -> 0}} } -> 0
-49: inputs={
+49 [8.S]: inputs={
      C -> 0,
      D -> 0
   }, outputs={
      Q -> 0
   }
-50: inputs={
+50 [8.D]: inputs={
      C -> 0,
      D -> 0
   }, outputs={
      Q -> 0
   }
 Rod2D(<W:13:7-15>)->evaluateAt(diagram, tick=51): { [Get2]{ <"CD&":S:14-4:11> -> !0, <"C!Q&":S:14-4:13> -> !0}, [Get1]{}} } -> 1
-51: inputs={
+51 [8.W]: inputs={
      C -> 0,
      D -> 0
   }, outputs={
      Q -> 0
   }
 Rod2D(<"=":N:5-15:8>)->evaluateAt(diagram, tick=52): { [Get2]{}, [Get1]{ <W:13:7-15> -> !1}} } -> 0
-52: inputs={
+52 [8.N]: inputs={
      C -> 0,
      D -> 0
   }, outputs={
      Q -> 0
   }
-53: inputs={
+53 [8.U]: inputs={
      C -> 0,
      D -> 0
   }, outputs={
@@ -426,7 +426,7 @@ Rod2D(<"=":N:5-15:8>)->evaluateAt(diagram, tick=52): { [Get2]{}, [Get1]{ <W:13:7
 Rod2D(<"C":E:6:14-2>)->evaluateAt(diagram, tick=54): { [Get2]{}, [Get1]{}}, Input[C] -> 0 } -> 0
 Rod2D(<"D":E:8:14-2>)->evaluateAt(diagram, tick=54): { [Get2]{}, [Get1]{}}, Input[D] -> 1 } -> 1*
 Rod2D(<"Q":E:10:20-2>)->evaluateAt(diagram, tick=54): { [Get2]{ <"=":N:5-15:8> -> 0}, [Get1]{}}, 0 -> Output[Q] } -> 0
-54: inputs={
+54 [9.E]: inputs={
      C -> 0,
      D -> 1
   }, outputs={
@@ -434,33 +434,33 @@ Rod2D(<"Q":E:10:20-2>)->evaluateAt(diagram, tick=54): { [Get2]{ <"=":N:5-15:8> -
   }
 Rod2D(<"CD&":S:14-4:11>)->evaluateAt(diagram, tick=55): { [Get2]{}, [Get1]{ <"C":E:6:14-2> -> 0, <"D":E:8:14-2> -> 1}} } -> 0
 Rod2D(<"C!Q&":S:14-4:13>)->evaluateAt(diagram, tick=55): { [Get2]{}, [Get1]{ <"C":E:6:14-2> -> !0, <"Q":E:10:20-2> -> 0}} } -> 0
-55: inputs={
+55 [9.S]: inputs={
      C -> 0,
      D -> 1
   }, outputs={
      Q -> 0
   }
-56: inputs={
+56 [9.D]: inputs={
      C -> 0,
      D -> 1
   }, outputs={
      Q -> 0
   }
 Rod2D(<W:13:7-15>)->evaluateAt(diagram, tick=57): { [Get2]{ <"CD&":S:14-4:11> -> !0, <"C!Q&":S:14-4:13> -> !0}, [Get1]{}} } -> 1
-57: inputs={
+57 [9.W]: inputs={
      C -> 0,
      D -> 1
   }, outputs={
      Q -> 0
   }
 Rod2D(<"=":N:5-15:8>)->evaluateAt(diagram, tick=58): { [Get2]{}, [Get1]{ <W:13:7-15> -> !1}} } -> 0
-58: inputs={
+58 [9.N]: inputs={
      C -> 0,
      D -> 1
   }, outputs={
      Q -> 0
   }
-59: inputs={
+59 [9.U]: inputs={
      C -> 0,
      D -> 1
   }, outputs={
@@ -469,7 +469,7 @@ Rod2D(<"=":N:5-15:8>)->evaluateAt(diagram, tick=58): { [Get2]{}, [Get1]{ <W:13:7
 Rod2D(<"C":E:6:14-2>)->evaluateAt(diagram, tick=60): { [Get2]{}, [Get1]{}}, Input[C] -> 0 } -> 0
 Rod2D(<"D":E:8:14-2>)->evaluateAt(diagram, tick=60): { [Get2]{}, [Get1]{}}, Input[D] -> 0 } -> 0*
 Rod2D(<"Q":E:10:20-2>)->evaluateAt(diagram, tick=60): { [Get2]{ <"=":N:5-15:8> -> 0}, [Get1]{}}, 0 -> Output[Q] } -> 0
-60: inputs={
+60 [10.E]: inputs={
      C -> 0,
      D -> 0
   }, outputs={
@@ -477,33 +477,33 @@ Rod2D(<"Q":E:10:20-2>)->evaluateAt(diagram, tick=60): { [Get2]{ <"=":N:5-15:8> -
   }
 Rod2D(<"CD&":S:14-4:11>)->evaluateAt(diagram, tick=61): { [Get2]{}, [Get1]{ <"C":E:6:14-2> -> 0, <"D":E:8:14-2> -> 0}} } -> 0
 Rod2D(<"C!Q&":S:14-4:13>)->evaluateAt(diagram, tick=61): { [Get2]{}, [Get1]{ <"C":E:6:14-2> -> !0, <"Q":E:10:20-2> -> 0}} } -> 0
-61: inputs={
+61 [10.S]: inputs={
      C -> 0,
      D -> 0
   }, outputs={
      Q -> 0
   }
-62: inputs={
+62 [10.D]: inputs={
      C -> 0,
      D -> 0
   }, outputs={
      Q -> 0
   }
 Rod2D(<W:13:7-15>)->evaluateAt(diagram, tick=63): { [Get2]{ <"CD&":S:14-4:11> -> !0, <"C!Q&":S:14-4:13> -> !0}, [Get1]{}} } -> 1
-63: inputs={
+63 [10.W]: inputs={
      C -> 0,
      D -> 0
   }, outputs={
      Q -> 0
   }
 Rod2D(<"=":N:5-15:8>)->evaluateAt(diagram, tick=64): { [Get2]{}, [Get1]{ <W:13:7-15> -> !1}} } -> 0
-64: inputs={
+64 [10.N]: inputs={
      C -> 0,
      D -> 0
   }, outputs={
      Q -> 0
   }
-65: inputs={
+65 [10.U]: inputs={
      C -> 0,
      D -> 0
   }, outputs={
@@ -512,179 +512,7 @@ Rod2D(<"=":N:5-15:8>)->evaluateAt(diagram, tick=64): { [Get2]{}, [Get1]{ <W:13:7
 Rod2D(<"C":E:6:14-2>)->evaluateAt(diagram, tick=66): { [Get2]{}, [Get1]{}}, Input[C] -> 0 } -> 0
 Rod2D(<"D":E:8:14-2>)->evaluateAt(diagram, tick=66): { [Get2]{}, [Get1]{}}, Input[D] -> 0 } -> 0
 Rod2D(<"Q":E:10:20-2>)->evaluateAt(diagram, tick=66): { [Get2]{ <"=":N:5-15:8> -> 0}, [Get1]{}}, 0 -> Output[Q] } -> 0
-66: inputs={
-     C -> 0,
-     D -> 0
-  }, outputs={
-     Q -> 0
-  }
-Rod2D(<"CD&":S:14-4:11>)->evaluateAt(diagram, tick=67): { [Get2]{}, [Get1]{ <"C":E:6:14-2> -> 0, <"D":E:8:14-2> -> 0}} } -> 0
-Rod2D(<"C!Q&":S:14-4:13>)->evaluateAt(diagram, tick=67): { [Get2]{}, [Get1]{ <"C":E:6:14-2> -> !0, <"Q":E:10:20-2> -> 0}} } -> 0
-67: inputs={
-     C -> 0,
-     D -> 0
-  }, outputs={
-     Q -> 0
-  }
-68: inputs={
-     C -> 0,
-     D -> 0
-  }, outputs={
-     Q -> 0
-  }
-Rod2D(<W:13:7-15>)->evaluateAt(diagram, tick=69): { [Get2]{ <"CD&":S:14-4:11> -> !0, <"C!Q&":S:14-4:13> -> !0}, [Get1]{}} } -> 1
-69: inputs={
-     C -> 0,
-     D -> 0
-  }, outputs={
-     Q -> 0
-  }
-Rod2D(<"=":N:5-15:8>)->evaluateAt(diagram, tick=70): { [Get2]{}, [Get1]{ <W:13:7-15> -> !1}} } -> 0
-70: inputs={
-     C -> 0,
-     D -> 0
-  }, outputs={
-     Q -> 0
-  }
-71: inputs={
-     C -> 0,
-     D -> 0
-  }, outputs={
-     Q -> 0
-  }
-Rod2D(<"C":E:6:14-2>)->evaluateAt(diagram, tick=72): { [Get2]{}, [Get1]{}}, Input[C] -> 0 } -> 0
-Rod2D(<"D":E:8:14-2>)->evaluateAt(diagram, tick=72): { [Get2]{}, [Get1]{}}, Input[D] -> 0 } -> 0
-Rod2D(<"Q":E:10:20-2>)->evaluateAt(diagram, tick=72): { [Get2]{ <"=":N:5-15:8> -> 0}, [Get1]{}}, 0 -> Output[Q] } -> 0
-72: inputs={
-     C -> 0,
-     D -> 0
-  }, outputs={
-     Q -> 0
-  }
-Rod2D(<"CD&":S:14-4:11>)->evaluateAt(diagram, tick=73): { [Get2]{}, [Get1]{ <"C":E:6:14-2> -> 0, <"D":E:8:14-2> -> 0}} } -> 0
-Rod2D(<"C!Q&":S:14-4:13>)->evaluateAt(diagram, tick=73): { [Get2]{}, [Get1]{ <"C":E:6:14-2> -> !0, <"Q":E:10:20-2> -> 0}} } -> 0
-73: inputs={
-     C -> 0,
-     D -> 0
-  }, outputs={
-     Q -> 0
-  }
-74: inputs={
-     C -> 0,
-     D -> 0
-  }, outputs={
-     Q -> 0
-  }
-Rod2D(<W:13:7-15>)->evaluateAt(diagram, tick=75): { [Get2]{ <"CD&":S:14-4:11> -> !0, <"C!Q&":S:14-4:13> -> !0}, [Get1]{}} } -> 1
-75: inputs={
-     C -> 0,
-     D -> 0
-  }, outputs={
-     Q -> 0
-  }
-Rod2D(<"=":N:5-15:8>)->evaluateAt(diagram, tick=76): { [Get2]{}, [Get1]{ <W:13:7-15> -> !1}} } -> 0
-76: inputs={
-     C -> 0,
-     D -> 0
-  }, outputs={
-     Q -> 0
-  }
-77: inputs={
-     C -> 0,
-     D -> 0
-  }, outputs={
-     Q -> 0
-  }
-Rod2D(<"C":E:6:14-2>)->evaluateAt(diagram, tick=78): { [Get2]{}, [Get1]{}}, Input[C] -> 0 } -> 0
-Rod2D(<"D":E:8:14-2>)->evaluateAt(diagram, tick=78): { [Get2]{}, [Get1]{}}, Input[D] -> 0 } -> 0
-Rod2D(<"Q":E:10:20-2>)->evaluateAt(diagram, tick=78): { [Get2]{ <"=":N:5-15:8> -> 0}, [Get1]{}}, 0 -> Output[Q] } -> 0
-78: inputs={
-     C -> 0,
-     D -> 0
-  }, outputs={
-     Q -> 0
-  }
-Rod2D(<"CD&":S:14-4:11>)->evaluateAt(diagram, tick=79): { [Get2]{}, [Get1]{ <"C":E:6:14-2> -> 0, <"D":E:8:14-2> -> 0}} } -> 0
-Rod2D(<"C!Q&":S:14-4:13>)->evaluateAt(diagram, tick=79): { [Get2]{}, [Get1]{ <"C":E:6:14-2> -> !0, <"Q":E:10:20-2> -> 0}} } -> 0
-79: inputs={
-     C -> 0,
-     D -> 0
-  }, outputs={
-     Q -> 0
-  }
-80: inputs={
-     C -> 0,
-     D -> 0
-  }, outputs={
-     Q -> 0
-  }
-Rod2D(<W:13:7-15>)->evaluateAt(diagram, tick=81): { [Get2]{ <"CD&":S:14-4:11> -> !0, <"C!Q&":S:14-4:13> -> !0}, [Get1]{}} } -> 1
-81: inputs={
-     C -> 0,
-     D -> 0
-  }, outputs={
-     Q -> 0
-  }
-Rod2D(<"=":N:5-15:8>)->evaluateAt(diagram, tick=82): { [Get2]{}, [Get1]{ <W:13:7-15> -> !1}} } -> 0
-82: inputs={
-     C -> 0,
-     D -> 0
-  }, outputs={
-     Q -> 0
-  }
-83: inputs={
-     C -> 0,
-     D -> 0
-  }, outputs={
-     Q -> 0
-  }
-Rod2D(<"C":E:6:14-2>)->evaluateAt(diagram, tick=84): { [Get2]{}, [Get1]{}}, Input[C] -> 0 } -> 0
-Rod2D(<"D":E:8:14-2>)->evaluateAt(diagram, tick=84): { [Get2]{}, [Get1]{}}, Input[D] -> 0 } -> 0
-Rod2D(<"Q":E:10:20-2>)->evaluateAt(diagram, tick=84): { [Get2]{ <"=":N:5-15:8> -> 0}, [Get1]{}}, 0 -> Output[Q] } -> 0
-84: inputs={
-     C -> 0,
-     D -> 0
-  }, outputs={
-     Q -> 0
-  }
-Rod2D(<"CD&":S:14-4:11>)->evaluateAt(diagram, tick=85): { [Get2]{}, [Get1]{ <"C":E:6:14-2> -> 0, <"D":E:8:14-2> -> 0}} } -> 0
-Rod2D(<"C!Q&":S:14-4:13>)->evaluateAt(diagram, tick=85): { [Get2]{}, [Get1]{ <"C":E:6:14-2> -> !0, <"Q":E:10:20-2> -> 0}} } -> 0
-85: inputs={
-     C -> 0,
-     D -> 0
-  }, outputs={
-     Q -> 0
-  }
-86: inputs={
-     C -> 0,
-     D -> 0
-  }, outputs={
-     Q -> 0
-  }
-Rod2D(<W:13:7-15>)->evaluateAt(diagram, tick=87): { [Get2]{ <"CD&":S:14-4:11> -> !0, <"C!Q&":S:14-4:13> -> !0}, [Get1]{}} } -> 1
-87: inputs={
-     C -> 0,
-     D -> 0
-  }, outputs={
-     Q -> 0
-  }
-Rod2D(<"=":N:5-15:8>)->evaluateAt(diagram, tick=88): { [Get2]{}, [Get1]{ <W:13:7-15> -> !1}} } -> 0
-88: inputs={
-     C -> 0,
-     D -> 0
-  }, outputs={
-     Q -> 0
-  }
-89: inputs={
-     C -> 0,
-     D -> 0
-  }, outputs={
-     Q -> 0
-  }
-Rod2D(<"C":E:6:14-2>)->evaluateAt(diagram, tick=90): { [Get2]{}, [Get1]{}}, Input[C] -> 0 } -> 0
-Rod2D(<"D":E:8:14-2>)->evaluateAt(diagram, tick=90): { [Get2]{}, [Get1]{}}, Input[D] -> 0 } -> 0
-Rod2D(<"Q":E:10:20-2>)->evaluateAt(diagram, tick=90): { [Get2]{ <"=":N:5-15:8> -> 0}, [Get1]{}}, 0 -> Output[Q] } -> 0
-90: inputs={
+66 [11.E]: inputs={
      C -> 0,
      D -> 0
   }, outputs={

@@ -22,7 +22,11 @@ using std::string;
 #include <unistd.h>
 
 #include "diagram2d.h"
+#include "edged_bool.h"
+#define EBQT EdgedBool::QueryType
 
+EBQT optLogStateOnLabelState = EBQT::eoQueryType;
+string optLogStateOnLabel = "";
 bool optLittleEndian = false;
 bool optCycleCountSet = false;
 bool optShowDebugOutput = false;
@@ -376,19 +380,22 @@ void processDiagramFrom(istream &in, map<string, vector<int>> const &inputs) {
   }
 
   if (!inputs.empty()) {
-    int const allowedPhasesWithoutChanges = 16;
+    int const allowedPhasesWithoutChanges = 6;
     int nPhasesWithoutChanges = 0;
     int nPhasesWithoutInputs = 0;
-    Label ready("Ready");
+    Label label(optLogStateOnLabelState != EBQT::eoQueryType ?
+                optLogStateOnLabel : ""
+               );
 
     // fprintf(stdout, "Executing up to %d cycles....\n", maxInputLength);
     // while (diagram.CurrentTick() < (maxInputLength * int(eoDirections))) {
-    while ((0 < optCycleCount &&
-            ((diagram.CurrentTick() % int(eoDirections)) < optCycleCount)
-           ) ||
-           diagram.hasUnreadInput()
-          )
-    {
+    while (diagram.hasUnreadInput()) {
+      if (0 < optCycleCount) {
+        if (optCycleCount < (diagram.CurrentTick() / int(eoDirections))) {
+          break;
+        }
+      }
+
       if (!diagram.rodsWereChangedDuringLastEvaluation()) {
         nPhasesWithoutChanges += 1;
         if (allowedPhasesWithoutChanges * int(eoDirections) <=
@@ -397,22 +404,24 @@ void processDiagramFrom(istream &in, map<string, vector<int>> const &inputs) {
         {
           fprintf(stdout,
                   "Bailing early (cycle %d): "
-                  "the last %d tick(s) had no rod changes....\n",
-                  diagram.CurrentTick() % int(eoDirections),
-		  allowedPhasesWithoutChanges
+                  "the last %d cycle(s) had no rod changes....\n",
+                  diagram.CurrentTick() / int(eoDirections),
+        	  allowedPhasesWithoutChanges
                   );
           break;
-	}
+        }
       } else {
-	nPhasesWithoutChanges = 0;
+        nPhasesWithoutChanges = 0;
       }
 
       diagram.evaluate();
 
-      if (// optShowStateEveryTick ||
-	  // diagram.inputsWereReadDuringLastEvaluation() ||
-	  // diagram.outputsWereWrittenDuringLastEvaluation() ||
-          diagram.getOutputFor(ready).isALeadingEdge()
+      // diagram.inputsWereReadDuringLastEvaluation() ||
+      // diagram.outputsWereWrittenDuringLastEvaluation() ||
+      if ((optLogStateOnLabelState != EBQT::eoQueryType &&
+           diagram.getOutputFor(label).is(optLogStateOnLabelState)
+          ) ||
+          optShowStateEveryTick
 	 )
       {
 	diagram.dumpState();
@@ -437,14 +446,19 @@ void Usage(bool terminate) {
           "\
 %s [ <option>... ] [ <diagram>... ]\n\
 where <option> is:\n\
+-/ <label>	Log state when <label> changes from 0 to 1 (default: no) [%s].\n\
+-\\ <label>	Log state when <label> changes from 1 to 0 (default: no) [%s].\n\
 -0		Set the default initial value of a rod to 0 (default: false) [%s].\n\
 -1		Set the default initial value of a rod to 1 (default: true) [%s].\n\
 -b		Assume Big Endian for multi-rod variables (default: on) [%s].\n\
 -c <n>		Execute up to <n> cycles (default: 0; execute until input is exhausted) [%d].\n\
 -d		Log debug output (in addition to input and output) variables (default: no) [%s].\n\
 -e		Log rod evaluation (default: no) [%s].\n\
+-H <label>	Log state when <label> == 1 (default: no) [%s].\n\
+-h		Show this usage.\n\
 -i <path>	Read (variable-per-row) input from <path>, without echo (default: no) [%s].\n\
 -I <path>	Read (variable-per-row) input from <path>, with echo (default: no) [%s].\n\
+-L <label>	Log state when <label> == 0 (default: no) [%s].\n\
 -l		Assume Little Endian for multi-rod variables (default: off) [%s].\n\
 -p		Log performance metrics (default: off) [%s].\n\
 -r		Log rods (default: off) [%s].\n\
@@ -455,14 +469,22 @@ where <option> is:\n\
 -w		Log verification warnings (default: no) [%s].\n\
 ",
           ARGV0,
+          optLogStateOnLabelState == EBQT::aLeadingEdge ?
+              optLogStateOnLabel.c_str() : "",
+          optLogStateOnLabelState == EBQT::aTrailingEdge ?
+              optLogStateOnLabel.c_str() : "",
           optRodsInitialValue ? "" : "-0",
           optRodsInitialValue ? "-1" : "",
           optLittleEndian ? "" : "-b",
           optCycleCount,
           optShowDebugOutput ? "-d" : "",
           optShowEvaluatingRods ? "-e" : "",
+          optLogStateOnLabelState == EBQT::aHi ?
+              optLogStateOnLabel.c_str() : "",
           !optInputPath.empty() && !optEchoInput ? optInputPath.c_str() : "",
           !optInputPath.empty() &&  optEchoInput ? optInputPath.c_str() : "",
+          optLogStateOnLabelState == EBQT::aLo ?
+              optLogStateOnLabel.c_str() : "",
           optLittleEndian ? "-l" : "",
           optShowPerformance ? "-p" : "",
           optShowRods ? "-s" : "",
@@ -482,80 +504,96 @@ int main(int argc, char *const argv[]) {
 
   bool optShowHelp = false;
   int c;
-  while ((c = getopt(argc, argv, "01bc:dehi:I:lprsSt:T:w")) != -1) {
+  while ((c = getopt(argc, argv, "/:\\:01bc:deH:hi:I:L:lprsSt:T:w")) != -1) {
     switch (c) {
-      case '0':
-        optRodsInitialValue = false;
-        break;
-      case '1':
-        optRodsInitialValue = true;
-        break;
-      case 'b':
-        optLittleEndian = false;
-        break;
-      case 'c':
-        if (sscanf(optarg, "%i", &optCycleCount) != 1) {
-          fprintf(stderr, "cam.r: Error: Option -%c requires a [decimal] integer argument.\n", c);
-          return 1;
-        }
-        optCycleCountSet = true;
-        break;
-      case 'd':
-        optShowDebugOutput = true;
-        break;
-      case 'e':
-        optShowEvaluatingRods = true;
-        break;
-      case 'h':
-        optShowHelp = true;
-        break;
-      case 'i':
-        optInputPath = optarg;
-	optEchoInput = false;
-        break;
-      case 'I':
-        optInputPath = optarg;
-	optEchoInput = true;
-        break;
-      case 'l':
-        optLittleEndian = true;
-        break;
-      case 'p':
-	optShowPerformance = true;
-	break;
-      case 'r':
-        optShowRods = true;
-        break;
-      case 's':
-        optShowChangedStateEveryTick = false;
-        optShowStateEveryTick = true;
-	break;
-      case 'S':
-        optShowChangedStateEveryTick = true;
-        optShowStateEveryTick = true;
-	break;
-      case 't':
-        optTableInputPath = optarg;
-	optEchoInput = false;
-        break;
-      case 'T':
-        optTableInputPath = optarg;
-	optEchoInput = true;
-        break;
-      case 'w':
-        optWarnings = true;
-        break;
-      case '?':
-        if (optopt == 'c') {
-          fprintf(stderr, "cam.r: Error: Option -%c requires an argument.\n", optopt);
-        } else if (isprint(optopt)) {
-          fprintf(stderr, "cam.r: Error: Unknown option `-%c'.\n", optopt);
-        } else {
-          fprintf(stderr, "cam.r: Error: Unknown option character `\\x%x'.\n", optopt);
-        }
+    case '/':
+      optLogStateOnLabelState = EBQT::aLeadingEdge;
+      optLogStateOnLabel = optarg;
+      break;
+    case '\\':
+      optLogStateOnLabelState = EBQT::aTrailingEdge;
+      optLogStateOnLabel = optarg;
+      break;
+    case '0':
+      optRodsInitialValue = false;
+      break;
+    case '1':
+      optRodsInitialValue = true;
+      break;
+    case 'b':
+      optLittleEndian = false;
+      break;
+    case 'c':
+      if (sscanf(optarg, "%i", &optCycleCount) != 1) {
+        fprintf(stderr, "cam.r: Error: Option -%c requires a [decimal] integer argument.\n", c);
         return 1;
-      default:
-        abort();
+      }
+      optCycleCountSet = true;
+      break;
+    case 'd':
+      optShowDebugOutput = true;
+      break;
+    case 'e':
+      optShowEvaluatingRods = true;
+      break;
+    case 'H':
+      optLogStateOnLabelState = EBQT::aHi;
+      optLogStateOnLabel = optarg;
+      break;
+    case 'h':
+      optShowHelp = true;
+      break;
+    case 'i':
+      optInputPath = optarg;
+      optEchoInput = false;
+      break;
+    case 'I':
+      optInputPath = optarg;
+      optEchoInput = true;
+      break;
+    case 'L':
+      optLogStateOnLabelState = EBQT::aLo;
+      optLogStateOnLabel = optarg;
+      break;
+    case 'l':
+      optLittleEndian = true;
+      break;
+    case 'p':
+      optShowPerformance = true;
+      break;
+    case 'r':
+      optShowRods = true;
+      break;
+    case 's':
+      optShowChangedStateEveryTick = false;
+      optShowStateEveryTick = true;
+      break;
+    case 'S':
+      optShowChangedStateEveryTick = true;
+      optShowStateEveryTick = true;
+      break;
+    case 't':
+      optTableInputPath = optarg;
+      optEchoInput = false;
+      break;
+    case 'T':
+      optTableInputPath = optarg;
+      optEchoInput = true;
+      break;
+    case 'w':
+      optWarnings = true;
+      break;
+    case '?':
+      if (optopt == 'c') {
+        fprintf(stderr, "cam.r: Error: Option -%c requires an argument.\n", optopt);
+      } else if (isprint(optopt)) {
+        fprintf(stderr, "cam.r: Error: Unknown option `-%c'.\n", optopt);
+      } else {
+        fprintf(stderr, "cam.r: Error: Unknown option character `\\x%x'.\n", optopt);
+      }
+      return 1;
+    default:
+      abort();
     }
   }
 
@@ -567,6 +605,22 @@ int main(int argc, char *const argv[]) {
   fprintf(stdout, " -%s", optRodsInitialValue ? "1" : "0");
   fprintf(stdout, " -%s", optLittleEndian ? "l" : "b");
   fprintf(stdout, " -c %d", optCycleCount);
+  switch (optLogStateOnLabelState) {
+  case EBQT::eoQueryType:
+    break;
+  case EBQT::aLeadingEdge:
+    fprintf(stdout, " -/ %s", optLogStateOnLabel.c_str());
+    break;
+  case EBQT::aHi:
+    fprintf(stdout, " -H %s", optLogStateOnLabel.c_str());
+    break;
+  case EBQT::aTrailingEdge:
+    fprintf(stdout, " -\\ %s", optLogStateOnLabel.c_str());
+    break;
+  case EBQT::aLo:
+    fprintf(stdout, " -L %s", optLogStateOnLabel.c_str());
+    break;
+  }
   if (optShowDebugOutput) {
     fprintf(stdout, " -d");
   }

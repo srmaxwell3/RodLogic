@@ -17,7 +17,7 @@ ALL_OBJS = \
 	rod_connection.o \
 	rod2d.o
 
-all:	cam.r test.74181 test.16x16bytes
+all:	cam.r test.dcff test.74181 test.16x16bytes
 
 clean:
 	$(RM) $(ALL_OBJS) 74181.log 16x16bytes.log
@@ -66,6 +66,11 @@ rod2d.o: \
 	rod2d.h \
 	directions.h
 	$(CXX) -c rod2d.cc
+
+test.dcff:	dcff.txt dcff.input.txt dcff.log.good
+	./cam.r -c 15 -e -i dcff.input.txt -s dcff.txt > dcff.log
+	diff -c dcff.log.good dcff.log
+
 
 test.74181:	74181.txt 74181.log.good
 	./cam.r 74181.txt > 74181.log

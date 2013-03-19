@@ -968,7 +968,12 @@ void PlaneOfInt::Dump() const {
  }
 
  void Diagram2D::dumpState() {
-   fprintf(stdout, "%d: inputs={", lastEvaluatedTick);
+   fprintf(stdout, 
+           "%ld [%ld.%s]: inputs={",
+           lastEvaluatedTick,
+           lastEvaluatedTick / eoDirections,
+           c_str(Directions(lastEvaluatedTick % eoDirections))
+          );
    bool dumpedALabel = false;
    char const *comma = "\n    ";
    if (!currentInputs.empty()) {
@@ -1165,6 +1170,12 @@ void PlaneOfInt::Dump() const {
  size_t Diagram2D::maxUnreadInput()const {
    size_t result = 0;
    for (auto const &i : currentInputs) {
+     // fprintf(stderr,
+     //         "%s has %lu remaining inputs.\n",
+     //         i.first.ToString().c_str(),
+     //         i.second.size()
+     //        );
+
      result = std::max(result, i.second.size());
    }
    return result;
