@@ -867,3 +867,9 @@ void Rod2D::dump(Diagram2D const &diagram) const {
   fprintf(stdout, "}");
   fprintf(stdout, "\n");
 }
+
+void Rod2D::Rebuild(Diagram2D const &diagram, PlaneOfInt &plane) const {
+  for (auto const &p : *this) {
+    plane[p.y][p.x] = diagram.at(p);
+  }
+}

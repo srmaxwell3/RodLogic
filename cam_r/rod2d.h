@@ -13,6 +13,7 @@ using std::string;
 #include "label.h"
 #include "rod_connection.h"
 
+struct PlaneOfInt;
 struct Diagram2D;
 struct Rod2D;
 typedef set<Rod2D *> SetOfRod2Ds;
@@ -53,6 +54,8 @@ class Rod2D : public SetOfP2Ds {
   bool hasChanged() const;
 
   void dump(Diagram2D const &diagram) const;
+
+  void Rebuild(Diagram2D const &diagram, PlaneOfInt &plane) const;
 
  private:
   bool findHeadLabel(Diagram2D const &diagram);

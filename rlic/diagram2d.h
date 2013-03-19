@@ -24,6 +24,25 @@ using std::vector;
 struct Rod2D;
 typedef set<Rod2D *> SetOfRod2Ds;
 
+struct PlaneOfInt : public vector<vector<int>> {
+  PlaneOfInt(size_t _yMax, size_t _xMax);
+
+  void insertRow(size_t atY);
+  void insertCol(size_t atX);
+  void deleteRow(size_t atY);
+  void deleteCol(size_t atX);
+  bool compareRowAndRowBelow(size_t atY) const;
+  bool compareColAndColToRight(size_t atX) const;
+  bool isRowEmpty(size_t atY) const;
+  bool isColEmpty(size_t atX) const;
+  bool isRowSqueezable(size_t atY) const;
+  bool isColSqueezable(size_t atX) const;
+  void Dump() const;
+
+  size_t yMax;
+  size_t xMax;
+};
+
 struct Diagram2D : public vector<string> {
   Diagram2D(istream &in);
 
@@ -104,13 +123,32 @@ struct Diagram2D : public vector<string> {
 
   void refactor();
 
-  bool dumpInputLabelState(Label const &label, char const *comma, CombinedLabel const *&lastCLabel);
-  bool dumpOutputLabelState(Label const &label, char const *comma, CombinedLabel const *&lastCLabel);
-  bool dumpDebugOutputLabelState(Label const &label, char const *comma, CombinedLabel const *&lastCLabel);
-  bool dumpLabelState(int isIOD, Label const &label, char const *comma, CombinedLabel const *&lastCLabel);
+  bool dumpInputLabelState
+    (Label const &label,
+     char const *comma,
+     CombinedLabel const *&lastCLabel
+    );
+  bool dumpOutputLabelState
+    (Label const &label,
+     char const *comma,
+     CombinedLabel const *&lastCLabel
+    );
+  bool dumpDebugOutputLabelState
+    (Label const &label,
+     char const *comma,
+     CombinedLabel const *&lastCLabel
+    );
+  bool dumpLabelState
+    (int isIOD,
+     Label const &label,
+     char const *comma,
+     CombinedLabel const *&lastCLabel
+    );
   void dumpState();
   void dumpPerformance() const;
   void dump() const;
+
+  void Rebuild(PlaneOfInt &plane) const;
 
   static bool isLegalEWChar(char c);
   static bool isLegalSNChar(char c);

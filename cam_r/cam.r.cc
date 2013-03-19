@@ -366,64 +366,6 @@ void processDiagramFrom(istream &in, map<string, vector<int>> const &inputs) {
   diagram.dump();
   diagram.refactor();
 
-  // for (unsigned s = 0; s < 16; s += 1) {
-  //   for (unsigned m = 0; m < 2; m += 1) {
-  //     for (unsigned c = 0; c < 2; c += 1) {
-  //       for (unsigned b = 0; b < 16; b += 1) {
-  //         for (unsigned a = 0; a < 16; a += 1) {
-  //           diagram.addInputFor("A0", a & 1);
-  //           diagram.addInputFor("A1", a & 2);
-  //           diagram.addInputFor("A2", a & 4);
-  //           diagram.addInputFor("A3", a & 8);
-  //           diagram.addInputFor("B0", b & 1);
-  //           diagram.addInputFor("B1", b & 2);
-  //           diagram.addInputFor("B2", b & 4);
-  //           diagram.addInputFor("B3", b & 8);
-  //           diagram.addInputFor("C0", c & 1);
-  //           diagram.addInputFor("M",  m & 1);
-  //           diagram.addInputFor("S0", s & 1);
-  //           diagram.addInputFor("S1", s & 2);
-  //           diagram.addInputFor("S2", s & 4);
-  //           diagram.addInputFor("S3", s & 8);
-  //         }
-  //       }
-  //     }
-  //   }
-  // }
-  //
-  // for (bool oldReady = diagram.getOutputFor("Ready"), newReady = true;
-  //      /* diagram.CurrentTick() < 100000 && */ diagram.hasInputFor("A0");
-  //      oldReady = newReady, newReady = diagram.getOutputFor("Ready")
-  //     )
-  // {
-  //   if (!oldReady && newReady) {
-  //     diagram.dumpState();
-  //     diagram.addInputFor("Start", true);
-  //   }
-  //   diagram.evaluate();
-  // }
-  // diagram.setInputFor("MAdr.XX.0", { 0, 1, 0, 1, 0, 1 });
-  // diagram.setInputFor("MAdr.XX.1", { 0, 0, 0, 0, 0, 0 });
-  // diagram.setInputFor("MAdr.XX.2", { 0, 0, 0, 0, 0, 0 });
-  // diagram.setInputFor("MAdr.XX.3", { 0, 0, 0, 0, 0, 0 });
-  // diagram.setInputFor("MAdr.XX.4", { 0, 0, 0, 0, 0, 0 });
-  // diagram.setInputFor("MAdr.XX.5", { 0, 0, 0, 0, 0, 0 });
-  // diagram.setInputFor("MAdr.XX.6", { 0, 0, 0, 0, 0, 0 });
-  // diagram.setInputFor("MAdr.XX.7", { 0, 0, 0, 0, 0, 0 });
-  // diagram.setInputFor("MDWr.bb.0", { 0, 0, 1, 1, 0, 0 });
-  // diagram.setInputFor("MDWr.bb.1", { 0, 0, 1, 0, 0, 0 });
-  // diagram.setInputFor("MDWr.bb.2", { 0, 0, 1, 1, 0, 0 });
-  // diagram.setInputFor("MDWr.bb.3", { 0, 0, 1, 1, 0, 0 });
-  // diagram.setInputFor("MDWr.bb.4", { 0, 0, 1, 0, 0, 0 });
-  // diagram.setInputFor("MDWr.bb.5", { 0, 0, 1, 1, 0, 0 });
-  // diagram.setInputFor("MDWr.bb.6", { 0, 0, 1, 0, 0, 0 });
-  // diagram.setInputFor("MDWr.bb.7", { 0, 0, 1, 0, 0, 0 });
-  // diagram.setInputFor("Read",      { 1, 1, 0, 0, 1, 1 });
-  // diagram.setInputFor("Write",     { 0, 0, 1, 1, 0, 0 });
-  // while (diagram.CurrentTick() < 100 && diagram.hasInputFor("Read")) {
-  //   diagram.evaluate();
-  // }
-
   int maxInputLength = optCycleCount;
   for (auto const &nameAndValues : inputs) {
     string const &name = nameAndValues.first;
@@ -437,20 +379,27 @@ void processDiagramFrom(istream &in, map<string, vector<int>> const &inputs) {
     int const allowedPhasesWithoutChanges = 16;
     int nPhasesWithoutChanges = 0;
     int nPhasesWithoutInputs = 0;
+    Label ready("Ready");
 
     // fprintf(stdout, "Executing up to %d cycles....\n", maxInputLength);
     // while (diagram.CurrentTick() < (maxInputLength * int(eoDirections))) {
-    while ((0 < optCycleCount && ((diagram.CurrentTick() % int(eoDirections)) < optCycleCount)) ||
+    while ((0 < optCycleCount &&
+            ((diagram.CurrentTick() % int(eoDirections)) < optCycleCount)
+           ) ||
            diagram.hasUnreadInput()
           )
     {
       if (!diagram.rodsWereChangedDuringLastEvaluation()) {
         nPhasesWithoutChanges += 1;
-        if (allowedPhasesWithoutChanges * int(eoDirections) <= nPhasesWithoutChanges) {
+        if (allowedPhasesWithoutChanges * int(eoDirections) <=
+            nPhasesWithoutChanges
+           )
+        {
           fprintf(stdout,
-                  "Bailing early (cycle %d): the last %d cycle(s) had no rod changes....\n",
-		  allowedPhasesWithoutChanges,
-                  diagram.CurrentTick()
+                  "Bailing early (cycle %d): "
+                  "the last %d tick(s) had no rod changes....\n",
+                  diagram.CurrentTick() % int(eoDirections),
+		  allowedPhasesWithoutChanges
                   );
           break;
 	}
@@ -458,25 +407,12 @@ void processDiagramFrom(istream &in, map<string, vector<int>> const &inputs) {
 	nPhasesWithoutChanges = 0;
       }
 
-      // if (!diagram.unreadInputsWereReadDuringLastEvaluation()) {
-      //   nPhasesWithoutInputs += 1;
-      //   if (allowedPhasesWithoutChanges * int(eoDirections) <= nPhasesWithoutInputs) {
-      //     fprintf(stdout,
-      //             "Bailing early (cycle %d): the last %d cycle(s) had no rod inputs....\n",
-      // 		  allowedPhasesWithoutChanges,
-      //             diagram.CurrentTick()
-      //             );
-      //     break;
-      // 	}
-      // } else {
-      // 	nPhasesWithoutInputs = 0;
-      // }
-
       diagram.evaluate();
 
-      if (optShowStateEveryTick ||
-	  diagram.inputsWereReadDuringLastEvaluation() ||
-	  diagram.outputsWereWrittenDuringLastEvaluation()
+      if (// optShowStateEveryTick ||
+	  // diagram.inputsWereReadDuringLastEvaluation() ||
+	  // diagram.outputsWereWrittenDuringLastEvaluation() ||
+          diagram.getOutputFor(ready).isALeadingEdge()
 	 )
       {
 	diagram.dumpState();
@@ -488,6 +424,9 @@ void processDiagramFrom(istream &in, map<string, vector<int>> const &inputs) {
     }
   } else {
     fprintf(stdout, "Not executing (optCycleCount == %d).\n", optCycleCount);
+
+    PlaneOfInt plane(diagram.yMax, diagram.xMax);
+    diagram.Rebuild(plane);
   }
 }
 
