@@ -6,6 +6,7 @@ CXX = g++ -std=c++0x $(DEBUG) $(OPT)
 endif
 DEBUG = -g
 OPT = -O0
+LIBS = -lncurses
 
 ALL_OBJS = \
 	cam.r.o \
@@ -25,7 +26,7 @@ clobber:	clean
 	$(RM) ./cam.r
 
 cam.r:	$(ALL_OBJS)
-	$(CXX) -o cam.r $(ALL_OBJS)
+	$(CXX) -o cam.r $(ALL_OBJS) $(LIBS)
 
 cam.r.o: \
 	cam.r.cc \
