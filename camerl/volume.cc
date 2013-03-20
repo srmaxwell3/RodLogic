@@ -17,6 +17,7 @@ using std::chrono::CHRONO_CLOCK;
 #include "tickpercycleproperties.h"
 #include "volume.h"
 
+extern bool optDelayMSecSet;
 extern bool optShowPerformance;
 extern bool optVerbose;
 
@@ -121,97 +122,97 @@ void Volume::PrintViewFlat() const {
   int v = whichView % 2;
   ViewFlat(views[v]);
 
-#if 1
-  mvprintw(0, 0,
-          "Clock: %d, tick %s (cycle: %d, phase: %s, minor tick: %s)\n",
-          CurrentClock(),
-          toConstCharPointer(CurrentTickPerCycle()),
-          CurrentCycle(),
-          toConstCharPointer(CurrentPhasePerCycle()),
-          toConstCharPointer(CurrentTickPerPhase())
-         );
-  printw("   ");
-  for (int c = 0; c < NCols; c += 1) {
-    if (int cc = (c / 10) % 10) {
-      printw("%1d", cc);
-    } else {
-      printw(" ");
-    }
-  }
-  printw("\n   ");
-  for (int c = 0; c < NCols; c += 1) {
-    printw("%1d", c % 10);
-  }
-  printw("\n");
-  for (int r = 0; r < NRows; r += 1) {
-    printw("%2d ", r % 100);
+  if (optDelayMSecSet) {
+    mvprintw(0, 0,
+             "Clock: %d, tick %s (cycle: %d, phase: %s, minor tick: %s)\n",
+             CurrentClock(),
+             toConstCharPointer(CurrentTickPerCycle()),
+             CurrentCycle(),
+             toConstCharPointer(CurrentPhasePerCycle()),
+             toConstCharPointer(CurrentTickPerPhase())
+             );
+    printw("   ");
     for (int c = 0; c < NCols; c += 1) {
-      if (0 < whichView && views[v][r][c] != views[v ^ 1][r][c]) {
-        addch(views[v][r][c] | A_BOLD);
+      if (int cc = (c / 10) % 10) {
+        printw("%1d", cc);
       } else {
-        printw("%c", views[v][r][c]);
+        printw(" ");
       }
     }
-    printw(" %2d\n", r % 100);
-  }
-  printw("   ");
-  for (int c = 0; c < NCols; c += 1) {
-    if (int cc = (c / 10) % 10) {
-      printw("%1d", cc);
-    } else {
-      printw(" ");
-    }
-  }
-  printw("\n   ");
-  for (int c = 0; c < NCols; c += 1) {
-    printw("%1d", c % 10);
-  }
-  printw("\n");
-  refresh();
-  whichView += 1;
-#else
-  fprintf(stdout,
-          "Clock: %d, tick %s (cycle: %d, phase: %s, minor tick: %s)\n",
-          CurrentClock(),
-          toConstCharPointer(CurrentTickPerCycle()),
-          CurrentCycle(),
-          toConstCharPointer(CurrentPhasePerCycle()),
-          toConstCharPointer(CurrentTickPerPhase())
-         );
-  fprintf(stdout, "   ");
-  for (int c = 0; c < NCols; c += 1) {
-    if (int cc = (c / 10) % 10) {
-      fprintf(stdout, "%1d", cc);
-    } else {
-      fprintf(stdout, " ");
-    }
-  }
-  fprintf(stdout, "\n   ");
-  for (int c = 0; c < NCols; c += 1) {
-    fprintf(stdout, "%1d", c % 10);
-  }
-  fprintf(stdout, "\n");
-  for (int r = 0; r < NRows; r += 1) {
-    fprintf(stdout, "%2d ", r % 100);
+    printw("\n   ");
     for (int c = 0; c < NCols; c += 1) {
-      fprintf(stdout, "%c", view[r][c]);
+      printw("%1d", c % 10);
     }
-    fprintf(stdout, " %2d\n", r % 100);
-  }
-  fprintf(stdout, "   ");
-  for (int c = 0; c < NCols; c += 1) {
-    if (int cc = (c / 10) % 10) {
-      fprintf(stdout, "%1d", cc);
-    } else {
-      fprintf(stdout, " ");
+    printw("\n");
+    for (int r = 0; r < NRows; r += 1) {
+      printw("%2d ", r % 100);
+      for (int c = 0; c < NCols; c += 1) {
+        if (0 < whichView && views[v][r][c] != views[v ^ 1][r][c]) {
+          addch(views[v][r][c] | A_BOLD);
+        } else {
+          printw("%c", views[v][r][c]);
+        }
+      }
+      printw(" %2d\n", r % 100);
     }
+    printw("   ");
+    for (int c = 0; c < NCols; c += 1) {
+      if (int cc = (c / 10) % 10) {
+        printw("%1d", cc);
+      } else {
+        printw(" ");
+      }
+    }
+    printw("\n   ");
+    for (int c = 0; c < NCols; c += 1) {
+      printw("%1d", c % 10);
+    }
+    printw("\n");
+    refresh();
+    whichView += 1;
+  } else {
+    fprintf(stdout,
+            "Clock: %d, tick %s (cycle: %d, phase: %s, minor tick: %s)\n",
+            CurrentClock(),
+            toConstCharPointer(CurrentTickPerCycle()),
+            CurrentCycle(),
+            toConstCharPointer(CurrentPhasePerCycle()),
+            toConstCharPointer(CurrentTickPerPhase())
+            );
+    fprintf(stdout, "   ");
+    for (int c = 0; c < NCols; c += 1) {
+      if (int cc = (c / 10) % 10) {
+        fprintf(stdout, "%1d", cc);
+      } else {
+        fprintf(stdout, " ");
+      }
+    }
+    fprintf(stdout, "\n   ");
+    for (int c = 0; c < NCols; c += 1) {
+      fprintf(stdout, "%1d", c % 10);
+    }
+    fprintf(stdout, "\n");
+    for (int r = 0; r < NRows; r += 1) {
+      fprintf(stdout, "%2d ", r % 100);
+      for (int c = 0; c < NCols; c += 1) {
+        fprintf(stdout, "%c", views[v][r][c]);
+      }
+      fprintf(stdout, " %2d\n", r % 100);
+    }
+    fprintf(stdout, "   ");
+    for (int c = 0; c < NCols; c += 1) {
+      if (int cc = (c / 10) % 10) {
+        fprintf(stdout, "%1d", cc);
+      } else {
+        fprintf(stdout, " ");
+      }
+    }
+    fprintf(stdout, "\n   ");
+    for (int c = 0; c < NCols; c += 1) {
+      fprintf(stdout, "%1d", c % 10);
+    }
+    fprintf(stdout, "\n\n");
   }
-  fprintf(stdout, "\n   ");
-  for (int c = 0; c < NCols; c += 1) {
-    fprintf(stdout, "%1d", c % 10);
-  }
-  fprintf(stdout, "\n\n");
-#endif
 }
 
 void Volume::ViewFlat(ViewLvlArray &view) const {

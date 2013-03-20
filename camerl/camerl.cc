@@ -611,27 +611,29 @@ int main(int argc, char *const argv[]) {
     }
   }
 
-  fprintf(stdout, "%s -c %d", argv[0], optCycleCount);
-  if (optShowEvaluatingRods) {
-    fprintf(stdout, " -e");
-  }
-  if (!optInputPath.empty()) {
-    fprintf(stdout, " -i %s", optInputPath.c_str());
-  }
-  if (optShowRods) {
-    fprintf(stdout, " -s");
-  }
-  if (!optTableInputPath.empty()) {
-    fprintf(stdout, " -t %s", optTableInputPath.c_str());
-  }
-  if (optind < argc) {
-    for (int a = optind; a < argc; a += 1) {
-      fprintf(stdout, " %s", argv[a]);
+  if (!optDelayMSecSet) {
+    fprintf(stdout, "%s -c %d", argv[0], optCycleCount);
+    if (optShowEvaluatingRods) {
+      fprintf(stdout, " -e");
     }
-  } else {
-    fprintf(stdout, " <stdin>");
+    if (!optInputPath.empty()) {
+      fprintf(stdout, " -i %s", optInputPath.c_str());
+    }
+    if (optShowRods) {
+      fprintf(stdout, " -s");
+    }
+    if (!optTableInputPath.empty()) {
+      fprintf(stdout, " -t %s", optTableInputPath.c_str());
+    }
+    if (optind < argc) {
+      for (int a = optind; a < argc; a += 1) {
+        fprintf(stdout, " %s", argv[a]);
+      }
+    } else {
+      fprintf(stdout, " <stdin>");
+    }
+    fprintf(stdout, "\n");
   }
-  fprintf(stdout, "\n");
 
   for (size_t i = 0; i < eoVoxel; i += 1) {
     Voxel v = Voxel(i);
@@ -645,16 +647,25 @@ int main(int argc, char *const argv[]) {
 
   volume.AddInput
       (VoxelCoordinant(2,  8, 0),
-       { dsSet0, dsSet0, dsSet0, dsSet0, dsSet1, dsSet0, dsSet1, dsSet0 }
+       { dsSet0, dsSet1, dsSet0, dsSet1,
+         dsSet0, dsSet0, dsSet0, dsSet1,
+         dsSet0, dsSet1, dsSet0, dsSet0
+       }
       );
   volume.AddInput
       (VoxelCoordinant(2, 12, 0),
-       { dsSet0, dsSet0, dsSet1, dsSet0, dsSet0, dsSet0, dsSet1, dsSet0 }
+       { dsSet0, dsSet0, dsSet0, dsSet1,
+         dsSet0, dsSet1, dsSet0, dsSet0,
+         dsSet0, dsSet1, dsSet0, dsSet0
+       }
       );
 
-  initscr();			// Start curses mode
-  mvprintw(0, 0, "Press any key to start.");
-  refresh();
+  if (optDelayMSecSet) {
+   initscr();			// Start curses mode
+   mvprintw(0, 0, "Press any key to start.");
+   getch();
+   refresh();
+  }
 
   for (size_t t = 0; t < (8 * NTicksPerCycle); t += 1) {
     volume.PrintViewFlat();
@@ -667,13 +678,16 @@ int main(int argc, char *const argv[]) {
     }
   }
   volume.PrintViewFlat();
-  volume.DumpUnusedRules();
-  volume.DumpPerformance();
 
-  refresh();
-  mvprintw(0, 0, "Press any key to exit.");
-  refresh();
-  getch();
-  endwin();
+  if (optDelayMSec) {
+    refresh();
+    printw("\n\nPress any key to exit.");
+    refresh();
+    getch();
+    endwin();
+  } else {
+    volume.DumpUnusedRules();
+    volume.DumpPerformance();
+  }
   return 0;
 }
