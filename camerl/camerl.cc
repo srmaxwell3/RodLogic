@@ -652,7 +652,9 @@ int main(int argc, char *const argv[]) {
        { dsSet0, dsSet0, dsSet1, dsSet0, dsSet0, dsSet0, dsSet1, dsSet0 }
       );
 
-  initscr();                      /* Start curses mode              */
+  initscr();			// Start curses mode
+  mvprintw(0, 0, "Press any key to start.");
+  refresh();
 
   for (size_t t = 0; t < (8 * NTicksPerCycle); t += 1) {
     volume.PrintViewFlat();
@@ -668,6 +670,7 @@ int main(int argc, char *const argv[]) {
   volume.DumpUnusedRules();
   volume.DumpPerformance();
 
+  refresh();
   mvprintw(0, 0, "Press any key to exit.");
   refresh();
   getch();

@@ -124,7 +124,7 @@ class Volume: public VolArray
   int CurrentClock() const { return clock; }
   int CurrentCycle() const { return clock / NTicksPerCycle; }
   Direction CurrentPhasePerCycle() const {
-    return Direction((CurrentClock() % NTicksPerCycle) / NTicksPerPhase);
+    return Direction((CurrentClock() / NTicksPerPhase) % NTicksPerPhase);
   }
   TickPerCycle CurrentTickPerCycle() const {
     return TickPerCycle(CurrentClock() % NTicksPerCycle);
