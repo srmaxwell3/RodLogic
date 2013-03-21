@@ -27,7 +27,7 @@ PlateOfInt::PlateOfInt(size_t _yMax, size_t _xMax) :
   yMax(_yMax),
   xMax(_xMax)
 {
-  for (size_t w = 10; w < yMax; w *= 10) {
+  for (size_t w = 10; w <= xMax; w *= 10) {
     scale += 1;
   }
 
@@ -42,6 +42,10 @@ PlateOfInt::PlateOfInt(PlateOfInt const &that) :
   yMax(that.yMax),
   xMax(that.xMax)
 {
+  for (size_t w = 10; w <= xMax; w *= 10) {
+    scale += 1;
+  }
+
   for (size_t y = 0; y < yMax; y += 1) {
     (*this)[y].resize(xMax, ' ');
   }
@@ -243,11 +247,12 @@ BrickOfInt::BrickOfInt(size_t _zMax, size_t _yMax, size_t _xMax) :
   yMax(_yMax),
   xMax(_xMax)
 {
-  for (size_t w = 10; w < yMax; w *= 10) {
+  for (size_t w = 10; w <= xMax; w *= 10) {
     scale += 1;
   }
 
   for (size_t z = 0; z < zMax; z += 1) {
+    (*this)[z].scale = scale;
     (*this)[z].yMax = yMax;
     (*this)[z].xMax = xMax;
     (*this)[z].resize(yMax);
@@ -264,7 +269,12 @@ BrickOfInt::BrickOfInt(BrickOfInt const &that) :
   yMax(that.yMax),
   xMax(that.xMax)
 {
+  for (size_t w = 10; w <= xMax; w *= 10) {
+    scale += 1;
+  }
+
   for (size_t z = 0; z < zMax; z += 1) {
+    (*this)[z].scale = scale;
     (*this)[z].yMax = yMax;
     (*this)[z].xMax = xMax;
     (*this)[z].resize(yMax);
