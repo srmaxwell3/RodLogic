@@ -434,8 +434,14 @@ void processDiagramFrom(istream &in, map<string, vector<int>> const &inputs) {
   } else {
     fprintf(stdout, "Not executing (optCycleCount == %d).\n", optCycleCount);
 
-    PlateOfInt plane(diagram.yMax, diagram.xMax);
-    diagram.Rebuild(plane);
+    PlateOfInt plate(diagram.yMax, diagram.xMax);
+    diagram.Rebuild(plate);
+    Diagram2D newDiagram(plate);
+    newDiagram.scan();
+    newDiagram.dump();
+
+    BrickOfInt brick(7, newDiagram.yMax, newDiagram.xMax);
+    newDiagram.Rebuild(brick);
   }
 }
 

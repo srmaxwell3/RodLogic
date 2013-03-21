@@ -20,7 +20,7 @@ ALL_OBJS = \
 all:	cam.r test.dcff test.74181 test.16x16bytes
 
 clean:
-	$(RM) $(ALL_OBJS) 74181.log 16x16bytes.log
+	$(RM) $(ALL_OBJS) dcff.log 74181.log 16x16bytes.log
 
 clobber:	clean
 	$(RM) ./cam.r
