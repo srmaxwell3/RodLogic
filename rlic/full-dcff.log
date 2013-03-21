@@ -1,0 +1,74 @@
+./cam.r -0 -b -c 0 -r ../full-dcff.txt
+(Rod2D *)(0xd537c0)->{ label="C |", isComplete, !isALockRod, headAt=P2D(7,18), tailAt=P2D(7,4), direction=E, tickFirstSet=0, countOfValidInputs=0, SetOfP2Ds=(15){P2D(7,4)(>),P2D(7,5)(-),P2D(7,6)(I),P2D(7,7)(-),P2D(7,8)(X),P2D(7,9)(-),P2D(7,10)(-),P2D(7,11)(-),P2D(7,12)(-),P2D(7,13)(-),P2D(7,14)(-),P2D(7,15)(0),P2D(7,16)(-),P2D(7,17)(1),P2D(7,18)(>)}, shared=(3){P2D(7,8)(X),P2D(7,15)(0),P2D(7,17)(1)}, inputs=(1){P2D(7,6)(I)}, connectedTo[]={ [rcPut1](3){{<S:15-2:7>,X},{<S:13-2:14>,0},{<S:13-2:16>,1}}}, expression=""}
+(Rod2D *)(0xd54c00)->{ label="D |", isComplete, !isALockRod, headAt=P2D(9,18), tailAt=P2D(9,4), direction=E, tickFirstSet=0, countOfValidInputs=0, SetOfP2Ds=(15){P2D(9,4)(>),P2D(9,5)(-),P2D(9,6)(I),P2D(9,7)(-),P2D(9,8)(X),P2D(9,9)(-),P2D(9,10)(-),P2D(9,11)(-),P2D(9,12)(-),P2D(9,13)(-),P2D(9,14)(-),P2D(9,15)(|),P2D(9,16)(-),P2D(9,17)(1),P2D(9,18)(>)}, shared=(3){P2D(9,8)(X),P2D(9,15)(|),P2D(9,17)(1)}, inputs=(1){P2D(9,6)(I)}, connectedTo[]={ [rcPut1](2){{<S:15-2:7>,X},{<S:13-2:16>,1}}}, expression=""}
+(Rod2D *)(0xd56860)->{ label="Q", isComplete, !isALockRod, headAt=P2D(11,26), tailAt=P2D(11,6), direction=E, tickFirstSet=6, countOfValidInputs=1, SetOfP2Ds=(21){P2D(11,6)(>),P2D(11,7)(-),P2D(11,8)(X),P2D(11,9)(-),P2D(11,10)(-),P2D(11,11)(-),P2D(11,12)(-),P2D(11,13)(1),P2D(11,14)(-),P2D(11,15)(1),P2D(11,16)(-),P2D(11,17)(|),P2D(11,18)(-),P2D(11,19)(-),P2D(11,20)(-),P2D(11,21)(-),P2D(11,22)(|),P2D(11,23)(-),P2D(11,24)(O),P2D(11,25)(-),P2D(11,26)(>)}, shared=(5){P2D(11,8)(X),P2D(11,13)(1),P2D(11,15)(1),P2D(11,17)(|),P2D(11,22)(|)}, outputs=(1){P2D(11,24)(O)}, connectedTo[]={ [rcGet2](1){{<N:9-16:12>,1}} [rcPut1](2){{<S:15-2:7>,X},{<S:13-2:14>,1}}}, expression=""}
+(Rod2D *)(0xd58b70)->{ label="<undefined>", isComplete, isALockRod, headAt=P2D(15,23), tailAt=P2D(15,6), direction=E, tickFirstSet=6, countOfValidInputs=0, countOfInvalidInputs=1, SetOfP2Ds=(18){P2D(15,6)(>),P2D(15,7)(-),P2D(15,8)(|),P2D(15,9)(-),P2D(15,10)(-),P2D(15,11)(-),P2D(15,12)(-),P2D(15,13)(X),P2D(15,14)(-),P2D(15,15)(-),P2D(15,16)(-),P2D(15,17)(-),P2D(15,18)(-),P2D(15,19)(-),P2D(15,20)(-),P2D(15,21)(-),P2D(15,22)(|),P2D(15,23)(>)}, shared=(3){P2D(15,8)(|),P2D(15,13)(X),P2D(15,22)(|)}, connectedTo[]={ [rcGet2](1){{<N:9-16:12>,X}}}, expression=""}
+(Rod2D *)(0xd4f590)->{ label="<undefined>", isComplete, isALockRod, headAt=P2D(16,8), tailAt=P2D(3,8), direction=S, tickFirstSet=1, countOfValidInputs=0, countOfInvalidInputs=3, SetOfP2Ds=(14){P2D(3,8)(v),P2D(4,8)(|),P2D(5,8)(|),P2D(6,8)(|),P2D(7,8)(X),P2D(8,8)(|),P2D(9,8)(X),P2D(10,8)(|),P2D(11,8)(X),P2D(12,8)(|),P2D(13,8)(|),P2D(14,8)(|),P2D(15,8)(|),P2D(16,8)(v)}, shared=(3){P2D(7,8)(X),P2D(9,8)(X),P2D(11,8)(X)}, connectedTo[]={ [rcGet1](3){{<"C |":E:6:17-3>,X},{<"D |":E:8:17-3>,X},{<"Q":E:10:25-5>,X}}}, expression=""}
+(Rod2D *)(0xd500d0)->{ label="<undefined>", isComplete, !isALockRod, headAt=P2D(14,15), tailAt=P2D(3,15), direction=S, tickFirstSet=1, countOfValidInputs=1, countOfInvalidInputs=1, SetOfP2Ds=(12){P2D(3,15)(v),P2D(4,15)(|),P2D(5,15)(X),P2D(6,15)(|),P2D(7,15)(0),P2D(8,15)(|),P2D(9,15)(|),P2D(10,15)(|),P2D(11,15)(1),P2D(12,15)(|),P2D(13,15)(0),P2D(14,15)(v)}, shared=(4){P2D(5,15)(X),P2D(7,15)(0),P2D(11,15)(1),P2D(13,15)(0)}, connectedTo[]={ [rcGet1](2){{<"C |":E:6:17-3>,0},{<"Q":E:10:25-5>,1}} [rcPut2](2){{<W:4:6-23>,X},{<W:12:11-23>,0}}}, expression=""}
+(Rod2D *)(0xd50b20)->{ label="<undefined>", isComplete, !isALockRod, headAt=P2D(14,17), tailAt=P2D(3,17), direction=S, tickFirstSet=1, countOfValidInputs=2, SetOfP2Ds=(12){P2D(3,17)(v),P2D(4,17)(|),P2D(5,17)(X),P2D(6,17)(|),P2D(7,17)(1),P2D(8,17)(|),P2D(9,17)(1),P2D(10,17)(|),P2D(11,17)(|),P2D(12,17)(|),P2D(13,17)(0),P2D(14,17)(v)}, shared=(4){P2D(5,17)(X),P2D(7,17)(1),P2D(9,17)(1),P2D(13,17)(0)}, connectedTo[]={ [rcGet1](2){{<"C |":E:6:17-3>,1},{<"D |":E:8:17-3>,1}} [rcPut2](2){{<W:4:6-23>,X},{<W:12:11-23>,0}}}, expression=""}
+(Rod2D *)(0xd52650)->{ label="<undefined>", isComplete, isALockRod, headAt=P2D(5,7), tailAt=P2D(5,24), direction=W, tickFirstSet=3, countOfValidInputs=0, countOfInvalidInputs=2, SetOfP2Ds=(18){P2D(5,7)(<),P2D(5,8)(|),P2D(5,9)(-),P2D(5,10)(-),P2D(5,11)(-),P2D(5,12)(-),P2D(5,13)(-),P2D(5,14)(-),P2D(5,15)(X),P2D(5,16)(-),P2D(5,17)(X),P2D(5,18)(-),P2D(5,19)(-),P2D(5,20)(-),P2D(5,21)(-),P2D(5,22)(|),P2D(5,23)(-),P2D(5,24)(<)}, shared=(4){P2D(5,8)(|),P2D(5,15)(X),P2D(5,17)(X),P2D(5,22)(|)}, connectedTo[]={ [rcGet2](2){{<S:13-2:14>,X},{<S:13-2:16>,X}}}, expression=""}
+(Rod2D *)(0xd57c70)->{ label="<undefined>", isComplete, !isALockRod, headAt=P2D(13,12), tailAt=P2D(13,24), direction=W, tickFirstSet=3, countOfValidInputs=2, SetOfP2Ds=(13){P2D(13,12)(<),P2D(13,13)(0),P2D(13,14)(-),P2D(13,15)(0),P2D(13,16)(-),P2D(13,17)(0),P2D(13,18)(-),P2D(13,19)(-),P2D(13,20)(-),P2D(13,21)(-),P2D(13,22)(X),P2D(13,23)(-),P2D(13,24)(<)}, shared=(4){P2D(13,13)(0),P2D(13,15)(0),P2D(13,17)(0),P2D(13,22)(X)}, connectedTo[]={ [rcGet2](2){{<S:13-2:14>,0},{<S:13-2:16>,0}} [rcPut1](2){{<N:3-16:21>,X},{<N:9-16:12>,0}}}, expression=""}
+(Rod2D *)(0xd51b10)->{ label="<undefined>", isComplete, isALockRod, headAt=P2D(4,22), tailAt=P2D(17,22), direction=N, tickFirstSet=4, countOfValidInputs=0, countOfInvalidInputs=1, SetOfP2Ds=(14){P2D(4,22)(^),P2D(5,22)(|),P2D(6,22)(|),P2D(7,22)(|),P2D(8,22)(|),P2D(9,22)(|),P2D(10,22)(|),P2D(11,22)(|),P2D(12,22)(|),P2D(13,22)(X),P2D(14,22)(|),P2D(15,22)(|),P2D(16,22)(|),P2D(17,22)(^)}, shared=(1){P2D(13,22)(X)}, connectedTo[]={ [rcGet1](1){{<W:12:11-23>,X}}}, expression=""}
+(Rod2D *)(0xd55cf0)->{ label="<undefined>", isComplete, !isALockRod, headAt=P2D(10,13), tailAt=P2D(17,13), direction=N, tickFirstSet=4, countOfValidInputs=1, SetOfP2Ds=(8){P2D(10,13)(^),P2D(11,13)(1),P2D(12,13)(|),P2D(13,13)(0),P2D(14,13)(|),P2D(15,13)(X),P2D(16,13)(|),P2D(17,13)(^)}, shared=(3){P2D(11,13)(1),P2D(13,13)(0),P2D(15,13)(X)}, connectedTo[]={ [rcGet1](1){{<W:12:11-23>,0}} [rcPut2](2){{<"Q":E:10:25-5>,1},{<E:14:22-5>,X}}}, expression=""}
+
+Rod Count by (Length, Fan-In, Fan-Out):
+(    7,   1,   2):     1
+(   11,   2,   2):     2
+(   12,   2,   2):     1
+(   13,   1,   0):     1
+(   13,   3,   0):     1
+(   14,   0,   2):     1
+(   14,   0,   3):     1
+(   17,   1,   0):     1
+(   17,   2,   0):     1
+(   20,   1,   2):     1
+
+Rod Count (and # incomplete) by Direction:
+    E:     4 (    0)
+    S:     3 (    0)
+    D:     0 (    0)
+    W:     2 (    0)
+    N:     2 (    0)
+    U:     0 (    0)
+Total:    11 (    0)
+
+Earliest input: E
+Earliest output: E
+Earliest debugOutput: None
+
+Refactoring....
+limitTowards[E] =   12
+limitTowards[S] =   16
+limitTowards[D] =    0
+limitTowards[W] =   21
+limitTowards[N] =   12
+limitTowards[U] =    0
+
+Row separations:
+separations[ 2] =    5
+
+Column separations:
+separations[ 2] =    2
+separations[ 5] =    2
+
+Not executing (optCycleCount == 0).
+Removed 4 empty row(s).
+Removed 7 empty col(s).
+Removed 3 squeezable row(s).
+Removed 10 squeezable col(s).
+0         1  
+0         0  
+ 0    v  vv       0
+      |  || ^   
+     <|--XX-|-< 
+   >I-X--01>|   
+   >I-X--|1>|   
+      | ^|| |   
+    >-X-11|-|-O>
+      |<000-X-< 
+      | |vv |   
+    >-|-X---|>  
+10    v |   |    10
+        ^   ^   
+0         1  
+0         0  

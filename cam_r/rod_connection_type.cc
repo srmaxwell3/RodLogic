@@ -1,7 +1,7 @@
 #include "rod_connection_type.h"
 
 RodConnectionType const rodConnectionType[eoRodConnectionType] = {
-  Get2, Get1, Put1, Put2, None
+  Get2, Get1, Put1, Put2, Lock, None
 };
 
 RodConnectionType const rodConnectionThisToThat[eoDirections][eoDirections] = {
@@ -21,6 +21,7 @@ char const *c_str(RodConnectionType t) {
     case Get1: return "Get1";
     case Put1: return "Put1";
     case Put2: return "Put2";
+    case Lock: return "Lock";
     case None: return "None";
     case eoRodConnectionType:
       return "eoRodConnectionType";

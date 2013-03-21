@@ -6,6 +6,7 @@ enum RodConnectionType {
   Get1,
   Put1,
   Put2,
+  Lock,
   None,
 
   eoRodConnectionType

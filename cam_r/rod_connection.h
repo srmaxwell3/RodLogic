@@ -8,6 +8,7 @@ enum RodIntersectionType {
   riCrossing,
   riComplement,
   riIdentity,
+  riLocking,
 
   eoRodIntersectionType
 };
@@ -60,6 +61,9 @@ struct RodConnection {
   bool isAComplementConnection() const {
     return intersectionType == riComplement;
   };
+  bool isALockingConnection() const {
+    return intersectionType == riLocking;
+  }
 
   Rod2D *rod;
   RodIntersectionType intersectionType;

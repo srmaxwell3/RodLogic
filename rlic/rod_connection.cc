@@ -1,7 +1,7 @@
 #include "rod_connection.h"
 
 RodIntersectionType const rodIntersectionType[eoRodIntersectionType] = {
-  riNone, riCrossing, riComplement, riIdentity
+  riNone, riCrossing, riComplement, riIdentity, riLocking
 };
 
 char const *c_str(RodIntersectionType t) {
@@ -10,6 +10,7 @@ char const *c_str(RodIntersectionType t) {
     case riCrossing: return "riCrossing";
     case riComplement: return "riComplement";
     case riIdentity: return "riIdentity";
+    case riLocking: return "riLocking";
     case eoRodIntersectionType:
       return "eoRodIntersectionType";
   }

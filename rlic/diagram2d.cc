@@ -21,7 +21,7 @@ extern bool optShowDebugOutput;
 extern bool optShowPerformance;
 extern bool optShowRods;
 
-PlaneOfInt::PlaneOfInt(size_t _yMax, size_t _xMax) :
+PlateOfInt::PlateOfInt(size_t _yMax, size_t _xMax) :
   vector<vector<int>>(_yMax),
   yMax(_yMax),
   xMax(_xMax)
@@ -31,13 +31,13 @@ PlaneOfInt::PlaneOfInt(size_t _yMax, size_t _xMax) :
   }
 }
 
-void PlaneOfInt::insertRow(size_t atY) {
+void PlateOfInt::insertRow(size_t atY) {
   auto insertAt = atY < yMax ? begin() + atY : end();
   insert(insertAt, vector<int>(xMax, ' '));
   yMax = size();
 }
 
-void PlaneOfInt::insertCol(size_t atX) {
+void PlateOfInt::insertCol(size_t atX) {
   for (auto &r : *this) {
     auto insertAt = atX < xMax ? r.begin() + atX : r.end();
     r.insert(insertAt, ' ');
@@ -45,14 +45,14 @@ void PlaneOfInt::insertCol(size_t atX) {
   }
 }
 
-void PlaneOfInt::deleteRow(size_t atY) {
+void PlateOfInt::deleteRow(size_t atY) {
   if (atY < yMax) {
     erase(begin() + atY);
     yMax = size();
   }
 }
 
-void PlaneOfInt::deleteCol(size_t atX) {
+void PlateOfInt::deleteCol(size_t atX) {
   if (atX < xMax) {
      for (auto &r : *this) {
        r.erase(r.begin() + atX);
@@ -61,14 +61,14 @@ void PlaneOfInt::deleteCol(size_t atX) {
    }
  }
 
- bool PlaneOfInt::compareRowAndRowBelow(size_t atY) const {
+ bool PlateOfInt::compareRowAndRowBelow(size_t atY) const {
    if ((atY + 1) < yMax) {
      return (*this)[atY] == (*this)[atY + 1];
    }
    return false;
  }
 
- bool PlaneOfInt::compareColAndColToRight(size_t atX) const {
+ bool PlateOfInt::compareColAndColToRight(size_t atX) const {
    if ((atX + 1) < xMax) {
      for (auto const &r : *this) {
        if (r[atX] != r[atX + 1]) {
@@ -80,7 +80,7 @@ void PlaneOfInt::deleteCol(size_t atX) {
    return false;
  }
 
-bool PlaneOfInt::isRowEmpty(size_t atY) const {
+bool PlateOfInt::isRowEmpty(size_t atY) const {
   if (atY < yMax) {
     auto const &r = (*this)[atY];
     for (auto const &c : r) {
@@ -92,7 +92,7 @@ bool PlaneOfInt::isRowEmpty(size_t atY) const {
   return true;
 }
 
-bool PlaneOfInt::isColEmpty(size_t atX) const {
+bool PlateOfInt::isColEmpty(size_t atX) const {
   if (atX < xMax) {
     for (auto const &r : *this) {
       auto const &c = r[atX];
@@ -104,7 +104,7 @@ bool PlaneOfInt::isColEmpty(size_t atX) const {
   return true;
 }
 
-bool PlaneOfInt::isRowSqueezable(size_t atY) const {
+bool PlateOfInt::isRowSqueezable(size_t atY) const {
   if (atY < yMax) {
     auto const &r = (*this)[atY];
     for (auto const &c : r) {
@@ -116,7 +116,7 @@ bool PlaneOfInt::isRowSqueezable(size_t atY) const {
   return true;
 }
 
-bool PlaneOfInt::isColSqueezable(size_t atX) const {
+bool PlateOfInt::isColSqueezable(size_t atX) const {
   if (atX < xMax) {
     for (auto const &r : *this) {
       auto const &c = r[atX];
@@ -128,7 +128,7 @@ bool PlaneOfInt::isColSqueezable(size_t atX) const {
   return true;
 }
 
-void PlaneOfInt::Dump() const {
+void PlateOfInt::Dump() const {
   if (100 < xMax) {
     for (size_t x = 0; x < xMax; x += 1) {
       if (x % 10 == 0) {
@@ -531,6 +531,10 @@ void PlaneOfInt::Dump() const {
          intersectionType = riIdentity;
          break;
 
+       case 'X':
+         intersectionType = riLocking;
+         break;
+
        default:
          assert(intersectionType != riNone);
      }
@@ -588,6 +592,12 @@ void PlaneOfInt::Dump() const {
        for (auto &r : rodsWithDebugOutputs[d]) {
          r->verifyInputDelays();
        }
+     }
+   }
+
+   for (auto const d : directions) {
+     for (auto r : rods[d]) {
+       r->DetermineIfALockRod();
      }
    }
 
@@ -969,7 +979,7 @@ void PlaneOfInt::Dump() const {
 
  void Diagram2D::dumpState() {
    fprintf(stdout, 
-           "%ld [%ld.%s]: inputs={",
+           "%d [%d.%s]: inputs={",
            lastEvaluatedTick,
            lastEvaluatedTick / eoDirections,
            c_str(Directions(lastEvaluatedTick % eoDirections))
@@ -1403,17 +1413,39 @@ void PlaneOfInt::Dump() const {
    fprintf(stdout, "\n");
  }
 
- bool Diagram2D::isLegalEWChar(char c) {
+ bool Diagram2D::isLegalEWCharNotLabel1st(char c) {
    switch (c) {
    case '-':
    case '|':
    case '.':
-   case '0':
-   case '1':
    case '>':
    case '<':
+     return true;
+   default:
+     return false;
+   }
+ }
+
+ bool Diagram2D::isLegalEWChar(char c) {
+   switch (c) {
+   case '0':
+   case '1':
+   case 'X':
    case 'I':
    case 'O':
+     return true;
+   default:
+     return isLegalEWCharNotLabel1st(c);
+   }
+ }
+
+ bool Diagram2D::isLegalSNCharNotLabel1st(char c) {
+   switch (c) {
+   case '-':
+   case '|':
+   case '.':
+   case 'v':
+   case '^':
      return true;
    default:
      return false;
@@ -1422,21 +1454,18 @@ void PlaneOfInt::Dump() const {
 
  bool Diagram2D::isLegalSNChar(char c) {
    switch (c) {
-   case '|':
-   case '.':
    case '0':
    case '1':
-   case 'v':
-   case '^':
+   case 'X':
    case 'I':
    case 'O':
      return true;
    default:
-     return false;
+     return isLegalSNCharNotLabel1st(c);
    }
  }
 
- void Diagram2D::Rebuild(PlaneOfInt &plane) const {
+ void Diagram2D::Rebuild(PlateOfInt &plane) const {
   size_t deleted = 0;
   for (auto const d : directions) {
     for (auto const &r : rods[d]) {

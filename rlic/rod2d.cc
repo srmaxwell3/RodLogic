@@ -18,6 +18,7 @@ Rod2D::Rod2D(Diagram2D &diagram, P2D const &pStart, Directions d) :
     label(),
     id(),
     isComplete(false),
+    isALockRod(false),
     headAt(),
     tailAt(),
     direction(d),
@@ -86,6 +87,7 @@ Rod2D::Rod2D(Diagram2D &diagram, P2D const &pStart, Directions d) :
 
       case '0':
       case '1':
+      case 'X':
 	diagram.rodSharedAt(this, p);
 	shared.insert(p);
 	diagram.saw(p);
@@ -204,6 +206,7 @@ Rod2D::Rod2D(Diagram2D &diagram, P2D const &pStart, Directions d) :
 Rod2D::Rod2D() :
     SetOfP2Ds(),
     isComplete(false),
+    isALockRod(false),
     label(),
     id(),
     shared(),
@@ -223,6 +226,10 @@ string const &Rod2D::rodsId() const {
 
 bool Rod2D::rodIsIncomplete() const {
   return !isComplete;
+}
+
+bool Rod2D::rodIsALockRod() const {
+  return !isALockRod;
 }
 
 bool Rod2D::rodsDirection() const {
@@ -552,15 +559,30 @@ void Rod2D::verifyInputDelays(SetOfRod2Ds &seenAlready) {
 }
 
 void Rod2D::connectWith(Rod2D *that, RodIntersectionType intersectionType) {
-  assert(intersectionType != riNone);
-
   RodConnectionType toThat = rodConnectionThisToThat[direction][that->direction];
-  assert(toThat != rcNone || intersectionType == riCrossing);
-  connectedTo[toThat].insert(RodConnection(that, intersectionType));
-
   RodConnectionType toThis = rodConnectionThisToThat[that->direction][direction];
-  assert(toThis != rcNone || intersectionType == riCrossing);
-  that->connectedTo[toThis].insert(RodConnection(this, intersectionType));
+
+  switch (intersectionType) {
+    case riCrossing:
+    case riComplement:
+    case riIdentity:
+    case riLocking:
+      assert(toThat != rcNone ||
+             intersectionType == riCrossing ||
+             intersectionType == riLocking
+            );
+      assert(toThis != rcNone ||
+             intersectionType == riCrossing ||
+             intersectionType == riLocking
+            );
+
+      connectedTo[toThat].insert(RodConnection(that, intersectionType));
+      that->connectedTo[toThis].insert(RodConnection(this, intersectionType));
+
+    case riNone:
+      assert(intersectionType != riNone && intersectionType != eoRodIntersectionType);
+      break;
+  }
 }
 
 bool Rod2D::isShared(P2D const &p) const {
@@ -699,6 +721,15 @@ string const &Rod2D::formExpression() {
   return expression;
 }
 
+void Rod2D::DetermineIfALockRod() {
+  isALockRod = true;
+  for (auto const &rcs : connectedTo) {
+    for (auto const &rc : rcs) {
+      isALockRod &= (rc.intersectionType == riLocking);
+    }
+  }
+}
+
 void Rod2D::reset() {
   lastEvaluatedValue.reset(optRodsInitialValue);
 }
@@ -813,6 +844,7 @@ void Rod2D::dump(Diagram2D const &diagram) const {
   fprintf(stdout, "(Rod2D *)(%p)->", this);
   fprintf(stdout, "{ label=\"%s\"", label.ToString().c_str());
   fprintf(stdout, ", %sisComplete", isComplete ? "" : "!");
+  fprintf(stdout, ", %sisALockRod", isALockRod ? "" : "!");
   fprintf(stdout, ", headAt=%s", headAt.ToString().c_str());
   fprintf(stdout, ", tailAt=%s", tailAt.ToString().c_str());
   fprintf(stdout, ", direction=%s", c_str(direction));
@@ -851,11 +883,18 @@ void Rod2D::dump(Diagram2D const &diagram) const {
       fprintf(stdout, " [%s](%lu){", c_str(t), nConnections);
       char const *comma = "";
       for (auto const &c : connections) {
+        static char const *intersectGraphic[eoRodIntersectionType] = {
+          "?", // riNone
+          "|", // riCrossing
+          "0", // riComplement
+          "1", // riIdentity
+          "X", // riLocking
+        };
 	fprintf(stdout,
-                "%s{%p,%s}",
+                "%s{%s,%s}",
                 comma,
-                c.rod,
-                c.isACrossingConnection() ? "+" : c.isAnIdentityConnection() ? "1" : "0"
+                c.rod->rodsId().c_str(),
+                intersectGraphic[c.intersectionType]
                );
 	comma = ",";
       }
@@ -868,7 +907,7 @@ void Rod2D::dump(Diagram2D const &diagram) const {
   fprintf(stdout, "\n");
 }
 
-void Rod2D::Rebuild(Diagram2D const &diagram, PlaneOfInt &plane) const {
+void Rod2D::Rebuild(Diagram2D const &diagram, PlateOfInt &plane) const {
   for (auto const &p : *this) {
     plane[p.y][p.x] = diagram.at(p);
   }

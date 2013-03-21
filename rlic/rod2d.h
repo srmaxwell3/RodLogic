@@ -13,7 +13,7 @@ using std::string;
 #include "label.h"
 #include "rod_connection.h"
 
-struct PlaneOfInt;
+struct PlateOfInt;
 struct Diagram2D;
 struct Rod2D;
 typedef set<Rod2D *> SetOfRod2Ds;
@@ -27,6 +27,7 @@ class Rod2D : public SetOfP2Ds {
   string const &rodsId() const;
 
   bool rodIsIncomplete() const;
+  bool rodIsALockRod() const;
   bool rodsDirection() const;
   int rodsLength() const;
   P2D const &getHeadAt() const { return headAt; }
@@ -48,6 +49,8 @@ class Rod2D : public SetOfP2Ds {
   string const &formExpression();
   string const &getExpression() const { return expression; }
 
+  void DetermineIfALockRod();
+
   void reset();
   EdgedBool const &getValue() const;
   bool evaluateAt(Diagram2D &diagram, int tick);
@@ -55,7 +58,7 @@ class Rod2D : public SetOfP2Ds {
 
   void dump(Diagram2D const &diagram) const;
 
-  void Rebuild(Diagram2D const &diagram, PlaneOfInt &plane) const;
+  void Rebuild(Diagram2D const &diagram, PlateOfInt &plane) const;
 
  private:
   bool findHeadLabel(Diagram2D const &diagram);
@@ -68,6 +71,7 @@ class Rod2D : public SetOfP2Ds {
   Label label;
   string id;
   bool isComplete;
+  bool isALockRod;
   P2D headAt;
   P2D tailAt;
   Directions direction;

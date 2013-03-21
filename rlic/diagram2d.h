@@ -24,8 +24,27 @@ using std::vector;
 struct Rod2D;
 typedef set<Rod2D *> SetOfRod2Ds;
 
-struct PlaneOfInt : public vector<vector<int>> {
-  PlaneOfInt(size_t _yMax, size_t _xMax);
+struct PlateOfInt : public vector<vector<int>> {
+  PlateOfInt(size_t _yMax, size_t _xMax);
+
+  void insertRow(size_t atY);
+  void insertCol(size_t atX);
+  void deleteRow(size_t atY);
+  void deleteCol(size_t atX);
+  bool compareRowAndRowBelow(size_t atY) const;
+  bool compareColAndColToRight(size_t atX) const;
+  bool isRowEmpty(size_t atY) const;
+  bool isColEmpty(size_t atX) const;
+  bool isRowSqueezable(size_t atY) const;
+  bool isColSqueezable(size_t atX) const;
+  void Dump() const;
+
+  size_t yMax;
+  size_t xMax;
+};
+
+struct BrickOfInt : public vector<vector<vector<int>>> {
+  BrickOfInt(size_t _zMax, size_t _yMax, size_t _xMax);
 
   void insertRow(size_t atY);
   void insertCol(size_t atX);
@@ -148,9 +167,11 @@ struct Diagram2D : public vector<string> {
   void dumpPerformance() const;
   void dump() const;
 
-  void Rebuild(PlaneOfInt &plane) const;
+  void Rebuild(PlateOfInt &plane) const;
 
+  static bool isLegalEWCharNotLabel1st(char c);
   static bool isLegalEWChar(char c);
+  static bool isLegalSNCharNotLabel1st(char c);
   static bool isLegalSNChar(char c);
 
   set<P2D> pointsAlreadySeen;
