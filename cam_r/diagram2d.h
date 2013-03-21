@@ -25,7 +25,8 @@ struct Rod2D;
 typedef set<Rod2D *> SetOfRod2Ds;
 
 struct PlateOfInt : public vector<vector<int>> {
-  PlateOfInt(size_t _yMax, size_t _xMax);
+  PlateOfInt(size_t _yMax = 0, size_t _xMax = 0);
+  PlateOfInt(PlateOfInt const &that);
 
   void insertRow(size_t atY);
   void insertCol(size_t atX);
@@ -43,26 +44,8 @@ struct PlateOfInt : public vector<vector<int>> {
   size_t xMax;
 };
 
-struct BrickOfInt : public vector<vector<vector<int>>> {
-  BrickOfInt(size_t _zMax, size_t _yMax, size_t _xMax);
-
-  void insertRow(size_t atY);
-  void insertCol(size_t atX);
-  void deleteRow(size_t atY);
-  void deleteCol(size_t atX);
-  bool compareRowAndRowBelow(size_t atY) const;
-  bool compareColAndColToRight(size_t atX) const;
-  bool isRowEmpty(size_t atY) const;
-  bool isColEmpty(size_t atX) const;
-  bool isRowSqueezable(size_t atY) const;
-  bool isColSqueezable(size_t atX) const;
-  void Dump() const;
-
-  size_t yMax;
-  size_t xMax;
-};
-
-struct Diagram2D : public vector<string> {
+struct Diagram2D : public PlateOfInt {
+  Diagram2D(PlateOfInt const &p);
   Diagram2D(istream &in);
 
   bool isInBounds(P2D const &p) const {
@@ -85,12 +68,12 @@ struct Diagram2D : public vector<string> {
     pointsAlreadySeen.insert(p);
   }
 
-  char const &at(P2D const &p) const {
+  int const &at(P2D const &p) const {
     return at(p.y, p.x);
   }
 
-  char const &at(int y, int x) const {
-    return vector<string>::at(y).at(x);
+  int const &at(int y, int x) const {
+    return PlateOfInt::at(y).at(x);
   }
 
   void newRodAt(P2D const &p, Directions d);
@@ -203,8 +186,6 @@ struct Diagram2D : public vector<string> {
   int lastEvaluatedTickNUnreadInputsRead;
   int lastEvaluatedTickNOutputsWritten;
   int lastEvaluatedTickNDebugOutputsWritten;
-  int xMax;
-  int yMax;
 };
 
 #endif // DIAGRAM2D

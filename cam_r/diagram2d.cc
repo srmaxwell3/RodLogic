@@ -31,6 +31,16 @@ PlateOfInt::PlateOfInt(size_t _yMax, size_t _xMax) :
   }
 }
 
+PlateOfInt::PlateOfInt(PlateOfInt const &that) :
+  vector<vector<int>>(that.yMax),
+  yMax(that.yMax),
+  xMax(that.xMax)
+{
+  for (size_t y = 0; y < yMax; y += 1) {
+    (*this)[y].resize(xMax, ' ');
+  }
+}
+
 void PlateOfInt::insertRow(size_t atY) {
   auto insertAt = atY < yMax ? begin() + atY : end();
   insert(insertAt, vector<int>(xMax, ' '));
@@ -222,8 +232,8 @@ void PlateOfInt::Dump() const {
   fprintf(stdout, "\n");
 }
 
- Diagram2D::Diagram2D(istream &in) :
-     vector<string>(),
+ Diagram2D::Diagram2D(PlateOfInt const &p) :
+     PlateOfInt(p),
      earliestInput(eoDirections),
      earliestOutput(eoDirections),
      earliestDebugOutput(eoDirections),
@@ -234,23 +244,46 @@ void PlateOfInt::Dump() const {
      lastEvaluatedTickNInputsRead(0),
      lastEvaluatedTickNUnreadInputsRead(0),
      lastEvaluatedTickNOutputsWritten(0),
-     lastEvaluatedTickNDebugOutputsWritten(0),
-     xMax(0),
-     yMax(0)
+     lastEvaluatedTickNDebugOutputsWritten(0)
+ {
+   for (auto &rank : (*this)) {
+     rank.resize(xMax, ' ');
+   }
+
+   totalEvaluatedUSecsPerDirection.fill(0);
+   yMax = size();
+ }
+
+ Diagram2D::Diagram2D(istream &in) :
+     PlateOfInt(),
+     earliestInput(eoDirections),
+     earliestOutput(eoDirections),
+     earliestDebugOutput(eoDirections),
+     totalEvaluatedUSecs(0),
+     totalEvaluatedTicks(0),
+     lastEvaluatedTick(-1),
+     lastEvaluatedTickNChangedRods(0),
+     lastEvaluatedTickNInputsRead(0),
+     lastEvaluatedTickNUnreadInputsRead(0),
+     lastEvaluatedTickNOutputsWritten(0),
+     lastEvaluatedTickNDebugOutputsWritten(0)
  {
    do {
      string line;
      getline(in, line);
      if (in.good()) {
-       push_back(line);
+       push_back(vector<int>());
+       for (auto const &c : line) {
+         back().push_back(int(c));
+       }
        if (xMax < line.size()) {
          xMax = line.size();
        }
      }
    } while (in.good() && !in.eof());
 
-   for (auto &line : (*this)) {
-     line.resize(xMax, ' ');
+   for (auto &rank : (*this)) {
+     rank.resize(xMax, ' ');
    }
 
    totalEvaluatedUSecsPerDirection.fill(0);
