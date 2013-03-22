@@ -291,7 +291,7 @@ void BrickOfInt::Dump() const {
   for (size_t z = 0; z < zMax; z += 1) {
     int length;
     fprintf(stdout, "# %lu %n", z, &length);
-    while (length++ < xMax + scale) {
+    while (length++ < xMax + scale + 2) {
       fprintf(stdout, "-");
     }
     fprintf(stdout, "\n");
