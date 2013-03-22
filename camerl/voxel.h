@@ -5,6 +5,8 @@
 using std::array;
 #include <map>
 using std::map;
+#include <string>
+using std::string;
 
 #include "blockstate.h"
 #include "datastate.h"
@@ -62,6 +64,9 @@ enum Voxel {
 };
 
 char const *toConstCharPointer(Voxel v);
+Voxel StringToVoxel(string const &s);
+
+extern Voxel const voxel[eoVoxel];
 
 typedef map<VoxelCoordinant, Voxel> Changes;
 

@@ -8,6 +8,10 @@ using std::size_t;
 using std::array;
 #include <deque>
 using std::deque;
+#include <fstream>
+using std::ifstream;
+#include <iostream>
+using std::istream;
 #include <map>
 using std::map;
 #include <set>
@@ -34,13 +38,16 @@ class DataRod;
 //
 // typedef array<array<array<Voxel, NCols>, NRows>, NLvls> VolArray;
 // typedef array<array<wchar_t, NCols>, NRows> ViewLvlArray;
-typedef vector<vector<vector<Voxel>>> VolArray;
+typedef vector<Voxel> VoxelRank;
+typedef vector<VoxelRank> VoxelPlate;
+typedef vector<VoxelPlate> VoxelBrick;
 typedef vector<vector<wchar_t>> ViewLvlArray;
 
-class Volume: public VolArray
+class Volume: public VoxelBrick
 {
  public:
-  Volume(VolArray const &initial);
+  Volume(VoxelBrick const &initial);
+  Volume(istream &in);
   void AddRule(Scenario const &scenario, Voxel newVoxel) {
     rules[scenario] = newVoxel;
   }

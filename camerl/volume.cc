@@ -21,8 +21,8 @@ extern bool optDelayMSecSet;
 extern bool optShowPerformance;
 extern bool optVerbose;
 
-Volume::Volume(VolArray const &initial) :
-    VolArray(initial),
+Volume::Volume(VoxelBrick const &initial) :
+    VoxelBrick(initial),
     NLvls(initial.size()),
     NRows(0),
     NCols(0),
@@ -38,6 +38,253 @@ Volume::Volume(VolArray const &initial) :
       if (NCols < row.size()) {
         NCols = row.size();
       }
+    }
+  }
+
+  totalEvaluatedUSecsPerDirection.fill(0);
+  totalEvaluatedUSecsPerTick.fill(0);
+
+  FindItems();
+}
+
+int lineNumber = 1;
+int charNumber = 0;
+
+char skipWhitespaceAndComments(istream &in, char c) {
+  int state = 0;
+  for (/* c = c */;
+       in.good() && !in.eof();
+       charNumber += 1, c = in.get()
+      )
+  {
+    switch (state) {
+      case 0:
+        if (isspace(c)) {
+          if (c == '\n') {
+            lineNumber += 1;
+            charNumber = 0;
+          }
+          continue;
+        } else if (c == '/') {
+          state = 1;
+          continue;
+        }
+        return c;
+      case 1:
+        if (c == '/') {
+          state = 2;
+          continue;
+        } else if (c == '*') {
+          state = 3;
+          continue;
+        }
+        return c;
+      case 2:
+        if (c == '\n') {
+          lineNumber += 1;
+          charNumber = 0;
+          state = 0;
+        }
+        continue;
+      case 3:
+        if (c == '*') {
+          state = 4;
+        } else if (c == '\n') {
+          lineNumber += 1;
+          charNumber = 0;
+        }
+        continue;
+      case 4:
+        state = (c == '/') ? 0 : 3;
+        continue;
+    }
+  }
+  return c;
+}
+
+char parseVoxel(VoxelRank &rank, istream &in, char c) {
+  string symbol;
+  for (c = skipWhitespaceAndComments(in, c);
+       isalnum(c);
+       charNumber += 1, c = in.get()
+      )
+  {
+    symbol.push_back(c);
+  }
+
+  if (symbol.empty()) {
+    fflush(stdout);
+    fprintf(stderr,
+            "\nparseVoxel(): %d:%d: Missing <symbol> (at '%c')!\n",
+            lineNumber,
+            charNumber,
+            c
+           );
+    exit(1);
+  }
+
+  Voxel voxel = StringToVoxel(symbol);
+  if (voxel == eoVoxel) {
+    fflush(stdout);
+    fprintf(stderr,
+            "\nparseVoxel(): %d:%d: %s is not a Voxel!\n",
+            lineNumber,
+            charNumber,
+            symbol.c_str()
+           );
+    exit(1);
+  }
+
+  fprintf(stdout, "%s", symbol.c_str());
+  rank.push_back(voxel);
+  return c;
+}
+
+char parseRank(VoxelRank &rank, istream &in, char c) {
+  if ((c = skipWhitespaceAndComments(in, c)) != '{') {
+    fflush(stdout);
+    fprintf(stderr,
+            "\nparseRank(): %d:%d: Missing '{' (at '%c')!\n",
+            lineNumber,
+            charNumber,
+            c
+           );
+    exit(1);
+  }
+  fprintf(stdout, "    {");
+  charNumber += 1, c = in.get();
+
+  for (c = parseVoxel(rank, in, c);
+       (c = skipWhitespaceAndComments(in, c)) == ',';
+       c = parseVoxel(rank, in, (c = skipWhitespaceAndComments(in, c)))
+      )
+  {
+    fprintf(stdout, ",");
+    charNumber += 1, c = in.get();
+  }
+
+  if ((c = skipWhitespaceAndComments(in, c)) != '}') {
+    fflush(stdout);
+    fprintf(stderr,
+            "\nparseRank(): %d:%d: Missing '}' (at '%c')!\n",
+            lineNumber,
+            charNumber,
+            c
+           );
+    exit(1);
+  }
+  fprintf(stdout, " }");
+  charNumber += 1, c = in.get();
+  return c;
+}
+
+char parsePlate(VoxelPlate &plate, istream &in, char c) {
+  if ((c = skipWhitespaceAndComments(in, c)) != '{') {
+    fflush(stdout);
+    fprintf(stderr,
+            "\nparsePlate(): %d:%d: Missing '{' (at '%c')!\n",
+            lineNumber,
+            charNumber,
+            c
+           );
+    exit(1);
+  }
+  fprintf(stdout, "  {\n");
+  charNumber += 1, c = in.get();
+
+  plate.push_back(VoxelRank());
+  for (c = parseRank(plate.back(), in, c);
+       (c = skipWhitespaceAndComments(in, c)) == ',';
+       c = parseRank(plate.back(), in, (c = skipWhitespaceAndComments(in, c)))
+      )
+  {
+    fprintf(stdout, ",\n");
+    charNumber += 1, c = in.get();
+    plate.push_back(VoxelRank());
+  }
+
+  if ((c = skipWhitespaceAndComments(in, c))!= '}') {
+    fflush(stdout);
+    fprintf(stderr,
+            "\nparsePlate(): %d:%d: Missing '}' (at '%c')!\n",
+            lineNumber,
+            charNumber,
+            c
+           );
+    exit(1);
+  }
+  fprintf(stdout, "\n  }");
+  charNumber += 1; c = in.get();
+  return c;
+}
+
+void parseBrick(VoxelBrick &brick, istream &in, char c = ' ') {
+  if ((c = skipWhitespaceAndComments(in, c)) != '{') {
+    fflush(stdout);
+    fprintf(stderr,
+            "\nparseBrick(): %d:%d: Missing '{' (at '%c')!\n",
+            lineNumber,
+            charNumber,
+            c
+           );
+    exit(1);
+  }
+  fprintf(stdout, " {\n");
+  charNumber += 1, c = in.get();
+
+  brick.push_back(VoxelPlate());
+  for (c = parsePlate(brick.back(), in, c);
+       (c = skipWhitespaceAndComments(in, c)) == ',';
+       c = parsePlate(brick.back(), in, (c = skipWhitespaceAndComments(in, c)))
+      )
+  {
+    fprintf(stdout, ",\n");
+    charNumber += 1, c = in.get();
+    brick.push_back(VoxelPlate());
+  }
+
+  if ((c = skipWhitespaceAndComments(in, c)) != '}') {
+    fflush(stdout);
+    fprintf(stderr,
+            "\nparseBrick(): %d:%d: Missing '}' (at '%c')!\n",
+            lineNumber,
+            charNumber,
+            c
+           );
+    exit(1);
+  }
+  fprintf(stdout, "}\n");
+  charNumber += 1, c = in.get();
+}
+
+Volume::Volume(istream &in) :
+    VoxelBrick(),
+    NLvls(0),
+    NRows(0),
+    NCols(0),
+    clock(0),
+    totalEvaluatedUSecs(0),
+    totalEvaluatedTicks(0)
+{
+  // Read and parse the input.
+  parseBrick(*this, in);
+
+  // Determine sizes.
+  NLvls = size();
+  for (auto const &lvl : *this) {
+    if (NRows < lvl.size()) {
+      NRows = lvl.size();
+    }
+    for (auto const &row : lvl) {
+      if (NCols < row.size()) {
+        NCols = row.size();
+      }
+    }
+  }
+  for (auto &lvl : *this) {
+    lvl.resize(NRows);
+    for (auto &row : lvl) {
+      row.resize(NCols, Wall);
     }
   }
 

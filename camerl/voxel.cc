@@ -1,5 +1,316 @@
 #include "voxel.h"
 
+Voxel const voxel[eoVoxel] = {
+  Unkn,
+  Wall,
+  Slot,
+  LBEL, LBEU,  LBSL, LBSU,  LBDL, LBDU,  LBWL, LBWU,  LBNL, LBNU,  LBUL, LBUU,
+  LHEL, LHEU,  LHSL, LHSU,  LHDL, LHDU,  LHWL, LHWU,  LHNL, LHNU,  LHUL, LHUU,
+  LTEL, LTEU,  LTSL, LTSU,  LTDL, LTDU,  LTWL, LTWU,  LTNL, LTNU,  LTUL, LTUU,
+  LPEL, LPEU,  LPSL, LPSU,  LPDL, LPDU,  LPWL, LPWU,  LPNL, LPNU,  LPUL, LPUU,
+  LKEL, LKEU,  LKSL, LKSU,  LKDL, LKDU,  LKWL, LKWU,  LKNL, LKNU,  LKUL, LKUU,
+  DBER, DBE0, DBEX, DBE1,  DBSR, DBS0, DBSX, DBS1,  DBDR, DBD0, DBDX, DBD1,
+  DBWR, DBW0, DBWX, DBW1,  DBNR, DBN0, DBNX, DBN1,  DBUR, DBU0, DBUX, DBU1,
+  DHER, DHE0, DHEX, DHE1,  DHSR, DHS0, DHSX, DHS1,  DHDR, DHD0, DHDX, DHD1,
+  DHWR, DHW0, DHWX, DHW1,  DHNR, DHN0, DHNX, DHN1,  DHUR, DHU0, DHUX, DHU1,
+  DTER, DTE0, DTEX, DTE1,  DTSR, DTS0, DTSX, DTS1,  DTDR, DTD0, DTDX, DTD1,
+  DTWR, DTW0, DTWX, DTW1,  DTNR, DTN0, DTNX, DTN1,  DTUR, DTU0, DTUX, DTU1,
+  DPER, DPE0, DPEX, DPE1,  DPSR, DPS0, DPSX, DPS1,  DPDR, DPD0, DPDX, DPD1,
+  DPWR, DPW0, DPWX, DPW1,  DPNR, DPN0, DPNX, DPN1,  DPUR, DPU0, DPUX, DPU1,
+  DSER, DSE0, DSEX, DSE1,  DSSR, DSS0, DSSX, DSS1,  DSDR, DSD0, DSDX, DSD1,
+  DSWR, DSW0, DSWX, DSW1,  DSNR, DSN0, DSNX, DSN1,  DSUR, DSU0, DSUX, DSU1,
+  DQER, DQE0, DQEX, DQE1,  DQSR, DQS0, DQSX, DQS1,  DQDR, DQD0, DQDX, DQD1,
+  DQWR, DQW0, DQWX, DQW1,  DQNR, DQN0, DQNX, DQN1,  DQUR, DQU0, DQUX, DQU1,
+  DGER, DGE0, DGEX, DGE1,  DGSR, DGS0, DGSX, DGS1,  DGDR, DGD0, DGDX, DGD1,
+  DGWR, DGW0, DGWX, DGW1,  DGNR, DGN0, DGNX, DGN1,  DGUR, DGU0, DGUX, DGU1,
+  DIER, DIE0, DIEX, DIE1,  DISR, DIS0, DISX, DIS1,  DIDR, DID0, DIDX, DID1,
+  DIWR, DIW0, DIWX, DIW1,  DINR, DIN0, DINX, DIN1,  DIUR, DIU0, DIUX, DIU1,
+  DOER, DOE0, DOEX, DOE1,  DOSR, DOS0, DOSX, DOS1,  DODR, DOD0, DODX, DOD1,
+  DOWR, DOW0, DOWX, DOW1,  DONR, DON0, DONX, DON1,  DOUR, DOU0, DOUX, DOU1,
+};
+
+static char const *voxelToCStr[eoVoxel] = {
+  "Unkn", // Unkn
+  "Wall", // Wall
+  "Slot", // Slot
+  "LBEL", // LBEL
+  "LBEU", // LBEU
+  "LBSL", // LBSL
+  "LBSU", // LBSU
+  "LBDL", // LBDL
+  "LBDU", // LBDU
+  "LBWL", // LBWL
+  "LBWU", // LBWU
+  "LBNL", // LBNL
+  "LBNU", // LBNU
+  "LBUL", // LBUL
+  "LBUU", // LBUU
+  "LHEL", // LHEL
+  "LHEU", // LHEU
+  "LHSL", // LHSL
+  "LHSU", // LHSU
+  "LHDL", // LHDL
+  "LHDU", // LHDU
+  "LHWL", // LHWL
+  "LHWU", // LHWU
+  "LHNL", // LHNL
+  "LHNU", // LHNU
+  "LHUL", // LHUL
+  "LHUU", // LHUU
+  "LTEL", // LTEL
+  "LTEU", // LTEU
+  "LTSL", // LTSL
+  "LTSU", // LTSU
+  "LTDL", // LTDL
+  "LTDU", // LTDU
+  "LTWL", // LTWL
+  "LTWU", // LTWU
+  "LTNL", // LTNL
+  "LTNU", // LTNU
+  "LTUL", // LTUL
+  "LTUU", // LTUU
+  "LPEL", // LPEL
+  "LPEU", // LPEU
+  "LPSL", // LPSL
+  "LPSU", // LPSU
+  "LPDL", // LPDL
+  "LPDU", // LPDU
+  "LPWL", // LPWL
+  "LPWU", // LPWU
+  "LPNL", // LPNL
+  "LPNU", // LPNU
+  "LPUL", // LPUL
+  "LPUU", // LPUU
+  "LKEL", // LKEL
+  "LKEU", // LKEU
+  "LKSL", // LKSL
+  "LKSU", // LKSU
+  "LKDL", // LKDL
+  "LKDU", // LKDU
+  "LKWL", // LKWL
+  "LKWU", // LKWU
+  "LKNL", // LKNL
+  "LKNU", // LKNU
+  "LKUL", // LKUL
+  "LKUU", // LKUU
+  "DBER", // DBER
+  "DBE0", // DBE0
+  "DBEX", // DBEX
+  "DBE1", // DBE1
+  "DBSR", // DBSR
+  "DBS0", // DBS0
+  "DBSX", // DBSX
+  "DBS1", // DBS1
+  "DBDR", // DBDR
+  "DBD0", // DBD0
+  "DBDX", // DBDX
+  "DBD1", // DBD1
+  "DBWR", // DBWR
+  "DBW0", // DBW0
+  "DBWX", // DBWX
+  "DBW1", // DBW1
+  "DBNR", // DBNR
+  "DBN0", // DBN0
+  "DBNX", // DBNX
+  "DBN1", // DBN1
+  "DBUR", // DBUR
+  "DBU0", // DBU0
+  "DBUX", // DBUX
+  "DBU1", // DBU1
+  "DHER", // DHER
+  "DHE0", // DHE0
+  "DHEX", // DHEX
+  "DHE1", // DHE1
+  "DHSR", // DHSR
+  "DHS0", // DHS0
+  "DHSX", // DHSX
+  "DHS1", // DHS1
+  "DHDR", // DHDR
+  "DHD0", // DHD0
+  "DHDX", // DHDX
+  "DHD1", // DHD1
+  "DHWR", // DHWR
+  "DHW0", // DHW0
+  "DHWX", // DHWX
+  "DHW1", // DHW1
+  "DHNR", // DHNR
+  "DHN0", // DHN0
+  "DHNX", // DHNX
+  "DHN1", // DHN1
+  "DHUR", // DHUR
+  "DHU0", // DHU0
+  "DHUX", // DHUX
+  "DHU1", // DHU1
+  "DTER", // DTER
+  "DTE0", // DTE0
+  "DTEX", // DTEX
+  "DTE1", // DTE1
+  "DTSR", // DTSR
+  "DTS0", // DTS0
+  "DTSX", // DTSX
+  "DTS1", // DTS1
+  "DTDR", // DTDR
+  "DTD0", // DTD0
+  "DTDX", // DTDX
+  "DTD1", // DTD1
+  "DTWR", // DTWR
+  "DTW0", // DTW0
+  "DTWX", // DTWX
+  "DTW1", // DTW1
+  "DTNR", // DTNR
+  "DTN0", // DTN0
+  "DTNX", // DTNX
+  "DTN1", // DTN1
+  "DTUR", // DTUR
+  "DTU0", // DTU0
+  "DTUX", // DTUX
+  "DTU1", // DTU1
+  "DPER", // DPER
+  "DPE0", // DPE0
+  "DPEX", // DPEX
+  "DPE1", // DPE1
+  "DPSR", // DPSR
+  "DPS0", // DPS0
+  "DPSX", // DPSX
+  "DPS1", // DPS1
+  "DPDR", // DPDR
+  "DPD0", // DPD0
+  "DPDX", // DPDX
+  "DPD1", // DPD1
+  "DPWR", // DPWR
+  "DPW0", // DPW0
+  "DPWX", // DPWX
+  "DPW1", // DPW1
+  "DPNR", // DPNR
+  "DPN0", // DPN0
+  "DPNX", // DPNX
+  "DPN1", // DPN1
+  "DPUR", // DPUR
+  "DPU0", // DPU0
+  "DPUX", // DPUX
+  "DPU1", // DPU1
+  "DSER", // DSER
+  "DSE0", // DSE0
+  "DSEX", // DSEX
+  "DSE1", // DSE1
+  "DSSR", // DSSR
+  "DSS0", // DSS0
+  "DSSX", // DSSX
+  "DSS1", // DSS1
+  "DSDR", // DSDR
+  "DSD0", // DSD0
+  "DSDX", // DSDX
+  "DSD1", // DSD1
+  "DSWR", // DSWR
+  "DSW0", // DSW0
+  "DSWX", // DSWX
+  "DSW1", // DSW1
+  "DSNR", // DSNR
+  "DSN0", // DSN0
+  "DSNX", // DSNX
+  "DSN1", // DSN1
+  "DSUR", // DSUR
+  "DSU0", // DSU0
+  "DSUX", // DSUX
+  "DSU1", // DSU1
+  "DQER", // DQER
+  "DQE0", // DQE0
+  "DQEX", // DQEX
+  "DQE1", // DQE1
+  "DQSR", // DQSR
+  "DQS0", // DQS0
+  "DQSX", // DQSX
+  "DQS1", // DQS1
+  "DQDR", // DQDR
+  "DQD0", // DQD0
+  "DQDX", // DQDX
+  "DQD1", // DQD1
+  "DQWR", // DQWR
+  "DQW0", // DQW0
+  "DQWX", // DQWX
+  "DQW1", // DQW1
+  "DQNR", // DQNR
+  "DQN0", // DQN0
+  "DQNX", // DQNX
+  "DQN1", // DQN1
+  "DQUR", // DQUR
+  "DQU0", // DQU0
+  "DQUX", // DQUX
+  "DQU1", // DQU1
+  "DGER", // DGER
+  "DGE0", // DGE0
+  "DGEX", // DGEX
+  "DGE1", // DGE1
+  "DGSR", // DGSR
+  "DGS0", // DGS0
+  "DGSX", // DGSX
+  "DGS1", // DGS1
+  "DGDR", // DGDR
+  "DGD0", // DGD0
+  "DGDX", // DGDX
+  "DGD1", // DGD1
+  "DGWR", // DGWR
+  "DGW0", // DGW0
+  "DGWX", // DGWX
+  "DGW1", // DGW1
+  "DGNR", // DGNR
+  "DGN0", // DGN0
+  "DGNX", // DGNX
+  "DGN1", // DGN1
+  "DGUR", // DGUR
+  "DGU0", // DGU0
+  "DGUX", // DGUX
+  "DGU1", // DGU1
+  "DIER", // DIER
+  "DIE0", // DIE0
+  "DIEX", // DIEX
+  "DIE1", // DIE1
+  "DISR", // DISR
+  "DIS0", // DIS0
+  "DISX", // DISX
+  "DIS1", // DIS1
+  "DIDR", // DIDR
+  "DID0", // DID0
+  "DIDX", // DIDX
+  "DID1", // DID1
+  "DIWR", // DIWR
+  "DIW0", // DIW0
+  "DIWX", // DIWX
+  "DIW1", // DIW1
+  "DINR", // DINR
+  "DIN0", // DIN0
+  "DINX", // DINX
+  "DIN1", // DIN1
+  "DIUR", // DIUR
+  "DIU0", // DIU0
+  "DIUX", // DIUX
+  "DIU1", // DIU1
+  "DOER", // DOER
+  "DOE0", // DOE0
+  "DOEX", // DOEX
+  "DOE1", // DOE1
+  "DOSR", // DOSR
+  "DOS0", // DOS0
+  "DOSX", // DOSX
+  "DOS1", // DOS1
+  "DODR", // DODR
+  "DOD0", // DOD0
+  "DODX", // DODX
+  "DOD1", // DOD1
+  "DOWR", // DOWR
+  "DOW0", // DOW0
+  "DOWX", // DOWX
+  "DOW1", // DOW1
+  "DONR", // DONR
+  "DON0", // DON0
+  "DONX", // DONX
+  "DON1", // DON1
+  "DOUR", // DOUR
+  "DOU0", // DOU0
+  "DOUX", // DOUX
+  "DOU1", // DOU1
+};
+
 char const *toConstCharPointer(Voxel v) {
   switch (v) {
   case Unkn: return "Unkn";
@@ -286,6 +597,20 @@ char const *toConstCharPointer(Voxel v) {
   }
   return "Voxel(?)";
 }
+
+Voxel StringToVoxel(string const &s) {
+  static map<string, Voxel> *stringToVoxel = 0;
+  if (!stringToVoxel) {
+    stringToVoxel = new map<string, Voxel>();
+    for (auto const v : voxel) {
+      (*stringToVoxel)[voxelToCStr[v]] = v;
+    }
+  }
+  if (stringToVoxel->find(s) == stringToVoxel->end()) {
+    return eoVoxel;
+  }
+  return (*stringToVoxel)[s];
+};
 
 VoxelProperties voxelProperties[eoVoxel] = {
 #undef Props
