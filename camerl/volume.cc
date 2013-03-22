@@ -135,7 +135,7 @@ char parseVoxel(VoxelRank &rank, istream &in, char c) {
     exit(1);
   }
 
-  fprintf(stdout, "%s", symbol.c_str());
+  // fprintf(stdout, "%s", symbol.c_str());
   rank.push_back(voxel);
   return c;
 }
@@ -151,7 +151,7 @@ char parseRank(VoxelRank &rank, istream &in, char c) {
            );
     exit(1);
   }
-  fprintf(stdout, "    {");
+  // fprintf(stdout, "    {");
   charNumber += 1, c = in.get();
 
   for (c = parseVoxel(rank, in, c);
@@ -159,7 +159,7 @@ char parseRank(VoxelRank &rank, istream &in, char c) {
        c = parseVoxel(rank, in, (c = skipWhitespaceAndComments(in, c)))
       )
   {
-    fprintf(stdout, ",");
+    // fprintf(stdout, ",");
     charNumber += 1, c = in.get();
   }
 
@@ -173,7 +173,7 @@ char parseRank(VoxelRank &rank, istream &in, char c) {
            );
     exit(1);
   }
-  fprintf(stdout, " }");
+  // fprintf(stdout, " }");
   charNumber += 1, c = in.get();
   return c;
 }
@@ -189,7 +189,7 @@ char parsePlate(VoxelPlate &plate, istream &in, char c) {
            );
     exit(1);
   }
-  fprintf(stdout, "  {\n");
+  // fprintf(stdout, "  {\n");
   charNumber += 1, c = in.get();
 
   plate.push_back(VoxelRank());
@@ -198,7 +198,7 @@ char parsePlate(VoxelPlate &plate, istream &in, char c) {
        c = parseRank(plate.back(), in, (c = skipWhitespaceAndComments(in, c)))
       )
   {
-    fprintf(stdout, ",\n");
+    // fprintf(stdout, ",\n");
     charNumber += 1, c = in.get();
     plate.push_back(VoxelRank());
   }
@@ -213,7 +213,7 @@ char parsePlate(VoxelPlate &plate, istream &in, char c) {
            );
     exit(1);
   }
-  fprintf(stdout, "\n  }");
+  // fprintf(stdout, "\n  }");
   charNumber += 1; c = in.get();
   return c;
 }
@@ -229,7 +229,7 @@ void parseBrick(VoxelBrick &brick, istream &in, char c = ' ') {
            );
     exit(1);
   }
-  fprintf(stdout, " {\n");
+  // fprintf(stdout, " {\n");
   charNumber += 1, c = in.get();
 
   brick.push_back(VoxelPlate());
@@ -238,7 +238,7 @@ void parseBrick(VoxelBrick &brick, istream &in, char c = ' ') {
        c = parsePlate(brick.back(), in, (c = skipWhitespaceAndComments(in, c)))
       )
   {
-    fprintf(stdout, ",\n");
+    // fprintf(stdout, ",\n");
     charNumber += 1, c = in.get();
     brick.push_back(VoxelPlate());
   }
@@ -253,7 +253,7 @@ void parseBrick(VoxelBrick &brick, istream &in, char c = ' ') {
            );
     exit(1);
   }
-  fprintf(stdout, "}\n");
+  // fprintf(stdout, "}\n");
   charNumber += 1, c = in.get();
 }
 
@@ -287,6 +287,8 @@ Volume::Volume(istream &in) :
       row.resize(NCols, Wall);
     }
   }
+
+  fprintf(stdout, "Read a %lu x %lu x %lu brick....\n", NLvls, NRows, NCols);
 
   totalEvaluatedUSecsPerDirection.fill(0);
   totalEvaluatedUSecsPerTick.fill(0);
