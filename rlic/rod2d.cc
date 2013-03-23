@@ -908,6 +908,126 @@ void Rod2D::dump(Diagram2D const &diagram) const {
 }
 
 void Rod2D::Rebuild(Diagram2D const &diagram, PlateOfInt &plane) const {
+  // static Voxel const voxelFromcCharAndDirection[128 - 32 - 1][eoDirections] = {
+
+  //   //          E
+  //   //         /     S
+  //   //        /     /     D
+  //   //       /     /     /     W
+  //   //      /     /     /     /     N
+  //   //     /     /     /     /     /     U
+  //   //    /     /     /     /     /     /
+  //   { Wall, Wall, Wall, Wall, Wall, Wall }, //  32, 040, 20, ' ' , Space
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  33, 041, 21, '!', Exclamation mark
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  34, 042, 22, '"', Double quotes (or speech marks)
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  35, 043, 23, '#', Number
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  36, 044, 24, '$', Dollar
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  37, 045, 25, '%', Procenttecken
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  38, 046, 26, '&', Ampersand
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  39, 047, 27, ''', Single quote
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  40, 050, 28, '(', Open parenthesis (or open bracket)
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  41, 051, 29, ')', Close parenthesis (or close bracket)
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  42, 052, 2A, '*', Asterisk
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  43, 053, 2B, '+', Plus
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  44, 054, 2C, ',', Comma
+  //   { DBER, DBSR, DBDR, DBWR, DBNR, DBUR }, //  45, 055, 2D, '-', Hyphen
+  //   { DBER, DBSR, DBDR, DBWR, DBNR, DBUR }, //  46, 056, 2E, '.', Period, dot or full stop
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  47, 057, 2F, '/', Slash or divide
+  //   { D0ER, D0SR, D0DR, D0WR, D0NR, D0UR }, //  48, 060, 30, '0', Zero
+  //   { D1ER, D1SR, D1DR, D1WR, D1NR, D1UR }, //  49, 061, 31, '1', One
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  50, 062, 32, '2', Two
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  51, 063, 33, '3', Three
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  52, 064, 34, '4', Four
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  53, 065, 35, '5', Five
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  54, 066, 36, '6', Six
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  55, 067, 37, '7', Seven
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  56, 070, 38, '8', Eight
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  57, 071, 39, '9', Nine
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  58, 072, 3A, ':', Colon
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  59, 073, 3B, ';', Semicolon
+  //   { DQER, DQSR, DQDR, DQWR, DQNR, DQUR }, //  60, 074, 3C, '<', Less than (or open angled bracket)
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  61, 075, 3D, '=', Equals
+  //   { DQER, DQSR, DQDR, DQWR, DQNR, DQUR }, //  62, 076, 3E, '>', Greater than (or close angled bracket)
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  63, 077, 3F, '?', Question mark
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  64, 100, 40, '@', At symbol
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  65, 101, 41, 'A', Uppercase A
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  66, 102, 42, 'B', Uppercase B
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  67, 103, 43, 'C', Uppercase C
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  68, 104, 44, 'D', Uppercase D
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  69, 105, 45, 'E', Uppercase E
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  70, 106, 46, 'F', Uppercase F
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  71, 107, 47, 'G', Uppercase G
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  72, 110, 48, 'H', Uppercase H
+  //   { DIER, DISR, DIDR, DIWR, DINR, DIUR }, //  73, 111, 49, 'I', Uppercase I
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  74, 112, 4A, 'J', Uppercase J
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  75, 113, 4B, 'K', Uppercase K
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  76, 114, 4C, 'L', Uppercase L
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  77, 115, 4D, 'M', Uppercase M
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  78, 116, 4E, 'N', Uppercase N
+  //   { DOER, DOSR, DODR, DOWR, DONR, DOUR }, //  79, 117, 4F, 'O', Uppercase O
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  80, 120, 50, 'P', Uppercase P
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  81, 121, 51, 'Q', Uppercase Q
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  82, 122, 52, 'R', Uppercase R
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  83, 123, 53, 'S', Uppercase S
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  84, 124, 54, 'T', Uppercase T
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  85, 125, 55, 'U', Uppercase U
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  86, 126, 56, 'V', Uppercase V
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  87, 127, 57, 'W', Uppercase W
+  //   { DSER, DSSR, DSDR, DSWR, DSNR, DSUR }, //  88, 130, 58, 'X', Uppercase X
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  89, 131, 59, 'Y', Uppercase Y
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  90, 132, 5A, 'Z', Uppercase Z
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  91, 133, 5B, '[', Opening bracket
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  92, 134, 5C, '\', Backslash
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  93, 135, 5D, ']', Closing bracket
+  //   { DQER, DQSR, DQDR, DQWR, DQNR, DQUR }, //  94, 136, 5E, '^', Caret - circumflex
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  95, 137, 5F, '_', Underscore
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  96, 140, 60, '`', Grave accent
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  97, 141, 61, 'a', Lowercase a
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  98, 142, 62, 'b', Lowercase b
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  99, 143, 63, 'c', Lowercase c
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, // 100, 144, 64, 'd', Lowercase d
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, // 101, 145, 65, 'e', Lowercase e
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, // 102, 146, 66, 'f', Lowercase f
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, // 103, 147, 67, 'g', Lowercase g
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, // 104, 150, 68, 'h', Lowercase h
+  //   { DIER, DISR, DIDR, DIWR, DINR, DIUR }, // 105, 151, 69, 'i', Lowercase i
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, // 106, 152, 6A, 'j', Lowercase j
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, // 107, 153, 6B, 'k', Lowercase k
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, // 108, 154, 6C, 'l', Lowercase l
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, // 109, 155, 6D, 'm', Lowercase m
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, // 110, 156, 6E, 'n', Lowercase n
+  //   { DOER, DOSR, DODR, DOWR, DONR, DOUR }, // 111, 157, 6F, 'o', Lowercase o
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, // 112, 160, 70, 'p', Lowercase p
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, // 113, 161, 71, 'q', Lowercase q
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, // 114, 162, 72, 'r', Lowercase r
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, // 115, 163, 73, 's', Lowercase s
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, // 116, 164, 74, 't', Lowercase t
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, // 117, 165, 75, 'u', Lowercase u
+  //   { DQER, DQSR, DQDR, DQWR, DQNR, DQUR }, // 118, 166, 76, 'v', Lowercase v
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, // 119, 167, 77, 'w', Lowercase w
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, // 120, 170, 78, 'x', Lowercase x
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, // 121, 171, 79, 'y', Lowercase y
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, // 122, 172, 7A, 'z', Lowercase z
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, // 123, 173, 7B, '{', Opening brace
+  //   { DBER, DBSR, DBDR, DBWR, DBNR, DBUR }, // 124, 174, 7C, '|', Vertical bar
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, // 125, 175, 7D, '}', Closing brace
+  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }  // 126, 176, 7E, '~', Equivalency sign - tilde
+  // };
+
+  // for (auto const &p : *this) {
+  //   Voxel v = voxelFromcCharAndDirection[size_t(diagram.at(p)) - 32 - 1][direction];
+  //   VoxelProperties const &vp = voxelProperties[v];
+  //   if (vp.dataType == dtTest) {
+  //     if (p == headAt) {
+  // 	static Voxel const headFromDirection[eoDirections] = { DHER, DHSR, DHDR, DHWR, DHNR, DHUR };
+  // 	v = headFromDirection[direction];
+  //     } else if (p == tailAt) {
+  // 	static Voxel const tailFromDirection[eoDirections] = { DTER, DTSR, DTDR, DTWR, DTNR, DTUR };
+  // 	v = tailFromDirection[direction];
+  //     }
+  //   }
+  //   plane[p.y][p.x] = int(v);
+  // }
   for (auto const &p : *this) {
     plane[p.y][p.x] = diagram.at(p);
   }
