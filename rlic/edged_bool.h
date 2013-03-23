@@ -57,6 +57,8 @@ class EdgedBool {
       return isATrailingEdge();
     case aLo:
       return isALo();
+    default:
+      break;
     }
     return false;
   }
