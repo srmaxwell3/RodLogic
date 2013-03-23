@@ -9,7 +9,7 @@ OPT = -O0
 LIBS = -lncurses
 
 ALL_OBJS = \
-	cam.r.o \
+	rlic.o \
 	diagram2d.o \
 	directions.o \
 	label.o \
@@ -17,21 +17,21 @@ ALL_OBJS = \
 	rod_connection.o \
 	rod2d.o
 
-all:	cam.r test.dcff test.74181 test.16x16bytes
+all:	rlic test.dcff test.74181 test.16x16bytes
 
 clean:
 	$(RM) $(ALL_OBJS) dcff.log 74181.log 16x16bytes.log
 
 clobber:	clean
-	$(RM) ./cam.r
+	$(RM) ./rlic
 
-cam.r:	$(ALL_OBJS)
-	$(CXX) -o cam.r $(ALL_OBJS) $(LIBS)
+rlic:	$(ALL_OBJS)
+	$(CXX) -o rlic $(ALL_OBJS) $(LIBS)
 
-cam.r.o: \
-	cam.r.cc \
+rlic.o: \
+	rlic.cc \
 	diagram2d.h
-	$(CXX) -c cam.r.cc
+	$(CXX) -c rlic.cc
 
 diagram2d.o: \
 	diagram2d.cc \
@@ -68,14 +68,14 @@ rod2d.o: \
 	$(CXX) -c rod2d.cc
 
 test.dcff:	dcff.txt dcff.input.txt dcff.log.good
-	./cam.r -c 15 -e -i dcff.input.txt -s dcff.txt > dcff.log
+	./rlic -c 15 -e -i dcff.input.txt -s dcff.txt > dcff.log
 	diff -c dcff.log.good dcff.log
 
 
 test.74181:	74181.txt 74181.log.good
-	./cam.r 74181.txt > 74181.log
+	./rlic 74181.txt > 74181.log
 	diff -c 74181.log.good 74181.log
 
 test.16x16bytes:	16x16bytes.txt 16x16bytes.log.good
-	./cam.r 16x16bytes.txt > 16x16bytes.log
+	./rlic 16x16bytes.txt > 16x16bytes.log
 	diff -c 16x16bytes.log.good 16x16bytes.log
