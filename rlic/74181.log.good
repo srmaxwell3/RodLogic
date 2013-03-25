@@ -1,4 +1,4 @@
-./cam.r -0 -b -c 0 74181.txt
+./rlic -0 -b -c 0 74181.txt
 Rod Count by (Length, Fan-In, Fan-Out):
 (   11,   0,   0):     1
 (   11,   1,   1):     1
@@ -71,10 +71,10 @@ separations[ 3] =   23
 separations[ 4] =    2
 
 Not executing (optCycleCount == 0).
-Removed 52 empty rank(s).
-Removed 6 empty file(s).
-Removed 73 squeezable rank(s).
-Removed 81 squeezable file(s).
+Removed 52 empty row(s).
+Removed 6 empty col(s).
+Removed 73 squeezable row(s).
+Removed 81 squeezable col(s).
    0         1         2         3         4         5         6         7
    0         0         0         0         0         0         0         0
    .........................................................................

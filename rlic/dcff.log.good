@@ -1,4 +1,4 @@
-./cam.r -0 -b -c 15 -e -i dcff.input.txt -s dcff.txt
+./rlic -0 -b -c 15 -e -i dcff.input.txt -s dcff.txt
 Rod Count by (Length, Fan-In, Fan-Out):
 (    8,   2,   1):     1
 (   10,   1,   1):     1
