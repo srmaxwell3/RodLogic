@@ -28,16 +28,16 @@ struct PlateOfInt : public vector<vector<int>> {
   PlateOfInt(size_t _yMax = 0, size_t _xMax = 0);
   PlateOfInt(PlateOfInt const &that);
 
-  void insertRank(size_t atY);
-  void insertFile(size_t atX);
-  void deleteRank(size_t atY);
-  void deleteFile(size_t atX);
-  bool compareRankAndRankBelow(size_t atY) const;
-  bool compareFileAndFileToRight(size_t atX) const;
-  bool isRankEmpty(size_t atY) const;
-  bool isFileEmpty(size_t atX) const;
-  bool isRankSqueezable(size_t atY) const;
-  bool isFileSqueezable(size_t atX) const;
+  void insertRow(size_t atY);
+  void insertCol(size_t atX);
+  void deleteRow(size_t atY);
+  void deleteCol(size_t atX);
+  bool compareRowAndRowBelow(size_t atY) const;
+  bool compareColAndColToRight(size_t atX) const;
+  bool isRowEmpty(size_t atY) const;
+  bool isColEmpty(size_t atX) const;
+  bool isRowSqueezable(size_t atY) const;
+  bool isColSqueezable(size_t atX) const;
   void Dump() const;
 
   int scale;

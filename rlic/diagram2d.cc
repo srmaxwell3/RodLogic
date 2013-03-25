@@ -51,13 +51,13 @@ PlateOfInt::PlateOfInt(PlateOfInt const &that) :
   }
 }
 
-void PlateOfInt::insertRank(size_t atY) {
+void PlateOfInt::insertRow(size_t atY) {
   auto insertAt = atY < yMax ? begin() + atY : end();
   insert(insertAt, vector<int>(xMax, ' '));
   yMax = size();
 }
 
-void PlateOfInt::insertFile(size_t atX) {
+void PlateOfInt::insertCol(size_t atX) {
   for (auto &r : *this) {
     auto insertAt = atX < xMax ? r.begin() + atX : r.end();
     r.insert(insertAt, ' ');
@@ -65,14 +65,14 @@ void PlateOfInt::insertFile(size_t atX) {
   }
 }
 
-void PlateOfInt::deleteRank(size_t atY) {
+void PlateOfInt::deleteRow(size_t atY) {
   if (atY < yMax) {
     erase(begin() + atY);
     yMax = size();
   }
 }
 
-void PlateOfInt::deleteFile(size_t atX) {
+void PlateOfInt::deleteCol(size_t atX) {
   if (atX < xMax) {
      for (auto &r : *this) {
        r.erase(r.begin() + atX);
@@ -81,14 +81,14 @@ void PlateOfInt::deleteFile(size_t atX) {
    }
  }
 
- bool PlateOfInt::compareRankAndRankBelow(size_t atY) const {
+ bool PlateOfInt::compareRowAndRowBelow(size_t atY) const {
    if ((atY + 1) < yMax) {
      return (*this)[atY] == (*this)[atY + 1];
    }
    return false;
  }
 
- bool PlateOfInt::compareFileAndFileToRight(size_t atX) const {
+ bool PlateOfInt::compareColAndColToRight(size_t atX) const {
    if ((atX + 1) < xMax) {
      for (auto const &r : *this) {
        if (r[atX] != r[atX + 1]) {
@@ -100,7 +100,7 @@ void PlateOfInt::deleteFile(size_t atX) {
    return false;
  }
 
-bool PlateOfInt::isRankEmpty(size_t atY) const {
+bool PlateOfInt::isRowEmpty(size_t atY) const {
   if (atY < yMax) {
     auto const &r = (*this)[atY];
     for (auto const &c : r) {
@@ -112,7 +112,7 @@ bool PlateOfInt::isRankEmpty(size_t atY) const {
   return true;
 }
 
-bool PlateOfInt::isFileEmpty(size_t atX) const {
+bool PlateOfInt::isColEmpty(size_t atX) const {
   if (atX < xMax) {
     for (auto const &r : *this) {
       auto const &c = r[atX];
@@ -124,7 +124,7 @@ bool PlateOfInt::isFileEmpty(size_t atX) const {
   return true;
 }
 
-bool PlateOfInt::isRankSqueezable(size_t atY) const {
+bool PlateOfInt::isRowSqueezable(size_t atY) const {
   if (atY < yMax) {
     auto const &r = (*this)[atY];
     for (auto const &c : r) {
@@ -136,7 +136,7 @@ bool PlateOfInt::isRankSqueezable(size_t atY) const {
   return true;
 }
 
-bool PlateOfInt::isFileSqueezable(size_t atX) const {
+bool PlateOfInt::isColSqueezable(size_t atX) const {
   if (atX < xMax) {
     for (auto const &r : *this) {
       auto const &c = r[atX];
@@ -352,8 +352,8 @@ Diagram2D::Diagram2D(istream &in) :
     }
   } while (in.good() && !in.eof());
 
-  for (auto &rank : (*this)) {
-    rank.resize(xMax, ' ');
+  for (auto &row : (*this)) {
+    row.resize(xMax, ' ');
   }
 
   totalEvaluatedUSecsPerDirection.fill(0);
@@ -1577,54 +1577,67 @@ void Diagram2D::Rebuild(PlateOfInt &plate) const {
   }
   deleted = 0;
   for (size_t y = 0; y < plate.yMax; /* empty */) {
-    if (plate.isRankEmpty(y)) {
-      plate.deleteRank(y);
+    if (plate.isRowEmpty(y)) {
+      plate.deleteRow(y);
       deleted += 1;
     } else {
       y += 1;
     }
   }
   if (deleted) {
-    fprintf(stdout, "Removed %lu empty rank(s).\n", deleted);
+    fprintf(stdout, "Removed %lu empty row(s).\n", deleted);
   }
   deleted = 0;
   for (size_t x = 0; x < plate.xMax; /* empty */) {
-    if (plate.isFileEmpty(x)) {
-      plate.deleteFile(x);
+    if (plate.isColEmpty(x)) {
+      plate.deleteCol(x);
       deleted += 1;
     } else {
       x += 1;
     }
   }
   if (deleted) {
-    fprintf(stdout, "Removed %lu empty file(s).\n", deleted);
+    fprintf(stdout, "Removed %lu empty col(s).\n", deleted);
   }
   deleted = 0;
   for (size_t y = 0; y < plate.yMax; /* empty */) {
-    if (plate.isRankSqueezable(y)) {
-      plate.deleteRank(y);
+    if (plate.isRowSqueezable(y)) {
+      plate.deleteRow(y);
       deleted += 1;
     } else {
       y += 1;
     }
   }
   if (deleted) {
-    fprintf(stdout, "Removed %lu squeezable rank(s).\n", deleted);
+    fprintf(stdout, "Removed %lu squeezable row(s).\n", deleted);
   }
   deleted = 0;
   for (size_t x = 0; x < plate.xMax; /* empty */) {
-    if (plate.isFileSqueezable(x)) {
-      plate.deleteFile(x);
+    if (plate.isColSqueezable(x)) {
+      plate.deleteCol(x);
       deleted += 1;
     } else {
       x += 1;
     }
   }
   if (deleted) {
-    fprintf(stdout, "Removed %lu squeezable file(s).\n", deleted);
+    fprintf(stdout, "Removed %lu squeezable col(s).\n", deleted);
   }
   plate.Dump();
 }
+
+// Diagram2D::Compress() {
+//   auto lessCol = [] (Rod2d *l, Rod2D *r) {
+//     return l->headAt.x < r->headAt.x || ();
+//   }
+//   auto lessRow = [] (Rod2d *l, Rod2D *r) {
+//     return l->headAt.y < r->headAt.y;
+//   }
+
+//   vector<vector<Rod2D *>> rodsInRows;
+//   vector<vector<Rod2D *>> rodsInCols;
+
+// }
 
 void Diagram2D::Rebuild(BrickOfInt &brick) const {
   static size_t const rodDirectionAndIsLockRodToLayer[eoDirections][2] = {
