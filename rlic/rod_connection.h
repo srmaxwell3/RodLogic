@@ -1,7 +1,7 @@
 #ifndef ROD_CONNECTION_TYPE_H
 #define ROD_CONNECTION_TYPE_H
 
-#include "directions.h"
+#include "direction.h"
 
 enum RodIntersectionType {
   riNone,
@@ -28,7 +28,7 @@ enum RodConnectionType {
 };
 
 extern RodConnectionType const rodConnectionType[eoRodConnectionType];
-extern RodConnectionType const rodConnectionThisToThat[eoDirections][eoDirections];
+extern RodConnectionType const rodConnectionThisToThat[eoDirection][eoDirection];
 
 char const *c_str(RodConnectionType t);
 

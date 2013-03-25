@@ -17,9 +17,10 @@ using std::pair;
 using std::vector;
 
 #include "bit_stream_input.h"
-#include "directions.h"
+#include "direction.h"
 #include "label.h"
 #include "p2d.h"
+#include "p3d.h"
 
 struct Rod2D;
 typedef set<Rod2D *> SetOfRod2Ds;
@@ -27,6 +28,20 @@ typedef set<Rod2D *> SetOfRod2Ds;
 struct PlateOfInt : public vector<vector<int>> {
   PlateOfInt(size_t _yMax = 0, size_t _xMax = 0);
   PlateOfInt(PlateOfInt const &that);
+
+  int const &at(P2D const &p) const {
+    return at(p.y, p.x);
+  }
+  int &at(P2D const &p) {
+    return at(p.y, p.x);
+  }
+
+  int const &at(int y, int x) const {
+    return vector<vector<int>>::at(y).at(x);
+  }
+  int &at(int y, int x) {
+    return vector<vector<int>>::at(y).at(x);
+  }
 
   void insertRow(size_t atY);
   void insertCol(size_t atX);
@@ -49,6 +64,18 @@ struct BrickOfInt : public vector<PlateOfInt> {
   BrickOfInt(size_t _zMax = 0, size_t _yMax = 0, size_t _xMax = 0);
   BrickOfInt(size_t _zMax, PlateOfInt const &that);
   BrickOfInt(BrickOfInt const &that);
+
+  bool isInBounds(P3D const &p) const {
+    return 0 <= p.x && p.x < xMax && 0 <= p.y && p.y < yMax && 0 <= p.z && p.z < zMax;
+  }
+
+  int const &at(P3D const &p) const {
+    return at(p.z, p.y, p.x);
+  }
+
+  int const &at(int z, int y, int x) const {
+    return vector<PlateOfInt>::at(z).at(y, x);
+  }
 
   void Dump() const;
 
@@ -85,12 +112,18 @@ struct Diagram2D : public PlateOfInt {
   int const &at(P2D const &p) const {
     return at(p.y, p.x);
   }
-
-  int const &at(int y, int x) const {
-    return PlateOfInt::at(y).at(x);
+  int &at(P2D const &p) {
+    return at(p.y, p.x);
   }
 
-  void newRodAt(P2D const &p, Directions d);
+  int const &at(int y, int x) const {
+    return PlateOfInt::at(y, x);
+  }
+  int &at(int y, int x) {
+    return PlateOfInt::at(y, x);
+  }
+
+  void newRodAt(P2D const &p, Direction d);
   void newIncompleteEWRodAt(P2D const &p);
   void newIncompleteSNRodAt(P2D const &p);
 
@@ -164,8 +197,9 @@ struct Diagram2D : public PlateOfInt {
   void dumpPerformance() const;
   void dump() const;
 
-  void Rebuild(PlateOfInt &plane) const;
-  void Rebuild(BrickOfInt &plane) const;
+  void RebuildWithChar(PlateOfInt &plane) const;
+  void RebuildWithChar(BrickOfInt &plane) const;
+  void RebuildWithEnum(BrickOfInt &plane, size_t scaleBy = 4) const;
 
   static bool isLegalEWCharNotLabel1st(char c);
   static bool isLegalEWChar(char c);
@@ -174,24 +208,24 @@ struct Diagram2D : public PlateOfInt {
 
   set<P2D> pointsAlreadySeen;
   map<P2D, SetOfRod2Ds> pointsShared;
-  array<SetOfRod2Ds, eoDirections> rods;
+  array<SetOfRod2Ds, eoDirection> rods;
 
-  array<SetOfRod2Ds, eoDirections> rodsWithInputs;
-  Directions earliestInput;
+  array<SetOfRod2Ds, eoDirection> rodsWithInputs;
+  Direction earliestInput;
   map<Label, BitStreamInput> currentInputs;
   map<string, CombinedLabel> currentCombinedInputs;
 
-  array<SetOfRod2Ds, eoDirections> rodsWithOutputs;
-  Directions earliestOutput;
+  array<SetOfRod2Ds, eoDirection> rodsWithOutputs;
+  Direction earliestOutput;
   map<Label, EdgedBool> currentOutputs;
   map<string, CombinedLabel> currentCombinedOutputs;
 
-  array<SetOfRod2Ds, eoDirections> rodsWithDebugOutputs;
-  Directions earliestDebugOutput;
+  array<SetOfRod2Ds, eoDirection> rodsWithDebugOutputs;
+  Direction earliestDebugOutput;
   map<Label, EdgedBool> currentDebugOutputs;
   map<string, CombinedLabel> currentCombinedDebugOutputs;
 
-  array<long, eoDirections> totalEvaluatedUSecsPerDirection;
+  array<long, eoDirection> totalEvaluatedUSecsPerDirection;
   long totalEvaluatedUSecs;
   long totalEvaluatedTicks;
 

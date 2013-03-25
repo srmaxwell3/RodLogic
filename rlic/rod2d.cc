@@ -8,12 +8,13 @@
 using std::ostringstream;
 
 #include "string_trims.h"
+#include "voxel.h"
 
 extern bool optRodsInitialValue;
 extern bool optShowEvaluatingRods;
 extern bool optWarnings;
 
-Rod2D::Rod2D(Diagram2D &diagram, P2D const &pStart, Directions d) :
+Rod2D::Rod2D(Diagram2D &diagram, P2D const &pStart, Direction d) :
     SetOfP2Ds(),
     label(),
     id(),
@@ -34,6 +35,10 @@ Rod2D::Rod2D(Diagram2D &diagram, P2D const &pStart, Directions d) :
     case 'v':
     case '^':
       sawHeadOrTailChar = true;
+      break;
+    default:
+      sawHeadOrTailChar = false;
+      break;
   }
 
   assert(direction == E || direction == W ||
@@ -41,11 +46,11 @@ Rod2D::Rod2D(Diagram2D &diagram, P2D const &pStart, Directions d) :
 	 /* || direction == D || direction == U */
 	);
 
-  Directions scanDirection =
+  Direction scanDirection =
       (direction == E || direction == W) ? E :
       (direction == S || direction == N) ? S :
       // (direction == D || direction == U) ? D :
-      eoDirections;
+      eoDirection;
   bool sawHead = scanDirection != direction;
   if (sawHead) {
     headAt = pStart;
@@ -88,6 +93,7 @@ Rod2D::Rod2D(Diagram2D &diagram, P2D const &pStart, Directions d) :
       case '0':
       case '1':
       case 'X':
+      case 'x':
 	diagram.rodSharedAt(this, p);
 	shared.insert(p);
 	diagram.saw(p);
@@ -95,18 +101,21 @@ Rod2D::Rod2D(Diagram2D &diagram, P2D const &pStart, Directions d) :
 	break;
 
       case 'I':
+      case 'i':
 	inputs.insert(p);
 	diagram.saw(p);
 	insert(p);
 	break;
 
       case 'O':
+      case 'o':
 	outputs.insert(p);
 	diagram.saw(p);
 	insert(p);
 	break;
 
       case 'D':
+      case 'd':
 	debugOutputs.insert(p);
 	diagram.saw(p);
 	insert(p);
@@ -210,7 +219,7 @@ Rod2D::Rod2D() :
     label(),
     id(),
     shared(),
-    direction(eoDirections),
+    direction(eoDirection),
     tickFirstSet(-1),
     lastEvaluatedValue(optRodsInitialValue)
 {
@@ -255,11 +264,11 @@ bool Rod2D::findTailLabel(Diagram2D const &diagram) {
   return findLabel(diagram, tailAt, BWard(direction));
 }
 
-bool Rod2D::findLabel(Diagram2D const &diagram, P2D pStart, Directions oWard) {
-  Directions lWard = LWard(oWard);
-  Directions rWard = RWard(oWard);
+bool Rod2D::findLabel(Diagram2D const &diagram, P2D pStart, Direction oWard) {
+  Direction lWard = LWard(oWard);
+  Direction rWard = RWard(oWard);
 
-  static Directions oWardToTWard[eoDirections][2] = {
+  static Direction oWardToTWard[eoDirection][2] = {
     { E, E }, // E
     { E, W }, // S
     { W, E }, // D
@@ -267,7 +276,7 @@ bool Rod2D::findLabel(Diagram2D const &diagram, P2D pStart, Directions oWard) {
     { W, E }, // N
     { W, E }, // U
   };
-  static char oWardToSlash[eoDirections][2] = {
+  static char oWardToSlash[eoDirection][2] = {
     { '/', '\\' }, // E
     { '\\', '/' }, // S
     { '?',  '?' }, // D
@@ -277,7 +286,7 @@ bool Rod2D::findLabel(Diagram2D const &diagram, P2D pStart, Directions oWard) {
   };
 
   if (!label.IsDefined()) {
-    Directions const &tWard = oWardToTWard[oWard][0];
+    Direction const &tWard = oWardToTWard[oWard][0];
     char const &slash = oWardToSlash[oWard][0];
     int nLSlashes = 0;
     for (P2D pOl = pStart.offsetBy(oWard, lWard);
@@ -319,7 +328,7 @@ bool Rod2D::findLabel(Diagram2D const &diagram, P2D pStart, Directions oWard) {
   }
 
   if (!label.IsDefined()) {
-    Directions const &tWard = oWardToTWard[oWard][1];
+    Direction const &tWard = oWardToTWard[oWard][1];
     char const &slash = oWardToSlash[oWard][1];
     int nRSlashes = 0;
     for (P2D pOr = pStart.offsetBy(oWard, rWard);
@@ -362,7 +371,7 @@ bool Rod2D::findLabel(Diagram2D const &diagram, P2D pStart, Directions oWard) {
 
   if (!label.IsDefined()) {
     if (direction == E || direction == W) {
-      Directions const tWard = oWard;
+      Direction const tWard = oWard;
       int nBlanks = 0;
       string l;
       P2D t;
@@ -400,7 +409,7 @@ bool Rod2D::findLabel(Diagram2D const &diagram, P2D pStart, Directions oWard) {
         }
       }
     } else {
-      Directions const tWard = oWard;
+      Direction const tWard = oWard;
       int nBlanks = 0;
       string l;
       P2D t;
@@ -907,128 +916,171 @@ void Rod2D::dump(Diagram2D const &diagram) const {
   fprintf(stdout, "\n");
 }
 
-void Rod2D::Rebuild(Diagram2D const &diagram, PlateOfInt &plane) const {
-  // static Voxel const voxelFromcCharAndDirection[128 - 32 - 1][eoDirections] = {
-
-  //   //          E
-  //   //         /     S
-  //   //        /     /     D
-  //   //       /     /     /     W
-  //   //      /     /     /     /     N
-  //   //     /     /     /     /     /     U
-  //   //    /     /     /     /     /     /
-  //   { Wall, Wall, Wall, Wall, Wall, Wall }, //  32, 040, 20, ' ' , Space
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  33, 041, 21, '!', Exclamation mark
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  34, 042, 22, '"', Double quotes (or speech marks)
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  35, 043, 23, '#', Number
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  36, 044, 24, '$', Dollar
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  37, 045, 25, '%', Procenttecken
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  38, 046, 26, '&', Ampersand
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  39, 047, 27, ''', Single quote
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  40, 050, 28, '(', Open parenthesis (or open bracket)
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  41, 051, 29, ')', Close parenthesis (or close bracket)
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  42, 052, 2A, '*', Asterisk
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  43, 053, 2B, '+', Plus
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  44, 054, 2C, ',', Comma
-  //   { DBER, DBSR, DBDR, DBWR, DBNR, DBUR }, //  45, 055, 2D, '-', Hyphen
-  //   { DBER, DBSR, DBDR, DBWR, DBNR, DBUR }, //  46, 056, 2E, '.', Period, dot or full stop
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  47, 057, 2F, '/', Slash or divide
-  //   { D0ER, D0SR, D0DR, D0WR, D0NR, D0UR }, //  48, 060, 30, '0', Zero
-  //   { D1ER, D1SR, D1DR, D1WR, D1NR, D1UR }, //  49, 061, 31, '1', One
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  50, 062, 32, '2', Two
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  51, 063, 33, '3', Three
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  52, 064, 34, '4', Four
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  53, 065, 35, '5', Five
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  54, 066, 36, '6', Six
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  55, 067, 37, '7', Seven
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  56, 070, 38, '8', Eight
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  57, 071, 39, '9', Nine
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  58, 072, 3A, ':', Colon
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  59, 073, 3B, ';', Semicolon
-  //   { DQER, DQSR, DQDR, DQWR, DQNR, DQUR }, //  60, 074, 3C, '<', Less than (or open angled bracket)
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  61, 075, 3D, '=', Equals
-  //   { DQER, DQSR, DQDR, DQWR, DQNR, DQUR }, //  62, 076, 3E, '>', Greater than (or close angled bracket)
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  63, 077, 3F, '?', Question mark
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  64, 100, 40, '@', At symbol
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  65, 101, 41, 'A', Uppercase A
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  66, 102, 42, 'B', Uppercase B
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  67, 103, 43, 'C', Uppercase C
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  68, 104, 44, 'D', Uppercase D
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  69, 105, 45, 'E', Uppercase E
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  70, 106, 46, 'F', Uppercase F
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  71, 107, 47, 'G', Uppercase G
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  72, 110, 48, 'H', Uppercase H
-  //   { DIER, DISR, DIDR, DIWR, DINR, DIUR }, //  73, 111, 49, 'I', Uppercase I
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  74, 112, 4A, 'J', Uppercase J
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  75, 113, 4B, 'K', Uppercase K
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  76, 114, 4C, 'L', Uppercase L
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  77, 115, 4D, 'M', Uppercase M
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  78, 116, 4E, 'N', Uppercase N
-  //   { DOER, DOSR, DODR, DOWR, DONR, DOUR }, //  79, 117, 4F, 'O', Uppercase O
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  80, 120, 50, 'P', Uppercase P
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  81, 121, 51, 'Q', Uppercase Q
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  82, 122, 52, 'R', Uppercase R
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  83, 123, 53, 'S', Uppercase S
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  84, 124, 54, 'T', Uppercase T
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  85, 125, 55, 'U', Uppercase U
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  86, 126, 56, 'V', Uppercase V
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  87, 127, 57, 'W', Uppercase W
-  //   { DSER, DSSR, DSDR, DSWR, DSNR, DSUR }, //  88, 130, 58, 'X', Uppercase X
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  89, 131, 59, 'Y', Uppercase Y
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  90, 132, 5A, 'Z', Uppercase Z
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  91, 133, 5B, '[', Opening bracket
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  92, 134, 5C, '\', Backslash
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  93, 135, 5D, ']', Closing bracket
-  //   { DQER, DQSR, DQDR, DQWR, DQNR, DQUR }, //  94, 136, 5E, '^', Caret - circumflex
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  95, 137, 5F, '_', Underscore
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  96, 140, 60, '`', Grave accent
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  97, 141, 61, 'a', Lowercase a
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  98, 142, 62, 'b', Lowercase b
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, //  99, 143, 63, 'c', Lowercase c
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, // 100, 144, 64, 'd', Lowercase d
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, // 101, 145, 65, 'e', Lowercase e
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, // 102, 146, 66, 'f', Lowercase f
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, // 103, 147, 67, 'g', Lowercase g
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, // 104, 150, 68, 'h', Lowercase h
-  //   { DIER, DISR, DIDR, DIWR, DINR, DIUR }, // 105, 151, 69, 'i', Lowercase i
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, // 106, 152, 6A, 'j', Lowercase j
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, // 107, 153, 6B, 'k', Lowercase k
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, // 108, 154, 6C, 'l', Lowercase l
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, // 109, 155, 6D, 'm', Lowercase m
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, // 110, 156, 6E, 'n', Lowercase n
-  //   { DOER, DOSR, DODR, DOWR, DONR, DOUR }, // 111, 157, 6F, 'o', Lowercase o
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, // 112, 160, 70, 'p', Lowercase p
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, // 113, 161, 71, 'q', Lowercase q
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, // 114, 162, 72, 'r', Lowercase r
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, // 115, 163, 73, 's', Lowercase s
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, // 116, 164, 74, 't', Lowercase t
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, // 117, 165, 75, 'u', Lowercase u
-  //   { DQER, DQSR, DQDR, DQWR, DQNR, DQUR }, // 118, 166, 76, 'v', Lowercase v
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, // 119, 167, 77, 'w', Lowercase w
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, // 120, 170, 78, 'x', Lowercase x
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, // 121, 171, 79, 'y', Lowercase y
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, // 122, 172, 7A, 'z', Lowercase z
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, // 123, 173, 7B, '{', Opening brace
-  //   { DBER, DBSR, DBDR, DBWR, DBNR, DBUR }, // 124, 174, 7C, '|', Vertical bar
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }, // 125, 175, 7D, '}', Closing brace
-  //   { Unkn, Unkn, Unkn, Unkn, Unkn, Unkn }  // 126, 176, 7E, '~', Equivalency sign - tilde
-  // };
-
-  // for (auto const &p : *this) {
-  //   Voxel v = voxelFromcCharAndDirection[size_t(diagram.at(p)) - 32 - 1][direction];
-  //   VoxelProperties const &vp = voxelProperties[v];
-  //   if (vp.dataType == dtTest) {
-  //     if (p == headAt) {
-  // 	static Voxel const headFromDirection[eoDirections] = { DHER, DHSR, DHDR, DHWR, DHNR, DHUR };
-  // 	v = headFromDirection[direction];
-  //     } else if (p == tailAt) {
-  // 	static Voxel const tailFromDirection[eoDirections] = { DTER, DTSR, DTDR, DTWR, DTNR, DTUR };
-  // 	v = tailFromDirection[direction];
-  //     }
-  //   }
-  //   plane[p.y][p.x] = int(v);
-  // }
+void Rod2D::RebuildWithChar(Diagram2D const &diagram, PlateOfInt &plate) const {
   for (auto const &p : *this) {
-    plane[p.y][p.x] = diagram.at(p);
+    plate[p.y][p.x] = diagram.at(p);
+  }
+}
+
+void Rod2D::RebuildWithEnum
+    (Diagram2D const &diagram,
+     PlateOfInt &plate,
+     size_t scaleBy
+    ) const
+{
+  if (rodIsALockRod()) {
+
+    //   LBEL, ...,  LBSL, ...,  LBDL, ...,  LBWL, ...,  LBNL, ...,  LBUL, ...,
+    //   LHEL, ...,  LHSL, ...,  LHDL, ...,  LHWL, ...,  LHNL, ...,  LHUL, ...,
+    //   LTEL, ...,  LTSL, ...,  LTDL, ...,  LTWL, ...,  LTNL, ...,  LTUL, ...,
+    //   lpel, ...,  lpsl, ...,  lpdl, ...,  lpwl, ...,  lpnl, ...,  lpul, ...,
+    //   LKEL, ...,  LKSL, ...,  LKDL, ...,  LKWL, ...,  LKNL, ...,  LKUL, ...,
+    //                                                E
+    //                                               /     S
+    //                                              /     /     D
+    //                                             /     /     /     W
+    //                                            /     /     /     /     N
+    //                                           /     /     /     /     /     U
+    //                                          /     /     /     /     /     /
+    static Voxel const lb[eoDirection] = { LBEL, LBSL, LBDL, LBWL, LBNL, LBUL };
+    static Voxel const lh[eoDirection] = { LHEL, LHSL, LHDL, LHWL, LHNL, LHUL };
+    static Voxel const lt[eoDirection] = { LTEL, LTSL, LTDL, LTWL, LTNL, LTUL };
+    static Voxel const lk[eoDirection] = { LKEL, LKSL, LKDL, LKWL, LKNL, LKUL };
+
+    for (auto const &p : *this) {
+      Voxel l = Unkn;
+      switch (char c = diagram.at(p)) {
+        case '>':
+        case 'v':
+        case '<':
+        case '^':
+          if (p == headAt) {
+            l = lh[direction];
+          } else if (p == tailAt) {
+            l = lt[direction];
+          } else {
+            l = lk[direction];
+          }
+          break;
+        case '-':
+        case '|':
+          l = lb[direction];
+          break;
+        default:
+          assert(l != Unkn);
+      }
+
+      assert(l != Unkn);
+
+      P2D dst(p.y * scaleBy + scaleBy, p.x * scaleBy + scaleBy);
+      plate.at(dst) = l;
+      l = lb[direction];
+      for (int i = 1; i < scaleBy; i += 1) {
+        dst.move(FWard(direction));
+        plate.at(dst) = l;
+      }
+    }
+  } else {
+    //   DBER, ..., ..., ...,  DBSR, ..., ..., ...,  DBDR, ..., ..., ...,
+    //   DBWR, ..., ..., ...,  DBNR, ..., ..., ...,  DBUR, ..., ..., ...,
+    //   DHER, ..., ..., ...,  DHSR, ..., ..., ...,  DHDR, ..., ..., ...,
+    //   DHWR, ..., ..., ...,  DHNR, ..., ..., ...,  DHUR, ..., ..., ...,
+    //   DTER, ..., ..., ...,  DTSR, ..., ..., ...,  DTDR, ..., ..., ...,
+    //   DTWR, ..., ..., ...,  DTNR, ..., ..., ...,  DTUR, ..., ..., ...,
+    //   DPER, ..., ..., ...,  DPSR, ..., ..., ...,  DPDR, ..., ..., ...,
+    //   DPWR, ..., ..., ...,  DPNR, ..., ..., ...,  DPUR, ..., ..., ...,
+    //   DSER, ..., ..., ...,  DSSR, ..., ..., ...,  DSDR, ..., ..., ...,
+    //   DSWR, ..., ..., ...,  DSNR, ..., ..., ...,  DSUR, ..., ..., ...,
+    //   DLER, ..., ..., ...,  DLSR, ..., ..., ...,  DLDR, ..., ..., ...,
+    //   DLWR, ..., ..., ...,  DLNR, ..., ..., ...,  DLUR, ..., ..., ...,
+    //   DQER, ..., ..., ...,  DQSR, ..., ..., ...,  DQDR, ..., ..., ...,
+    //   DQWR, ..., ..., ...,  DQNR, ..., ..., ...,  DQUR, ..., ..., ...,
+    //   DGER, ..., ..., ...,  DGSR, ..., ..., ...,  DGDR, ..., ..., ...,
+    //   DGWR, ..., ..., ...,  DGNR, ..., ..., ...,  DGUR, ..., ..., ...,
+    //   D0ER, ..., ..., ...,  D0SR, ..., ..., ...,  D0DR, ..., ..., ...,
+    //   D0WR, ..., ..., ...,  D0NR, ..., ..., ...,  D0UR, ..., ..., ...,
+    //   D1ER, ..., ..., ...,  D1SR, ..., ..., ...,  D1DR, ..., ..., ...,
+    //   D1WR, ..., ..., ...,  D1NR, ..., ..., ...,  D1UR, ..., ..., ...,
+    //   DIER, ..., ..., ...,  DISR, ..., ..., ...,  DIDR, ..., ..., ...,
+    //   DIWR, ..., ..., ...,  DINR, ..., ..., ...,  DIUR, ..., ..., ...,
+    //   DOER, ..., ..., ...,  DOSR, ..., ..., ...,  DODR, ..., ..., ...,
+    //   DOWR, ..., ..., ...,  DONR, ..., ..., ...,  DOUR, ..., ..., ...,
+    //                                                E
+    //                                               /     S
+    //                                              /     /     D
+    //                                             /     /     /     W
+    //                                            /     /     /     /     N
+    //                                           /     /     /     /     /     U
+    //                                          /     /     /     /     /     /
+    static Voxel const db[eoDirection] = { DBER, DBSR, DBDR, DBWR, DBNR, DBUR };
+    static Voxel const dh[eoDirection] = { DHER, DHSR, DHDR, DHWR, DHNR, DHUR };
+    static Voxel const dt[eoDirection] = { DTER, DTSR, DTDR, DTWR, DTNR, DTUR };
+    static Voxel const ds[eoDirection] = { DSER, DSSR, DSDR, DSWR, DSNR, DSUR };
+    static Voxel const dl[eoDirection] = { DLER, DLSR, DLDR, DLWR, DLNR, DLUR };
+    static Voxel const dq[eoDirection] = { DQER, DQSR, DQDR, DQWR, DQNR, DQUR };
+    static Voxel const d0[eoDirection] = { D0ER, D0SR, D0DR, D0WR, D0NR, D0UR };
+    static Voxel const d1[eoDirection] = { D1ER, D1SR, D1DR, D1WR, D1NR, D1UR };
+    static Voxel const di[eoDirection] = { DIER, DISR, DIDR, DIWR, DINR, DIUR };
+    static Voxel const dO[eoDirection] = { DOER, DOSR, DODR, DOWR, DONR, DOUR };
+
+    static char const htq[eoDirection] = { '>',  'v',  '?',  '<',  '^',  '?'  };
+
+    for (auto const &p : *this) {
+      Voxel d = Unkn;
+      switch (char c = diagram.at(p)) {
+        case '>':
+        case 'v':
+        case '<':
+        case '^':
+          if (c == htq[direction]) {
+            if (p == headAt) {
+              d = dh[direction];
+            } else if (p == tailAt) {
+              d = dt[direction];
+            } else {
+              d = dq[direction];
+            }
+          } else {
+            d = ds[direction];
+          }
+          break;
+        case 'X':
+        case 'x':
+          d = dl[direction];
+          break;
+        case '-':
+        case '|':
+        case 'D':
+        case 'd':
+          d = db[direction];
+          break;
+        case '0':
+          d = d0[direction];
+          break;
+        case '1':
+          d = d1[direction];
+          break;
+        case 'I':
+        case 'i':
+          d = di[direction];
+          break;
+        case 'O':
+        case 'o':
+          d = dO[direction];
+          break;
+        default:
+          assert(d != Unkn);
+      }
+
+      assert(d != Unkn);
+
+      P2D dst(p.y * scaleBy + scaleBy, p.x * scaleBy + scaleBy);
+      plate.at(dst) = d;
+      d = db[direction];
+      for (int i = 1; i < scaleBy; i += 1) {
+        dst.move(FWard(direction));
+        plate.at(dst) = d;
+      }
+    }
   }
 }

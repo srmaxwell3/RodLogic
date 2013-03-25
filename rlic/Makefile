@@ -1,12 +1,14 @@
 HOSTNAME = $(shell hostname)
 ifeq ($(HOSTNAME),Sidneys-MacBook-Pro.local)
-CXX = clang++ -std=c++11 -stdlib=libc++ $(DEBUG) $(OPT)
+CXX = clang++ -std=c++11 -stdlib=libc++ $(DEBUG) $(OPT) $(INCs)
 else
-CXX = g++ -std=c++0x $(DEBUG) $(OPT)
+CXX = g++ -std=c++0x $(DEBUG) $(OPT) $(INCs)
 endif
 DEBUG = -g
 OPT = -O0
-LIBS = -lncurses
+CAMERL = ../camerl
+INCs = -I$(CAMERL)
+LIBS = -lncurses $(CAMERL)/camerl.a
 
 ALL_OBJS = \
 	rlic.o \

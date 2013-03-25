@@ -1,5 +1,6 @@
 #include "diagram2d.h"
 #include "rod2d.h"
+#include "voxel.h"
 
 #include <cctype>
 #include <chrono>
@@ -303,9 +304,9 @@ void BrickOfInt::Dump() const {
 
 Diagram2D::Diagram2D(PlateOfInt const &p) :
     PlateOfInt(p),
-    earliestInput(eoDirections),
-    earliestOutput(eoDirections),
-    earliestDebugOutput(eoDirections),
+    earliestInput(eoDirection),
+    earliestOutput(eoDirection),
+    earliestDebugOutput(eoDirection),
     totalEvaluatedUSecs(0),
     totalEvaluatedTicks(0),
     lastEvaluatedTick(-1),
@@ -326,9 +327,9 @@ Diagram2D::Diagram2D(PlateOfInt const &p) :
 
 Diagram2D::Diagram2D(istream &in) :
     PlateOfInt(),
-    earliestInput(eoDirections),
-    earliestOutput(eoDirections),
-    earliestDebugOutput(eoDirections),
+    earliestInput(eoDirection),
+    earliestOutput(eoDirection),
+    earliestDebugOutput(eoDirection),
     totalEvaluatedUSecs(0),
     totalEvaluatedTicks(0),
     lastEvaluatedTick(-1),
@@ -360,7 +361,7 @@ Diagram2D::Diagram2D(istream &in) :
   yMax = size();
 }
 
-void Diagram2D::newRodAt(P2D const &p, Directions d) {
+void Diagram2D::newRodAt(P2D const &p, Direction d) {
   Rod2D *r = new Rod2D(*this, p, d);
   Label const &label = r->rodsLabel();
 
@@ -462,12 +463,12 @@ void Diagram2D::newIncompleteEWRodAt(P2D const &p) {
 
   size_t nEHeads = eHeads.size();
   size_t nWHeads = wHeads.size();
-  Directions d =
+  Direction d =
       0 < nEHeads ?
-      (0 < nWHeads ? eoDirections : E) :
-      (0 < nWHeads ? W : eoDirections);
+      (0 < nWHeads ? eoDirection : E) :
+      (0 < nWHeads ? W : eoDirection);
 
-  if (d == eoDirections) {
+  if (d == eoDirection) {
     if (nEHeads || nWHeads) {
       fprintf(stderr,
               "cam.r: Warning: Unable to determine the direction of an EW rod, at %s!\n",
@@ -518,12 +519,12 @@ void Diagram2D::newIncompleteSNRodAt(P2D const &p) {
 
   size_t nSHeads = sHeads.size();
   size_t nNHeads = nHeads.size();
-  Directions d =
+  Direction d =
       0 < nSHeads ?
-      (0 < nNHeads ? eoDirections : S) :
-      (0 < nNHeads ? N : eoDirections);
+      (0 < nNHeads ? eoDirection : S) :
+      (0 < nNHeads ? N : eoDirection);
 
-  if (d == eoDirections) {
+  if (d == eoDirection) {
     if (nSHeads || nNHeads) {
       fprintf(stderr,
               "cam.r: Warning: Unable to determine the direction of an SN rod, at %s!\n",
@@ -651,28 +652,28 @@ void Diagram2D::scan() {
     }
   }
 
-  earliestInput = eoDirections;
-  for (auto const d : directions) {
+  earliestInput = eoDirection;
+  for (auto const d : direction) {
     if (!rodsWithInputs[d].empty()) {
       earliestInput = d;
     }
   }
 
-  earliestOutput = eoDirections;
-  for (auto const d : directions) {
+  earliestOutput = eoDirection;
+  for (auto const d : direction) {
     if (!rodsWithOutputs[d].empty()) {
       earliestOutput = d;
     }
   }
 
-  earliestDebugOutput = eoDirections;
-  for (auto const d : directions) {
+  earliestDebugOutput = eoDirection;
+  for (auto const d : direction) {
     if (!rodsWithDebugOutputs[d].empty()) {
       earliestDebugOutput = d;
     }
   }
 
-  if (earliestInput != eoDirections) {
+  if (earliestInput != eoDirection) {
     int tick = 0;
     for (auto d = earliestInput; Last(d) != earliestInput; d = Last(d)) {
       for (auto &r : rodsWithInputs[d]) {
@@ -682,7 +683,7 @@ void Diagram2D::scan() {
     }
   }
 
-  if (earliestOutput != eoDirections) {
+  if (earliestOutput != eoDirection) {
     for (auto d = earliestOutput; Last(d) != earliestOutput; d = Last(d)) {
       for (auto &r : rodsWithOutputs[d]) {
         r->verifyInputDelays();
@@ -690,7 +691,7 @@ void Diagram2D::scan() {
     }
   }
 
-  if (earliestDebugOutput != eoDirections) {
+  if (earliestDebugOutput != eoDirection) {
     for (auto d = earliestDebugOutput; Last(d) != earliestDebugOutput; d = Last(d)) {
       for (auto &r : rodsWithDebugOutputs[d]) {
         r->verifyInputDelays();
@@ -698,13 +699,13 @@ void Diagram2D::scan() {
     }
   }
 
-  for (auto const d : directions) {
+  for (auto const d : direction) {
     for (auto r : rods[d]) {
       r->DetermineIfALockRod();
     }
   }
 
-  // for (auto const d : directions) {
+  // for (auto const d : direction) {
   //   for (auto r : rods[d]) {
   //     r->formExpression();
   //   }
@@ -715,17 +716,17 @@ void Diagram2D::refactor() {
   fprintf(stdout, "Refactoring....\n");
 
   // Find the extents of the current rods.
-  array<int, eoDirections>  limitTowards;
+  array<int, eoDirection>  limitTowards;
   limitTowards.fill(0);
 
-  for (auto const d : directions) {
+  for (auto const d : direction) {
     for (auto const r : rods[d]) {
       P2D const &headAt = r->getHeadAt();
       P2D const &tailAt = r->getTailAt();
-      Directions bwd = BWard(d);
-      Directions fwd = FWard(d);
-      Directions lwd = LWard(d);
-      Directions rwd = RWard(d);
+      Direction bwd = BWard(d);
+      Direction fwd = FWard(d);
+      Direction lwd = LWard(d);
+      Direction rwd = RWard(d);
 
       switch (d) {
       case E:
@@ -757,14 +758,14 @@ void Diagram2D::refactor() {
       }
     }
   }
-  for (auto const d : directions) {
+  for (auto const d : direction) {
     fprintf(stdout, "limitTowards[%s] = %4d\n", c_str(d), limitTowards[d]);
   }
   fprintf(stdout, "\n");
 
   // Find the separations between the rods.
   array<map<int, int>, 2> rowAndColumnCounts;
-  for (auto const d : directions) {
+  for (auto const d : direction) {
     for (auto const r : rods[d]) {
       P2D const &headAt = r->getHeadAt();
 
@@ -805,7 +806,7 @@ void Diagram2D::refactor() {
 }
 
 void Diagram2D::reset() {
-  for (Directions d : directions) {
+  for (Direction d : direction) {
     auto &dRods = rods[d];
 
     for (auto &r : dRods) {
@@ -818,9 +819,9 @@ void Diagram2D::reset() {
 void Diagram2D::evaluateAt(int tick) {
   lastEvaluatedTick = tick;
 
-  Directions d =
-      Directions((earliestInput != eoDirections ? tick + int(earliestInput) : tick) %
-                 eoDirections
+  Direction d =
+      Direction((earliestInput != eoDirection ? tick + int(earliestInput) : tick) %
+                 eoDirection
                 );
   lastEvaluatedTickNChangedRods = 0;
   lastEvaluatedTickNInputsRead = 0;
@@ -839,15 +840,15 @@ void Diagram2D::evaluateAt(int tick) {
 
   auto eoEvaluation = CHRONO_CLOCK::now();
   auto dTEvaluation = duration_cast<microseconds>(eoEvaluation - boEvaluation).count();
-  totalEvaluatedUSecsPerDirection[totalEvaluatedTicks % eoDirections] += dTEvaluation;
+  totalEvaluatedUSecsPerDirection[totalEvaluatedTicks % eoDirection] += dTEvaluation;
   totalEvaluatedUSecs += dTEvaluation;
 
   if (optShowPerformance) {
     fprintf(stdout,
             "%ld [%ld.%s]: dT = %lld us\n",
             totalEvaluatedTicks,
-            totalEvaluatedTicks / eoDirections,
-            c_str(Directions(totalEvaluatedTicks % eoDirections)),
+            totalEvaluatedTicks / eoDirection,
+            c_str(Direction(totalEvaluatedTicks % eoDirection)),
             (long long) dTEvaluation
             );
   }
@@ -1084,8 +1085,8 @@ void Diagram2D::dumpState() {
   fprintf(stdout,
           "%d [%d.%s]: inputs={",
           lastEvaluatedTick,
-          lastEvaluatedTick / eoDirections,
-          c_str(Directions(lastEvaluatedTick % eoDirections))
+          lastEvaluatedTick / eoDirection,
+          c_str(Direction(lastEvaluatedTick % eoDirection))
          );
   bool dumpedALabel = false;
   char const *comma = "\n    ";
@@ -1143,10 +1144,10 @@ void Diagram2D::dumpState() {
 }
 
 void Diagram2D::dumpPerformance() const {
-  if (int totalEvaluatedCycles = totalEvaluatedTicks / eoDirections) {
+  if (int totalEvaluatedCycles = totalEvaluatedTicks / eoDirection) {
     double averageEvaluatedUSecsPerCycle = 0.0;
     fprintf(stdout, "Performance:\n");
-    for (auto d : directions) {
+    for (auto d : direction) {
       double averageEvaluatedUSecsForTick =
           totalEvaluatedUSecsPerDirection[d] / totalEvaluatedTicks;
       fprintf(stdout,
@@ -1442,28 +1443,28 @@ void Diagram2D::dump() const {
   struct {
     size_t nRods;
     size_t nIncompleteRods;
-  } rodCounts[eoDirections + 1] = {
+  } rodCounts[eoDirection + 1] = {
     { 0, 0 }, // E
     { 0, 0 }, // S
     { 0, 0 }, // D
     { 0, 0 }, // W
     { 0, 0 }, // N
     { 0, 0 }, // U
-    { 0, 0 }  // eoDirections
+    { 0, 0 }  // eoDirection
   };
 
   typedef tuple<int, size_t, size_t> LenInsOuts;
   map<LenInsOuts, int> rodLengthHistogram;
 
-  for (Directions d : directions) {
+  for (Direction d : direction) {
     auto const &dRods = rods[d];
 
-    rodCounts[eoDirections].nRods += dRods.size();
+    rodCounts[eoDirection].nRods += dRods.size();
     rodCounts[d].nRods = dRods.size();
 
     for (auto const &r : dRods) {
       if (r->rodIsIncomplete()) {
-        rodCounts[eoDirections].nIncompleteRods += 1;
+        rodCounts[eoDirection].nIncompleteRods += 1;
         rodCounts[d].nIncompleteRods += 1;
       }
       rodLengthHistogram[make_tuple(r->rodsLength(), r->countOfInputs(), r->countOfOutputs())] += 1;
@@ -1490,28 +1491,28 @@ void Diagram2D::dump() const {
   fprintf(stdout, "\n");
 
   fprintf(stdout, "Rod Count (and # incomplete) by Direction:\n");
-  for (Directions d : directions) {
+  for (Direction d : direction) {
     auto const &cs = rodCounts[d];
     fprintf(stdout, "%5s: %5lu (%5lu)\n", c_str(d), cs.nRods, cs.nIncompleteRods);
   }
   fprintf(stdout,
           "Total: %5lu (%5lu)\n",
-          rodCounts[eoDirections].nRods,
-          rodCounts[eoDirections].nIncompleteRods
+          rodCounts[eoDirection].nRods,
+          rodCounts[eoDirection].nIncompleteRods
          );
   fprintf(stdout, "\n");
 
   fprintf(stdout,
           "Earliest input: %s\n",
-          earliestInput != eoDirections ? c_str(earliestInput) : "None"
+          earliestInput != eoDirection ? c_str(earliestInput) : "None"
          );
   fprintf(stdout,
           "Earliest output: %s\n",
-          earliestOutput != eoDirections ? c_str(earliestOutput) : "None"
+          earliestOutput != eoDirection ? c_str(earliestOutput) : "None"
          );
   fprintf(stdout,
           "Earliest debugOutput: %s\n",
-          earliestDebugOutput != eoDirections ? c_str(earliestDebugOutput) : "None"
+          earliestDebugOutput != eoDirection ? c_str(earliestDebugOutput) : "None"
          );
   fprintf(stdout, "\n");
 }
@@ -1568,11 +1569,11 @@ bool Diagram2D::isLegalSNChar(char c) {
   }
 }
 
-void Diagram2D::Rebuild(PlateOfInt &plate) const {
+void Diagram2D::RebuildWithChar(PlateOfInt &plate) const {
   size_t deleted = 0;
-  for (auto const d : directions) {
+  for (auto const d : direction) {
     for (auto const &r : rods[d]) {
-      r->Rebuild(*this, plate);
+      r->RebuildWithChar(*this, plate);
     }
   }
   deleted = 0;
@@ -1639,8 +1640,8 @@ void Diagram2D::Rebuild(PlateOfInt &plate) const {
 
 // }
 
-void Diagram2D::Rebuild(BrickOfInt &brick) const {
-  static size_t const rodDirectionAndIsLockRodToLayer[eoDirections][2] = {
+void Diagram2D::RebuildWithChar(BrickOfInt &brick) const {
+  static size_t const rodDirectionAndIsLockRodToLayer[eoDirection][2] = {
 
     //   [?][!isALockRod]
     //  /  [?][isALockRod]
@@ -1652,9 +1653,9 @@ void Diagram2D::Rebuild(BrickOfInt &brick) const {
     { 0, 4 }, // [S][?]
     { 7, 7 }, // [U][?]
   };
-  for (auto const d : directions) {
+  for (auto const d : direction) {
     for (auto const &r : rods[d]) {
-      r->Rebuild(*this, brick[rodDirectionAndIsLockRodToLayer[d][r->rodIsALockRod()]]);
+      r->RebuildWithChar(*this, brick[rodDirectionAndIsLockRodToLayer[d][r->rodIsALockRod()]]);
     }
   }
 
@@ -1786,6 +1787,426 @@ void Diagram2D::Rebuild(BrickOfInt &brick) const {
               case '>':
               case '<':
               case ' ':
+                break;
+              default:
+                break; // assert(false);
+            }
+          }
+        }
+        break;
+    }
+  }
+
+  brick.Dump();
+}
+
+void Diagram2D::RebuildWithEnum(BrickOfInt &brick, size_t scaleBy) const {
+  static size_t const rodDirectionAndIsLockRodToLayer[eoDirection][2] = {
+
+    //   [?][!isALockRod]
+    //  /  [?][isALockRod]
+    // /  /
+    { 6, 2 }, // [E][?]
+    { 0, 4 }, // [S][?]
+    { 7, 7 }, // [D][?]
+    { 6, 2 }, // [W][?]
+    { 0, 4 }, // [S][?]
+    { 7, 7 }, // [U][?]
+  };
+  for (auto const d : direction) {
+    for (auto const &r : rods[d]) {
+      r->RebuildWithEnum
+          (*this,
+           brick[rodDirectionAndIsLockRodToLayer[d][r->rodIsALockRod()]],
+           scaleBy
+          );
+    }
+  }
+
+  //   LBEL, ...,  LBSL, ...,  LBDL, ...,  LBWL, ...,  LBNL, ...,  LBUL, ...,
+  //   LHEL, ...,  LHSL, ...,  LHDL, ...,  LHWL, ...,  LHNL, ...,  LHUL, ...,
+  //   LTEL, ...,  LTSL, ...,  LTDL, ...,  LTWL, ...,  LTNL, ...,  LTUL, ...,
+  //   LPEL, ...,  LPSL, ...,  LPDL, ...,  LPWL, ...,  LPNL, ...,  LPUL, ...,
+  //   LKEL, ...,  LKSL, ...,  LKDL, ...,  LKWL, ...,  LKNL, ...,  LKUL, ...,
+  //                                                E
+  //                                               /     S
+  //                                              /     /     D
+  //                                             /     /     /     W
+  //                                            /     /     /     /     N
+  //                                           /     /     /     /     /     U
+  //                                          /     /     /     /     /     /
+  static Voxel const lb[eoDirection] = { LBEL, LBSL, LBDL, LBWL, LBNL, LBUL };
+  static Voxel const lh[eoDirection] = { LHEL, LHSL, LHDL, LHWL, LHNL, LHUL };
+  static Voxel const lt[eoDirection] = { LTEL, LTSL, LTDL, LTWL, LTNL, LTUL };
+  static Voxel const lp[eoDirection] = { LPEL, LPSL, LPDL, LPWL, LPNL, LPUL };
+  static Voxel const lk[eoDirection] = { LKEL, LKSL, LKDL, LKWL, LKNL, LKUL };
+
+  //   DBER, ..., ..., ...,  DBSR, ..., ..., ...,  DBDR, ..., ..., ...,
+  //   DBWR, ..., ..., ...,  DBNR, ..., ..., ...,  DBUR, ..., ..., ...,
+  //   DHER, ..., ..., ...,  DHSR, ..., ..., ...,  DHDR, ..., ..., ...,
+  //   DHWR, ..., ..., ...,  DHNR, ..., ..., ...,  DHUR, ..., ..., ...,
+  //   DTER, ..., ..., ...,  DTSR, ..., ..., ...,  DTDR, ..., ..., ...,
+  //   DTWR, ..., ..., ...,  DTNR, ..., ..., ...,  DTUR, ..., ..., ...,
+  //   DPER, ..., ..., ...,  DPSR, ..., ..., ...,  DPDR, ..., ..., ...,
+  //   DPWR, ..., ..., ...,  DPNR, ..., ..., ...,  DPUR, ..., ..., ...,
+  //   DSER, ..., ..., ...,  DSSR, ..., ..., ...,  DSDR, ..., ..., ...,
+  //   DSWR, ..., ..., ...,  DSNR, ..., ..., ...,  DSUR, ..., ..., ...,
+  //   DLER, ..., ..., ...,  DLSR, ..., ..., ...,  DLDR, ..., ..., ...,
+  //   DLWR, ..., ..., ...,  DLNR, ..., ..., ...,  DLUR, ..., ..., ...,
+  //   DQER, ..., ..., ...,  DQSR, ..., ..., ...,  DQDR, ..., ..., ...,
+  //   DQWR, ..., ..., ...,  DQNR, ..., ..., ...,  DQUR, ..., ..., ...,
+  //   DGER, ..., ..., ...,  DGSR, ..., ..., ...,  DGDR, ..., ..., ...,
+  //   DGWR, ..., ..., ...,  DGNR, ..., ..., ...,  DGUR, ..., ..., ...,
+  //   D0ER, ..., ..., ...,  D0SR, ..., ..., ...,  D0DR, ..., ..., ...,
+  //   D0WR, ..., ..., ...,  D0NR, ..., ..., ...,  D0UR, ..., ..., ...,
+  //   D1ER, ..., ..., ...,  D1SR, ..., ..., ...,  D1DR, ..., ..., ...,
+  //   D1WR, ..., ..., ...,  D1NR, ..., ..., ...,  D1UR, ..., ..., ...,
+  //   DIER, ..., ..., ...,  DISR, ..., ..., ...,  DIDR, ..., ..., ...,
+  //   DIWR, ..., ..., ...,  DINR, ..., ..., ...,  DIUR, ..., ..., ...,
+  //   DOER, ..., ..., ...,  DOSR, ..., ..., ...,  DODR, ..., ..., ...,
+  //   DOWR, ..., ..., ...,  DONR, ..., ..., ...,  DOUR, ..., ..., ...,
+  //                                                E
+  //                                               /     S
+  //                                              /     /     D
+  //                                             /     /     /     W
+  //                                            /     /     /     /     N
+  //                                           /     /     /     /     /     U
+  //                                          /     /     /     /     /     /
+  static Voxel const db[eoDirection] = { DBER, DBSR, DBDR, DBWR, DBNR, DBUR };
+  static Voxel const dh[eoDirection] = { DHER, DHSR, DHDR, DHWR, DHNR, DHUR };
+  static Voxel const dt[eoDirection] = { DTER, DTSR, DTDR, DTWR, DTNR, DTUR };
+  static Voxel const dp[eoDirection] = { DPER, DPSR, DPDR, DPWR, DPNR, DPUR };
+  static Voxel const ds[eoDirection] = { DSER, DSSR, DSDR, DSWR, DSNR, DSUR };
+  static Voxel const dl[eoDirection] = { DLER, DLSR, DLDR, DLWR, DLNR, DLUR };
+  static Voxel const dq[eoDirection] = { DQER, DQSR, DQDR, DQWR, DQNR, DQUR };
+  static Voxel const d0[eoDirection] = { D0ER, D0SR, D0DR, D0WR, D0NR, D0UR };
+  static Voxel const d1[eoDirection] = { D1ER, D1SR, D1DR, D1WR, D1NR, D1UR };
+  static Voxel const di[eoDirection] = { DIER, DISR, DIDR, DIWR, DINR, DIUR };
+  static Voxel const dO[eoDirection] = { DOER, DOSR, DODR, DOWR, DONR, DOUR };
+
+  for (size_t z = 0; z < brick.zMax; z += 1) {
+    switch (z) {
+
+      // Level 0 is the S/N lock rods.
+
+      case 0:
+        for (size_t y = 0; y < brick.yMax; y += 1) {
+          for (size_t x = 0; x < brick.xMax; x += 1) {
+            P3D p(z, y, x);
+            Voxel &v = (Voxel &) brick.at(p);
+            VoxelProperties const &vp = voxelProperties[v];
+
+            switch (VoxelType vt = vp.voxelType) {
+              case vtUnkn:
+                assert(vt != vtUnkn);
+              case vtWall:
+                continue;
+              case vtSlot:
+                continue;
+              case vtLock:
+                assert(vt == vtLock);
+                break;
+              case vtData:
+                assert(vt != vtData);
+                break;
+            }
+
+            P3D pu = p.offsetBy(U);
+            Voxel &vu = (Voxel &) brick.at(pu);
+            VoxelProperties vup = voxelProperties[vu];
+
+            P3D puu = pu.offsetBy(U);
+            Voxel &vuu = (Voxel &) brick.at(puu);
+            VoxelProperties vuup = voxelProperties[vuu];
+
+            P3D pf = pu.offsetBy(FWard(vp.direction));
+            Voxel &vf = (Voxel &) brick.at(pf);
+            VoxelProperties vfp = voxelProperties[vf];
+
+
+            switch (LockType lt = vp.lockType) {
+              case ltLock:
+                assert(vup.voxelType == vtWall);
+                if (vuup.voxelType == vtWall) {
+                  P3D puuf = puu.offsetBy(FWard(vp.direction));
+                  Voxel &vuuf = (Voxel &) brick.at(puuf);
+                  VoxelProperties vuufp = voxelProperties[vuuf];
+                  P3D puf = pu.offsetBy(FWard(vp.direction));
+                  Voxel &vuf = (Voxel &) brick.at(puf);
+                  VoxelProperties vufp = voxelProperties[vuf];
+
+                  assert(vuufp.voxelType == vtData);
+                  assert(vuufp.dataType == dtSlot);
+
+                  vuuf = dp[vp.direction];
+                  vuf = ds[vp.direction];
+                  vu = lk[vp.direction];
+                  v = lp[vp.direction];
+
+                } else if (vuup.voxelType == vtData) {
+                  P3D pub = pu.offsetBy(BWard(vp.direction));
+                  Voxel &vub = (Voxel &) brick.at(pub);
+                  VoxelProperties vubp = voxelProperties[vub];
+                  P3D pb = pu.offsetBy(BWard(vp.direction));
+                  Voxel &vb = (Voxel &) brick.at(pb);
+                  VoxelProperties vbp = voxelProperties[vb];
+
+                  assert(vuup.dataType == dtLock);
+                  vuu = dp[vp.direction];
+                  vu = ds[vp.direction];
+                  vub = lk[vp.direction];
+                  vb = lp[vp.direction];
+                  v = lb[vp.direction];
+                } else {
+                  assert(vuup.voxelType == vtWall || vuup.voxelType == vtData);
+                }
+                break;
+              case ltHead:
+                assert(vfp.voxelType == vtWall);
+                vf = Slot;
+                break;
+              case ltBody:
+                break;
+              case ltTail:
+                break;
+              default:
+                assert(lt != eoLockType);
+                break;
+            }
+          }
+        }
+        break;
+
+      // Level 1 is the keys/slots for the S/N lock rods, and E/W data
+      // rods.
+
+      case 1: case 5:
+        // for (size_t y = 0; y < brick.yMax; y += 1) {
+        //   for (size_t x = 0; x < brick.xMax; x += 1) {
+        //     switch (brick[z][y][x]) {
+        //       case 'X':
+        //         assert(brick[z - 1][y][x] == '+');
+        //         assert(brick[z + 1][y][x] == '+');
+        //         break;
+        //       case ' ':
+        //         break;
+        //       default:
+        //         break; // assert(false);
+        //     }
+        //   }
+        // }
+        break;
+
+      // Level 2 is the E/W data rods.
+
+      case 2:
+        for (size_t y = 0; y < brick.yMax; y += 1) {
+          for (size_t x = 0; x < brick.xMax; x += 1) {
+            P3D p(z, y, x);
+            Voxel &v = (Voxel &) brick.at(p);
+            VoxelProperties const &vp = voxelProperties[v];
+
+            switch (VoxelType vt = vp.voxelType) {
+              case vtUnkn:
+                assert(vt != vtUnkn);
+              case vtWall:
+                continue;
+              case vtSlot:
+                continue;
+              case vtLock:
+                assert(vt != vtLock);
+                break;
+              case vtData:
+                assert(vt == vtData);
+                break;
+            }
+
+            P3D pd = p.offsetBy(D);
+            Voxel &vd = (Voxel &) brick.at(pd);
+            VoxelProperties vdp = voxelProperties[vd];
+            P3D pdd = pd.offsetBy(D);
+            Voxel &vdd = (Voxel &) brick.at(pdd);
+            VoxelProperties vddp = voxelProperties[vdd];
+
+            P3D pu = p.offsetBy(U);
+            Voxel &vu = (Voxel &) brick.at(pu);
+            VoxelProperties vup = voxelProperties[vu];
+            P3D puu = pu.offsetBy(U);
+            Voxel &vuu = (Voxel &) brick.at(puu);
+            VoxelProperties vuup = voxelProperties[vuu];
+
+            P3D pf = p.offsetBy(FWard(vp.direction));
+            Voxel &vf = (Voxel &) brick.at(pf);
+            VoxelProperties vfp = voxelProperties[vf];
+
+            switch (DataType dt = vp.dataType) {
+              case dtTest:
+                assert(vup.voxelType == vtWall);
+                if (vuup.voxelType == vtWall) {
+                  P3D puuf = puu.offsetBy(FWard(vp.direction));
+                  Voxel &vuuf = (Voxel &) brick.at(puuf);
+                  VoxelProperties vuufp = voxelProperties[vuuf];
+                  P3D puf = pu.offsetBy(FWard(vp.direction));
+                  Voxel &vuf = (Voxel &) brick.at(puf);
+                  VoxelProperties vufp = voxelProperties[vuf];
+
+                  assert(vuufp.voxelType == vtData);
+                  assert(vuufp.dataType == dtSlot);
+
+                  vuuf = dp[vp.direction];
+                  vuf = ds[vp.direction];
+                  vu = lk[vp.direction];
+                  v = lp[vp.direction];
+
+                } else if (vuup.voxelType == vtData) {
+                  P3D pub = pu.offsetBy(BWard(vp.direction));
+                  Voxel &vub = (Voxel &) brick.at(pub);
+                  VoxelProperties vubp = voxelProperties[vub];
+                  P3D pb = pu.offsetBy(BWard(vp.direction));
+                  Voxel &vb = (Voxel &) brick.at(pb);
+                  VoxelProperties vbp = voxelProperties[vb];
+
+                  assert(vuup.dataType == dtGate);
+                  vuu = dp[vp.direction];
+                  vu = ds[vp.direction];
+                  vub = lk[vp.direction];
+                  vb = lp[vp.direction];
+                  v = lb[vp.direction];
+                } else {
+                  assert(vuup.voxelType == vtWall || vuup.voxelType == vtData);
+                }
+                break;
+              case ltHead:
+                assert(vfp.voxelType == vtWall);
+                vf = Slot;
+                break;
+              case ltBody:
+                break;
+              case ltTail:
+                break;
+              default:
+                assert(dt != eoDataType);
+                break;
+            }
+          }
+        }
+        break;
+
+      // Level 3 is the query/gates for E/W and S/N data rods.
+
+      case 3:
+        // for (size_t y = 0; y < brick.yMax; y += 1) {
+        //   for (size_t x = 0; x < brick.xMax; x += 1) {
+        //     switch (brick[z][y][x]) {
+        //       case '0': case '1':
+        //         assert(brick[z - 1][y][x] == '+');
+        //         assert(brick[z + 1][y][x] == '+');
+        //         break;
+        //       case ' ':
+        //         break;
+        //       default:
+        //         break; // assert(false);
+        //     }
+        //   }
+        // }
+        break;
+
+      // Level 4 is the S/N data rods.
+
+      case 4:
+        for (size_t y = 0; y < brick.yMax; y += 1) {
+          for (size_t x = 0; x < brick.xMax; x += 1) {
+            switch (brick[z][y][x]) {
+              case 'X':
+                assert(brick[z + 1][y][x] == ' ');
+                assert(brick[z + 2][y][x] == 'X');
+
+                brick[z + 0][y][x] = '+';
+                brick[z + 1][y][x] = 'X';
+                brick[z + 2][y][x] = '+';
+                break;
+              case '+':
+                assert(brick[z - 1][y][x] == '0' || brick[z - 1][y][x] == '1');
+                break;
+              case '|':
+              case 'v':
+              case '^':
+              case ' ':
+                break;
+              default:
+                break; // assert(false);
+            }
+          }
+        }
+        break;
+
+      // Level 6 is the E/W lock rods.
+
+      case 6:
+        for (size_t y = 0; y < brick.yMax; y += 1) {
+          for (size_t x = 0; x < brick.xMax; x += 1) {
+            P3D p(z, y, x);
+            P3D pd = p.offsetBy(D);
+            P3D pdd = pd.offsetBy(D);
+
+            Voxel &v = (Voxel &) brick.at(p);
+            Voxel &vd = (Voxel &) brick.at(pd);
+            Voxel &vdd = (Voxel &) brick.at(pdd);
+
+            VoxelProperties vp = voxelProperties[v];
+            VoxelProperties vdp = voxelProperties[vd];
+            VoxelProperties vddp = voxelProperties[vdd];
+
+            P3D pf = p.offsetBy(FWard(vp.direction));
+            Voxel &vf = (Voxel &) brick.at(pf);
+            VoxelProperties vfp = voxelProperties[vf];
+
+            assert(vp.voxelType == vtLock);
+
+            switch (vp.lockType) {
+              case ltLock:
+                assert(vdp.voxelType == vtWall);
+                if (vddp.voxelType == vtWall) {
+                  P3D pddf = pdd.offsetBy(FWard(vp.direction));
+                  Voxel &vddf = (Voxel &) brick.at(pddf);
+                  VoxelProperties vddfp = voxelProperties[vddf];
+                  P3D pdf = pd.offsetBy(FWard(vp.direction));
+                  Voxel &vdf = (Voxel &) brick.at(pdf);
+                  VoxelProperties vdfp = voxelProperties[vdf];
+
+                  assert(vddfp.voxelType == vtData);
+                  assert(vddfp.dataType == dtSlot);
+
+                  vddf = dp[vp.direction];
+                  vdf = ds[vp.direction];
+                  vd = lk[vp.direction];
+                  v = lp[vp.direction];
+
+                } else if (vddp.voxelType == vtData) {
+                  P3D pdb = pd.offsetBy(BWard(vp.direction));
+                  Voxel &vdb = (Voxel &) brick.at(pdb);
+                  VoxelProperties vdbp = voxelProperties[vdb];
+                  P3D pb = pd.offsetBy(BWard(vp.direction));
+                  Voxel &vb = (Voxel &) brick.at(pb);
+                  VoxelProperties vbp = voxelProperties[vb];
+
+                  assert(vddp.dataType == dtLock);
+                  vdd = dp[vp.direction];
+                  vd = ds[vp.direction];
+                  vdb = lk[vp.direction];
+                  vb = lp[vp.direction];
+                  v = lb[vp.direction];
+                } else {
+                  assert(vddp.voxelType == vtWall || vddp.voxelType == vtData);
+                }
+                break;
+              case ltHead:
+                assert(vfp.voxelType == vtWall);
+                vf = Slot;
+                break;
+              case ltBody:
+                break;
+              case ltTail:
                 break;
               default:
                 break; // assert(false);

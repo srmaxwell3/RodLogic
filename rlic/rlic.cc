@@ -388,24 +388,24 @@ void processDiagramFrom(istream &in, map<string, vector<int>> const &inputs) {
                );
 
     // fprintf(stdout, "Executing up to %d cycles....\n", maxInputLength);
-    // while (diagram.CurrentTick() < (maxInputLength * int(eoDirections))) {
+    // while (diagram.CurrentTick() < (maxInputLength * int(eoDirection))) {
     while (diagram.hasUnreadInput()) {
       if (0 < optCycleCount) {
-        if (optCycleCount < (diagram.CurrentTick() / int(eoDirections))) {
+        if (optCycleCount < (diagram.CurrentTick() / int(eoDirection))) {
           break;
         }
       }
 
       if (!diagram.rodsWereChangedDuringLastEvaluation()) {
         nPhasesWithoutChanges += 1;
-        if (allowedPhasesWithoutChanges * int(eoDirections) <=
+        if (allowedPhasesWithoutChanges * int(eoDirection) <=
             nPhasesWithoutChanges
            )
         {
           fprintf(stdout,
                   "Bailing early (cycle %d): "
                   "the last %d cycle(s) had no rod changes....\n",
-                  diagram.CurrentTick() / int(eoDirections),
+                  diagram.CurrentTick() / int(eoDirection),
         	  allowedPhasesWithoutChanges
                   );
           break;
@@ -435,13 +435,13 @@ void processDiagramFrom(istream &in, map<string, vector<int>> const &inputs) {
     fprintf(stdout, "Not executing (optCycleCount == %d).\n", optCycleCount);
 
     PlateOfInt plate(diagram.yMax, diagram.xMax);
-    diagram.Rebuild(plate);
+    diagram.RebuildWithChar(plate);
     Diagram2D newDiagram(plate);
     newDiagram.scan();
     newDiagram.dump();
 
     BrickOfInt brick(7, newDiagram.yMax, newDiagram.xMax);
-    newDiagram.Rebuild(brick);
+    newDiagram.RebuildWithChar(brick);
   }
 }
 

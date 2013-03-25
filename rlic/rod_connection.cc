@@ -21,7 +21,7 @@ RodConnectionType const rodConnectionType[eoRodConnectionType] = {
   rcGet2, rcGet1, rcPut1, rcPut2, rcNone
 };
 
-RodConnectionType const rodConnectionThisToThat[eoDirections][eoDirections] = {
+RodConnectionType const rodConnectionThisToThat[eoDirection][eoDirection] = {
   //  that->direction ==
   //   E       S       D       W       N       U
   { rcNone, rcPut1, rcPut2, rcNone, rcGet2, rcGet1 }, // this->direction == E

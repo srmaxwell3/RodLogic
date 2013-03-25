@@ -7,19 +7,24 @@ using std::set;
 #include <string>
 using std::string;
 
-#include "directions.h"
+#include "direction.h"
 
 struct P2D {
   P2D() : y(0), x(0) {}
   P2D(int _y, int _x) : y(_y), x(_x) { }
 
-  bool operator<(P2D const &that) const { return y < that.y || (y == that.y && (x < that.x)); }
+  bool operator==(P2D const &that) const {
+    return y == that.y && x == that.x;
+  }
+  bool operator<(P2D const &that) const {
+    return y < that.y || (y == that.y && (x < that.x));
+  }
 
   P2D offsetBy(int dY, int dX) const {
     return P2D(y + dY, x + dX);
   }
 
-  P2D offsetBy(Directions d) const {
+  P2D offsetBy(Direction d) const {
     switch (d) {
       case E:
         return P2D(y + 0, x + 1);
@@ -39,11 +44,11 @@ struct P2D {
     return P2D(y, x);
   }
 
-  P2D offsetBy(Directions d1, Directions d2) const {
+  P2D offsetBy(Direction d1, Direction d2) const {
     return offsetBy(d1).offsetBy(d2);
   }
 
-  P2D &move(Directions d) {
+  P2D &move(Direction d) {
     switch (d) {
       case E: x += 1; break;
       case S: y += 1; break;
@@ -55,7 +60,7 @@ struct P2D {
     return *this;
   }
 
-  int limitTowards(Directions d) const {
+  int limitTowards(Direction d) const {
     switch (d) {
       case E:
       case W:
@@ -66,10 +71,10 @@ struct P2D {
       default:
         assert(d == E || d == S || d == W || d == N);
     }
-    return eoDirections;
+    return eoDirection;
   }
 
-  P2D &move(Directions d1, Directions d2) {
+  P2D &move(Direction d1, Direction d2) {
     return move(d1).move(d2);
   }
 

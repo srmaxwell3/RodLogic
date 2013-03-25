@@ -8,7 +8,7 @@ using std::string;
 
 #include "p2d.h"
 
-#include "directions.h"
+#include "direction.h"
 #include "edged_bool.h"
 #include "label.h"
 #include "rod_connection.h"
@@ -20,7 +20,7 @@ typedef set<Rod2D *> SetOfRod2Ds;
 
 class Rod2D : public SetOfP2Ds {
  public:
-  Rod2D(Diagram2D &diagram, P2D const &pStart, Directions d);
+  Rod2D(Diagram2D &diagram, P2D const &pStart, Direction d);
   Rod2D();
 
   Label const &rodsLabel() const;
@@ -58,12 +58,14 @@ class Rod2D : public SetOfP2Ds {
 
   void dump(Diagram2D const &diagram) const;
 
-  void Rebuild(Diagram2D const &diagram, PlateOfInt &plane) const;
+  void RebuildWithChar(Diagram2D const &diagram, PlateOfInt &plane) const;
+  void RebuildWithEnum
+      (Diagram2D const &diagram, PlateOfInt &plane, size_t scaleBy = 4) const;
 
  private:
   bool findHeadLabel(Diagram2D const &diagram);
   bool findTailLabel(Diagram2D const &diagram);
-  bool findLabel(Diagram2D const &diagram, P2D pStart, Directions oWard);
+  bool findLabel(Diagram2D const &diagram, P2D pStart, Direction oWard);
 
   string formExpression(SetOfRod2Ds &seenAlready);
   bool hasExpression() const { return !expression.empty(); }
@@ -74,7 +76,7 @@ class Rod2D : public SetOfP2Ds {
   bool isALockRod;
   P2D headAt;
   P2D tailAt;
-  Directions direction;
+  Direction direction;
   int tickFirstSet;
   int countOfValidInputs;
   SetOfP2Ds shared;
