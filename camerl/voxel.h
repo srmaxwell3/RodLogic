@@ -24,7 +24,11 @@ using std::string;
 // L[ock]{B[ody},H[ead],T[ail],P[ost],K[ey]}
 //       {E,S,D,N,W,U}
 //       {L[ocked],U[unlocked]}
-// D[ata]{B[ody},H[ead],T[ail],P[ost],S[lot],[Loc]K,Q[uery],G[ate],J[oin],I[nput],O[utput}}
+// D[ata]{B[ody},H[ead],T[ail],P[ost],
+//        S[lot],L[oc]K,Q[uery],G[ate],
+//        0[gate],1[gate],J[oin],I[nput],
+//        O[utput}
+//       }
 //       {E,S,D,W,N,U}
 //       {R[eset],[Set]0,X,[Set]1}
 
@@ -51,13 +55,15 @@ enum Voxel {
   DPWR, DPW0, DPWX, DPW1,  DPNR, DPN0, DPNX, DPN1,  DPUR, DPU0, DPUX, DPU1,
   DSER, DSE0, DSEX, DSE1,  DSSR, DSS0, DSSX, DSS1,  DSDR, DSD0, DSDX, DSD1, // D[ata]S[lot]
   DSWR, DSW0, DSWX, DSW1,  DSNR, DSN0, DSNX, DSN1,  DSUR, DSU0, DSUX, DSU1,
+  DLER, DLE0, DLEX, DLE1,  DLSR, DLS0, DLSX, DLS1,  DLDR, DLD0, DLDX, DLD1, // D[ata]L[ock]
+  DLWR, DLW0, DLWX, DLW1,  DLNR, DLN0, DLNX, DLN1,  DLUR, DLU0, DLUX, DLU1,
   DQER, DQE0, DQEX, DQE1,  DQSR, DQS0, DQSX, DQS1,  DQDR, DQD0, DQDX, DQD1, // D[ata]Q[uery]
   DQWR, DQW0, DQWX, DQW1,  DQNR, DQN0, DQNX, DQN1,  DQUR, DQU0, DQUX, DQU1,
   DGER, DGE0, DGEX, DGE1,  DGSR, DGS0, DGSX, DGS1,  DGDR, DGD0, DGDX, DGD1, // D[ata]G[ate]
   DGWR, DGW0, DGWX, DGW1,  DGNR, DGN0, DGNX, DGN1,  DGUR, DGU0, DGUX, DGU1,
-  D0ER, D0E0, D0EX, D0E1,  D0SR, D0S0, D0SX, D0S1,  D0DR, D0D0, D0DX, D0D1, // D[ata]G[ate]
+  D0ER, D0E0, D0EX, D0E1,  D0SR, D0S0, D0SX, D0S1,  D0DR, D0D0, D0DX, D0D1, // D[ata]0[gate]
   D0WR, D0W0, D0WX, D0W1,  D0NR, D0N0, D0NX, D0N1,  D0UR, D0U0, D0UX, D0U1,
-  D1ER, D1E0, D1EX, D1E1,  D1SR, D1S0, D1SX, D1S1,  D1DR, D1D0, D1DX, D1D1, // D[ata]G[ate]
+  D1ER, D1E0, D1EX, D1E1,  D1SR, D1S0, D1SX, D1S1,  D1DR, D1D0, D1DX, D1D1, // D[ata]1[gate]
   D1WR, D1W0, D1WX, D1W1,  D1NR, D1N0, D1NX, D1N1,  D1UR, D1U0, D1UX, D1U1,
   DIER, DIE0, DIEX, DIE1,  DISR, DIS0, DISX, DIS1,  DIDR, DID0, DIDX, DID1, // D[ata]I[nput]
   DIWR, DIW0, DIWX, DIW1,  DINR, DIN0, DINX, DIN1,  DIUR, DIU0, DIUX, DIU1,

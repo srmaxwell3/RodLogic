@@ -19,6 +19,8 @@ Voxel const voxel[eoVoxel] = {
   DPWR, DPW0, DPWX, DPW1,  DPNR, DPN0, DPNX, DPN1,  DPUR, DPU0, DPUX, DPU1,
   DSER, DSE0, DSEX, DSE1,  DSSR, DSS0, DSSX, DSS1,  DSDR, DSD0, DSDX, DSD1,
   DSWR, DSW0, DSWX, DSW1,  DSNR, DSN0, DSNX, DSN1,  DSUR, DSU0, DSUX, DSU1,
+  DLER, DLE0, DLEX, DLE1,  DLSR, DLS0, DLSX, DLS1,  DLDR, DLD0, DLDX, DLD1,
+  DLWR, DLW0, DLWX, DLW1,  DLNR, DLN0, DLNX, DLN1,  DLUR, DLU0, DLUX, DLU1,
   DQER, DQE0, DQEX, DQE1,  DQSR, DQS0, DQSX, DQS1,  DQDR, DQD0, DQDX, DQD1,
   DQWR, DQW0, DQWX, DQW1,  DQNR, DQN0, DQNX, DQN1,  DQUR, DQU0, DQUX, DQU1,
   DGER, DGE0, DGEX, DGE1,  DGSR, DGS0, DGSX, DGS1,  DGDR, DGD0, DGDX, DGD1,
@@ -217,6 +219,30 @@ static char const *voxelToCStr[eoVoxel] = {
   "DSU0", // DSU0
   "DSUX", // DSUX
   "DSU1", // DSU1
+  "DLER", // DLER
+  "DLE0", // DLE0
+  "DLEX", // DLEX
+  "DLE1", // DLE1
+  "DLSR", // DLSR
+  "DLS0", // DLS0
+  "DLSX", // DLSX
+  "DLS1", // DLS1
+  "DLDR", // DLDR
+  "DLD0", // DLD0
+  "DLDX", // DLDX
+  "DLD1", // DLD1
+  "DLWR", // DLWR
+  "DLW0", // DLW0
+  "DLWX", // DLWX
+  "DLW1", // DLW1
+  "DLNR", // DLNR
+  "DLN0", // DLN0
+  "DLNX", // DLNX
+  "DLN1", // DLN1
+  "DLUR", // DLUR
+  "DLU0", // DLU0
+  "DLUX", // DLUX
+  "DLU1", // DLU1
   "DQER", // DQER
   "DQE0", // DQE0
   "DQEX", // DQEX
@@ -548,6 +574,30 @@ char const *toConstCharPointer(Voxel v) {
   case DSU0: return "DSU0";
   case DSUX: return "DSUX";
   case DSU1: return "DSU1";
+  case DLER: return "DLER";
+  case DLE0: return "DLE0";
+  case DLEX: return "DLEX";
+  case DLE1: return "DLE1";
+  case DLSR: return "DLSR";
+  case DLS0: return "DLS0";
+  case DLSX: return "DLSX";
+  case DLS1: return "DLS1";
+  case DLDR: return "DLDR";
+  case DLD0: return "DLD0";
+  case DLDX: return "DLDX";
+  case DLD1: return "DLD1";
+  case DLWR: return "DLWR";
+  case DLW0: return "DLW0";
+  case DLWX: return "DLWX";
+  case DLW1: return "DLW1";
+  case DLNR: return "DLNR";
+  case DLN0: return "DLN0";
+  case DLNX: return "DLNX";
+  case DLN1: return "DLN1";
+  case DLUR: return "DLUR";
+  case DLU0: return "DLU0";
+  case DLUX: return "DLUX";
+  case DLU1: return "DLU1";
   case DQER: return "DQER";
   case DQE0: return "DQE0";
   case DQEX: return "DQEX";
@@ -953,6 +1003,30 @@ VoxelProperties voxelProperties[eoVoxel] = {
   Props(5,'<',Data,DN,Un,Un,Unkn,Unkn,Slot,Set0,F,FRL,N,DSUX,S,DSUR), // DSU0
   Props(5,'<',Data,DN,Un,Un,Unkn,Unkn,Slot,SetX,F,FRL,N,DSU1,S,DSU0), // DSUX
   Props(5,'<',Data,DN,Un,Un,Unkn,Unkn,Slot,Set1,F,FRL,N,____,S,DSUX), // DSU1
+  Props(5,'X',Data,DE,Un,Un,Unkn,Unkn,Lock,Rset,F,FRL,E,DLE0,W,____), // DLER
+  Props(5,'X',Data,DE,Un,Un,Unkn,Unkn,Lock,Set0,F,FRL,E,DLEX,W,DLER), // DLE0
+  Props(5,'X',Data,DE,Un,Un,Unkn,Unkn,Lock,SetX,F,FRL,E,DLE1,W,DLE0), // DLEX
+  Props(5,'X',Data,DE,Un,Un,Unkn,Unkn,Lock,Set1,F,FRL,E,____,W,DLEX), // DLE1
+  Props(5,'X',Data,DS,Un,Un,Unkn,Unkn,Lock,Rset,F,FRL,S,DLS0,N,____), // DLSR
+  Props(5,'X',Data,DS,Un,Un,Unkn,Unkn,Lock,Set0,F,FRL,S,DLSX,N,DLSR), // DLS0
+  Props(5,'X',Data,DS,Un,Un,Unkn,Unkn,Lock,SetX,F,FRL,S,DLS1,N,DLS0), // DLSX
+  Props(5,'X',Data,DS,Un,Un,Unkn,Unkn,Lock,Set1,F,FRL,S,____,N,DLSX), // DLS1
+  Props(5,'X',Data,DS,Un,Un,Unkn,Unkn,Lock,Rset,F,FRL,S,DLD0,N,____), // DLDR
+  Props(5,'X',Data,DS,Un,Un,Unkn,Unkn,Lock,Set0,F,FRL,S,DLDX,N,DLDR), // DLD0
+  Props(5,'X',Data,DS,Un,Un,Unkn,Unkn,Lock,SetX,F,FRL,S,DLD1,N,DLD0), // DLDX
+  Props(5,'X',Data,DS,Un,Un,Unkn,Unkn,Lock,Set1,F,FRL,S,____,N,DLDX), // DLD1
+  Props(5,'X',Data,DW,Un,Un,Unkn,Unkn,Lock,Rset,F,FRL,W,DLW0,E,____), // DLWR
+  Props(5,'X',Data,DW,Un,Un,Unkn,Unkn,Lock,Set0,F,FRL,W,DLWX,E,DLWR), // DLW0
+  Props(5,'X',Data,DW,Un,Un,Unkn,Unkn,Lock,SetX,F,FRL,W,DLW1,E,DLW0), // DLWX
+  Props(5,'X',Data,DW,Un,Un,Unkn,Unkn,Lock,Set1,F,FRL,W,____,E,DLWX), // DLW1
+  Props(5,'X',Data,DN,Un,Un,Unkn,Unkn,Lock,Rset,F,FRL,N,DLN0,S,____), // DLNR
+  Props(5,'X',Data,DN,Un,Un,Unkn,Unkn,Lock,Set0,F,FRL,N,DLNX,S,DLNR), // DLN0
+  Props(5,'X',Data,DN,Un,Un,Unkn,Unkn,Lock,SetX,F,FRL,N,DLN1,S,DLN0), // DLNX
+  Props(5,'X',Data,DN,Un,Un,Unkn,Unkn,Lock,Set1,F,FRL,N,____,S,DLNX), // DLN1
+  Props(5,'X',Data,DN,Un,Un,Unkn,Unkn,Lock,Rset,F,FRL,N,DLU0,S,____), // DLUR
+  Props(5,'X',Data,DN,Un,Un,Unkn,Unkn,Lock,Set0,F,FRL,N,DLUX,S,DLUR), // DLU0
+  Props(5,'X',Data,DN,Un,Un,Unkn,Unkn,Lock,SetX,F,FRL,N,DLU1,S,DLU0), // DLUX
+  Props(5,'X',Data,DN,Un,Un,Unkn,Unkn,Lock,Set1,F,FRL,N,____,S,DLUX), // DLU1
   Props(5,'>',Data,DE,Un,Un,Unkn,Unkn,Test,Rset,F,FR_,E,DQE0,W,____), // DQER
   Props(5,'>',Data,DE,Un,Un,Unkn,Unkn,Test,Set0,F,FR_,E,DQEX,W,DQER), // DQE0
   Props(5,'>',Data,DE,Un,Un,Unkn,Unkn,Test,SetX,F,FR_,E,DQE1,W,DQE0), // DQEX
