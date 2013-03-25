@@ -12,7 +12,7 @@ bool Item::AttemptToMove(Volume *volume, FwdOrBwd fwdOrBwd, Changes &changes) {
             "(%s *)(%p)->AttemptToMove(): fwdOrBwd=%s\n",
             TypeName(),
             this,
-            toConstCharPointer(fwdOrBwd)
+            c_str(fwdOrBwd)
             );
     Dump(volume);
     fprintf(stdout, "\n");
@@ -65,11 +65,11 @@ bool Item::AttemptToMove(Volume *volume, FwdOrBwd fwdOrBwd, Changes &changes) {
           madeChanges = true;
         } else {
           scenario.Dump();
-          fprintf(stdout, "thisVoxel=%s\n", toConstCharPointer(thisVoxel));
-          fprintf(stdout, "prevVoxel=%s\n", toConstCharPointer(prevVoxel));
+          fprintf(stdout, "thisVoxel=%s\n", c_str(thisVoxel));
+          fprintf(stdout, "prevVoxel=%s\n", c_str(prevVoxel));
           fprintf(stdout,
                   "nextVoxel(%s) %s Unkn\n",
-                  toConstCharPointer(nextVoxel),
+                  c_str(nextVoxel),
                   nextVoxel == Unkn ? "==" : "!="
                  );
           assert(nextVoxel != Unkn);
@@ -78,15 +78,15 @@ bool Item::AttemptToMove(Volume *volume, FwdOrBwd fwdOrBwd, Changes &changes) {
       //   scenario.Dump();
       //   fprintf(stdout,
       //           "thisVoxel(%s) %s Slot\n",
-      //           toConstCharPointer(thisVoxel),
+      //           c_str(thisVoxel),
       //           thisVoxel == Slot ? "==" : "!="
       //          );
       //   fprintf(stdout,
       //           "rodType(%s) %s tvProperties[%s](%s)\n",
-      //           toConstCharPointer(rodType),
+      //           c_str(rodType),
       //           rodType == tvProperties.rodType ? "==" : "!=",
-      //           toConstCharPointer(thisVoxel),
-      //           toConstCharPointer(tvProperties.rodType)
+      //           c_str(thisVoxel),
+      //           c_str(tvProperties.rodType)
       //          );
       //   assert(thisVoxel == Slot || rodType == tvProperties.rodType);
       }
@@ -133,16 +133,16 @@ bool Item::AttemptToMove(Volume *volume, FwdOrBwd fwdOrBwd, Changes &changes) {
                   "     +------+------+------|\n"
                   "     | ???? | %s | ???? |\n"
                   "     +------+------+------|\n",
-        	  toConstCharPointer(tick),
-        	  toConstCharPointer(scenario.N()),
+        	  c_str(tick),
+        	  c_str(scenario.N()),
         	  directionOfMotion[fwd][Fwd],
-        	  toConstCharPointer(scenario.W()),
+        	  c_str(scenario.W()),
         	  directionOfMotion[fwd][tProperties.fwdOrBwd],
-        	  toConstCharPointer(scenario.O()),
+        	  c_str(scenario.O()),
         	  directionOfMotion[fwd][tProperties.fwdOrBwd],
-        	  toConstCharPointer(scenario.E()),
+        	  c_str(scenario.E()),
         	  directionOfMotion[fwd][Fwd],
-        	  toConstCharPointer(scenario.S())
+        	  c_str(scenario.S())
         	 );
           break;
         case N:
@@ -156,14 +156,14 @@ bool Item::AttemptToMove(Volume *volume, FwdOrBwd fwdOrBwd, Changes &changes) {
                   "     | ???? | %s | ???? |\n"
                   "     +------+--%s---+------|\n",
         	  directionOfMotion[fwd][Fwd],
-        	  toConstCharPointer(tick),
-        	  toConstCharPointer(scenario.N()),
+        	  c_str(tick),
+        	  c_str(scenario.N()),
         	  directionOfMotion[fwd][tProperties.fwdOrBwd],
-        	  toConstCharPointer(scenario.W()),
-        	  toConstCharPointer(scenario.O()),
-        	  toConstCharPointer(scenario.E()),
+        	  c_str(scenario.W()),
+        	  c_str(scenario.O()),
+        	  c_str(scenario.E()),
         	  directionOfMotion[fwd][tProperties.fwdOrBwd],
-        	  toConstCharPointer(scenario.S()),
+        	  c_str(scenario.S()),
         	  directionOfMotion[fwd][Fwd]
         	 );
           break;
@@ -213,7 +213,7 @@ bool Item::AttemptToMove(Volume *volume, FwdOrBwd fwdOrBwd, Changes &changes) {
                 this
                );
         scenario.Dump();
-        fprintf(stdout, " = %s\n", toConstCharPointer(newVoxel));
+        fprintf(stdout, " = %s\n", c_str(newVoxel));
       }
 
       changes[v] = newVoxel;
@@ -247,8 +247,8 @@ bool Item::AttemptToMove(Volume *volume, FwdOrBwd fwdOrBwd, Changes &changes) {
     //           "(%s *)(%p)->AttemptToMove(): Unable to move %s during %s: ",
     //           TypeName(),
     //           this,
-    //           toConstCharPointer(fwdOrBwd),
-    //           toConstCharPointer(tick)
+    //           c_str(fwdOrBwd),
+    //           c_str(tick)
     //           );
     //   Dump(volume);
     //   fprintf(stdout, "\n");
@@ -280,13 +280,13 @@ bool Item::IsValid(Volume const *volume) {
            );
     fprintf(stdout,
             "  rodTypeCounts={ [%s]%lu",
-            toConstCharPointer(RodType(0)),
+            c_str(RodType(0)),
             rodTypeCounts[0]
            );
     for (size_t t = 1; t < eoRodType; t += 1) {
       fprintf(stdout,
               ", [%s]%lu",
-              toConstCharPointer(RodType(t)),
+              c_str(RodType(t)),
               rodTypeCounts[t]
               );
     }
@@ -297,9 +297,9 @@ bool Item::IsValid(Volume const *volume) {
 
 void Item::Dump(Volume const *volume) const {
   fprintf(stdout, "(Item *)(%p)->{", this);
-  fprintf(stdout, " rodType=%s, ", toConstCharPointer(rodType));
-  fprintf(stdout, " fBlkState=%s, ", toConstCharPointer(fBlkState));
-  fprintf(stdout, " rBlkState=%s, {", toConstCharPointer(rBlkState));
+  fprintf(stdout, " rodType=%s, ", c_str(rodType));
+  fprintf(stdout, " fBlkState=%s, ", c_str(fBlkState));
+  fprintf(stdout, " rBlkState=%s, {", c_str(rBlkState));
   char const *comma = "";
   for (auto const &c : *this) {
     fprintf(stdout, "%s ", comma);

@@ -7,6 +7,6 @@ enum FwdOrBwd {
   eoFwdOrBwd
 };
 
-char const *toConstCharPointer(FwdOrBwd d);
+char const *c_str(FwdOrBwd d);
 
 #endif // FWDORBWD_H

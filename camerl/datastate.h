@@ -12,6 +12,6 @@ enum DataState {
   eoDataState
 };
 
-char const *toConstCharPointer(DataState s);
+char const *c_str(DataState s);
 
 #endif // DATASTATE_H

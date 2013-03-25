@@ -1,6 +1,6 @@
 #include "lockstate.h"
 
-char const *toConstCharPointer(LockState t) {
+char const *c_str(LockState t) {
   switch (t) {
     case lsUnkn: return "lsUnkn";
     case lsLckd: return "lsLckd";

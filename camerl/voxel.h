@@ -73,7 +73,7 @@ enum Voxel {
   eoVoxel
 };
 
-char const *toConstCharPointer(Voxel v);
+char const *c_str(Voxel v);
 Voxel StringToVoxel(string const &s);
 
 extern Voxel const voxel[eoVoxel];
@@ -93,6 +93,7 @@ struct VoxelProperties {
   int displayPriority;
   char const text;
   VoxelType voxelType;
+  Direction direction;
   array<RodType, /* 3 */ 1> rodType;
   LockType lockType;
   LockState lockState;

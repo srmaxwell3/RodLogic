@@ -12,7 +12,7 @@ enum PhasePerCycle {
 
 size_t const NPhasesPerCycle = size_t(eoPhasePerCycle);
 
-char const *toConstCharPointer(PhasePerCycle t);
+char const *c_str(PhasePerCycle t);
 
 struct PhaseProperties {
   Direction fwd;  // this major cycle direction forward (identity)

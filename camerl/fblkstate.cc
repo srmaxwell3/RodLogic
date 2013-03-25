@@ -1,6 +1,6 @@
 #include "fblkstate.h"
 
-char const *toConstCharPointer(FBlkState s) {
+char const *c_str(FBlkState s) {
   switch (s) {
     case fbUnkn: return "fbUnkn";
     case fbBlkd: return "fbBlkd";

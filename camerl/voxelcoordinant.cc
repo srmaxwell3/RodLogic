@@ -6,7 +6,7 @@ void VoxelCoordinant::Dump(Volume const *volume) const {
     Voxel v = volume->voxelAt(*this);
     fprintf(stdout,
             "%s(%d,%d,%d)",
-            toConstCharPointer(v),
+            c_str(v),
             l,
             r,
             c

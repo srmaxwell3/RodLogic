@@ -1,6 +1,6 @@
 #include "fwdorbwd.h"
 
-char const *toConstCharPointer(FwdOrBwd d) {
+char const *c_str(FwdOrBwd d) {
   switch (d) {
     case Fwd: return "Fwd";
     case Bwd: return "Bwd";

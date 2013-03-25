@@ -13,6 +13,6 @@ enum LockType {
   eoLockType
 };
 
-char const *toConstCharPointer(LockType t);
+char const *c_str(LockType t);
 
 #endif // LOCKTYPE_H

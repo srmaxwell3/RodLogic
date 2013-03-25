@@ -1,6 +1,6 @@
 #include "datastate.h"
 
-char const *toConstCharPointer(DataState s) {
+char const *c_str(DataState s) {
   switch (s) {
     case dsUnkn: return "dsUnkn";
     case dsRset: return "dsRset";

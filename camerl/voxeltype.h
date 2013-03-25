@@ -12,6 +12,6 @@ enum VoxelType {
   eoVoxelType
 };
 
-char const *toConstCharPointer(VoxelType t);
+char const *c_str(VoxelType t);
 
 #endif // VOXELTYPE_H

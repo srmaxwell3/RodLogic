@@ -62,18 +62,18 @@ class Volume: public VoxelBrick
       fprintf(stdout,
               "(Volume *)(%p)->AddRule(%s, %s, %s, %s, %s, %s, %s, %s, %s): rules[",
               this,
-              toConstCharPointer(t),
-              toConstCharPointer(n),
-              toConstCharPointer(u),
-              toConstCharPointer(w),
-              toConstCharPointer(o),
-              toConstCharPointer(e),
-              toConstCharPointer(d),
-              toConstCharPointer(s),
-              toConstCharPointer(v)
+              c_str(t),
+              c_str(n),
+              c_str(u),
+              c_str(w),
+              c_str(o),
+              c_str(e),
+              c_str(d),
+              c_str(s),
+              c_str(v)
              );
       scenario.Show();
-      fprintf(stdout, "] = %s\n", toConstCharPointer(v));
+      fprintf(stdout, "] = %s\n", c_str(v));
     }
   }
   Rules &GetRules() { return rules; }

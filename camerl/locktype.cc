@@ -1,6 +1,6 @@
 #include "locktype.h"
 
-char const *toConstCharPointer(LockType t) {
+char const *c_str(LockType t) {
   switch (t) {
     case ltUnkn: return "ltUnkn";
     case ltBody: return "ltBody";

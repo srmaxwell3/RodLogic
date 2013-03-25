@@ -10,6 +10,6 @@ enum RBlkState {
   eoRBlkState
 };
 
-char const *toConstCharPointer(RBlkState s);
+char const *c_str(RBlkState s);
 
 #endif // RBLKSTATE_H

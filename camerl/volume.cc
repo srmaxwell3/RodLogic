@@ -327,9 +327,9 @@ void Volume::ProceedOneTick() {
             "(Volume *)(%p)->ProceedOneTick(): "
             "tick=%s, tProperties.rodType=%s, tProperties.fwdOrBwd=%s\n",
             this,
-            toConstCharPointer(TickPerCycle(tick)),
-            toConstCharPointer(tProperties.rodType),
-            toConstCharPointer(tProperties.fwdOrBwd)
+            c_str(TickPerCycle(tick)),
+            c_str(tProperties.rodType),
+            c_str(tProperties.fwdOrBwd)
             );
   }
 
@@ -357,7 +357,7 @@ void Volume::ProceedOneTick() {
             "%ld [%ld.%s]: dT = %lld us\n",
             totalEvaluatedTicks,
             totalEvaluatedTicks / eoTickPerCycle,
-            toConstCharPointer(TickPerCycle(totalEvaluatedTicks % eoTickPerCycle)),
+            c_str(TickPerCycle(totalEvaluatedTicks % eoTickPerCycle)),
             (long long) dTEvaluation
             );
   }
@@ -375,10 +375,10 @@ void Volume::PrintViewFlat() const {
     mvprintw(0, 0,
              "Clock: %d, tick %s (cycle: %d, phase: %s, minor tick: %s)\n",
              CurrentClock(),
-             toConstCharPointer(CurrentTickPerCycle()),
+             c_str(CurrentTickPerCycle()),
              CurrentCycle(),
-             toConstCharPointer(CurrentPhasePerCycle()),
-             toConstCharPointer(CurrentTickPerPhase())
+             c_str(CurrentPhasePerCycle()),
+             c_str(CurrentTickPerPhase())
              );
     printw("   ");
     for (int c = 0; c < NCols; c += 1) {
@@ -423,10 +423,10 @@ void Volume::PrintViewFlat() const {
     fprintf(stdout,
             "Clock: %d, tick %s (cycle: %d, phase: %s, minor tick: %s)\n",
             CurrentClock(),
-            toConstCharPointer(CurrentTickPerCycle()),
+            c_str(CurrentTickPerCycle()),
             CurrentCycle(),
-            toConstCharPointer(CurrentPhasePerCycle()),
-            toConstCharPointer(CurrentTickPerPhase())
+            c_str(CurrentPhasePerCycle()),
+            c_str(CurrentTickPerPhase())
             );
     fprintf(stdout, "   ");
     for (int c = 0; c < NCols; c += 1) {
@@ -529,13 +529,13 @@ void Volume::DumpPerformance() const {
           totalEvaluatedUSecsPerDirection[d] / totalEvaluatedTicks;
       // fprintf(stdout,
       //         "%s: %9.2f (%9.2f) uS mean total time (per rod time)/tick\n",
-      //         toConstCharPointer(d),
+      //         c_str(d),
       //         averageEvaluatedUSecsForDirection,
       //         averageEvaluatedUSecsForDirection / rods[d].size()
       //        );
       fprintf(stdout,
               "%s: %9.2f uS mean total time/direction\n",
-              toConstCharPointer(d),
+              c_str(d),
               averageEvaluatedUSecsForDirection
              );
       averageEvaluatedUSecsPerCycle += averageEvaluatedUSecsForDirection;
@@ -550,13 +550,13 @@ void Volume::DumpPerformance() const {
           totalEvaluatedUSecsPerTick[t] / totalEvaluatedTicks;
       // fprintf(stdout,
       //         "%s: %9.2f (%9.2f) uS mean total time (per rod time)/tick\n",
-      //         toConstCharPointer(d),
+      //         c_str(d),
       //         averageEvaluatedUSecsForTick,
       //         averageEvaluatedUSecsForTick / rods[d].size()
       //        );
       fprintf(stdout,
               "%s: %9.2f uS mean total time/tick\n",
-              toConstCharPointer(t),
+              c_str(t),
               averageEvaluatedUSecsForTick
              );
     }

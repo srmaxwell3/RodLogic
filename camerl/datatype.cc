@@ -1,6 +1,6 @@
 #include "datatype.h"
 
-char const *toConstCharPointer(DataType t) {
+char const *c_str(DataType t) {
   switch (t) {
     case dtUnkn: return "dtUnkn";
     case dtBody: return "dtBody";

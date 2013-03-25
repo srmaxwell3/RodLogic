@@ -19,6 +19,6 @@ enum DataType {
   eoDataType
 };
 
-char const *toConstCharPointer(DataType t);
+char const *c_str(DataType t);
 
 #endif // DATATYPE_H

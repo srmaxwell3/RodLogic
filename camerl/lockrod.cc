@@ -36,7 +36,7 @@ bool LockRod::CheckForFreedomOfMovement(Volume *volume) {
 	  fprintf(stdout,
 		  "(LockRod *)(%p) rBlked by %s(%d,%d,%d)\n",
 		  this,
-		  toConstCharPointer(v),
+		  c_str(v),
 		  vc.L(),
 		  vc.R(),
 		  vc.C()
@@ -62,11 +62,11 @@ bool LockRod::CheckForFreedomOfMovement(Volume *volume) {
             fprintf(stdout,
                     "(LockRod *)(%p) fBlked at %s(%d,%d,%d) by %s(%d,%d,%d)\n",
                     this,
-                    toConstCharPointer(v),
+                    c_str(v),
                     vc.L(),
                     vc.R(),
                     vc.C(),
-                    toConstCharPointer(f),
+                    c_str(f),
                     fc.L(),
                     fc.R(),
                     fc.C()
@@ -79,7 +79,7 @@ bool LockRod::CheckForFreedomOfMovement(Volume *volume) {
           fprintf(stdout,
                   "(LockRod *)(%p) fBlked at %s(%d,%d,%d) by edge\n",
                   this,
-                  toConstCharPointer(v),
+                  c_str(v),
                   vc.L(),
                   vc.R(),
                   vc.C()
@@ -97,11 +97,11 @@ bool LockRod::CheckForFreedomOfMovement(Volume *volume) {
             fprintf(stdout,
                     "(LockRod *)(%p) rBlked at %s(%d,%d,%d) by %s(%d,%d,%d)\n",
                     this,
-                    toConstCharPointer(v),
+                    c_str(v),
                     vc.L(),
                     vc.R(),
                     vc.C(),
-                    toConstCharPointer(b),
+                    c_str(b),
                     bc.L(),
                     bc.R(),
                     bc.C()
@@ -114,7 +114,7 @@ bool LockRod::CheckForFreedomOfMovement(Volume *volume) {
           fprintf(stdout,
                   "(LockRod *)(%p) rBlked at %s(%d,%d,%d) by edge\n",
                   this,
-                  toConstCharPointer(v),
+                  c_str(v),
                   vc.L(),
                   vc.R(),
                   vc.C()
@@ -143,7 +143,7 @@ bool LockRod::CheckForFreedomOfMovement(Volume *volume) {
 //     fprintf(stdout,
 //             "(LockRod *)(%p)->AttemptToMove(): fwdOrBwd=%s\n",
 //             this,
-//             toConstCharPointer(fwdOrBwd)
+//             c_str(fwdOrBwd)
 //             );
 //     Dump(volume);
 //     fprintf(stdout, "\n");
@@ -188,11 +188,11 @@ bool LockRod::CheckForFreedomOfMovement(Volume *volume) {
 //         madeChanges = true;
 //       } else {
 //         scenario.Dump();
-//         fprintf(stdout, "thisVoxel=%s\n", toConstCharPointer(thisVoxel));
-//         fprintf(stdout, "prevVoxel=%s\n", toConstCharPointer(prevVoxel));
+//         fprintf(stdout, "thisVoxel=%s\n", c_str(thisVoxel));
+//         fprintf(stdout, "prevVoxel=%s\n", c_str(prevVoxel));
 //         fprintf(stdout,
 //                 "nextVoxel(%s) %s Unkn\n",
-//                 toConstCharPointer(nextVoxel),
+//                 c_str(nextVoxel),
 //                 nextVoxel == Unkn ? "==" : "!="
 //                );
 //         assert(nextVoxel != Unkn);
@@ -236,13 +236,13 @@ bool LockRod::IsValid(Volume const *volume) {
            );
     fprintf(stdout,
             "  lockStateCounts={ [%s]%lu",
-            toConstCharPointer(LockState(0)),
+            c_str(LockState(0)),
             lockStateCounts[0]
            );
     for (size_t t = 1; t < eoLockState; t += 1) {
       fprintf(stdout,
               ", [%s]%lu",
-              toConstCharPointer(LockState(t)),
+              c_str(LockState(t)),
               lockStateCounts[t]
               );
     }
@@ -253,7 +253,7 @@ bool LockRod::IsValid(Volume const *volume) {
 
 void LockRod::Dump(Volume const *volume) const {
   fprintf(stdout, "(LockRod *)(%p)->{ ", this);
-  fprintf(stdout, " lockState=%s, ", toConstCharPointer(lockState));
+  fprintf(stdout, " lockState=%s, ", c_str(lockState));
   Item::Dump(volume);
   fprintf(stdout, " }");
 }

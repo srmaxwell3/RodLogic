@@ -22,7 +22,7 @@ struct Rule {
   void Dump() const {
     fprintf(stdout, "(Rule *)(%p)->{ scenario=", this);
     scenario.Dump();
-    fprintf(stdout, ", newVoxel=%s }", toConstCharPointer(newVoxel));
+    fprintf(stdout, ", newVoxel=%s }", c_str(newVoxel));
   }
 
   void Show() const {
@@ -33,15 +33,15 @@ struct Rule {
             "        %s, %s,\n"
             "     %s\n"
             "    );\n",
-            toConstCharPointer(scenario.tick),
-            toConstCharPointer(scenario.area[N]),
-            toConstCharPointer(scenario.area[U]),
-            toConstCharPointer(scenario.area[W]),
-            toConstCharPointer(scenario.self),
-            toConstCharPointer(scenario.area[E]),
-            toConstCharPointer(scenario.area[D]),
-            toConstCharPointer(scenario.area[S]),
-            toConstCharPointer(newVoxel)
+            c_str(scenario.tick),
+            c_str(scenario.area[N]),
+            c_str(scenario.area[U]),
+            c_str(scenario.area[W]),
+            c_str(scenario.self),
+            c_str(scenario.area[E]),
+            c_str(scenario.area[D]),
+            c_str(scenario.area[S]),
+            c_str(newVoxel)
            );
   }
 

@@ -2,16 +2,15 @@ HOSTNAME = $(shell hostname)
 ifeq ($(HOSTNAME),Sidneys-MacBook-Pro.local)
 CXX = clang++ -std=c++11 -stdlib=libc++ $(DEBUG) $(OPT)
 else
-CXX = g++ -std=c++0x $(DEBUG) $(OPT)
+CXX = g++ -std=c++0x $(DEBUG) $(OPT) $(LIBs)
 endif
 # CXX = clang++ -std=c++11 -stdlib=libc++ $(DEBUG) $(OPT)
 DEBUG = -g
 OPT = -O0
-LIBS = -lncurses
+LIBs = -lncurses
 zzzzzzzz =
 
-ALL_OBJS = \
-	camerl.o \
+LIB_OBJs = \
 	direction.o \
 	fwdorbwd.o \
 	tickperphase.o \
@@ -35,16 +34,24 @@ ALL_OBJS = \
 	datarod.o \
 	$(zzzzzzzz)
 
-all:	camerl
+ALL_OBJS = \
+	camerl.o \
+	$(LIB_OBJs) \
+	$(zzzzzzzz)
+
+all:	camerl.a camerl
 
 clean:
 	$(RM) $(ALL_OBJS)
 
 clobber:	clean
-	$(RM) ./camerl
+	$(RM) ./camerl.a ./camerl
 
-camerl:		$(ALL_OBJS)
-	$(CXX) -o camerl $(ALL_OBJS) $(LIBS)
+camerl.a:	$(LIB_OBJs)
+	$(AR) r ./camerl.a $(LIB_OBJs)
+
+camerl:		camerl.o camerl.a # $(ALL_OBJS)
+	$(CXX) -o camerl camerl.o camerl.a $(LIBs) # $(ALL_OBJS) $(LIBs)
 
 camerl.o:	camerl.cc
 

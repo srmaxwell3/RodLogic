@@ -1,6 +1,6 @@
 #include "voxeltype.h"
 
-char const *toConstCharPointer(VoxelType t) {
+char const *c_str(VoxelType t) {
   switch (t) {
     case vtUnkn: return "vtUnkn";
     case vtWall: return "vtWall";

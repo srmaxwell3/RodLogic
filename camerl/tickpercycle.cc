@@ -1,6 +1,6 @@
 #include "tickpercycle.h"
 
-char const *toConstCharPointer(TickPerCycle t) {
+char const *c_str(TickPerCycle t) {
   switch (t) {
     case tcEUSL: return "tcEUSL";
     case tcERS1: return "tcERS1";

@@ -1,6 +1,6 @@
 #include "blockstate.h"
 
-char const *toConstCharPointer(BlockState s) {
+char const *c_str(BlockState s) {
   switch (s) {
     case ___: return "___";
     case F__: return "F__";

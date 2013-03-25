@@ -68,27 +68,27 @@ class Scenario {
     fprintf(stdout,
             "(Scenario *)(%p)->{ tick=%s, self=%s, area={ %s, %s, %s, %s, %s, %s } }",
             this,
-            toConstCharPointer(tick),
-            toConstCharPointer(self),
-            toConstCharPointer(area[E]),
-            toConstCharPointer(area[S]),
-            toConstCharPointer(area[D]),
-            toConstCharPointer(area[W]),
-            toConstCharPointer(area[N]),
-            toConstCharPointer(area[U])
+            c_str(tick),
+            c_str(self),
+            c_str(area[E]),
+            c_str(area[S]),
+            c_str(area[D]),
+            c_str(area[W]),
+            c_str(area[N]),
+            c_str(area[U])
            );
   }
   void Show() const {
     fprintf(stdout,
             "{ %s, %s, %s, %s, %s, %s, %s, %s }",
-            toConstCharPointer(tick),
-            toConstCharPointer(area[N]),
-            toConstCharPointer(area[U]),
-            toConstCharPointer(area[W]),
-            toConstCharPointer(self),
-            toConstCharPointer(area[E]),
-            toConstCharPointer(area[D]),
-            toConstCharPointer(area[S])
+            c_str(tick),
+            c_str(area[N]),
+            c_str(area[U]),
+            c_str(area[W]),
+            c_str(self),
+            c_str(area[E]),
+            c_str(area[D]),
+            c_str(area[S])
            );
   }
 

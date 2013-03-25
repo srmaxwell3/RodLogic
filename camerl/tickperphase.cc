@@ -1,6 +1,6 @@
 #include "tickperphase.h"
 
-char const *toConstCharPointer(TickPerPhase t) {
+char const *c_str(TickPerPhase t) {
   switch (t) {
     case UnlockNextDataRods: return "UnlockNextDataRods";
     case ResetNextDataRodsFrom1: return "ResetNextDataRodsFrom1";

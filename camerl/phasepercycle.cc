@@ -1,6 +1,6 @@
 #include "phasepercycle.h"
 
-char const *toConstCharPointer(PhasePerCycle t) {
+char const *c_str(PhasePerCycle t) {
   switch (t) {
     case E: return "E";
     case S: return "S";

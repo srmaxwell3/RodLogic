@@ -14,7 +14,7 @@ enum BlockState {
   eoBlockState
 };
 
-char const *toConstCharPointer(BlockState s);
+char const *c_str(BlockState s);
 
 struct BlockStateProperties {
   bool isFBlkable;

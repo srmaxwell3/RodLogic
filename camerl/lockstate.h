@@ -10,6 +10,6 @@ enum LockState {
   eoLockState
 };
 
-char const *toConstCharPointer(LockState t);
+char const *c_str(LockState t);
 
 #endif // LOCKSTATE

@@ -10,8 +10,16 @@ enum Direction {
   X = eoDirection
 };
 
-char const *toConstCharPointer(Direction d);
-
 extern Direction const direction[eoDirection];
+
+char const *c_str(Direction d);
+Direction Next(Direction d);
+Direction NNext(Direction d);
+Direction Last(Direction d);
+Direction LLast(Direction d);
+Direction FWard(Direction d);
+Direction BWard(Direction d);
+Direction LWard(Direction d);
+Direction RWard(Direction d);
 
 #endif // DIRECTION_H

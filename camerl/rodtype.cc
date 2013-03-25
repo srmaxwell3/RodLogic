@@ -1,6 +1,6 @@
 #include "rodtype.h"
 
-char const *toConstCharPointer(RodType t) {
+char const *c_str(RodType t) {
   switch (t) {
     case rtUn: return "rtUn";
     case rtLE: return "rtLE";

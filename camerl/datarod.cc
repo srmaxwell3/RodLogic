@@ -41,7 +41,7 @@ bool DataRod::CheckForFreedomOfMovement(Volume *volume) {
     //       fprintf(stdout,
     //     	  "(LockRod *)(%p) fBlked by %s(%d,%d,%d)\n",
     //     	  this,
-    //     	  toConstCharPointer(v),
+    //     	  c_str(v),
     //     	  vc.L(),
     //     	  vc.R(),
     //     	  vc.C()
@@ -81,11 +81,11 @@ bool DataRod::CheckForFreedomOfMovement(Volume *volume) {
             fprintf(stdout,
                     "(DataRod *)(%p) fBlked at %s(%d,%d,%d) by input (%s)\n",
                     this,
-                    toConstCharPointer(v),
+                    c_str(v),
                     vc.L(),
                     vc.R(),
                     vc.C(),
-                    toConstCharPointer(inputState)
+                    c_str(inputState)
                     );
           }
         }
@@ -99,11 +99,11 @@ bool DataRod::CheckForFreedomOfMovement(Volume *volume) {
               fprintf(stdout,
                       "(DataRod *)(%p) fBlked at %s(%d,%d,%d) by %s(%d,%d,%d)\n",
                       this,
-                      toConstCharPointer(v),
+                      c_str(v),
                       vc.L(),
                       vc.R(),
                       vc.C(),
-                      toConstCharPointer(f),
+                      c_str(f),
                       fc.L(),
                       fc.R(),
                       fc.C()
@@ -116,7 +116,7 @@ bool DataRod::CheckForFreedomOfMovement(Volume *volume) {
             fprintf(stdout,
                     "(DataRod *)(%p) fBlked at %s(%d,%d,%d) by edge\n",
                     this,
-                    toConstCharPointer(v),
+                    c_str(v),
                     vc.L(),
                     vc.R(),
                     vc.C()
@@ -136,11 +136,11 @@ bool DataRod::CheckForFreedomOfMovement(Volume *volume) {
             fprintf(stdout,
                     "(DataRod *)(%p) rBlked at %s(%d,%d,%d) by %s(%d,%d,%d)\n",
                     this,
-                    toConstCharPointer(v),
+                    c_str(v),
                     vc.L(),
                     vc.R(),
                     vc.C(),
-                    toConstCharPointer(b),
+                    c_str(b),
                     bc.L(),
                     bc.R(),
                     bc.C()
@@ -153,7 +153,7 @@ bool DataRod::CheckForFreedomOfMovement(Volume *volume) {
           fprintf(stdout,
                   "(DataRod *)(%p) rBlked at %s(%d,%d,%d) by edge\n",
                   this,
-                  toConstCharPointer(v),
+                  c_str(v),
                   vc.L(),
                   vc.R(),
                   vc.C()
@@ -168,7 +168,7 @@ bool DataRod::CheckForFreedomOfMovement(Volume *volume) {
           fprintf(stdout,
                   "(DataRod *)(%p) locked at %s(%d,%d,%d)\n",
                   this,
-                  toConstCharPointer(v),
+                  c_str(v),
                   vc.L(),
                   vc.R(),
                   vc.C()
@@ -197,7 +197,7 @@ bool DataRod::CheckForFreedomOfMovement(Volume *volume) {
 //     fprintf(stdout,
 //             "(DataRod *)(%p)->AttemptToMove(): fwdOrBwd=%s\n",
 //             this,
-//             toConstCharPointer(fwdOrBwd)
+//             c_str(fwdOrBwd)
 //             );
 //     Dump(volume);
 //     fprintf(stdout, "\n");
@@ -244,11 +244,11 @@ bool DataRod::CheckForFreedomOfMovement(Volume *volume) {
 //           madeChanges = true;
 //         } else {
 //           scenario.Dump();
-//           fprintf(stdout, "thisVoxel=%s\n", toConstCharPointer(thisVoxel));
-//           fprintf(stdout, "prevVoxel=%s\n", toConstCharPointer(prevVoxel));
+//           fprintf(stdout, "thisVoxel=%s\n", c_str(thisVoxel));
+//           fprintf(stdout, "prevVoxel=%s\n", c_str(prevVoxel));
 //           fprintf(stdout,
 //                   "nextVoxel(%s) %s Unkn\n",
-//                   toConstCharPointer(nextVoxel),
+//                   c_str(nextVoxel),
 //                   nextVoxel == Unkn ? "==" : "!="
 //                  );
 //           assert(nextVoxel != Unkn);
@@ -304,13 +304,13 @@ bool DataRod::IsValid(Volume const *volume) {
            );
     fprintf(stdout,
             "  lockStateCounts={ [%s]%lu",
-            toConstCharPointer(LockState(0)),
+            c_str(LockState(0)),
             lockStateCounts[0]
            );
     for (size_t t = 1; t < eoLockState; t += 1) {
       fprintf(stdout,
               ", [%s]%lu",
-              toConstCharPointer(LockState(t)),
+              c_str(LockState(t)),
               lockStateCounts[t]
               );
     }
@@ -324,13 +324,13 @@ bool DataRod::IsValid(Volume const *volume) {
            );
     fprintf(stdout,
             "  dataStateCounts={ [%s]%lu",
-            toConstCharPointer(DataState(0)),
+            c_str(DataState(0)),
             dataStateCounts[0]
            );
     for (size_t t = 1; t < eoDataState; t += 1) {
       fprintf(stdout,
               ", [%s]%lu",
-              toConstCharPointer(DataState(t)),
+              c_str(DataState(t)),
               dataStateCounts[t]
               );
     }
@@ -341,8 +341,8 @@ bool DataRod::IsValid(Volume const *volume) {
 
 void DataRod::Dump(Volume const *volume) const {
   fprintf(stdout, "(DataRod *)(%p)->{", this);
-  fprintf(stdout, " lockState=%s, ", toConstCharPointer(lockState));
-  fprintf(stdout, " dataState=%s, ", toConstCharPointer(dataState));
+  fprintf(stdout, " lockState=%s, ", c_str(lockState));
+  fprintf(stdout, " dataState=%s, ", c_str(dataState));
   Item::Dump(volume);
   fprintf(stdout, " }");
 }

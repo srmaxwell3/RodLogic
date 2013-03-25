@@ -24,7 +24,7 @@ enum TickPerCycle {
 size_t const NPhasesPerCycle = size_t(eoDirection);
 size_t const NTicksPerCycle = size_t(eoTickPerCycle);
 
-char const *toConstCharPointer(TickPerCycle t);
+char const *c_str(TickPerCycle t);
 
 extern TickPerCycle const tickPerCycle[eoTickPerCycle];
 

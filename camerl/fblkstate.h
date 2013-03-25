@@ -10,6 +10,6 @@ enum FBlkState {
   eoFBlkState
 };
 
-char const *toConstCharPointer(FBlkState s);
+char const *c_str(FBlkState s);
 
 #endif // FBLKSTATE_H

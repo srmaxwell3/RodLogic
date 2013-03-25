@@ -17,7 +17,7 @@ enum RodType {
   eoRodType
 };
 
-char const *toConstCharPointer(RodType t);
+char const *c_str(RodType t);
 
 struct RodTypeProperties {
   VoxelType voxelType;

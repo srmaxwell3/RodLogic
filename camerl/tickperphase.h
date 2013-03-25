@@ -19,6 +19,6 @@ enum TickPerPhase {
 
 size_t const NTicksPerPhase = size_t(eoTickPerPhase);
 
-char const *toConstCharPointer(TickPerPhase t);
+char const *c_str(TickPerPhase t);
 
 #endif // TICKPERPHASE_H
