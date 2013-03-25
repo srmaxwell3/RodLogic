@@ -23,6 +23,10 @@ Voxel const voxel[eoVoxel] = {
   DQWR, DQW0, DQWX, DQW1,  DQNR, DQN0, DQNX, DQN1,  DQUR, DQU0, DQUX, DQU1,
   DGER, DGE0, DGEX, DGE1,  DGSR, DGS0, DGSX, DGS1,  DGDR, DGD0, DGDX, DGD1,
   DGWR, DGW0, DGWX, DGW1,  DGNR, DGN0, DGNX, DGN1,  DGUR, DGU0, DGUX, DGU1,
+  D0ER, D0E0, D0EX, D0E1,  D0SR, D0S0, D0SX, D0S1,  D0DR, D0D0, D0DX, D0D1,
+  D0WR, D0W0, D0WX, D0W1,  D0NR, D0N0, D0NX, D0N1,  D0UR, D0U0, D0UX, D0U1,
+  D1ER, D1E0, D1EX, D1E1,  D1SR, D1S0, D1SX, D1S1,  D1DR, D1D0, D1DX, D1D1,
+  D1WR, D1W0, D1WX, D1W1,  D1NR, D1N0, D1NX, D1N1,  D1UR, D1U0, D1UX, D1U1,
   DIER, DIE0, DIEX, DIE1,  DISR, DIS0, DISX, DIS1,  DIDR, DID0, DIDX, DID1,
   DIWR, DIW0, DIWX, DIW1,  DINR, DIN0, DINX, DIN1,  DIUR, DIU0, DIUX, DIU1,
   DOER, DOE0, DOEX, DOE1,  DOSR, DOS0, DOSX, DOS1,  DODR, DOD0, DODX, DOD1,
@@ -261,6 +265,54 @@ static char const *voxelToCStr[eoVoxel] = {
   "DGU0", // DGU0
   "DGUX", // DGUX
   "DGU1", // DGU1
+  "D0ER", // D0ER
+  "D0E0", // D0E0
+  "D0EX", // D0EX
+  "D0E1", // D0E1
+  "D0SR", // D0SR
+  "D0S0", // D0S0
+  "D0SX", // D0SX
+  "D0S1", // D0S1
+  "D0DR", // D0DR
+  "D0D0", // D0D0
+  "D0DX", // D0DX
+  "D0D1", // D0D1
+  "D0WR", // D0WR
+  "D0W0", // D0W0
+  "D0WX", // D0WX
+  "D0W1", // D0W1
+  "D0NR", // D0NR
+  "D0N0", // D0N0
+  "D0NX", // D0NX
+  "D0N1", // D0N1
+  "D0UR", // D0UR
+  "D0U0", // D0U0
+  "D0UX", // D0UX
+  "D0U1", // D0U1
+  "D1ER", // D1ER
+  "D1E0", // D1E0
+  "D1EX", // D1EX
+  "D1E1", // D1E1
+  "D1SR", // D1SR
+  "D1S0", // D1S0
+  "D1SX", // D1SX
+  "D1S1", // D1S1
+  "D1DR", // D1DR
+  "D1D0", // D1D0
+  "D1DX", // D1DX
+  "D1D1", // D1D1
+  "D1WR", // D1WR
+  "D1W0", // D1W0
+  "D1WX", // D1WX
+  "D1W1", // D1W1
+  "D1NR", // D1NR
+  "D1N0", // D1N0
+  "D1NX", // D1NX
+  "D1N1", // D1N1
+  "D1UR", // D1UR
+  "D1U0", // D1U0
+  "D1UX", // D1UX
+  "D1U1", // D1U1
   "DIER", // DIER
   "DIE0", // DIE0
   "DIEX", // DIEX
@@ -544,6 +596,54 @@ char const *toConstCharPointer(Voxel v) {
   case DGU0: return "DGU0";
   case DGUX: return "DGUX";
   case DGU1: return "DGU1";
+  case D0ER: return "D0ER";
+  case D0E0: return "D0E0";
+  case D0EX: return "D0EX";
+  case D0E1: return "D0E1";
+  case D0SR: return "D0SR";
+  case D0S0: return "D0S0";
+  case D0SX: return "D0SX";
+  case D0S1: return "D0S1";
+  case D0DR: return "D0DR";
+  case D0D0: return "D0D0";
+  case D0DX: return "D0DX";
+  case D0D1: return "D0D1";
+  case D0WR: return "D0WR";
+  case D0W0: return "D0W0";
+  case D0WX: return "D0WX";
+  case D0W1: return "D0W1";
+  case D0NR: return "D0NR";
+  case D0N0: return "D0N0";
+  case D0NX: return "D0NX";
+  case D0N1: return "D0N1";
+  case D0UR: return "D0UR";
+  case D0U0: return "D0U0";
+  case D0UX: return "D0UX";
+  case D0U1: return "D0U1";
+  case D1ER: return "D1ER";
+  case D1E0: return "D1E0";
+  case D1EX: return "D1EX";
+  case D1E1: return "D1E1";
+  case D1SR: return "D1SR";
+  case D1S0: return "D1S0";
+  case D1SX: return "D1SX";
+  case D1S1: return "D1S1";
+  case D1DR: return "D1DR";
+  case D1D0: return "D1D0";
+  case D1DX: return "D1DX";
+  case D1D1: return "D1D1";
+  case D1WR: return "D1WR";
+  case D1W0: return "D1W0";
+  case D1WX: return "D1WX";
+  case D1W1: return "D1W1";
+  case D1NR: return "D1NR";
+  case D1N0: return "D1N0";
+  case D1NX: return "D1NX";
+  case D1N1: return "D1N1";
+  case D1UR: return "D1UR";
+  case D1U0: return "D1U0";
+  case D1UX: return "D1UX";
+  case D1U1: return "D1U1";
   case DIER: return "DIER";
   case DIE0: return "DIE0";
   case DIEX: return "DIEX";
@@ -901,6 +1001,54 @@ VoxelProperties voxelProperties[eoVoxel] = {
   Props(5,'#',Data,DN,Un,Un,Unkn,Unkn,Gate,Set0,F,FR_,N,DGUX,S,DGUR), // DGU0
   Props(5,'#',Data,DN,Un,Un,Unkn,Unkn,Gate,SetX,F,FR_,N,DGU1,S,DGU0), // DGUX
   Props(5,'#',Data,DN,Un,Un,Unkn,Unkn,Gate,Set1,F,FR_,N,____,S,DGUX), // DGU1
+  Props(5,'0',Data,DE,Un,Un,Unkn,Unkn,Gate,Rset,F,FR_,E,D0E0,W,____), // D0ER
+  Props(5,'0',Data,DE,DS,Un,Unkn,Unkn,Gate,Set0,F,FR_,E,D0EX,W,D0ER), // D0E0
+  Props(5,'0',Data,DE,DS,Un,Unkn,Unkn,Gate,SetX,F,FR_,E,D0E1,W,D0E0), // D0EX
+  Props(5,'0',Data,DE,DS,Un,Unkn,Unkn,Gate,Set1,F,FR_,E,____,W,D0EX), // D0E1
+  Props(5,'0',Data,DS,Un,Un,Unkn,Unkn,Gate,Rset,F,FR_,S,D0S0,N,____), // D0SR
+  Props(5,'0',Data,DS,DW,Un,Unkn,Unkn,Gate,Set0,F,FR_,S,D0SX,N,D0SR), // D0S0
+  Props(5,'0',Data,DS,DW,Un,Unkn,Unkn,Gate,SetX,F,FR_,S,D0S1,N,D0S0), // D0SX
+  Props(5,'0',Data,DS,DW,Un,Unkn,Unkn,Gate,Set1,F,FR_,S,____,N,D0SX), // D0S1
+  Props(5,'0',Data,DS,Un,Un,Unkn,Unkn,Gate,Rset,F,FR_,S,D0D0,N,____), // D0DR
+  Props(5,'0',Data,DS,Un,Un,Unkn,Unkn,Gate,Set0,F,FR_,S,D0DX,N,D0DR), // D0D0
+  Props(5,'0',Data,DS,Un,Un,Unkn,Unkn,Gate,SetX,F,FR_,S,D0D1,N,D0D0), // D0DX
+  Props(5,'0',Data,DS,Un,Un,Unkn,Unkn,Gate,Set1,F,FR_,S,____,N,D0DX), // D0D1
+  Props(5,'0',Data,DW,DN,Un,Unkn,Unkn,Gate,Rset,F,FR_,W,D0W0,E,____), // D0WR
+  Props(5,'0',Data,DW,DN,Un,Unkn,Unkn,Gate,Set0,F,FR_,W,D0WX,E,D0WR), // D0W0
+  Props(5,'0',Data,DW,DN,Un,Unkn,Unkn,Gate,SetX,F,FR_,W,D0W1,E,D0W0), // D0WX
+  Props(5,'0',Data,DW,Un,Un,Unkn,Unkn,Gate,Set1,F,FR_,W,____,E,D0WX), // D0W1
+  Props(5,'0',Data,DN,Un,Un,Unkn,Unkn,Gate,Rset,F,FR_,N,D0N0,S,____), // D0NR
+  Props(5,'0',Data,DN,DE,Un,Unkn,Unkn,Gate,Set0,F,FR_,N,D0NX,S,D0NR), // D0N0
+  Props(5,'0',Data,DN,DE,Un,Unkn,Unkn,Gate,SetX,F,FR_,N,D0N1,S,D0N0), // D0NX
+  Props(5,'0',Data,DN,DE,Un,Unkn,Unkn,Gate,Set1,F,FR_,N,____,S,D0NX), // D0N1
+  Props(5,'0',Data,DN,Un,Un,Unkn,Unkn,Gate,Rset,F,FR_,N,D0U0,S,____), // D0UR
+  Props(5,'0',Data,DN,Un,Un,Unkn,Unkn,Gate,Set0,F,FR_,N,D0UX,S,D0UR), // D0U0
+  Props(5,'0',Data,DN,Un,Un,Unkn,Unkn,Gate,SetX,F,FR_,N,D0U1,S,D0U0), // D0UX
+  Props(5,'0',Data,DN,Un,Un,Unkn,Unkn,Gate,Set1,F,FR_,N,____,S,D0UX), // D0U1
+  Props(5,'1',Data,DE,Un,Un,Unkn,Unkn,Gate,Rset,F,FR_,E,D1E0,W,____), // D1ER
+  Props(5,'1',Data,DE,DS,Un,Unkn,Unkn,Gate,Set0,F,FR_,E,D1EX,W,D1ER), // D1E0
+  Props(5,'1',Data,DE,DS,Un,Unkn,Unkn,Gate,SetX,F,FR_,E,D1E1,W,D1E0), // D1EX
+  Props(5,'1',Data,DE,DS,Un,Unkn,Unkn,Gate,Set1,F,FR_,E,____,W,D1EX), // D1E1
+  Props(5,'1',Data,DS,Un,Un,Unkn,Unkn,Gate,Rset,F,FR_,S,D1S0,N,____), // D1SR
+  Props(5,'1',Data,DS,DW,Un,Unkn,Unkn,Gate,Set0,F,FR_,S,D1SX,N,D1SR), // D1S0
+  Props(5,'1',Data,DS,DW,Un,Unkn,Unkn,Gate,SetX,F,FR_,S,D1S1,N,D1S0), // D1SX
+  Props(5,'1',Data,DS,DW,Un,Unkn,Unkn,Gate,Set1,F,FR_,S,____,N,D1SX), // D1S1
+  Props(5,'1',Data,DS,Un,Un,Unkn,Unkn,Gate,Rset,F,FR_,S,D1D0,N,____), // D1DR
+  Props(5,'1',Data,DS,Un,Un,Unkn,Unkn,Gate,Set0,F,FR_,S,D1DX,N,D1DR), // D1D0
+  Props(5,'1',Data,DS,Un,Un,Unkn,Unkn,Gate,SetX,F,FR_,S,D1D1,N,D1D0), // D1DX
+  Props(5,'1',Data,DS,Un,Un,Unkn,Unkn,Gate,Set1,F,FR_,S,____,N,D1DX), // D1D1
+  Props(5,'1',Data,DW,DN,Un,Unkn,Unkn,Gate,Rset,F,FR_,W,D1W0,E,____), // D1WR
+  Props(5,'1',Data,DW,DN,Un,Unkn,Unkn,Gate,Set0,F,FR_,W,D1WX,E,D1WR), // D1W0
+  Props(5,'1',Data,DW,DN,Un,Unkn,Unkn,Gate,SetX,F,FR_,W,D1W1,E,D1W0), // D1WX
+  Props(5,'1',Data,DW,Un,Un,Unkn,Unkn,Gate,Set1,F,FR_,W,____,E,D1WX), // D1W1
+  Props(5,'1',Data,DN,Un,Un,Unkn,Unkn,Gate,Rset,F,FR_,N,D1N0,S,____), // D1NR
+  Props(5,'1',Data,DN,DE,Un,Unkn,Unkn,Gate,Set0,F,FR_,N,D1NX,S,D1NR), // D1N0
+  Props(5,'1',Data,DN,DE,Un,Unkn,Unkn,Gate,SetX,F,FR_,N,D1N1,S,D1N0), // D1NX
+  Props(5,'1',Data,DN,DE,Un,Unkn,Unkn,Gate,Set1,F,FR_,N,____,S,D1NX), // D1N1
+  Props(5,'1',Data,DN,Un,Un,Unkn,Unkn,Gate,Rset,F,FR_,N,D1U0,S,____), // D1UR
+  Props(5,'1',Data,DN,Un,Un,Unkn,Unkn,Gate,Set0,F,FR_,N,D1UX,S,D1UR), // D1U0
+  Props(5,'1',Data,DN,Un,Un,Unkn,Unkn,Gate,SetX,F,FR_,N,D1U1,S,D1U0), // D1UX
+  Props(5,'1',Data,DN,Un,Un,Unkn,Unkn,Gate,Set1,F,FR_,N,____,S,D1UX), // D1U1
   Props(6,'i',Data,DE,Un,Un,Unkn,Unkn,Inpt,Rset,T,F__,E,DIE0,W,____), // DIER
   Props(6,'0',Data,DE,Un,Un,Unkn,Unkn,Inpt,Set0,T,F__,E,DIEX,W,DIER), // DIE0
   Props(6,'x',Data,DE,Un,Un,Unkn,Unkn,Inpt,SetX,T,F__,E,DIE1,W,DIE0), // DIEX
