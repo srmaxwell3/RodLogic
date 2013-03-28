@@ -49,14 +49,14 @@ void processVolumeFrom(istream &in) {
   // #include "cam.8.rules.h"
 
   volume.AddInput
-      (VoxelCoordinant(2,  8, 0),
+      (VoxelCoordinant(2, 16, 8),
        { dsSet0, dsSet1, dsSet0, dsSet1,
          dsSet0, dsSet0, dsSet0, dsSet1,
          dsSet0, dsSet1, dsSet0, dsSet0
        }
       );
   volume.AddInput
-      (VoxelCoordinant(2, 12, 0),
+      (VoxelCoordinant(2, 20, 8),
        { dsSet0, dsSet0, dsSet0, dsSet1,
          dsSet0, dsSet1, dsSet0, dsSet0,
          dsSet0, dsSet1, dsSet0, dsSet0

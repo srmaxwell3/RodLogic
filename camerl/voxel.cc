@@ -4,35 +4,35 @@ Voxel const voxel[eoVoxel] = {
   Unkn,
   Wall,
   Slot,
-  LBEL, LBEU,  LBSL, LBSU,  LBDL, LBDU,  LBWL, LBWU,  LBNL, LBNU,  LBUL, LBUU,
-  LHEL, LHEU,  LHSL, LHSU,  LHDL, LHDU,  LHWL, LHWU,  LHNL, LHNU,  LHUL, LHUU,
-  LTEL, LTEU,  LTSL, LTSU,  LTDL, LTDU,  LTWL, LTWU,  LTNL, LTNU,  LTUL, LTUU,
-  LPEL, LPEU,  LPSL, LPSU,  LPDL, LPDU,  LPWL, LPWU,  LPNL, LPNU,  LPUL, LPUU,
-  LKEL, LKEU,  LKSL, LKSU,  LKDL, LKDU,  LKWL, LKWU,  LKNL, LKNU,  LKUL, LKUU,
-  DBER, DBE0, DBEX, DBE1,  DBSR, DBS0, DBSX, DBS1,  DBDR, DBD0, DBDX, DBD1,
-  DBWR, DBW0, DBWX, DBW1,  DBNR, DBN0, DBNX, DBN1,  DBUR, DBU0, DBUX, DBU1,
-  DHER, DHE0, DHEX, DHE1,  DHSR, DHS0, DHSX, DHS1,  DHDR, DHD0, DHDX, DHD1,
-  DHWR, DHW0, DHWX, DHW1,  DHNR, DHN0, DHNX, DHN1,  DHUR, DHU0, DHUX, DHU1,
-  DTER, DTE0, DTEX, DTE1,  DTSR, DTS0, DTSX, DTS1,  DTDR, DTD0, DTDX, DTD1,
-  DTWR, DTW0, DTWX, DTW1,  DTNR, DTN0, DTNX, DTN1,  DTUR, DTU0, DTUX, DTU1,
-  DPER, DPE0, DPEX, DPE1,  DPSR, DPS0, DPSX, DPS1,  DPDR, DPD0, DPDX, DPD1,
-  DPWR, DPW0, DPWX, DPW1,  DPNR, DPN0, DPNX, DPN1,  DPUR, DPU0, DPUX, DPU1,
-  DSER, DSE0, DSEX, DSE1,  DSSR, DSS0, DSSX, DSS1,  DSDR, DSD0, DSDX, DSD1,
-  DSWR, DSW0, DSWX, DSW1,  DSNR, DSN0, DSNX, DSN1,  DSUR, DSU0, DSUX, DSU1,
-  DLER, DLE0, DLEX, DLE1,  DLSR, DLS0, DLSX, DLS1,  DLDR, DLD0, DLDX, DLD1,
-  DLWR, DLW0, DLWX, DLW1,  DLNR, DLN0, DLNX, DLN1,  DLUR, DLU0, DLUX, DLU1,
-  DQER, DQE0, DQEX, DQE1,  DQSR, DQS0, DQSX, DQS1,  DQDR, DQD0, DQDX, DQD1,
-  DQWR, DQW0, DQWX, DQW1,  DQNR, DQN0, DQNX, DQN1,  DQUR, DQU0, DQUX, DQU1,
-  DGER, DGE0, DGEX, DGE1,  DGSR, DGS0, DGSX, DGS1,  DGDR, DGD0, DGDX, DGD1,
-  DGWR, DGW0, DGWX, DGW1,  DGNR, DGN0, DGNX, DGN1,  DGUR, DGU0, DGUX, DGU1,
-  D0ER, D0E0, D0EX, D0E1,  D0SR, D0S0, D0SX, D0S1,  D0DR, D0D0, D0DX, D0D1,
-  D0WR, D0W0, D0WX, D0W1,  D0NR, D0N0, D0NX, D0N1,  D0UR, D0U0, D0UX, D0U1,
-  D1ER, D1E0, D1EX, D1E1,  D1SR, D1S0, D1SX, D1S1,  D1DR, D1D0, D1DX, D1D1,
-  D1WR, D1W0, D1WX, D1W1,  D1NR, D1N0, D1NX, D1N1,  D1UR, D1U0, D1UX, D1U1,
-  DIER, DIE0, DIEX, DIE1,  DISR, DIS0, DISX, DIS1,  DIDR, DID0, DIDX, DID1,
-  DIWR, DIW0, DIWX, DIW1,  DINR, DIN0, DINX, DIN1,  DIUR, DIU0, DIUX, DIU1,
-  DOER, DOE0, DOEX, DOE1,  DOSR, DOS0, DOSX, DOS1,  DODR, DOD0, DODX, DOD1,
-  DOWR, DOW0, DOWX, DOW1,  DONR, DON0, DONX, DON1,  DOUR, DOU0, DOUX, DOU1,
+  LBEL, LBEU, LBSL, LBSU, LBDL, LBDU, LBWL, LBWU, LBNL, LBNU, LBUL, LBUU,
+  LHEL, LHEU, LHSL, LHSU, LHDL, LHDU, LHWL, LHWU, LHNL, LHNU, LHUL, LHUU,
+  LTEL, LTEU, LTSL, LTSU, LTDL, LTDU, LTWL, LTWU, LTNL, LTNU, LTUL, LTUU,
+  LPEL, LPEU, LPSL, LPSU, LPDL, LPDU, LPWL, LPWU, LPNL, LPNU, LPUL, LPUU,
+  LKEL, LKEU, LKSL, LKSU, LKDL, LKDU, LKWL, LKWU, LKNL, LKNU, LKUL, LKUU,
+  DBER, DBE0, DBEX, DBE1, DBSR, DBS0, DBSX, DBS1, DBDR, DBD0, DBDX, DBD1,
+  DBWR, DBW0, DBWX, DBW1, DBNR, DBN0, DBNX, DBN1, DBUR, DBU0, DBUX, DBU1,
+  DHER, DHE0, DHEX, DHE1, DHSR, DHS0, DHSX, DHS1, DHDR, DHD0, DHDX, DHD1,
+  DHWR, DHW0, DHWX, DHW1, DHNR, DHN0, DHNX, DHN1, DHUR, DHU0, DHUX, DHU1,
+  DTER, DTE0, DTEX, DTE1, DTSR, DTS0, DTSX, DTS1, DTDR, DTD0, DTDX, DTD1,
+  DTWR, DTW0, DTWX, DTW1, DTNR, DTN0, DTNX, DTN1, DTUR, DTU0, DTUX, DTU1,
+  DPER, DPE0, DPEX, DPE1, DPSR, DPS0, DPSX, DPS1, DPDR, DPD0, DPDX, DPD1,
+  DPWR, DPW0, DPWX, DPW1, DPNR, DPN0, DPNX, DPN1, DPUR, DPU0, DPUX, DPU1,
+  DSER, DSE0, DSEX, DSE1, DSSR, DSS0, DSSX, DSS1, DSDR, DSD0, DSDX, DSD1,
+  DSWR, DSW0, DSWX, DSW1, DSNR, DSN0, DSNX, DSN1, DSUR, DSU0, DSUX, DSU1,
+  DLER, DLE0, DLEX, DLE1, DLSR, DLS0, DLSX, DLS1, DLDR, DLD0, DLDX, DLD1,
+  DLWR, DLW0, DLWX, DLW1, DLNR, DLN0, DLNX, DLN1, DLUR, DLU0, DLUX, DLU1,
+  DQER, DQE0, DQEX, DQE1, DQSR, DQS0, DQSX, DQS1, DQDR, DQD0, DQDX, DQD1,
+  DQWR, DQW0, DQWX, DQW1, DQNR, DQN0, DQNX, DQN1, DQUR, DQU0, DQUX, DQU1,
+  DGER, DGE0, DGEX, DGE1, DGSR, DGS0, DGSX, DGS1, DGDR, DGD0, DGDX, DGD1,
+  DGWR, DGW0, DGWX, DGW1, DGNR, DGN0, DGNX, DGN1, DGUR, DGU0, DGUX, DGU1,
+  D0ER, D0E0, D0EX, D0E1, D0SR, D0S0, D0SX, D0S1, D0DR, D0D0, D0DX, D0D1,
+  D0WR, D0W0, D0WX, D0W1, D0NR, D0N0, D0NX, D0N1, D0UR, D0U0, D0UX, D0U1,
+  D1ER, D1E0, D1EX, D1E1, D1SR, D1S0, D1SX, D1S1, D1DR, D1D0, D1DX, D1D1,
+  D1WR, D1W0, D1WX, D1W1, D1NR, D1N0, D1NX, D1N1, D1UR, D1U0, D1UX, D1U1,
+  DIER, DIE0, DIEX, DIE1, DISR, DIS0, DISX, DIS1, DIDR, DID0, DIDX, DID1,
+  DIWR, DIW0, DIWX, DIW1, DINR, DIN0, DINX, DIN1, DIUR, DIU0, DIUX, DIU1,
+  DOER, DOE0, DOEX, DOE1, DOSR, DOS0, DOSX, DOS1, DODR, DOD0, DODX, DOD1,
+  DOWR, DOW0, DOWX, DOW1, DONR, DON0, DONX, DON1, DOUR, DOU0, DOUX, DOU1,
 };
 
 static char const *voxelToCStr[eoVoxel] = {
@@ -776,6 +776,7 @@ VoxelProperties voxelProperties[eoVoxel] = {
               dataType, \
               dataState, \
               isRodBody, \
+              isComplementing, \
               blockableStates, \
               fwd, \
               fwdVoxel, \
@@ -792,6 +793,7 @@ VoxelProperties voxelProperties[eoVoxel] = {
   dt##dataType, \
   ds##dataState, \
   isRodBody, \
+  isComplementing, \
   blockableStates, \
   { { fwd, fwdVoxel }, \
     { bwd, bwdVoxel } \
@@ -807,375 +809,376 @@ VoxelProperties voxelProperties[eoVoxel] = {
 #undef ____
 #define ____ Unkn
 
-  //                      displayPriority
-  //                     /  text
-  //                    /  /    voxelType
-  //                   /  /    /  direction
-  //                  /  /    /  /  rodType[0]
-  //                 /  /    /  /  /  rodType[1]
-  //                /  /    /  /  /  /  rodType[2]
-  //               /  /    /  /  /  /  /    lockType
-  //              /  /    /  /  /  /  /    /    lockState
-  //             /  /    /  /  /  /  /    /    /    dataType
-  //            /  /    /  /  /  /  /    /    /    /    dataState
-  //           /  /    /  /  /  /  /    /    /    /    / isRodBody
-  //          /  /    /  /  /  /  /    /    /    /    / /   blockableStates
-  //         /  /    /  /  /  /  /    /    /    /    / /   / fwd
-  //        /  /    /  /  /  /  /    /    /    /    / /   / /    fwdVoxel
-  //       /  /    /  /  /  /  /    /    /    /    / /   / /    / bwd
-  //      /  /    /  /  /  /  /    /    /    /    / /   / /    / /    bwdVoxel
-  //     /  /    /  /  /  /  /    /    /    /    / /   / /    / /    /
-  Props(9,'?',Unkn,X,Un,Un,Un,Unkn,Unkn,Unkn,Unkn,F,___,X,____,X,____), // Unkn
-  Props(0,'.',Wall,X,Un,Un,Un,Unkn,Unkn,Unkn,Unkn,F,___,X,____,X,____), // Wall
-  Props(1,' ',Slot,X,Un,Un,Un,Unkn,Unkn,Unkn,Unkn,F,___,X,____,X,____), // Slot
-  Props(2,'-',Lock,E,LE,Un,Un,Body,Lckd,Unkn,Unkn,T,___,E,LBEU,W,____), // LBEL
-  Props(2,'-',Lock,E,LE,Un,Un,Body,Unlk,Unkn,Unkn,T,___,E,____,W,LBEL), // LBEU
-  Props(2,'|',Lock,S,LS,Un,Un,Body,Lckd,Unkn,Unkn,T,___,S,LBSU,N,____), // LBSL
-  Props(2,'|',Lock,S,LS,Un,Un,Body,Unlk,Unkn,Unkn,T,___,S,____,N,LBSL), // LBSU
-  Props(2,'|',Lock,S,LS,Un,Un,Body,Lckd,Unkn,Unkn,T,___,S,LBDU,N,____), // LBDL
-  Props(2,'|',Lock,S,LS,Un,Un,Body,Unlk,Unkn,Unkn,T,___,S,____,N,LBDL), // LBDU
-  Props(2,'-',Lock,W,LW,Un,Un,Body,Lckd,Unkn,Unkn,T,___,W,LBWU,E,____), // LBWL
-  Props(2,'-',Lock,W,LW,Un,Un,Body,Unlk,Unkn,Unkn,T,___,W,____,E,LBWL), // LBWU
-  Props(2,'|',Lock,N,LN,Un,Un,Body,Lckd,Unkn,Unkn,T,___,N,LBNU,S,____), // LBNL
-  Props(2,'|',Lock,N,LN,Un,Un,Body,Unlk,Unkn,Unkn,T,___,N,____,S,LBNL), // LBNU
-  Props(2,'|',Lock,N,LN,Un,Un,Body,Lckd,Unkn,Unkn,T,___,N,LBUU,S,____), // LBUL
-  Props(2,'|',Lock,N,LN,Un,Un,Body,Unlk,Unkn,Unkn,T,___,N,____,S,LBUL), // LBUU
-  Props(3,'>',Lock,E,LE,Un,Un,Head,Lckd,Unkn,Unkn,T,___,E,LHEU,W,____), // LHEL
-  Props(3,'>',Lock,E,LE,Un,Un,Head,Unlk,Unkn,Unkn,T,___,E,____,W,LHEL), // LHEU
-  Props(3,'v',Lock,S,LS,Un,Un,Head,Lckd,Unkn,Unkn,T,___,S,LHSU,N,____), // LHSL
-  Props(3,'v',Lock,S,LS,Un,Un,Head,Unlk,Unkn,Unkn,T,___,S,____,N,LHSL), // LHSU
-  Props(3,'v',Lock,S,LS,Un,Un,Head,Lckd,Unkn,Unkn,T,___,S,LHDU,N,____), // LHDL
-  Props(3,'v',Lock,S,LS,Un,Un,Head,Unlk,Unkn,Unkn,T,___,S,____,N,LHDL), // LHDU
-  Props(3,'<',Lock,W,LW,Un,Un,Head,Lckd,Unkn,Unkn,T,___,W,LHWU,E,____), // LHWL
-  Props(3,'<',Lock,W,LW,Un,Un,Head,Unlk,Unkn,Unkn,T,___,W,____,E,LHWL), // LHWU
-  Props(3,'^',Lock,N,LN,Un,Un,Head,Lckd,Unkn,Unkn,T,___,N,LHNU,S,____), // LHNL
-  Props(3,'^',Lock,N,LN,Un,Un,Head,Unlk,Unkn,Unkn,T,___,N,____,S,LHNL), // LHNU
-  Props(3,'^',Lock,N,LN,Un,Un,Head,Lckd,Unkn,Unkn,T,___,N,LHUU,S,____), // LHUL
-  Props(3,'^',Lock,N,LN,Un,Un,Head,Unlk,Unkn,Unkn,T,___,N,____,S,LHUL), // LHUU
-  Props(3,'>',Lock,E,LE,Un,Un,Tail,Lckd,Unkn,Unkn,T,___,E,LTEU,W,____), // LTEL
-  Props(3,'>',Lock,E,LE,Un,Un,Tail,Unlk,Unkn,Unkn,T,___,E,____,W,LTEL), // LTEU
-  Props(3,'v',Lock,S,LS,Un,Un,Tail,Lckd,Unkn,Unkn,T,___,S,LTSU,N,____), // LTSL
-  Props(3,'v',Lock,S,LS,Un,Un,Tail,Unlk,Unkn,Unkn,T,___,S,____,N,LTSL), // LTSU
-  Props(3,'v',Lock,S,LS,Un,Un,Tail,Lckd,Unkn,Unkn,T,___,S,LTDU,N,____), // LTDL
-  Props(3,'v',Lock,S,LS,Un,Un,Tail,Unlk,Unkn,Unkn,T,___,S,____,N,LTDL), // LTDU
-  Props(3,'<',Lock,W,LW,Un,Un,Tail,Lckd,Unkn,Unkn,T,___,W,LTWU,E,____), // LTWL
-  Props(3,'<',Lock,W,LW,Un,Un,Tail,Unlk,Unkn,Unkn,T,___,W,____,E,LTWL), // LTWU
-  Props(3,'^',Lock,N,LN,Un,Un,Tail,Lckd,Unkn,Unkn,T,___,N,LTNU,S,____), // LTNL
-  Props(3,'^',Lock,N,LN,Un,Un,Tail,Unlk,Unkn,Unkn,T,___,N,____,S,LTNL), // LTNU
-  Props(3,'^',Lock,N,LN,Un,Un,Tail,Lckd,Unkn,Unkn,T,___,N,LTUU,S,____), // LTUL
-  Props(3,'^',Lock,N,LN,Un,Un,Tail,Unlk,Unkn,Unkn,T,___,N,____,S,LTUL), // LTUU
-  Props(2,'+',Lock,E,LE,Un,Un,Post,Lckd,Unkn,Unkn,T,___,E,LPEU,W,____), // LPEL
-  Props(2,'+',Lock,E,LE,Un,Un,Post,Unlk,Unkn,Unkn,T,___,E,____,W,LPEL), // LPEU
-  Props(2,'+',Lock,S,LS,Un,Un,Post,Lckd,Unkn,Unkn,T,___,S,LPSU,N,____), // LPSL
-  Props(2,'+',Lock,S,LS,Un,Un,Post,Unlk,Unkn,Unkn,T,___,S,____,N,LPSL), // LPSU
-  Props(2,'+',Lock,S,LS,Un,Un,Post,Lckd,Unkn,Unkn,T,___,S,LPDU,N,____), // LPDL
-  Props(2,'+',Lock,S,LS,Un,Un,Post,Unlk,Unkn,Unkn,T,___,S,____,N,LPDL), // LPDU
-  Props(2,'+',Lock,W,LW,Un,Un,Post,Lckd,Unkn,Unkn,T,___,W,LPWU,E,____), // LPWL
-  Props(2,'+',Lock,W,LW,Un,Un,Post,Unlk,Unkn,Unkn,T,___,W,____,E,LPWL), // LPWU
-  Props(2,'+',Lock,N,LN,Un,Un,Post,Lckd,Unkn,Unkn,T,___,N,LPNU,S,____), // LPNL
-  Props(2,'+',Lock,N,LN,Un,Un,Post,Unlk,Unkn,Unkn,T,___,N,____,S,LPNL), // LPNU
-  Props(2,'+',Lock,N,LN,Un,Un,Post,Lckd,Unkn,Unkn,T,___,N,LPUU,S,____), // LPUL
-  Props(2,'+',Lock,N,LN,Un,Un,Post,Unlk,Unkn,Unkn,T,___,N,____,S,LPUL), // LPUU
-  Props(3,'<',Lock,E,LE,Un,Un,Lock,Lckd,Unkn,Unkn,F,FRL,E,LKEU,W,____), // LKEL
-  Props(3,'<',Lock,E,LE,Un,Un,Lock,Unlk,Unkn,Unkn,F,FRL,E,____,W,LKEL), // LKEU
-  Props(3,'^',Lock,S,LS,Un,Un,Lock,Lckd,Unkn,Unkn,F,FRL,S,LKSU,N,____), // LKSL
-  Props(3,'^',Lock,S,LS,Un,Un,Lock,Unlk,Unkn,Unkn,F,FRL,S,____,N,LKSL), // LKSU
-  Props(3,'^',Lock,S,LS,Un,Un,Lock,Lckd,Unkn,Unkn,F,FRL,S,LKDU,N,____), // LKDL
-  Props(3,'^',Lock,S,LS,Un,Un,Lock,Unlk,Unkn,Unkn,F,FRL,S,____,N,LKDL), // LKDU
-  Props(3,'>',Lock,W,LW,Un,Un,Lock,Lckd,Unkn,Unkn,F,FRL,W,LKWU,E,____), // LKWL
-  Props(3,'>',Lock,W,LW,Un,Un,Lock,Unlk,Unkn,Unkn,F,FRL,W,____,E,LKWL), // LKWU
-  Props(3,'v',Lock,N,LN,Un,Un,Lock,Lckd,Unkn,Unkn,F,FRL,N,LKNU,S,____), // LKNL
-  Props(3,'v',Lock,N,LN,Un,Un,Lock,Unlk,Unkn,Unkn,F,FRL,N,____,S,LKNL), // LKNU
-  Props(3,'v',Lock,N,LN,Un,Un,Lock,Lckd,Unkn,Unkn,F,FRL,N,LKUU,S,____), // LKUL
-  Props(3,'v',Lock,N,LN,Un,Un,Lock,Unlk,Unkn,Unkn,F,FRL,N,____,S,LKUL), // LKUU
-  Props(4,'-',Data,E,DE,Un,Un,Unkn,Unkn,Body,Rset,T,___,E,DBE0,W,____), // DBER
-  Props(4,'-',Data,E,DE,Un,Un,Unkn,Unkn,Body,Set0,T,___,E,DBEX,W,DBER), // DBE0
-  Props(4,'-',Data,E,DE,Un,Un,Unkn,Unkn,Body,SetX,T,___,E,DBE1,W,DBE0), // DBEX
-  Props(4,'-',Data,E,DE,Un,Un,Unkn,Unkn,Body,Set1,T,___,E,____,W,DBEX), // DBE1
-  Props(4,'|',Data,S,DS,Un,Un,Unkn,Unkn,Body,Rset,T,___,S,DBS0,N,____), // DBSR
-  Props(4,'|',Data,S,DS,Un,Un,Unkn,Unkn,Body,Set0,T,___,S,DBSX,N,DBSR), // DBS0
-  Props(4,'|',Data,S,DS,Un,Un,Unkn,Unkn,Body,SetX,T,___,S,DBS1,N,DBS0), // DBSX
-  Props(4,'|',Data,S,DS,Un,Un,Unkn,Unkn,Body,Set1,T,___,S,____,N,DBSX), // DBS1
-  Props(4,'|',Data,S,DS,Un,Un,Unkn,Unkn,Body,Rset,T,___,S,DBD0,N,____), // DBDR
-  Props(4,'|',Data,S,DS,Un,Un,Unkn,Unkn,Body,Set0,T,___,S,DBDX,N,DBDR), // DBD0
-  Props(4,'|',Data,S,DS,Un,Un,Unkn,Unkn,Body,SetX,T,___,S,DBD1,N,DBD0), // DBDX
-  Props(4,'|',Data,S,DS,Un,Un,Unkn,Unkn,Body,Set1,T,___,S,____,N,DBDX), // DBD1
-  Props(4,'-',Data,W,DW,Un,Un,Unkn,Unkn,Body,Rset,T,___,W,DBW0,E,____), // DBWR
-  Props(4,'-',Data,W,DW,Un,Un,Unkn,Unkn,Body,Set0,T,___,W,DBWX,E,DBWR), // DBW0
-  Props(4,'-',Data,W,DW,Un,Un,Unkn,Unkn,Body,SetX,T,___,W,DBW1,E,DBW0), // DBWX
-  Props(4,'-',Data,W,DW,Un,Un,Unkn,Unkn,Body,Set1,T,___,W,____,E,DBWX), // DBW1
-  Props(4,'|',Data,N,DN,Un,Un,Unkn,Unkn,Body,Rset,T,___,N,DBN0,S,____), // DBNR
-  Props(4,'|',Data,N,DN,Un,Un,Unkn,Unkn,Body,Set0,T,___,N,DBNX,S,DBNR), // DBN0
-  Props(4,'|',Data,N,DN,Un,Un,Unkn,Unkn,Body,SetX,T,___,N,DBN1,S,DBN0), // DBNX
-  Props(4,'|',Data,N,DN,Un,Un,Unkn,Unkn,Body,Set1,T,___,N,____,S,DBNX), // DBN1
-  Props(4,'|',Data,N,DN,Un,Un,Unkn,Unkn,Body,Rset,T,___,N,DBU0,S,____), // DBUR
-  Props(4,'|',Data,N,DN,Un,Un,Unkn,Unkn,Body,Set0,T,___,N,DBUX,S,DBUR), // DBU0
-  Props(4,'|',Data,N,DN,Un,Un,Unkn,Unkn,Body,SetX,T,___,N,DBU1,S,DBU0), // DBUX
-  Props(4,'|',Data,N,DN,Un,Un,Unkn,Unkn,Body,Set1,T,___,N,____,S,DBUX), // DBU1
-  Props(5,'>',Data,E,DE,Un,Un,Unkn,Unkn,Head,Rset,T,F__,E,DHE0,W,____), // DHER
-  Props(5,'0',Data,E,DE,Un,Un,Unkn,Unkn,Head,Set0,T,F__,E,DHEX,W,DHER), // DHE0
-  Props(5,'X',Data,E,DE,Un,Un,Unkn,Unkn,Head,SetX,T,F__,E,DHE1,W,DHE0), // DHEX
-  Props(5,'1',Data,E,DE,Un,Un,Unkn,Unkn,Head,Set1,T,F__,E,____,W,DHEX), // DHE1
-  Props(5,'v',Data,S,DS,Un,Un,Unkn,Unkn,Head,Rset,T,F__,S,DHS0,N,____), // DHSR
-  Props(5,'0',Data,S,DS,Un,Un,Unkn,Unkn,Head,Set0,T,F__,S,DHSX,N,DHSR), // DHS0
-  Props(5,'X',Data,S,DS,Un,Un,Unkn,Unkn,Head,SetX,T,F__,S,DHS1,N,DHS0), // DHSX
-  Props(5,'1',Data,S,DS,Un,Un,Unkn,Unkn,Head,Set1,T,F__,S,____,N,DHSX), // DHS1
-  Props(5,'v',Data,S,DS,Un,Un,Unkn,Unkn,Head,Rset,T,F__,S,DHD0,N,____), // DHDR
-  Props(5,'0',Data,S,DS,Un,Un,Unkn,Unkn,Head,Set0,T,F__,S,DHDX,N,DHDR), // DHD0
-  Props(5,'X',Data,S,DS,Un,Un,Unkn,Unkn,Head,SetX,T,F__,S,DHD1,N,DHD0), // DHDX
-  Props(5,'1',Data,S,DS,Un,Un,Unkn,Unkn,Head,Set1,T,F__,S,____,N,DHDX), // DHD1
-  Props(5,'<',Data,W,DW,Un,Un,Unkn,Unkn,Head,Rset,T,F__,W,DHW0,E,____), // DHWR
-  Props(5,'0',Data,W,DW,Un,Un,Unkn,Unkn,Head,Set0,T,F__,W,DHWX,E,DHWR), // DHW0
-  Props(5,'X',Data,W,DW,Un,Un,Unkn,Unkn,Head,SetX,T,F__,W,DHW1,E,DHW0), // DHWX
-  Props(5,'1',Data,W,DW,Un,Un,Unkn,Unkn,Head,Set1,T,F__,W,____,E,DHWX), // DHW1
-  Props(5,'^',Data,N,DN,Un,Un,Unkn,Unkn,Head,Rset,T,F__,N,DHN0,S,____), // DHNR
-  Props(5,'0',Data,N,DN,Un,Un,Unkn,Unkn,Head,Set0,T,F__,X,DHNX,S,DHNR), // DHN0
-  Props(5,'X',Data,N,DN,Un,Un,Unkn,Unkn,Head,SetX,T,F__,N,DHN1,S,DHN0), // DHNX
-  Props(5,'1',Data,N,DN,Un,Un,Unkn,Unkn,Head,Set1,T,F__,N,____,S,DHNX), // DHN1
-  Props(5,'^',Data,N,DN,Un,Un,Unkn,Unkn,Head,Rset,T,F__,N,DHU0,S,____), // DHUR
-  Props(5,'0',Data,N,DN,Un,Un,Unkn,Unkn,Head,Set0,T,F__,N,DHUX,S,DHUR), // DHU0
-  Props(5,'X',Data,N,DN,Un,Un,Unkn,Unkn,Head,SetX,T,F__,N,DHU1,S,DHU0), // DHUX
-  Props(5,'1',Data,N,DN,Un,Un,Unkn,Unkn,Head,Set1,T,F__,N,____,S,DHUX), // DHU1
-  Props(5,'>',Data,E,DE,Un,Un,Unkn,Unkn,Tail,Rset,T,_R_,E,DTE0,W,____), // DTER
-  Props(5,'>',Data,E,DE,Un,Un,Unkn,Unkn,Tail,Set0,T,_R_,E,DTEX,W,DTER), // DTE0
-  Props(5,'>',Data,E,DE,Un,Un,Unkn,Unkn,Tail,SetX,T,_R_,E,DTE1,W,DTE0), // DTEX
-  Props(5,'>',Data,E,DE,Un,Un,Unkn,Unkn,Tail,Set1,T,_R_,E,____,W,DTEX), // DTE1
-  Props(5,'v',Data,S,DS,Un,Un,Unkn,Unkn,Tail,Rset,T,_R_,S,DTS0,N,____), // DTSR
-  Props(5,'v',Data,S,DS,Un,Un,Unkn,Unkn,Tail,Set0,T,_R_,S,DTSX,N,DTSR), // DTS0
-  Props(5,'v',Data,S,DS,Un,Un,Unkn,Unkn,Tail,SetX,T,_R_,S,DTS1,N,DTS0), // DTSX
-  Props(5,'v',Data,S,DS,Un,Un,Unkn,Unkn,Tail,Set1,T,_R_,S,____,N,DTSX), // DTS1
-  Props(5,'v',Data,S,DS,Un,Un,Unkn,Unkn,Tail,Rset,T,_R_,S,DTD0,N,____), // DTDR
-  Props(5,'v',Data,S,DS,Un,Un,Unkn,Unkn,Tail,Set0,T,_R_,S,DTDX,N,DTDR), // DTD0
-  Props(5,'v',Data,S,DS,Un,Un,Unkn,Unkn,Tail,SetX,T,_R_,S,DTD1,N,DTD0), // DTDX
-  Props(5,'v',Data,S,DS,Un,Un,Unkn,Unkn,Tail,Set1,T,_R_,S,____,N,DTDX), // DTD1
-  Props(5,'<',Data,W,DW,Un,Un,Unkn,Unkn,Tail,Rset,T,_R_,W,DTW0,E,____), // DTWR
-  Props(5,'<',Data,W,DW,Un,Un,Unkn,Unkn,Tail,Set0,T,_R_,W,DTWX,E,DTWR), // DTW0
-  Props(5,'<',Data,W,DW,Un,Un,Unkn,Unkn,Tail,SetX,T,_R_,W,DTW1,E,DTW0), // DTWX
-  Props(5,'<',Data,W,DW,Un,Un,Unkn,Unkn,Tail,Set1,T,_R_,W,____,E,DTWX), // DTW1
-  Props(5,'^',Data,N,DN,Un,Un,Unkn,Unkn,Tail,Rset,T,_R_,N,DTN0,S,____), // DTNR
-  Props(5,'^',Data,N,DN,Un,Un,Unkn,Unkn,Tail,Set0,T,_R_,N,DTNX,S,DTNR), // DTN0
-  Props(5,'^',Data,N,DN,Un,Un,Unkn,Unkn,Tail,SetX,T,_R_,N,DTN1,S,DTN0), // DTNX
-  Props(5,'^',Data,N,DN,Un,Un,Unkn,Unkn,Tail,Set1,T,_R_,N,____,S,DTNX), // DTN1
-  Props(5,'^',Data,N,DN,Un,Un,Unkn,Unkn,Tail,Rset,T,_R_,N,DTU0,S,____), // DTUR
-  Props(5,'^',Data,N,DN,Un,Un,Unkn,Unkn,Tail,Set0,T,_R_,N,DTUX,S,DTUR), // DTU0
-  Props(5,'^',Data,N,DN,Un,Un,Unkn,Unkn,Tail,SetX,T,_R_,N,DTU1,S,DTU0), // DTUX
-  Props(5,'^',Data,N,DN,Un,Un,Unkn,Unkn,Tail,Set1,T,_R_,N,____,S,DTUX), // DTU1
-  Props(4,'+',Data,E,DE,Un,Un,Unkn,Unkn,Post,Rset,T,FR_,E,DPE0,W,____), // DPER
-  Props(4,'+',Data,E,DE,Un,Un,Unkn,Unkn,Post,Set0,T,FR_,E,DPEX,W,DPER), // DPE0
-  Props(4,'+',Data,E,DE,Un,Un,Unkn,Unkn,Post,SetX,T,FR_,E,DPE1,W,DPE0), // DPEX
-  Props(4,'+',Data,E,DE,Un,Un,Unkn,Unkn,Post,Set1,T,FR_,E,____,W,DPEX), // DPE1
-  Props(4,'+',Data,S,DS,Un,Un,Unkn,Unkn,Post,Rset,T,FR_,S,DPS0,X,____), // DPSR
-  Props(4,'+',Data,S,DS,Un,Un,Unkn,Unkn,Post,Set0,T,FR_,S,DPSX,N,DPSR), // DPS0
-  Props(4,'+',Data,S,DS,Un,Un,Unkn,Unkn,Post,SetX,T,FR_,S,DPS1,N,DPS0), // DPSX
-  Props(4,'+',Data,S,DS,Un,Un,Unkn,Unkn,Post,Set1,T,FR_,S,____,N,DPSX), // DPS1
-  Props(4,'+',Data,S,DS,Un,Un,Unkn,Unkn,Post,Rset,T,FR_,S,DPD0,N,____), // DPDR
-  Props(4,'+',Data,S,DS,Un,Un,Unkn,Unkn,Post,Set0,T,FR_,S,DPDX,N,DPDR), // DPD0
-  Props(4,'+',Data,S,DS,Un,Un,Unkn,Unkn,Post,SetX,T,FR_,S,DPD1,N,DPD0), // DPDX
-  Props(4,'+',Data,S,DS,Un,Un,Unkn,Unkn,Post,Set1,T,FR_,S,____,N,DPDX), // DPD1
-  Props(4,'+',Data,W,DW,Un,Un,Unkn,Unkn,Post,Rset,T,FR_,W,DPW0,E,____), // DPWR
-  Props(4,'+',Data,W,DW,Un,Un,Unkn,Unkn,Post,Set0,T,FR_,W,DPWX,E,DPWR), // DPW0
-  Props(4,'+',Data,W,DW,Un,Un,Unkn,Unkn,Post,SetX,T,FR_,W,DPW1,E,DPW0), // DPWX
-  Props(4,'+',Data,W,DW,Un,Un,Unkn,Unkn,Post,Set1,T,FR_,W,____,E,DPWX), // DPW1
-  Props(4,'+',Data,N,DN,Un,Un,Unkn,Unkn,Post,Rset,T,FR_,N,DPN0,S,____), // DPNR
-  Props(4,'+',Data,N,DN,Un,Un,Unkn,Unkn,Post,Set0,T,FR_,N,DPNX,S,DPNR), // DPN0
-  Props(4,'+',Data,N,DN,Un,Un,Unkn,Unkn,Post,SetX,T,FR_,N,DPN1,S,DPN0), // DPNX
-  Props(4,'+',Data,N,DN,Un,Un,Unkn,Unkn,Post,Set1,T,FR_,N,____,S,DPNX), // DPN1
-  Props(4,'+',Data,N,DN,Un,Un,Unkn,Unkn,Post,Rset,T,FR_,N,DPU0,S,____), // DPUR
-  Props(4,'+',Data,N,DN,Un,Un,Unkn,Unkn,Post,Set0,T,FR_,N,DPUX,S,DPUR), // DPU0
-  Props(4,'+',Data,N,DN,Un,Un,Unkn,Unkn,Post,SetX,T,FR_,N,DPU1,S,DPU0), // DPUX
-  Props(4,'+',Data,N,DN,Un,Un,Unkn,Unkn,Post,Set1,T,FR_,N,____,S,DPUX), // DPU1
-  Props(5,'^',Data,E,DE,Un,Un,Unkn,Unkn,Slot,Rset,F,FRL,E,DSE0,W,____), // DSER
-  Props(5,'^',Data,E,DE,Un,Un,Unkn,Unkn,Slot,Set0,F,FRL,E,DSEX,W,DSER), // DSE0
-  Props(5,'^',Data,E,DE,Un,Un,Unkn,Unkn,Slot,SetX,F,FRL,E,DSE1,W,DSE0), // DSEX
-  Props(5,'^',Data,E,DE,Un,Un,Unkn,Unkn,Slot,Set1,F,FRL,E,____,W,DSEX), // DSE1
-  Props(5,'>',Data,S,DS,Un,Un,Unkn,Unkn,Slot,Rset,F,FRL,S,DSS0,N,____), // DSSR
-  Props(5,'>',Data,S,DS,Un,Un,Unkn,Unkn,Slot,Set0,F,FRL,S,DSSX,N,DSSR), // DSS0
-  Props(5,'>',Data,S,DS,Un,Un,Unkn,Unkn,Slot,SetX,F,FRL,S,DSS1,N,DSS0), // DSSX
-  Props(5,'>',Data,S,DS,Un,Un,Unkn,Unkn,Slot,Set1,F,FRL,S,____,N,DSSX), // DSS1
-  Props(5,'>',Data,S,DS,Un,Un,Unkn,Unkn,Slot,Rset,F,FRL,S,DSD0,N,____), // DSDR
-  Props(5,'>',Data,S,DS,Un,Un,Unkn,Unkn,Slot,Set0,F,FRL,S,DSDX,N,DSDR), // DSD0
-  Props(5,'>',Data,S,DS,Un,Un,Unkn,Unkn,Slot,SetX,F,FRL,S,DSD1,N,DSD0), // DSDX
-  Props(5,'>',Data,S,DS,Un,Un,Unkn,Unkn,Slot,Set1,F,FRL,S,____,N,DSDX), // DSD1
-  Props(5,'v',Data,W,DW,Un,Un,Unkn,Unkn,Slot,Rset,F,FRL,W,DSW0,E,____), // DSWR
-  Props(5,'v',Data,W,DW,Un,Un,Unkn,Unkn,Slot,Set0,F,FRL,W,DSWX,E,DSWR), // DSW0
-  Props(5,'v',Data,W,DW,Un,Un,Unkn,Unkn,Slot,SetX,F,FRL,W,DSW1,E,DSW0), // DSWX
-  Props(5,'v',Data,W,DW,Un,Un,Unkn,Unkn,Slot,Set1,F,FRL,W,____,E,DSWX), // DSW1
-  Props(5,'<',Data,N,DN,Un,Un,Unkn,Unkn,Slot,Rset,F,FRL,N,DSN0,S,____), // DSNR
-  Props(5,'<',Data,N,DN,Un,Un,Unkn,Unkn,Slot,Set0,F,FRL,N,DSNX,S,DSNR), // DSN0
-  Props(5,'<',Data,N,DN,Un,Un,Unkn,Unkn,Slot,SetX,F,FRL,N,DSN1,S,DSN0), // DSNX
-  Props(5,'<',Data,N,DN,Un,Un,Unkn,Unkn,Slot,Set1,F,FRL,N,____,S,DSNX), // DSN1
-  Props(5,'<',Data,N,DN,Un,Un,Unkn,Unkn,Slot,Rset,F,FRL,N,DSU0,S,____), // DSUR
-  Props(5,'<',Data,N,DN,Un,Un,Unkn,Unkn,Slot,Set0,F,FRL,N,DSUX,S,DSUR), // DSU0
-  Props(5,'<',Data,N,DN,Un,Un,Unkn,Unkn,Slot,SetX,F,FRL,N,DSU1,S,DSU0), // DSUX
-  Props(5,'<',Data,N,DN,Un,Un,Unkn,Unkn,Slot,Set1,F,FRL,N,____,S,DSUX), // DSU1
-  Props(5,'X',Data,E,DE,Un,Un,Unkn,Unkn,Lock,Rset,F,FRL,E,DLE0,W,____), // DLER
-  Props(5,'X',Data,E,DE,Un,Un,Unkn,Unkn,Lock,Set0,F,FRL,E,DLEX,W,DLER), // DLE0
-  Props(5,'X',Data,E,DE,Un,Un,Unkn,Unkn,Lock,SetX,F,FRL,E,DLE1,W,DLE0), // DLEX
-  Props(5,'X',Data,E,DE,Un,Un,Unkn,Unkn,Lock,Set1,F,FRL,E,____,W,DLEX), // DLE1
-  Props(5,'X',Data,S,DS,Un,Un,Unkn,Unkn,Lock,Rset,F,FRL,S,DLS0,N,____), // DLSR
-  Props(5,'X',Data,S,DS,Un,Un,Unkn,Unkn,Lock,Set0,F,FRL,S,DLSX,N,DLSR), // DLS0
-  Props(5,'X',Data,S,DS,Un,Un,Unkn,Unkn,Lock,SetX,F,FRL,S,DLS1,N,DLS0), // DLSX
-  Props(5,'X',Data,S,DS,Un,Un,Unkn,Unkn,Lock,Set1,F,FRL,S,____,N,DLSX), // DLS1
-  Props(5,'X',Data,S,DS,Un,Un,Unkn,Unkn,Lock,Rset,F,FRL,S,DLD0,N,____), // DLDR
-  Props(5,'X',Data,S,DS,Un,Un,Unkn,Unkn,Lock,Set0,F,FRL,S,DLDX,N,DLDR), // DLD0
-  Props(5,'X',Data,S,DS,Un,Un,Unkn,Unkn,Lock,SetX,F,FRL,S,DLD1,N,DLD0), // DLDX
-  Props(5,'X',Data,S,DS,Un,Un,Unkn,Unkn,Lock,Set1,F,FRL,S,____,N,DLDX), // DLD1
-  Props(5,'X',Data,W,DW,Un,Un,Unkn,Unkn,Lock,Rset,F,FRL,W,DLW0,E,____), // DLWR
-  Props(5,'X',Data,W,DW,Un,Un,Unkn,Unkn,Lock,Set0,F,FRL,W,DLWX,E,DLWR), // DLW0
-  Props(5,'X',Data,W,DW,Un,Un,Unkn,Unkn,Lock,SetX,F,FRL,W,DLW1,E,DLW0), // DLWX
-  Props(5,'X',Data,W,DW,Un,Un,Unkn,Unkn,Lock,Set1,F,FRL,W,____,E,DLWX), // DLW1
-  Props(5,'X',Data,N,DN,Un,Un,Unkn,Unkn,Lock,Rset,F,FRL,N,DLN0,S,____), // DLNR
-  Props(5,'X',Data,N,DN,Un,Un,Unkn,Unkn,Lock,Set0,F,FRL,N,DLNX,S,DLNR), // DLN0
-  Props(5,'X',Data,N,DN,Un,Un,Unkn,Unkn,Lock,SetX,F,FRL,N,DLN1,S,DLN0), // DLNX
-  Props(5,'X',Data,N,DN,Un,Un,Unkn,Unkn,Lock,Set1,F,FRL,N,____,S,DLNX), // DLN1
-  Props(5,'X',Data,N,DN,Un,Un,Unkn,Unkn,Lock,Rset,F,FRL,N,DLU0,S,____), // DLUR
-  Props(5,'X',Data,N,DN,Un,Un,Unkn,Unkn,Lock,Set0,F,FRL,N,DLUX,S,DLUR), // DLU0
-  Props(5,'X',Data,N,DN,Un,Un,Unkn,Unkn,Lock,SetX,F,FRL,N,DLU1,S,DLU0), // DLUX
-  Props(5,'X',Data,N,DN,Un,Un,Unkn,Unkn,Lock,Set1,F,FRL,N,____,S,DLUX), // DLU1
-  Props(5,'>',Data,E,DE,Un,Un,Unkn,Unkn,Test,Rset,F,FR_,E,DQE0,W,____), // DQER
-  Props(5,'>',Data,E,DE,Un,Un,Unkn,Unkn,Test,Set0,F,FR_,E,DQEX,W,DQER), // DQE0
-  Props(5,'>',Data,E,DE,Un,Un,Unkn,Unkn,Test,SetX,F,FR_,E,DQE1,W,DQE0), // DQEX
-  Props(5,'>',Data,E,DE,Un,Un,Unkn,Unkn,Test,Set1,F,FR_,E,____,W,DQEX), // DQE1
-  Props(5,'v',Data,S,DS,Un,Un,Unkn,Unkn,Test,Rset,F,FR_,S,DQS0,N,____), // DQSR
-  Props(5,'v',Data,S,DS,Un,Un,Unkn,Unkn,Test,Set0,F,FR_,S,DQSX,N,DQSR), // DQS0
-  Props(5,'v',Data,S,DS,Un,Un,Unkn,Unkn,Test,SetX,F,FR_,S,DQS1,N,DQS0), // DQSX
-  Props(5,'v',Data,S,DS,Un,Un,Unkn,Unkn,Test,Set1,F,FR_,S,____,N,DQSX), // DQS1
-  Props(5,'v',Data,S,DS,Un,Un,Unkn,Unkn,Test,Rset,F,FR_,S,DQD0,N,____), // DQDR
-  Props(5,'v',Data,S,DS,Un,Un,Unkn,Unkn,Test,Set0,F,FR_,S,DQDX,N,DQDR), // DQD0
-  Props(5,'v',Data,S,DS,Un,Un,Unkn,Unkn,Test,SetX,F,FR_,S,DQD1,N,DQD0), // DQDX
-  Props(5,'v',Data,S,DS,Un,Un,Unkn,Unkn,Test,Set1,F,FR_,S,____,N,DQDX), // DQD1
-  Props(5,'<',Data,W,DW,Un,Un,Unkn,Unkn,Test,Rset,F,FR_,W,DQW0,E,____), // DQWR
-  Props(5,'<',Data,W,DW,Un,Un,Unkn,Unkn,Test,Set0,F,FR_,W,DQWX,E,DQWR), // DQW0
-  Props(5,'<',Data,W,DW,Un,Un,Unkn,Unkn,Test,SetX,F,FR_,W,DQW1,E,DQW0), // DQWX
-  Props(5,'<',Data,W,DW,Un,Un,Unkn,Unkn,Test,Set1,F,FR_,W,____,E,DQWX), // DQW1
-  Props(5,'^',Data,N,DN,Un,Un,Unkn,Unkn,Test,Rset,F,FR_,N,DQN0,S,____), // DQNR
-  Props(5,'^',Data,N,DN,Un,Un,Unkn,Unkn,Test,Set0,F,FR_,N,DQNX,S,DQNR), // DQN0
-  Props(5,'^',Data,N,DN,Un,Un,Unkn,Unkn,Test,SetX,F,FR_,N,DQN1,S,DQN0), // DQNX
-  Props(5,'^',Data,N,DN,Un,Un,Unkn,Unkn,Test,Set1,F,FR_,N,____,S,DQNX), // DQN1
-  Props(5,'^',Data,N,DN,Un,Un,Unkn,Unkn,Test,Rset,F,FR_,N,DQU0,S,____), // DQUR
-  Props(5,'^',Data,N,DN,Un,Un,Unkn,Unkn,Test,Set0,F,FR_,N,DQUX,S,DQUR), // DQU0
-  Props(5,'^',Data,N,DN,Un,Un,Unkn,Unkn,Test,SetX,F,FR_,N,DQU1,S,DQU0), // DQUX
-  Props(5,'^',Data,N,DN,Un,Un,Unkn,Unkn,Test,Set1,F,FR_,N,____,S,DQUX), // DQU1
-  Props(5,'#',Data,E,DE,Un,Un,Unkn,Unkn,Gate,Rset,F,FR_,E,DGE0,W,____), // DGER
-  Props(5,'#',Data,E,DE,DS,Un,Unkn,Unkn,Gate,Set0,F,FR_,E,DGEX,W,DGER), // DGE0
-  Props(5,'#',Data,E,DE,DS,Un,Unkn,Unkn,Gate,SetX,F,FR_,E,DGE1,W,DGE0), // DGEX
-  Props(5,'#',Data,E,DE,DS,Un,Unkn,Unkn,Gate,Set1,F,FR_,E,____,W,DGEX), // DGE1
-  Props(5,'#',Data,S,DS,Un,Un,Unkn,Unkn,Gate,Rset,F,FR_,S,DGS0,N,____), // DGSR
-  Props(5,'#',Data,S,DS,DW,Un,Unkn,Unkn,Gate,Set0,F,FR_,S,DGSX,N,DGSR), // DGS0
-  Props(5,'#',Data,S,DS,DW,Un,Unkn,Unkn,Gate,SetX,F,FR_,S,DGS1,N,DGS0), // DGSX
-  Props(5,'#',Data,S,DS,DW,Un,Unkn,Unkn,Gate,Set1,F,FR_,S,____,N,DGSX), // DGS1
-  Props(5,'#',Data,S,DS,Un,Un,Unkn,Unkn,Gate,Rset,F,FR_,S,DGD0,N,____), // DGDR
-  Props(5,'#',Data,S,DS,Un,Un,Unkn,Unkn,Gate,Set0,F,FR_,S,DGDX,N,DGDR), // DGD0
-  Props(5,'#',Data,S,DS,Un,Un,Unkn,Unkn,Gate,SetX,F,FR_,S,DGD1,N,DGD0), // DGDX
-  Props(5,'#',Data,S,DS,Un,Un,Unkn,Unkn,Gate,Set1,F,FR_,S,____,N,DGDX), // DGD1
-  Props(5,'#',Data,W,DW,DN,Un,Unkn,Unkn,Gate,Rset,F,FR_,W,DGW0,E,____), // DGWR
-  Props(5,'#',Data,W,DW,DN,Un,Unkn,Unkn,Gate,Set0,F,FR_,W,DGWX,E,DGWR), // DGW0
-  Props(5,'#',Data,W,DW,DN,Un,Unkn,Unkn,Gate,SetX,F,FR_,W,DGW1,E,DGW0), // DGWX
-  Props(5,'#',Data,W,DW,Un,Un,Unkn,Unkn,Gate,Set1,F,FR_,W,____,E,DGWX), // DGW1
-  Props(5,'#',Data,N,DN,Un,Un,Unkn,Unkn,Gate,Rset,F,FR_,N,DGN0,S,____), // DGNR
-  Props(5,'#',Data,N,DN,DE,Un,Unkn,Unkn,Gate,Set0,F,FR_,N,DGNX,S,DGNR), // DGN0
-  Props(5,'#',Data,N,DN,DE,Un,Unkn,Unkn,Gate,SetX,F,FR_,N,DGN1,S,DGN0), // DGNX
-  Props(5,'#',Data,N,DN,DE,Un,Unkn,Unkn,Gate,Set1,F,FR_,N,____,S,DGNX), // DGN1
-  Props(5,'#',Data,N,DN,Un,Un,Unkn,Unkn,Gate,Rset,F,FR_,N,DGU0,S,____), // DGUR
-  Props(5,'#',Data,N,DN,Un,Un,Unkn,Unkn,Gate,Set0,F,FR_,N,DGUX,S,DGUR), // DGU0
-  Props(5,'#',Data,N,DN,Un,Un,Unkn,Unkn,Gate,SetX,F,FR_,N,DGU1,S,DGU0), // DGUX
-  Props(5,'#',Data,N,DN,Un,Un,Unkn,Unkn,Gate,Set1,F,FR_,N,____,S,DGUX), // DGU1
-  Props(5,'0',Data,E,DE,Un,Un,Unkn,Unkn,Gate,Rset,F,FR_,E,D0E0,W,____), // D0ER
-  Props(5,'0',Data,E,DE,DS,Un,Unkn,Unkn,Gate,Set0,F,FR_,E,D0EX,W,D0ER), // D0E0
-  Props(5,'0',Data,E,DE,DS,Un,Unkn,Unkn,Gate,SetX,F,FR_,E,D0E1,W,D0E0), // D0EX
-  Props(5,'0',Data,E,DE,DS,Un,Unkn,Unkn,Gate,Set1,F,FR_,E,____,W,D0EX), // D0E1
-  Props(5,'0',Data,S,DS,Un,Un,Unkn,Unkn,Gate,Rset,F,FR_,S,D0S0,N,____), // D0SR
-  Props(5,'0',Data,S,DS,DW,Un,Unkn,Unkn,Gate,Set0,F,FR_,S,D0SX,N,D0SR), // D0S0
-  Props(5,'0',Data,S,DS,DW,Un,Unkn,Unkn,Gate,SetX,F,FR_,S,D0S1,N,D0S0), // D0SX
-  Props(5,'0',Data,S,DS,DW,Un,Unkn,Unkn,Gate,Set1,F,FR_,S,____,N,D0SX), // D0S1
-  Props(5,'0',Data,S,DS,Un,Un,Unkn,Unkn,Gate,Rset,F,FR_,S,D0D0,N,____), // D0DR
-  Props(5,'0',Data,S,DS,Un,Un,Unkn,Unkn,Gate,Set0,F,FR_,S,D0DX,N,D0DR), // D0D0
-  Props(5,'0',Data,S,DS,Un,Un,Unkn,Unkn,Gate,SetX,F,FR_,S,D0D1,N,D0D0), // D0DX
-  Props(5,'0',Data,S,DS,Un,Un,Unkn,Unkn,Gate,Set1,F,FR_,S,____,N,D0DX), // D0D1
-  Props(5,'0',Data,W,DW,DN,Un,Unkn,Unkn,Gate,Rset,F,FR_,W,D0W0,E,____), // D0WR
-  Props(5,'0',Data,W,DW,DN,Un,Unkn,Unkn,Gate,Set0,F,FR_,W,D0WX,E,D0WR), // D0W0
-  Props(5,'0',Data,W,DW,DN,Un,Unkn,Unkn,Gate,SetX,F,FR_,W,D0W1,E,D0W0), // D0WX
-  Props(5,'0',Data,W,DW,Un,Un,Unkn,Unkn,Gate,Set1,F,FR_,W,____,E,D0WX), // D0W1
-  Props(5,'0',Data,N,DN,Un,Un,Unkn,Unkn,Gate,Rset,F,FR_,N,D0N0,S,____), // D0NR
-  Props(5,'0',Data,N,DN,DE,Un,Unkn,Unkn,Gate,Set0,F,FR_,N,D0NX,S,D0NR), // D0N0
-  Props(5,'0',Data,N,DN,DE,Un,Unkn,Unkn,Gate,SetX,F,FR_,N,D0N1,S,D0N0), // D0NX
-  Props(5,'0',Data,N,DN,DE,Un,Unkn,Unkn,Gate,Set1,F,FR_,N,____,S,D0NX), // D0N1
-  Props(5,'0',Data,N,DN,Un,Un,Unkn,Unkn,Gate,Rset,F,FR_,N,D0U0,S,____), // D0UR
-  Props(5,'0',Data,N,DN,Un,Un,Unkn,Unkn,Gate,Set0,F,FR_,N,D0UX,S,D0UR), // D0U0
-  Props(5,'0',Data,N,DN,Un,Un,Unkn,Unkn,Gate,SetX,F,FR_,N,D0U1,S,D0U0), // D0UX
-  Props(5,'0',Data,N,DN,Un,Un,Unkn,Unkn,Gate,Set1,F,FR_,N,____,S,D0UX), // D0U1
-  Props(5,'1',Data,E,DE,Un,Un,Unkn,Unkn,Gate,Rset,F,FR_,E,D1E0,W,____), // D1ER
-  Props(5,'1',Data,E,DE,DS,Un,Unkn,Unkn,Gate,Set0,F,FR_,E,D1EX,W,D1ER), // D1E0
-  Props(5,'1',Data,E,DE,DS,Un,Unkn,Unkn,Gate,SetX,F,FR_,E,D1E1,W,D1E0), // D1EX
-  Props(5,'1',Data,E,DE,DS,Un,Unkn,Unkn,Gate,Set1,F,FR_,E,____,W,D1EX), // D1E1
-  Props(5,'1',Data,S,DS,Un,Un,Unkn,Unkn,Gate,Rset,F,FR_,S,D1S0,N,____), // D1SR
-  Props(5,'1',Data,S,DS,DW,Un,Unkn,Unkn,Gate,Set0,F,FR_,S,D1SX,N,D1SR), // D1S0
-  Props(5,'1',Data,S,DS,DW,Un,Unkn,Unkn,Gate,SetX,F,FR_,S,D1S1,N,D1S0), // D1SX
-  Props(5,'1',Data,S,DS,DW,Un,Unkn,Unkn,Gate,Set1,F,FR_,S,____,N,D1SX), // D1S1
-  Props(5,'1',Data,S,DS,Un,Un,Unkn,Unkn,Gate,Rset,F,FR_,S,D1D0,N,____), // D1DR
-  Props(5,'1',Data,S,DS,Un,Un,Unkn,Unkn,Gate,Set0,F,FR_,S,D1DX,N,D1DR), // D1D0
-  Props(5,'1',Data,S,DS,Un,Un,Unkn,Unkn,Gate,SetX,F,FR_,S,D1D1,N,D1D0), // D1DX
-  Props(5,'1',Data,S,DS,Un,Un,Unkn,Unkn,Gate,Set1,F,FR_,S,____,N,D1DX), // D1D1
-  Props(5,'1',Data,W,DW,DN,Un,Unkn,Unkn,Gate,Rset,F,FR_,W,D1W0,E,____), // D1WR
-  Props(5,'1',Data,W,DW,DN,Un,Unkn,Unkn,Gate,Set0,F,FR_,W,D1WX,E,D1WR), // D1W0
-  Props(5,'1',Data,W,DW,DN,Un,Unkn,Unkn,Gate,SetX,F,FR_,W,D1W1,E,D1W0), // D1WX
-  Props(5,'1',Data,W,DW,Un,Un,Unkn,Unkn,Gate,Set1,F,FR_,W,____,E,D1WX), // D1W1
-  Props(5,'1',Data,N,DN,Un,Un,Unkn,Unkn,Gate,Rset,F,FR_,N,D1N0,S,____), // D1NR
-  Props(5,'1',Data,N,DN,DE,Un,Unkn,Unkn,Gate,Set0,F,FR_,N,D1NX,S,D1NR), // D1N0
-  Props(5,'1',Data,N,DN,DE,Un,Unkn,Unkn,Gate,SetX,F,FR_,N,D1N1,S,D1N0), // D1NX
-  Props(5,'1',Data,N,DN,DE,Un,Unkn,Unkn,Gate,Set1,F,FR_,N,____,S,D1NX), // D1N1
-  Props(5,'1',Data,N,DN,Un,Un,Unkn,Unkn,Gate,Rset,F,FR_,N,D1U0,S,____), // D1UR
-  Props(5,'1',Data,N,DN,Un,Un,Unkn,Unkn,Gate,Set0,F,FR_,N,D1UX,S,D1UR), // D1U0
-  Props(5,'1',Data,N,DN,Un,Un,Unkn,Unkn,Gate,SetX,F,FR_,N,D1U1,S,D1U0), // D1UX
-  Props(5,'1',Data,N,DN,Un,Un,Unkn,Unkn,Gate,Set1,F,FR_,N,____,S,D1UX), // D1U1
-  Props(6,'i',Data,E,DE,Un,Un,Unkn,Unkn,Inpt,Rset,T,F__,E,DIE0,W,____), // DIER
-  Props(6,'0',Data,E,DE,Un,Un,Unkn,Unkn,Inpt,Set0,T,F__,E,DIEX,W,DIER), // DIE0
-  Props(6,'x',Data,E,DE,Un,Un,Unkn,Unkn,Inpt,SetX,T,F__,E,DIE1,W,DIE0), // DIEX
-  Props(6,'1',Data,E,DE,Un,Un,Unkn,Unkn,Inpt,Set1,T,F__,E,____,W,DIEX), // DIE1
-  Props(6,'i',Data,S,DS,Un,Un,Unkn,Unkn,Inpt,Rset,T,F__,S,DIS0,N,____), // DISR
-  Props(6,'0',Data,S,DS,Un,Un,Unkn,Unkn,Inpt,Set0,T,F__,S,DISX,N,DISR), // DIS0
-  Props(6,'x',Data,S,DS,Un,Un,Unkn,Unkn,Inpt,SetX,T,F__,S,DIS1,N,DIS0), // DISX
-  Props(6,'1',Data,S,DS,Un,Un,Unkn,Unkn,Inpt,Set1,T,F__,S,____,N,DISX), // DIS1
-  Props(6,'i',Data,S,DS,Un,Un,Unkn,Unkn,Inpt,Rset,T,F__,S,DID0,N,____), // DIDR
-  Props(6,'0',Data,S,DS,Un,Un,Unkn,Unkn,Inpt,Set0,T,F__,S,DIDX,N,DIDR), // DID0
-  Props(6,'x',Data,S,DS,Un,Un,Unkn,Unkn,Inpt,SetX,T,F__,S,DID1,N,DID0), // DIDX
-  Props(6,'1',Data,S,DS,Un,Un,Unkn,Unkn,Inpt,Set1,T,F__,S,____,N,DIDX), // DID1
-  Props(6,'i',Data,W,DW,Un,Un,Unkn,Unkn,Inpt,Rset,T,F__,W,DIW0,E,____), // DIWR
-  Props(6,'0',Data,W,DW,Un,Un,Unkn,Unkn,Inpt,Set0,T,F__,W,DIWX,E,DIWR), // DIW0
-  Props(6,'x',Data,W,DW,Un,Un,Unkn,Unkn,Inpt,SetX,T,F__,W,DIW1,E,DIW0), // DIWX
-  Props(6,'1',Data,W,DW,Un,Un,Unkn,Unkn,Inpt,Set1,T,F__,W,____,E,DIWX), // DIW1
-  Props(6,'i',Data,N,DN,Un,Un,Unkn,Unkn,Inpt,Rset,T,F__,N,DIN0,S,____), // DINR
-  Props(6,'0',Data,N,DN,Un,Un,Unkn,Unkn,Inpt,Set0,T,F__,N,DINX,S,DINR), // DIN0
-  Props(6,'x',Data,N,DN,Un,Un,Unkn,Unkn,Inpt,SetX,T,F__,N,DIN1,S,DIN0), // DINX
-  Props(6,'1',Data,N,DN,Un,Un,Unkn,Unkn,Inpt,Set1,T,F__,N,____,S,DINX), // DIN1
-  Props(6,'i',Data,N,DN,Un,Un,Unkn,Unkn,Inpt,Rset,T,F__,N,DIU0,S,____), // DIUR
-  Props(6,'0',Data,N,DN,Un,Un,Unkn,Unkn,Inpt,Set0,T,F__,N,DIUX,S,DIUR), // DIU0
-  Props(6,'x',Data,N,DN,Un,Un,Unkn,Unkn,Inpt,SetX,T,F__,N,DIU1,S,DIU0), // DIUX
-  Props(6,'1',Data,N,DN,Un,Un,Unkn,Unkn,Inpt,Set1,T,F__,N,____,S,DIUX), // DIU1
-  Props(6,'o',Data,E,DE,Un,Un,Unkn,Unkn,Outp,Rset,T,___,E,DOE0,W,____), // DOER
-  Props(6,'0',Data,E,DE,Un,Un,Unkn,Unkn,Outp,Set0,T,___,E,DOEX,W,DOER), // DOE0
-  Props(6,'x',Data,E,DE,Un,Un,Unkn,Unkn,Outp,SetX,T,___,E,DOE1,W,DOE0), // DOEX
-  Props(6,'1',Data,E,DE,Un,Un,Unkn,Unkn,Outp,Set1,T,___,E,____,W,DOEX), // DOE1
-  Props(6,'o',Data,S,DS,Un,Un,Unkn,Unkn,Outp,Rset,T,___,S,DOS0,N,____), // DOSR
-  Props(6,'0',Data,S,DS,Un,Un,Unkn,Unkn,Outp,Set0,T,___,S,DOSX,N,DOSR), // DOS0
-  Props(6,'x',Data,S,DS,Un,Un,Unkn,Unkn,Outp,SetX,T,___,S,DOS1,N,DOS0), // DOSX
-  Props(6,'1',Data,S,DS,Un,Un,Unkn,Unkn,Outp,Set1,T,___,S,____,N,DOSX), // DOS1
-  Props(6,'o',Data,S,DS,Un,Un,Unkn,Unkn,Outp,Rset,T,___,S,DOD0,N,____), // DODR
-  Props(6,'0',Data,S,DS,Un,Un,Unkn,Unkn,Outp,Set0,T,___,S,DODX,N,DODR), // DOD0
-  Props(6,'x',Data,S,DS,Un,Un,Unkn,Unkn,Outp,SetX,T,___,S,DOD1,N,DOD0), // DODX
-  Props(6,'1',Data,S,DS,Un,Un,Unkn,Unkn,Outp,Set1,T,___,S,____,N,DODX), // DOD1
-  Props(6,'o',Data,W,DW,Un,Un,Unkn,Unkn,Outp,Rset,T,___,W,DOW0,E,____), // DOWR
-  Props(6,'0',Data,W,DW,Un,Un,Unkn,Unkn,Outp,Set0,T,___,W,DOWX,E,DOWR), // DOW0
-  Props(6,'x',Data,W,DW,Un,Un,Unkn,Unkn,Outp,SetX,T,___,W,DOW1,E,DOW0), // DOWX
-  Props(6,'1',Data,W,DW,Un,Un,Unkn,Unkn,Outp,Set1,T,___,W,____,E,DOWX), // DOW1
-  Props(6,'o',Data,N,DN,Un,Un,Unkn,Unkn,Outp,Rset,T,___,N,DON0,S,____), // DONR
-  Props(6,'0',Data,N,DN,Un,Un,Unkn,Unkn,Outp,Set0,T,___,N,DONX,S,DONR), // DON0
-  Props(6,'x',Data,N,DN,Un,Un,Unkn,Unkn,Outp,SetX,T,___,N,DON1,S,DON0), // DONX
-  Props(6,'1',Data,N,DN,Un,Un,Unkn,Unkn,Outp,Set1,T,___,N,____,S,DONX), // DON1
-  Props(6,'o',Data,N,DN,Un,Un,Unkn,Unkn,Outp,Rset,T,___,N,DOU0,S,____), // DOUR
-  Props(6,'0',Data,N,DN,Un,Un,Unkn,Unkn,Outp,Set0,T,___,N,DOUX,S,DOUR), // DOU0
-  Props(6,'x',Data,N,DN,Un,Un,Unkn,Unkn,Outp,SetX,T,___,N,DOU1,S,DOU0), // DOUX
-  Props(6,'1',Data,N,DN,Un,Un,Unkn,Unkn,Outp,Set1,T,___,N,____,S,DOUX)  // DOU1
+  //                       displayPriority
+  //                      /  text
+  //                     /  /    voxelType
+  //                    /  /    /  direction
+  //                   /  /    /  /  rodType[0]
+  //                  /  /    /  /  /  rodType[1]
+  //                 /  /    /  /  /  /  rodType[2]
+  //                /  /    /  /  /  /  /    lockType
+  //               /  /    /  /  /  /  /    /    lockState
+  //              /  /    /  /  /  /  /    /    /    dataType
+  //             /  /    /  /  /  /  /    /    /    /    dataState
+  //            /  /    /  /  /  /  /    /    /    /    / isRodBody
+  //           /  /    /  /  /  /  /    /    /    /    / / isComplementing
+  //          /  /    /  /  /  /  /    /    /    /    / / /   blockableStates
+  //         /  /    /  /  /  /  /    /    /    /    / / /   / fwd
+  //        /  /    /  /  /  /  /    /    /    /    / / /   / /    fwdVoxel
+  //       /  /    /  /  /  /  /    /    /    /    / / /   / /    / bwd
+  //      /  /    /  /  /  /  /    /    /    /    / / /   / /    / /    bwdVoxel
+  //     /  /    /  /  /  /  /    /    /    /    / / /   / /    / /    /
+  Props(9,'?',Unkn,X,Un,Un,Un,Unkn,Unkn,Unkn,Unkn,F,F,___,X,____,X,____), // Unkn
+  Props(0,'.',Wall,X,Un,Un,Un,Unkn,Unkn,Unkn,Unkn,F,F,___,X,____,X,____), // Wall
+  Props(1,' ',Slot,X,Un,Un,Un,Unkn,Unkn,Unkn,Unkn,F,F,___,X,____,X,____), // Slot
+  Props(2,'-',Lock,E,LE,Un,Un,Body,Lckd,Unkn,Unkn,T,F,___,E,LBEU,W,____), // LBEL
+  Props(2,'-',Lock,E,LE,Un,Un,Body,Unlk,Unkn,Unkn,T,F,___,E,____,W,LBEL), // LBEU
+  Props(2,'|',Lock,S,LS,Un,Un,Body,Lckd,Unkn,Unkn,T,F,___,S,LBSU,N,____), // LBSL
+  Props(2,'|',Lock,S,LS,Un,Un,Body,Unlk,Unkn,Unkn,T,F,___,S,____,N,LBSL), // LBSU
+  Props(2,'|',Lock,S,LS,Un,Un,Body,Lckd,Unkn,Unkn,T,F,___,S,LBDU,N,____), // LBDL
+  Props(2,'|',Lock,S,LS,Un,Un,Body,Unlk,Unkn,Unkn,T,F,___,S,____,N,LBDL), // LBDU
+  Props(2,'-',Lock,W,LW,Un,Un,Body,Lckd,Unkn,Unkn,T,F,___,W,LBWU,E,____), // LBWL
+  Props(2,'-',Lock,W,LW,Un,Un,Body,Unlk,Unkn,Unkn,T,F,___,W,____,E,LBWL), // LBWU
+  Props(2,'|',Lock,N,LN,Un,Un,Body,Lckd,Unkn,Unkn,T,F,___,N,LBNU,S,____), // LBNL
+  Props(2,'|',Lock,N,LN,Un,Un,Body,Unlk,Unkn,Unkn,T,F,___,N,____,S,LBNL), // LBNU
+  Props(2,'|',Lock,N,LN,Un,Un,Body,Lckd,Unkn,Unkn,T,F,___,N,LBUU,S,____), // LBUL
+  Props(2,'|',Lock,N,LN,Un,Un,Body,Unlk,Unkn,Unkn,T,F,___,N,____,S,LBUL), // LBUU
+  Props(3,'>',Lock,E,LE,Un,Un,Head,Lckd,Unkn,Unkn,T,F,___,E,LHEU,W,____), // LHEL
+  Props(3,'>',Lock,E,LE,Un,Un,Head,Unlk,Unkn,Unkn,T,F,___,E,____,W,LHEL), // LHEU
+  Props(3,'v',Lock,S,LS,Un,Un,Head,Lckd,Unkn,Unkn,T,F,___,S,LHSU,N,____), // LHSL
+  Props(3,'v',Lock,S,LS,Un,Un,Head,Unlk,Unkn,Unkn,T,F,___,S,____,N,LHSL), // LHSU
+  Props(3,'v',Lock,S,LS,Un,Un,Head,Lckd,Unkn,Unkn,T,F,___,S,LHDU,N,____), // LHDL
+  Props(3,'v',Lock,S,LS,Un,Un,Head,Unlk,Unkn,Unkn,T,F,___,S,____,N,LHDL), // LHDU
+  Props(3,'<',Lock,W,LW,Un,Un,Head,Lckd,Unkn,Unkn,T,F,___,W,LHWU,E,____), // LHWL
+  Props(3,'<',Lock,W,LW,Un,Un,Head,Unlk,Unkn,Unkn,T,F,___,W,____,E,LHWL), // LHWU
+  Props(3,'^',Lock,N,LN,Un,Un,Head,Lckd,Unkn,Unkn,T,F,___,N,LHNU,S,____), // LHNL
+  Props(3,'^',Lock,N,LN,Un,Un,Head,Unlk,Unkn,Unkn,T,F,___,N,____,S,LHNL), // LHNU
+  Props(3,'^',Lock,N,LN,Un,Un,Head,Lckd,Unkn,Unkn,T,F,___,N,LHUU,S,____), // LHUL
+  Props(3,'^',Lock,N,LN,Un,Un,Head,Unlk,Unkn,Unkn,T,F,___,N,____,S,LHUL), // LHUU
+  Props(3,'>',Lock,E,LE,Un,Un,Tail,Lckd,Unkn,Unkn,T,F,___,E,LTEU,W,____), // LTEL
+  Props(3,'>',Lock,E,LE,Un,Un,Tail,Unlk,Unkn,Unkn,T,F,___,E,____,W,LTEL), // LTEU
+  Props(3,'v',Lock,S,LS,Un,Un,Tail,Lckd,Unkn,Unkn,T,F,___,S,LTSU,N,____), // LTSL
+  Props(3,'v',Lock,S,LS,Un,Un,Tail,Unlk,Unkn,Unkn,T,F,___,S,____,N,LTSL), // LTSU
+  Props(3,'v',Lock,S,LS,Un,Un,Tail,Lckd,Unkn,Unkn,T,F,___,S,LTDU,N,____), // LTDL
+  Props(3,'v',Lock,S,LS,Un,Un,Tail,Unlk,Unkn,Unkn,T,F,___,S,____,N,LTDL), // LTDU
+  Props(3,'<',Lock,W,LW,Un,Un,Tail,Lckd,Unkn,Unkn,T,F,___,W,LTWU,E,____), // LTWL
+  Props(3,'<',Lock,W,LW,Un,Un,Tail,Unlk,Unkn,Unkn,T,F,___,W,____,E,LTWL), // LTWU
+  Props(3,'^',Lock,N,LN,Un,Un,Tail,Lckd,Unkn,Unkn,T,F,___,N,LTNU,S,____), // LTNL
+  Props(3,'^',Lock,N,LN,Un,Un,Tail,Unlk,Unkn,Unkn,T,F,___,N,____,S,LTNL), // LTNU
+  Props(3,'^',Lock,N,LN,Un,Un,Tail,Lckd,Unkn,Unkn,T,F,___,N,LTUU,S,____), // LTUL
+  Props(3,'^',Lock,N,LN,Un,Un,Tail,Unlk,Unkn,Unkn,T,F,___,N,____,S,LTUL), // LTUU
+  Props(2,'+',Lock,E,LE,Un,Un,Post,Lckd,Unkn,Unkn,T,F,___,E,LPEU,W,____), // LPEL
+  Props(2,'+',Lock,E,LE,Un,Un,Post,Unlk,Unkn,Unkn,T,F,___,E,____,W,LPEL), // LPEU
+  Props(2,'+',Lock,S,LS,Un,Un,Post,Lckd,Unkn,Unkn,T,F,___,S,LPSU,N,____), // LPSL
+  Props(2,'+',Lock,S,LS,Un,Un,Post,Unlk,Unkn,Unkn,T,F,___,S,____,N,LPSL), // LPSU
+  Props(2,'+',Lock,S,LS,Un,Un,Post,Lckd,Unkn,Unkn,T,F,___,S,LPDU,N,____), // LPDL
+  Props(2,'+',Lock,S,LS,Un,Un,Post,Unlk,Unkn,Unkn,T,F,___,S,____,N,LPDL), // LPDU
+  Props(2,'+',Lock,W,LW,Un,Un,Post,Lckd,Unkn,Unkn,T,F,___,W,LPWU,E,____), // LPWL
+  Props(2,'+',Lock,W,LW,Un,Un,Post,Unlk,Unkn,Unkn,T,F,___,W,____,E,LPWL), // LPWU
+  Props(2,'+',Lock,N,LN,Un,Un,Post,Lckd,Unkn,Unkn,T,F,___,N,LPNU,S,____), // LPNL
+  Props(2,'+',Lock,N,LN,Un,Un,Post,Unlk,Unkn,Unkn,T,F,___,N,____,S,LPNL), // LPNU
+  Props(2,'+',Lock,N,LN,Un,Un,Post,Lckd,Unkn,Unkn,T,F,___,N,LPUU,S,____), // LPUL
+  Props(2,'+',Lock,N,LN,Un,Un,Post,Unlk,Unkn,Unkn,T,F,___,N,____,S,LPUL), // LPUU
+  Props(3,'<',Lock,E,LE,Un,Un,Lock,Lckd,Unkn,Unkn,F,F,FRL,E,LKEU,W,____), // LKEL
+  Props(3,'<',Lock,E,LE,Un,Un,Lock,Unlk,Unkn,Unkn,F,F,FRL,E,____,W,LKEL), // LKEU
+  Props(3,'^',Lock,S,LS,Un,Un,Lock,Lckd,Unkn,Unkn,F,F,FRL,S,LKSU,N,____), // LKSL
+  Props(3,'^',Lock,S,LS,Un,Un,Lock,Unlk,Unkn,Unkn,F,F,FRL,S,____,N,LKSL), // LKSU
+  Props(3,'^',Lock,S,LS,Un,Un,Lock,Lckd,Unkn,Unkn,F,F,FRL,S,LKDU,N,____), // LKDL
+  Props(3,'^',Lock,S,LS,Un,Un,Lock,Unlk,Unkn,Unkn,F,F,FRL,S,____,N,LKDL), // LKDU
+  Props(3,'>',Lock,W,LW,Un,Un,Lock,Lckd,Unkn,Unkn,F,F,FRL,W,LKWU,E,____), // LKWL
+  Props(3,'>',Lock,W,LW,Un,Un,Lock,Unlk,Unkn,Unkn,F,F,FRL,W,____,E,LKWL), // LKWU
+  Props(3,'v',Lock,N,LN,Un,Un,Lock,Lckd,Unkn,Unkn,F,F,FRL,N,LKNU,S,____), // LKNL
+  Props(3,'v',Lock,N,LN,Un,Un,Lock,Unlk,Unkn,Unkn,F,F,FRL,N,____,S,LKNL), // LKNU
+  Props(3,'v',Lock,N,LN,Un,Un,Lock,Lckd,Unkn,Unkn,F,F,FRL,N,LKUU,S,____), // LKUL
+  Props(3,'v',Lock,N,LN,Un,Un,Lock,Unlk,Unkn,Unkn,F,F,FRL,N,____,S,LKUL), // LKUU
+  Props(4,'-',Data,E,DE,Un,Un,Unkn,Unkn,Body,Rset,T,F,___,E,DBE0,W,____), // DBER
+  Props(4,'-',Data,E,DE,Un,Un,Unkn,Unkn,Body,Set0,T,F,___,E,DBEX,W,DBER), // DBE0
+  Props(4,'-',Data,E,DE,Un,Un,Unkn,Unkn,Body,SetX,T,F,___,E,DBE1,W,DBE0), // DBEX
+  Props(4,'-',Data,E,DE,Un,Un,Unkn,Unkn,Body,Set1,T,F,___,E,____,W,DBEX), // DBE1
+  Props(4,'|',Data,S,DS,Un,Un,Unkn,Unkn,Body,Rset,T,F,___,S,DBS0,N,____), // DBSR
+  Props(4,'|',Data,S,DS,Un,Un,Unkn,Unkn,Body,Set0,T,F,___,S,DBSX,N,DBSR), // DBS0
+  Props(4,'|',Data,S,DS,Un,Un,Unkn,Unkn,Body,SetX,T,F,___,S,DBS1,N,DBS0), // DBSX
+  Props(4,'|',Data,S,DS,Un,Un,Unkn,Unkn,Body,Set1,T,F,___,S,____,N,DBSX), // DBS1
+  Props(4,'|',Data,S,DS,Un,Un,Unkn,Unkn,Body,Rset,T,F,___,S,DBD0,N,____), // DBDR
+  Props(4,'|',Data,S,DS,Un,Un,Unkn,Unkn,Body,Set0,T,F,___,S,DBDX,N,DBDR), // DBD0
+  Props(4,'|',Data,S,DS,Un,Un,Unkn,Unkn,Body,SetX,T,F,___,S,DBD1,N,DBD0), // DBDX
+  Props(4,'|',Data,S,DS,Un,Un,Unkn,Unkn,Body,Set1,T,F,___,S,____,N,DBDX), // DBD1
+  Props(4,'-',Data,W,DW,Un,Un,Unkn,Unkn,Body,Rset,T,F,___,W,DBW0,E,____), // DBWR
+  Props(4,'-',Data,W,DW,Un,Un,Unkn,Unkn,Body,Set0,T,F,___,W,DBWX,E,DBWR), // DBW0
+  Props(4,'-',Data,W,DW,Un,Un,Unkn,Unkn,Body,SetX,T,F,___,W,DBW1,E,DBW0), // DBWX
+  Props(4,'-',Data,W,DW,Un,Un,Unkn,Unkn,Body,Set1,T,F,___,W,____,E,DBWX), // DBW1
+  Props(4,'|',Data,N,DN,Un,Un,Unkn,Unkn,Body,Rset,T,F,___,N,DBN0,S,____), // DBNR
+  Props(4,'|',Data,N,DN,Un,Un,Unkn,Unkn,Body,Set0,T,F,___,N,DBNX,S,DBNR), // DBN0
+  Props(4,'|',Data,N,DN,Un,Un,Unkn,Unkn,Body,SetX,T,F,___,N,DBN1,S,DBN0), // DBNX
+  Props(4,'|',Data,N,DN,Un,Un,Unkn,Unkn,Body,Set1,T,F,___,N,____,S,DBNX), // DBN1
+  Props(4,'|',Data,N,DN,Un,Un,Unkn,Unkn,Body,Rset,T,F,___,N,DBU0,S,____), // DBUR
+  Props(4,'|',Data,N,DN,Un,Un,Unkn,Unkn,Body,Set0,T,F,___,N,DBUX,S,DBUR), // DBU0
+  Props(4,'|',Data,N,DN,Un,Un,Unkn,Unkn,Body,SetX,T,F,___,N,DBU1,S,DBU0), // DBUX
+  Props(4,'|',Data,N,DN,Un,Un,Unkn,Unkn,Body,Set1,T,F,___,N,____,S,DBUX), // DBU1
+  Props(5,'>',Data,E,DE,Un,Un,Unkn,Unkn,Head,Rset,T,F,F__,E,DHE0,W,____), // DHER
+  Props(5,'0',Data,E,DE,Un,Un,Unkn,Unkn,Head,Set0,T,F,F__,E,DHEX,W,DHER), // DHE0
+  Props(5,'X',Data,E,DE,Un,Un,Unkn,Unkn,Head,SetX,T,F,F__,E,DHE1,W,DHE0), // DHEX
+  Props(5,'1',Data,E,DE,Un,Un,Unkn,Unkn,Head,Set1,T,F,F__,E,____,W,DHEX), // DHE1
+  Props(5,'v',Data,S,DS,Un,Un,Unkn,Unkn,Head,Rset,T,F,F__,S,DHS0,N,____), // DHSR
+  Props(5,'0',Data,S,DS,Un,Un,Unkn,Unkn,Head,Set0,T,F,F__,S,DHSX,N,DHSR), // DHS0
+  Props(5,'X',Data,S,DS,Un,Un,Unkn,Unkn,Head,SetX,T,F,F__,S,DHS1,N,DHS0), // DHSX
+  Props(5,'1',Data,S,DS,Un,Un,Unkn,Unkn,Head,Set1,T,F,F__,S,____,N,DHSX), // DHS1
+  Props(5,'v',Data,S,DS,Un,Un,Unkn,Unkn,Head,Rset,T,F,F__,S,DHD0,N,____), // DHDR
+  Props(5,'0',Data,S,DS,Un,Un,Unkn,Unkn,Head,Set0,T,F,F__,S,DHDX,N,DHDR), // DHD0
+  Props(5,'X',Data,S,DS,Un,Un,Unkn,Unkn,Head,SetX,T,F,F__,S,DHD1,N,DHD0), // DHDX
+  Props(5,'1',Data,S,DS,Un,Un,Unkn,Unkn,Head,Set1,T,F,F__,S,____,N,DHDX), // DHD1
+  Props(5,'<',Data,W,DW,Un,Un,Unkn,Unkn,Head,Rset,T,F,F__,W,DHW0,E,____), // DHWR
+  Props(5,'0',Data,W,DW,Un,Un,Unkn,Unkn,Head,Set0,T,F,F__,W,DHWX,E,DHWR), // DHW0
+  Props(5,'X',Data,W,DW,Un,Un,Unkn,Unkn,Head,SetX,T,F,F__,W,DHW1,E,DHW0), // DHWX
+  Props(5,'1',Data,W,DW,Un,Un,Unkn,Unkn,Head,Set1,T,F,F__,W,____,E,DHWX), // DHW1
+  Props(5,'^',Data,N,DN,Un,Un,Unkn,Unkn,Head,Rset,T,F,F__,N,DHN0,S,____), // DHNR
+  Props(5,'0',Data,N,DN,Un,Un,Unkn,Unkn,Head,Set0,T,F,F__,X,DHNX,S,DHNR), // DHN0
+  Props(5,'X',Data,N,DN,Un,Un,Unkn,Unkn,Head,SetX,T,F,F__,N,DHN1,S,DHN0), // DHNX
+  Props(5,'1',Data,N,DN,Un,Un,Unkn,Unkn,Head,Set1,T,F,F__,N,____,S,DHNX), // DHN1
+  Props(5,'^',Data,N,DN,Un,Un,Unkn,Unkn,Head,Rset,T,F,F__,N,DHU0,S,____), // DHUR
+  Props(5,'0',Data,N,DN,Un,Un,Unkn,Unkn,Head,Set0,T,F,F__,N,DHUX,S,DHUR), // DHU0
+  Props(5,'X',Data,N,DN,Un,Un,Unkn,Unkn,Head,SetX,T,F,F__,N,DHU1,S,DHU0), // DHUX
+  Props(5,'1',Data,N,DN,Un,Un,Unkn,Unkn,Head,Set1,T,F,F__,N,____,S,DHUX), // DHU1
+  Props(5,'>',Data,E,DE,Un,Un,Unkn,Unkn,Tail,Rset,T,F,_R_,E,DTE0,W,____), // DTER
+  Props(5,'>',Data,E,DE,Un,Un,Unkn,Unkn,Tail,Set0,T,F,_R_,E,DTEX,W,DTER), // DTE0
+  Props(5,'>',Data,E,DE,Un,Un,Unkn,Unkn,Tail,SetX,T,F,_R_,E,DTE1,W,DTE0), // DTEX
+  Props(5,'>',Data,E,DE,Un,Un,Unkn,Unkn,Tail,Set1,T,F,_R_,E,____,W,DTEX), // DTE1
+  Props(5,'v',Data,S,DS,Un,Un,Unkn,Unkn,Tail,Rset,T,F,_R_,S,DTS0,N,____), // DTSR
+  Props(5,'v',Data,S,DS,Un,Un,Unkn,Unkn,Tail,Set0,T,F,_R_,S,DTSX,N,DTSR), // DTS0
+  Props(5,'v',Data,S,DS,Un,Un,Unkn,Unkn,Tail,SetX,T,F,_R_,S,DTS1,N,DTS0), // DTSX
+  Props(5,'v',Data,S,DS,Un,Un,Unkn,Unkn,Tail,Set1,T,F,_R_,S,____,N,DTSX), // DTS1
+  Props(5,'v',Data,S,DS,Un,Un,Unkn,Unkn,Tail,Rset,T,F,_R_,S,DTD0,N,____), // DTDR
+  Props(5,'v',Data,S,DS,Un,Un,Unkn,Unkn,Tail,Set0,T,F,_R_,S,DTDX,N,DTDR), // DTD0
+  Props(5,'v',Data,S,DS,Un,Un,Unkn,Unkn,Tail,SetX,T,F,_R_,S,DTD1,N,DTD0), // DTDX
+  Props(5,'v',Data,S,DS,Un,Un,Unkn,Unkn,Tail,Set1,T,F,_R_,S,____,N,DTDX), // DTD1
+  Props(5,'<',Data,W,DW,Un,Un,Unkn,Unkn,Tail,Rset,T,F,_R_,W,DTW0,E,____), // DTWR
+  Props(5,'<',Data,W,DW,Un,Un,Unkn,Unkn,Tail,Set0,T,F,_R_,W,DTWX,E,DTWR), // DTW0
+  Props(5,'<',Data,W,DW,Un,Un,Unkn,Unkn,Tail,SetX,T,F,_R_,W,DTW1,E,DTW0), // DTWX
+  Props(5,'<',Data,W,DW,Un,Un,Unkn,Unkn,Tail,Set1,T,F,_R_,W,____,E,DTWX), // DTW1
+  Props(5,'^',Data,N,DN,Un,Un,Unkn,Unkn,Tail,Rset,T,F,_R_,N,DTN0,S,____), // DTNR
+  Props(5,'^',Data,N,DN,Un,Un,Unkn,Unkn,Tail,Set0,T,F,_R_,N,DTNX,S,DTNR), // DTN0
+  Props(5,'^',Data,N,DN,Un,Un,Unkn,Unkn,Tail,SetX,T,F,_R_,N,DTN1,S,DTN0), // DTNX
+  Props(5,'^',Data,N,DN,Un,Un,Unkn,Unkn,Tail,Set1,T,F,_R_,N,____,S,DTNX), // DTN1
+  Props(5,'^',Data,N,DN,Un,Un,Unkn,Unkn,Tail,Rset,T,F,_R_,N,DTU0,S,____), // DTUR
+  Props(5,'^',Data,N,DN,Un,Un,Unkn,Unkn,Tail,Set0,T,F,_R_,N,DTUX,S,DTUR), // DTU0
+  Props(5,'^',Data,N,DN,Un,Un,Unkn,Unkn,Tail,SetX,T,F,_R_,N,DTU1,S,DTU0), // DTUX
+  Props(5,'^',Data,N,DN,Un,Un,Unkn,Unkn,Tail,Set1,T,F,_R_,N,____,S,DTUX), // DTU1
+  Props(4,'+',Data,E,DE,Un,Un,Unkn,Unkn,Post,Rset,T,F,FR_,E,DPE0,W,____), // DPER
+  Props(4,'+',Data,E,DE,Un,Un,Unkn,Unkn,Post,Set0,T,F,FR_,E,DPEX,W,DPER), // DPE0
+  Props(4,'+',Data,E,DE,Un,Un,Unkn,Unkn,Post,SetX,T,F,FR_,E,DPE1,W,DPE0), // DPEX
+  Props(4,'+',Data,E,DE,Un,Un,Unkn,Unkn,Post,Set1,T,F,FR_,E,____,W,DPEX), // DPE1
+  Props(4,'+',Data,S,DS,Un,Un,Unkn,Unkn,Post,Rset,T,F,FR_,S,DPS0,X,____), // DPSR
+  Props(4,'+',Data,S,DS,Un,Un,Unkn,Unkn,Post,Set0,T,F,FR_,S,DPSX,N,DPSR), // DPS0
+  Props(4,'+',Data,S,DS,Un,Un,Unkn,Unkn,Post,SetX,T,F,FR_,S,DPS1,N,DPS0), // DPSX
+  Props(4,'+',Data,S,DS,Un,Un,Unkn,Unkn,Post,Set1,T,F,FR_,S,____,N,DPSX), // DPS1
+  Props(4,'+',Data,S,DS,Un,Un,Unkn,Unkn,Post,Rset,T,F,FR_,S,DPD0,N,____), // DPDR
+  Props(4,'+',Data,S,DS,Un,Un,Unkn,Unkn,Post,Set0,T,F,FR_,S,DPDX,N,DPDR), // DPD0
+  Props(4,'+',Data,S,DS,Un,Un,Unkn,Unkn,Post,SetX,T,F,FR_,S,DPD1,N,DPD0), // DPDX
+  Props(4,'+',Data,S,DS,Un,Un,Unkn,Unkn,Post,Set1,T,F,FR_,S,____,N,DPDX), // DPD1
+  Props(4,'+',Data,W,DW,Un,Un,Unkn,Unkn,Post,Rset,T,F,FR_,W,DPW0,E,____), // DPWR
+  Props(4,'+',Data,W,DW,Un,Un,Unkn,Unkn,Post,Set0,T,F,FR_,W,DPWX,E,DPWR), // DPW0
+  Props(4,'+',Data,W,DW,Un,Un,Unkn,Unkn,Post,SetX,T,F,FR_,W,DPW1,E,DPW0), // DPWX
+  Props(4,'+',Data,W,DW,Un,Un,Unkn,Unkn,Post,Set1,T,F,FR_,W,____,E,DPWX), // DPW1
+  Props(4,'+',Data,N,DN,Un,Un,Unkn,Unkn,Post,Rset,T,F,FR_,N,DPN0,S,____), // DPNR
+  Props(4,'+',Data,N,DN,Un,Un,Unkn,Unkn,Post,Set0,T,F,FR_,N,DPNX,S,DPNR), // DPN0
+  Props(4,'+',Data,N,DN,Un,Un,Unkn,Unkn,Post,SetX,T,F,FR_,N,DPN1,S,DPN0), // DPNX
+  Props(4,'+',Data,N,DN,Un,Un,Unkn,Unkn,Post,Set1,T,F,FR_,N,____,S,DPNX), // DPN1
+  Props(4,'+',Data,N,DN,Un,Un,Unkn,Unkn,Post,Rset,T,F,FR_,N,DPU0,S,____), // DPUR
+  Props(4,'+',Data,N,DN,Un,Un,Unkn,Unkn,Post,Set0,T,F,FR_,N,DPUX,S,DPUR), // DPU0
+  Props(4,'+',Data,N,DN,Un,Un,Unkn,Unkn,Post,SetX,T,F,FR_,N,DPU1,S,DPU0), // DPUX
+  Props(4,'+',Data,N,DN,Un,Un,Unkn,Unkn,Post,Set1,T,F,FR_,N,____,S,DPUX), // DPU1
+  Props(5,'^',Data,E,DE,Un,Un,Unkn,Unkn,Slot,Rset,F,F,FRL,E,DSE0,W,____), // DSER
+  Props(5,'^',Data,E,DE,Un,Un,Unkn,Unkn,Slot,Set0,F,F,FRL,E,DSEX,W,DSER), // DSE0
+  Props(5,'^',Data,E,DE,Un,Un,Unkn,Unkn,Slot,SetX,F,F,FRL,E,DSE1,W,DSE0), // DSEX
+  Props(5,'^',Data,E,DE,Un,Un,Unkn,Unkn,Slot,Set1,F,F,FRL,E,____,W,DSEX), // DSE1
+  Props(5,'>',Data,S,DS,Un,Un,Unkn,Unkn,Slot,Rset,F,F,FRL,S,DSS0,N,____), // DSSR
+  Props(5,'>',Data,S,DS,Un,Un,Unkn,Unkn,Slot,Set0,F,F,FRL,S,DSSX,N,DSSR), // DSS0
+  Props(5,'>',Data,S,DS,Un,Un,Unkn,Unkn,Slot,SetX,F,F,FRL,S,DSS1,N,DSS0), // DSSX
+  Props(5,'>',Data,S,DS,Un,Un,Unkn,Unkn,Slot,Set1,F,F,FRL,S,____,N,DSSX), // DSS1
+  Props(5,'>',Data,S,DS,Un,Un,Unkn,Unkn,Slot,Rset,F,F,FRL,S,DSD0,N,____), // DSDR
+  Props(5,'>',Data,S,DS,Un,Un,Unkn,Unkn,Slot,Set0,F,F,FRL,S,DSDX,N,DSDR), // DSD0
+  Props(5,'>',Data,S,DS,Un,Un,Unkn,Unkn,Slot,SetX,F,F,FRL,S,DSD1,N,DSD0), // DSDX
+  Props(5,'>',Data,S,DS,Un,Un,Unkn,Unkn,Slot,Set1,F,F,FRL,S,____,N,DSDX), // DSD1
+  Props(5,'v',Data,W,DW,Un,Un,Unkn,Unkn,Slot,Rset,F,F,FRL,W,DSW0,E,____), // DSWR
+  Props(5,'v',Data,W,DW,Un,Un,Unkn,Unkn,Slot,Set0,F,F,FRL,W,DSWX,E,DSWR), // DSW0
+  Props(5,'v',Data,W,DW,Un,Un,Unkn,Unkn,Slot,SetX,F,F,FRL,W,DSW1,E,DSW0), // DSWX
+  Props(5,'v',Data,W,DW,Un,Un,Unkn,Unkn,Slot,Set1,F,F,FRL,W,____,E,DSWX), // DSW1
+  Props(5,'<',Data,N,DN,Un,Un,Unkn,Unkn,Slot,Rset,F,F,FRL,N,DSN0,S,____), // DSNR
+  Props(5,'<',Data,N,DN,Un,Un,Unkn,Unkn,Slot,Set0,F,F,FRL,N,DSNX,S,DSNR), // DSN0
+  Props(5,'<',Data,N,DN,Un,Un,Unkn,Unkn,Slot,SetX,F,F,FRL,N,DSN1,S,DSN0), // DSNX
+  Props(5,'<',Data,N,DN,Un,Un,Unkn,Unkn,Slot,Set1,F,F,FRL,N,____,S,DSNX), // DSN1
+  Props(5,'<',Data,N,DN,Un,Un,Unkn,Unkn,Slot,Rset,F,F,FRL,N,DSU0,S,____), // DSUR
+  Props(5,'<',Data,N,DN,Un,Un,Unkn,Unkn,Slot,Set0,F,F,FRL,N,DSUX,S,DSUR), // DSU0
+  Props(5,'<',Data,N,DN,Un,Un,Unkn,Unkn,Slot,SetX,F,F,FRL,N,DSU1,S,DSU0), // DSUX
+  Props(5,'<',Data,N,DN,Un,Un,Unkn,Unkn,Slot,Set1,F,F,FRL,N,____,S,DSUX), // DSU1
+  Props(5,'X',Data,E,DE,Un,Un,Unkn,Unkn,Lock,Rset,F,F,FRL,E,DLE0,W,____), // DLER
+  Props(5,'X',Data,E,DE,Un,Un,Unkn,Unkn,Lock,Set0,F,F,FRL,E,DLEX,W,DLER), // DLE0
+  Props(5,'X',Data,E,DE,Un,Un,Unkn,Unkn,Lock,SetX,F,F,FRL,E,DLE1,W,DLE0), // DLEX
+  Props(5,'X',Data,E,DE,Un,Un,Unkn,Unkn,Lock,Set1,F,F,FRL,E,____,W,DLEX), // DLE1
+  Props(5,'X',Data,S,DS,Un,Un,Unkn,Unkn,Lock,Rset,F,F,FRL,S,DLS0,N,____), // DLSR
+  Props(5,'X',Data,S,DS,Un,Un,Unkn,Unkn,Lock,Set0,F,F,FRL,S,DLSX,N,DLSR), // DLS0
+  Props(5,'X',Data,S,DS,Un,Un,Unkn,Unkn,Lock,SetX,F,F,FRL,S,DLS1,N,DLS0), // DLSX
+  Props(5,'X',Data,S,DS,Un,Un,Unkn,Unkn,Lock,Set1,F,F,FRL,S,____,N,DLSX), // DLS1
+  Props(5,'X',Data,S,DS,Un,Un,Unkn,Unkn,Lock,Rset,F,F,FRL,S,DLD0,N,____), // DLDR
+  Props(5,'X',Data,S,DS,Un,Un,Unkn,Unkn,Lock,Set0,F,F,FRL,S,DLDX,N,DLDR), // DLD0
+  Props(5,'X',Data,S,DS,Un,Un,Unkn,Unkn,Lock,SetX,F,F,FRL,S,DLD1,N,DLD0), // DLDX
+  Props(5,'X',Data,S,DS,Un,Un,Unkn,Unkn,Lock,Set1,F,F,FRL,S,____,N,DLDX), // DLD1
+  Props(5,'X',Data,W,DW,Un,Un,Unkn,Unkn,Lock,Rset,F,F,FRL,W,DLW0,E,____), // DLWR
+  Props(5,'X',Data,W,DW,Un,Un,Unkn,Unkn,Lock,Set0,F,F,FRL,W,DLWX,E,DLWR), // DLW0
+  Props(5,'X',Data,W,DW,Un,Un,Unkn,Unkn,Lock,SetX,F,F,FRL,W,DLW1,E,DLW0), // DLWX
+  Props(5,'X',Data,W,DW,Un,Un,Unkn,Unkn,Lock,Set1,F,F,FRL,W,____,E,DLWX), // DLW1
+  Props(5,'X',Data,N,DN,Un,Un,Unkn,Unkn,Lock,Rset,F,F,FRL,N,DLN0,S,____), // DLNR
+  Props(5,'X',Data,N,DN,Un,Un,Unkn,Unkn,Lock,Set0,F,F,FRL,N,DLNX,S,DLNR), // DLN0
+  Props(5,'X',Data,N,DN,Un,Un,Unkn,Unkn,Lock,SetX,F,F,FRL,N,DLN1,S,DLN0), // DLNX
+  Props(5,'X',Data,N,DN,Un,Un,Unkn,Unkn,Lock,Set1,F,F,FRL,N,____,S,DLNX), // DLN1
+  Props(5,'X',Data,N,DN,Un,Un,Unkn,Unkn,Lock,Rset,F,F,FRL,N,DLU0,S,____), // DLUR
+  Props(5,'X',Data,N,DN,Un,Un,Unkn,Unkn,Lock,Set0,F,F,FRL,N,DLUX,S,DLUR), // DLU0
+  Props(5,'X',Data,N,DN,Un,Un,Unkn,Unkn,Lock,SetX,F,F,FRL,N,DLU1,S,DLU0), // DLUX
+  Props(5,'X',Data,N,DN,Un,Un,Unkn,Unkn,Lock,Set1,F,F,FRL,N,____,S,DLUX), // DLU1
+  Props(5,'>',Data,E,DE,Un,Un,Unkn,Unkn,Test,Rset,F,F,FR_,E,DQE0,W,____), // DQER
+  Props(5,'>',Data,E,DE,Un,Un,Unkn,Unkn,Test,Set0,F,F,FR_,E,DQEX,W,DQER), // DQE0
+  Props(5,'>',Data,E,DE,Un,Un,Unkn,Unkn,Test,SetX,F,F,FR_,E,DQE1,W,DQE0), // DQEX
+  Props(5,'>',Data,E,DE,Un,Un,Unkn,Unkn,Test,Set1,F,F,FR_,E,____,W,DQEX), // DQE1
+  Props(5,'v',Data,S,DS,Un,Un,Unkn,Unkn,Test,Rset,F,F,FR_,S,DQS0,N,____), // DQSR
+  Props(5,'v',Data,S,DS,Un,Un,Unkn,Unkn,Test,Set0,F,F,FR_,S,DQSX,N,DQSR), // DQS0
+  Props(5,'v',Data,S,DS,Un,Un,Unkn,Unkn,Test,SetX,F,F,FR_,S,DQS1,N,DQS0), // DQSX
+  Props(5,'v',Data,S,DS,Un,Un,Unkn,Unkn,Test,Set1,F,F,FR_,S,____,N,DQSX), // DQS1
+  Props(5,'v',Data,S,DS,Un,Un,Unkn,Unkn,Test,Rset,F,F,FR_,S,DQD0,N,____), // DQDR
+  Props(5,'v',Data,S,DS,Un,Un,Unkn,Unkn,Test,Set0,F,F,FR_,S,DQDX,N,DQDR), // DQD0
+  Props(5,'v',Data,S,DS,Un,Un,Unkn,Unkn,Test,SetX,F,F,FR_,S,DQD1,N,DQD0), // DQDX
+  Props(5,'v',Data,S,DS,Un,Un,Unkn,Unkn,Test,Set1,F,F,FR_,S,____,N,DQDX), // DQD1
+  Props(5,'<',Data,W,DW,Un,Un,Unkn,Unkn,Test,Rset,F,F,FR_,W,DQW0,E,____), // DQWR
+  Props(5,'<',Data,W,DW,Un,Un,Unkn,Unkn,Test,Set0,F,F,FR_,W,DQWX,E,DQWR), // DQW0
+  Props(5,'<',Data,W,DW,Un,Un,Unkn,Unkn,Test,SetX,F,F,FR_,W,DQW1,E,DQW0), // DQWX
+  Props(5,'<',Data,W,DW,Un,Un,Unkn,Unkn,Test,Set1,F,F,FR_,W,____,E,DQWX), // DQW1
+  Props(5,'^',Data,N,DN,Un,Un,Unkn,Unkn,Test,Rset,F,F,FR_,N,DQN0,S,____), // DQNR
+  Props(5,'^',Data,N,DN,Un,Un,Unkn,Unkn,Test,Set0,F,F,FR_,N,DQNX,S,DQNR), // DQN0
+  Props(5,'^',Data,N,DN,Un,Un,Unkn,Unkn,Test,SetX,F,F,FR_,N,DQN1,S,DQN0), // DQNX
+  Props(5,'^',Data,N,DN,Un,Un,Unkn,Unkn,Test,Set1,F,F,FR_,N,____,S,DQNX), // DQN1
+  Props(5,'^',Data,N,DN,Un,Un,Unkn,Unkn,Test,Rset,F,F,FR_,N,DQU0,S,____), // DQUR
+  Props(5,'^',Data,N,DN,Un,Un,Unkn,Unkn,Test,Set0,F,F,FR_,N,DQUX,S,DQUR), // DQU0
+  Props(5,'^',Data,N,DN,Un,Un,Unkn,Unkn,Test,SetX,F,F,FR_,N,DQU1,S,DQU0), // DQUX
+  Props(5,'^',Data,N,DN,Un,Un,Unkn,Unkn,Test,Set1,F,F,FR_,N,____,S,DQUX), // DQU1
+  Props(5,'#',Data,E,DE,Un,Un,Unkn,Unkn,Gate,Rset,F,F,FR_,E,DGE0,W,____), // DGER
+  Props(5,'#',Data,E,DE,DS,Un,Unkn,Unkn,Gate,Set0,F,F,FR_,E,DGEX,W,DGER), // DGE0
+  Props(5,'#',Data,E,DE,DS,Un,Unkn,Unkn,Gate,SetX,F,F,FR_,E,DGE1,W,DGE0), // DGEX
+  Props(5,'#',Data,E,DE,DS,Un,Unkn,Unkn,Gate,Set1,F,F,FR_,E,____,W,DGEX), // DGE1
+  Props(5,'#',Data,S,DS,Un,Un,Unkn,Unkn,Gate,Rset,F,F,FR_,S,DGS0,N,____), // DGSR
+  Props(5,'#',Data,S,DS,DW,Un,Unkn,Unkn,Gate,Set0,F,F,FR_,S,DGSX,N,DGSR), // DGS0
+  Props(5,'#',Data,S,DS,DW,Un,Unkn,Unkn,Gate,SetX,F,F,FR_,S,DGS1,N,DGS0), // DGSX
+  Props(5,'#',Data,S,DS,DW,Un,Unkn,Unkn,Gate,Set1,F,F,FR_,S,____,N,DGSX), // DGS1
+  Props(5,'#',Data,S,DS,Un,Un,Unkn,Unkn,Gate,Rset,F,F,FR_,S,DGD0,N,____), // DGDR
+  Props(5,'#',Data,S,DS,Un,Un,Unkn,Unkn,Gate,Set0,F,F,FR_,S,DGDX,N,DGDR), // DGD0
+  Props(5,'#',Data,S,DS,Un,Un,Unkn,Unkn,Gate,SetX,F,F,FR_,S,DGD1,N,DGD0), // DGDX
+  Props(5,'#',Data,S,DS,Un,Un,Unkn,Unkn,Gate,Set1,F,F,FR_,S,____,N,DGDX), // DGD1
+  Props(5,'#',Data,W,DW,DN,Un,Unkn,Unkn,Gate,Rset,F,F,FR_,W,DGW0,E,____), // DGWR
+  Props(5,'#',Data,W,DW,DN,Un,Unkn,Unkn,Gate,Set0,F,F,FR_,W,DGWX,E,DGWR), // DGW0
+  Props(5,'#',Data,W,DW,DN,Un,Unkn,Unkn,Gate,SetX,F,F,FR_,W,DGW1,E,DGW0), // DGWX
+  Props(5,'#',Data,W,DW,Un,Un,Unkn,Unkn,Gate,Set1,F,F,FR_,W,____,E,DGWX), // DGW1
+  Props(5,'#',Data,N,DN,Un,Un,Unkn,Unkn,Gate,Rset,F,F,FR_,N,DGN0,S,____), // DGNR
+  Props(5,'#',Data,N,DN,DE,Un,Unkn,Unkn,Gate,Set0,F,F,FR_,N,DGNX,S,DGNR), // DGN0
+  Props(5,'#',Data,N,DN,DE,Un,Unkn,Unkn,Gate,SetX,F,F,FR_,N,DGN1,S,DGN0), // DGNX
+  Props(5,'#',Data,N,DN,DE,Un,Unkn,Unkn,Gate,Set1,F,F,FR_,N,____,S,DGNX), // DGN1
+  Props(5,'#',Data,N,DN,Un,Un,Unkn,Unkn,Gate,Rset,F,F,FR_,N,DGU0,S,____), // DGUR
+  Props(5,'#',Data,N,DN,Un,Un,Unkn,Unkn,Gate,Set0,F,F,FR_,N,DGUX,S,DGUR), // DGU0
+  Props(5,'#',Data,N,DN,Un,Un,Unkn,Unkn,Gate,SetX,F,F,FR_,N,DGU1,S,DGU0), // DGUX
+  Props(5,'#',Data,N,DN,Un,Un,Unkn,Unkn,Gate,Set1,F,F,FR_,N,____,S,DGUX), // DGU1
+  Props(5,'0',Data,E,DE,Un,Un,Unkn,Unkn,Gate,Rset,F,T,FR_,E,D0E0,W,____), // D0ER
+  Props(5,'0',Data,E,DE,DS,Un,Unkn,Unkn,Gate,Set0,F,T,FR_,E,D0EX,W,D0ER), // D0E0
+  Props(5,'0',Data,E,DE,DS,Un,Unkn,Unkn,Gate,SetX,F,T,FR_,E,D0E1,W,D0E0), // D0EX
+  Props(5,'0',Data,E,DE,DS,Un,Unkn,Unkn,Gate,Set1,F,T,FR_,E,____,W,D0EX), // D0E1
+  Props(5,'0',Data,S,DS,Un,Un,Unkn,Unkn,Gate,Rset,F,T,FR_,S,D0S0,N,____), // D0SR
+  Props(5,'0',Data,S,DS,DW,Un,Unkn,Unkn,Gate,Set0,F,T,FR_,S,D0SX,N,D0SR), // D0S0
+  Props(5,'0',Data,S,DS,DW,Un,Unkn,Unkn,Gate,SetX,F,T,FR_,S,D0S1,N,D0S0), // D0SX
+  Props(5,'0',Data,S,DS,DW,Un,Unkn,Unkn,Gate,Set1,F,T,FR_,S,____,N,D0SX), // D0S1
+  Props(5,'0',Data,S,DS,Un,Un,Unkn,Unkn,Gate,Rset,F,T,FR_,S,D0D0,N,____), // D0DR
+  Props(5,'0',Data,S,DS,Un,Un,Unkn,Unkn,Gate,Set0,F,T,FR_,S,D0DX,N,D0DR), // D0D0
+  Props(5,'0',Data,S,DS,Un,Un,Unkn,Unkn,Gate,SetX,F,T,FR_,S,D0D1,N,D0D0), // D0DX
+  Props(5,'0',Data,S,DS,Un,Un,Unkn,Unkn,Gate,Set1,F,T,FR_,S,____,N,D0DX), // D0D1
+  Props(5,'0',Data,W,DW,DN,Un,Unkn,Unkn,Gate,Rset,F,T,FR_,W,D0W0,E,____), // D0WR
+  Props(5,'0',Data,W,DW,DN,Un,Unkn,Unkn,Gate,Set0,F,T,FR_,W,D0WX,E,D0WR), // D0W0
+  Props(5,'0',Data,W,DW,DN,Un,Unkn,Unkn,Gate,SetX,F,T,FR_,W,D0W1,E,D0W0), // D0WX
+  Props(5,'0',Data,W,DW,Un,Un,Unkn,Unkn,Gate,Set1,F,T,FR_,W,____,E,D0WX), // D0W1
+  Props(5,'0',Data,N,DN,Un,Un,Unkn,Unkn,Gate,Rset,F,T,FR_,N,D0N0,S,____), // D0NR
+  Props(5,'0',Data,N,DN,DE,Un,Unkn,Unkn,Gate,Set0,F,T,FR_,N,D0NX,S,D0NR), // D0N0
+  Props(5,'0',Data,N,DN,DE,Un,Unkn,Unkn,Gate,SetX,F,T,FR_,N,D0N1,S,D0N0), // D0NX
+  Props(5,'0',Data,N,DN,DE,Un,Unkn,Unkn,Gate,Set1,F,T,FR_,N,____,S,D0NX), // D0N1
+  Props(5,'0',Data,N,DN,Un,Un,Unkn,Unkn,Gate,Rset,F,T,FR_,N,D0U0,S,____), // D0UR
+  Props(5,'0',Data,N,DN,Un,Un,Unkn,Unkn,Gate,Set0,F,T,FR_,N,D0UX,S,D0UR), // D0U0
+  Props(5,'0',Data,N,DN,Un,Un,Unkn,Unkn,Gate,SetX,F,T,FR_,N,D0U1,S,D0U0), // D0UX
+  Props(5,'0',Data,N,DN,Un,Un,Unkn,Unkn,Gate,Set1,F,T,FR_,N,____,S,D0UX), // D0U1
+  Props(5,'1',Data,E,DE,Un,Un,Unkn,Unkn,Gate,Rset,F,F,FR_,E,D1E0,W,____), // D1ER
+  Props(5,'1',Data,E,DE,DS,Un,Unkn,Unkn,Gate,Set0,F,F,FR_,E,D1EX,W,D1ER), // D1E0
+  Props(5,'1',Data,E,DE,DS,Un,Unkn,Unkn,Gate,SetX,F,F,FR_,E,D1E1,W,D1E0), // D1EX
+  Props(5,'1',Data,E,DE,DS,Un,Unkn,Unkn,Gate,Set1,F,F,FR_,E,____,W,D1EX), // D1E1
+  Props(5,'1',Data,S,DS,Un,Un,Unkn,Unkn,Gate,Rset,F,F,FR_,S,D1S0,N,____), // D1SR
+  Props(5,'1',Data,S,DS,DW,Un,Unkn,Unkn,Gate,Set0,F,F,FR_,S,D1SX,N,D1SR), // D1S0
+  Props(5,'1',Data,S,DS,DW,Un,Unkn,Unkn,Gate,SetX,F,F,FR_,S,D1S1,N,D1S0), // D1SX
+  Props(5,'1',Data,S,DS,DW,Un,Unkn,Unkn,Gate,Set1,F,F,FR_,S,____,N,D1SX), // D1S1
+  Props(5,'1',Data,S,DS,Un,Un,Unkn,Unkn,Gate,Rset,F,F,FR_,S,D1D0,N,____), // D1DR
+  Props(5,'1',Data,S,DS,Un,Un,Unkn,Unkn,Gate,Set0,F,F,FR_,S,D1DX,N,D1DR), // D1D0
+  Props(5,'1',Data,S,DS,Un,Un,Unkn,Unkn,Gate,SetX,F,F,FR_,S,D1D1,N,D1D0), // D1DX
+  Props(5,'1',Data,S,DS,Un,Un,Unkn,Unkn,Gate,Set1,F,F,FR_,S,____,N,D1DX), // D1D1
+  Props(5,'1',Data,W,DW,DN,Un,Unkn,Unkn,Gate,Rset,F,F,FR_,W,D1W0,E,____), // D1WR
+  Props(5,'1',Data,W,DW,DN,Un,Unkn,Unkn,Gate,Set0,F,F,FR_,W,D1WX,E,D1WR), // D1W0
+  Props(5,'1',Data,W,DW,DN,Un,Unkn,Unkn,Gate,SetX,F,F,FR_,W,D1W1,E,D1W0), // D1WX
+  Props(5,'1',Data,W,DW,Un,Un,Unkn,Unkn,Gate,Set1,F,F,FR_,W,____,E,D1WX), // D1W1
+  Props(5,'1',Data,N,DN,Un,Un,Unkn,Unkn,Gate,Rset,F,F,FR_,N,D1N0,S,____), // D1NR
+  Props(5,'1',Data,N,DN,DE,Un,Unkn,Unkn,Gate,Set0,F,F,FR_,N,D1NX,S,D1NR), // D1N0
+  Props(5,'1',Data,N,DN,DE,Un,Unkn,Unkn,Gate,SetX,F,F,FR_,N,D1N1,S,D1N0), // D1NX
+  Props(5,'1',Data,N,DN,DE,Un,Unkn,Unkn,Gate,Set1,F,F,FR_,N,____,S,D1NX), // D1N1
+  Props(5,'1',Data,N,DN,Un,Un,Unkn,Unkn,Gate,Rset,F,F,FR_,N,D1U0,S,____), // D1UR
+  Props(5,'1',Data,N,DN,Un,Un,Unkn,Unkn,Gate,Set0,F,F,FR_,N,D1UX,S,D1UR), // D1U0
+  Props(5,'1',Data,N,DN,Un,Un,Unkn,Unkn,Gate,SetX,F,F,FR_,N,D1U1,S,D1U0), // D1UX
+  Props(5,'1',Data,N,DN,Un,Un,Unkn,Unkn,Gate,Set1,F,F,FR_,N,____,S,D1UX), // D1U1
+  Props(6,'i',Data,E,DE,Un,Un,Unkn,Unkn,Inpt,Rset,T,F,F__,E,DIE0,W,____), // DIER
+  Props(6,'0',Data,E,DE,Un,Un,Unkn,Unkn,Inpt,Set0,T,F,F__,E,DIEX,W,DIER), // DIE0
+  Props(6,'x',Data,E,DE,Un,Un,Unkn,Unkn,Inpt,SetX,T,F,F__,E,DIE1,W,DIE0), // DIEX
+  Props(6,'1',Data,E,DE,Un,Un,Unkn,Unkn,Inpt,Set1,T,F,F__,E,____,W,DIEX), // DIE1
+  Props(6,'i',Data,S,DS,Un,Un,Unkn,Unkn,Inpt,Rset,T,F,F__,S,DIS0,N,____), // DISR
+  Props(6,'0',Data,S,DS,Un,Un,Unkn,Unkn,Inpt,Set0,T,F,F__,S,DISX,N,DISR), // DIS0
+  Props(6,'x',Data,S,DS,Un,Un,Unkn,Unkn,Inpt,SetX,T,F,F__,S,DIS1,N,DIS0), // DISX
+  Props(6,'1',Data,S,DS,Un,Un,Unkn,Unkn,Inpt,Set1,T,F,F__,S,____,N,DISX), // DIS1
+  Props(6,'i',Data,S,DS,Un,Un,Unkn,Unkn,Inpt,Rset,T,F,F__,S,DID0,N,____), // DIDR
+  Props(6,'0',Data,S,DS,Un,Un,Unkn,Unkn,Inpt,Set0,T,F,F__,S,DIDX,N,DIDR), // DID0
+  Props(6,'x',Data,S,DS,Un,Un,Unkn,Unkn,Inpt,SetX,T,F,F__,S,DID1,N,DID0), // DIDX
+  Props(6,'1',Data,S,DS,Un,Un,Unkn,Unkn,Inpt,Set1,T,F,F__,S,____,N,DIDX), // DID1
+  Props(6,'i',Data,W,DW,Un,Un,Unkn,Unkn,Inpt,Rset,T,F,F__,W,DIW0,E,____), // DIWR
+  Props(6,'0',Data,W,DW,Un,Un,Unkn,Unkn,Inpt,Set0,T,F,F__,W,DIWX,E,DIWR), // DIW0
+  Props(6,'x',Data,W,DW,Un,Un,Unkn,Unkn,Inpt,SetX,T,F,F__,W,DIW1,E,DIW0), // DIWX
+  Props(6,'1',Data,W,DW,Un,Un,Unkn,Unkn,Inpt,Set1,T,F,F__,W,____,E,DIWX), // DIW1
+  Props(6,'i',Data,N,DN,Un,Un,Unkn,Unkn,Inpt,Rset,T,F,F__,N,DIN0,S,____), // DINR
+  Props(6,'0',Data,N,DN,Un,Un,Unkn,Unkn,Inpt,Set0,T,F,F__,N,DINX,S,DINR), // DIN0
+  Props(6,'x',Data,N,DN,Un,Un,Unkn,Unkn,Inpt,SetX,T,F,F__,N,DIN1,S,DIN0), // DINX
+  Props(6,'1',Data,N,DN,Un,Un,Unkn,Unkn,Inpt,Set1,T,F,F__,N,____,S,DINX), // DIN1
+  Props(6,'i',Data,N,DN,Un,Un,Unkn,Unkn,Inpt,Rset,T,F,F__,N,DIU0,S,____), // DIUR
+  Props(6,'0',Data,N,DN,Un,Un,Unkn,Unkn,Inpt,Set0,T,F,F__,N,DIUX,S,DIUR), // DIU0
+  Props(6,'x',Data,N,DN,Un,Un,Unkn,Unkn,Inpt,SetX,T,F,F__,N,DIU1,S,DIU0), // DIUX
+  Props(6,'1',Data,N,DN,Un,Un,Unkn,Unkn,Inpt,Set1,T,F,F__,N,____,S,DIUX), // DIU1
+  Props(6,'o',Data,E,DE,Un,Un,Unkn,Unkn,Outp,Rset,T,F,___,E,DOE0,W,____), // DOER
+  Props(6,'0',Data,E,DE,Un,Un,Unkn,Unkn,Outp,Set0,T,F,___,E,DOEX,W,DOER), // DOE0
+  Props(6,'x',Data,E,DE,Un,Un,Unkn,Unkn,Outp,SetX,T,F,___,E,DOE1,W,DOE0), // DOEX
+  Props(6,'1',Data,E,DE,Un,Un,Unkn,Unkn,Outp,Set1,T,F,___,E,____,W,DOEX), // DOE1
+  Props(6,'o',Data,S,DS,Un,Un,Unkn,Unkn,Outp,Rset,T,F,___,S,DOS0,N,____), // DOSR
+  Props(6,'0',Data,S,DS,Un,Un,Unkn,Unkn,Outp,Set0,T,F,___,S,DOSX,N,DOSR), // DOS0
+  Props(6,'x',Data,S,DS,Un,Un,Unkn,Unkn,Outp,SetX,T,F,___,S,DOS1,N,DOS0), // DOSX
+  Props(6,'1',Data,S,DS,Un,Un,Unkn,Unkn,Outp,Set1,T,F,___,S,____,N,DOSX), // DOS1
+  Props(6,'o',Data,S,DS,Un,Un,Unkn,Unkn,Outp,Rset,T,F,___,S,DOD0,N,____), // DODR
+  Props(6,'0',Data,S,DS,Un,Un,Unkn,Unkn,Outp,Set0,T,F,___,S,DODX,N,DODR), // DOD0
+  Props(6,'x',Data,S,DS,Un,Un,Unkn,Unkn,Outp,SetX,T,F,___,S,DOD1,N,DOD0), // DODX
+  Props(6,'1',Data,S,DS,Un,Un,Unkn,Unkn,Outp,Set1,T,F,___,S,____,N,DODX), // DOD1
+  Props(6,'o',Data,W,DW,Un,Un,Unkn,Unkn,Outp,Rset,T,F,___,W,DOW0,E,____), // DOWR
+  Props(6,'0',Data,W,DW,Un,Un,Unkn,Unkn,Outp,Set0,T,F,___,W,DOWX,E,DOWR), // DOW0
+  Props(6,'x',Data,W,DW,Un,Un,Unkn,Unkn,Outp,SetX,T,F,___,W,DOW1,E,DOW0), // DOWX
+  Props(6,'1',Data,W,DW,Un,Un,Unkn,Unkn,Outp,Set1,T,F,___,W,____,E,DOWX), // DOW1
+  Props(6,'o',Data,N,DN,Un,Un,Unkn,Unkn,Outp,Rset,T,F,___,N,DON0,S,____), // DONR
+  Props(6,'0',Data,N,DN,Un,Un,Unkn,Unkn,Outp,Set0,T,F,___,N,DONX,S,DONR), // DON0
+  Props(6,'x',Data,N,DN,Un,Un,Unkn,Unkn,Outp,SetX,T,F,___,N,DON1,S,DON0), // DONX
+  Props(6,'1',Data,N,DN,Un,Un,Unkn,Unkn,Outp,Set1,T,F,___,N,____,S,DONX), // DON1
+  Props(6,'o',Data,N,DN,Un,Un,Unkn,Unkn,Outp,Rset,T,F,___,N,DOU0,S,____), // DOUR
+  Props(6,'0',Data,N,DN,Un,Un,Unkn,Unkn,Outp,Set0,T,F,___,N,DOUX,S,DOUR), // DOU0
+  Props(6,'x',Data,N,DN,Un,Un,Unkn,Unkn,Outp,SetX,T,F,___,N,DOU1,S,DOU0), // DOUX
+  Props(6,'1',Data,N,DN,Un,Un,Unkn,Unkn,Outp,Set1,T,F,___,N,____,S,DOUX)  // DOU1
 #undef _
 #undef T
 #undef F
