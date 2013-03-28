@@ -937,17 +937,20 @@ void Rod2D::RebuildWithEnum
     //   LTEL, ...,  LTSL, ...,  LTDL, ...,  LTWL, ...,  LTNL, ...,  LTUL, ...,
     //   lpel, ...,  lpsl, ...,  lpdl, ...,  lpwl, ...,  lpnl, ...,  lpul, ...,
     //   LKEL, ...,  LKSL, ...,  LKDL, ...,  LKWL, ...,  LKNL, ...,  LKUL, ...,
-    //                                                E
-    //                                               /     S
-    //                                              /     /     D
-    //                                             /     /     /     W
-    //                                            /     /     /     /     N
-    //                                           /     /     /     /     /     U
-    //                                          /     /     /     /     /     /
+    //
+    //                                               E
+    //                                              /     S
+    //                                             /     /     D
+    //                                            /     /     /     W
+    //                                           /     /     /     /     N
+    //                                          /     /     /     /     /     U
+    //                                         /     /     /     /     /     /
     static Voxel const lb[eoDirection] = { LBEL, LBSL, LBDL, LBWL, LBNL, LBUL };
     static Voxel const lh[eoDirection] = { LHEL, LHSL, LHDL, LHWL, LHNL, LHUL };
     static Voxel const lt[eoDirection] = { LTEL, LTSL, LTDL, LTWL, LTNL, LTUL };
     static Voxel const lk[eoDirection] = { LKEL, LKSL, LKDL, LKWL, LKNL, LKUL };
+
+    static Voxel const dl[eoDirection] = { DLNR, DLER, Unkn, DLSR, DLWR, Unkn };
 
     for (auto const &p : *this) {
       Voxel l = Unkn;
@@ -968,6 +971,9 @@ void Rod2D::RebuildWithEnum
       case '|':
 	l = lb[direction];
 	break;
+      case 'X':
+      case 'x':
+	l = dl[direction];
       default:
 	assert(l != Unkn);
       }
@@ -1009,13 +1015,14 @@ void Rod2D::RebuildWithEnum
     //   DIWR, ..., ..., ...,  DINR, ..., ..., ...,  DIUR, ..., ..., ...,
     //   DOER, ..., ..., ...,  DOSR, ..., ..., ...,  DODR, ..., ..., ...,
     //   DOWR, ..., ..., ...,  DONR, ..., ..., ...,  DOUR, ..., ..., ...,
-    //                                                E
-    //                                               /     S
-    //                                              /     /     D
-    //                                             /     /     /     W
-    //                                            /     /     /     /     N
-    //                                           /     /     /     /     /     U
-    //                                          /     /     /     /     /     /
+    //
+    //                                               E
+    //                                              /     S
+    //                                             /     /     D
+    //                                            /     /     /     W
+    //                                           /     /     /     /     N
+    //                                          /     /     /     /     /     U
+    //                                         /     /     /     /     /     /
     static Voxel const db[eoDirection] = { DBER, DBSR, DBDR, DBWR, DBNR, DBUR };
     static Voxel const dh[eoDirection] = { DHER, DHSR, DHDR, DHWR, DHNR, DHUR };
     static Voxel const dt[eoDirection] = { DTER, DTSR, DTDR, DTWR, DTNR, DTUR };

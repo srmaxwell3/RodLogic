@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <fstream>
 using std::ifstream;
+using std::ofstream;
 #include <iostream>
 using std::istream;
 using std::cin;
@@ -35,12 +36,14 @@ int optCycleCount = 0;
 string optInputPath = "";
 bool optEchoInput = false;
 string optTableInputPath = "";
+string optOutputPath = "";
 bool optRodsInitialValue = false;
 bool optShowEvaluatingRods = false;
 bool optShowPerformance = false;
 bool optShowRods = false;
 bool optShowChangedStateEveryTick = false;
 bool optShowStateEveryTick = false;
+bool optVerbose = false;
 bool optShowWaveforms = false;
 bool optWarnings = false;
 
@@ -454,8 +457,21 @@ void processDiagramFrom(istream &in, map<string, vector<int>> const &inputs) {
     newDiagram.scan();
     newDiagram.dump();
 
-    Brick<Voxel> brick(Wall, 4, 7, newDiagram.yMax, newDiagram.xMax);
-    newDiagram.RebuildWithEnum(brick);
+    if (!optOutputPath.empty()) {
+      Brick<Voxel> brick(Wall, 4, 7, newDiagram.yMax, newDiagram.xMax);
+      newDiagram.RebuildWithEnum(brick);
+
+      ofstream oFile(optOutputPath);
+      if (!oFile.is_open()) {
+        fprintf(stderr,
+                "rlic: Error: Unable to open output %s for writing!\n",
+                optOutputPath.c_str()
+                );
+        exit(1);
+      }
+
+      brick.WriteTo(oFile);
+    }
   }
 }
 
@@ -480,6 +496,7 @@ where <option> is:\n\
 -I <path>	Read (variable-per-row) input from <path>, with echo (default: no) [%s].\n\
 -L <label>	Log state when <label> == 0 (default: no) [%s].\n\
 -l		Assume Little Endian for multi-rod variables (default: off) [%s].\n\
+-o <path>       Create, and write CAM output to <path>.\n\
 -p		Log performance metrics (default: off) [%s].\n\
 -r		Log rods (default: off) [%s].\n\
 -s		Log whole state after each tick (default: off) [%s].\n\
@@ -507,6 +524,7 @@ where <option> is:\n\
           optLogStateOnLabelState == EBQT::aLo ?
               optLogStateOnLabel.c_str() : "",
           optLittleEndian ? "-l" : "",
+          optOutputPath.c_str(),
           optShowPerformance ? "-p" : "",
           optShowRods ? "-s" : "",
           optShowStateEveryTick && !optShowChangedStateEveryTick ? "-s" : "",
@@ -526,7 +544,7 @@ int main(int argc, char *const argv[]) {
 
   bool optShowHelp = false;
   int c;
-  while ((c = getopt(argc, argv, "/:\\:01bc:deH:hi:I:L:lprsSt:T:wW")) != -1) {
+  while ((c = getopt(argc, argv, "/:\\:01bc:deH:hi:I:L:lpo:rsSt:T:vwW")) != -1) {
     switch (c) {
     case '/':
       optLogStateOnLabelState = EBQT::aLeadingEdge;
@@ -580,6 +598,9 @@ int main(int argc, char *const argv[]) {
     case 'l':
       optLittleEndian = true;
       break;
+    case 'o':
+      optOutputPath = optarg;
+      break;
     case 'p':
       optShowPerformance = true;
       break;
@@ -601,6 +622,9 @@ int main(int argc, char *const argv[]) {
     case 'T':
       optTableInputPath = optarg;
       optEchoInput = true;
+      break;
+    case 'v':
+      optVerbose = true;
       break;
     case 'w':
       optShowWaveforms = true;

@@ -4,7 +4,7 @@
 #include <array>
 using std::array;
 #include <fstream>
-using std::ifstream;
+using std::ofstream;
 #include <iostream>
 using std::istream;
 #include <map>
@@ -32,7 +32,7 @@ template<typename T> struct Plate : public vector<vector<T>> {
   Plate() : vector<vector<PixelType>>(), defaultPixel(), scaleBy(), yMax(), xMax() { }
 
   Plate(PixelType _defaultPixel, size_t _scaleBy, size_t _yMax, size_t _xMax) :
-    vector<vector<PixelType>>(_yMax),
+    vector<vector<PixelType>>(),
     defaultPixel(_defaultPixel),
     scaleBy(_scaleBy),
     yMax((_yMax + 2) * scaleBy),
@@ -42,6 +42,8 @@ template<typename T> struct Plate : public vector<vector<T>> {
     for (size_t w = 10; w <= xMax; w *= 10) {
       nDigits += 1;
     }
+
+    vector<vector<T>>::resize(yMax);
     for (size_t y = 0; y < yMax; y += 1) {
       (*this)[y].vector<PixelType>::resize(xMax, defaultPixel);
     }
@@ -86,8 +88,27 @@ template<typename T> struct Plate : public vector<vector<T>> {
   bool isColEmpty(size_t atX) const;
   bool isRowSqueezable(size_t atY) const;
   bool isColSqueezable(size_t atX) const;
+
   void DumpPixelAt(size_t y, size_t x) const;
   void Dump() const;
+  ofstream &WriteTo(ofstream &o) const {
+    char const *oComma = "";
+    o << "  {\n";
+    for (auto const &row : *this) {
+      o << oComma;
+      o << "    { ";
+      char const *iComma = "";
+      for (auto const &v : row) {
+        o << iComma;
+        o << c_str(v);
+        iComma = ",";
+      }
+      o << " }";
+      oComma = ",\n";
+    }
+    o << "\n  }";
+    return o;
+  }
 
   PixelType defaultPixel;
   size_t scaleBy;
@@ -102,7 +123,7 @@ template<typename T> struct Brick : public vector<Plate<T>> {
   Brick() : vector<Plate<VoxelType>>(), defaultVoxel(), scaleBy(), zMax(), yMax(), xMax(), nDigits() { }
 
   Brick(VoxelType _defaultVoxel, size_t _scaleBy, size_t _zMax, size_t _yMax, size_t _xMax) :
-    vector<Plate<VoxelType>>(_zMax),
+    vector<Plate<VoxelType>>(),
     defaultVoxel(_defaultVoxel),
     scaleBy(_scaleBy),
     zMax(_zMax),
@@ -114,6 +135,7 @@ template<typename T> struct Brick : public vector<Plate<T>> {
       nDigits += 1;
     }
 
+    vector<Plate<T>>::resize(zMax);
     for (size_t z = 0; z < zMax; z += 1) {
       (*this)[z].scaleBy = scaleBy;
       (*this)[z].yMax = yMax;
@@ -157,12 +179,22 @@ template<typename T> struct Brick : public vector<Plate<T>> {
   VoxelType const &at(P3D const &p) const {
     return at(p.z, p.y, p.x);
   }
-
   VoxelType const &at(int z, int y, int x) const {
     return vector<Plate<VoxelType>>::at(z).at(y, x);
   }
 
   void Dump() const;
+  ofstream &WriteTo(ofstream &o) const {
+    char const *comma = "";
+    o << "{\n";
+    for (auto const &plate : *this) {
+      o << comma;
+      plate.WriteTo(o);
+      comma = ",\n";
+    }
+    o << "\n}\n";
+    return o;
+  }
 
   VoxelType const defaultVoxel;
   size_t scaleBy;

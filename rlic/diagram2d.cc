@@ -21,6 +21,7 @@ extern bool optShowChangedStateEveryTick;
 extern bool optShowDebugOutput;
 extern bool optShowPerformance;
 extern bool optShowRods;
+extern bool optVerbose;
 
 template<typename T> void Plate<T>::insertRow(size_t atY) {
   auto insertAt = atY < yMax ? Plate<T>::begin() + atY : Plate<T>::end();
@@ -63,7 +64,7 @@ template<typename T> bool Plate<T>::compareColAndColToRight(size_t atX) const {
   if ((atX + 1) < xMax) {
     for (auto const &r : *this) {
       if (r[atX] != r[atX + 1]) {
-	return false;
+        return false;
       }
     }
     return true;
@@ -1106,7 +1107,7 @@ void Diagram2D::dumpWaveforms() const {
     }
     if (optShowDebugOutput) {
       for (auto const &dw : debugOutputsByTick) {
-	fprintf(stdout, ", %d", bool(dw.second[i]));
+        fprintf(stdout, ", %d", bool(dw.second[i]));
       }
     }
     fprintf(stdout, "\n");
@@ -1805,11 +1806,11 @@ void Diagram2D::RebuildWithEnum(Brick<Voxel> &brick) const {
   //                                            /     /     /     /     N
   //                                           /     /     /     /     /     U
   //                                          /     /     /     /     /     /
-  static Voxel const lb[eoDirection] = { LBEL, LBSL, LBDL, LBWL, LBNL, LBUL };
-  static Voxel const lh[eoDirection] = { LHEL, LHSL, LHDL, LHWL, LHNL, LHUL };
-  static Voxel const lt[eoDirection] = { LTEL, LTSL, LTDL, LTWL, LTNL, LTUL };
-  static Voxel const lp[eoDirection] = { LPEL, LPSL, LPDL, LPWL, LPNL, LPUL };
-  static Voxel const lk[eoDirection] = { LKEL, LKSL, LKDL, LKWL, LKNL, LKUL };
+  static Voxel const LB[eoDirection] = { LBEL, LBSL, LBDL, LBWL, LBNL, LBUL };
+  static Voxel const LH[eoDirection] = { LHEL, LHSL, LHDL, LHWL, LHNL, LHUL };
+  static Voxel const LT[eoDirection] = { LTEL, LTSL, LTDL, LTWL, LTNL, LTUL };
+  static Voxel const LP[eoDirection] = { LPEL, LPSL, LPDL, LPWL, LPNL, LPUL };
+  static Voxel const LK[eoDirection] = { LKEL, LKSL, LKDL, LKWL, LKNL, LKUL };
 
   //   DBER, ..., ..., ...,  DBSR, ..., ..., ...,  DBDR, ..., ..., ...,
   //   DBWR, ..., ..., ...,  DBNR, ..., ..., ...,  DBUR, ..., ..., ...,
@@ -1842,24 +1843,53 @@ void Diagram2D::RebuildWithEnum(Brick<Voxel> &brick) const {
   //                                            /     /     /     /     N
   //                                           /     /     /     /     /     U
   //                                          /     /     /     /     /     /
-  static Voxel const db[eoDirection] = { DBER, DBSR, DBDR, DBWR, DBNR, DBUR };
-  static Voxel const dh[eoDirection] = { DHER, DHSR, DHDR, DHWR, DHNR, DHUR };
-  static Voxel const dt[eoDirection] = { DTER, DTSR, DTDR, DTWR, DTNR, DTUR };
-  static Voxel const dp[eoDirection] = { DPER, DPSR, DPDR, DPWR, DPNR, DPUR };
-  static Voxel const ds[eoDirection] = { DSER, DSSR, DSDR, DSWR, DSNR, DSUR };
-  static Voxel const dl[eoDirection] = { DLER, DLSR, DLDR, DLWR, DLNR, DLUR };
-  static Voxel const dq[eoDirection] = { DQER, DQSR, DQDR, DQWR, DQNR, DQUR };
+  static Voxel const DB[eoDirection] = { DBER, DBSR, DBDR, DBWR, DBNR, DBUR };
+  static Voxel const DH[eoDirection] = { DHER, DHSR, DHDR, DHWR, DHNR, DHUR };
+  static Voxel const DT[eoDirection] = { DTER, DTSR, DTDR, DTWR, DTNR, DTUR };
+  static Voxel const DP[eoDirection] = { DPER, DPSR, DPDR, DPWR, DPNR, DPUR };
+  static Voxel const DS[eoDirection] = { DSER, DSSR, DSDR, DSWR, DSNR, DSUR };
+  static Voxel const DL[eoDirection] = { DLER, DLSR, DLDR, DLWR, DLNR, DLUR };
+  static Voxel const DQ[eoDirection] = { DQER, DQSR, DQDR, DQWR, DQNR, DQUR };
   static Voxel const d0[eoDirection] = { D0ER, D0SR, D0DR, D0WR, D0NR, D0UR };
   static Voxel const d1[eoDirection] = { D1ER, D1SR, D1DR, D1WR, D1NR, D1UR };
-  static Voxel const di[eoDirection] = { DIER, DISR, DIDR, DIWR, DINR, DIUR };
-  static Voxel const dO[eoDirection] = { DOER, DOSR, DODR, DOWR, DONR, DOUR };
+  static Voxel const DI[eoDirection] = { DIER, DISR, DIDR, DIWR, DINR, DIUR };
+  static Voxel const DO[eoDirection] = { DOER, DOSR, DODR, DOWR, DONR, DOUR };
 
-  for (size_t z = 0; z < brick.zMax; z += 1) {
+  static Direction const dataToLockDirection[eoDirection] = { S, W, X, N, E, X };
+  static Direction const lockToDataDirection[eoDirection] = { N, W, X, S, E, X };
+
+  // Given a lower (E/W) data rod's (forward) direction, and an
+  // interacting upper (S/N rod's direction, and the fact that we're
+  // looking at a dtGate on the lower rod (and on the upper rod, in
+  // the same position, above), is the lower rod's dtGate supposed to
+  // be a dtGate, or a dtTest?  (The opposite will be true for the
+  // upper rod.)
+
+  static DataType const gateToGateOrTest[eoDirection][eoDirection] = {
+    //   Lower (E/W) data rod fwd direction             // Upper (S/N) data
+    //   E       S       D       W       N       U      //   rod fdb direction
+    { dtUnkn, dtGate, dtGate, dtUnkn, dtTest, dtTest }, // E
+    { dtTest, dtUnkn, dtGate, dtGate, dtUnkn, dtTest }, // S
+    { dtTest, dtTest, dtUnkn, dtGate, dtGate, dtUnkn }, // D
+    { dtUnkn, dtTest, dtTest, dtUnkn, dtGate, dtGate }, // W
+    { dtGate, dtUnkn, dtTest, dtTest, dtUnkn, dtGate }, // N
+    { dtGate, dtGate, dtUnkn, dtTest, dtTest, dtUnkn }  // U
+  };
+
+  // We'll do the (S/N, E/W) lock rods, first, followed by the (E/W,
+  // S/N) data rods.
+
+  array<size_t, 4> levelProcessOrder = { 0, 6, 2, 4 };
+  for (auto z : levelProcessOrder) {
     switch (z) {
-      brick[z].Dump();
-      fflush(stdout);
+      if (optVerbose) {
+        brick[z].Dump();
+        fflush(stdout);
+      }
 
-      // Level 0 is the S/N lock rods.
+      // Level 0 is the S/N lock rods.  Note that dtLock's are allowed
+      // here, propogated from the associated data rods.  We turn them
+      // into lkLock/dtSlot pairs.
 
       case 0:
         for (size_t y = 0; y < brick.yMax; y += 1) {
@@ -1867,23 +1897,29 @@ void Diagram2D::RebuildWithEnum(Brick<Voxel> &brick) const {
             P3D p(z, y, x);
             Voxel &v = (Voxel &) brick.at(p);
             VoxelProperties const &vp = voxelProperties[v];
+            VoxelType vt = vp.voxelType;
 
-            switch (VoxelType vt = vp.voxelType) {
-	    case vtUnkn:
-	      assert(vt != vtUnkn);
-	    case vtWall:
-	      continue;
-	    case vtSlot:
-	      continue;
-	    case vtLock:
-	      assert(vt == vtLock);
-	      break;
-	    case vtData:
-	      assert(vt != vtData);
-	      break;
-	    case eoVoxelType:
-	      assert(vt != eoVoxelType);
+            switch (vt) {
+            case vtUnkn:
+              assert(vt != vtUnkn);
+            case vtWall:
+              continue;
+            case vtSlot:
+              continue;
+            case vtLock:
+              assert(vt == vtLock);
+              break;
+            case vtData:
+              assert(vp.dataType == dtLock);
+              break;
+            case eoVoxelType:
+              assert(vt != eoVoxelType);
             }
+
+            Direction lFwd =
+                vt == vtLock ? vp.direction : dataToLockDirection[vp.direction];
+            Direction dFwd =
+                vt == vtLock ? lockToDataDirection[vp.direction] : vp.direction;
 
             P3D pu = p.offsetBy(U);
             Voxel &vu = (Voxel &) brick.at(pu);
@@ -1893,51 +1929,109 @@ void Diagram2D::RebuildWithEnum(Brick<Voxel> &brick) const {
             Voxel &vuu = (Voxel &) brick.at(puu);
             VoxelProperties vuup = voxelProperties[vuu];
 
-            P3D pf = pu.offsetBy(FWard(vp.direction));
+            // For vtData/dtLock's....
+
+            if (vt == vtData && vp.dataType == dtLock) {
+
+              // ...[X]--... -> ...[+]--...
+              // ...[#]##... -> ...[<]< ...
+              // ...[X]--...    ..-[-]+-...
+
+              P3D puub = puu.offsetBy(BWard(lFwd));
+              Voxel &vuub = (Voxel &) brick.at(puub);
+              VoxelProperties vuufp = voxelProperties[vuub];
+
+              P3D pf = p.offsetBy(FWard(lFwd));
+              Voxel &vf = (Voxel &) brick.at(pf);
+              VoxelProperties vfp = voxelProperties[vf];
+
+              P3D puf = pu.offsetBy(FWard(lFwd));
+              Voxel &vuf = (Voxel &) brick.at(puf);
+              VoxelProperties vufp = voxelProperties[vuf];
+              P3D puff = puf.offsetBy(FWard(lFwd));
+              Voxel &vuff = (Voxel &) brick.at(puff);
+              VoxelProperties vuffp = voxelProperties[vuff];
+
+
+              // Setup a key for this lock, and change the data rod's
+              // dtLock to a dtSlot....
+
+              assert(vfp.voxelType == vtLock && vfp.lockType == ltBody);
+              assert(vup.voxelType == vtWall);
+              assert(vufp.voxelType == vtWall);
+              assert(vuffp.voxelType == vtWall);
+              assert(vuup.voxelType == vtData && vuup.dataType == dtLock);
+
+              vuu = DP[dFwd];
+              vu = DS[dFwd];
+              vuf = LK[lFwd];
+              if (vuff == Wall) {
+                vuff = Slot;
+              }
+              vf = LP[lFwd];
+              v = LB[lFwd];
+              continue;
+            }
+
+            // For vtLock's....
+
+            P3D pf = p.offsetBy(FWard(lFwd));
             Voxel &vf = (Voxel &) brick.at(pf);
             VoxelProperties vfp = voxelProperties[vf];
-
 
             switch (LockType lt = vp.lockType) {
               case ltLock:
                 assert(vup.voxelType == vtWall);
+                assert(vfp.voxelType == vtLock && vfp.lockType == ltBody);
+
                 if (vuup.voxelType == vtWall) {
-                  P3D puuf = puu.offsetBy(FWard(vp.direction));
+
+                  // ...<[#]#... -> ...+[#]#...
+                  // ...#[#]#... -> ...<[<] ...
+                  // ...-[<]-...    ...-[+]-...
+
+                  P3D puuf = puu.offsetBy(FWard(lFwd));
                   Voxel &vuuf = (Voxel &) brick.at(puuf);
                   VoxelProperties vuufp = voxelProperties[vuuf];
-                  P3D puf = pu.offsetBy(FWard(vp.direction));
+                  P3D puf = pu.offsetBy(FWard(lFwd));
                   Voxel &vuf = (Voxel &) brick.at(puf);
                   VoxelProperties vufp = voxelProperties[vuf];
 
-                  assert(vuufp.voxelType == vtData);
-                  assert(vuufp.dataType == dtSlot);
+                  assert(vuufp.voxelType == vtData && vuufp.dataType == dtSlot);
 
-                  vuuf = dp[vp.direction];
-                  vuf = ds[vp.direction];
-                  vu = lk[vp.direction];
-                  v = lp[vp.direction];
+                  vuuf = DP[dFwd];
+                  vuf = DS[dFwd];
+                  vu = LK[lFwd];
+                  v = LP[lFwd];
 
                 } else if (vuup.voxelType == vtData) {
-                  P3D pub = pu.offsetBy(BWard(vp.direction));
-                  Voxel &vub = (Voxel &) brick.at(pub);
-                  VoxelProperties vubp = voxelProperties[vub];
-                  P3D pb = pu.offsetBy(BWard(vp.direction));
-                  Voxel &vb = (Voxel &) brick.at(pb);
-                  VoxelProperties vbp = voxelProperties[vb];
+
+                  // ...[<]##... -> ...[+]#...
+                  // ...[#]##... -> ...[<]< ..
+                  // ...[<]--...    ...[-]+-..
+
+                  P3D puf = pu.offsetBy(FWard(lFwd));
+                  Voxel &vuf = (Voxel &) brick.at(puf);
+                  VoxelProperties vufp = voxelProperties[vuf];
+                  P3D pf = pu.offsetBy(FWard(lFwd));
+                  Voxel &vf = (Voxel &) brick.at(pf);
+                  VoxelProperties vfp = voxelProperties[vf];
 
                   assert(vuup.dataType == dtLock);
-                  vuu = dp[vp.direction];
-                  vu = ds[vp.direction];
-                  vub = lk[vp.direction];
-                  vb = lp[vp.direction];
-                  v = lb[vp.direction];
+                  vuu = DP[dFwd];
+                  vu = DS[dFwd];
+                  vuf = LK[lFwd];
+                  vf = LP[lFwd];
+                  v = LB[lFwd];
                 } else {
                   assert(vuup.voxelType == vtWall || vuup.voxelType == vtData);
                 }
                 break;
               case ltHead:
                 assert(vfp.voxelType == vtWall);
-                vf = Slot;
+                if (vf == Wall) {
+                  vf = Slot;
+                }
                 break;
               case ltBody:
                 break;
@@ -1955,20 +2049,6 @@ void Diagram2D::RebuildWithEnum(Brick<Voxel> &brick) const {
       // rods.
 
       case 1: case 5:
-        // for (size_t y = 0; y < brick.yMax; y += 1) {
-        //   for (size_t x = 0; x < brick.xMax; x += 1) {
-        //     switch (brick[z][y][x]) {
-        //       case 'X':
-        //         assert(brick[z - 1][y][x] == '+');
-        //         assert(brick[z + 1][y][x] == '+');
-        //         break;
-        //       case ' ':
-        //         break;
-        //       default:
-        //         break; // assert(false);
-        //     }
-        //   }
-        // }
         break;
 
       // Level 2 is the E/W data rods.
@@ -1977,88 +2057,231 @@ void Diagram2D::RebuildWithEnum(Brick<Voxel> &brick) const {
         for (size_t y = 0; y < brick.yMax; y += 1) {
           for (size_t x = 0; x < brick.xMax; x += 1) {
             P3D p(z, y, x);
-            Voxel &v = (Voxel &) brick.at(p);
-            VoxelProperties const &vp = voxelProperties[v];
+            Voxel &lv = (Voxel &) brick.at(p);
+            VoxelProperties const &lvp = voxelProperties[lv];
 
-            switch (VoxelType vt = vp.voxelType) {
-	    case vtUnkn:
-	      assert(vt != vtUnkn);
-	    case vtWall:
-	      continue;
-	    case vtSlot:
-	      continue;
-	    case vtLock:
-	      assert(vt != vtLock);
-	      break;
-	    case vtData:
-	      assert(vt == vtData);
-	      break;
-	    case eoVoxelType:
-	      assert(vt != eoVoxelType);
+            switch (VoxelType vt = lvp.voxelType) {
+            case vtUnkn:
+              assert(vt != vtUnkn);
+            case vtWall:
+              continue;
+            case vtSlot:
+              continue;
+            case vtLock:
+              assert(vt != vtLock);
+              break;
+            case vtData:
+              assert(vt == vtData);
+              break;
+            case eoVoxelType:
+              assert(vt != eoVoxelType);
             }
 
+            Direction lFwd = lvp.direction;
+
             P3D pd = p.offsetBy(D);
-            Voxel &vd = (Voxel &) brick.at(pd);
-            VoxelProperties vdp = voxelProperties[vd];
+            Voxel &lvd = (Voxel &) brick.at(pd);
+            VoxelProperties lvdp = voxelProperties[lvd];
+
+            P3D pdf = pd.offsetBy(FWard(lFwd));
+            Voxel &lvdf = (Voxel &) brick.at(pdf);
+            VoxelProperties lvdfp = voxelProperties[lvdf];
+            P3D pdff = pdf.offsetBy(FWard(lFwd));
+            Voxel &lvdff = (Voxel &) brick.at(pdff);
+            VoxelProperties lvdffp = voxelProperties[lvdff];
+            P3D pdfff = pdff.offsetBy(FWard(lFwd));
+            Voxel &lvdfff = (Voxel &) brick.at(pdfff);
+            VoxelProperties lvdfffp = voxelProperties[lvdfff];
+
             P3D pdd = pd.offsetBy(D);
-            Voxel &vdd = (Voxel &) brick.at(pdd);
-            VoxelProperties vddp = voxelProperties[vdd];
+            Voxel &lvdd = (Voxel &) brick.at(pdd);
+            VoxelProperties lvddp = voxelProperties[lvdd];
 
             P3D pu = p.offsetBy(U);
-            Voxel &vu = (Voxel &) brick.at(pu);
-            VoxelProperties vup = voxelProperties[vu];
-            P3D puu = pu.offsetBy(U);
-            Voxel &vuu = (Voxel &) brick.at(puu);
-            VoxelProperties vuup = voxelProperties[vuu];
+            Voxel &lvu = (Voxel &) brick.at(pu);
+            VoxelProperties lvup = voxelProperties[lvu];
 
-            P3D pf = p.offsetBy(FWard(vp.direction));
-            Voxel &vf = (Voxel &) brick.at(pf);
-            VoxelProperties vfp = voxelProperties[vf];
+            P3D up = pu.offsetBy(U);
+            Voxel &uv = (Voxel &) brick.at(up);
+            VoxelProperties uvp = voxelProperties[uv];
 
-            switch (DataType dt = vp.dataType) {
+            Direction uFwd = X;
+            if (uvp.voxelType == vtData) {
+              uFwd = uvp.direction;
+            }
+
+            P3D pf = p.offsetBy(FWard(lFwd));
+            Voxel &lvf = (Voxel &) brick.at(pf);
+            VoxelProperties lvfp = voxelProperties[lvf];
+            P3D pff = pf.offsetBy(FWard(lFwd));
+            Voxel &lvff = (Voxel &) brick.at(pff);
+            VoxelProperties lvffp = voxelProperties[lvff];
+            P3D pfff = pff.offsetBy(FWard(lFwd));
+            Voxel &lvfff = (Voxel &) brick.at(pfff);
+            VoxelProperties lvfffp = voxelProperties[lvfff];
+
+            P3D puf = pu.offsetBy(FWard(lFwd));
+            Voxel &lvuf = (Voxel &) brick.at(puf);
+            VoxelProperties lvufp = voxelProperties[lvuf];
+            P3D puff = puf.offsetBy(FWard(lFwd));
+            Voxel &lvuff = (Voxel &) brick.at(puff);
+            VoxelProperties lvuffp = voxelProperties[lvuff];
+            P3D pufff = puff.offsetBy(FWard(lFwd));
+            Voxel &lvufff = (Voxel &) brick.at(pufff);
+            VoxelProperties lvufffp = voxelProperties[lvufff];
+
+            P3D pb = p.offsetBy(BWard(lFwd));
+            Voxel &lvb = (Voxel &) brick.at(pb);
+            VoxelProperties lvbp = voxelProperties[lvb];
+            P3D pbb = pb.offsetBy(BWard(lFwd));
+            Voxel &lvbb = (Voxel &) brick.at(pbb);
+            VoxelProperties lvbbp = voxelProperties[lvbb];
+            P3D pbbb = pbb.offsetBy(BWard(lFwd));
+            Voxel &lvbbb = (Voxel &) brick.at(pbbb);
+            VoxelProperties lvbbbp = voxelProperties[lvbbb];
+
+            P3D pub = pu.offsetBy(BWard(lFwd));
+            Voxel &lvub = (Voxel &) brick.at(pub);
+            VoxelProperties lvubp = voxelProperties[lvub];
+            P3D pubb = pub.offsetBy(BWard(lFwd));
+            Voxel &lvubb = (Voxel &) brick.at(pubb);
+            VoxelProperties lvubbp = voxelProperties[lvubb];
+            P3D pubbb = pubb.offsetBy(BWard(lFwd));
+            Voxel &lvubbb = (Voxel &) brick.at(pubbb);
+            VoxelProperties lvubbbp = voxelProperties[lvubbb];
+
+            P3D pdb = pd.offsetBy(BWard(lFwd));
+            Voxel &lvdb = (Voxel &) brick.at(pdb);
+            VoxelProperties lvdbp = voxelProperties[lvdb];
+            P3D pdbb = pdb.offsetBy(BWard(lFwd));
+            Voxel &lvdbb = (Voxel &) brick.at(pdbb);
+            VoxelProperties lvdbbp = voxelProperties[lvdbb];
+            P3D pdbbb = pdbb.offsetBy(BWard(lFwd));
+            Voxel &lvdbbb = (Voxel &) brick.at(pdbbb);
+            VoxelProperties lvdbbbp = voxelProperties[lvdbbb];
+
+            switch (DataType dt = lvp.dataType) {
               case dtTest:
-                assert(vup.voxelType == vtWall);
-                if (vuup.voxelType == vtWall) {
-                  P3D puuf = puu.offsetBy(FWard(vp.direction));
-                  Voxel &vuuf = (Voxel &) brick.at(puuf);
-                  VoxelProperties vuufp = voxelProperties[vuuf];
-                  P3D puf = pu.offsetBy(FWard(vp.direction));
-                  Voxel &vuf = (Voxel &) brick.at(puf);
-                  VoxelProperties vufp = voxelProperties[vuf];
+                assert(dt != dtTest);
+                break;
+              case dtGate:
+                assert(uvp.voxelType == vtData && uvp.dataType == dtGate);
 
-                  assert(vuufp.voxelType == vtData);
-                  assert(vuufp.dataType == dtSlot);
+                assert(lvbbbp.voxelType == vtData && lvbbbp.dataType == dtBody);
+                assert(lvbbp.voxelType == vtData && lvbbp.dataType == dtBody);
+                assert(lvbp.voxelType == vtData && lvbp.dataType == dtBody);
+                assert(lvubbbp.voxelType == vtWall || lvubbbp.voxelType == vtSlot);
+                assert(lvubbp.voxelType == vtWall || lvubbp.voxelType == vtSlot);
+                assert(lvubp.voxelType == vtWall || lvubp.voxelType == vtSlot);
+                assert(lvup.voxelType == vtWall || lvup.voxelType == vtSlot);
+                // assert(lvufp.voxelType == vtWall || lvufp.voxelType == vtSlot);
+                // assert(lvuffp.voxelType == vtWall || lvuffp.voxelType == vtSlot);
 
-                  vuuf = dp[vp.direction];
-                  vuf = ds[vp.direction];
-                  vu = lk[vp.direction];
-                  v = lp[vp.direction];
+                if (gateToGateOrTest[lFwd][uFwd] == dtGate) {
+                  if (lvp.isComplementing) {
 
-                } else if (vuup.voxelType == vtData) {
-                  P3D pub = pu.offsetBy(BWard(vp.direction));
-                  Voxel &vub = (Voxel &) brick.at(pub);
-                  VoxelProperties vubp = voxelProperties[vub];
-                  P3D pb = pu.offsetBy(BWard(vp.direction));
-                  Voxel &vb = (Voxel &) brick.at(pb);
-                  VoxelProperties vbp = voxelProperties[vb];
+                    // ...###[0]...    ...###[0]...
+                    // ...###[#]... -> ...0  [ ]...
+                    // ...---[0]...    ...+--[-]...
 
-                  assert(vuup.dataType == dtGate);
-                  vuu = dp[vp.direction];
-                  vu = ds[vp.direction];
-                  vub = lk[vp.direction];
-                  vb = lp[vp.direction];
-                  v = lb[vp.direction];
+                    lvbbb = DP[lFwd];
+                    lvbb = DB[lFwd];
+                    lvb = DB[lFwd];
+                    lv = DB[lFwd];
+
+                    lvubbb = d0[lFwd];
+                    if (lvubb == Wall) {
+                      lvubb = Slot;
+                    }
+                    if (lvub == Wall) {
+                      lvub = Slot;
+                    }
+                    lvu = Slot;
+                  } else {
+
+                    // ...#[1]##...    ...#[1]##...
+                    // ...#[#]##... -> ...1[ ]  ...
+                    // ...-[1]--...    ...+[-]--...
+
+                    lvb = DP[lFwd];
+                    lv = DB[lFwd];
+                    lvf = DB[lFwd];
+                    lvff = DB[lFwd];
+
+                    lvub = d1[lFwd];
+                    lvu = Slot;
+                    if (lvuf == Wall) {
+                      lvuf = Slot;
+                    }
+                    if (lvuff == Wall) {
+                      lvuff = Slot;
+                    }
+                  }
                 } else {
-                  assert(vuup.voxelType == vtWall || vuup.voxelType == vtData);
+
+                  // ...##[G]#...    ...##[G]#...
+                  // ...##[#]#... -> ...> [ ] ...
+                  // ...--[G]-...    ...+-[-]-...
+
+                  lvbb = DP[lFwd];
+                  lvb = DB[lFwd];
+                  lv = DB[lFwd];
+                  lvf = DB[lFwd];
+
+                  lvubb = DQ[lFwd];
+                  if (lvub == Wall) {
+                    lvub = Slot;
+                  }
+                  lvu = Slot;
+                  if (lvuf == Wall) {
+                    lvuf = Slot;
+                  }
                 }
                 break;
-              case ltHead:
-                assert(vfp.voxelType == vtWall);
-                vf = Slot;
+              case dtHead:
+                assert(lvfp.voxelType == vtWall);
+                assert(lvffp.voxelType == vtWall);
+                if (lvf == Wall) {
+                  lvf = Slot;
+                }
+                if (lvff == Wall) {
+                  lvff = Slot;
+                }
+                if (lvfff == Wall) {
+                  lvfff = Slot;
+                }
                 break;
-              case ltBody:
+              case dtBody:
                 break;
-              case ltTail:
+              case dtPost:
+                if (lvd == DS[lFwd]) {
+                  if (lvf != DP[lFwd] &&
+                      lvff != DP[lFwd] &&
+                      lvbbb == DB[lFwd] &&
+                      lvbb == DB[lFwd] &&
+                      lvb == DB[lFwd]
+                     )
+                  {
+                    lvdbbb = DS[lFwd];
+                    lvbbb = DP[lFwd];
+                    lvdb = DS[lFwd];
+                    lvb = DP[lFwd];
+                    if (lvdbb == Wall) {
+                      lvdbb = Slot;
+                    }
+                    if (lvdf == Wall) {
+                      lvdf = Slot;
+                    }
+                    if (lvdff == Wall) {
+                      lvdff = Slot;
+                    }
+                    if (lvdfff == Wall) {
+                      lvdfff = Slot;
+                    }
+                  }
+                }
+                break;
+              case dtTail:
                 break;
               default:
                 assert(dt != eoDataType);
@@ -2071,126 +2294,391 @@ void Diagram2D::RebuildWithEnum(Brick<Voxel> &brick) const {
       // Level 3 is the query/gates for E/W and S/N data rods.
 
       case 3:
-        // for (size_t y = 0; y < brick.yMax; y += 1) {
-        //   for (size_t x = 0; x < brick.xMax; x += 1) {
-        //     switch (brick[z][y][x]) {
-        //       case '0': case '1':
-        //         assert(brick[z - 1][y][x] == '+');
-        //         assert(brick[z + 1][y][x] == '+');
-        //         break;
-        //       case ' ':
-        //         break;
-        //       default:
-        //         break; // assert(false);
-        //     }
-        //   }
-        // }
         break;
 
       // Level 4 is the S/N data rods.
 
       case 4:
-        // for (size_t y = 0; y < brick.yMax; y += 1) {
-        //   for (size_t x = 0; x < brick.xMax; x += 1) {
-        //     switch (brick[z][y][x]) {
-        //       case 'X':
-        //         assert(brick[z + 1][y][x] == ' ');
-        //         assert(brick[z + 2][y][x] == 'X');
-        //         brick[z + 0][y][x] = '+';
-        //         brick[z + 1][y][x] = 'X';
-        //         brick[z + 2][y][x] = '+';
-        //         break;
-        //       case '+':
-        //         assert(brick[z - 1][y][x] == '0' || brick[z - 1][y][x] == '1');
-        //         break;
-        //       case '|':
-        //       case 'v':
-        //       case '^':
-        //       case ' ':
-        //         break;
-        //       default:
-        //         break; // assert(false);
-        //     }
-        //   }
-        // }
+        for (size_t y = 0; y < brick.yMax; y += 1) {
+          for (size_t x = 0; x < brick.xMax; x += 1) {
+            P3D p(z, y, x);
+            Voxel &uv = (Voxel &) brick.at(p);
+            VoxelProperties const &uvp = voxelProperties[uv];
+
+            switch (VoxelType vt = uvp.voxelType) {
+            case vtUnkn:
+              assert(vt != vtUnkn);
+            case vtWall:
+              continue;
+            case vtSlot:
+              continue;
+            case vtLock:
+              assert(vt != vtLock);
+              break;
+            case vtData:
+              assert(vt == vtData);
+              break;
+            case eoVoxelType:
+              assert(vt != eoVoxelType);
+            }
+
+            Direction uFwd = uvp.direction;
+
+            P3D pu = p.offsetBy(U);
+            Voxel &uvu = (Voxel &) brick.at(pu);
+            VoxelProperties uvup = voxelProperties[uvu];
+
+            P3D puf = pu.offsetBy(FWard(uFwd));
+            Voxel &uvuf = (Voxel &) brick.at(puf);
+            VoxelProperties uvufp = voxelProperties[uvuf];
+            P3D puff = puf.offsetBy(FWard(uFwd));
+            Voxel &uvuff = (Voxel &) brick.at(puff);
+            VoxelProperties uvuffp = voxelProperties[uvuff];
+            P3D pufff = puff.offsetBy(FWard(uFwd));
+            Voxel &uvufff = (Voxel &) brick.at(pufff);
+            VoxelProperties uvufffp = voxelProperties[uvufff];
+
+            P3D puu = pu.offsetBy(U);
+            Voxel &uvuu = (Voxel &) brick.at(puu);
+            VoxelProperties uvuup = voxelProperties[uvuu];
+
+            P3D pd = p.offsetBy(D);
+            Voxel &uvd = (Voxel &) brick.at(pd);
+            VoxelProperties uvdp = voxelProperties[uvd];
+
+            P3D dp = pd.offsetBy(D);
+            Voxel &dv = (Voxel &) brick.at(dp);
+            VoxelProperties dvp = voxelProperties[dv];
+
+            Direction lFwd = X;
+            if (dvp.voxelType == vtData) {
+              lFwd = dvp.direction;
+            }
+
+            P3D pf = p.offsetBy(FWard(uFwd));
+            Voxel &uvf = (Voxel &) brick.at(pf);
+            VoxelProperties uvfp = voxelProperties[uvf];
+            P3D pff = pf.offsetBy(FWard(uFwd));
+            Voxel &uvff = (Voxel &) brick.at(pff);
+            VoxelProperties uvffp = voxelProperties[uvff];
+            P3D pfff = pff.offsetBy(FWard(uFwd));
+            Voxel &uvfff = (Voxel &) brick.at(pfff);
+            VoxelProperties uvfffp = voxelProperties[uvfff];
+
+            P3D pdf = pd.offsetBy(FWard(uFwd));
+            Voxel &uvdf = (Voxel &) brick.at(pdf);
+            VoxelProperties uvdfp = voxelProperties[uvdf];
+            P3D pdff = pdf.offsetBy(FWard(uFwd));
+            Voxel &uvdff = (Voxel &) brick.at(pdff);
+            VoxelProperties uvdffp = voxelProperties[uvdff];
+            P3D pdfff = pdff.offsetBy(FWard(uFwd));
+            Voxel &uvdfff = (Voxel &) brick.at(pdfff);
+            VoxelProperties uvdfffp = voxelProperties[uvdfff];
+
+            P3D pb = p.offsetBy(BWard(uFwd));
+            Voxel &uvb = (Voxel &) brick.at(pb);
+            VoxelProperties uvbp = voxelProperties[uvb];
+            P3D pbb = pb.offsetBy(BWard(uFwd));
+            Voxel &uvbb = (Voxel &) brick.at(pbb);
+            VoxelProperties uvbbp = voxelProperties[uvbb];
+            P3D pbbb = pbb.offsetBy(BWard(uFwd));
+            Voxel &uvbbb = (Voxel &) brick.at(pbbb);
+            VoxelProperties uvbbbp = voxelProperties[uvbbb];
+
+            P3D pdb = pd.offsetBy(BWard(uFwd));
+            Voxel &uvdb = (Voxel &) brick.at(pdb);
+            VoxelProperties uvdbp = voxelProperties[uvdb];
+            P3D pdbb = pdb.offsetBy(BWard(uFwd));
+            Voxel &uvdbb = (Voxel &) brick.at(pdbb);
+            VoxelProperties uvdbbp = voxelProperties[uvdbb];
+            P3D pdbbb = pdbb.offsetBy(BWard(uFwd));
+            Voxel &uvdbbb = (Voxel &) brick.at(pdbbb);
+            VoxelProperties uvdbbbp = voxelProperties[uvdbbb];
+
+            P3D pub = pu.offsetBy(BWard(uFwd));
+            Voxel &uvub = (Voxel &) brick.at(pub);
+            VoxelProperties uvubp = voxelProperties[uvub];
+            P3D pubb = pub.offsetBy(BWard(uFwd));
+            Voxel &uvubb = (Voxel &) brick.at(pubb);
+            VoxelProperties uvubbp = voxelProperties[uvubb];
+            P3D pubbb = pubb.offsetBy(BWard(uFwd));
+            Voxel &uvubbb = (Voxel &) brick.at(pubbb);
+            VoxelProperties uvubbbp = voxelProperties[uvubbb];
+
+            switch (DataType dt = uvp.dataType) {
+              case dtTest:
+                assert(dt != dtTest);
+                break;
+              case dtGate:
+                assert(dvp.voxelType == vtData && dvp.dataType == dtBody);
+
+                assert(uvbbbp.voxelType == vtData && uvbbbp.dataType == dtBody);
+                assert(uvbbp.voxelType == vtData && uvbbp.dataType == dtBody);
+                assert(uvbp.voxelType == vtData && uvbp.dataType == dtBody);
+                assert(uvdbbbp.voxelType == vtWall || uvdbbbp.voxelType == vtSlot);
+                assert(uvdbbp.voxelType == vtWall || uvdbbp.voxelType == vtSlot);
+                assert(uvdbp.voxelType == vtWall || uvdbp.voxelType == vtSlot);
+                assert(uvdp.voxelType == vtWall || uvdp.voxelType == vtSlot);
+                // assert(uvdfp.voxelType == vtWall || uvdfp.voxelType == vtSlot);
+                // assert(uvdffp.voxelType == vtWall || uvdffp.voxelType == vtSlot);
+
+                if (gateToGateOrTest[uFwd][lFwd] == dtGate) {
+                  if (uvp.isComplementing) {
+
+                    // ...###[0]...    ...###[0]...
+                    // ...###[#]... -> ...   [ ]...
+                    // ...---[0]...    ...+--[-]...
+
+                    uvbbb = DP[uFwd];
+                    uvbb = DB[uFwd];
+                    uvb = DB[uFwd];
+                    uv = DB[uFwd];
+
+                    uvdbbb = d0[uFwd];
+                    if (uvdbb == Wall) {
+                      uvdbb = Slot;
+                    }
+                    if (uvdb == Wall) {
+                      uvdb = Slot;
+                    }
+                    uvd = Slot;
+                  } else {
+
+                    // ...#[1]##...    ...#[1]##...
+                    // ...#[#]##... -> ...@[ ]  ...
+                    // ...-[1]--...    ...+[-]--...
+
+                    uvb = DP[uFwd];
+                    uv = DB[uFwd];
+                    uvf = DB[uFwd];
+                    uvff = DB[uFwd];
+
+                    uvdb = d1[uFwd];
+                    uvd = Slot;
+                    if (uvdf == Wall) {
+                      uvdf = Slot;
+                    }
+                    if (uvdff == Wall) {
+                      uvdff = Slot;
+                    }
+                  }
+                } else {
+
+                  // ...##[?]#...    ...##[?]#...
+                  // ...##[#]#... -> ...> [ ] ...
+                  // ...--[?]-...    ...+-[-]-...
+
+                  uvbb = DP[uFwd];
+                  uvb = DB[uFwd];
+                  uv = DB[uFwd];
+                  uvf = DB[uFwd];
+
+                  uvdbb = DQ[uFwd];
+                  if (uvdb == Wall) {
+                    uvdb = Slot;
+                  }
+                  uvd = Slot;
+                  if (uvdf == Wall) {
+                    uvdf = Slot;
+                  }
+                }
+                break;
+              case dtHead:
+                assert(uvfp.voxelType == vtWall);
+                assert(uvffp.voxelType == vtWall);
+                if (uvf == Wall) {
+                  uvf = Slot;
+                }
+                if (uvff == Wall) {
+                  uvff = Slot;
+                }
+                if (uvfff == Wall) {
+                  uvfff = Slot;
+                }
+                break;
+              case dtBody:
+                break;
+              case dtPost:
+                if (uvu == DS[uFwd]) {
+                  if (uvf != DP[uFwd] &&
+                      uvff != DP[uFwd] &&
+                      uvbbb == DB[uFwd] &&
+                      uvbb == DB[uFwd] &&
+                      uvb == DB[uFwd]
+                     )
+                  {
+                    uvubbb = DS[uFwd];
+                    uvbbb = DP[uFwd];
+                    uvub = DS[uFwd];
+                    uvb = DP[uFwd];
+                    if (uvubb == Wall) {
+                      uvubb = Slot;
+                    }
+                    if (uvuf == Wall) {
+                      uvuf = Slot;
+                    }
+                    if (uvuff == Wall) {
+                      uvuff = Slot;
+                    }
+                    if (uvufff == Wall) {
+                      uvufff = Slot;
+                    }
+                  }
+                }
+                break;
+              case dtTail:
+                break;
+              default:
+                assert(dt != eoDataType);
+                break;
+            }
+          }
+        }
         break;
 
       // Level 6 is the E/W lock rods.
 
       case 6:
-        // for (size_t y = 0; y < brick.yMax; y += 1) {
-        //   for (size_t x = 0; x < brick.xMax; x += 1) {
-        //     P3D p(z, y, x);
-        //     P3D pd = p.offsetBy(D);
-        //     P3D pdd = pd.offsetBy(D);
-	// 
-        //     Voxel &v = (Voxel &) brick.at(p);
-        //     Voxel &vd = (Voxel &) brick.at(pd);
-        //     Voxel &vdd = (Voxel &) brick.at(pdd);
-	// 
-        //     VoxelProperties vp = voxelProperties[v];
-        //     VoxelProperties vdp = voxelProperties[vd];
-        //     VoxelProperties vddp = voxelProperties[vdd];
-	// 
-        //     P3D pf = p.offsetBy(FWard(vp.direction));
-        //     Voxel &vf = (Voxel &) brick.at(pf);
-        //     VoxelProperties vfp = voxelProperties[vf];
-	// 
-        //     assert(vp.voxelType == vtLock);
-	// 
-        //     switch (vp.lockType) {
-        //       case ltLock:
-        //         assert(vdp.voxelType == vtWall);
-        //         if (vddp.voxelType == vtWall) {
-        //           P3D pddf = pdd.offsetBy(FWard(vp.direction));
-        //           Voxel &vddf = (Voxel &) brick.at(pddf);
-        //           VoxelProperties vddfp = voxelProperties[vddf];
-        //           P3D pdf = pd.offsetBy(FWard(vp.direction));
-        //           Voxel &vdf = (Voxel &) brick.at(pdf);
-        //           VoxelProperties vdfp = voxelProperties[vdf];
-	// 
-        //           assert(vddfp.voxelType == vtData);
-        //           assert(vddfp.dataType == dtSlot);
-	// 
-        //           vddf = dp[vp.direction];
-        //           vdf = ds[vp.direction];
-        //           vd = lk[vp.direction];
-        //           v = lp[vp.direction];
-	// 
-        //         } else if (vddp.voxelType == vtData) {
-        //           P3D pdb = pd.offsetBy(BWard(vp.direction));
-        //           Voxel &vdb = (Voxel &) brick.at(pdb);
-        //           VoxelProperties vdbp = voxelProperties[vdb];
-        //           P3D pb = pd.offsetBy(BWard(vp.direction));
-        //           Voxel &vb = (Voxel &) brick.at(pb);
-        //           VoxelProperties vbp = voxelProperties[vb];
-	// 
-        //           assert(vddp.dataType == dtLock);
-        //           vdd = dp[vp.direction];
-        //           vd = ds[vp.direction];
-        //           vdb = lk[vp.direction];
-        //           vb = lp[vp.direction];
-        //           v = lb[vp.direction];
-        //         } else {
-        //           assert(vddp.voxelType == vtWall || vddp.voxelType == vtData);
-        //         }
-        //         break;
-        //       case ltHead:
-        //         assert(vfp.voxelType == vtWall);
-        //         vf = Slot;
-        //         break;
-        //       case ltBody:
-        //         break;
-        //       case ltTail:
-        //         break;
-        //       default:
-        //         break; // assert(false);
-        //     }
-        //   }
-        // }
+        for (size_t y = 0; y < brick.yMax; y += 1) {
+          for (size_t x = 0; x < brick.xMax; x += 1) {
+            P3D p(z, y, x);
+            Voxel &v = (Voxel &) brick.at(p);
+            VoxelProperties const &vp = voxelProperties[v];
+            VoxelType vt = vp.voxelType;
+
+            switch (vt) {
+            case vtUnkn:
+              assert(vt != vtUnkn);
+            case vtWall:
+              continue;
+            case vtSlot:
+              continue;
+            case vtLock:
+              assert(vt == vtLock);
+              break;
+            case vtData:
+              assert(vp.dataType == dtLock);
+              break;
+            case eoVoxelType:
+              assert(vt != eoVoxelType);
+            }
+
+            Direction lFwd =
+                vt == vtLock ? vp.direction : dataToLockDirection[vp.direction];
+            Direction dFwd =
+                vt == vtLock ? lockToDataDirection[vp.direction] : vp.direction;
+
+            P3D pd = p.offsetBy(D);
+            Voxel &vd = (Voxel &) brick.at(pd);
+            VoxelProperties vdp = voxelProperties[vd];
+
+            P3D pdd = pd.offsetBy(D);
+            Voxel &vdd = (Voxel &) brick.at(pdd);
+            VoxelProperties vddp = voxelProperties[vdd];
+
+            // For vtData/dtLock's....
+
+            if (vt == vtData && vp.dataType == dtLock) {
+              P3D pddf = pdd.offsetBy(FWard(lFwd));
+              Voxel &vddf = (Voxel &) brick.at(pddf);
+              VoxelProperties vddfp = voxelProperties[vddf];
+
+              P3D pf = p.offsetBy(FWard(lFwd));
+              Voxel &vf = (Voxel &) brick.at(pf);
+              VoxelProperties vfp = voxelProperties[vf];
+
+              P3D pdf = pd.offsetBy(FWard(lFwd));
+              Voxel &vdf = (Voxel &) brick.at(pdf);
+              VoxelProperties vdfp = voxelProperties[vdf];
+              P3D pdff = pdf.offsetBy(FWard(lFwd));
+              Voxel &vdff = (Voxel &) brick.at(pdff);
+              VoxelProperties vdffp = voxelProperties[vdff];
+
+
+              // Setup a key for this lock, and change the data rod's
+              // dtLock to a dtSlot....
+
+              assert(vfp.voxelType == vtLock && vfp.lockType == ltBody);
+              assert(vdp.voxelType == vtWall);
+              assert(vdfp.voxelType == vtWall);
+              assert(vddp.voxelType == vtData && vddp.dataType == dtLock);
+
+              vdd = DP[dFwd];
+              vd = DS[dFwd];
+              vdf = LK[lFwd];
+              if (vdff == Wall) {
+                vdff = Slot;
+              }
+              vf = LP[lFwd];
+              v = LB[lFwd];
+              continue;
+            }
+
+            // For vtLock's....
+
+            P3D pf = p.offsetBy(FWard(lFwd));
+            Voxel &vf = (Voxel &) brick.at(pf);
+            VoxelProperties vfp = voxelProperties[vf];
+
+            switch (LockType lt = vp.lockType) {
+              case ltLock:
+                assert(vdp.voxelType == vtWall);
+                assert(vfp.voxelType == vtLock && vfp.lockType == ltBody);
+
+                if (vddp.voxelType == vtWall) {
+                  P3D pddf = pdd.offsetBy(FWard(lFwd));
+                  Voxel &vddf = (Voxel &) brick.at(pddf);
+                  VoxelProperties vddfp = voxelProperties[vddf];
+                  P3D pdf = pd.offsetBy(FWard(lFwd));
+                  Voxel &vdf = (Voxel &) brick.at(pdf);
+                  VoxelProperties vdfp = voxelProperties[vdf];
+
+                  assert(vddfp.voxelType == vtData && vddfp.dataType == dtSlot);
+
+                  vddf = DP[dFwd];
+                  vdf = DS[dFwd];
+                  vd = LK[lFwd];
+                  v = LP[lFwd];
+
+                } else if (vddp.voxelType == vtData) {
+                  P3D pdf = pd.offsetBy(FWard(lFwd));
+                  Voxel &vdf = (Voxel &) brick.at(pdf);
+                  VoxelProperties vdfp = voxelProperties[vdf];
+                  P3D pf = p.offsetBy(FWard(lFwd));
+                  Voxel &vf = (Voxel &) brick.at(pf);
+                  VoxelProperties vfp = voxelProperties[vf];
+
+                  assert(vddp.dataType == dtLock);
+                  vdd = DP[dFwd];
+                  vd = DS[dFwd];
+                  vdf = LK[lFwd];
+                  vf = LP[lFwd];
+                  v = LB[lFwd];
+                } else {
+                  assert(vddp.voxelType == vtWall || vddp.voxelType == vtData);
+                }
+                break;
+              case ltHead:
+                assert(vfp.voxelType == vtWall);
+                if (vf == Wall) {
+                  vf = Slot;
+                }
+                break;
+              case ltBody:
+                break;
+              case ltTail:
+                break;
+              default:
+                assert(lt != eoLockType);
+                break;
+            }
+          }
+        }
         break;
     }
   }
 
-  brick.Dump();
+  if (optVerbose) {
+    brick.Dump();
+  }
 }

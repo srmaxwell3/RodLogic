@@ -1,0 +1,93 @@
+./rlic -0 -b -c 0 ../full-dcff.txt
+Rod Count by (Length, Fan-In, Fan-Out):
+(    7,   1,   2):     1
+(   11,   2,   2):     2
+(   12,   2,   2):     1
+(   13,   1,   0):     1
+(   13,   3,   0):     1
+(   14,   0,   2):     1
+(   14,   0,   3):     1
+(   17,   1,   0):     1
+(   17,   2,   0):     1
+(   20,   1,   2):     1
+
+Rod Count (and # incomplete) by Direction:
+    E:     4 (    0)
+    S:     3 (    0)
+    D:     0 (    0)
+    W:     2 (    0)
+    N:     2 (    0)
+    U:     0 (    0)
+Total:    11 (    0)
+
+Earliest input: E
+Earliest output: E
+Earliest debugOutput: None
+
+Refactoring....
+limitTowards[E] =   12
+limitTowards[S] =   16
+limitTowards[D] =    0
+limitTowards[W] =   21
+limitTowards[N] =   12
+limitTowards[U] =    0
+
+Row separations:
+separations[ 2] =    5
+
+Column separations:
+separations[ 2] =    2
+separations[ 5] =    2
+
+Not executing (optCycleCount == 0).
+Removed 6 empty row(s).
+Removed 9 empty col(s).
+Removed 3 squeezable row(s).
+Removed 10 squeezable col(s).
+  0         1  
+  0         0  
+  ...............
+ 0.   v  vv     . 0
+  .   |  || ^   .
+  .  <|--XX-|-< .
+  .>I-X--01>|   .
+  .>I-X--|1>|   .
+  .   | ^|| |   .
+  . >-X-11|-|-O>.
+  .   |<000-X-< .
+  .   | |vv |   .
+  . >-|-X---|>  .
+10.   v |   |   .10
+  .     ^   ^   .
+  ...............
+  0         1  
+  0         0  
+
+rlic: Warning: <E:3:8-0> has inputs/[debug] outputs, but no label!
+rlic: Warning: <E:4:8-0> has inputs/[debug] outputs, but no label!
+rlic: Warning: <E:6:12-1> has inputs/[debug] outputs, but no label!
+Rod Count by (Length, Fan-In, Fan-Out):
+(    6,   1,   2):     1
+(    7,   2,   2):     1
+(    8,   0,   2):     1
+(    8,   0,   3):     1
+(    8,   2,   2):     2
+(    9,   1,   0):     1
+(    9,   2,   0):     1
+(   10,   1,   0):     1
+(   10,   3,   0):     1
+(   11,   1,   2):     1
+
+Rod Count (and # incomplete) by Direction:
+    E:     4 (    0)
+    S:     3 (    0)
+    D:     0 (    0)
+    W:     2 (    0)
+    N:     2 (    0)
+    U:     0 (    0)
+Total:    11 (    0)
+
+Earliest input: E
+Earliest output: E
+Earliest debugOutput: None
+
