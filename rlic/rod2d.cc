@@ -8,7 +8,6 @@
 using std::ostringstream;
 
 #include "string_trims.h"
-#include "voxel.h"
 
 extern bool optRodsInitialValue;
 extern bool optShowEvaluatingRods;
@@ -160,12 +159,12 @@ Rod2D::Rod2D(Diagram2D &diagram, P2D const &pStart, Direction d) :
   if (0 < inputs.size()) {
     if (1 < inputs.size()) {
       fprintf(stderr,
-	      "cam.r: Warning: Rod2D(%s) has more than 1 (%lu) inputs!",
+	      "rlic: Warning: Rod2D(%s) has more than 1 (%lu) inputs!",
 	      rodsId().c_str(),
 	      inputs.size()
 	     );
       fprintf(stdout,
-	      "cam.r: Warning: Rod2D(%s) has more than 1 (%lu) inputs!",
+	      "rlic: Warning: Rod2D(%s) has more than 1 (%lu) inputs!",
 	      rodsId().c_str(),
 	      inputs.size()
 	     );
@@ -174,12 +173,12 @@ Rod2D::Rod2D(Diagram2D &diagram, P2D const &pStart, Direction d) :
   if (0 < outputs.size()) {
     if (1 < outputs.size()) {
       fprintf(stderr,
-	      "cam.r: Warning: Rod2D(%s) has more than 1 (%lu) outputs!",
+	      "rlic: Warning: Rod2D(%s) has more than 1 (%lu) outputs!",
 	      rodsId().c_str(),
 	      inputs.size()
 	     );
       fprintf(stdout,
-	      "cam.r: Warning: Rod2D(%s) has more than 1 (%lu) outputs!",
+	      "rlic: Warning: Rod2D(%s) has more than 1 (%lu) outputs!",
 	      rodsId().c_str(),
 	      inputs.size()
 	     );
@@ -188,12 +187,12 @@ Rod2D::Rod2D(Diagram2D &diagram, P2D const &pStart, Direction d) :
   if (0 < debugOutputs.size()) {
     if (1 < debugOutputs.size()) {
       fprintf(stderr,
-	      "cam.r: Warning: Rod2D(%s) has more than 1 (%lu) debugOutputs!",
+	      "rlic: Warning: Rod2D(%s) has more than 1 (%lu) debugOutputs!",
 	      rodsId().c_str(),
 	      inputs.size()
 	     );
       fprintf(stdout,
-	      "cam.r: Warning: Rod2D(%s) has more than 1 (%lu) debugOutputs!",
+	      "rlic: Warning: Rod2D(%s) has more than 1 (%lu) debugOutputs!",
 	      rodsId().c_str(),
 	      inputs.size()
 	     );
@@ -202,11 +201,11 @@ Rod2D::Rod2D(Diagram2D &diagram, P2D const &pStart, Direction d) :
   if ((hasInputs() || hasOutputs() || hasDebugOutputs()) && !label.IsDefined()) {
     label = rodsId();
     fprintf(stderr,
-            "cam.r: Warning: %s has inputs/[debug]outputs, but no label!\n",
+            "rlic: Warning: %s has inputs/[debug]outputs, but no label!\n",
             label.ToString().c_str()
            );
     fprintf(stdout,
-            "cam.r: Warning: %s has inputs/[debug] outputs, but no label!\n",
+            "rlic: Warning: %s has inputs/[debug] outputs, but no label!\n",
             label.ToString().c_str()
            );
   }
@@ -455,13 +454,13 @@ void Rod2D::setFirstTick (int t) {
   if (tickFirstSet != -1) {
     if (tickFirstSet != t && optWarnings) {
       fprintf(stderr,
-	      "cam.r: Warning: Rod2D(%s): First tick was set to %d, now to %d?\n",
+	      "rlic: Warning: Rod2D(%s): First tick was set to %d, now to %d?\n",
 	      rodsId().c_str(),
 	      tickFirstSet,
 	      t
 	     );
       fprintf(stdout,
-	      "cam.r: Warning: Rod2D(%s): First tick was set to %d, now to %d?\n",
+	      "rlic: Warning: Rod2D(%s): First tick was set to %d, now to %d?\n",
 	      rodsId().c_str(),
 	      tickFirstSet,
 	      t
@@ -502,11 +501,11 @@ void Rod2D::verifyInputDelays(SetOfRod2Ds &seenAlready) {
 
   if (tickFirstSet == -1 && optWarnings) {
     fprintf(stderr,
-            "cam.r: Warning: Rod2D(%s): First tick never set!\n",
+            "rlic: Warning: Rod2D(%s): First tick never set!\n",
             rodsId().c_str()
            );
     fprintf(stdout,
-            "cam.r: Warning: Rod2D(%s): First tick never set!\n",
+            "rlic: Warning: Rod2D(%s): First tick never set!\n",
             rodsId().c_str()
            );
   }
@@ -516,7 +515,7 @@ void Rod2D::verifyInputDelays(SetOfRod2Ds &seenAlready) {
       if (r->tickFirstSetAt() != (tickFirstSet - 2)) {
 	if (optWarnings) {
 	  fprintf(stderr,
-		  "cam.r: Warning: Rod2D(%s): "
+		  "rlic: Warning: Rod2D(%s): "
                   "First tick was set to %d, but input from Rod2D(%s) was set to %d?\n",
 		  rodsId().c_str(),
 		  tickFirstSet,
@@ -524,7 +523,7 @@ void Rod2D::verifyInputDelays(SetOfRod2Ds &seenAlready) {
 		  r->tickFirstSet
 		  );
 	  fprintf(stdout,
-		  "cam.r: Warning: Rod2D(%s): "
+		  "rlic: Warning: Rod2D(%s): "
                   "First tick was set to %d, but input from Rod2D(%s) was set to %d?\n",
 		  rodsId().c_str(),
 		  tickFirstSet,
@@ -543,7 +542,7 @@ void Rod2D::verifyInputDelays(SetOfRod2Ds &seenAlready) {
       if (r->tickFirstSetAt() != (tickFirstSet - 1)) {
 	if (optWarnings) {
 	  fprintf(stderr,
-		  "cam.r: Warning: Rod2D(%s): "
+		  "rlic: Warning: Rod2D(%s): "
                   "First tick was set to %d, but input from Rod2D(%s) was set to %d?\n",
 		  rodsId().c_str(),
 		  tickFirstSet,
@@ -551,7 +550,7 @@ void Rod2D::verifyInputDelays(SetOfRod2Ds &seenAlready) {
 		  r->tickFirstSet
 		  );
 	  fprintf(stdout,
-		  "cam.r: Warning: Rod2D(%s): "
+		  "rlic: Warning: Rod2D(%s): "
                   "First tick was set to %d, but input from Rod2D(%s) was set to %d?\n",
 		  rodsId().c_str(),
 		  tickFirstSet,
@@ -572,25 +571,28 @@ void Rod2D::connectWith(Rod2D *that, RodIntersectionType intersectionType) {
   RodConnectionType toThis = rodConnectionThisToThat[that->direction][direction];
 
   switch (intersectionType) {
-    case riCrossing:
-    case riComplement:
-    case riIdentity:
-    case riLocking:
-      assert(toThat != rcNone ||
-             intersectionType == riCrossing ||
-             intersectionType == riLocking
-            );
-      assert(toThis != rcNone ||
-             intersectionType == riCrossing ||
-             intersectionType == riLocking
-            );
+  case riCrossing:
+  case riComplement:
+  case riIdentity:
+  case riLocking:
+    assert(toThat != rcNone ||
+	   intersectionType == riCrossing ||
+	   intersectionType == riLocking
+	   );
+    assert(toThis != rcNone ||
+	   intersectionType == riCrossing ||
+	   intersectionType == riLocking
+	   );
 
-      connectedTo[toThat].insert(RodConnection(that, intersectionType));
-      that->connectedTo[toThis].insert(RodConnection(this, intersectionType));
+    connectedTo[toThat].insert(RodConnection(that, intersectionType));
+    that->connectedTo[toThis].insert(RodConnection(this, intersectionType));
 
-    case riNone:
-      assert(intersectionType != riNone && intersectionType != eoRodIntersectionType);
-      break;
+  case riNone:
+    assert(intersectionType != riNone);
+    break;
+  case eoRodIntersectionType:
+    assert(intersectionType != eoRodIntersectionType);
+    break;
   }
 }
 
@@ -916,7 +918,7 @@ void Rod2D::dump(Diagram2D const &diagram) const {
   fprintf(stdout, "\n");
 }
 
-void Rod2D::RebuildWithChar(Diagram2D const &diagram, PlateOfInt &plate) const {
+void Rod2D::RebuildWithChar(Diagram2D const &diagram, Plate<char> &plate) const {
   for (auto const &p : *this) {
     plate[p.y][p.x] = diagram.at(p);
   }
@@ -924,11 +926,11 @@ void Rod2D::RebuildWithChar(Diagram2D const &diagram, PlateOfInt &plate) const {
 
 void Rod2D::RebuildWithEnum
     (Diagram2D const &diagram,
-     PlateOfInt &plate,
+     Plate<Voxel> &plate,
      size_t scaleBy
     ) const
 {
-  if (rodIsALockRod()) {
+  if (isALockRod) {
 
     //   LBEL, ...,  LBSL, ...,  LBDL, ...,  LBWL, ...,  LBNL, ...,  LBUL, ...,
     //   LHEL, ...,  LHSL, ...,  LHDL, ...,  LHWL, ...,  LHNL, ...,  LHUL, ...,
@@ -950,34 +952,36 @@ void Rod2D::RebuildWithEnum
     for (auto const &p : *this) {
       Voxel l = Unkn;
       switch (char c = diagram.at(p)) {
-        case '>':
-        case 'v':
-        case '<':
-        case '^':
-          if (p == headAt) {
-            l = lh[direction];
-          } else if (p == tailAt) {
-            l = lt[direction];
-          } else {
-            l = lk[direction];
-          }
-          break;
-        case '-':
-        case '|':
-          l = lb[direction];
-          break;
-        default:
-          assert(l != Unkn);
+      case '>':
+      case 'v':
+      case '<':
+      case '^':
+	if (p == headAt) {
+	  l = lh[direction];
+	} else if (p == tailAt) {
+	  l = lt[direction];
+	} else {
+	  l = lk[direction];
+	}
+	break;
+      case '-':
+      case '|':
+	l = lb[direction];
+	break;
+      default:
+	assert(l != Unkn);
       }
 
       assert(l != Unkn);
 
       P2D dst(p.y * scaleBy + scaleBy, p.x * scaleBy + scaleBy);
       plate.at(dst) = l;
-      l = lb[direction];
-      for (int i = 1; i < scaleBy; i += 1) {
-        dst.move(FWard(direction));
-        plate.at(dst) = l;
+      if (voxelProperties[l].lockType != ltHead) {
+	l = lb[direction];
+	for (int i = 1; i < scaleBy; i += 1) {
+	  dst.move(FWard(direction));
+	  plate.at(dst) = l;
+	}
       }
     }
   } else {
@@ -1076,10 +1080,12 @@ void Rod2D::RebuildWithEnum
 
       P2D dst(p.y * scaleBy + scaleBy, p.x * scaleBy + scaleBy);
       plate.at(dst) = d;
-      d = db[direction];
-      for (int i = 1; i < scaleBy; i += 1) {
-        dst.move(FWard(direction));
-        plate.at(dst) = d;
+      if (voxelProperties[d].dataType != dtHead) {
+	d = db[direction];
+	for (int i = 1; i < scaleBy; i += 1) {
+	  dst.move(FWard(direction));
+	  plate.at(dst) = d;
+	}
       }
     }
   }

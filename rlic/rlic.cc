@@ -24,6 +24,7 @@ using std::string;
 #include "diagram2d.h"
 #include "edged_bool.h"
 #define EBQT EdgedBool::QueryType
+#include "voxel.h"
 
 EBQT optLogStateOnLabelState = EBQT::eoQueryType;
 string optLogStateOnLabel = "";
@@ -40,6 +41,7 @@ bool optShowPerformance = false;
 bool optShowRods = false;
 bool optShowChangedStateEveryTick = false;
 bool optShowStateEveryTick = false;
+bool optShowWaveforms = false;
 bool optWarnings = false;
 
 void processInputFrom(istream &in, map<string, vector<int>> &inputs) {
@@ -69,7 +71,7 @@ void processInputFrom(istream &in, map<string, vector<int>> &inputs) {
 
     if (sscanf(sPtr, " %[{]%n", sBuf, &sCnt) != 1) {
       fprintf(stderr,
-              "cam.r: Error: %d, %ld: Input syntax error; "
+              "rlic: Error: %d, %ld: Input syntax error; "
               "expected '^ >[#{]<' at '%s'!\n",
               lineNumber,
               ((sPtr + sCnt) - sStart),
@@ -90,7 +92,7 @@ void processInputFrom(istream &in, map<string, vector<int>> &inputs) {
       name = sBuf;
     } else {
       fprintf(stderr,
-              "cam.r: Error: %d, %ld: Input syntax error; "
+              "rlic: Error: %d, %ld: Input syntax error; "
               "expected '^{ >\\w+< ,' (symbol name) at '%s'!\n",
               lineNumber,
               ((sPtr + sCnt) - sStart),
@@ -105,7 +107,7 @@ void processInputFrom(istream &in, map<string, vector<int>> &inputs) {
 
     if (sscanf(sPtr, " %[{]%n", sBuf, &sCnt) != 1) {
       fprintf(stderr,
-              "cam.r: Error: %d, %ld: Input syntax error; "
+              "rlic: Error: %d, %ld: Input syntax error; "
               "expected '^{ \\w+ , >{<' at '%s'!\n",
               lineNumber,
               ((sPtr + sCnt) - sStart),
@@ -138,7 +140,7 @@ void processInputFrom(istream &in, map<string, vector<int>> &inputs) {
 
       if (sscanf(sPtr, " %[}]%n", sBuf, &sCnt) != 1) {
         fprintf(stderr,
-                "cam.r: Error: %d, %ld: Input syntax error; "
+                "rlic: Error: %d, %ld: Input syntax error; "
                 "expected '^{ \\w+, { \\d+ ( , \\d+ )* >}<' at '%s'!\n",
                 lineNumber,
                 ((sPtr + sCnt) - sStart),
@@ -149,7 +151,7 @@ void processInputFrom(istream &in, map<string, vector<int>> &inputs) {
       sPtr += sCnt;
     } else {
       fprintf(stderr,
-              "cam.r: Error: %d, %ld: Input syntax error; "
+              "rlic: Error: %d, %ld: Input syntax error; "
               "expected '^{ \\w+, { >\\d+<' (integer->bool value) at '%s'!\n",
               lineNumber,
               ((sPtr + sCnt) - sStart),
@@ -162,7 +164,7 @@ void processInputFrom(istream &in, map<string, vector<int>> &inputs) {
 
     if (sscanf(sPtr, " %[}]%n", sBuf, &sCnt) != 1) {
       fprintf(stderr,
-              "cam.r: Error: %d, %ld: Input syntax error; "
+              "rlic: Error: %d, %ld: Input syntax error; "
               "expected '^{ \\w+, { \\d+ ( , \\d+ ) } >}<' at '%s'!\n",
               lineNumber,
               ((sPtr + sCnt) - sStart),
@@ -200,7 +202,7 @@ void processTableInputFrom(istream &in, map<string, vector<int>> &inputs) {
 
     if (sscanf(sPtr, " %[{]%n", sBuf, &sCnt) != 1) {
       fprintf(stderr,
-              "cam.r: Error: %d, %ld: Input syntax error; "
+              "rlic: Error: %d, %ld: Input syntax error; "
               "expected '^ >[#{]<' at '%s'!\n",
               lineNumber,
               ((sPtr + sCnt) - sStart),
@@ -229,7 +231,7 @@ void processTableInputFrom(istream &in, map<string, vector<int>> &inputs) {
       sPtr += sCnt;
     } else {
       fprintf(stderr,
-              "cam.r: Error: %d, %ld: Input syntax error; "
+              "rlic: Error: %d, %ld: Input syntax error; "
               "expected '^ >\\w+<' (first symbol name) at '%s'!\n",
               lineNumber,
               ((sPtr + sCnt) - sStart),
@@ -254,7 +256,7 @@ void processTableInputFrom(istream &in, map<string, vector<int>> &inputs) {
 
     if (sscanf(sPtr, " %[}]%n", sBuf, &sCnt) != 1) {
       fprintf(stderr,
-              "cam.r: Error: %d, %ld: Input syntax error; "
+              "rlic: Error: %d, %ld: Input syntax error; "
               "expected '^{ \\w+, >( , \\w+ ) }<' (additional symbol name(s), and '}') at '%s'!\n",
               lineNumber,
               ((sPtr + sCnt) - sStart),
@@ -285,7 +287,7 @@ void processTableInputFrom(istream &in, map<string, vector<int>> &inputs) {
 
     if (sscanf(sPtr, " %[{]%n", sBuf, &sCnt) != 1) {
       fprintf(stderr,
-              "cam.r: Error: %d, %ld: Input syntax error; "
+              "rlic: Error: %d, %ld: Input syntax error; "
               "expected '^ >[#{]<' at '%s'!\n",
               lineNumber,
               ((sPtr + sCnt) - sStart),
@@ -318,7 +320,7 @@ void processTableInputFrom(istream &in, map<string, vector<int>> &inputs) {
 
       if (sscanf(sPtr, " %[}]%n", sBuf, &sCnt) != 1) {
         fprintf(stderr,
-                "cam.r: Error: %d, %ld: Input syntax error; "
+                "rlic: Error: %d, %ld: Input syntax error; "
                 "expected '^{ \\w+, { \\d+ ( , \\d+ )* >}<' at '%s'!\n",
                 lineNumber,
                 ((sPtr + sCnt) - sStart),
@@ -329,7 +331,7 @@ void processTableInputFrom(istream &in, map<string, vector<int>> &inputs) {
       sPtr += sCnt;
     } else {
       fprintf(stderr,
-              "cam.r: Error: %d, %ld: Input syntax error; "
+              "rlic: Error: %d, %ld: Input syntax error; "
               "expected '^{ \\w+, { >\\d+<' (integer->bool value) at '%s'!\n",
               lineNumber,
               ((sPtr + sCnt) - sStart),
@@ -340,7 +342,7 @@ void processTableInputFrom(istream &in, map<string, vector<int>> &inputs) {
 
     if (names.size() < values.size()) {
       fprintf(stderr,
-              "cam.r: Warning: "
+              "rlic: Warning: "
               "Table row %d has too many values (has %lu, expected %lu); "
               "ignoring extra.\n",
               lineNumber,
@@ -349,7 +351,7 @@ void processTableInputFrom(istream &in, map<string, vector<int>> &inputs) {
              );
     } else if (values.size() < names.size()) {
       fprintf(stderr,
-              "cam.r: Warning: "
+              "rlic: Warning: "
               "Table row %d has too few values (has %lu, expected %lu); "
               "filling with 0's.\n",
               lineNumber,
@@ -362,6 +364,15 @@ void processTableInputFrom(istream &in, map<string, vector<int>> &inputs) {
       inputs[names[n]].push_back(n < values.size() ? values[n] : 0);
     }
   } while (in.good() && !in.eof());
+}
+
+template<> void Plate<char>::DumpPixelAt(size_t y, size_t x) const {
+  fprintf(stdout, "%c", (*this)[y][x]);
+}
+
+template<> void Plate<Voxel>::DumpPixelAt(size_t y, size_t x) const {
+  VoxelProperties const &vp = voxelProperties[(*this)[y][x]];
+  fprintf(stdout, "%c", vp.text);
 }
 
 void processDiagramFrom(istream &in, map<string, vector<int>> const &inputs) {
@@ -428,24 +439,27 @@ void processDiagramFrom(istream &in, map<string, vector<int>> const &inputs) {
       }
     };
 
+    if (optShowWaveforms) {
+      diagram.dumpWaveforms();
+    }
     if (optShowPerformance) {
       diagram.dumpPerformance();
     }
   } else {
     fprintf(stdout, "Not executing (optCycleCount == %d).\n", optCycleCount);
 
-    PlateOfInt plate(diagram.yMax, diagram.xMax);
+    Plate<char> plate(' ', 1, diagram.yMax, diagram.xMax);
     diagram.RebuildWithChar(plate);
     Diagram2D newDiagram(plate);
     newDiagram.scan();
     newDiagram.dump();
 
-    BrickOfInt brick(7, newDiagram.yMax, newDiagram.xMax);
-    newDiagram.RebuildWithChar(brick);
+    Brick<Voxel> brick(Wall, 4, 7, newDiagram.yMax, newDiagram.xMax);
+    newDiagram.RebuildWithEnum(brick);
   }
 }
 
-char const *ARGV0 = "cam.r";
+char const *ARGV0 = "rlic";
 
 void Usage(bool terminate) {
   fprintf(stderr,
@@ -472,7 +486,8 @@ where <option> is:\n\
 -S		Log changed state after each tick (default: off) [%s].\n\
 -t <path>	Read (tabular, variable-per-column) input from <path>, without echo (default: no) [%s].\n\
 -T <path>	Read (tabular, variable-per-column) input from <path>, with echo (default: no) [%s].\n\
--w		Log verification warnings (default: no) [%s].\n\
+-w		Log input/output/debug output waveforms following execution (default: no) [%s].\n\
+-W		Log verification warnings (default: no) [%s].\n\
 ",
           ARGV0,
           optLogStateOnLabelState == EBQT::aLeadingEdge ?
@@ -498,7 +513,8 @@ where <option> is:\n\
           optShowStateEveryTick &&  optShowChangedStateEveryTick ? "-S" : "",
           !optTableInputPath.empty() && !optEchoInput ? optTableInputPath.c_str() : "",
           !optTableInputPath.empty() &&  optEchoInput ? optTableInputPath.c_str() : "",
-          optWarnings ? "-w" : ""
+          optShowWaveforms ? "-w" : "",
+          optWarnings ? "-W" : ""
          );
   if (terminate) {
     exit(1);
@@ -510,7 +526,7 @@ int main(int argc, char *const argv[]) {
 
   bool optShowHelp = false;
   int c;
-  while ((c = getopt(argc, argv, "/:\\:01bc:deH:hi:I:L:lprsSt:T:w")) != -1) {
+  while ((c = getopt(argc, argv, "/:\\:01bc:deH:hi:I:L:lprsSt:T:wW")) != -1) {
     switch (c) {
     case '/':
       optLogStateOnLabelState = EBQT::aLeadingEdge;
@@ -531,7 +547,7 @@ int main(int argc, char *const argv[]) {
       break;
     case 'c':
       if (sscanf(optarg, "%i", &optCycleCount) != 1) {
-        fprintf(stderr, "cam.r: Error: Option -%c requires a [decimal] integer argument.\n", c);
+        fprintf(stderr, "rlic: Error: Option -%c requires a [decimal] integer argument.\n", c);
         return 1;
       }
       optCycleCountSet = true;
@@ -587,15 +603,18 @@ int main(int argc, char *const argv[]) {
       optEchoInput = true;
       break;
     case 'w':
+      optShowWaveforms = true;
+      break;
+    case 'W':
       optWarnings = true;
       break;
     case '?':
       if (optopt == 'c') {
-        fprintf(stderr, "cam.r: Error: Option -%c requires an argument.\n", optopt);
+        fprintf(stderr, "rlic: Error: Option -%c requires an argument.\n", optopt);
       } else if (isprint(optopt)) {
-        fprintf(stderr, "cam.r: Error: Unknown option `-%c'.\n", optopt);
+        fprintf(stderr, "rlic: Error: Unknown option `-%c'.\n", optopt);
       } else {
-        fprintf(stderr, "cam.r: Error: Unknown option character `\\x%x'.\n", optopt);
+        fprintf(stderr, "rlic: Error: Unknown option character `\\x%x'.\n", optopt);
       }
       return 1;
     default:
@@ -672,7 +691,7 @@ int main(int argc, char *const argv[]) {
     ifstream iFile(optInputPath);
     if (!iFile.is_open()) {
       fprintf(stderr,
-              "cam.r: Error: Unable to open input %s for reading!\n",
+              "rlic: Error: Unable to open input %s for reading!\n",
               optInputPath.c_str()
              );
       return 1;
@@ -684,7 +703,7 @@ int main(int argc, char *const argv[]) {
     ifstream iFile(optTableInputPath);
     if (!iFile.is_open()) {
       fprintf(stderr,
-              "cam.r: Error: Unable to open [table] input %s for reading!\n",
+              "rlic: Error: Unable to open [table] input %s for reading!\n",
               optTableInputPath.c_str()
              );
       return 1;
@@ -697,7 +716,7 @@ int main(int argc, char *const argv[]) {
       ifstream dFile(argv[a]);
       if (!dFile.is_open()) {
         fprintf(stderr,
-                "cam.r: Error: Unable to open diagram %s for reading!\n",
+                "rlic: Error: Unable to open diagram %s for reading!\n",
                 argv[a]
                );
         return 1;

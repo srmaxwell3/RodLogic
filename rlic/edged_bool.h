@@ -43,6 +43,14 @@ class EdgedBool {
     return *this;
   }
 
+  bool getAsBoolAt(int atTick) {
+    if (history[0].atTick != atTick) {
+      history[1] = history[0];
+      history[0] = { atTick, history[1].value };
+    }
+    return history[0].value;
+  }
+
   int dTicks() const {
     return history[0].atTick - history[1].atTick;
   }

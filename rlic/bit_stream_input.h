@@ -14,6 +14,7 @@ class BitStreamInput : public deque<bool> {
   }
   EdgedBool const &get() const { return edgedBool; }
   EdgedBool const &getAt(int atTick) { return edgedBool.getAt(atTick); }
+  bool getAsBoolAt(int atTick) { return edgedBool.getAsBoolAt(atTick); }
   EdgedBool const &read() {
     if (!empty()) {
       edgedBool = front();

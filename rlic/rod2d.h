@@ -12,8 +12,9 @@ using std::string;
 #include "edged_bool.h"
 #include "label.h"
 #include "rod_connection.h"
+#include "voxel.h"
 
-struct PlateOfInt;
+template<typename T> struct Plate;
 struct Diagram2D;
 struct Rod2D;
 typedef set<Rod2D *> SetOfRod2Ds;
@@ -58,9 +59,9 @@ class Rod2D : public SetOfP2Ds {
 
   void dump(Diagram2D const &diagram) const;
 
-  void RebuildWithChar(Diagram2D const &diagram, PlateOfInt &plane) const;
+  void RebuildWithChar(Diagram2D const &diagram, Plate<char> &plate) const;
   void RebuildWithEnum
-      (Diagram2D const &diagram, PlateOfInt &plane, size_t scaleBy = 4) const;
+      (Diagram2D const &diagram, Plate<Voxel> &plate, size_t scaleBy = 4) const;
 
  private:
   bool findHeadLabel(Diagram2D const &diagram);

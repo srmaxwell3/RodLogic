@@ -21,26 +21,59 @@ using std::vector;
 #include "label.h"
 #include "p2d.h"
 #include "p3d.h"
+#include "voxel.h"
 
 struct Rod2D;
 typedef set<Rod2D *> SetOfRod2Ds;
 
-struct PlateOfInt : public vector<vector<int>> {
-  PlateOfInt(size_t _yMax = 0, size_t _xMax = 0);
-  PlateOfInt(PlateOfInt const &that);
+template<typename T> struct Plate : public vector<vector<T>> {
+  typedef T PixelType;
 
-  int const &at(P2D const &p) const {
+  Plate() : vector<vector<PixelType>>(), defaultPixel(), scaleBy(), yMax(), xMax() { }
+
+  Plate(PixelType _defaultPixel, size_t _scaleBy, size_t _yMax, size_t _xMax) :
+    vector<vector<PixelType>>(_yMax),
+    defaultPixel(_defaultPixel),
+    scaleBy(_scaleBy),
+    yMax((_yMax + 2) * scaleBy),
+    xMax((_xMax + 2) * scaleBy),
+    nDigits(1)
+  {
+    for (size_t w = 10; w <= xMax; w *= 10) {
+      nDigits += 1;
+    }
+    for (size_t y = 0; y < yMax; y += 1) {
+      (*this)[y].vector<PixelType>::resize(xMax, defaultPixel);
+    }
+  }
+
+  Plate(Plate const &that) :
+    vector<vector<PixelType>>(that.yMax),
+    defaultPixel(that.defaultPixel),
+    scaleBy(that.scaleBy),
+    yMax(that.yMax),
+    xMax(that.xMax)
+  {
+    for (size_t w = 10; w <= xMax; w *= 10) {
+      scaleBy += 1;
+    }
+    for (size_t y = 0; y < yMax; y += 1) {
+      (*this)[y].resize(xMax, defaultPixel);
+    }
+  }
+
+  PixelType const &at(P2D const &p) const {
     return at(p.y, p.x);
   }
-  int &at(P2D const &p) {
+  PixelType &at(P2D const &p) {
     return at(p.y, p.x);
   }
 
-  int const &at(int y, int x) const {
-    return vector<vector<int>>::at(y).at(x);
+  PixelType const &at(int y, int x) const {
+    return vector<vector<PixelType>>::at(y).at(x);
   }
-  int &at(int y, int x) {
-    return vector<vector<int>>::at(y).at(x);
+  PixelType &at(int y, int x) {
+    return vector<vector<PixelType>>::at(y).at(x);
   }
 
   void insertRow(size_t atY);
@@ -53,40 +86,94 @@ struct PlateOfInt : public vector<vector<int>> {
   bool isColEmpty(size_t atX) const;
   bool isRowSqueezable(size_t atY) const;
   bool isColSqueezable(size_t atX) const;
+  void DumpPixelAt(size_t y, size_t x) const;
   void Dump() const;
 
-  int scale;
+  PixelType defaultPixel;
+  size_t scaleBy;
   size_t yMax;
   size_t xMax;
+  int nDigits;
 };
 
-struct BrickOfInt : public vector<PlateOfInt> {
-  BrickOfInt(size_t _zMax = 0, size_t _yMax = 0, size_t _xMax = 0);
-  BrickOfInt(size_t _zMax, PlateOfInt const &that);
-  BrickOfInt(BrickOfInt const &that);
+template<typename T> struct Brick : public vector<Plate<T>> {
+  typedef T VoxelType;
+
+  Brick() : vector<Plate<VoxelType>>(), defaultVoxel(), scaleBy(), zMax(), yMax(), xMax(), nDigits() { }
+
+  Brick(VoxelType _defaultVoxel, size_t _scaleBy, size_t _zMax, size_t _yMax, size_t _xMax) :
+    vector<Plate<VoxelType>>(_zMax),
+    defaultVoxel(_defaultVoxel),
+    scaleBy(_scaleBy),
+    zMax(_zMax),
+    yMax((_yMax + 2) * scaleBy),
+    xMax((_xMax + 2) * scaleBy),
+    nDigits(1)
+  {
+    for (size_t w = 10; w <= std::max(yMax, xMax); w *= 10) {
+      nDigits += 1;
+    }
+
+    for (size_t z = 0; z < zMax; z += 1) {
+      (*this)[z].scaleBy = scaleBy;
+      (*this)[z].yMax = yMax;
+      (*this)[z].xMax = xMax;
+      (*this)[z].nDigits = nDigits;
+      (*this)[z].resize(yMax);
+      for (size_t y = 0; y < yMax; y += 1) {
+	(*this)[z][y].vector<VoxelType>::resize(xMax, defaultVoxel);
+      }
+    }
+  }
+
+  Brick(Brick const &that) :
+    vector<Plate<VoxelType>>(that.zMax),
+    defaultVoxel(that.defaultVoxel),
+    scaleBy(that.scaleBy),
+    zMax(that.zMax),
+    yMax(that.yMax),
+    xMax(that.xMax),
+    nDigits(that.nDigits)
+  {
+    for (size_t z = 0; z < zMax; z += 1) {
+      (*this)[z].scaleBy = scaleBy;
+      (*this)[z].yMax = yMax;
+      (*this)[z].xMax = xMax;
+      (*this)[z].nDigits = nDigits;
+      (*this)[z].resize(yMax);
+      for (size_t y = 0; y < yMax; y += 1) {
+	(*this)[z][y].resize(xMax);
+	for (size_t x = 0; x < xMax; x += 1) {
+	  (*this)[z][y][z] = that[z][y][x];
+	}
+      }
+    }
+  }
 
   bool isInBounds(P3D const &p) const {
     return 0 <= p.x && p.x < xMax && 0 <= p.y && p.y < yMax && 0 <= p.z && p.z < zMax;
   }
 
-  int const &at(P3D const &p) const {
+  VoxelType const &at(P3D const &p) const {
     return at(p.z, p.y, p.x);
   }
 
-  int const &at(int z, int y, int x) const {
-    return vector<PlateOfInt>::at(z).at(y, x);
+  VoxelType const &at(int z, int y, int x) const {
+    return vector<Plate<VoxelType>>::at(z).at(y, x);
   }
 
   void Dump() const;
 
-  int scale;
+  VoxelType const defaultVoxel;
+  size_t scaleBy;
   size_t zMax;
   size_t yMax;
   size_t xMax;
+  int nDigits;
 };
 
-struct Diagram2D : public PlateOfInt {
-  Diagram2D(PlateOfInt const &p);
+struct Diagram2D : public Plate<char> {
+  Diagram2D(Plate<char> const &p);
   Diagram2D(istream &in);
 
   bool isInBounds(P2D const &p) const {
@@ -109,18 +196,18 @@ struct Diagram2D : public PlateOfInt {
     pointsAlreadySeen.insert(p);
   }
 
-  int const &at(P2D const &p) const {
+  char const &at(P2D const &p) const {
     return at(p.y, p.x);
   }
-  int &at(P2D const &p) {
+  char &at(P2D const &p) {
     return at(p.y, p.x);
   }
 
-  int const &at(int y, int x) const {
-    return PlateOfInt::at(y, x);
+  char const &at(int y, int x) const {
+    return Plate::at(y, x);
   }
-  int &at(int y, int x) {
-    return PlateOfInt::at(y, x);
+  char &at(int y, int x) {
+    return Plate::at(y, x);
   }
 
   void newRodAt(P2D const &p, Direction d);
@@ -195,11 +282,12 @@ struct Diagram2D : public PlateOfInt {
     );
   void dumpState();
   void dumpPerformance() const;
+  void dumpWaveforms() const;
   void dump() const;
 
-  void RebuildWithChar(PlateOfInt &plane) const;
-  void RebuildWithChar(BrickOfInt &plane) const;
-  void RebuildWithEnum(BrickOfInt &plane, size_t scaleBy = 4) const;
+  void RebuildWithChar(Plate<char> &plane) const;
+  void RebuildWithChar(Brick<char> &plane) const;
+  void RebuildWithEnum(Brick<Voxel> &plane) const;
 
   static bool isLegalEWCharNotLabel1st(char c);
   static bool isLegalEWChar(char c);
@@ -224,6 +312,10 @@ struct Diagram2D : public PlateOfInt {
   Direction earliestDebugOutput;
   map<Label, EdgedBool> currentDebugOutputs;
   map<string, CombinedLabel> currentCombinedDebugOutputs;
+
+  map<Label, vector<bool>> inputsByTick;
+  map<Label, vector<bool>> outputsByTick;
+  map<Label, vector<bool>> debugOutputsByTick;
 
   array<long, eoDirection> totalEvaluatedUSecsPerDirection;
   long totalEvaluatedUSecs;

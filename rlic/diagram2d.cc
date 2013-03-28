@@ -22,43 +22,13 @@ extern bool optShowDebugOutput;
 extern bool optShowPerformance;
 extern bool optShowRods;
 
-PlateOfInt::PlateOfInt(size_t _yMax, size_t _xMax) :
-  vector<vector<int>>(_yMax),
-  scale(1),
-  yMax(_yMax),
-  xMax(_xMax)
-{
-  for (size_t w = 10; w <= xMax; w *= 10) {
-    scale += 1;
-  }
-
-  for (size_t y = 0; y < yMax; y += 1) {
-    (*this)[y].resize(xMax, ' ');
-  }
-}
-
-PlateOfInt::PlateOfInt(PlateOfInt const &that) :
-  vector<vector<int>>(that.yMax),
-  scale(1),
-  yMax(that.yMax),
-  xMax(that.xMax)
-{
-  for (size_t w = 10; w <= xMax; w *= 10) {
-    scale += 1;
-  }
-
-  for (size_t y = 0; y < yMax; y += 1) {
-    (*this)[y].resize(xMax, ' ');
-  }
-}
-
-void PlateOfInt::insertRow(size_t atY) {
-  auto insertAt = atY < yMax ? begin() + atY : end();
+template<typename T> void Plate<T>::insertRow(size_t atY) {
+  auto insertAt = atY < yMax ? Plate<T>::begin() + atY : Plate<T>::end();
   insert(insertAt, vector<int>(xMax, ' '));
-  yMax = size();
+  yMax = Plate<T>::size();
 }
 
-void PlateOfInt::insertCol(size_t atX) {
+template<typename T> void Plate<T>::insertCol(size_t atX) {
   for (auto &r : *this) {
     auto insertAt = atX < xMax ? r.begin() + atX : r.end();
     r.insert(insertAt, ' ');
@@ -66,14 +36,14 @@ void PlateOfInt::insertCol(size_t atX) {
   }
 }
 
-void PlateOfInt::deleteRow(size_t atY) {
+template<typename T> void Plate<T>::deleteRow(size_t atY) {
   if (atY < yMax) {
-    erase(begin() + atY);
-    yMax = size();
+    Plate<T>::erase(Plate<T>::begin() + atY);
+    yMax = Plate<T>::size();
   }
 }
 
-void PlateOfInt::deleteCol(size_t atX) {
+template<typename T> void Plate<T>::deleteCol(size_t atX) {
   if (atX < xMax) {
      for (auto &r : *this) {
        r.erase(r.begin() + atX);
@@ -82,26 +52,26 @@ void PlateOfInt::deleteCol(size_t atX) {
    }
  }
 
- bool PlateOfInt::compareRowAndRowBelow(size_t atY) const {
-   if ((atY + 1) < yMax) {
-     return (*this)[atY] == (*this)[atY + 1];
-   }
-   return false;
- }
+template<typename T> bool Plate<T>::compareRowAndRowBelow(size_t atY) const {
+  if ((atY + 1) < yMax) {
+    return (*this)[atY] == (*this)[atY + 1];
+  }
+  return false;
+}
 
- bool PlateOfInt::compareColAndColToRight(size_t atX) const {
-   if ((atX + 1) < xMax) {
-     for (auto const &r : *this) {
-       if (r[atX] != r[atX + 1]) {
-         return false;
-       }
-     }
-     return true;
-   }
-   return false;
- }
+template<typename T> bool Plate<T>::compareColAndColToRight(size_t atX) const {
+  if ((atX + 1) < xMax) {
+    for (auto const &r : *this) {
+      if (r[atX] != r[atX + 1]) {
+	return false;
+      }
+    }
+    return true;
+  }
+  return false;
+}
 
-bool PlateOfInt::isRowEmpty(size_t atY) const {
+template<typename T> bool Plate<T>::isRowEmpty(size_t atY) const {
   if (atY < yMax) {
     auto const &r = (*this)[atY];
     for (auto const &c : r) {
@@ -113,7 +83,7 @@ bool PlateOfInt::isRowEmpty(size_t atY) const {
   return true;
 }
 
-bool PlateOfInt::isColEmpty(size_t atX) const {
+template<typename T> bool Plate<T>::isColEmpty(size_t atX) const {
   if (atX < xMax) {
     for (auto const &r : *this) {
       auto const &c = r[atX];
@@ -125,7 +95,7 @@ bool PlateOfInt::isColEmpty(size_t atX) const {
   return true;
 }
 
-bool PlateOfInt::isRowSqueezable(size_t atY) const {
+template<typename T> bool Plate<T>::isRowSqueezable(size_t atY) const {
   if (atY < yMax) {
     auto const &r = (*this)[atY];
     for (auto const &c : r) {
@@ -137,7 +107,7 @@ bool PlateOfInt::isRowSqueezable(size_t atY) const {
   return true;
 }
 
-bool PlateOfInt::isColSqueezable(size_t atX) const {
+template<typename T> bool Plate<T>::isColSqueezable(size_t atX) const {
   if (atX < xMax) {
     for (auto const &r : *this) {
       auto const &c = r[atX];
@@ -149,9 +119,13 @@ bool PlateOfInt::isColSqueezable(size_t atX) const {
   return true;
 }
 
-void PlateOfInt::Dump() const {
+template<typename T> void Plate<T>::DumpPixelAt(size_t y, size_t x) const {
+  fprintf(stdout, "%c", (*this)[y][x]);
+}
+
+template<typename T> void Plate<T>::Dump() const {
   if (100 < xMax) {
-    fprintf(stdout, "%*lu", scale + 1, 0lu);
+    fprintf(stdout, "%*lu", nDigits + 1, 0lu);
     for (size_t x = 1; x < xMax; x += 1) {
       if (x % 10 == 0) {
         fprintf(stdout, "%1lu", (x / 100) % 10);
@@ -162,7 +136,7 @@ void PlateOfInt::Dump() const {
     fprintf(stdout, "\n");
   }
   if (10 < xMax) {
-    fprintf(stdout, "%*lu", scale + 1, 0lu);
+    fprintf(stdout, "%*lu", nDigits + 1, 0lu);
     for (size_t x = 1; x < xMax; x += 1) {
       if (x % 10 == 0) {
         fprintf(stdout, "%1lu", (x / 10) % 10);
@@ -172,7 +146,7 @@ void PlateOfInt::Dump() const {
     }
     fprintf(stdout, "\n");
   }
-  fprintf(stdout, "%*lu", scale + 1, 0lu);
+  fprintf(stdout, "%*lu", nDigits + 1, 0lu);
   for (size_t x = 1; x < xMax; x += 1) {
     if (x % 10 == 0) {
       fprintf(stdout, "%1lu", x % 10);
@@ -181,7 +155,7 @@ void PlateOfInt::Dump() const {
     }
   }
   fprintf(stdout, "\n");
-  fprintf(stdout, "%*s", scale + 1, ".");
+  fprintf(stdout, "%*s", nDigits + 1, ".");
   for (size_t x = 0; x < xMax + 1; x += 1) {
     fprintf(stdout, ".");
   }
@@ -189,27 +163,27 @@ void PlateOfInt::Dump() const {
 
   for (size_t y = 0; y < yMax; y += 1) {
     if (y % 10 == 0) {
-      fprintf(stdout, "%*lu.", scale, y);
+      fprintf(stdout, "%*lu.", nDigits, y);
     } else {
-      fprintf(stdout, "%*s.", scale, "");
+      fprintf(stdout, "%*s.", nDigits, "");
     }
     for (size_t x = 0; x < xMax; x += 1) {
-      fprintf(stdout, "%c", (*this)[y][x]);
+      DumpPixelAt(y, x);
     }
     if (y % 10 == 0) {
-      fprintf(stdout, ".%*lu\n", scale, y);
+      fprintf(stdout, ".%*lu\n", nDigits, y);
     } else {
       fprintf(stdout, ".\n");
     }
   }
 
-  fprintf(stdout, "%*s", scale + 1, ".");
+  fprintf(stdout, "%*s", nDigits + 1, ".");
   for (size_t x = 0; x < xMax + 1; x += 1) {
     fprintf(stdout, ".");
   }
   fprintf(stdout, "\n");
   if (100 < xMax) {
-    fprintf(stdout, "%*lu", scale + 1, 0lu);
+    fprintf(stdout, "%*lu", nDigits + 1, 0lu);
     for (size_t x = 1; x < xMax; x += 1) {
       if (x % 10 == 0) {
         fprintf(stdout, "%1lu", (x / 100) % 10);
@@ -220,7 +194,7 @@ void PlateOfInt::Dump() const {
     fprintf(stdout, "\n");
   }
   if (10 < xMax) {
-    fprintf(stdout, "%*lu", scale + 1, 0lu);
+    fprintf(stdout, "%*lu", nDigits + 1, 0lu);
     for (size_t x = 1; x < xMax; x += 1) {
       if (x % 10 == 0) {
         fprintf(stdout, "%1lu", (x / 10) % 10);
@@ -230,7 +204,7 @@ void PlateOfInt::Dump() const {
     }
     fprintf(stdout, "\n");
   }
-  fprintf(stdout, "%*lu", scale + 1, 0lu);
+  fprintf(stdout, "%*lu", nDigits + 1, 0lu);
   for (size_t x = 1; x < xMax; x += 1) {
     if (x % 10 == 0) {
       fprintf(stdout, "%1lu", x % 10);
@@ -241,58 +215,11 @@ void PlateOfInt::Dump() const {
   fprintf(stdout, "\n\n");
 }
 
-BrickOfInt::BrickOfInt(size_t _zMax, size_t _yMax, size_t _xMax) :
-  vector<PlateOfInt>(_zMax),
-  scale(1),
-  zMax(_zMax),
-  yMax(_yMax),
-  xMax(_xMax)
-{
-  for (size_t w = 10; w <= xMax; w *= 10) {
-    scale += 1;
-  }
-
-  for (size_t z = 0; z < zMax; z += 1) {
-    (*this)[z].scale = scale;
-    (*this)[z].yMax = yMax;
-    (*this)[z].xMax = xMax;
-    (*this)[z].resize(yMax);
-    for (size_t y = 0; y < yMax; y += 1) {
-      (*this)[z][y].resize(xMax, ' ');
-    }
-  }
-}
-
-BrickOfInt::BrickOfInt(BrickOfInt const &that) :
-  vector<PlateOfInt>(that.zMax),
-  scale(1),
-  zMax(that.zMax),
-  yMax(that.yMax),
-  xMax(that.xMax)
-{
-  for (size_t w = 10; w <= xMax; w *= 10) {
-    scale += 1;
-  }
-
-  for (size_t z = 0; z < zMax; z += 1) {
-    (*this)[z].scale = scale;
-    (*this)[z].yMax = yMax;
-    (*this)[z].xMax = xMax;
-    (*this)[z].resize(yMax);
-    for (size_t y = 0; y < yMax; y += 1) {
-      (*this)[z][y].resize(xMax);
-      for (size_t x = 0; x < xMax; x += 1) {
-        (*this)[z][y][z] = that[z][y][x];
-      }
-    }
-  }
-}
-
-void BrickOfInt::Dump() const {
+template<typename T> void Brick<T>::Dump() const {
   for (size_t z = 0; z < zMax; z += 1) {
     int length;
     fprintf(stdout, "# %lu %n", z, &length);
-    while (length++ < xMax + scale + 2) {
+    while (length++ < xMax + nDigits + 2) {
       fprintf(stdout, "-");
     }
     fprintf(stdout, "\n");
@@ -302,8 +229,8 @@ void BrickOfInt::Dump() const {
   fprintf(stdout, "\n");
 }
 
-Diagram2D::Diagram2D(PlateOfInt const &p) :
-    PlateOfInt(p),
+Diagram2D::Diagram2D(Plate const &p) :
+    Plate(p),
     earliestInput(eoDirection),
     earliestOutput(eoDirection),
     earliestDebugOutput(eoDirection),
@@ -326,7 +253,7 @@ Diagram2D::Diagram2D(PlateOfInt const &p) :
 }
 
 Diagram2D::Diagram2D(istream &in) :
-    PlateOfInt(),
+    Plate(),
     earliestInput(eoDirection),
     earliestOutput(eoDirection),
     earliestDebugOutput(eoDirection),
@@ -343,7 +270,7 @@ Diagram2D::Diagram2D(istream &in) :
     string line;
     getline(in, line);
     if (in.good()) {
-      push_back(vector<int>());
+      Plate<char>::push_back(vector<char>());
       for (auto const &c : line) {
         back().push_back(int(c));
       }
@@ -370,12 +297,12 @@ void Diagram2D::newRodAt(P2D const &p, Direction d) {
     rodsWithInputs[d].insert(r);
     if (currentInputs.find(label) != currentInputs.end()) {
       fprintf(stderr,
-              "cam.r: Warning: Rod2D(%s): rod reuses an input label (\"%s\")!\n",
+              "rlic: Warning: Rod2D(%s): rod reuses an input label (\"%s\")!\n",
               r->rodsId().c_str(),
               r->rodsLabel().ToString().c_str()
              );
       fprintf(stdout,
-              "cam.r: Warning: Rod2D(%s): rod reuses an input label (\"%s\")!\n",
+              "rlic: Warning: Rod2D(%s): rod reuses an input label (\"%s\")!\n",
               r->rodsId().c_str(),
               r->rodsLabel().ToString().c_str()
              );
@@ -391,12 +318,12 @@ void Diagram2D::newRodAt(P2D const &p, Direction d) {
     rodsWithOutputs[d].insert(r);
     if (currentOutputs.find(label) != currentOutputs.end()) {
       fprintf(stderr,
-              "cam.r: Warning: Rod2D(%s): rod reuses an output label (\"%s\")!\n",
+              "rlic: Warning: Rod2D(%s): rod reuses an output label (\"%s\")!\n",
               r->rodsId().c_str(),
               r->rodsLabel().ToString().c_str()
              );
       fprintf(stdout,
-              "cam.r: Warning: Rod2D(%s): rod reuses an output label (\"%s\")!\n",
+              "rlic: Warning: Rod2D(%s): rod reuses an output label (\"%s\")!\n",
               r->rodsId().c_str(),
               r->rodsLabel().ToString().c_str()
              );
@@ -411,12 +338,12 @@ void Diagram2D::newRodAt(P2D const &p, Direction d) {
     rodsWithDebugOutputs[d].insert(r);
     if (currentDebugOutputs.find(label) != currentDebugOutputs.end()) {
       fprintf(stderr,
-              "cam.r: Warning: Rod2D(%s): rod reuses an debugOutput label (\"%s\")!\n",
+              "rlic: Warning: Rod2D(%s): rod reuses an debugOutput label (\"%s\")!\n",
               r->rodsId().c_str(),
               r->rodsLabel().ToString().c_str()
              );
       fprintf(stdout,
-              "cam.r: Warning: Rod2D(%s): rod reuses an debugOutput label (\"%s\")!\n",
+              "rlic: Warning: Rod2D(%s): rod reuses an debugOutput label (\"%s\")!\n",
               r->rodsId().c_str(),
               r->rodsLabel().ToString().c_str()
              );
@@ -471,11 +398,11 @@ void Diagram2D::newIncompleteEWRodAt(P2D const &p) {
   if (d == eoDirection) {
     if (nEHeads || nWHeads) {
       fprintf(stderr,
-              "cam.r: Warning: Unable to determine the direction of an EW rod, at %s!\n",
+              "rlic: Warning: Unable to determine the direction of an EW rod, at %s!\n",
               p.ToString().c_str()
              );
       fprintf(stdout,
-              "cam.r: Warning: Unable to determine the direction of an EW rod, at %s!\n",
+              "rlic: Warning: Unable to determine the direction of an EW rod, at %s!\n",
               p.ToString().c_str()
              );
     }
@@ -527,11 +454,11 @@ void Diagram2D::newIncompleteSNRodAt(P2D const &p) {
   if (d == eoDirection) {
     if (nSHeads || nNHeads) {
       fprintf(stderr,
-              "cam.r: Warning: Unable to determine the direction of an SN rod, at %s!\n",
+              "rlic: Warning: Unable to determine the direction of an SN rod, at %s!\n",
               p.ToString().c_str()
              );
       fprintf(stdout,
-              "cam.r: Warning: Unable to determine the direction of an SN rod, at %s!\n",
+              "rlic: Warning: Unable to determine the direction of an SN rod, at %s!\n",
               p.ToString().c_str()
              );
     }
@@ -854,13 +781,25 @@ void Diagram2D::evaluateAt(int tick) {
   }
 
   for (auto &i : currentInputs) {
-    i.second.getAt(lastEvaluatedTick);
+    auto const &l = i.first;
+    auto &lv = inputsByTick[l];
+    auto const &v = i.second.getAt(lastEvaluatedTick);
+    lv.push_back(bool(v));
+    // fprintf(stdout, "inputsByTick[\"%s\"][%lu] = %d\n", l.ToString().c_str(), lv.size() - 1, bool(v));
   }
   for (auto &o : currentOutputs) {
-    o.second.getAt(lastEvaluatedTick);
+    auto const &l = o.first;
+    auto &lv = outputsByTick[l];
+    auto const &v = o.second.getAt(lastEvaluatedTick);
+    lv.push_back(bool(v));
+    // fprintf(stdout, "outputsByTick[\"%s\"][%lu] = %d\n", l.ToString().c_str(), lv.size() - 1, bool(v));
   }
-  for (auto &o : currentDebugOutputs) {
-    o.second.getAt(lastEvaluatedTick);
+  for (auto &d : currentDebugOutputs) {
+    auto const &l = d.first;
+    auto &lv = debugOutputsByTick[l];
+    auto const &v = d.second.getAt(lastEvaluatedTick);
+    lv.push_back(bool(v));
+    // fprintf(stdout, "debugOutputsByTick[\"%s\"][%lu] = %d\n", l.ToString().c_str(), lv.size() - 1, bool(v));
   }
 
   totalEvaluatedTicks += 1;
@@ -1089,17 +1028,17 @@ void Diagram2D::dumpState() {
           c_str(Direction(lastEvaluatedTick % eoDirection))
          );
   bool dumpedALabel = false;
-  char const *comma = "\n    ";
+  char const *comma = " ";
   if (!currentInputs.empty()) {
     CombinedLabel const *lastCLabel = nullptr;
     for (auto const &lv : currentInputs) {
       if ((dumpedALabel |= dumpInputLabelState(lv.first, comma, lastCLabel))) {
-        comma = ",\n    ";
+        comma = ", ";
       }
     }
   }
   if (dumpedALabel) {
-    fprintf(stdout, "\n  }");
+    fprintf(stdout, " }");
   } else {
     fprintf(stdout, " }");
   }
@@ -1108,17 +1047,17 @@ void Diagram2D::dumpState() {
   dumpedALabel = false;
   if (!currentOutputs.empty()) {
     CombinedLabel const *lastCLabel = nullptr;
-    comma = "\n    ";
+    comma = " ";
     for (auto const &lv : currentOutputs) {
       if ((dumpedALabel |= dumpOutputLabelState(lv.first, comma, lastCLabel))) {
-        comma = ",\n    ";
+        comma = ", ";
       }
     }
   }
 
   if (optShowDebugOutput) {
     if (dumpedALabel) {
-      fprintf(stdout, "\n  }");
+      fprintf(stdout, " }");
     } else {
       fprintf(stdout, " }");
     }
@@ -1127,19 +1066,50 @@ void Diagram2D::dumpState() {
     dumpedALabel = false;
     if (!currentDebugOutputs.empty()) {
       CombinedLabel const *lastCLabel = nullptr;
-      comma = "\n    ";
+      comma = " ";
       for (auto const &lv : currentDebugOutputs) {
         if ((dumpedALabel |= dumpDebugOutputLabelState(lv.first, comma, lastCLabel))) {
-          comma = ",\n    ";
+          comma = ", ";
         }
       }
     }
   }
 
   if (dumpedALabel) {
-   fprintf(stdout, "\n  }\n");
+   fprintf(stdout, " }\n");
   } else {
    fprintf(stdout, " }\n");
+  }
+}
+
+void Diagram2D::dumpWaveforms() const {
+  fprintf(stdout, "\"Tick\"");
+  for (auto const &iw : inputsByTick) {
+    fprintf(stdout, ", \"i.%s\"", iw.first.ToString().c_str());
+  }
+  for (auto const &ow : outputsByTick) {
+    fprintf(stdout, ", \"o.%s\"", ow.first.ToString().c_str());
+  }
+  if (optShowDebugOutput) {
+    for (auto const &dw : debugOutputsByTick) {
+      fprintf(stdout, ", \"d.%s\"", dw.first.ToString().c_str());
+    }
+  }
+  fprintf(stdout, "\n");
+  for (size_t i = 0; i < lastEvaluatedTick; i += 1) {
+    fprintf(stdout, "%lu", i);
+    for (auto const &iw : inputsByTick) {
+      fprintf(stdout, ", %d", bool(iw.second[i]));
+    }
+    for (auto const &ow : outputsByTick) {
+      fprintf(stdout, ", %d", bool(ow.second[i]));
+    }
+    if (optShowDebugOutput) {
+      for (auto const &dw : debugOutputsByTick) {
+	fprintf(stdout, ", %d", bool(dw.second[i]));
+      }
+    }
+    fprintf(stdout, "\n");
   }
 }
 
@@ -1250,11 +1220,11 @@ void Diagram2D::setInputFor(string const &text, vector<int> const &values) {
 void Diagram2D::setInputFor(Label const &label, vector<int> const &values) {
   if (currentInputs.find(label) == currentInputs.end()) {
     fprintf(stderr,
-            "cam.r: Warning: Attempting to set input for non-existing input [label] %s!  Ignoring....\n",
+            "rlic: Warning: Attempting to set input for non-existing input [label] %s!  Ignoring....\n",
             label.ToString().c_str()
            );
     fprintf(stdout,
-            "cam.r: Warning: Attempting to set input for non-existing input [label] %s!  Ignoring....\n",
+            "rlic: Warning: Attempting to set input for non-existing input [label] %s!  Ignoring....\n",
             label.ToString().c_str()
            );
   }
@@ -1271,7 +1241,7 @@ void Diagram2D::setInputFor(Label const &label, vector<int> const &values) {
 void Diagram2D::addInputFor(Label const &label, bool value) {
   if (currentInputs.find(label) == currentInputs.end()) {
     fprintf(stderr,
-            "cam.r: Error: Diagram2D::addInputFor(label=\"%s\", value=%d): "
+            "rlic: Error: Diagram2D::addInputFor(label=\"%s\", value=%d): "
             "Unable to find input for label!\n",
             label.ToString().c_str(),
             value
@@ -1302,7 +1272,7 @@ bool Diagram2D::hasUnreadInput() const {
 bool Diagram2D::hasInputFor(Label const &label) {
   if (currentInputs.find(label) == currentInputs.end()) {
     fprintf(stderr,
-            "cam.r: Error: Diagram2D::hasInputFor(label=\"%s\"): "
+            "rlic: Error: Diagram2D::hasInputFor(label=\"%s\"): "
             "Unable to find input for label!\n",
             label.ToString().c_str()
            );
@@ -1314,7 +1284,7 @@ bool Diagram2D::hasInputFor(Label const &label) {
 EdgedBool const &Diagram2D::getInputFor(Label const &label) {
   if (currentInputs.find(label) == currentInputs.end()) {
     fprintf(stderr,
-            "cam.r: Error: Diagram2D::getInputFor(label=\"%s\"): "
+            "rlic: Error: Diagram2D::getInputFor(label=\"%s\"): "
             "Unable to find input for label!\n",
             label.ToString().c_str()
            );
@@ -1327,7 +1297,7 @@ EdgedBool const &Diagram2D::getInputFor(string const &name, int bitNumber) {
   Label label(name, bitNumber);
   if (currentInputs.find(label) == currentInputs.end()) {
     fprintf(stderr,
-            "cam.r: Error: Diagram2D::getInputFor(name=\"%s\", bitNumber=%d): "
+            "rlic: Error: Diagram2D::getInputFor(name=\"%s\", bitNumber=%d): "
             "Unable to find input for Label().ToString()=%s!\n",
             name.c_str(),
             bitNumber,
@@ -1341,7 +1311,7 @@ EdgedBool const &Diagram2D::getInputFor(string const &name, int bitNumber) {
 EdgedBool const &Diagram2D::readInputFor(Label const &label) {
   if (currentInputs.find(label) == currentInputs.end()) {
     fprintf(stderr,
-            "cam.r: Error: Diagram2D::readInputFor(label=\"%s\"): "
+            "rlic: Error: Diagram2D::readInputFor(label=\"%s\"): "
             "Unable to find input for label!\n",
             label.ToString().c_str()
            );
@@ -1354,7 +1324,7 @@ EdgedBool const &Diagram2D::readInputFor(Label const &label) {
 void Diagram2D::writeOutputFor(Label const &label, bool value) {
   if (currentOutputs.find(label) == currentOutputs.end()) {
     fprintf(stderr,
-            "cam.r: Error: "
+            "rlic: Error: "
             "Diagram2D::getOutputFor(label=\"%s\", value=%d): "
             "Unable to find input for label!\n",
             label.ToString().c_str(),
@@ -1369,7 +1339,7 @@ void Diagram2D::writeOutputFor(Label const &label, bool value) {
 EdgedBool const &Diagram2D::getOutputFor(Label const &label) {
   if (currentOutputs.find(label) == currentOutputs.end()) {
     fprintf(stderr,
-            "cam.r: Error: "
+            "rlic: Error: "
             "Diagram2D::getOutputFor(label=\"%s\"): "
             "Unable to find input for label!\n",
             label.ToString().c_str()
@@ -1383,7 +1353,7 @@ EdgedBool const &Diagram2D::getOutputFor(string const &name, int bitNumber) {
   Label label(name, bitNumber);
   if (currentOutputs.find(label) == currentOutputs.end()) {
     fprintf(stderr,
-            "cam.r: Error: "
+            "rlic: Error: "
             "Diagram2D::getOutputFor(name=\"%s\", bitNumber=%d): "
             "Unable to find input for Label().ToString()=%s\n",
             name.c_str(),
@@ -1398,7 +1368,7 @@ EdgedBool const &Diagram2D::getOutputFor(string const &name, int bitNumber) {
 void Diagram2D::writeDebugOutputFor(Label const &label, bool value) {
   if (currentDebugOutputs.find(label) == currentDebugOutputs.end()) {
     fprintf(stderr,
-            "cam.r: Error: "
+            "rlic: Error: "
             "Diagram2D::getDebugOutputFor(label=\"%s\", value=%d): "
             "Unable to find input for label!\n",
             label.ToString().c_str(),
@@ -1413,7 +1383,7 @@ void Diagram2D::writeDebugOutputFor(Label const &label, bool value) {
 EdgedBool const &Diagram2D::getDebugOutputFor(Label const &label) {
   if (currentDebugOutputs.find(label) == currentDebugOutputs.end()) {
     fprintf(stderr,
-            "cam.r: Error: "
+            "rlic: Error: "
             "Diagram2D::getDebugOutputFor(label=\"%s\"): "
             "Unable to find input for label!\n",
             label.ToString().c_str()
@@ -1427,7 +1397,7 @@ EdgedBool const &Diagram2D::getDebugOutputFor(string const &name, int bitNumber)
   Label label(name, bitNumber);
   if (currentDebugOutputs.find(label) == currentDebugOutputs.end()) {
     fprintf(stderr,
-            "cam.r: Error: "
+            "rlic: Error: "
             "Diagram2D::getDebugOutputFor(name=\"%s\", bitNumber=%d): "
             "Unable to find input for Label().ToString()=%s\n",
             name.c_str(),
@@ -1569,7 +1539,7 @@ bool Diagram2D::isLegalSNChar(char c) {
   }
 }
 
-void Diagram2D::RebuildWithChar(PlateOfInt &plate) const {
+void Diagram2D::RebuildWithChar(Plate<char> &plate) const {
   size_t deleted = 0;
   for (auto const d : direction) {
     for (auto const &r : rods[d]) {
@@ -1640,7 +1610,7 @@ void Diagram2D::RebuildWithChar(PlateOfInt &plate) const {
 
 // }
 
-void Diagram2D::RebuildWithChar(BrickOfInt &brick) const {
+void Diagram2D::RebuildWithChar(Brick<char> &brick) const {
   static size_t const rodDirectionAndIsLockRodToLayer[eoDirection][2] = {
 
     //   [?][!isALockRod]
@@ -1800,7 +1770,7 @@ void Diagram2D::RebuildWithChar(BrickOfInt &brick) const {
   brick.Dump();
 }
 
-void Diagram2D::RebuildWithEnum(BrickOfInt &brick, size_t scaleBy) const {
+void Diagram2D::RebuildWithEnum(Brick<Voxel> &brick) const {
   static size_t const rodDirectionAndIsLockRodToLayer[eoDirection][2] = {
 
     //   [?][!isALockRod]
@@ -1818,7 +1788,7 @@ void Diagram2D::RebuildWithEnum(BrickOfInt &brick, size_t scaleBy) const {
       r->RebuildWithEnum
           (*this,
            brick[rodDirectionAndIsLockRodToLayer[d][r->rodIsALockRod()]],
-           scaleBy
+           brick.scaleBy
           );
     }
   }
@@ -1886,6 +1856,8 @@ void Diagram2D::RebuildWithEnum(BrickOfInt &brick, size_t scaleBy) const {
 
   for (size_t z = 0; z < brick.zMax; z += 1) {
     switch (z) {
+      brick[z].Dump();
+      fflush(stdout);
 
       // Level 0 is the S/N lock rods.
 
@@ -1897,18 +1869,20 @@ void Diagram2D::RebuildWithEnum(BrickOfInt &brick, size_t scaleBy) const {
             VoxelProperties const &vp = voxelProperties[v];
 
             switch (VoxelType vt = vp.voxelType) {
-              case vtUnkn:
-                assert(vt != vtUnkn);
-              case vtWall:
-                continue;
-              case vtSlot:
-                continue;
-              case vtLock:
-                assert(vt == vtLock);
-                break;
-              case vtData:
-                assert(vt != vtData);
-                break;
+	    case vtUnkn:
+	      assert(vt != vtUnkn);
+	    case vtWall:
+	      continue;
+	    case vtSlot:
+	      continue;
+	    case vtLock:
+	      assert(vt == vtLock);
+	      break;
+	    case vtData:
+	      assert(vt != vtData);
+	      break;
+	    case eoVoxelType:
+	      assert(vt != eoVoxelType);
             }
 
             P3D pu = p.offsetBy(U);
@@ -2007,18 +1981,20 @@ void Diagram2D::RebuildWithEnum(BrickOfInt &brick, size_t scaleBy) const {
             VoxelProperties const &vp = voxelProperties[v];
 
             switch (VoxelType vt = vp.voxelType) {
-              case vtUnkn:
-                assert(vt != vtUnkn);
-              case vtWall:
-                continue;
-              case vtSlot:
-                continue;
-              case vtLock:
-                assert(vt != vtLock);
-                break;
-              case vtData:
-                assert(vt == vtData);
-                break;
+	    case vtUnkn:
+	      assert(vt != vtUnkn);
+	    case vtWall:
+	      continue;
+	    case vtSlot:
+	      continue;
+	    case vtLock:
+	      assert(vt != vtLock);
+	      break;
+	    case vtData:
+	      assert(vt == vtData);
+	      break;
+	    case eoVoxelType:
+	      assert(vt != eoVoxelType);
             }
 
             P3D pd = p.offsetBy(D);
@@ -2114,105 +2090,104 @@ void Diagram2D::RebuildWithEnum(BrickOfInt &brick, size_t scaleBy) const {
       // Level 4 is the S/N data rods.
 
       case 4:
-        for (size_t y = 0; y < brick.yMax; y += 1) {
-          for (size_t x = 0; x < brick.xMax; x += 1) {
-            switch (brick[z][y][x]) {
-              case 'X':
-                assert(brick[z + 1][y][x] == ' ');
-                assert(brick[z + 2][y][x] == 'X');
-
-                brick[z + 0][y][x] = '+';
-                brick[z + 1][y][x] = 'X';
-                brick[z + 2][y][x] = '+';
-                break;
-              case '+':
-                assert(brick[z - 1][y][x] == '0' || brick[z - 1][y][x] == '1');
-                break;
-              case '|':
-              case 'v':
-              case '^':
-              case ' ':
-                break;
-              default:
-                break; // assert(false);
-            }
-          }
-        }
+        // for (size_t y = 0; y < brick.yMax; y += 1) {
+        //   for (size_t x = 0; x < brick.xMax; x += 1) {
+        //     switch (brick[z][y][x]) {
+        //       case 'X':
+        //         assert(brick[z + 1][y][x] == ' ');
+        //         assert(brick[z + 2][y][x] == 'X');
+        //         brick[z + 0][y][x] = '+';
+        //         brick[z + 1][y][x] = 'X';
+        //         brick[z + 2][y][x] = '+';
+        //         break;
+        //       case '+':
+        //         assert(brick[z - 1][y][x] == '0' || brick[z - 1][y][x] == '1');
+        //         break;
+        //       case '|':
+        //       case 'v':
+        //       case '^':
+        //       case ' ':
+        //         break;
+        //       default:
+        //         break; // assert(false);
+        //     }
+        //   }
+        // }
         break;
 
       // Level 6 is the E/W lock rods.
 
       case 6:
-        for (size_t y = 0; y < brick.yMax; y += 1) {
-          for (size_t x = 0; x < brick.xMax; x += 1) {
-            P3D p(z, y, x);
-            P3D pd = p.offsetBy(D);
-            P3D pdd = pd.offsetBy(D);
-
-            Voxel &v = (Voxel &) brick.at(p);
-            Voxel &vd = (Voxel &) brick.at(pd);
-            Voxel &vdd = (Voxel &) brick.at(pdd);
-
-            VoxelProperties vp = voxelProperties[v];
-            VoxelProperties vdp = voxelProperties[vd];
-            VoxelProperties vddp = voxelProperties[vdd];
-
-            P3D pf = p.offsetBy(FWard(vp.direction));
-            Voxel &vf = (Voxel &) brick.at(pf);
-            VoxelProperties vfp = voxelProperties[vf];
-
-            assert(vp.voxelType == vtLock);
-
-            switch (vp.lockType) {
-              case ltLock:
-                assert(vdp.voxelType == vtWall);
-                if (vddp.voxelType == vtWall) {
-                  P3D pddf = pdd.offsetBy(FWard(vp.direction));
-                  Voxel &vddf = (Voxel &) brick.at(pddf);
-                  VoxelProperties vddfp = voxelProperties[vddf];
-                  P3D pdf = pd.offsetBy(FWard(vp.direction));
-                  Voxel &vdf = (Voxel &) brick.at(pdf);
-                  VoxelProperties vdfp = voxelProperties[vdf];
-
-                  assert(vddfp.voxelType == vtData);
-                  assert(vddfp.dataType == dtSlot);
-
-                  vddf = dp[vp.direction];
-                  vdf = ds[vp.direction];
-                  vd = lk[vp.direction];
-                  v = lp[vp.direction];
-
-                } else if (vddp.voxelType == vtData) {
-                  P3D pdb = pd.offsetBy(BWard(vp.direction));
-                  Voxel &vdb = (Voxel &) brick.at(pdb);
-                  VoxelProperties vdbp = voxelProperties[vdb];
-                  P3D pb = pd.offsetBy(BWard(vp.direction));
-                  Voxel &vb = (Voxel &) brick.at(pb);
-                  VoxelProperties vbp = voxelProperties[vb];
-
-                  assert(vddp.dataType == dtLock);
-                  vdd = dp[vp.direction];
-                  vd = ds[vp.direction];
-                  vdb = lk[vp.direction];
-                  vb = lp[vp.direction];
-                  v = lb[vp.direction];
-                } else {
-                  assert(vddp.voxelType == vtWall || vddp.voxelType == vtData);
-                }
-                break;
-              case ltHead:
-                assert(vfp.voxelType == vtWall);
-                vf = Slot;
-                break;
-              case ltBody:
-                break;
-              case ltTail:
-                break;
-              default:
-                break; // assert(false);
-            }
-          }
-        }
+        // for (size_t y = 0; y < brick.yMax; y += 1) {
+        //   for (size_t x = 0; x < brick.xMax; x += 1) {
+        //     P3D p(z, y, x);
+        //     P3D pd = p.offsetBy(D);
+        //     P3D pdd = pd.offsetBy(D);
+	// 
+        //     Voxel &v = (Voxel &) brick.at(p);
+        //     Voxel &vd = (Voxel &) brick.at(pd);
+        //     Voxel &vdd = (Voxel &) brick.at(pdd);
+	// 
+        //     VoxelProperties vp = voxelProperties[v];
+        //     VoxelProperties vdp = voxelProperties[vd];
+        //     VoxelProperties vddp = voxelProperties[vdd];
+	// 
+        //     P3D pf = p.offsetBy(FWard(vp.direction));
+        //     Voxel &vf = (Voxel &) brick.at(pf);
+        //     VoxelProperties vfp = voxelProperties[vf];
+	// 
+        //     assert(vp.voxelType == vtLock);
+	// 
+        //     switch (vp.lockType) {
+        //       case ltLock:
+        //         assert(vdp.voxelType == vtWall);
+        //         if (vddp.voxelType == vtWall) {
+        //           P3D pddf = pdd.offsetBy(FWard(vp.direction));
+        //           Voxel &vddf = (Voxel &) brick.at(pddf);
+        //           VoxelProperties vddfp = voxelProperties[vddf];
+        //           P3D pdf = pd.offsetBy(FWard(vp.direction));
+        //           Voxel &vdf = (Voxel &) brick.at(pdf);
+        //           VoxelProperties vdfp = voxelProperties[vdf];
+	// 
+        //           assert(vddfp.voxelType == vtData);
+        //           assert(vddfp.dataType == dtSlot);
+	// 
+        //           vddf = dp[vp.direction];
+        //           vdf = ds[vp.direction];
+        //           vd = lk[vp.direction];
+        //           v = lp[vp.direction];
+	// 
+        //         } else if (vddp.voxelType == vtData) {
+        //           P3D pdb = pd.offsetBy(BWard(vp.direction));
+        //           Voxel &vdb = (Voxel &) brick.at(pdb);
+        //           VoxelProperties vdbp = voxelProperties[vdb];
+        //           P3D pb = pd.offsetBy(BWard(vp.direction));
+        //           Voxel &vb = (Voxel &) brick.at(pb);
+        //           VoxelProperties vbp = voxelProperties[vb];
+	// 
+        //           assert(vddp.dataType == dtLock);
+        //           vdd = dp[vp.direction];
+        //           vd = ds[vp.direction];
+        //           vdb = lk[vp.direction];
+        //           vb = lp[vp.direction];
+        //           v = lb[vp.direction];
+        //         } else {
+        //           assert(vddp.voxelType == vtWall || vddp.voxelType == vtData);
+        //         }
+        //         break;
+        //       case ltHead:
+        //         assert(vfp.voxelType == vtWall);
+        //         vf = Slot;
+        //         break;
+        //       case ltBody:
+        //         break;
+        //       case ltTail:
+        //         break;
+        //       default:
+        //         break; // assert(false);
+        //     }
+        //   }
+        // }
         break;
     }
   }
