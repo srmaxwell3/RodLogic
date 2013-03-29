@@ -23,11 +23,11 @@ using std::string;
 // S[lot]
 // L[ock]{B[ody},H[ead],T[ail],P[ost],K[ey]}
 //       {E,S,D,N,W,U}
-//       {L[ocked],U[unlocked]}
+//       {L[ckd],U[nlk]}
 // D[ata]{B[ody},H[ead],T[ail],P[ost],
-//        S[lot],L[oc]K,Q[uery],G[ate],
-//        0[gate],1[gate],J[oin],I[nput],
-//        O[utput}
+//        S[lot],L[ock],Q[ury],G[ate],
+//        0[Gat],1[Gat],I[Put],O[Put],
+//        D[Put]}
 //       }
 //       {E,S,D,W,N,U}
 //       {R[eset],[Set]0,X,[Set]1}
@@ -61,14 +61,16 @@ enum Voxel {
   DQWR, DQW0, DQWX, DQW1, DQNR, DQN0, DQNX, DQN1, DQUR, DQU0, DQUX, DQU1,
   DGER, DGE0, DGEX, DGE1, DGSR, DGS0, DGSX, DGS1, DGDR, DGD0, DGDX, DGD1, // D[ata]G[ate]
   DGWR, DGW0, DGWX, DGW1, DGNR, DGN0, DGNX, DGN1, DGUR, DGU0, DGUX, DGU1,
-  D0ER, D0E0, D0EX, D0E1, D0SR, D0S0, D0SX, D0S1, D0DR, D0D0, D0DX, D0D1, // D[ata]0[gate]
+  D0ER, D0E0, D0EX, D0E1, D0SR, D0S0, D0SX, D0S1, D0DR, D0D0, D0DX, D0D1, // D[ata]0[Gat]
   D0WR, D0W0, D0WX, D0W1, D0NR, D0N0, D0NX, D0N1, D0UR, D0U0, D0UX, D0U1,
-  D1ER, D1E0, D1EX, D1E1, D1SR, D1S0, D1SX, D1S1, D1DR, D1D0, D1DX, D1D1, // D[ata]1[gate]
+  D1ER, D1E0, D1EX, D1E1, D1SR, D1S0, D1SX, D1S1, D1DR, D1D0, D1DX, D1D1, // D[ata]1[Gat]
   D1WR, D1W0, D1WX, D1W1, D1NR, D1N0, D1NX, D1N1, D1UR, D1U0, D1UX, D1U1,
-  DIER, DIE0, DIEX, DIE1, DISR, DIS0, DISX, DIS1, DIDR, DID0, DIDX, DID1, // D[ata]I[nput]
+  DIER, DIE0, DIEX, DIE1, DISR, DIS0, DISX, DIS1, DIDR, DID0, DIDX, DID1, // D[ata]I[Put]
   DIWR, DIW0, DIWX, DIW1, DINR, DIN0, DINX, DIN1, DIUR, DIU0, DIUX, DIU1,
-  DOER, DOE0, DOEX, DOE1, DOSR, DOS0, DOSX, DOS1, DODR, DOD0, DODX, DOD1, // D[ata]O[utput]
+  DOER, DOE0, DOEX, DOE1, DOSR, DOS0, DOSX, DOS1, DODR, DOD0, DODX, DOD1, // D[ata]O[Put]
   DOWR, DOW0, DOWX, DOW1, DONR, DON0, DONX, DON1, DOUR, DOU0, DOUX, DOU1,
+  DDER, DDE0, DDEX, DDE1, DDSR, DDS0, DDSX, DDS1, DDDR, DDD0, DDDX, DDD1, // D[ata]D[Put]
+  DDWR, DDW0, DDWX, DDW1, DDNR, DDN0, DDNX, DDN1, DDUR, DDU0, DDUX, DDU1,
 
   eoVoxel
 };

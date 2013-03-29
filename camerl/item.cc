@@ -35,8 +35,9 @@ bool Item::AttemptToMove(Volume *volume, FwdOrBwd fwdOrBwd, Changes &changes) {
 
       if (thisVoxel == Slot || rodType == tvProperties.rodType[0]) {
         if (tvProperties.voxelType == vtData &&
-            (tvProperties.dataType == dtInpt ||
-             tvProperties.dataType == dtOutp
+            (tvProperties.dataType == dtIPut ||
+             tvProperties.dataType == dtOPut ||
+             tvProperties.dataType == dtDPut
             )
            )
         {
@@ -46,8 +47,9 @@ bool Item::AttemptToMove(Volume *volume, FwdOrBwd fwdOrBwd, Changes &changes) {
           VoxelProperties const &pvProperties = voxelProperties[prevVoxel];
           if (pvProperties.rodType[0] == rodType) {
             if (pvProperties.voxelType == vtData &&
-                (pvProperties.dataType == dtInpt ||
-                 pvProperties.dataType == dtOutp
+                (pvProperties.dataType == dtIPut ||
+                 pvProperties.dataType == dtOPut ||
+                 pvProperties.dataType == dtDPut
                 )
                )
             {

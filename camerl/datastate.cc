@@ -1,4 +1,6 @@
 #include "datastate.h"
+#include <string>
+using std::string;
 
 char const *c_str(DataState s) {
   switch (s) {
@@ -12,3 +14,28 @@ char const *c_str(DataState s) {
   }
   return "DataState(?)";
 }
+
+static char const *dataStateSymbols[eoDataState] = {
+  "dsUnkn",
+  "dsRset",
+  "dsSet0",
+  "dsSetX",
+  "dsSet1"
+};
+
+DataState toDataState(string const &state) {
+  for (DataState s : dataState) {
+    if (state == dataStateSymbols[s]) {
+      return s;
+    }
+  }
+  return eoDataState;
+}
+
+DataState const dataState[eoDataState] = {
+  dsUnkn,
+  dsRset,
+  dsSet0,
+  dsSetX,
+  dsSet1
+};

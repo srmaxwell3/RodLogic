@@ -13,8 +13,9 @@ enum DataType {
   dtTest,
   dtGate,
   // dtJoin,
-  dtInpt,
-  dtOutp,
+  dtIPut,
+  dtOPut,
+  dtDPut,
 
   eoDataType
 };

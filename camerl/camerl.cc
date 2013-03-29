@@ -42,32 +42,465 @@ bool optVerbose = false;
 bool optWarnings = false;
 
 #include "volume.h"
+#include "datastate.h"
 
-void processVolumeFrom(istream &in) {
+void processInputFrom(istream &in, map<string, deque<DataState>> &inputs) {
+  unsigned lineNumber = 0;
+
+  inputs.clear();
+
+  do {
+    string line;
+    getline(in, line);
+    if (!in.good()) {
+      continue;
+    }
+
+    lineNumber += 1;
+
+    char const *sStart = line.c_str();
+    char const *sPtr = sStart;
+    unsigned sCnt;
+    char sBuf[1024];
+
+    // fprintf(stderr, "%d: scanning >%s\n", lineNumber, sPtr);
+
+    if (sscanf(sPtr, " %[#]", sBuf) == 1) {
+      continue;
+    }
+
+    if (sscanf(sPtr, " %[{]%n", sBuf, &sCnt) != 1) {
+      fprintf(stderr,
+              "rlic: Error: %d, %ld: Input syntax error; "
+              "expected '^ >[#{]<' at '%s'!\n",
+              lineNumber,
+              ((sPtr + sCnt) - sStart),
+	      sPtr
+             );
+      continue;
+    }
+    sPtr += sCnt;
+
+    // fprintf(stderr, "%d: scanning >%s\n", lineNumber, sPtr);
+
+    string name;
+    if (sscanf(sPtr, " \"%[^\",]\" , %n", sBuf, &sCnt) == 1 ||
+        sscanf(sPtr, " \'%[^\',]\' , %n", sBuf, &sCnt) == 1 ||
+        sscanf(sPtr, " %[^, ] , %n", sBuf, &sCnt) == 1
+        )
+    {
+      name = sBuf;
+    } else {
+      fprintf(stderr,
+              "rlic: Error: %d, %ld: Input syntax error; "
+              "expected '^{ >\\w+< ,' (symbol name) at '%s'!\n",
+              lineNumber,
+              ((sPtr + sCnt) - sStart),
+	      sPtr
+             );
+      continue;
+    }
+    sPtr += sCnt;
+
+    // fprintf(stderr, "%d: name='%s'\n", lineNumber, name.c_str());
+    // fprintf(stderr, "%d: scanning >%s\n", lineNumber, sPtr);
+
+    if (sscanf(sPtr, " %[{]%n", sBuf, &sCnt) != 1) {
+      fprintf(stderr,
+              "rlic: Error: %d, %ld: Input syntax error; "
+              "expected '^{ \\w+ , >{<' at '%s'!\n",
+              lineNumber,
+              ((sPtr + sCnt) - sStart),
+	      sPtr
+             );
+      continue;
+    }
+    sPtr += sCnt;
+
+    deque<DataState> values;
+    char symbol[128];
+    int value;
+
+    // fprintf(stderr, "%d: scanning >%s\n", lineNumber, sPtr);
+
+    if (sscanf(sPtr, " %i %n", &value, &sCnt) == 1) {
+      values.push_back(value == 0 ? dsSet0 : dsSet1);
+      sPtr += sCnt;
+
+      // fprintf(stderr, "%d: value=%d\n", lineNumber, value);
+      // fprintf(stderr, "%d: scanning >%s\n", lineNumber, sPtr);
+
+      while (sscanf(sPtr, " , %i %n", &value, &sCnt) == 1) {
+        values.push_back(value == 0 ? dsSet0 : dsSet1);
+        sPtr += sCnt;
+
+        // fprintf(stderr, "%d: , value=%d\n", lineNumber, value);
+      }
+
+      // fprintf(stderr, "%d: scanning >%s\n", lineNumber, sPtr);
+
+      if (sscanf(sPtr, " %[}]%n", sBuf, &sCnt) != 1) {
+        fprintf(stderr,
+                "rlic: Error: %d, %ld: Input syntax error; "
+                "expected '^{ \\w+, { \\d+ ( , \\d+ )* >}<' at '%s'!\n",
+                lineNumber,
+                ((sPtr + sCnt) - sStart),
+		sPtr
+               );
+        continue;
+      }
+      sPtr += sCnt;
+    } else if (sscanf(sPtr, " %[^,} ] %n", symbol, &sCnt) == 1) {
+      DataState state = toDataState(symbol);
+      if (state == eoDataState) {
+        fprintf(stderr,
+                "rlic: Error: %d, %ld: Input syntax error; "
+                "expected '^{ \\w+ , { ><DataState>< ( , <DataState> )* }' at '%s'!\n",
+                lineNumber,
+                ((sPtr + sCnt) - sStart),
+		sPtr
+               );
+        continue;
+      }
+      values.push_back(state);
+      sPtr += sCnt;
+
+      // fprintf(stderr, "%d: value=%d\n", lineNumber, value);
+      // fprintf(stderr, "%d: scanning >%s\n", lineNumber, sPtr);
+
+      while (sscanf(sPtr, " , %[^,} ] %n", symbol, &sCnt) == 1) {
+        DataState state = toDataState(symbol);
+        if (state == eoDataState) {
+          fprintf(stderr,
+                  "rlic: Error: %d, %ld: Input syntax error; "
+                  "expected '^{ \\w+ , { <DataState> ( , ><DataState>< )* }' at '%s'!\n",
+                  lineNumber,
+                  ((sPtr + sCnt) - sStart),
+                  sPtr
+                  );
+          continue;
+        }
+        values.push_back(state);
+        sPtr += sCnt;
+
+        // fprintf(stderr, "%d: , value=%d\n", lineNumber, value);
+      }
+
+      // fprintf(stderr, "%d: scanning >%s\n", lineNumber, sPtr);
+
+      if (sscanf(sPtr, " %[}]%n", sBuf, &sCnt) != 1) {
+        fprintf(stderr,
+                "rlic: Error: %d, %ld: Input syntax error; "
+                "expected '^{ \\w+ , { <DataState> ( , <DataState> )* >}<' at '%s'!\n",
+                lineNumber,
+                ((sPtr + sCnt) - sStart),
+		sPtr
+               );
+        continue;
+      }
+      sPtr += sCnt;
+    } else {
+      fprintf(stderr,
+              "rlic: Error: %d, %ld: Input syntax error; "
+              "expected '^{ \\w+, { >\\d+<' (integer->bool value) at '%s'!\n",
+              lineNumber,
+              ((sPtr + sCnt) - sStart),
+	      sPtr
+             );
+      continue;
+    }
+
+    // fprintf(stderr, "%d: scanning >%s\n", lineNumber, sPtr);
+
+    if (sscanf(sPtr, " %[}]%n", sBuf, &sCnt) != 1) {
+      fprintf(stderr,
+              "rlic: Error: %d, %ld: Input syntax error; "
+              "expected '^{ \\w+, { \\d+ ( , \\d+ ) } >}<' at '%s'!\n",
+              lineNumber,
+              ((sPtr + sCnt) - sStart),
+	      sPtr
+             );
+      continue;
+    }
+    sPtr += sCnt;
+
+    inputs[name] = values;
+  } while (in.good() && !in.eof());
+}
+
+void processTableInputFrom(istream &in, map<string, deque<DataState>> &inputs) {
+  unsigned lineNumber = 0;
+
+  inputs.clear();
+
+  deque<string> names;
+  do {
+    string line;
+    getline(in, line);
+    if (!in.good()) {
+      continue;
+    }
+
+    lineNumber += 1;
+
+    char const *sStart = line.c_str();
+    char const *sPtr = sStart;
+    unsigned sCnt;
+    char sBuf[1024];
+
+    // fprintf(stderr, "%d: scanning >%s\n", lineNumber, sPtr);
+
+    if (sscanf(sPtr, " %[{]%n", sBuf, &sCnt) != 1) {
+      fprintf(stderr,
+              "rlic: Error: %d, %ld: Input syntax error; "
+              "expected '^ >[#{]<' at '%s'!\n",
+              lineNumber,
+              ((sPtr + sCnt) - sStart),
+	      sPtr
+             );
+      continue;
+    }
+    sPtr += sCnt;
+
+    // fprintf(stderr, "%d: scanning >%s\n", lineNumber, sPtr);
+
+    if (sscanf(sPtr, " %[#]", sBuf) == 1) {
+      continue;
+    }
+
+    string name;
+    if (sscanf(sPtr, " \"%[^\",]\"%n", sBuf, &sCnt) == 1 ||
+        sscanf(sPtr, " \'%[^\',]\'%n", sBuf, &sCnt) == 1 ||
+        sscanf(sPtr, " %[^,} ]%n", sBuf, &sCnt) == 1
+        )
+    {
+      name = sBuf;
+
+      // fprintf(stderr, "%d: name='%s'\n", lineNumber, name.c_str());
+      names.push_back(name);
+      sPtr += sCnt;
+    } else {
+      fprintf(stderr,
+              "rlic: Error: %d, %ld: Input syntax error; "
+              "expected '^ >\\w+<' (first symbol name) at '%s'!\n",
+              lineNumber,
+              ((sPtr + sCnt) - sStart),
+	      sPtr
+             );
+      continue;
+    }
+    while (sscanf(sPtr, " , \"%[^\"]\"%n", sBuf, &sCnt) == 1 ||
+           sscanf(sPtr, " , \'%[^\']\'%n", sBuf, &sCnt) == 1 ||
+           sscanf(sPtr, " , %[^,} ]%n", sBuf, &sCnt) == 1
+          )
+    {
+      name = sBuf;
+
+      // fprintf(stderr, "%d: name='%s'\n", lineNumber, name.c_str());
+
+      names.push_back(name);
+      sPtr += sCnt;
+    }
+
+    // fprintf(stderr, "%d: scanning >%s\n", lineNumber, sPtr);
+
+    if (sscanf(sPtr, " %[}]%n", sBuf, &sCnt) != 1) {
+      fprintf(stderr,
+              "rlic: Error: %d, %ld: Input syntax error; "
+              "expected '^{ \\w+, >( , \\w+ ) }<' (additional symbol name(s), and '}') at '%s'!\n",
+              lineNumber,
+              ((sPtr + sCnt) - sStart),
+	      sPtr
+             );
+    }
+  } while (names.empty() && in.good() && !in.eof());
+
+  do {
+    string line;
+    getline(in, line);
+    if (!in.good()) {
+      continue;
+    }
+
+    lineNumber += 1;
+
+    char const *sStart = line.c_str();
+    char const *sPtr = sStart;
+    unsigned sCnt;
+    char sBuf[1024];
+
+    // fprintf(stderr, "%d: scanning >%s\n", lineNumber, sPtr);
+
+    if (sscanf(sPtr, " %[#]", sBuf) == 1) {
+      continue;
+    }
+
+    if (sscanf(sPtr, " %[{]%n", sBuf, &sCnt) != 1) {
+      fprintf(stderr,
+              "rlic: Error: %d, %ld: Input syntax error; "
+              "expected '^ >[#{]<' at '%s'!\n",
+              lineNumber,
+              ((sPtr + sCnt) - sStart),
+	      sPtr
+             );
+      continue;
+    }
+    sPtr += sCnt;
+
+    deque<DataState> values;
+    char symbol[128];
+    int value;
+
+    // fprintf(stderr, "%d: scanning >%s\n", lineNumber, sPtr);
+
+    if (sscanf(sPtr, " %i %n", &value, &sCnt) == 1) {
+      values.push_back(value == 0 ? dsSet0 : dsSet1);
+      sPtr += sCnt;
+
+      // fprintf(stderr, "%d: value=%d\n", lineNumber, value);
+      // fprintf(stderr, "%d: scanning >%s\n", lineNumber, sPtr);
+
+      while (sscanf(sPtr, " , %i %n", &value, &sCnt) == 1) {
+        values.push_back(value == 0 ? dsSet0 : dsSet1);
+        sPtr += sCnt;
+
+        // fprintf(stderr, "%d: , value=%d\n", lineNumber, value);
+      }
+
+      // fprintf(stderr, "%d: scanning >%s\n", lineNumber, sPtr);
+
+      if (sscanf(sPtr, " %[}]%n", sBuf, &sCnt) != 1) {
+        fprintf(stderr,
+                "rlic: Error: %d, %ld: Input syntax error; "
+                "expected '^{ \\w+, { \\d+ ( , \\d+ )* >}<' at '%s'!\n",
+                lineNumber,
+                ((sPtr + sCnt) - sStart),
+		sPtr
+               );
+        continue;
+      }
+      sPtr += sCnt;
+    } else if (sscanf(sPtr, " %[^,} ] %n", symbol, &sCnt) == 1) {
+      DataState state = toDataState(symbol);
+      if (state == eoDataState) {
+        fprintf(stderr,
+                "rlic: Error: %d, %ld: Input syntax error; "
+                "expected '^{ \\w+ , { ><DataState>< ( , <DataState> )* }' at '%s'!\n",
+                lineNumber,
+                ((sPtr + sCnt) - sStart),
+		sPtr
+               );
+        continue;
+      }
+      values.push_back(state);
+      sPtr += sCnt;
+
+      // fprintf(stderr, "%d: value=%d\n", lineNumber, value);
+      // fprintf(stderr, "%d: scanning >%s\n", lineNumber, sPtr);
+
+      while (sscanf(sPtr, " , %[^,} ] %n", symbol, &sCnt) == 1) {
+        DataState state = toDataState(symbol);
+        if (state == eoDataState) {
+          fprintf(stderr,
+                  "rlic: Error: %d, %ld: Input syntax error; "
+                  "expected '^{ \\w+ , { <DataState> ( , ><DataState>< )* }' at '%s'!\n",
+                  lineNumber,
+                  ((sPtr + sCnt) - sStart),
+                  sPtr
+                  );
+          continue;
+        }
+        values.push_back(state);
+        sPtr += sCnt;
+
+        // fprintf(stderr, "%d: , value=%d\n", lineNumber, value);
+      }
+
+      // fprintf(stderr, "%d: scanning >%s\n", lineNumber, sPtr);
+
+      if (sscanf(sPtr, " %[}]%n", sBuf, &sCnt) != 1) {
+        fprintf(stderr,
+                "rlic: Error: %d, %ld: Input syntax error; "
+                "expected '^{ \\w+ , { <DataState> ( , <DataState> )* >}<' at '%s'!\n",
+                lineNumber,
+                ((sPtr + sCnt) - sStart),
+		sPtr
+               );
+        continue;
+      }
+      sPtr += sCnt;
+    } else {
+      fprintf(stderr,
+              "rlic: Error: %d, %ld: Input syntax error; "
+              "expected '^{ \\w+, { >\\d+<' (integer->bool value) at '%s'!\n",
+              lineNumber,
+              ((sPtr + sCnt) - sStart),
+	      sPtr
+             );
+      continue;
+    }
+
+    if (names.size() < values.size()) {
+      fprintf(stderr,
+              "rlic: Warning: "
+              "Table row %d has too many values (has %lu, expected %lu); "
+              "ignoring extra.\n",
+              lineNumber,
+              values.size(),
+              names.size()
+             );
+    } else if (values.size() < names.size()) {
+      fprintf(stderr,
+              "rlic: Warning: "
+              "Table row %d has too few values (has %lu, expected %lu); "
+              "filling with 0's.\n",
+              lineNumber,
+              values.size(),
+              names.size()
+             );
+    }
+
+    for (size_t n = 0; n < names.size(); n += 1) {
+      inputs[names[n]].push_back(n < values.size() ? values[n] : dsUnkn);
+    }
+  } while (in.good() && !in.eof());
+}
+
+void processVolumeFrom(istream &in, map<string, deque<DataState>> &inputs) {
   Volume volume(in);
 
   // #include "cam.8.rules.h"
 
-  volume.AddInput
-      (VoxelCoordinant(2, 16, 8),
-       { dsSet0, dsSet1, dsSet0, dsSet1,
-         dsSet0, dsSet0, dsSet0, dsSet1,
-         dsSet0, dsSet1, dsSet0, dsSet0
-       }
-      );
-  volume.AddInput
-      (VoxelCoordinant(2, 20, 8),
-       { dsSet0, dsSet0, dsSet0, dsSet1,
-         dsSet0, dsSet1, dsSet0, dsSet0,
-         dsSet0, dsSet1, dsSet0, dsSet0
-       }
-      );
+  // volume.AddInput
+  //     ("C",
+  //      { dsSet0, dsSet1, dsSet0, dsSet1,
+  //        dsSet0, dsSet0, dsSet0, dsSet1,
+  //        dsSet0, dsSet1, dsSet0, dsSet0
+  //      }
+  //     );
+  // volume.AddInput
+  //     ("D",
+  //      { dsSet0, dsSet0, dsSet0, dsSet1,
+  //        dsSet0, dsSet1, dsSet0, dsSet0,
+  //        dsSet0, dsSet1, dsSet0, dsSet0
+  //      }
+  //     );
+
+  int maxInputLength = optCycleCount;
+  for (auto const &nameAndValues : inputs) {
+    string const &name = nameAndValues.first;
+    deque<DataState> const &values = nameAndValues.second;
+
+    volume.AddInput(name, values);
+    maxInputLength = std::max(maxInputLength, int(values.size()));
+  }
 
   if (optDelayMSecSet) {
-   initscr();			// Start curses mode
-   mvprintw(0, 0, "Press any key to start.");
-   getch();
-   refresh();
+    fprintf(stdout, "Press any key to start.");
+    fgetc(stdin);
+
+    initscr();			// Start curses mode
+    refresh();
   }
 
   for (size_t t = 0; t < (8 * NTicksPerCycle); t += 1) {
@@ -196,21 +629,47 @@ int main(int argc, char *const argv[]) {
     fprintf(stdout, "\n");
   }
 
+  map<string, deque<DataState>> inputs;
+
+  if (!optInputPath.empty()) {
+    ifstream iFile(optInputPath);
+    if (!iFile.is_open()) {
+      fprintf(stderr,
+              "rlic: Error: Unable to open input %s for reading!\n",
+              optInputPath.c_str()
+             );
+      return 1;
+    }
+    processInputFrom(iFile, inputs);
+  }
+
+  if (!optTableInputPath.empty()) {
+    ifstream iFile(optTableInputPath);
+    if (!iFile.is_open()) {
+      fprintf(stderr,
+              "rlic: Error: Unable to open [table] input %s for reading!\n",
+              optTableInputPath.c_str()
+             );
+      return 1;
+    }
+    processTableInputFrom(iFile, inputs);
+  }
+
   if (optind < argc) {
     for (int a = optind; a < argc; a += 1) {
       ifstream dFile(argv[a]);
       if (!dFile.is_open()) {
         fprintf(stderr,
-                "cam.r: Error: Unable to open volume %s for reading!\n",
+                "rlic: Error: Unable to open volume %s for reading!\n",
                 argv[a]
                );
         return 1;
       }
-      processVolumeFrom(dFile);
+      processVolumeFrom(dFile, inputs);
       dFile.close();
     }
   } else {
-    processVolumeFrom(cin);
+    processVolumeFrom(cin, inputs);
   }
 
   return 0;

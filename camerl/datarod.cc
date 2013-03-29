@@ -60,7 +60,7 @@ bool DataRod::CheckForFreedomOfMovement(Volume *volume) {
     }
 
     if (blockStateProperties[vProperties.blockableStates].isFBlkable) {
-      if (vProperties.dataType == dtInpt) {
+      if (vProperties.dataType == dtIPut) {
         TickPerPhase tickPerPhase = volume->CurrentTickPerPhase();
         deque<DataState> &values = volume->GetInputsFor(vc);
         DataState inputState = values.empty() ? dsSet0 : values.front();

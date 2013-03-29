@@ -48,6 +48,16 @@ class Volume: public VoxelBrick
  public:
   Volume(VoxelBrick const &initial);
   Volume(istream &in);
+
+  char parseBrick(istream &in, char c = ' ');
+  char parsePlate(VoxelPlate &plate, istream &in, char c);
+  char parseRank(VoxelRank &rank, istream &in, char c);
+  char parseVoxel(VoxelRank &rank, istream &in, char c);
+  char parseIOD(istream &in, char c);
+  char parseLabel(string &label, istream &in, char c);
+  char parseExpectingA(istream &in, char c, char expecting);
+  char skipWhitespaceAndComments(istream &in, char c);
+
   void AddRule(Scenario const &scenario, Voxel newVoxel) {
     rules[scenario] = newVoxel;
   }
@@ -99,6 +109,20 @@ class Volume: public VoxelBrick
     }
   }
 
+  void AddInput(string const &label, deque<DataState> const &values) {
+    for (size_t l = 0; l < inputLabels.size(); l += 1) {
+      if (inputLabels[l] == label) {
+        AddInput(inputCoordinates[l], values);
+        return;
+      }
+    }
+    fprintf(stderr,
+            "AddInput(label=\"%s\", values): "
+            "%s is not a valid input label!\n",
+            label.c_str(),
+            label.c_str()
+            );
+  }
   void AddInput(VoxelCoordinant const &vc, deque<DataState> const &values) {
     GetInputsFor(vc) = values;
   }
@@ -106,7 +130,7 @@ class Volume: public VoxelBrick
     Voxel v = voxelAt(vc);
     VoxelProperties const &vProperties = voxelProperties[v];
     assert(vProperties.voxelType == vtData);
-    assert(vProperties.dataType == dtInpt);
+    assert(vProperties.dataType == dtIPut);
     Direction d = rodTypeProperties[vProperties.rodType[0]].fwd;
     return inputs[d][vc];
   }
@@ -169,6 +193,15 @@ class Volume: public VoxelBrick
   array<long, eoTickPerCycle> totalEvaluatedUSecsPerTick;
   long totalEvaluatedUSecs;
   long totalEvaluatedTicks;
+
+  int lineNumber;
+  int charNumber;
+  vector<string> inputLabels;
+  vector<string> outputLabels;
+  vector<string> debugOutputLabels;
+  vector<VoxelCoordinant> inputCoordinates;
+  vector<VoxelCoordinant> outputCoordinates;
+  vector<VoxelCoordinant> debugOutputCoordinates;
 };
 
 #endif // VOLUME_H

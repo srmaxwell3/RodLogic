@@ -28,7 +28,9 @@ Volume::Volume(VoxelBrick const &initial) :
     NCols(0),
     clock(0),
     totalEvaluatedUSecs(0),
-    totalEvaluatedTicks(0)
+    totalEvaluatedTicks(0),
+    lineNumber(1),
+    charNumber(0)
 {
   for (auto const &lvl : initial) {
     if (NRows < lvl.size()) {
@@ -47,10 +49,131 @@ Volume::Volume(VoxelBrick const &initial) :
   FindItems();
 }
 
-int lineNumber = 1;
-int charNumber = 0;
+Volume::Volume(istream &in) :
+    VoxelBrick(),
+    NLvls(0),
+    NRows(0),
+    NCols(0),
+    clock(0),
+    totalEvaluatedUSecs(0),
+    totalEvaluatedTicks(0),
+    lineNumber(1),
+    charNumber(0)
+{
+  // Read and parse the input.
+  char c = parseBrick(in);
 
-char skipWhitespaceAndComments(istream &in, char c) {
+  // Determine sizes.
+  NLvls = size();
+  for (auto const &lvl : *this) {
+    if (NRows < lvl.size()) {
+      NRows = lvl.size();
+    }
+    for (auto const &row : lvl) {
+      if (NCols < row.size()) {
+        NCols = row.size();
+      }
+    }
+  }
+  for (auto &lvl : *this) {
+    lvl.resize(NRows);
+    for (auto &row : lvl) {
+      row.resize(NCols, Wall);
+    }
+  }
+
+  fprintf(stdout, "Read a %lu x %lu x %lu brick....\n", NLvls, NRows, NCols);
+
+  for (size_t z = 0; z < NLvls; z += 1) {
+    for (size_t y = 0; y < NRows; y += 1) {
+      for (size_t x = 0; x < NCols; x += 1) {
+        Voxel const &v = (*this)[z][y][x];
+        VoxelProperties const &vp = voxelProperties[v];
+        if (vp.voxelType == vtData) {
+          VoxelCoordinant vc(z, y, x);
+          switch (vp.dataType) {
+            case dtIPut:
+              inputCoordinates.push_back(vc);
+              break;
+            case dtOPut:
+              outputCoordinates.push_back(vc);
+              break;
+            case dtDPut:
+              debugOutputCoordinates.push_back(vc);
+              break;
+            default:
+              break;
+          }
+        }
+      }
+    }
+  }
+
+  parseIOD(in, c);
+
+  int iodErrors = 0;
+  if (inputCoordinates.size() != inputLabels.size()) {
+    fflush(stdout);
+    fprintf(stderr,
+            "Volume(): Found %lu input voxels, but have %lu input labels!\n",
+            inputCoordinates.size(),
+            inputLabels.size()
+           );
+    iodErrors += 1;
+  }
+  if (outputCoordinates.size() != outputLabels.size()) {
+    fflush(stdout);
+    fprintf(stderr,
+            "Volume(): Found %lu output voxels, but have %lu output labels!\n",
+            outputCoordinates.size(),
+            outputLabels.size()
+           );
+    iodErrors += 1;
+  }
+  if (debugOutputCoordinates.size() != debugOutputLabels.size()) {
+    fflush(stdout);
+    fprintf(stderr,
+            "\nVolume(): Found %lu debugOutput voxels, but have %lu debugOutput labels!\n",
+            debugOutputCoordinates.size(),
+            debugOutputLabels.size()
+           );
+    iodErrors += 1;
+  }
+  if (iodErrors) {
+    exit(1);
+  }
+
+  char const *comma;
+  fprintf(stdout, "Inputs={ ");
+  comma = "";
+  for (size_t i = 0; i < inputLabels.size(); i += 1) {
+    fprintf(stdout, "%s%s @ ", comma, inputLabels[i].c_str());
+    inputCoordinates[i].Dump(this);
+    comma = ", ";
+  }
+  fprintf(stdout, " }\nOutputs={ ");
+  comma = "";
+  for (size_t i = 0; i < outputLabels.size(); i += 1) {
+    fprintf(stdout, "%s%s @ ", comma, outputLabels[i].c_str());
+    outputCoordinates[i].Dump(this);
+    comma = ", ";
+  }
+  fprintf(stdout, " }\nDebugOutputs={ ");
+  comma = "";
+  for (size_t i = 0; i < debugOutputLabels.size(); i += 1) {
+    fprintf(stdout, "%s%s @ ", comma, debugOutputLabels[i].c_str());
+    debugOutputCoordinates[i].Dump(this);
+    comma = ", ";
+  }
+  fprintf(stdout, " }\n");
+
+  totalEvaluatedUSecsPerDirection.fill(0);
+  totalEvaluatedUSecsPerTick.fill(0);
+
+  FindItems();
+}
+
+char Volume::skipWhitespaceAndComments(istream &in, char c) {
   int state = 0;
   for (/* c = c */;
        in.good() && !in.eof();
@@ -102,26 +225,78 @@ char skipWhitespaceAndComments(istream &in, char c) {
   return c;
 }
 
-char parseVoxel(VoxelRank &rank, istream &in, char c) {
-  string symbol;
-  for (c = skipWhitespaceAndComments(in, c);
-       isalnum(c);
-       charNumber += 1, c = in.get()
-      )
-  {
-    symbol.push_back(c);
-  }
-
-  if (symbol.empty()) {
+char Volume::parseExpectingA(istream &in, char c, char expecting) {
+  if ((c = skipWhitespaceAndComments(in, c)) != expecting) {
     fflush(stdout);
     fprintf(stderr,
-            "\nparseVoxel(): %d:%d: Missing <symbol> (at '%c')!\n",
+            "\nparseExpectingA(): %d:%d: Missing '%c' (at '%c')!\n",
             lineNumber,
             charNumber,
+            expecting,
             c
            );
     exit(1);
   }
+  charNumber += 1, c = in.get();
+  return c;
+}
+
+char Volume::parseBrick(istream &in, char c) {
+  c = parseExpectingA(in, c, '{');
+
+  push_back(VoxelPlate());
+  for (c = parsePlate(back(), in, c);
+       (c = skipWhitespaceAndComments(in, c)) == ',';
+       c = parsePlate(back(), in, (c = skipWhitespaceAndComments(in, c)))
+      )
+  {
+    // fprintf(stdout, ",\n");
+    charNumber += 1, c = in.get();
+    push_back(VoxelPlate());
+  }
+
+  c = parseExpectingA(in, c, '}');
+  return c;
+}
+
+char Volume::parsePlate(VoxelPlate &plate, istream &in, char c) {
+  c = parseExpectingA(in, c, '{');
+
+  plate.push_back(VoxelRank());
+  for (c = parseRank(plate.back(), in, c);
+       (c = skipWhitespaceAndComments(in, c)) == ',';
+       c = parseRank(plate.back(), in, (c = skipWhitespaceAndComments(in, c)))
+      )
+  {
+    // fprintf(stdout, ",\n");
+    charNumber += 1, c = in.get();
+    plate.push_back(VoxelRank());
+  }
+
+  c = parseExpectingA(in, c, '}');
+  return c;
+}
+
+char Volume::parseRank(VoxelRank &rank, istream &in, char c) {
+  c = parseExpectingA(in, c, '{');
+
+  for (c = parseVoxel(rank, in, c);
+       (c = skipWhitespaceAndComments(in, c)) == ',';
+       c = parseVoxel(rank, in, (c = skipWhitespaceAndComments(in, c)))
+      )
+  {
+    // fprintf(stdout, ",");
+    charNumber += 1, c = in.get();
+  }
+
+  c = parseExpectingA(in, c, '}');
+  return c;
+}
+
+char Volume::parseVoxel(VoxelRank &rank, istream &in, char c) {
+  string symbol;
+
+  c = parseLabel(symbol, in, c);
 
   Voxel voxel = StringToVoxel(symbol);
   if (voxel == eoVoxel) {
@@ -140,160 +315,76 @@ char parseVoxel(VoxelRank &rank, istream &in, char c) {
   return c;
 }
 
-char parseRank(VoxelRank &rank, istream &in, char c) {
-  if ((c = skipWhitespaceAndComments(in, c)) != '{') {
-    fflush(stdout);
-    fprintf(stderr,
-            "\nparseRank(): %d:%d: Missing '{' (at '%c')!\n",
-            lineNumber,
-            charNumber,
-            c
-           );
-    exit(1);
-  }
-  // fprintf(stdout, "    {");
-  charNumber += 1, c = in.get();
-
-  for (c = parseVoxel(rank, in, c);
-       (c = skipWhitespaceAndComments(in, c)) == ',';
-       c = parseVoxel(rank, in, (c = skipWhitespaceAndComments(in, c)))
+char Volume::parseIOD(istream &in, char c) {
+  for (c = skipWhitespaceAndComments(in, c);
+       !in.eof();
+       c = skipWhitespaceAndComments(in, c)
       )
   {
-    // fprintf(stdout, ",");
-    charNumber += 1, c = in.get();
+    string keyword;
+    c = parseLabel(keyword, in, c);
+
+    if (keyword != "Inputs" && keyword != "Outputs" && keyword != "DebugOutputs") {
+      fflush(stdout);
+      fprintf(stderr,
+              "\nparseIOD(): %d:%d: "
+              "Found \"%s\", expecting {Inputs,Outputs,DebugOutputs} (at '%c')!\n",
+              lineNumber,
+              charNumber,
+              keyword.c_str(),
+              c
+              );
+      exit(1);
+    }
+
+    c = parseExpectingA(in, c, '=');
+    c = parseExpectingA(in, c, '{');
+
+    if ((c = skipWhitespaceAndComments(in, c)) != '}') {
+      in.unget();
+
+      string label;
+      do {
+        charNumber += 1, c = in.get();
+
+        c = parseLabel(label, in, c);
+
+        if (keyword == "Inputs") {
+          inputLabels.push_back(label);
+        } else if (keyword == "Outputs") {
+          outputLabels.push_back(label);
+        } else {
+          debugOutputLabels.push_back(label);
+        }
+      } while ((c = skipWhitespaceAndComments(in, c)) == ',');
+    }
+
+    c = parseExpectingA(in, c, '}');
   }
 
-  if ((c = skipWhitespaceAndComments(in, c)) != '}') {
-    fflush(stdout);
-    fprintf(stderr,
-            "\nparseRank(): %d:%d: Missing '}' (at '%c')!\n",
-            lineNumber,
-            charNumber,
-            c
-           );
-    exit(1);
-  }
-  // fprintf(stdout, " }");
-  charNumber += 1, c = in.get();
   return c;
 }
 
-char parsePlate(VoxelPlate &plate, istream &in, char c) {
-  if ((c = skipWhitespaceAndComments(in, c)) != '{') {
-    fflush(stdout);
-    fprintf(stderr,
-            "\nparsePlate(): %d:%d: Missing '{' (at '%c')!\n",
-            lineNumber,
-            charNumber,
-            c
-           );
-    exit(1);
-  }
-  // fprintf(stdout, "  {\n");
-  charNumber += 1, c = in.get();
-
-  plate.push_back(VoxelRank());
-  for (c = parseRank(plate.back(), in, c);
-       (c = skipWhitespaceAndComments(in, c)) == ',';
-       c = parseRank(plate.back(), in, (c = skipWhitespaceAndComments(in, c)))
+char Volume::parseLabel(string &label, istream &in, char c) {
+  label.clear();
+  for (c = skipWhitespaceAndComments(in, c);
+       isalnum(c) || c == '!' || c == '.' || c == '_';
+       charNumber += 1, c = in.get()
       )
   {
-    // fprintf(stdout, ",\n");
-    charNumber += 1, c = in.get();
-    plate.push_back(VoxelRank());
+    label.push_back(c);
   }
-
-  if ((c = skipWhitespaceAndComments(in, c))!= '}') {
+  if (label.empty()) {
     fflush(stdout);
     fprintf(stderr,
-            "\nparsePlate(): %d:%d: Missing '}' (at '%c')!\n",
+            "\nparseLabel(): %d:%d: Missing <label> (at '%c')!\n",
             lineNumber,
             charNumber,
             c
            );
     exit(1);
   }
-  // fprintf(stdout, "\n  }");
-  charNumber += 1; c = in.get();
   return c;
-}
-
-void parseBrick(VoxelBrick &brick, istream &in, char c = ' ') {
-  if ((c = skipWhitespaceAndComments(in, c)) != '{') {
-    fflush(stdout);
-    fprintf(stderr,
-            "\nparseBrick(): %d:%d: Missing '{' (at '%c')!\n",
-            lineNumber,
-            charNumber,
-            c
-           );
-    exit(1);
-  }
-  // fprintf(stdout, " {\n");
-  charNumber += 1, c = in.get();
-
-  brick.push_back(VoxelPlate());
-  for (c = parsePlate(brick.back(), in, c);
-       (c = skipWhitespaceAndComments(in, c)) == ',';
-       c = parsePlate(brick.back(), in, (c = skipWhitespaceAndComments(in, c)))
-      )
-  {
-    // fprintf(stdout, ",\n");
-    charNumber += 1, c = in.get();
-    brick.push_back(VoxelPlate());
-  }
-
-  if ((c = skipWhitespaceAndComments(in, c)) != '}') {
-    fflush(stdout);
-    fprintf(stderr,
-            "\nparseBrick(): %d:%d: Missing '}' (at '%c')!\n",
-            lineNumber,
-            charNumber,
-            c
-           );
-    exit(1);
-  }
-  // fprintf(stdout, "}\n");
-  charNumber += 1, c = in.get();
-}
-
-Volume::Volume(istream &in) :
-    VoxelBrick(),
-    NLvls(0),
-    NRows(0),
-    NCols(0),
-    clock(0),
-    totalEvaluatedUSecs(0),
-    totalEvaluatedTicks(0)
-{
-  // Read and parse the input.
-  parseBrick(*this, in);
-
-  // Determine sizes.
-  NLvls = size();
-  for (auto const &lvl : *this) {
-    if (NRows < lvl.size()) {
-      NRows = lvl.size();
-    }
-    for (auto const &row : lvl) {
-      if (NCols < row.size()) {
-        NCols = row.size();
-      }
-    }
-  }
-  for (auto &lvl : *this) {
-    lvl.resize(NRows);
-    for (auto &row : lvl) {
-      row.resize(NCols, Wall);
-    }
-  }
-
-  fprintf(stdout, "Read a %lu x %lu x %lu brick....\n", NLvls, NRows, NCols);
-
-  totalEvaluatedUSecsPerDirection.fill(0);
-  totalEvaluatedUSecsPerTick.fill(0);
-
-  FindItems();
 }
 
 void Volume::ProceedOneCycle() {

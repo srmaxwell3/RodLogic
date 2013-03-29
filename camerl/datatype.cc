@@ -12,8 +12,9 @@ char const *c_str(DataType t) {
     case dtTest: return "dtTest";
     case dtGate: return "dtGate";
       // case dtJoin: return "dtJoin";
-    case dtInpt: return "dtInpt";
-    case dtOutp: return "dtOutp";
+    case dtIPut: return "dtIPut";
+    case dtOPut: return "dtOPut";
+    case dtDPut: return "dtDPut";
     case eoDataType:
       return "eoDataType";
   }
