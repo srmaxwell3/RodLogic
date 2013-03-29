@@ -496,7 +496,7 @@ where <option> is:\n\
 -I <path>	Read (variable-per-row) input from <path>, with echo (default: no) [%s].\n\
 -L <label>	Log state when <label> == 0 (default: no) [%s].\n\
 -l		Assume Little Endian for multi-rod variables (default: off) [%s].\n\
--o <path>       Create, and write CAM output to <path>.\n\
+-o <path>       Create, and write CAM output to <path> (default: no) [%s].\n\
 -p		Log performance metrics (default: off) [%s].\n\
 -r		Log rods (default: off) [%s].\n\
 -s		Log whole state after each tick (default: off) [%s].\n\
