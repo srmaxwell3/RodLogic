@@ -1438,7 +1438,7 @@ void Diagram2D::dump() const {
         rodCounts[eoDirection].nIncompleteRods += 1;
         rodCounts[d].nIncompleteRods += 1;
       }
-      rodLengthHistogram[make_tuple(r->rodsLength(), r->countOfInputs(), r->countOfOutputs())] += 1;
+      rodLengthHistogram[make_tuple(r->rodsLength(), r->countOfGets(), r->countOfPuts())] += 1;
 
       if (optShowRods) {
         r->dump(*this);
@@ -1850,10 +1850,11 @@ void Diagram2D::RebuildWithEnum(Brick<Voxel> &brick) const {
   static Voxel const DS[eoDirection] = { DSER, DSSR, DSDR, DSWR, DSNR, DSUR };
   static Voxel const DL[eoDirection] = { DLER, DLSR, DLDR, DLWR, DLNR, DLUR };
   static Voxel const DQ[eoDirection] = { DQER, DQSR, DQDR, DQWR, DQNR, DQUR };
-  static Voxel const d0[eoDirection] = { D0ER, D0SR, D0DR, D0WR, D0NR, D0UR };
-  static Voxel const d1[eoDirection] = { D1ER, D1SR, D1DR, D1WR, D1NR, D1UR };
+  static Voxel const D0[eoDirection] = { D0ER, D0SR, D0DR, D0WR, D0NR, D0UR };
+  static Voxel const D1[eoDirection] = { D1ER, D1SR, D1DR, D1WR, D1NR, D1UR };
   static Voxel const DI[eoDirection] = { DIER, DISR, DIDR, DIWR, DINR, DIUR };
   static Voxel const DO[eoDirection] = { DOER, DOSR, DODR, DOWR, DONR, DOUR };
+  static Voxel const DD[eoDirection] = { DDER, DDSR, DDDR, DDWR, DDNR, DDUR };
 
   static Direction const dataToLockDirection[eoDirection] = { S, W, X, N, E, X };
   static Direction const lockToDataDirection[eoDirection] = { N, W, X, S, E, X };
@@ -2161,82 +2162,7 @@ void Diagram2D::RebuildWithEnum(Brick<Voxel> &brick) const {
             VoxelProperties lvdbbbp = voxelProperties[lvdbbb];
 
             switch (DataType dt = lvp.dataType) {
-              case dtTest:
-                assert(dt != dtTest);
-                break;
-              case dtGate:
-                assert(uvp.voxelType == vtData && uvp.dataType == dtGate);
-
-                assert(lvbbbp.voxelType == vtData && lvbbbp.dataType == dtBody);
-                assert(lvbbp.voxelType == vtData && lvbbp.dataType == dtBody);
-                assert(lvbp.voxelType == vtData && lvbp.dataType == dtBody);
-                assert(lvubbbp.voxelType == vtWall || lvubbbp.voxelType == vtSlot);
-                assert(lvubbp.voxelType == vtWall || lvubbp.voxelType == vtSlot);
-                assert(lvubp.voxelType == vtWall || lvubp.voxelType == vtSlot);
-                assert(lvup.voxelType == vtWall || lvup.voxelType == vtSlot);
-                // assert(lvufp.voxelType == vtWall || lvufp.voxelType == vtSlot);
-                // assert(lvuffp.voxelType == vtWall || lvuffp.voxelType == vtSlot);
-
-                if (gateToGateOrTest[lFwd][uFwd] == dtGate) {
-                  if (lvp.isComplementing) {
-
-                    // ...###[0]...    ...###[0]...
-                    // ...###[#]... -> ...0  [ ]...
-                    // ...---[0]...    ...+--[-]...
-
-                    lvbbb = DP[lFwd];
-                    lvbb = DB[lFwd];
-                    lvb = DB[lFwd];
-                    lv = DB[lFwd];
-
-                    lvubbb = d0[lFwd];
-                    if (lvubb == Wall) {
-                      lvubb = Slot;
-                    }
-                    if (lvub == Wall) {
-                      lvub = Slot;
-                    }
-                    lvu = Slot;
-                  } else {
-
-                    // ...#[1]##...    ...#[1]##...
-                    // ...#[#]##... -> ...1[ ]  ...
-                    // ...-[1]--...    ...+[-]--...
-
-                    lvb = DP[lFwd];
-                    lv = DB[lFwd];
-                    lvf = DB[lFwd];
-                    lvff = DB[lFwd];
-
-                    lvub = d1[lFwd];
-                    lvu = Slot;
-                    if (lvuf == Wall) {
-                      lvuf = Slot;
-                    }
-                    if (lvuff == Wall) {
-                      lvuff = Slot;
-                    }
-                  }
-                } else {
-
-                  // ...##[G]#...    ...##[G]#...
-                  // ...##[#]#... -> ...> [ ] ...
-                  // ...--[G]-...    ...+-[-]-...
-
-                  lvbb = DP[lFwd];
-                  lvb = DB[lFwd];
-                  lv = DB[lFwd];
-                  lvf = DB[lFwd];
-
-                  lvubb = DQ[lFwd];
-                  if (lvub == Wall) {
-                    lvub = Slot;
-                  }
-                  lvu = Slot;
-                  if (lvuf == Wall) {
-                    lvuf = Slot;
-                  }
-                }
+              case dtBody:
                 break;
               case dtHead:
                 assert(lvfp.voxelType == vtWall);
@@ -2251,7 +2177,7 @@ void Diagram2D::RebuildWithEnum(Brick<Voxel> &brick) const {
                   lvfff = Slot;
                 }
                 break;
-              case dtBody:
+              case dtTail:
                 break;
               case dtPost:
                 if (lvd == DS[lFwd]) {
@@ -2281,7 +2207,92 @@ void Diagram2D::RebuildWithEnum(Brick<Voxel> &brick) const {
                   }
                 }
                 break;
-              case dtTail:
+              case dtSlot:
+                assert(dt != dtSlot);
+                break;
+              case dtLock:
+                assert(dt != dtLock);
+                break;
+              case dtTest:
+                assert(dt != dtTest);
+                break;
+              case dtGate:
+                assert(uvp.voxelType == vtData && uvp.dataType == dtGate);
+
+                assert(lvbbbp.voxelType == vtData && lvbbbp.dataType == dtBody);
+                assert(lvbbp.voxelType == vtData && lvbbp.dataType == dtBody);
+                assert(lvbp.voxelType == vtData && lvbp.dataType == dtBody);
+                assert(lvubbbp.voxelType == vtWall || lvubbbp.voxelType == vtSlot);
+                assert(lvubbp.voxelType == vtWall || lvubbp.voxelType == vtSlot);
+                assert(lvubp.voxelType == vtWall || lvubp.voxelType == vtSlot);
+                assert(lvup.voxelType == vtWall || lvup.voxelType == vtSlot);
+                // assert(lvufp.voxelType == vtWall || lvufp.voxelType == vtSlot);
+                // assert(lvuffp.voxelType == vtWall || lvuffp.voxelType == vtSlot);
+
+                if (gateToGateOrTest[lFwd][uFwd] == dtGate) {
+                  if (lvp.isComplementing) {
+
+                    // ...###[0]...    ...###[0]...
+                    // ...###[#]... -> ...0  [ ]...
+                    // ...---[0]...    ...+--[-]...
+
+                    lvbbb = DP[lFwd];
+                    lvbb = DB[lFwd];
+                    lvb = DB[lFwd];
+                    lv = DB[lFwd];
+
+                    lvubbb = D0[lFwd];
+                    if (lvubb == Wall) {
+                      lvubb = Slot;
+                    }
+                    if (lvub == Wall) {
+                      lvub = Slot;
+                    }
+                    lvu = Slot;
+                  } else {
+
+                    // ...#[1]##...    ...#[1]##...
+                    // ...#[#]##... -> ...1[ ]  ...
+                    // ...-[1]--...    ...+[-]--...
+
+                    lvb = DP[lFwd];
+                    lv = DB[lFwd];
+                    lvf = DB[lFwd];
+                    lvff = DB[lFwd];
+
+                    lvub = D1[lFwd];
+                    lvu = Slot;
+                    if (lvuf == Wall) {
+                      lvuf = Slot;
+                    }
+                    if (lvuff == Wall) {
+                      lvuff = Slot;
+                    }
+                  }
+                } else {
+
+                  // ...##[G]#...    ...##[G]#...
+                  // ...##[#]#... -> ...> [ ] ...
+                  // ...--[G]-...    ...+-[-]-...
+
+                  lvbb = DP[lFwd];
+                  lvb = DB[lFwd];
+                  lv = DB[lFwd];
+                  lvf = DB[lFwd];
+
+                  lvubb = DQ[lFwd];
+                  if (lvub == Wall) {
+                    lvub = Slot;
+                  }
+                  lvu = Slot;
+                  if (lvuf == Wall) {
+                    lvuf = Slot;
+                  }
+                }
+                break;
+              case dtIPut:
+              case dtOPut:
+              case dtDPut:
                 break;
               default:
                 assert(dt != eoDataType);
@@ -2406,83 +2417,6 @@ void Diagram2D::RebuildWithEnum(Brick<Voxel> &brick) const {
             VoxelProperties uvubbbp = voxelProperties[uvubbb];
 
             switch (DataType dt = uvp.dataType) {
-              case dtTest:
-                assert(dt != dtTest);
-                break;
-              case dtGate:
-                assert(dvp.voxelType == vtData && dvp.dataType == dtBody);
-
-                assert(uvbbbp.voxelType == vtData && uvbbbp.dataType == dtBody);
-                assert(uvbbp.voxelType == vtData && uvbbp.dataType == dtBody);
-                assert(uvbp.voxelType == vtData && uvbp.dataType == dtBody);
-                assert(uvdbbbp.voxelType == vtWall || uvdbbbp.voxelType == vtSlot);
-                assert(uvdbbp.voxelType == vtWall || uvdbbp.voxelType == vtSlot);
-                assert(uvdbp.voxelType == vtWall || uvdbp.voxelType == vtSlot);
-                assert(uvdp.voxelType == vtWall || uvdp.voxelType == vtSlot);
-                // assert(uvdfp.voxelType == vtWall || uvdfp.voxelType == vtSlot);
-                // assert(uvdffp.voxelType == vtWall || uvdffp.voxelType == vtSlot);
-
-                if (gateToGateOrTest[uFwd][lFwd] == dtGate) {
-                  if (uvp.isComplementing) {
-
-                    // ...###[0]...    ...###[0]...
-                    // ...###[#]... -> ...   [ ]...
-                    // ...---[0]...    ...+--[-]...
-
-                    uvbbb = DP[uFwd];
-                    uvbb = DB[uFwd];
-                    uvb = DB[uFwd];
-                    uv = DB[uFwd];
-
-                    uvdbbb = d0[uFwd];
-                    if (uvdbb == Wall) {
-                      uvdbb = Slot;
-                    }
-                    if (uvdb == Wall) {
-                      uvdb = Slot;
-                    }
-                    uvd = Slot;
-                  } else {
-
-                    // ...#[1]##...    ...#[1]##...
-                    // ...#[#]##... -> ...@[ ]  ...
-                    // ...-[1]--...    ...+[-]--...
-
-                    uvb = DP[uFwd];
-                    uv = DB[uFwd];
-                    uvf = DB[uFwd];
-                    uvff = DB[uFwd];
-
-                    uvdb = d1[uFwd];
-                    uvd = Slot;
-                    if (uvdf == Wall) {
-                      uvdf = Slot;
-                    }
-                    if (uvdff == Wall) {
-                      uvdff = Slot;
-                    }
-                  }
-                } else {
-
-                  // ...##[?]#...    ...##[?]#...
-                  // ...##[#]#... -> ...> [ ] ...
-                  // ...--[?]-...    ...+-[-]-...
-
-                  uvbb = DP[uFwd];
-                  uvb = DB[uFwd];
-                  uv = DB[uFwd];
-                  uvf = DB[uFwd];
-
-                  uvdbb = DQ[uFwd];
-                  if (uvdb == Wall) {
-                    uvdb = Slot;
-                  }
-                  uvd = Slot;
-                  if (uvdf == Wall) {
-                    uvdf = Slot;
-                  }
-                }
-                break;
               case dtHead:
                 assert(uvfp.voxelType == vtWall);
                 assert(uvffp.voxelType == vtWall);
@@ -2495,6 +2429,8 @@ void Diagram2D::RebuildWithEnum(Brick<Voxel> &brick) const {
                 if (uvfff == Wall) {
                   uvfff = Slot;
                 }
+                break;
+              case dtTail:
                 break;
               case dtBody:
                 break;
@@ -2526,7 +2462,92 @@ void Diagram2D::RebuildWithEnum(Brick<Voxel> &brick) const {
                   }
                 }
                 break;
-              case dtTail:
+              case dtSlot:
+                assert(dt != dtSlot);
+                break;
+              case dtLock:
+                assert(dt != dtLock);
+                break;
+              case dtTest:
+                assert(dt != dtTest);
+                break;
+              case dtGate:
+                assert(dvp.voxelType == vtData && dvp.dataType == dtBody);
+
+                assert(uvbbbp.voxelType == vtData && uvbbbp.dataType == dtBody);
+                assert(uvbbp.voxelType == vtData && uvbbp.dataType == dtBody);
+                assert(uvbp.voxelType == vtData && uvbp.dataType == dtBody);
+                assert(uvdbbbp.voxelType == vtWall || uvdbbbp.voxelType == vtSlot);
+                assert(uvdbbp.voxelType == vtWall || uvdbbp.voxelType == vtSlot);
+                assert(uvdbp.voxelType == vtWall || uvdbp.voxelType == vtSlot);
+                assert(uvdp.voxelType == vtWall || uvdp.voxelType == vtSlot);
+                // assert(uvdfp.voxelType == vtWall || uvdfp.voxelType == vtSlot);
+                // assert(uvdffp.voxelType == vtWall || uvdffp.voxelType == vtSlot);
+
+                if (gateToGateOrTest[uFwd][lFwd] == dtGate) {
+                  if (uvp.isComplementing) {
+
+                    // ...###[0]...    ...###[0]...
+                    // ...###[#]... -> ...   [ ]...
+                    // ...---[0]...    ...+--[-]...
+
+                    uvbbb = DP[uFwd];
+                    uvbb = DB[uFwd];
+                    uvb = DB[uFwd];
+                    uv = DB[uFwd];
+
+                    uvdbbb = D0[uFwd];
+                    if (uvdbb == Wall) {
+                      uvdbb = Slot;
+                    }
+                    if (uvdb == Wall) {
+                      uvdb = Slot;
+                    }
+                    uvd = Slot;
+                  } else {
+
+                    // ...#[1]##...    ...#[1]##...
+                    // ...#[#]##... -> ...@[ ]  ...
+                    // ...-[1]--...    ...+[-]--...
+
+                    uvb = DP[uFwd];
+                    uv = DB[uFwd];
+                    uvf = DB[uFwd];
+                    uvff = DB[uFwd];
+
+                    uvdb = D1[uFwd];
+                    uvd = Slot;
+                    if (uvdf == Wall) {
+                      uvdf = Slot;
+                    }
+                    if (uvdff == Wall) {
+                      uvdff = Slot;
+                    }
+                  }
+                } else {
+
+                  // ...##[?]#...    ...##[?]#...
+                  // ...##[#]#... -> ...> [ ] ...
+                  // ...--[?]-...    ...+-[-]-...
+
+                  uvbb = DP[uFwd];
+                  uvb = DB[uFwd];
+                  uv = DB[uFwd];
+                  uvf = DB[uFwd];
+
+                  uvdbb = DQ[uFwd];
+                  if (uvdb == Wall) {
+                    uvdb = Slot;
+                  }
+                  uvd = Slot;
+                  if (uvdf == Wall) {
+                    uvdf = Slot;
+                  }
+                }
+                break;
+              case dtIPut:
+              case dtOPut:
+              case dtDPut:
                 break;
               default:
                 assert(dt != eoDataType);
@@ -2680,5 +2701,40 @@ void Diagram2D::RebuildWithEnum(Brick<Voxel> &brick) const {
 
   if (optVerbose) {
     brick.Dump();
+  }
+}
+
+void Diagram2D::getIODPointsAndLabels(MapP3dToLabel (&p3dToLabel)[3]) const {
+  static size_t const dToZ[eoDirection] = { 2, 4, 7, 2, 4, 7 };
+  for (auto d : direction) {
+    for (auto const &rod : rodsWithInputs[d]) {
+      Label const &label = rod->rodsLabel();
+      string labelText(label.ToString());
+      SetOfP2Ds const &p2ds = rod->getInputs();
+      for (auto const &p2d : p2ds) {
+        P3D p3d(dToZ[d], p2d.y, p2d.x);
+        p3dToLabel[0][p3d] = labelText;
+      }
+    }
+
+    for (auto const &rod : rodsWithOutputs[d]) {
+      Label const &label = rod->rodsLabel();
+      string labelText(label.ToString());
+      SetOfP2Ds const &p2ds = rod->getOutputs();
+      for (auto const &p2d : p2ds) {
+        P3D p3d(dToZ[d], p2d.y, p2d.x);
+        p3dToLabel[1][p3d] = labelText;
+      }
+    }
+
+    for (auto const &rod : rodsWithDebugOutputs[d]) {
+      Label const &label = rod->rodsLabel();
+      string labelText(label.ToString());
+      SetOfP2Ds const &p2ds = rod->getDebugOutputs();
+      for (auto const &p2d : p2ds) {
+        P3D p3d(dToZ[d], p2d.y, p2d.x);
+        p3dToLabel[2][p3d] = labelText;
+      }
+    }
   }
 }

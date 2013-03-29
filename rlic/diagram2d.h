@@ -25,6 +25,7 @@ using std::vector;
 
 struct Rod2D;
 typedef set<Rod2D *> SetOfRod2Ds;
+typedef map<P3D, string> MapP3dToLabel;
 
 template<typename T> struct Plate : public vector<vector<T>> {
   typedef T PixelType;
@@ -320,6 +321,8 @@ struct Diagram2D : public Plate<char> {
   void RebuildWithChar(Plate<char> &plane) const;
   void RebuildWithChar(Brick<char> &plane) const;
   void RebuildWithEnum(Brick<Voxel> &plane) const;
+
+  void getIODPointsAndLabels(MapP3dToLabel (&p3dToLabel)[3]) const;
 
   static bool isLegalEWCharNotLabel1st(char c);
   static bool isLegalEWChar(char c);

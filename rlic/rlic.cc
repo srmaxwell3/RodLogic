@@ -451,6 +451,9 @@ void processDiagramFrom(istream &in, map<string, vector<int>> const &inputs) {
   } else {
     fprintf(stdout, "Not executing (optCycleCount == %d).\n", optCycleCount);
 
+    MapP3dToLabel p3dToLabel[3];
+    diagram.getIODPointsAndLabels(p3dToLabel);
+
     Plate<char> plate(' ', 1, diagram.yMax, diagram.xMax);
     diagram.RebuildWithChar(plate);
     Diagram2D newDiagram(plate);
@@ -471,6 +474,17 @@ void processDiagramFrom(istream &in, map<string, vector<int>> const &inputs) {
       }
 
       brick.WriteTo(oFile);
+      oFile << "\n";
+      static char const *iToIOD[3] = { "Inputs", "Outputs", "DebugOutputs" };
+      for (size_t i = 0; i < 3; i += 1) {
+        oFile << iToIOD[i] << "={ ";
+        char const *comma = "";
+        for (auto const &pl : p3dToLabel[i]) {
+          oFile << comma << pl.second;
+          comma = ", ";
+        }
+        oFile << " }\n";
+      }
     }
   }
 }

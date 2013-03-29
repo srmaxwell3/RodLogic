@@ -298,19 +298,23 @@ bool Rod2D::findLabel(Diagram2D const &diagram, P2D pStart, Direction oWard) {
           (c != '/' && c != '\\')
          )
       {
-	int nBlanks = 0;
+	// int nBlanks = 0;
 	string l;
 	for (P2D t = pOl; diagram.isInBounds(t); t.move(tWard)) {
 	  char c = diagram.at(t);
-	  if (c != ' ') {
-	    if (nBlanks) {
-	      l += ' ';
-	      nBlanks = 0;
-	    }
-	    l += c;
-	  } else if (nBlanks++) {
+	  // if (c != ' ') {
+	  //   if (nBlanks) {
+	  //     l += ' ';
+	  //     nBlanks = 0;
+	  //   }
+	  //   l += c;
+	  // } else if (nBlanks++) {
+	  //   break;
+	  // }
+	  if (c == ' ') {
 	    break;
 	  }
+          l += c;
 	}
 	l = trim(l);
 	if (tWard == W) {
@@ -340,19 +344,23 @@ bool Rod2D::findLabel(Diagram2D const &diagram, P2D pStart, Direction oWard) {
           (c != '/' && c != '\\')
          )
       {
-	int nBlanks = 0;
+	// int nBlanks = 0;
 	string l;
 	for (P2D t = pOr; diagram.isInBounds(t); t.move(tWard)) {
 	  char c = diagram.at(t);
-	  if (c != ' ') {
-	    if (nBlanks) {
-	      l += ' ';
-	      nBlanks = 0;
-	    }
-	    l += c;
-	  } else if (nBlanks++) {
+	  // if (c != ' ') {
+	  //   if (nBlanks) {
+	  //     l += ' ';
+	  //     nBlanks = 0;
+	  //   }
+	  //   l += c;
+	  // } else if (nBlanks++) {
+	  //   break;
+	  // }
+	  if (c == ' ') {
 	    break;
 	  }
+          l += c;
 	}
 	l = trim(l);
 	if (tWard == W) {
@@ -390,15 +398,19 @@ bool Rod2D::findLabel(Diagram2D const &diagram, P2D pStart, Direction oWard) {
         {
           for (; diagram.isInBounds(t); t.move(tWard)) {
             c = diagram.at(t);
-            if (c != ' ') {
-              if (nBlanks) {
-                l += ' ';
-                nBlanks = 0;
-              }
-              l += c;
-            } else if (nBlanks++) {
+            // if (c != ' ') {
+            //   if (nBlanks) {
+            //     l += ' ';
+            //     nBlanks = 0;
+            //   }
+            //   l += c;
+            // } else if (nBlanks++) {
+            //   break;
+            // }
+            if (c == ' ') {
               break;
             }
+            l += c;
           }
           l = trim(l);
           if (tWard == W) {
@@ -428,15 +440,19 @@ bool Rod2D::findLabel(Diagram2D const &diagram, P2D pStart, Direction oWard) {
         {
           for (; diagram.isInBounds(t); t.move(tWard)) {
             c = diagram.at(t);
-            if (c != ' ') {
-              if (nBlanks) {
-                l += ' ';
-                nBlanks = 0;
-              }
-              l += c;
-            } else if (nBlanks++) {
+            // if (c != ' ') {
+            //   if (nBlanks) {
+            //     l += ' ';
+            //     nBlanks = 0;
+            //   }
+            //   l += c;
+            // } else if (nBlanks++) {
+            //   break;
+            // }
+            if (c == ' ') {
               break;
             }
+            l += c;
           }
           l = trim(l);
           if (tWard == N) {
@@ -600,13 +616,11 @@ bool Rod2D::isShared(P2D const &p) const {
   return shared.find(p) != shared.end();
 }
 
-bool Rod2D::hasInputs() const { return 0 < inputs.size(); }
-bool Rod2D::hasOutputs() const { return 0 < outputs.size(); }
-bool Rod2D::hasDebugOutputs() const { return 0 < debugOutputs.size(); }
-size_t Rod2D::countOfInputs() const {
+
+size_t Rod2D::countOfGets() const {
   return connectedTo[rcGet1].size() + connectedTo[rcGet2].size();
 }
-size_t Rod2D::countOfOutputs() const {
+size_t Rod2D::countOfPuts() const {
   return connectedTo[rcPut1].size() + connectedTo[rcPut2].size();
 }
 
@@ -631,12 +645,12 @@ string Rod2D::formExpression(SetOfRod2Ds &seenAlready) {
     seenAlready.insert(this);
 
     fprintf(stderr,
-	    "(Rod2D *)(%p)->formExpression(): [%s] countOfInputs()=%lu\n",
+	    "(Rod2D *)(%p)->formExpression(): [%s] countOfGets()=%lu\n",
 	    this,
 	    rodsId().c_str(),
-	    countOfInputs()
+	    countOfGets()
 	    );
-    if (countOfInputs()) {
+    if (countOfGets()) {
       vector<string> argExpressions;
       for (auto &rc : connectedTo[rcGet2]) {
 	fprintf(stderr,
@@ -1023,16 +1037,17 @@ void Rod2D::RebuildWithEnum
     //                                           /     /     /     /     N
     //                                          /     /     /     /     /     U
     //                                         /     /     /     /     /     /
-    static Voxel const db[eoDirection] = { DBER, DBSR, DBDR, DBWR, DBNR, DBUR };
-    static Voxel const dh[eoDirection] = { DHER, DHSR, DHDR, DHWR, DHNR, DHUR };
-    static Voxel const dt[eoDirection] = { DTER, DTSR, DTDR, DTWR, DTNR, DTUR };
-    static Voxel const ds[eoDirection] = { DSER, DSSR, DSDR, DSWR, DSNR, DSUR };
-    static Voxel const dl[eoDirection] = { DLER, DLSR, DLDR, DLWR, DLNR, DLUR };
-    static Voxel const dq[eoDirection] = { DQER, DQSR, DQDR, DQWR, DQNR, DQUR };
-    static Voxel const d0[eoDirection] = { D0ER, D0SR, D0DR, D0WR, D0NR, D0UR };
-    static Voxel const d1[eoDirection] = { D1ER, D1SR, D1DR, D1WR, D1NR, D1UR };
-    static Voxel const di[eoDirection] = { DIER, DISR, DIDR, DIWR, DINR, DIUR };
-    static Voxel const dO[eoDirection] = { DOER, DOSR, DODR, DOWR, DONR, DOUR };
+    static Voxel const DB[eoDirection] = { DBER, DBSR, DBDR, DBWR, DBNR, DBUR };
+    static Voxel const DH[eoDirection] = { DHER, DHSR, DHDR, DHWR, DHNR, DHUR };
+    static Voxel const DT[eoDirection] = { DTER, DTSR, DTDR, DTWR, DTNR, DTUR };
+    static Voxel const DS[eoDirection] = { DSER, DSSR, DSDR, DSWR, DSNR, DSUR };
+    static Voxel const DL[eoDirection] = { DLER, DLSR, DLDR, DLWR, DLNR, DLUR };
+    static Voxel const DQ[eoDirection] = { DQER, DQSR, DQDR, DQWR, DQNR, DQUR };
+    static Voxel const D0[eoDirection] = { D0ER, D0SR, D0DR, D0WR, D0NR, D0UR };
+    static Voxel const D1[eoDirection] = { D1ER, D1SR, D1DR, D1WR, D1NR, D1UR };
+    static Voxel const DI[eoDirection] = { DIER, DISR, DIDR, DIWR, DINR, DIUR };
+    static Voxel const DO[eoDirection] = { DOER, DOSR, DODR, DOWR, DONR, DOUR };
+    static Voxel const DD[eoDirection] = { DDER, DDSR, DDDR, DDWR, DDNR, DDUR };
 
     static char const htq[eoDirection] = { '>',  'v',  '?',  '<',  '^',  '?'  };
 
@@ -1045,39 +1060,41 @@ void Rod2D::RebuildWithEnum
         case '^':
           if (c == htq[direction]) {
             if (p == headAt) {
-              d = dh[direction];
+              d = DH[direction];
             } else if (p == tailAt) {
-              d = dt[direction];
+              d = DT[direction];
             } else {
-              d = dq[direction];
+              d = DQ[direction];
             }
           } else {
-            d = ds[direction];
+            d = DS[direction];
           }
           break;
         case 'X':
         case 'x':
-          d = dl[direction];
+          d = DL[direction];
           break;
         case '-':
         case '|':
+          d = DB[direction];
+          break;
         case 'D':
         case 'd':
-          d = db[direction];
+          d = DD[direction];
           break;
         case '0':
-          d = d0[direction];
+          d = D0[direction];
           break;
         case '1':
-          d = d1[direction];
+          d = D1[direction];
           break;
         case 'I':
         case 'i':
-          d = di[direction];
+          d = DI[direction];
           break;
         case 'O':
         case 'o':
-          d = dO[direction];
+          d = DO[direction];
           break;
         default:
           assert(d != Unkn);
@@ -1088,7 +1105,7 @@ void Rod2D::RebuildWithEnum
       P2D dst(p.y * scaleBy + scaleBy, p.x * scaleBy + scaleBy);
       plate.at(dst) = d;
       if (voxelProperties[d].dataType != dtHead) {
-	d = db[direction];
+	d = DB[direction];
 	for (int i = 1; i < scaleBy; i += 1) {
 	  dst.move(FWard(direction));
 	  plate.at(dst) = d;

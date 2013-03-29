@@ -41,11 +41,16 @@ class Rod2D : public SetOfP2Ds {
 
   void connectWith(Rod2D *that, RodIntersectionType intersectionType);
   bool isShared(P2D const &p) const;
-  bool hasInputs() const;
-  bool hasOutputs() const;
-  bool hasDebugOutputs() const;
-  size_t countOfInputs() const;
-  size_t countOfOutputs() const;
+
+  bool hasInputs() const { return 0 < inputs.size(); }
+  SetOfP2Ds const &getInputs() const { return inputs; }
+  bool hasOutputs() const { return 0 < outputs.size(); }
+  SetOfP2Ds const &getOutputs() const { return outputs; }
+  bool hasDebugOutputs() const { return 0 < debugOutputs.size(); }
+  SetOfP2Ds const &getDebugOutputs() const { return debugOutputs; }
+
+  size_t countOfGets() const;
+  size_t countOfPuts() const;
 
   string const &formExpression();
   string const &getExpression() const { return expression; }
