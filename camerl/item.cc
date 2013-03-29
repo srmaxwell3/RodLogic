@@ -26,7 +26,6 @@ bool Item::AttemptToMove(Volume *volume, FwdOrBwd fwdOrBwd, Changes &changes) {
         fwdOrBwd == Fwd ? rProperties.bwd : rProperties.fwd;
     bool madeChanges = false;
 
-#if 1
     for (auto const &c : *this) {
       Scenario scenario(volume, tick, c);
       Voxel thisVoxel = scenario.Self();
@@ -52,7 +51,15 @@ bool Item::AttemptToMove(Volume *volume, FwdOrBwd fwdOrBwd, Changes &changes) {
                 )
                )
             {
-              nextVoxel = tvProperties.motion[fwdOrBwd].nextVoxel;
+	      static Voxel const RB[eoDirection][eoDataState] = {
+		{ Unkn, DBER, DBE0, DBEX, DBE1 }, // E
+		{ Unkn, DBSR, DBS0, DBSX, DBS1 }, // S
+		{ Unkn, DBDR, DBD0, DBDX, DBD1 }, // D
+		{ Unkn, DBWR, DBW0, DBWX, DBW1 }, // W
+		{ Unkn, DBNR, DBN0, DBNX, DBN1 }, // N
+		{ Unkn, DBUR, DBU0, DBUX, DBU1 }  // U
+	      };
+              nextVoxel = RB[tvProperties.direction][voxelProperties[tvProperties.motion[fwdOrBwd].nextVoxel].dataState];
             } else {
               nextVoxel = pvProperties.motion[fwdOrBwd].nextVoxel;
             }
@@ -61,10 +68,16 @@ bool Item::AttemptToMove(Volume *volume, FwdOrBwd fwdOrBwd, Changes &changes) {
           }
         }
         if (nextVoxel != Unkn) {
+          // scenario.Dump();
+          // fprintf(stdout, ", thisVoxel=%s", c_str(thisVoxel));
+          // fprintf(stdout, ", prevVoxel=%s", c_str(prevVoxel));
+          // fprintf(stdout, ", nextVoxel=%s\n", c_str(nextVoxel));
+
           changes[c] = nextVoxel;
           madeChanges = true;
         } else {
           scenario.Dump();
+	  fprintf(stdout, "\n");
           fprintf(stdout, "thisVoxel=%s\n", c_str(thisVoxel));
           fprintf(stdout, "prevVoxel=%s\n", c_str(prevVoxel));
           fprintf(stdout,
@@ -74,152 +87,8 @@ bool Item::AttemptToMove(Volume *volume, FwdOrBwd fwdOrBwd, Changes &changes) {
                  );
           assert(nextVoxel != Unkn);
         }
-      // } else {
-      //   scenario.Dump();
-      //   fprintf(stdout,
-      //           "thisVoxel(%s) %s Slot\n",
-      //           c_str(thisVoxel),
-      //           thisVoxel == Slot ? "==" : "!="
-      //          );
-      //   fprintf(stdout,
-      //           "rodType(%s) %s tvProperties[%s](%s)\n",
-      //           c_str(rodType),
-      //           rodType == tvProperties.rodType ? "==" : "!=",
-      //           c_str(thisVoxel),
-      //           c_str(tvProperties.rodType)
-      //          );
-      //   assert(thisVoxel == Slot || rodType == tvProperties.rodType);
       }
     }
-#else
-    Rules &rules = volume->GetRules();
-    RuleCounts &ruleCounts = volume->GetRuleCounts();
-    for (auto const &v : *this) {
-      Scenario scenario(volume, tick, v);
-      if (optVerbose) {
-        fprintf(stdout, "(%s *)(%p)->AttemptToMove(): At ", TypeName(), this);
-        v.Dump(volume);
-        fprintf(stdout, ", ");
-        scenario.Show();
-        fprintf(stdout, "\n");
-      }
-
-      if (rules.find(scenario) == rules.end()) {
-#if 0
-        TickPerCycleProperties const &tProperties =
-            tickPerCycleProperties[tick];
-        RodTypeProperties const &rProperties =
-            rodTypeProperties[tProperties.rodType];
-        Direction fwdOrBwd =
-            tProperties.fwdOrBwd == Fwd ? rProperties.fwd : rProperties.bwd;
-        Direction fwd = rProperties.fwd;
-        char const *directionOfMotion[eoDirection][eoFwdOrBwd] = {
-          { ">", "<" }, // E, W
-          { "v", "^" }, // S, N
-          { "d", "u" }, // D, U
-          { "<", ">" }, // W, E
-          { "^", "v" }, // N, S
-          { "u", "d" }  // U, D
-        };
-
-        switch (fwd) {
-        case E:
-        case W:
-          fprintf(stdout,
-                  "     +------+------+------|\n"
-                  "%s | ???? | %s | ???? |\n"
-                  "     +------+------+------|\n"
-                  "     %s %s %s %s %s %s %s\n"
-                  "     +------+------+------|\n"
-                  "     | ???? | %s | ???? |\n"
-                  "     +------+------+------|\n",
-        	  c_str(tick),
-        	  c_str(scenario.N()),
-        	  directionOfMotion[fwd][Fwd],
-        	  c_str(scenario.W()),
-        	  directionOfMotion[fwd][tProperties.fwdOrBwd],
-        	  c_str(scenario.O()),
-        	  directionOfMotion[fwd][tProperties.fwdOrBwd],
-        	  c_str(scenario.E()),
-        	  directionOfMotion[fwd][Fwd],
-        	  c_str(scenario.S())
-        	 );
-          break;
-        case N:
-        case S:
-          fprintf(stdout,
-                  "     +------+--%s---+------|\n"
-                  "%s | ???? | %s | ???? |\n"
-                  "     +------+--%s---+------|\n"
-                  "     | %s | %s | %s |\n"
-                  "     +------+--%s---+------|\n"
-                  "     | ???? | %s | ???? |\n"
-                  "     +------+--%s---+------|\n",
-        	  directionOfMotion[fwd][Fwd],
-        	  c_str(tick),
-        	  c_str(scenario.N()),
-        	  directionOfMotion[fwd][tProperties.fwdOrBwd],
-        	  c_str(scenario.W()),
-        	  c_str(scenario.O()),
-        	  c_str(scenario.E()),
-        	  directionOfMotion[fwd][tProperties.fwdOrBwd],
-        	  c_str(scenario.S()),
-        	  directionOfMotion[fwd][Fwd]
-        	 );
-          break;
-        default:
-          break;
-        }
-
-        char newVoxelChars[128];
-        do {
-          fprintf(stdout, "New voxel value? ");
-          fscanf(stdin, " %s", newVoxelChars);
-        } while (stringToVoxel.find(newVoxelChars) == stringToVoxel.end());
-
-        Voxel newVoxel = stringToVoxel[newVoxelChars];
-        rules[scenario] = newVoxel;
-#else
-        Voxel newVoxel = Unkn;
-        rules[scenario] = newVoxel;
-        fprintf(stdout,
-                "(%s *)(%p)->AttemptToMove(): No existing rule!\n",
-                TypeName(),
-                this
-               );
-        continue;
-#endif
-        // Rule newRule(scenario, newVoxel);
-        // newRule.Dump();
-        // fprintf(stdout, "\n");
-      }
-
-      ruleCounts[scenario] += 1;
-      Voxel newVoxel = rules[scenario];
-
-      // if (newVoxel == Unkn) {
-      //   fprintf(stdout,
-      //           "(%s *)(%p)->AttemptToMove(): Incomplete (i.e. new) rule!\n",
-      //           TypeName(),
-      //           this
-      //          );
-      //   continue;
-      // }
-
-      if (optVerbose) {
-        fprintf(stdout,
-                "(%s *)(%p)->AttemptToMove(): Applying rule ",
-                TypeName(),
-                this
-               );
-        scenario.Dump();
-        fprintf(stdout, " = %s\n", c_str(newVoxel));
-      }
-
-      changes[v] = newVoxel;
-      madeChanges = true;
-    }
-#endif
 
     if (madeChanges) {
       lastMovedAt = volume->CurrentClock();
