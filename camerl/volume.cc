@@ -368,7 +368,7 @@ char Volume::parseIOD(istream &in, char c) {
 char Volume::parseLabel(string &label, istream &in, char c) {
   label.clear();
   for (c = skipWhitespaceAndComments(in, c);
-       isalnum(c) || c == '!' || c == '.' || c == '_';
+       isalnum(c) || c == '!' || c == '.' || c == '_' || c == '-' || c == '+' || c == '&' || c == '|';
        charNumber += 1, c = in.get()
       )
   {
