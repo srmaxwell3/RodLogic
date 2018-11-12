@@ -46,6 +46,7 @@ bool optShowStateEveryTick = false;
 bool optVerbose = false;
 bool optShowWaveforms = false;
 bool optWarnings = false;
+bool optShowExpressions = false;
 
 void processInputFrom(istream &in, map<string, vector<int>> &inputs) {
   unsigned lineNumber = 0;
@@ -268,6 +269,7 @@ void processTableInputFrom(istream &in, map<string, vector<int>> &inputs) {
     }
   } while (names.empty() && in.good() && !in.eof());
 
+  size_t nInputValues = 0;
   do {
     string line;
     getline(in, line);
@@ -363,9 +365,14 @@ void processTableInputFrom(istream &in, map<string, vector<int>> &inputs) {
              );
     }
 
+    // fprintf(stdout, "inputs[%lu]: {", nInputValues++);
+    // char const *comma = "";
     for (size_t n = 0; n < names.size(); n += 1) {
       inputs[names[n]].push_back(n < values.size() ? values[n] : 0);
+      // fprintf(stdout, "%s %s=%d", comma, names[n].c_str(), inputs[names[n]].back());
+      // comma = ",";
     }
+    // fprintf(stdout, "\n");
   } while (in.good() && !in.eof());
 }
 
@@ -558,7 +565,7 @@ int main(int argc, char *const argv[]) {
 
   bool optShowHelp = false;
   int c;
-  while ((c = getopt(argc, argv, "/:\\:01bc:deH:hi:I:L:lpo:rsSt:T:vwW")) != -1) {
+  while ((c = getopt(argc, argv, "/:\\:01bc:deH:hi:I:L:lpo:rsSt:T:vwWx")) != -1) {
     switch (c) {
     case '/':
       optLogStateOnLabelState = EBQT::aLeadingEdge;
@@ -645,6 +652,9 @@ int main(int argc, char *const argv[]) {
       break;
     case 'W':
       optWarnings = true;
+      break;
+    case 'x':
+      optShowExpressions = true;
       break;
     case '?':
       if (optopt == 'c') {

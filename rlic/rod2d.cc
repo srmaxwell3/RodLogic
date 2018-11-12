@@ -142,17 +142,17 @@ Rod2D::Rod2D(Diagram2D &diagram, P2D const &pStart, Direction d) :
   char *bPtr = buffer;
   int bCnt = 0;
   if (findHeadLabel(diagram) || findTailLabel(diagram)) {
-    sprintf(bPtr, "<\"%s\":%s:%n", label.ToString().c_str(), c_str(direction), &bCnt);
+    sprintf(bPtr, "<\"%s\",%sr%n", label.ToString().c_str(), c_str(direction), &bCnt);
   } else {
-    sprintf(bPtr, "<%s:%n", c_str(direction), &bCnt);
+    sprintf(bPtr, "<%sr%n", c_str(direction), &bCnt);
   }
   bPtr += bCnt;
   if (direction == E || direction == W) {
-    sprintf(bPtr, "%d:%d-%d>", headAt.y, headAt.x, tailAt.x);
+    sprintf(bPtr, "%dc%d-%d>", headAt.y, headAt.x, tailAt.x);
   } else if (direction == S || direction == N) {
-    sprintf(bPtr, "%d-%d:%d>", headAt.y, tailAt.y, tailAt.x);
+    sprintf(bPtr, "%d-%dc%d>", headAt.y, tailAt.y, tailAt.x);
   } else {
-    sprintf(bPtr, "%d-%d:%d-%d>", headAt.y, headAt.x, tailAt.y, tailAt.x);
+    sprintf(bPtr, "%d-%dc%d-%d>", headAt.y, headAt.x, tailAt.y, tailAt.x);
   }
   id = buffer;
 
@@ -671,7 +671,9 @@ string Rod2D::formExpression(SetOfRod2Ds &seenAlready) {
 		  argExpressions.back().c_str()
 		  );
 	} else if (rc.intersectionType == riIdentity) {
-	  argExpressions.push_back(rc.rod->formExpression(seenAlready));
+	  ostringstream result;
+	  result << "IDN(" << rc.rod->formExpression(seenAlready) << ")";
+	  argExpressions.push_back(result.str());
 
 	  fprintf(stderr,
 		  "(Rod2D *)(%p)->formExpression(): [%s] get2 arg=%s\n",
@@ -700,7 +702,9 @@ string Rod2D::formExpression(SetOfRod2Ds &seenAlready) {
 		  argExpressions.back().c_str()
 		  );
 	} else if (rc.intersectionType == riIdentity) {
-	  argExpressions.push_back(rc.rod->formExpression(seenAlready));
+	  ostringstream result;
+	  result << "IDN(" << rc.rod->formExpression(seenAlready) << ")";
+	  argExpressions.push_back(result.str());
 
 	  fprintf(stderr,
 		  "(Rod2D *)(%p)->formExpression(): [%s] get1 arg=%s\n",
@@ -710,7 +714,7 @@ string Rod2D::formExpression(SetOfRod2Ds &seenAlready) {
 		  );
 	}
       }
-      if (!argExpressions.empty()) {
+      if (0 < argExpressions.size()) {
 	std::sort(argExpressions.begin(), argExpressions.end());
 	ostringstream result;
 	result << "AND(" << argExpressions[0];
