@@ -1,0 +1,287 @@
+	{
+	  on USR_RESET goto IDLE;
+F1:	// State == 0b0001
+
+	  IOP_enabler = TFFF;
+
+	  if (HALTFF == T) {
+IDLE:	// State = 0b0000
+	    do {
+	      HALTFF = F;
+	    } while (MANPULSE == F);
+	    if (USR_CONT == T) {
+	      goto F1;
+	    }
+IDLE_1:
+	    MANEX = T;
+	    goto E0;
+	  }
+F1_2:
+	  if (INT == T) {
+	    INT_EN = F;
+	    // Force JMS 0:
+	    MA = 0;
+	    IR = JMS;
+	    goto E0;
+	  }
+F1_1:
+	  MA = PC;
+	  MB = PC;
+F2:	// State = 0b0010
+	  PC += 1;
+	  START_READ = T;
+F3:	// State = 0b0011
+	  while (CC == F) {
+F3_2:
+	    IR = MEM;
+	  }
+F3_1:
+	  MA = EA;
+	  Load RQST;
+	  DOUBLE = IR10;
+	  if (NOMEM == T) {
+	    goto E0;
+	  }
+F3_3:
+	  START_READ = T;
+F4:	// State = 0b0100
+	  while (CC == F) {
+F4_1:
+	    MB = MEM;
+	  }
+	  if (DIRECT == T) {
+	    goto E0;
+	  }
+	  if (AUTO == T) {
+F4_2:
+	    MB += 1;
+	    START_WRITE = T;
+F5:	// State = 0b0101
+	    while (CC == F) { }
+	  }
+F6:	// State = 0b0110
+	  MA = MB;
+	  if (DCA | JMS | JMP) {
+	    goto E0;
+	  }
+F6_1:
+	  START_READ = T;
+F7:	// State = 0b0111
+	  whiile (CC == F) {
+F7_1:
+	    MB = MEM;
+	  }
+E0:	// State = 0b1000
+	  HALTFF = SING_INST;
+	  if (USR_MANEX_SW == T) {
+E0_MAN:
+	    if (unsigned USR = USR_LDMA | USR_LDMB | USR_LDPC | USR_LDIR | USR_LDAC | USR_EXAM | USR_CLR)) {
+	    switch (USR) {
+	    case USR_LDMA:
+EO_MAN_2:
+	      MA = SR;
+	      break;
+	    case USR_LDMB:
+EO_MAN_3:
+	      MB = SR;
+	      break;
+	    case USR_LDPC:
+EO_MAN_4:
+	      PC = SR;
+	      break;
+	    case USR_LDIR:
+EO_MAN_5:
+	      IR = SR;
+	      break;
+	    case USE_LDAC:
+EO_MAN_6:
+	      AC = SR;
+	      break;
+	    case USR_EXAM:
+EO_MAN_7:
+	      MA += 1;
+	      break;
+	    case USR_CLR:
+EO_MAN_8:
+	      LINK = F;
+	      INT_EN = F;
+	      break;
+	    }
+EO_MAN_1:
+	    MANEX = F;
+	    goto IDLE;
+	  } else if (unsigned USR = USR_DEP | USR_LDMEM) {
+	    
+EO_MAN_9:
+	    MB = SR;
+	    START_WRITE = T;
+E0_IR:
+	  switch (unsigned INS = AND | TAD | ISZ | DCA | JMS | JMP | IOT | OP) {
+	  case AND | TAD:
+	    switch (INS) {
+	    case TAD:
+E0_10:
+	      AC &= MB;
+	      break;
+	    case TAD:
+E0_11:
+	      AC += MB;
+	      if (ALU_COUT == T) {
+		LINK = !LINK;
+	      }
+	      break;
+	    }
+E0_35:
+	    MANEX = F;
+	    goto F1;
+	  case ISZ | DCA | JMS:
+	    switch (INS) {
+	    case ISZ:
+E0_12:
+	      MB += MB;
+	      break;
+	    case DCA:
+E0_13:
+	      MB = AC;
+	      break;
+	    case JMS:
+E0_14:
+	      MB = PC;
+	      break;
+	    }
+	    START_WRITE = T;
+	    goto E1;
+	  case JMP:
+E0_15:
+	    PC = MA;
+	    MANEX = F;
+	    goto F1;
+	  case IOT:
+E0_31:
+	    IOP_ENABLER <<= 1;
+	    MANEX = F;
+	    if (ION) {
+E0_32:
+	      INTEN = T;
+	      goto F1;
+	    }
+	    if (IOF) {
+E0_33:
+	      INTEN = F;
+	      goto F1;
+	    }
+E3:	// State = 0b1011
+	    if (IOSKIP) {
+	      PC += 1;
+	    }
+E4:	// State = 0b1100
+	    
+	  case OP:
+E0_34:
+	    MANEX = F;
+	    if (RQFF1) {
+E0_19:	// == SG1
+	      RQFF1 = F;
+	      if (G1 & IR4) {
+E0_16:
+		AC = 0;		// CLA
+	      }
+	      if (G1 & IR5) {
+E0_17:
+		LINK = 0;	// CLL
+	      }
+	      if (G2 & SKIP) {
+E0_18:
+		PC += 1;	// SKIPS
+	      }
+	    } else if (RQFF2) {
+E0_23:	// == SG2
+	      RQFF2 = F;
+	      if (G1 & IR6) {
+E0_20:
+		AC = ~AC;	// CMA
+	      }
+	      if (G1 & IR7) {
+E0_21:
+		LINK = !LINK;	// CML
+	      }
+	      if (G2 & IR4) {
+		AC = 0;		// CLA
+	      }
+	    } else if (RQFF3) {
+E0_27:	// == SG3
+	      RQFF3 = F;
+	      if (G1 & IR11) {
+E0_24:
+		AC += 1;	// IAC
+		if (ALU_COUT) {
+E0_38:
+		  LINK = !LINK;
+		}
+	      }
+	      if (G2 & IR9) {
+E0_25:
+		AC |= SR;	// OSR
+	      }
+	      if (G2 & IR10) {
+E0_26:
+		HALTFF = T;	// HLT
+	      }
+	    } else if (RQFF4) {
+E0_30:	// == SG4
+	      DOUBLE = F;
+	      if (IR8) {
+E0_28:
+		AC <<= 1;
+	      } else {
+E0_29:
+		AC >>= 1;
+	      }
+	    } else {
+	    }
+	    if (MOREOP /* 2 or more RQFFs == T */) {
+	      goto E0;
+	    }
+	    goto F1;
+	  }
+E5:
+	  if (ORAC) {
+	    AC |= INPUT;
+	  }
+	  if (IOP4EN) {
+	    goto F1;
+	  }
+	  goto E0;
+E1:
+	  while (CC == F) { }
+E1_1:
+	  MANEX = F;
+	  if (MANEXSW == T) {
+	    switch (USR_DEP | USR_LDMEM) {
+E1_2:
+	    case USR_DEP:
+	      MA += 1;
+	      goto IDLE;
+	    case USR_LDMEM:
+	      goto IDLE;
+	    default:
+	      ???
+	    }
+	  }
+	  switch (DCA | JMS | ISZ) {
+	  case DCA:
+E1_3:
+	    AC = 0;
+	    break;
+	  case JMS:
+E1_4:
+	    PC = MA + 1;
+	    break;
+	  case ISZ:
+E2:
+	    if (MB == 0) {
+	      PC += 1;
+	    }
+	    break;
+	  }
+	  goto F1;
