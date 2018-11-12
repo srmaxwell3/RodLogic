@@ -170,6 +170,18 @@ void Label::Dump() const {
   }
 }
 
+void Label::DumpWithInputs(BitStreamInput const &inputs) const {
+  if (!inputs.empty()) {
+    fprintf(stdout, "%s = { %d", ToString().c_str(), inputs[0]);
+    for (size_t i = 1; i < inputs.size(); i += 1) {
+      fprintf(stdout, ",%d", inputs[i]);
+    }
+    fprintf(stdout, "\n");
+  } else {
+    fprintf(stdout, "%s = { }\n", ToString().c_str());
+  }
+}
+
 void Label::SetFrom(string const &label) {
   string::operator=(label);
 

@@ -1,6 +1,8 @@
 #ifndef LABEL_H
 #define LABEL_H
 
+#include "bit_stream_input.h"
+
 #include <functional>
 #include <string>
 using std::string;
@@ -54,6 +56,7 @@ class Label: string {
   string const &Name() const { return *this; }
   int BitNumber() const { return bitNumber; }
   void Dump() const;
+  void DumpWithInputs(BitStreamInput const &inputs) const;
  private:
   void SetFrom(string const &label);
   bool isDefined;
