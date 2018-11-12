@@ -309,7 +309,7 @@ void Diagram2D::newRodAt(P2D const &p, Direction d) {
              );
     }
     currentInputs[label].clear();
-    currentInputs[label].push_back(false);
+    // currentInputs[label].push_back(false);
 
     if (0 <= label.BitNumber()) {
       currentCombinedInputs[label.Name()].Update(label);
@@ -928,7 +928,7 @@ bool Diagram2D::dumpLabelState
           // Write the multi-bit value.
           // {1,2,3,4} -> 1, {5,6,7,8} -> 2, etc.
           int nBinaryDigits = cLabel->Span();
-          int nHexDigits = ((nBinaryDigits + 1) / 4);
+          int nHexDigits = ((nBinaryDigits - 1) / 4) + 1;
           if (optShowChangedStateEveryTick) {
             fprintf(stdout,
                     "%s %s (%s [%0*x]) -> %s [%0*x]",
@@ -1023,7 +1023,7 @@ bool Diagram2D::dumpLabelState
 
 void Diagram2D::dumpState() {
   fprintf(stdout,
-          "%d [%d.%s]: inputs={",
+          "%06d [%05d.%s]: inputs={",
           lastEvaluatedTick,
           lastEvaluatedTick / eoDirection,
           c_str(Direction(lastEvaluatedTick % eoDirection))
@@ -1230,12 +1230,13 @@ void Diagram2D::setInputFor(Label const &label, vector<int> const &values) {
            );
   }
 
+  BitStreamInput &labelsInputs = currentInputs[label];
   size_t nthValue = 0;
   for (auto const &value : values) {
-    if (optEchoInput) {
-      fprintf(stdout, "[%lu] %s<-%1d\n", nthValue++, label.ToString().c_str(), value);
-    }
-    currentInputs[label].push_back(value);
+    labelsInputs.push_back(value);
+  }
+  if (optEchoInput) {
+    label.DumpWithInputs(labelsInputs);
   }
 }
 
@@ -1327,7 +1328,7 @@ void Diagram2D::writeOutputFor(Label const &label, bool value) {
     fprintf(stderr,
             "rlic: Error: "
             "Diagram2D::getOutputFor(label=\"%s\", value=%d): "
-            "Unable to find input for label!\n",
+            "Unable to find output for label!\n",
             label.ToString().c_str(),
             value
            );
@@ -1342,7 +1343,7 @@ EdgedBool const &Diagram2D::getOutputFor(Label const &label) {
     fprintf(stderr,
             "rlic: Error: "
             "Diagram2D::getOutputFor(label=\"%s\"): "
-            "Unable to find input for label!\n",
+            "Unable to find output for label!\n",
             label.ToString().c_str()
            );
     assert(currentOutputs.find(label) != currentOutputs.end());
@@ -1356,7 +1357,7 @@ EdgedBool const &Diagram2D::getOutputFor(string const &name, int bitNumber) {
     fprintf(stderr,
             "rlic: Error: "
             "Diagram2D::getOutputFor(name=\"%s\", bitNumber=%d): "
-            "Unable to find input for Label().ToString()=%s\n",
+            "Unable to find output for Label().ToString()=%s\n",
             name.c_str(),
             bitNumber,
             label.ToString().c_str()
@@ -1371,7 +1372,7 @@ void Diagram2D::writeDebugOutputFor(Label const &label, bool value) {
     fprintf(stderr,
             "rlic: Error: "
             "Diagram2D::getDebugOutputFor(label=\"%s\", value=%d): "
-            "Unable to find input for label!\n",
+            "Unable to find debug output for label!\n",
             label.ToString().c_str(),
             value
            );
@@ -1386,7 +1387,7 @@ EdgedBool const &Diagram2D::getDebugOutputFor(Label const &label) {
     fprintf(stderr,
             "rlic: Error: "
             "Diagram2D::getDebugOutputFor(label=\"%s\"): "
-            "Unable to find input for label!\n",
+            "Unable to find debug output for label!\n",
             label.ToString().c_str()
            );
     assert(currentDebugOutputs.find(label) != currentDebugOutputs.end());
@@ -1400,7 +1401,7 @@ EdgedBool const &Diagram2D::getDebugOutputFor(string const &name, int bitNumber)
     fprintf(stderr,
             "rlic: Error: "
             "Diagram2D::getDebugOutputFor(name=\"%s\", bitNumber=%d): "
-            "Unable to find input for Label().ToString()=%s\n",
+            "Unable to find debug output for Label().ToString()=%s\n",
             name.c_str(),
             bitNumber,
             label.ToString().c_str()
