@@ -503,7 +503,7 @@ void processVolumeFrom(istream &in, map<string, deque<DataState>> &inputs) {
     refresh();
   }
 
-  for (size_t t = 0; t < (8 * NTicksPerCycle); t += 1) {
+  for (size_t t = 0; t < (maxInputLength * NTicksPerCycle); t += 1) {
     volume.PrintViewFlat();
     volume.ProceedOneTick();
     if (volume.FoundNewRules()) {

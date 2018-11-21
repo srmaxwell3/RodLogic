@@ -109,7 +109,9 @@ Volume::Volume(istream &in) :
     }
   }
 
-  parseIOD(in, c);
+  if (c != ';') {
+    parseIOD(in, c);
+  }
 
   int iodErrors = 0;
   if (inputCoordinates.size() != inputLabels.size()) {
